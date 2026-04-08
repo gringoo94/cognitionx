@@ -13,22 +13,22 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        <a href="#" className="font-heading text-lg text-foreground tracking-tight">
-          Дмитрий Яцко
+        <a href="#" className="font-heading text-lg font-semibold text-foreground">
+          Д. Яцко
         </a>
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-[13px] text-muted-foreground hover:text-foreground transition-colors duration-200 tracking-wide uppercase"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
             >
               {l.label}
             </a>
           ))}
-          <Button size="sm" className="rounded-full px-6 text-xs tracking-wide" asChild>
+          <Button size="sm" className="rounded-lg px-6" asChild>
             <a href="#booking">Записаться</a>
           </Button>
         </div>
@@ -37,18 +37,13 @@ const Navbar = () => {
         </button>
       </div>
       {open && (
-        <div className="md:hidden border-t border-border bg-background p-6 space-y-4">
+        <div className="md:hidden border-t border-border bg-card p-6 space-y-4">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="block text-sm text-muted-foreground hover:text-foreground uppercase tracking-wide"
-            >
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="block text-sm text-muted-foreground hover:text-primary">
               {l.label}
             </a>
           ))}
-          <Button size="sm" className="w-full rounded-full" asChild>
+          <Button size="sm" className="w-full" asChild>
             <a href="#booking" onClick={() => setOpen(false)}>Записаться</a>
           </Button>
         </div>

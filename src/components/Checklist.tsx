@@ -9,22 +9,22 @@ const items = [
 const Checklist = () => (
   <section className="section-padding">
     <div className="container mx-auto px-4 max-w-2xl">
-      <div className="text-center space-y-6 mb-12">
-        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Подготовка</p>
-        <h2 className="font-heading text-3xl md:text-4xl text-foreground tracking-tight">
+      <div className="text-center space-y-4 mb-12">
+        <span className="text-xs font-medium text-primary uppercase tracking-widest">Подготовка</span>
+        <h2 className="font-heading text-3xl md:text-4xl text-foreground font-bold tracking-tight">
           Перед первой встречей
         </h2>
       </div>
-      <ol className="space-y-0 divide-y divide-border">
+      <div className="space-y-3">
         {items.map((item, i) => (
-          <li key={item} className="flex items-center gap-6 py-5">
-            <span className="text-xs font-mono text-muted-foreground w-6 text-right shrink-0">
+          <div key={item} className="glass rounded-xl flex items-center gap-5 p-5 hover:border-primary/30 transition-colors duration-300">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary font-mono text-xs font-semibold shrink-0">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <span className="text-foreground text-sm leading-relaxed">{item}</span>
-          </li>
+            <span className="text-foreground text-sm">{item}</span>
+          </div>
         ))}
-      </ol>
+      </div>
     </div>
   </section>
 );
