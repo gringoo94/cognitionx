@@ -1,30 +1,47 @@
 import heroPhoto from "@/assets/hero-photo.png";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => (
-  <section className="relative overflow-hidden bg-background">
-    <div className="container mx-auto px-4 py-16 md:py-24">
-      <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-        <div className="flex-1 space-y-6">
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight">
-            Дмитрий Яцко
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-lg">
-            Психолог · КПТ-терапевт. Помогаю справиться с тревогой, депрессией, 
-            выгоранием и сложностями в отношениях. Работаю онлайн и очно.
+  <section className="relative min-h-[90vh] flex items-center pt-16">
+    <div className="container mx-auto px-4">
+      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+        <div className="flex-1 space-y-8 max-w-xl">
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Психолог · КПТ-терапевт
+            </p>
+            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.1] tracking-tight">
+              Дмитрий
+              <br />
+              Яцко
+            </h1>
+          </div>
+          <p className="text-base text-muted-foreground leading-relaxed max-w-md">
+            Помогаю справиться с тревогой, депрессией, выгоранием и сложностями в отношениях. 
+            Работаю онлайн и очно.
           </p>
-          <div className="flex gap-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-              <a href="#booking">Записаться</a>
+          <div className="flex items-center gap-4">
+            <Button size="lg" className="rounded-full px-8 gap-2" asChild>
+              <a href="#booking">
+                Записаться
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="ghost" className="rounded-full text-muted-foreground" asChild>
               <a href="#about">Узнать больше</a>
             </Button>
           </div>
         </div>
         <div className="flex-shrink-0">
-          <div className="w-64 h-72 md:w-80 md:h-96 rounded-2xl bg-secondary overflow-hidden flex items-end justify-center">
-            <img src={heroPhoto} alt="Дмитрий Яцко — психолог" width={512} height={640} className="w-full h-full object-cover object-top" />
+          <div className="w-72 h-80 md:w-80 md:h-[28rem] rounded-3xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+            <img
+              src={heroPhoto}
+              alt="Дмитрий Яцко — психолог"
+              width={512}
+              height={640}
+              className="w-full h-full object-cover object-top"
+            />
           </div>
         </div>
       </div>
