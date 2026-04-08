@@ -4,12 +4,12 @@ const Footer = () => (
   <footer className="bg-footer text-footer-foreground py-16">
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-        <p className="font-heading text-lg">Дмитрий Яцко</p>
+        <p className="font-heading text-lg font-semibold">Дмитрий Яцко</p>
         <div className="flex items-center gap-8 text-sm text-footer-foreground/60">
-          <a href="https://t.me/darrroo04" className="flex items-center gap-2 hover:text-footer-foreground transition-colors">
+          <a href="https://t.me/darrroo04" className="flex items-center gap-2 hover:text-primary transition-colors">
             <Send className="w-4 h-4" /> Telegram
           </a>
-          <a href="mailto:digitdarrroo0@gmail.com" className="flex items-center gap-2 hover:text-footer-foreground transition-colors">
+          <a href="mailto:digitdarrroo0@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
             <Mail className="w-4 h-4" /> Email
           </a>
         </div>
