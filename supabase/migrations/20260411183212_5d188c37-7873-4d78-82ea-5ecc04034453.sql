@@ -1,0 +1,1 @@
+ALTER TABLE public.contact_submissions RENAME COLUMN phone TO messenger;
