@@ -225,8 +225,6 @@ export const problemPages: ProblemPageData[] = [
         answer: "Парадоксально, но попытка «остановить» паническую атаку часто её усиливает. Более эффективно — позволить ей пройти, не борясь. В КПТ мы учимся именно этому.",
       },
     ],
-      },
-    ],
     relatedPages: ["anxiety", "cbt-therapy", "online-therapy"],
     relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
   },
