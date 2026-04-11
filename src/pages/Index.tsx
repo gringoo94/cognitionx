@@ -11,13 +11,15 @@ import Footer from "@/components/Footer";
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <Navbar />
-    <Hero />
-    <About />
-    <Approach />
-    <Specializations />
-    <Pricing />
-    <BookingForm />
-    <Checklist />
+    <main>
+      <Hero />
+      <About />
+      <Approach />
+      <Specializations />
+      <Pricing />
+      <BookingForm />
+      <Checklist />
+    </main>
     <Footer />
   </div>
 );
