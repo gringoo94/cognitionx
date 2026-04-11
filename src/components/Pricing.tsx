@@ -1,28 +1,57 @@
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { CheckCircle2 } from "lucide-react";
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.5, delay },
+});
 
 const plans = [
-  { title: "Первая встреча", price: "2 500", duration: "50 мин", desc: "Знакомство и определение запроса" },
-  { title: "Сессия", price: "4 000", duration: "50 мин", desc: "Регулярная работа в формате КПТ", featured: true },
-  { title: "Пакет × 4", price: "14 000", duration: "4 × 50 мин", desc: "Экономия при оплате пакетом" },
+  {
+    title: "Первая встреча",
+    price: "2 500",
+    duration: "50 мин",
+    features: ["Знакомство и определение запроса", "Диагностика проблемы", "План работы"],
+  },
+  {
+    title: "Сессия",
+    price: "4 000",
+    duration: "50 мин",
+    featured: true,
+    features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
+  },
+  {
+    title: "Пакет × 4",
+    price: "14 000",
+    duration: "4 × 50 мин",
+    features: ["Экономия 2 000 ₽", "Регулярная работа", "Приоритетная запись"],
+  },
 ];
 
 const Pricing = () => (
-  <section id="pricing" className="section-padding">
-    <div className="container mx-auto px-4">
-      <div className="max-w-2xl mx-auto text-center space-y-4 mb-16">
-        <span className="text-xs font-medium text-accent uppercase tracking-widest">Стоимость</span>
-        <h2 className="font-heading text-3xl md:text-4xl text-foreground font-bold tracking-tight">
-          Цены
+  <section id="pricing" className="bg-card border-y border-border">
+    <div className="max-w-4xl mx-auto px-6 py-24 md:py-32">
+      <motion.div {...fade()} className="text-center mb-14">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+          Стоимость
         </h2>
-      </div>
-      <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-        {plans.map((p) => (
-          <div
+        <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+          Прозрачные цены без скрытых платежей
+        </p>
+      </motion.div>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {plans.map((p, i) => (
+          <motion.div
             key={p.title}
-            className={`rounded-2xl p-8 flex flex-col items-center text-center space-y-6 transition-all duration-300 ${
+            {...fade(0.08 * i)}
+            className={`rounded-2xl p-6 md:p-8 flex flex-col border transition-colors ${
               p.featured
-                ? "bg-primary text-primary-foreground shadow-2xl shadow-primary/30 scale-[1.03]"
-                : "glass hover:border-primary/30"
+                ? "border-primary bg-primary text-primary-foreground shadow-lg"
+                : "border-border bg-background hover:border-primary/30"
             }`}
           >
             <div className="space-y-1">
@@ -33,15 +62,20 @@ const Pricing = () => (
                 {p.duration}
               </p>
             </div>
-            <div>
+            <div className="mt-6">
               <span className="text-4xl font-bold tracking-tight">{p.price}</span>
               <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>₽</span>
             </div>
-            <p className={`text-sm leading-relaxed ${p.featured ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
-              {p.desc}
-            </p>
+            <ul className="mt-6 space-y-3 flex-1">
+              {p.features.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm">
+                  <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${p.featured ? "text-accent" : "text-accent"}`} />
+                  <span className={p.featured ? "text-primary-foreground/90" : "text-muted-foreground"}>{f}</span>
+                </li>
+              ))}
+            </ul>
             <Button
-              className={`w-full rounded-lg ${
+              className={`mt-8 w-full ${
                 p.featured
                   ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
                   : ""
@@ -51,7 +85,7 @@ const Pricing = () => (
             >
               <a href="#booking">Записаться</a>
             </Button>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
