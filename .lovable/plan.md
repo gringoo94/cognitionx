@@ -1,69 +1,70 @@
 
 
-## SEO-архитектура: план реализации
+## SEO-оптимизация под SPA-ограничения
 
-### Важное ограничение
-
-Проект на **Vite + React (SPA)**, а не Next.js. SSR/SSG недоступны. Для per-page мета-данных используем `react-helmet-async`. Поисковики индексируют SPA хуже, но с правильными мета-тегами и schema это работает.
+Текущее состояние хорошее: 7 страниц проблем, SEOHead, JSON-LD schema, sitemap. Нужно доработать по рекомендациям из твоего анализа.
 
 ---
 
-### Фаза 1: Страницы проблем (money pages)
+### 1. SEOHead на все страницы (сейчас только на problem pages)
 
-Создаём 7 отдельных страниц с жёсткой структурой:
+Добавить `SEOHead` на:
+- **Index.tsx** — title: "Психолог онлайн | КПТ терапия — Дмитрий Яцко", schema: `Person` + `ProfessionalService`
+- **BlogList.tsx** — title: "Блог психолога | КПТ, тревога, депрессия"
+- **BlogPost.tsx** — динамический title/description из данных поста
+- **Tools.tsx** — title: "КПТ инструменты | Психолог Дмитрий Яцко"
 
-| Роут | H1 |
-|------|-----|
-| `/depression` | Психолог при депрессии — КПТ подход |
-| `/anxiety` | Тревога и тревожное расстройство — помощь психолога |
-| `/panic-attacks` | Панические атаки — КПТ терапия |
-| `/burnout` | Выгорание — работа с психологом |
-| `/co-dependency` | Созависимость — как выйти из цикла |
-| `/cbt-therapy` | КПТ-терапия — как это работает |
-| `/online-therapy` | Психолог онлайн — консультация из любой точки |
+### 2. Расширить JSON-LD schema
 
-**Структура каждой страницы** (единый компонент-шаблон `ProblemPage.tsx`):
-1. Симптомы (язык клиента, SEO-ключи)
-2. Мини-концептуализация CBT (ситуация → мысли → эмоции → поведение)
-3. Психообразование (цикл проблемы)
-4. Как я работаю (механика терапии)
-5. Что получит клиент (конкретные результаты)
-6. FAQ (schema-ready)
-7. CTA → запись
+- **Главная**: добавить `ProfessionalService` schema (name, address/areaServed, url, sameAs)
+- **Страницы проблем**: добавить `BreadcrumbList` schema
+- **Блог-посты**: добавить `Article` schema (headline, author, datePublished)
 
-Данные страниц хранятся в `src/data/problemPages.ts`.
+### 3. Контент на problem pages — убрать скрытый текст
 
-### Фаза 2: SEO-инфраструктура
+Сейчас FAQ в аккордеонах — Google может их не проиндексировать. Варианты:
+- Рендерить FAQ-контент видимым (без аккордеонов), или
+- Оставить аккордеоны, но добавить `open` на первый элемент
 
-1. **react-helmet-async** — динамические `<title>`, `<meta description>`, `og:*` на каждой странице (главная, блог, статьи, страницы проблем)
-2. **JSON-LD Schema** на каждой странице проблемы: `MedicalCondition`, `FAQPage`, `Person`
-3. **Обновлённый sitemap.xml** — все новые роуты
-4. **Компонент SEOHead** — переиспользуемый враппер для мета-тегов
+Рекомендация: оставить аккордеоны (UX), но schema уже покрывает FAQ для Google.
 
-### Фаза 3: Internal linking
+### 4. Добавить `BreadcrumbList` schema на problem pages
 
-1. Статьи блога → ссылки на релевантные страницы проблем (например, статья про депрессию → `/depression`)
-2. Страницы проблем → перекрёстные ссылки (например, `/anxiety` → `/panic-attacks`)
-3. Страницы проблем → `/cbt-therapy`
-4. Добавить «Связанные статьи» блок на страницах проблем
+```json
+{
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "position": 1, "name": "Главная", "item": "https://yatsko-psy.ru/" },
+    { "position": 2, "name": "Депрессия", "item": "https://yatsko-psy.ru/depression" }
+  ]
+}
+```
 
-### Фаза 4: Навигация
+### 5. Sitemap — добавить blog posts
 
-- Обновить Navbar: выпадающее меню «Специализации» с ссылками на страницы проблем
-- Обновить Footer: секция с ссылками на все страницы проблем
+Сейчас в sitemap нет отдельных статей блога. Добавить все `/blog/{slug}` URLs.
+
+### 6. robots.txt — проверить/обновить
+
+Убедиться что robots.txt указывает на sitemap и не блокирует JS.
+
+### 7. noindex на служебные страницы
+
+Добавить noindex на NotFound (404) страницу.
 
 ---
 
 ### Технические детали
 
-**Новые файлы:**
-- `src/data/problemPages.ts` — контент для 7 страниц
-- `src/components/ProblemPage.tsx` — шаблон страницы проблемы
-- `src/components/SEOHead.tsx` — компонент мета-тегов
-- 7 роутов в `App.tsx`
+**Файлы для изменения:**
+- `src/pages/Index.tsx` — добавить SEOHead + ProfessionalService schema
+- `src/pages/BlogList.tsx` — добавить SEOHead
+- `src/pages/BlogPost.tsx` — добавить SEOHead + Article schema
+- `src/pages/Tools.tsx` — добавить SEOHead
+- `src/pages/NotFound.tsx` — добавить noindex meta
+- `src/components/ProblemPage.tsx` — добавить BreadcrumbList schema
+- `public/sitemap.xml` — добавить blog post URLs
+- `public/robots.txt` — обновить с указанием sitemap
 
-**Зависимости:**
-- `react-helmet-async`
-
-**Объём:** ~7 страниц контента + SEO-инфраструктура. Рекомендую делать в 2-3 итерации (сначала шаблон + 2 страницы, потом остальные).
+**Без новых зависимостей** — всё на уже установленном `react-helmet-async`.
 
