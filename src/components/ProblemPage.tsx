@@ -189,7 +189,7 @@ const ProblemPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button asChild>
-                <a href="https://t.me/darrroo04">Написать в Telegram</a>
+                <a href="https://t.me/gringoo94">Написать в Telegram</a>
               </Button>
               <Button variant="outline" asChild>
                 <Link to="/#booking">Заполнить форму</Link>

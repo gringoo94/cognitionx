@@ -19,7 +19,7 @@ const Footer = () => (
         <div>
           <p className="text-lg font-bold tracking-tight mb-4">Дмитрий Яцко</p>
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-            <a href="https://t.me/darrroo04" className="flex items-center gap-2 hover:text-foreground transition-colors">
+            <a href="https://t.me/gringoo94" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Send className="w-4 h-4" /> Telegram
             </a>
             <a href="mailto:digitdarrroo0@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
