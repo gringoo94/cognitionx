@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, CheckCircle2, ChevronRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,8 +18,9 @@ const fade = (delay = 0) => ({
 });
 
 const ProblemPage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const page = slug ? getPageBySlug(slug) : undefined;
+  const location = useLocation();
+  const slug = location.pathname.replace("/", "");
+  const page = getPageBySlug(slug);
 
   if (!page) return <NotFound />;
 
