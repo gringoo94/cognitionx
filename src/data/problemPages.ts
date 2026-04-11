@@ -84,7 +84,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "burnout", "cbt-therapy"],
-    relatedArticles: ["kogda-nichego-ne-hochetsya"],
+    relatedArticles: ["kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii"],
   },
   {
     slug: "anxiety",
@@ -140,7 +140,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["panic-attacks", "depression", "cbt-therapy"],
-    relatedArticles: [],
+    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
   },
   {
     slug: "panic-attacks",
@@ -195,7 +195,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "cbt-therapy", "online-therapy"],
-    relatedArticles: [],
+    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
   },
   {
     slug: "burnout",
@@ -246,7 +246,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["depression", "anxiety", "cbt-therapy"],
-    relatedArticles: ["kogda-nichego-ne-hochetsya"],
+    relatedArticles: ["kogda-nichego-ne-hochetsya", "depressiya-ili-vygoranie", "vygoranie-ili-ustalost"],
   },
   {
     slug: "co-dependency",
@@ -297,7 +297,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "depression", "cbt-therapy"],
-    relatedArticles: [],
+    relatedArticles: ["perekladyvanie-otvetstvennosti"],
   },
   {
     slug: "cbt-therapy",
@@ -353,7 +353,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["depression", "anxiety", "panic-attacks"],
-    relatedArticles: [],
+    relatedArticles: ["chto-takoe-kpt", "kak-spravitsya-s-trevozhnostyu", "planirovanie-dnya-pri-depressii"],
   },
   {
     slug: "online-therapy",
@@ -408,7 +408,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["cbt-therapy", "depression", "anxiety"],
-    relatedArticles: [],
+    relatedArticles: ["kak-vybrat-psihologa"],
   },
 ];
 
