@@ -60,6 +60,12 @@ const ContactPage = () => {
       });
       if (error) throw error;
       toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
+      
+      // Send Telegram notification (fire-and-forget)
+      supabase.functions.invoke("notify-telegram", {
+        body: { name: form.name.trim(), email: form.email.trim(), messenger: form.messenger.trim(), message: form.message.trim() },
+      }).catch(() => {});
+      
       setForm({ name: "", email: "", messenger: "", message: "" });
     } catch {
       toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте ещё раз.", variant: "destructive" });

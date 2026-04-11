@@ -34,6 +34,11 @@ const BookingForm = () => {
     }
     toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
     setForm({ name: "", email: "", messenger: "", message: "" });
+
+    // Send Telegram notification (fire-and-forget)
+    supabase.functions.invoke("notify-telegram", {
+      body: { name: form.name, email: form.email, messenger: form.messenger, message: form.message || "Заявка с главной страницы" },
+    }).catch(() => {});
   };
 
   return (
