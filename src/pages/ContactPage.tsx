@@ -96,7 +96,7 @@ const ContactPage = () => {
         {/* Contact methods */}
         <motion.div {...fade(0.1)} className="mt-8 grid sm:grid-cols-2 gap-4">
           <a
-            href="https://t.me/darrroo04"
+            href="https://t.me/gringoo94"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-all hover:shadow-lg group flex items-center gap-4"

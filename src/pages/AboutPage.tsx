@@ -156,7 +156,7 @@ const AboutPage = () => (
               <Link to="/contact">Записаться</Link>
             </Button>
             <Button variant="outline" asChild>
-              <a href="https://t.me/darrroo04">Telegram</a>
+              <a href="https://t.me/gringoo94">Telegram</a>
             </Button>
           </div>
         </div>
