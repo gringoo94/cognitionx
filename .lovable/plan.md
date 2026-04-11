@@ -1,70 +1,47 @@
 
 
-## SEO-оптимизация под SPA-ограничения
+# План улучшения конверсии сайта
 
-Текущее состояние хорошее: 7 страниц проблем, SEOHead, JSON-LD schema, sitemap. Нужно доработать по рекомендациям из твоего анализа.
-
----
-
-### 1. SEOHead на все страницы (сейчас только на problem pages)
-
-Добавить `SEOHead` на:
-- **Index.tsx** — title: "Психолог онлайн | КПТ терапия — Дмитрий Яцко", schema: `Person` + `ProfessionalService`
-- **BlogList.tsx** — title: "Блог психолога | КПТ, тревога, депрессия"
-- **BlogPost.tsx** — динамический title/description из данных поста
-- **Tools.tsx** — title: "КПТ инструменты | Психолог Дмитрий Яцко"
-
-### 2. Расширить JSON-LD schema
-
-- **Главная**: добавить `ProfessionalService` schema (name, address/areaServed, url, sameAs)
-- **Страницы проблем**: добавить `BreadcrumbList` schema
-- **Блог-посты**: добавить `Article` schema (headline, author, datePublished)
-
-### 3. Контент на problem pages — убрать скрытый текст
-
-Сейчас FAQ в аккордеонах — Google может их не проиндексировать. Варианты:
-- Рендерить FAQ-контент видимым (без аккордеонов), или
-- Оставить аккордеоны, но добавить `open` на первый элемент
-
-Рекомендация: оставить аккордеоны (UX), но schema уже покрывает FAQ для Google.
-
-### 4. Добавить `BreadcrumbList` schema на problem pages
-
-```json
-{
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "position": 1, "name": "Главная", "item": "https://yatsko-psy.ru/" },
-    { "position": 2, "name": "Депрессия", "item": "https://yatsko-psy.ru/depression" }
-  ]
-}
-```
-
-### 5. Sitemap — добавить blog posts
-
-Сейчас в sitemap нет отдельных статей блога. Добавить все `/blog/{slug}` URLs.
-
-### 6. robots.txt — проверить/обновить
-
-Убедиться что robots.txt указывает на sitemap и не блокирует JS.
-
-### 7. noindex на служебные страницы
-
-Добавить noindex на NotFound (404) страницу.
+Проанализировав текущую структуру сайта, вот конкретные доработки, которые дадут наибольший эффект:
 
 ---
 
-### Технические детали
+## 1. Социальное доказательство — блок отзывов
 
-**Файлы для изменения:**
-- `src/pages/Index.tsx` — добавить SEOHead + ProfessionalService schema
-- `src/pages/BlogList.tsx` — добавить SEOHead
-- `src/pages/BlogPost.tsx` — добавить SEOHead + Article schema
-- `src/pages/Tools.tsx` — добавить SEOHead
-- `src/pages/NotFound.tsx` — добавить noindex meta
-- `src/components/ProblemPage.tsx` — добавить BreadcrumbList schema
-- `public/sitemap.xml` — добавить blog post URLs
-- `public/robots.txt` — обновить с указанием sitemap
+Сейчас на сайте нет ни одного отзыва. Это критически важный элемент для психолога.
 
-**Без новых зависимостей** — всё на уже установленном `react-helmet-async`.
+- Создать компонент `Testimonials` с 4-6 отзывами (анонимные, с инициалами и проблемой: «Тревога», «Выгорание»)
+- Разместить между блоком «Подход» и «Цены» на главной
+- Добавить schema `Review` для rich results
+
+## 2. Форма записи на главной — подключить к базе
+
+Сейчас `BookingForm` на главной **не сохраняет данные** — только показывает toast. Нужно подключить к `contact_submissions` как на /contact.
+
+## 3. Sticky CTA — плавающая кнопка записи
+
+Добавить плавающую кнопку «Записаться» в правом нижнем углу, которая появляется после скролла мимо hero-секции. Ведёт на `#booking`.
+
+## 4. Счётчики доверия в Hero
+
+Добавить под кнопками hero строку с цифрами:
+- «200+ клиентов» · «5 лет опыта» · «Онлайн из любой точки»
+
+## 5. Навбар — добавить ссылку «Контакты»
+
+Сейчас в навбаре нет прямой ссылки на /contact. Добавить в массив `links`.
+
+---
+
+## Техническая реализация
+
+| Задача | Файлы |
+|--------|-------|
+| Отзывы | Новый `src/components/Testimonials.tsx`, обновить `Index.tsx` |
+| BookingForm → БД | Обновить `src/components/BookingForm.tsx` — добавить supabase insert |
+| Sticky CTA | Новый `src/components/FloatingCTA.tsx`, добавить в `App.tsx` |
+| Счётчики в Hero | Обновить `src/components/Hero.tsx` |
+| Навбар | Обновить `src/components/Navbar.tsx` — добавить «Контакты» |
+
+Все изменения — фронтенд + одна правка в BookingForm для подключения к существующей таблице `contact_submissions`. Новых миграций не нужно.
 
