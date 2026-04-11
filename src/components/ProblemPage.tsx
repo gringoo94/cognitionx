@@ -220,14 +220,29 @@ const ProblemPage = () => {
             {relatedArticles.length > 0 && (
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Статьи по теме</h3>
-                <div className="grid sm:grid-cols-2 gap-3">
+                <div className="grid sm:grid-cols-2 gap-4">
                   {relatedArticles.map((ra) => ra && (
                     <Link
                       key={ra.slug}
                       to={`/blog/${ra.slug}`}
-                      className="rounded-xl border border-border bg-card p-4 hover:border-primary/30 transition-colors group"
+                      className="rounded-xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all hover:shadow-lg group"
                     >
-                      <span className="text-sm font-medium group-hover:text-primary transition-colors">{ra.title}</span>
+                      <div className="aspect-[16/9] overflow-hidden">
+                        <img
+                          src={ra.image}
+                          alt={ra.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h4 className="text-sm font-semibold leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                          {ra.title}
+                        </h4>
+                        <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">
+                          {ra.description}
+                        </p>
+                      </div>
                     </Link>
                   ))}
                 </div>
