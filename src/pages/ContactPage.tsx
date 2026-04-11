@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Send, MessageCircle, Mail } from "lucide-react";
+import { ArrowLeft, Send, MessageCircle, Mail, Phone, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -119,7 +119,37 @@ const ContactPage = () => {
             </div>
             <div>
               <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">Email</h3>
-              <p className="text-xs text-muted-foreground mt-0.5">yatsko.psy@gmail.com</p>
+              <p className="text-xs text-muted-foreground mt-0.5">digitalgringoo@gmail.com</p>
+            </div>
+          </a>
+
+          <a
+            href="https://wa.me/447599880865"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-all hover:shadow-lg group flex items-center gap-4"
+          >
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <Phone className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">WhatsApp</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">+44 7599 880865</p>
+            </div>
+          </a>
+
+          <a
+            href="https://instagram.com/gringo.journal"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-all hover:shadow-lg group flex items-center gap-4"
+          >
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+              <Instagram className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">Instagram</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">@gringo.journal</p>
             </div>
           </a>
         </motion.div>
