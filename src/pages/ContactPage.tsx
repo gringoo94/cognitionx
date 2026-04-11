@@ -156,8 +156,8 @@ const ContactPage = () => {
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               className="rounded-lg min-h-[100px]"
             />
-            <Button type="submit" size="lg" className="w-full rounded-lg gap-2">
-              Отправить <Send className="w-4 h-4" />
+            <Button type="submit" size="lg" className="w-full rounded-lg gap-2" disabled={loading}>
+              {loading ? "Отправка..." : "Отправить"} {!loading && <Send className="w-4 h-4" />}
             </Button>
           </form>
         </motion.section>
