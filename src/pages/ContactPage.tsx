@@ -111,7 +111,7 @@ const ContactPage = () => {
           </a>
 
           <a
-            href="mailto:yatsko.psy@gmail.com"
+            href="mailto:digitalgringoo@gmail.com"
             className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-all hover:shadow-lg group flex items-center gap-4"
           >
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">

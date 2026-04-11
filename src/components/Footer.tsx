@@ -22,7 +22,7 @@ const Footer = () => (
             <a href="https://t.me/gringoo94" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Send className="w-4 h-4" /> Telegram
             </a>
-            <a href="mailto:digitdarrroo0@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
+            <a href="mailto:digitalgringoo@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="w-4 h-4" /> Email
             </a>
           </div>
