@@ -1,4 +1,4 @@
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, Phone, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const specLinks = [
@@ -21,6 +21,12 @@ const Footer = () => (
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
             <a href="https://t.me/gringoo94" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Send className="w-4 h-4" /> Telegram
+            </a>
+            <a href="https://wa.me/447599880865" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Phone className="w-4 h-4" /> WhatsApp
+            </a>
+            <a href="https://instagram.com/gringo.journal" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Instagram className="w-4 h-4" /> Instagram
             </a>
             <a href="mailto:digitalgringoo@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="w-4 h-4" /> Email
