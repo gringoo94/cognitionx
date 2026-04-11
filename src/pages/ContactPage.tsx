@@ -46,10 +46,26 @@ const breadcrumbSchema = {
 const ContactPage = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim() || null,
+        message: form.message.trim(),
+      });
+      if (error) throw error;
+      toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch {
+      toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте ещё раз.", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
