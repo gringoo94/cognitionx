@@ -11,6 +11,7 @@ import Tools from "./pages/Tools.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import ProblemPage from "./components/ProblemPage.tsx";
+import PageViewTracker from "./components/PageViewTracker.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
