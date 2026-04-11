@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -15,9 +16,22 @@ const fade = (delay = 0) => ({
 
 const BookingForm = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: form.name,
+      email: form.email,
+      phone: form.phone || null,
+      message: form.message || "Заявка с главной страницы",
+    });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте позже.", variant: "destructive" });
+      return;
+    }
     toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
     setForm({ name: "", email: "", phone: "", message: "" });
   };
@@ -63,8 +77,8 @@ const BookingForm = () => {
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 rounded-lg min-h-[100px] focus:border-accent focus:ring-accent"
           />
-          <Button type="submit" size="lg" className="w-full rounded-lg gap-2 shadow-lg shadow-primary/25">
-            Отправить <ArrowRight className="w-4 h-4" />
+          <Button type="submit" size="lg" disabled={loading} className="w-full rounded-lg gap-2 shadow-lg shadow-primary/25">
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Отправить <ArrowRight className="w-4 h-4" /></>}
           </Button>
         </motion.form>
       </div>

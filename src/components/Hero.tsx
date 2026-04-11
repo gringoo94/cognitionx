@@ -56,6 +56,22 @@ const Hero = () => (
         <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
           Первая консультация — 2 500 ₽ · Онлайн или очно
         </motion.p>
+
+        <motion.div
+          {...fade(0.25)}
+          className="mt-8 flex items-center justify-center md:justify-start gap-6 text-sm text-muted-foreground"
+        >
+          {[
+            { value: "200+", label: "клиентов" },
+            { value: "5 лет", label: "опыта" },
+            { value: "Онлайн", label: "из любой точки" },
+          ].map((s) => (
+            <div key={s.label} className="text-center">
+              <span className="block text-lg font-bold text-foreground">{s.value}</span>
+              <span className="text-xs">{s.label}</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Photo */}
