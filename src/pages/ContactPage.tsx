@@ -44,7 +44,7 @@ const breadcrumbSchema = {
 };
 
 const ContactPage = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", messenger: "", message: "" });
 
   const [loading, setLoading] = useState(false);
 
@@ -55,12 +55,12 @@ const ContactPage = () => {
       const { error } = await supabase.from("contact_submissions").insert({
         name: form.name.trim(),
         email: form.email.trim(),
-        phone: form.phone.trim() || null,
+        messenger: form.messenger.trim() || null,
         message: form.message.trim(),
       });
       if (error) throw error;
       toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
-      setForm({ name: "", email: "", phone: "", message: "" });
+      setForm({ name: "", email: "", messenger: "", message: "" });
     } catch {
       toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте ещё раз.", variant: "destructive" });
     } finally {
@@ -144,10 +144,9 @@ const ContactPage = () => {
               className="h-12 rounded-lg"
             />
             <Input
-              type="tel"
-              placeholder="Телефон"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              placeholder="Telegram / WhatsApp (@username или номер)"
+              value={form.messenger}
+              onChange={(e) => setForm({ ...form, messenger: e.target.value })}
               className="h-12 rounded-lg"
             />
             <Textarea

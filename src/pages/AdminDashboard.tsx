@@ -9,7 +9,7 @@ interface Submission {
   id: string;
   name: string;
   email: string;
-  phone: string | null;
+  messenger: string | null;
   message: string;
   created_at: string;
 }
@@ -168,7 +168,7 @@ const AdminDashboard = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="font-medium">{s.name}</p>
-                      <p className="text-sm text-muted-foreground">{s.email}{s.phone ? ` · ${s.phone}` : ""}</p>
+                      <p className="text-sm text-muted-foreground">{s.email}{s.messenger ? ` · ${s.messenger}` : ""}</p>
                     </div>
                     <span className="text-xs text-muted-foreground">
                       {new Date(s.created_at).toLocaleDateString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
