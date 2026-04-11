@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 
 const links = [
   { label: "Обо мне", href: "#about" },
-  { label: "Специализации", href: "#specs" },
   { label: "Подход", href: "#approach" },
+  { label: "Специализации", href: "#specs" },
   { label: "Цены", href: "#pricing" },
 ];
 
@@ -13,33 +13,31 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass">
-      <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        <a href="#" className="font-heading text-lg font-semibold text-foreground">
+    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+      <div className="flex items-center justify-between max-w-6xl mx-auto px-6 py-3.5">
+        <a href="#" className="text-lg font-bold tracking-tight">
           Д. Яцко
         </a>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-            >
+            <a key={l.href} href={l.href} className="hover:text-foreground transition-colors">
               {l.label}
             </a>
           ))}
-          <Button size="sm" className="rounded-lg px-6" asChild>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button size="sm" asChild className="hidden md:inline-flex">
             <a href="#booking">Записаться</a>
           </Button>
+          <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
-          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
       </div>
       {open && (
         <div className="md:hidden border-t border-border bg-card p-6 space-y-4">
           {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="block text-sm text-muted-foreground hover:text-primary">
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="block text-sm text-muted-foreground hover:text-foreground">
               {l.label}
             </a>
           ))}

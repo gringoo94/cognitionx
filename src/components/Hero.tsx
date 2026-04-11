@@ -1,51 +1,72 @@
-import heroPhoto from "@/assets/hero-photo.png";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import heroPhoto from "@/assets/hero-photo.png";
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.5, delay },
+});
 
 const Hero = () => (
-  <section className="relative min-h-[90vh] flex items-center pt-16 overflow-hidden">
-    {/* Gradient orbs */}
-    <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-    <div className="absolute bottom-20 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
+  <section className="max-w-4xl mx-auto px-6 pt-20 md:pt-32 pb-24 text-center">
+    <motion.div
+      {...fade(0)}
+      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
+    >
+      <Sparkles className="w-3.5 h-3.5" />
+      Психолог · КПТ-терапевт
+    </motion.div>
 
-    <div className="container mx-auto px-4 relative">
-      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-        <div className="flex-1 space-y-8 max-w-xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-accent" />
-            <span className="text-xs font-medium text-primary">Психолог · КПТ-терапевт</span>
-          </div>
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.1] font-bold tracking-tight">
-            Дмитрий
-            <br />
-            <span className="text-primary">Яцко</span>
-          </h1>
-          <p className="text-base text-muted-foreground leading-relaxed max-w-md">
-            Помогаю справиться с тревогой, депрессией, выгоранием и сложностями в отношениях. 
-            Работаю онлайн и очно.
-          </p>
-          <div className="flex items-center gap-4">
-            <Button size="lg" className="rounded-lg px-8 gap-2 shadow-lg shadow-primary/25" asChild>
-              <a href="#booking">
-                Записаться
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-lg" asChild>
-              <a href="#about">Узнать больше</a>
-            </Button>
-          </div>
-        </div>
-        <div className="flex-shrink-0">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-3xl blur-2xl scale-105" />
-            <div className="relative w-72 h-80 md:w-80 md:h-[28rem] rounded-3xl overflow-hidden border border-border/50 shadow-xl">
-              <img src={heroPhoto} alt="Дмитрий Яцко — психолог" width={512} height={640} className="w-full h-full object-cover object-top" />
-            </div>
-          </div>
+    <motion.h1
+      {...fade(0.05)}
+      className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+    >
+      Дмитрий
+      <br />
+      <span className="text-primary">Яцко</span>
+    </motion.h1>
+
+    <motion.p
+      {...fade(0.1)}
+      className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+    >
+      Помогаю справиться с тревогой, депрессией, выгоранием и сложностями в отношениях. Работаю онлайн и очно.
+    </motion.p>
+
+    <motion.div
+      {...fade(0.15)}
+      className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3"
+    >
+      <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
+        <a href="#booking">
+          Записаться <ArrowRight className="w-4 h-4" />
+        </a>
+      </Button>
+      <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
+        <a href="#approach">Как я работаю</a>
+      </Button>
+    </motion.div>
+
+    <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
+      Первая консультация — 2 500 ₽ · Онлайн или очно
+    </motion.p>
+
+    {/* Hero photo */}
+    <motion.div {...fade(0.25)} className="mt-16 flex justify-center">
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-2xl scale-110" />
+        <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl overflow-hidden border border-border shadow-xl">
+          <img
+            src={heroPhoto}
+            alt="Дмитрий Яцко — психолог"
+            className="w-full h-full object-cover object-top"
+          />
         </div>
       </div>
-    </div>
+    </motion.div>
   </section>
 );
 
