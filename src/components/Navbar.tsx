@@ -43,13 +43,13 @@ const Navbar = () => {
   const renderLink = (l: { label: string; href: string }, onClick?: () => void) => {
     if (isHashLink(l.href)) {
       return (
-        <a key={l.href} href={l.href} onClick={onClick} className="hover:text-foreground transition-colors">
+        <a key={l.href} href={l.href} onClick={onClick} className="block hover:text-foreground transition-colors">
           {l.label}
         </a>
       );
     }
     return (
-      <Link key={l.href} to={l.href} onClick={onClick} className="hover:text-foreground transition-colors">
+      <Link key={l.href} to={l.href} onClick={onClick} className="block hover:text-foreground transition-colors">
         {l.label}
       </Link>
     );
