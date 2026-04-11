@@ -139,7 +139,7 @@ const ContactPage = () => {
           </a>
 
           <a
-            href="https://instagram.com/gringo.journal"
+            href="https://www.instagram.com/gringo.journal"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-all hover:shadow-lg group flex items-center gap-4"
