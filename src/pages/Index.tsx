@@ -48,7 +48,7 @@ const Index = () => (
       <Blog />
       <HomeFAQ />
       <BookingForm />
-      <Checklist />
+      
     </main>
     <Footer />
   </div>
