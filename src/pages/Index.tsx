@@ -7,6 +7,7 @@ import Pricing from "@/components/Pricing";
 import BookingForm from "@/components/BookingForm";
 import Checklist from "@/components/Checklist";
 import Blog from "@/components/Blog";
+import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
@@ -35,7 +36,7 @@ const Index = () => (
       title="Психолог онлайн | КПТ терапия — Дмитрий Яцко"
       description="Когнитивно-поведенческая терапия онлайн. Помогаю при депрессии, тревоге, панических атаках, выгорании. Запись на консультацию."
       path="/"
-      schema={[personSchema, serviceSchema]}
+      schema={[personSchema, serviceSchema, homeFaqSchema]}
     />
     <Navbar />
     <main>
@@ -45,6 +46,7 @@ const Index = () => (
       <Specializations />
       <Pricing />
       <Blog />
+      <HomeFAQ />
       <BookingForm />
       <Checklist />
     </main>
