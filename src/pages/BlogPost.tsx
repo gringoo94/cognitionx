@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -55,6 +56,9 @@ const BlogPost = () => {
 
           <div className="mt-10 space-y-6">
             {post.content.map((block, i) => {
+              if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
+                return <BehavioralActivationDiary key={i} />;
+              }
               if (block.type === "preface") {
                 return (
                   <p
