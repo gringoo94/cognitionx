@@ -50,13 +50,22 @@ const ProblemPage = () => {
     url: "https://yatsko-psy.ru",
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://yatsko-psy.ru/" },
+      { "@type": "ListItem", position: 2, name: page.title, item: `https://yatsko-psy.ru/${page.slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[faqSchema, personSchema]}
+        schema={[faqSchema, personSchema, breadcrumbSchema]}
       />
       <Navbar />
 
