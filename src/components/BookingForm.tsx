@@ -15,7 +15,7 @@ const fade = (delay = 0) => ({
 });
 
 const BookingForm = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", messenger: "", message: "" });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ const BookingForm = () => {
     const { error } = await supabase.from("contact_submissions").insert({
       name: form.name,
       email: form.email,
-      phone: form.phone || null,
+      messenger: form.messenger || null,
       message: form.message || "Заявка с главной страницы",
     });
     setLoading(false);
@@ -33,7 +33,7 @@ const BookingForm = () => {
       return;
     }
     toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setForm({ name: "", email: "", messenger: "", message: "" });
   };
 
   return (
@@ -65,10 +65,9 @@ const BookingForm = () => {
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <Input
-            type="tel"
-            placeholder="Телефон"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            placeholder="Telegram / WhatsApp (@username или номер)"
+            value={form.messenger}
+            onChange={(e) => setForm({ ...form, messenger: e.target.value })}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <Textarea
