@@ -6,6 +6,7 @@ import Specializations from "@/components/Specializations";
 import Pricing from "@/components/Pricing";
 import BookingForm from "@/components/BookingForm";
 import Checklist from "@/components/Checklist";
+import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -17,6 +18,7 @@ const Index = () => (
       <Approach />
       <Specializations />
       <Pricing />
+      <Blog />
       <BookingForm />
       <Checklist />
     </main>
