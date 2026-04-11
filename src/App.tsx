@@ -11,6 +11,7 @@ import Tools from "./pages/Tools.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import ProblemPage from "./components/ProblemPage.tsx";
+import PageViewTracker from "./components/PageViewTracker.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <PageViewTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<BlogList />} />
