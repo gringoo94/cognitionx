@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
+import SEOHead from "@/components/SEOHead";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -23,8 +24,29 @@ const BlogPost = () => {
     );
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    image: post.image,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: "Дмитрий Яцко",
+      url: "https://yatsko-psy.ru",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEOHead
+        title={`${post.title} | Психолог Дмитрий Яцко`}
+        description={post.description}
+        path={`/blog/${post.slug}`}
+        ogImage={post.image}
+        schema={articleSchema}
+      />
       <Navbar />
       <main className="max-w-3xl mx-auto px-6 pt-24 pb-20">
         <Link

@@ -4,6 +4,7 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -14,6 +15,11 @@ const fade = (delay = 0) => ({
 
 const BlogList = () => (
   <div className="min-h-screen bg-background text-foreground">
+    <SEOHead
+      title="Блог психолога | КПТ, тревога, депрессия — Дмитрий Яцко"
+      description="Статьи о когнитивно-поведенческой терапии, депрессии, тревоге и выгорании. Практические техники и психообразование."
+      path="/blog"
+    />
     <Navbar />
     <main className="max-w-6xl mx-auto px-6 pt-24 pb-20">
       <Link
