@@ -18,6 +18,7 @@ Deno.serve(async (req) => {
     if (!TELEGRAM_API_KEY) throw new Error('TELEGRAM_API_KEY is not configured');
 
     const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID');
+    console.log('TELEGRAM_CHAT_ID value:', JSON.stringify(TELEGRAM_CHAT_ID), 'as number:', Number(TELEGRAM_CHAT_ID));
     if (!TELEGRAM_CHAT_ID) throw new Error('TELEGRAM_CHAT_ID is not configured');
 
     const { name, email, messenger, message } = await req.json();
@@ -39,7 +40,7 @@ Deno.serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
+        chat_id: Number(TELEGRAM_CHAT_ID),
         text,
         parse_mode: 'HTML',
       }),
