@@ -59,7 +59,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="flex items-center justify-between max-w-6xl mx-auto px-6 py-3.5">
         <Link to="/" className="text-lg font-bold tracking-tight">
-          Д. Яцко
+          CognitionX
         </Link>
         <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
           {links.slice(0, 2).map((l) => renderLink(l))}

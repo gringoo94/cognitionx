@@ -17,7 +17,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand + contacts */}
         <div>
-          <p className="text-lg font-bold tracking-tight mb-4">Дмитрий Яцко</p>
+          <p className="text-lg font-bold tracking-tight mb-4">CognitionX</p>
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
             <a href="https://t.me/gringoo94" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Send className="w-4 h-4" /> Telegram
@@ -59,7 +59,7 @@ const Footer = () => (
       </div>
 
       <div className="mt-10 pt-6 border-t border-border text-center">
-        <p className="text-xs text-muted-foreground">© 2026 Дмитрий Яцко. Все права защищены.</p>
+        <p className="text-xs text-muted-foreground">© 2026 CognitionX. Все права защищены.</p>
       </div>
     </div>
   </footer>
