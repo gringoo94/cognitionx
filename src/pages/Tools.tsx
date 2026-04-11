@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import {
   Brain, BookOpen, Target, Leaf, Zap, Shield,
   AlertTriangle, Lightbulb, Compass, Heart, ArrowLeft, ExternalLink
@@ -106,6 +107,11 @@ const KNOWLEDGE_FORGE_URL = "https://knowledge-forge.lovable.app";
 const Tools = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="КПТ инструменты | Психолог Дмитрий Яцко"
+        description="Бесплатные инструменты когнитивно-поведенческой терапии: дневник мыслей, трекер настроения, ABC-модель и другие техники КПТ."
+        path="/tools"
+      />
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-6 py-12">

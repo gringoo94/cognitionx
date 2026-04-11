@@ -46,6 +46,51 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yatsko-psy.ru/blog/perekladyvanie-otvetstvennosti</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/kogda-nichego-ne-hochetsya</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/pervaya-sessiya-u-psihologa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/priznaki-depressii</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/kak-vybrat-psihologa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/sindrom-samozvantsa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/vygoranie-ili-ustalost</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/simptomy-trevozhnogo-rasstrojstva</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://yatsko-psy.ru/blog/prokrastinaciya</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://yatsko-psy.ru/tools</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
