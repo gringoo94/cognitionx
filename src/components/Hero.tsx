@@ -58,7 +58,7 @@ const Hero = () => (
     <motion.div {...fade(0.25)} className="mt-16 flex justify-center">
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-2xl scale-110" />
-        <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl overflow-hidden border border-border shadow-xl">
+        <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-xl">
           <img
             src={heroPhoto}
             alt="Дмитрий Яцко — психолог"
