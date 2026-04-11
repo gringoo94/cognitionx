@@ -1,21 +1,59 @@
 import { Mail, Send } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const specLinks = [
+  { label: "Депрессия", href: "/depression" },
+  { label: "Тревога", href: "/anxiety" },
+  { label: "Панические атаки", href: "/panic-attacks" },
+  { label: "Выгорание", href: "/burnout" },
+  { label: "Созависимость", href: "/co-dependency" },
+  { label: "КПТ-терапия", href: "/cbt-therapy" },
+  { label: "Онлайн-терапия", href: "/online-therapy" },
+];
 
 const Footer = () => (
   <footer className="border-t border-border">
     <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-lg font-bold tracking-tight">Дмитрий Яцко</p>
-        <div className="flex items-center gap-6 text-sm text-muted-foreground">
-          <a href="https://t.me/darrroo04" className="flex items-center gap-2 hover:text-foreground transition-colors">
-            <Send className="w-4 h-4" /> Telegram
-          </a>
-          <a href="mailto:digitdarrroo0@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
-            <Mail className="w-4 h-4" /> Email
-          </a>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* Brand + contacts */}
+        <div>
+          <p className="text-lg font-bold tracking-tight mb-4">Дмитрий Яцко</p>
+          <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+            <a href="https://t.me/darrroo04" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Send className="w-4 h-4" /> Telegram
+            </a>
+            <a href="mailto:digitdarrroo0@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Mail className="w-4 h-4" /> Email
+            </a>
+          </div>
+        </div>
+
+        {/* Specializations */}
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Специализации</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            {specLinks.map((l) => (
+              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Навигация</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
+            <Link to="/blog" className="hover:text-foreground transition-colors">Блог</Link>
+            <Link to="/tools" className="hover:text-foreground transition-colors">Инструменты</Link>
+            <a href="/#booking" className="hover:text-foreground transition-colors">Записаться</a>
+          </div>
         </div>
       </div>
-      <div className="mt-8 pt-6 border-t border-border text-center">
-        <p className="text-xs text-muted-foreground">© 2026</p>
+
+      <div className="mt-10 pt-6 border-t border-border text-center">
+        <p className="text-xs text-muted-foreground">© 2026 Дмитрий Яцко. Все права защищены.</p>
       </div>
     </div>
   </footer>
