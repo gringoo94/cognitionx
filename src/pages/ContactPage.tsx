@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Send, MessageCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,10 +46,26 @@ const breadcrumbSchema = {
 const ContactPage = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim() || null,
+        message: form.message.trim(),
+      });
+      if (error) throw error;
+      toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch {
+      toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте ещё раз.", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -139,8 +156,8 @@ const ContactPage = () => {
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               className="rounded-lg min-h-[100px]"
             />
-            <Button type="submit" size="lg" className="w-full rounded-lg gap-2">
-              Отправить <Send className="w-4 h-4" />
+            <Button type="submit" size="lg" className="w-full rounded-lg gap-2" disabled={loading}>
+              {loading ? "Отправка..." : "Отправить"} {!loading && <Send className="w-4 h-4" />}
             </Button>
           </form>
         </motion.section>
