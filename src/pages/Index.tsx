@@ -5,7 +5,7 @@ import Approach from "@/components/Approach";
 import Specializations from "@/components/Specializations";
 import Pricing from "@/components/Pricing";
 import BookingForm from "@/components/BookingForm";
-import Checklist from "@/components/Checklist";
+
 import Blog from "@/components/Blog";
 import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
 import Footer from "@/components/Footer";
