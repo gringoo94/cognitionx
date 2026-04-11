@@ -14,7 +14,7 @@ import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import ProblemPage from "./components/ProblemPage.tsx";
 import PageViewTracker from "./components/PageViewTracker.tsx";
-import FloatingCTA from "./components/FloatingCTA.tsx";
+
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -27,7 +27,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <PageViewTracker />
-          <FloatingCTA />
+          
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<BlogList />} />
