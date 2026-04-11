@@ -8,6 +8,7 @@ const links = [
   { label: "Специализации", href: "#specs" },
   { label: "Цены", href: "#pricing" },
   { label: "Блог", href: "/blog" },
+  { label: "Инструменты", href: "/tools" },
 ];
 
 const Navbar = () => {
