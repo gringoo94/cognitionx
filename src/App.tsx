@@ -10,6 +10,8 @@ import BlogPost from "./pages/BlogPost.tsx";
 import Tools from "./pages/Tools.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
 import ProblemPage from "./components/ProblemPage.tsx";
 import PageViewTracker from "./components/PageViewTracker.tsx";
 import FloatingCTA from "./components/FloatingCTA.tsx";
@@ -33,6 +35,8 @@ const App = () => (
             <Route path="/tools" element={<Tools />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/depression" element={<ProblemPage />} />
             <Route path="/anxiety" element={<ProblemPage />} />
             <Route path="/panic-attacks" element={<ProblemPage />} />
