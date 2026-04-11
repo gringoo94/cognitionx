@@ -7,6 +7,7 @@ const links = [
   { label: "Подход", href: "#approach" },
   { label: "Специализации", href: "#specs" },
   { label: "Цены", href: "#pricing" },
+  { label: "Блог", href: "/blog" },
 ];
 
 const Navbar = () => {
