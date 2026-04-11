@@ -95,7 +95,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "burnout", "cbt-therapy"],
-    relatedArticles: ["kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii"],
+    relatedArticles: ["utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii"],
   },
   {
     slug: "anxiety",
@@ -161,7 +161,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["panic-attacks", "depression", "cbt-therapy"],
-    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
+    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "postoyannaya-trevoga-bez-prichiny", "simptomy-trevozhnogo-rasstrojstva"],
   },
   {
     slug: "panic-attacks",
@@ -226,7 +226,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "cbt-therapy", "online-therapy"],
-    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
+    relatedArticles: ["panicheskaya-ataka-chto-delat", "kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
   },
   {
     slug: "burnout",
