@@ -28,6 +28,7 @@ const plans = [
     price: "100",
     duration: "4 × 50 мин",
     features: ["25 € за сессию", "Регулярная работа", "Приоритетная запись"],
+    boldFirst: true,
   },
 ];
 
@@ -67,10 +68,10 @@ const Pricing = () => (
               <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>€</span>
             </div>
             <ul className="mt-6 space-y-3 flex-1">
-              {p.features.map((f) => (
+              {p.features.map((f, fi) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
                   <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${p.featured ? "text-accent" : "text-accent"}`} />
-                  <span className={p.featured ? "text-primary-foreground/90" : "text-muted-foreground"}>{f}</span>
+                  <span className={`${p.featured ? "text-primary-foreground/90" : "text-muted-foreground"} ${(p as any).boldFirst && fi === 0 ? "font-bold" : ""}`}>{f}</span>
                 </li>
               ))}
             </ul>
