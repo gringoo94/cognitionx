@@ -31,6 +31,7 @@ const BlogPost = () => {
     description: post.description,
     image: post.image,
     datePublished: post.date,
+    dateModified: post.date,
     author: {
       "@type": "Person",
       name: "Дмитрий Яцко",
@@ -45,6 +46,7 @@ const BlogPost = () => {
         description={post.description}
         path={`/blog/${post.slug}`}
         ogImage={post.image}
+        ogType="article"
         schema={articleSchema}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
@@ -78,7 +80,8 @@ const BlogPost = () => {
               src={post.image}
               alt={`Иллюстрация к статье: ${post.title}`}
               className="w-full h-auto object-cover"
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
 

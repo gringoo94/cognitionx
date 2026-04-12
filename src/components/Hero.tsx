@@ -83,6 +83,8 @@ const Hero = () => (
               src={heroPhoto}
               alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
               className="w-full h-full object-cover object-top"
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
         </div>
