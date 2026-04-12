@@ -16,12 +16,11 @@ const specLinks = [
   { label: "Зависимость", href: "/addiction", icon: Pill },
   { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
   { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
-  { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
 ];
 
 const links = [
   { label: "О терапевте", href: "/#about" },
-  { label: "Метод КПТ", href: "/#approach" },
+  { label: "Подход", href: "/#approach" },
   { label: "Цены", href: "/#pricing" },
   { label: "Блог", href: "/blog" },
   { label: "Инструменты", href: "/tools" },

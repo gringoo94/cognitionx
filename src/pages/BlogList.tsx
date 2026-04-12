@@ -53,7 +53,7 @@ const BlogList = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Блог психолога | КПТ, тревога, депрессия — Дмитрий Яцко"
+        title="Блог психолога | КПТ, схема-терапия, тревога, депрессия — Дмитрий Яцко"
         description="Статьи о когнитивно-поведенческой терапии, депрессии, тревоге и выгорании. Практические техники и психообразование."
         path="/blog"
         breadcrumbs={[
