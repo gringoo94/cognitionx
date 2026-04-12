@@ -108,6 +108,21 @@ const ProblemPage = () => {
       availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: "https://cognitionx.cloud/psiholog-europa" },
       sameAs: ["https://t.me/gringoo94", "https://www.instagram.com/gringo.journal", "https://www.linkedin.com/in/dmitrii-iatco/"],
     },
+    "psiholog-usa": {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://cognitionx.cloud/psiholog-usa#service",
+      name: "Русскоязычный психолог онлайн для США и Канады — Дмитрий Яцко",
+      description: "Русскоязычный психолог онлайн для клиентов из США и Канады. КПТ и схема-терапия на русском языке.",
+      url: "https://cognitionx.cloud/psiholog-usa",
+      telephone: "+447599880865",
+      email: "digitalgringoo@gmail.com",
+      priceRange: "$$",
+      areaServed: [{ "@type": "Country", name: "США" }, { "@type": "Country", name: "Канада" }],
+      serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
+      availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: "https://cognitionx.cloud/psiholog-usa" },
+      sameAs: ["https://t.me/gringoo94", "https://www.instagram.com/gringo.journal", "https://www.linkedin.com/in/dmitrii-iatco/"],
+    },
   };
 
   const localBusinessSchema = geoSchemas[slug] || null;
