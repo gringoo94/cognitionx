@@ -1,12 +1,18 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TelegramCTA from "@/components/TelegramCTA";
 import About from "@/components/About";
+import AboutDetailed from "@/components/AboutDetailed";
 import Approach from "@/components/Approach";
 import Specializations from "@/components/Specializations";
+import HowWeStart from "@/components/HowWeStart";
+import Expectations from "@/components/Expectations";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import BookingForm from "@/components/BookingForm";
-
+import Ethics from "@/components/Ethics";
+import Projects from "@/components/Projects";
+import SessionPrep from "@/components/SessionPrep";
 import Blog from "@/components/Blog";
 import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
 import Footer from "@/components/Footer";
@@ -42,15 +48,21 @@ const Index = () => (
     <Navbar />
     <main>
       <Hero />
+      <TelegramCTA />
       <About />
+      <AboutDetailed />
       <Approach />
       <Specializations />
+      <HowWeStart />
+      <Expectations />
       <Testimonials />
       <Pricing />
+      <Ethics />
+      <Projects />
+      <SessionPrep />
       <Blog />
       <HomeFAQ />
       <BookingForm />
-      
     </main>
     <Footer />
   </div>
