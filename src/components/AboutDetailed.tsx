@@ -12,7 +12,7 @@ const fade = (delay = 0) => ({
 const AboutDetailed = () => (
   <section className="max-w-3xl mx-auto px-6 py-20 md:py-28">
     <motion.div {...fade()} className="text-center mb-12">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и квалификация</h2>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
       <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
         Прозрачность — часть моей профессиональной этики
       </p>
@@ -27,8 +27,10 @@ const AboutDetailed = () => (
             </span>
           </AccordionTrigger>
           <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• Молдавский государственный университет — факультет психологии</p>
-            <p>• Специализация: клиническая психология</p>
+            <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
+            <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
+            <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
+            <p>• Курсы и конференции Минского центра КПТ</p>
           </AccordionContent>
         </AccordionItem>
 
@@ -39,8 +41,9 @@ const AboutDetailed = () => (
             </span>
           </AccordionTrigger>
           <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• Верифицированный специалист на платформе <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
-            <p>• Сооснователь проекта <a href="https://cbtlab.md" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CBTLAB</a> — первый КПТ-центр в Молдове</p>
+            <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
+            <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
+            <p>• Сооснователь <a href="https://cbtlab.md" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CBTLAB</a> — первый КПТ-центр в Молдове</p>
             <p>• Волонтёрская практика в MedHub и Initiativa Pozitiva</p>
           </AccordionContent>
         </AccordionItem>
@@ -70,6 +73,7 @@ const AboutDetailed = () => (
             <p>• Доказательная психотерапия и её популяризация</p>
             <p>• Цифровые инструменты для психического здоровья</p>
             <p>• Psychoeducation и self-help на основе КПТ</p>
+            <p className="italic mt-2">«Обучение не заканчивается — оно продолжается с каждым новым человеком на сессии»</p>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
