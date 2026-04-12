@@ -45,8 +45,6 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      <link rel="alternate" hrefLang="ru" href={url} />
-      <link rel="alternate" hrefLang="x-default" href={url} />
 
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
