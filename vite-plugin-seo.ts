@@ -4,60 +4,64 @@ import * as fs from "fs";
 import * as path from "path";
 
 const SITE_URL = "https://cognitionx.cloud";
+const OG_IMAGE = `${SITE_URL}/og-default.webp`;
 
-function generateMetaTags(route: typeof seoRoutes[0]): string {
-  const url = `${SITE_URL}${route.path}`;
-  const image = `${SITE_URL}/og-default.webp`;
-
-  return `
-    <title>${route.title}</title>
-    <meta name="description" content="${route.description}" />
-    <link rel="canonical" href="${url}" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${url}" />
-    <meta property="og:title" content="${route.title}" />
-    <meta property="og:description" content="${route.description}" />
-    <meta property="og:image" content="${image}" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:site_name" content="Психолог Дмитрий Яцко" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${route.title}" />
-    <meta name="twitter:description" content="${route.description}" />
-    <meta name="twitter:image" content="${image}" />`;
-}
-
+/**
+ * Generates a synchronous inline <script> that runs before React hydrates.
+ * It reads window.location.pathname, looks up SEO data from a baked-in map,
+ * and injects <title>, <meta>, <link rel="canonical"> into <head>.
+ * 
+ * This works with SPA hosting because the script runs in the single index.html
+ * that the server returns for every route.
+ */
 export function seoPlugin(): Plugin {
   return {
-    name: "vite-plugin-seo-prerender",
+    name: "vite-plugin-seo-inline",
     apply: "build",
     closeBundle() {
       const distDir = path.resolve(process.cwd(), "dist");
-      const indexHtml = fs.readFileSync(path.join(distDir, "index.html"), "utf-8");
+      const indexPath = path.join(distDir, "index.html");
+      let html = fs.readFileSync(indexPath, "utf-8");
 
-      for (const route of seoRoutes) {
-        if (route.path === "/") continue; // index.html already exists
-
-        // Inject meta tags into <head> of index.html
-        const metaTags = generateMetaTags(route);
-        const modifiedHtml = indexHtml.replace("</head>", `${metaTags}\n  </head>`);
-
-        // Create directory structure: /depression -> /depression/index.html
-        const routePath = route.path.startsWith("/") ? route.path.slice(1) : route.path;
-        const dir = path.join(distDir, routePath);
-        fs.mkdirSync(dir, { recursive: true });
-        fs.writeFileSync(path.join(dir, "index.html"), modifiedHtml);
+      // Build the route map as a compact JSON object
+      const routeMap: Record<string, { t: string; d: string }> = {};
+      for (const r of seoRoutes) {
+        routeMap[r.path] = { t: r.title, d: r.description };
       }
 
-      // Also inject meta for homepage into root index.html
-      const homeRoute = seoRoutes.find((r) => r.path === "/");
-      if (homeRoute) {
-        const metaTags = generateMetaTags(homeRoute);
-        const modifiedHome = indexHtml.replace("</head>", `${metaTags}\n  </head>`);
-        fs.writeFileSync(path.join(distDir, "index.html"), modifiedHome);
-      }
+      const script = `<script>
+(function(){
+  var S="${SITE_URL}",I="${OG_IMAGE}",R=${JSON.stringify(routeMap)};
+  var p=location.pathname.replace(/\\/$/,"") || "/";
+  var m=R[p];
+  if(!m)return;
+  var u=S+p,h=document.head;
+  document.title=m.t;
+  function a(tag,attrs){var e=document.createElement(tag);for(var k in attrs)e.setAttribute(k,attrs[k]);h.appendChild(e);}
+  function meta(n,c){a("meta",{name:n,content:c});}
+  function og(n,c){a("meta",{property:n,content:c});}
+  a("link",{rel:"canonical",href:u});
+  meta("description",m.d);
+  meta("robots","index, follow");
+  og("og:type","website");
+  og("og:url",u);
+  og("og:title",m.t);
+  og("og:description",m.d);
+  og("og:image",I);
+  og("og:locale","ru_RU");
+  og("og:site_name","Психолог Дмитрий Яцко");
+  meta("twitter:card","summary_large_image");
+  meta("twitter:title",m.t);
+  meta("twitter:description",m.d);
+  meta("twitter:image",I);
+})();
+</script>`;
 
-      console.log(`[seo-plugin] Generated ${seoRoutes.length} SEO-optimized HTML files`);
+      // Insert the script right after <head> so it runs before anything else
+      html = html.replace("<head>", "<head>\n" + script);
+
+      fs.writeFileSync(indexPath, html);
+      console.log(`[seo-plugin] Injected inline SEO script with ${seoRoutes.length} routes into index.html`);
     },
   };
 }
