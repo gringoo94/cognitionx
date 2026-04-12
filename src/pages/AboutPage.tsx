@@ -18,7 +18,7 @@ const personSchema = {
   "@type": "Person",
   name: "Дмитрий Яцко",
   jobTitle: "Психолог, КПТ и схема-терапевт",
-  url: "https://yatsko-psy.ru",
+  url: "https://cognitionx.cloud",
   description: "Психолог, практикующий КПТ и схема-терапию. Работаю с депрессией, тревогой, паническими атаками, выгоранием.",
   knowsAbout: [
     "Когнитивно-поведенческая терапия",
@@ -34,8 +34,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Главная", item: "https://yatsko-psy.ru/" },
-    { "@type": "ListItem", position: 2, name: "Обо мне", item: "https://yatsko-psy.ru/about" },
+    { "@type": "ListItem", position: 1, name: "Главная", item: "https://cognitionx.cloud/" },
+    { "@type": "ListItem", position: 2, name: "Обо мне", item: "https://cognitionx.cloud/about" },
   ],
 };
 

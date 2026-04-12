@@ -47,15 +47,15 @@ const ProblemPage = () => {
     "@type": "Person",
     name: "Дмитрий Яцко",
     jobTitle: "Психолог, КПТ и схема-терапевт",
-    url: "https://yatsko-psy.ru",
+    url: "https://cognitionx.cloud",
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: "https://yatsko-psy.ru/" },
-      { "@type": "ListItem", position: 2, name: page.title, item: `https://yatsko-psy.ru/${page.slug}` },
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://cognitionx.cloud/" },
+      { "@type": "ListItem", position: 2, name: page.title, item: `https://cognitionx.cloud/${page.slug}` },
     ],
   };
 

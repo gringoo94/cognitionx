@@ -15,7 +15,7 @@ interface SEOHeadProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const SITE_URL = "https://yatsko-psy.ru";
+const SITE_URL = "https://cognitionx.cloud";
 
 const SEOHead = ({ title, description, path, ogImage, schema, noindex, breadcrumbs }: SEOHeadProps) => {
   const url = `${SITE_URL}${path}`;

@@ -24,14 +24,14 @@ const personSchema = {
   "@type": "Person",
   name: "Дмитрий Яцко",
   jobTitle: "Психолог, КПТ и схема-терапевт",
-  url: "https://yatsko-psy.ru",
+  url: "https://cognitionx.cloud",
 };
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Психолог Дмитрий Яцко — КПТ и схема-терапия",
-  url: "https://yatsko-psy.ru",
+  url: "https://cognitionx.cloud",
   description: "Когнитивно-поведенческая и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание.",
   areaServed: ["Кишинёв", "Молдова", "Онлайн"],
   serviceType: "Психологическая консультация",

@@ -57,8 +57,8 @@ const BlogList = () => {
         description="Статьи о когнитивно-поведенческой терапии, депрессии, тревоге и выгорании. Практические техники и психообразование."
         path="/blog"
         breadcrumbs={[
-          { name: "Главная", url: "https://yatsko-psy.ru/" },
-          { name: "Блог", url: "https://yatsko-psy.ru/blog" },
+          { name: "Главная", url: "https://cognitionx.cloud/" },
+          { name: "Блог", url: "https://cognitionx.cloud/blog" },
         ]}
       />
       <Navbar />

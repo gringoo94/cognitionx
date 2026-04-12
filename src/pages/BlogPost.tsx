@@ -34,7 +34,7 @@ const BlogPost = () => {
     author: {
       "@type": "Person",
       name: "Дмитрий Яцко",
-      url: "https://yatsko-psy.ru",
+      url: "https://cognitionx.cloud",
     },
   };
 
@@ -47,9 +47,9 @@ const BlogPost = () => {
         ogImage={post.image}
         schema={articleSchema}
         breadcrumbs={[
-          { name: "Главная", url: "https://yatsko-psy.ru/" },
-          { name: "Блог", url: "https://yatsko-psy.ru/blog" },
-          { name: post.title, url: `https://yatsko-psy.ru/blog/${post.slug}` },
+          { name: "Главная", url: "https://cognitionx.cloud/" },
+          { name: "Блог", url: "https://cognitionx.cloud/blog" },
+          { name: post.title, url: `https://cognitionx.cloud/blog/${post.slug}` },
         ]}
       />
       <Navbar />

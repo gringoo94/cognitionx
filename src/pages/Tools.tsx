@@ -112,8 +112,8 @@ const Tools = () => {
         description="Бесплатные инструменты когнитивно-поведенческой терапии: дневник мыслей, трекер настроения, ABC-модель и другие техники КПТ."
         path="/tools"
         breadcrumbs={[
-          { name: "Главная", url: "https://yatsko-psy.ru/" },
-          { name: "Инструменты КПТ", url: "https://yatsko-psy.ru/tools" },
+          { name: "Главная", url: "https://cognitionx.cloud/" },
+          { name: "Инструменты КПТ", url: "https://cognitionx.cloud/tools" },
         ]}
       />
       <Navbar />
