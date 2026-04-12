@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -58,6 +58,14 @@ const App = () => (
             <Route path="/psiholog-moskva" element={<ProblemPage />} />
             <Route path="/psiholog-europa" element={<ProblemPage />} />
             <Route path="/psiholog-usa" element={<ProblemPage />} />
+            
+            {/* Redirects from old Tilda URLs */}
+            <Route path="/about_cognitionx" element={<Navigate to="/about" replace />} />
+            <Route path="/oursolution" element={<Navigate to="/" replace />} />
+            <Route path="/practice/generator" element={<Navigate to="/tools" replace />} />
+            <Route path="/tpost/*" element={<Navigate to="/blog" replace />} />
+            <Route path="/css/*" element={<Navigate to="/" replace />} />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
