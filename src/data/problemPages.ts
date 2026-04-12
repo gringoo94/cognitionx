@@ -567,7 +567,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Я работаю со взрослыми клиентами (18+). Если вам нужен детский или подростковый психолог — могу порекомендовать коллег.",
       },
     ],
-    relatedPages: ["online-therapy", "cbt-therapy", "schema-therapy"],
+    relatedPages: ["online-therapy", "cbt-therapy", "schema-therapy", "depression", "anxiety"],
     relatedArticles: ["pervaya-sessiya-u-psihologa", "kak-vybrat-psihologa"],
   },
   {
