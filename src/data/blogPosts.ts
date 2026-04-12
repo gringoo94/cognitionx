@@ -291,7 +291,7 @@ export const blogPosts: BlogPost[] = [
     slug: "izbeganie-pobeg-ot-lovushki",
     title: "Избегание — побег от своей ловушки",
     description: "Алкоголь, работа, еда, сериалы — всё это способы не чувствовать боль. Разбираем механизм избегания в схема-терапии и что с этим делать.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-02-avoidance.jpg",
     date: "2026-04-02",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
@@ -310,7 +310,7 @@ export const blogPosts: BlogPost[] = [
     slug: "kognitivnyj-barjer-vera-v-istinnost",
     title: "Когнитивный барьер — рациональная вера в истинность ловушки",
     description: "Что делать, когда вы всё ещё верите, что ваша ловушка — правда? Разбираем третье препятствие в схема-терапии.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-03-cognitive.jpg",
     date: "2026-04-03",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
@@ -329,7 +329,7 @@ export const blogPosts: BlogPost[] = [
     slug: "strategiya-peremen-popytka-sdelat-vsyo-srazu",
     title: "Стратегия перемен — попытка сделать всё сразу",
     description: "Почему грандиозные планы ведут к срыву. Четвёртое препятствие в схема-терапии: слишком сложные задачи и непосильные шаги.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-04-strategy.jpg",
     date: "2026-04-04",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
@@ -348,7 +348,7 @@ export const blogPosts: BlogPost[] = [
     slug: "emocionalnaya-vera",
     title: "Эмоциональная вера — когда инсайт не равен переменам",
     description: "Вы умом понимаете, что ловушка неистинна, но всё ещё чувствуете иначе. Пятое препятствие в схема-терапии.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-05-emotional.jpg",
     date: "2026-04-05",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
@@ -367,7 +367,7 @@ export const blogPosts: BlogPost[] = [
     slug: "bessistemnost-i-haos",
     title: "Бессистемность и хаос — почему работа «в уме» не работает",
     description: "Почему прогресс равен нулю, если вы работаете над ловушкой только в голове. Шестое препятствие в схема-терапии.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-06-system.jpg",
     date: "2026-04-06",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
@@ -386,7 +386,7 @@ export const blogPosts: BlogPost[] = [
     slug: "upushchenie-vazhnogo-elementa",
     title: "Упущение важного элемента — скрытый нюанс в плане перемен",
     description: "Вы меняетесь, но чего-то не хватает. Седьмое препятствие: когда план изменений неполон и скрытая форма ловушки продолжает работать.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-07-missing.jpg",
     date: "2026-04-07",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
@@ -405,7 +405,7 @@ export const blogPosts: BlogPost[] = [
     slug: "granicy-samopomoshchi",
     title: "Границы самопомощи — когда книга не заменит терапевта",
     description: "Восьмое препятствие: когда проблема укоренилась слишком глубоко для самостоятельной работы и нужна профессиональная помощь.",
-    image: "https://static.tildacdn.com/tild3032-3233-4133-b933-666337373965/3.png",
+    image: "/blog/obstacle-08-limits.jpg",
     date: "2026-04-08",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
