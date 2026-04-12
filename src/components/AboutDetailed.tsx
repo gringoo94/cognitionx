@@ -56,9 +56,9 @@ const AboutDetailed = () => (
             </span>
           </AccordionTrigger>
           <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• КПТ (когнитивно-поведенческая терапия) — основной метод</p>
+            <p>• <span className="font-medium">КПТ</span> (когнитивно-поведенческая терапия) — основное направление</p>
+            <p>• <span className="font-medium">Схема-терапия</span> — второе основное направление, работа с глубинными схемами и паттернами</p>
             <p>• ACT (терапия принятия и ответственности)</p>
-            <p>• Схема-терапия</p>
             <p>• Мотивационное интервьюирование (MI)</p>
             <p>• Элементы Smart Recovery при работе с зависимостями</p>
           </AccordionContent>
