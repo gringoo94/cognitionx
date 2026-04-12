@@ -23,16 +23,16 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Дмитрий Яцко",
-  jobTitle: "Психолог, КПТ-терапевт",
+  jobTitle: "Психолог, КПТ и схема-терапевт",
   url: "https://yatsko-psy.ru",
 };
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Психолог Дмитрий Яцко — КПТ терапия",
+  name: "Психолог Дмитрий Яцко — КПТ и схема-терапия",
   url: "https://yatsko-psy.ru",
-  description: "Когнитивно-поведенческая терапия онлайн: депрессия, тревога, панические атаки, выгорание.",
+  description: "Когнитивно-поведенческая и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание.",
   areaServed: ["Кишинёв", "Молдова", "Онлайн"],
   serviceType: "Психологическая консультация",
   provider: { "@type": "Person", name: "Дмитрий Яцко" },
@@ -41,8 +41,8 @@ const serviceSchema = {
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог онлайн | КПТ терапия — Дмитрий Яцко"
-      description="Когнитивно-поведенческая терапия онлайн. Помогаю при депрессии, тревоге, панических атаках, выгорании. Запись на консультацию."
+      title="Психолог онлайн | КПТ и схема-терапия — Дмитрий Яцко"
+      description="Когнитивно-поведенческая и схема-терапия онлайн. Помогаю при депрессии, тревоге, панических атаках, выгорании. Запись на консультацию."
       path="/"
       schema={[personSchema, serviceSchema, homeFaqSchema, testimonialsSchema]}
     />

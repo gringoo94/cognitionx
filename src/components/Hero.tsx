@@ -20,7 +20,7 @@ const Hero = () => (
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
         >
           <Sparkles className="w-3.5 h-3.5" />
-          Психолог · КПТ-терапевт
+          Психолог · КПТ · Схема-терапия
         </motion.div>
 
         <motion.h1
