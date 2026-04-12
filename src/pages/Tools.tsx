@@ -111,6 +111,10 @@ const Tools = () => {
         title="КПТ инструменты | Психолог Дмитрий Яцко"
         description="Бесплатные инструменты когнитивно-поведенческой терапии: дневник мыслей, трекер настроения, ABC-модель и другие техники КПТ."
         path="/tools"
+        breadcrumbs={[
+          { name: "Главная", url: "https://yatsko-psy.ru/" },
+          { name: "Инструменты КПТ", url: "https://yatsko-psy.ru/tools" },
+        ]}
       />
       <Navbar />
 

@@ -19,6 +19,10 @@ const BlogList = () => (
       title="Блог психолога | КПТ, тревога, депрессия — Дмитрий Яцко"
       description="Статьи о когнитивно-поведенческой терапии, депрессии, тревоге и выгорании. Практические техники и психообразование."
       path="/blog"
+      breadcrumbs={[
+        { name: "Главная", url: "https://yatsko-psy.ru/" },
+        { name: "Блог", url: "https://yatsko-psy.ru/blog" },
+      ]}
     />
     <Navbar />
     <main className="max-w-6xl mx-auto px-6 pt-24 pb-20">
@@ -46,7 +50,7 @@ const BlogList = () => (
               <div className="aspect-[16/10] overflow-hidden">
                 <img
                   src={post.image}
-                  alt={post.title}
+                  alt={`Иллюстрация: ${post.title}`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
