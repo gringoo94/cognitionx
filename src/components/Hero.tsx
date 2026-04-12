@@ -54,7 +54,7 @@ const Hero = () => (
         </motion.div>
 
         <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-          Первая консультация — 2 500 ₽ · Онлайн или очно
+          Первая консультация — 20 € · Онлайн
         </motion.p>
 
         <motion.div
