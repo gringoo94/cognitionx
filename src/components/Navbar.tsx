@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, ChevronDown, Brain, HeartPulse, Flame, Users, Shield, Zap, MonitorSmartphone, Sparkles } from "lucide-react";
+import { Menu, X, ChevronDown, Brain, HeartPulse, Flame, Users, Shield, Zap, MonitorSmartphone, Sparkles, Pill } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +13,9 @@ const specLinks = [
   { label: "Созависимость", href: "/co-dependency", icon: Users },
   { label: "Самооценка", href: "/self-esteem", icon: Shield },
   { label: "Стресс", href: "/stress", icon: Sparkles },
+  { label: "Зависимость", href: "/addiction", icon: Pill },
   { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
+  { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
   { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
 ];
 
