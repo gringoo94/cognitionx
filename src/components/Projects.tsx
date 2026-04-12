@@ -23,6 +23,12 @@ const projects = [
     url: "https://rolelit.lovable.app",
   },
   {
+    icon: BookOpen,
+    title: "CBT Workbook",
+    desc: "Интерактивная платформа для терапевтов и клиентов — инструменты КПТ, трекинг настроения, безопасный обмен сообщениями.",
+    url: "https://cbt-workbook.lovable.app",
+  },
+  {
     icon: HeartHandshake,
     title: "MedHub & Initiativa Pozitiva",
     desc: "Волонтёрские бесплатные консультации для тех, кто не может позволить себе частную терапию.",
