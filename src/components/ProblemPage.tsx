@@ -59,13 +59,52 @@ const ProblemPage = () => {
     ],
   };
 
+  const localBusinessSchema = slug === "in-person-therapy" ? {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://cognitionx.cloud/in-person-therapy#business",
+    name: "Психолог Дмитрий Яцко — КПТ и схема-терапия в Кишинёве",
+    description: "Очные консультации психолога в Кишинёве. Когнитивно-поведенческая и схема-терапия: депрессия, тревога, панические атаки, выгорание.",
+    url: "https://cognitionx.cloud/in-person-therapy",
+    telephone: "+447599880865",
+    email: "digitalgringoo@gmail.com",
+    image: "https://cognitionx.cloud/placeholder.svg",
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Кишинёв",
+      addressRegion: "Кишинёв",
+      addressCountry: "MD",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 47.0105,
+      longitude: 28.8638,
+    },
+    areaServed: [
+      { "@type": "City", name: "Кишинёв" },
+      { "@type": "Country", name: "Молдова" },
+    ],
+    serviceType: ["Психологическая консультация", "КПТ-терапия", "Схема-терапия"],
+    openingHoursSpecification: [
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
+    ],
+    sameAs: [
+      "https://t.me/gringoo94",
+      "https://www.instagram.com/gringo.journal",
+      "https://www.linkedin.com/in/dmitrii-iatco/",
+    ],
+  } : null;
+
+  const schemas = [faqSchema, personSchema, breadcrumbSchema, ...(localBusinessSchema ? [localBusinessSchema] : [])];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[faqSchema, personSchema, breadcrumbSchema]}
+        schema={schemas}
       />
       <Navbar />
 
