@@ -22,7 +22,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Психолог Дмитрий Яцко",
-  url: "https://yatsko-psy.ru",
+  url: "https://cognitionx.cloud",
   description: "Когнитивно-поведенческая и схема-терапия онлайн и очно. Депрессия, тревога, панические атаки, выгорание.",
   areaServed: ["Кишинёв", "Молдова", "Онлайн"],
   serviceType: "Психологическая консультация",
@@ -38,8 +38,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Главная", item: "https://yatsko-psy.ru/" },
-    { "@type": "ListItem", position: 2, name: "Контакты", item: "https://yatsko-psy.ru/contact" },
+    { "@type": "ListItem", position: 1, name: "Главная", item: "https://cognitionx.cloud/" },
+    { "@type": "ListItem", position: 2, name: "Контакты", item: "https://cognitionx.cloud/contact" },
   ],
 };
 
