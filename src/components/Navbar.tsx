@@ -13,7 +13,9 @@ const specLinks = [
   { label: "Созависимость", href: "/co-dependency", icon: Users },
   { label: "Самооценка", href: "/self-esteem", icon: Shield },
   { label: "Стресс", href: "/stress", icon: Sparkles },
+  { label: "Зависимость", href: "/addiction", icon: Pill },
   { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
+  { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
   { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
 ];
 
