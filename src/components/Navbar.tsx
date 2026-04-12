@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import logo from "@/assets/logo.png";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -58,7 +59,8 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="flex items-center justify-between max-w-6xl mx-auto px-6 py-3.5">
-        <Link to="/" className="text-lg font-bold tracking-tight">
+        <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
+          <img src={logo} alt="CognitionX логотип" className="h-8 w-8" />
           CognitionX
         </Link>
         <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
