@@ -52,6 +52,7 @@ const App = () => (
             <Route path="/self-esteem" element={<ProblemPage />} />
             <Route path="/stress" element={<ProblemPage />} />
             <Route path="/addiction" element={<ProblemPage />} />
+            <Route path="/in-person-therapy" element={<ProblemPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
