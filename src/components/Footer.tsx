@@ -1,21 +1,25 @@
 import { Mail, Send, Phone, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const specLinks = [
+const problemLinks = [
   { label: "Депрессия", href: "/depression" },
   { label: "Тревога", href: "/anxiety" },
   { label: "Панические атаки", href: "/panic-attacks" },
   { label: "Выгорание", href: "/burnout" },
   { label: "Созависимость", href: "/co-dependency" },
   { label: "Зависимости", href: "/addiction" },
+];
+
+const methodLinks = [
   { label: "КПТ-терапия", href: "/cbt-therapy" },
+  { label: "Схема-терапия", href: "/schema-therapy" },
   { label: "Онлайн-терапия", href: "/online-therapy" },
 ];
 
 const Footer = () => (
   <footer className="border-t border-border">
     <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Brand + contacts */}
         <div>
           <p className="text-lg font-bold tracking-tight mb-4">CognitionX</p>
@@ -38,11 +42,23 @@ const Footer = () => (
           </div>
         </div>
 
-        {/* Specializations */}
+        {/* Problems */}
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Специализации</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Проблемы</p>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            {specLinks.map((l) => (
+            {problemLinks.map((l) => (
+              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Methods */}
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Методы</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            {methodLinks.map((l) => (
               <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
                 {l.label}
               </Link>
