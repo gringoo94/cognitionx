@@ -72,10 +72,10 @@ const Pricing = () => (
               )}
             </div>
             <ul className="mt-6 space-y-3 flex-1">
-              {p.features.map((f, fi) => (
+              {p.features.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
                   <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${p.featured ? "text-accent" : "text-accent"}`} />
-                  <span className={`${p.featured ? "text-primary-foreground/90" : "text-muted-foreground"} ${(p as any).boldFirst && fi === 0 ? "font-bold" : ""}`}>{f}</span>
+                  <span className={p.featured ? "text-primary-foreground/90" : "text-muted-foreground"}>{f}</span>
                 </li>
               ))}
             </ul>
