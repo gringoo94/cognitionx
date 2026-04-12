@@ -114,7 +114,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Да, КПТ при депрессии эффективна в онлайн-формате. Исследования показывают сопоставимые результаты с очной терапией.",
       },
     ],
-    relatedPages: ["anxiety", "burnout", "cbt-therapy"],
+    relatedPages: ["anxiety", "burnout", "cbt-therapy", "schema-therapy", "online-therapy"],
     relatedArticles: ["utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii"],
   },
   {
@@ -180,7 +180,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Первые техники управления тревогой вы получите уже на 1-2 сессии. Устойчивые изменения обычно наступают через 8-12 сессий.",
       },
     ],
-    relatedPages: ["panic-attacks", "depression", "cbt-therapy"],
+    relatedPages: ["panic-attacks", "depression", "cbt-therapy", "schema-therapy", "online-therapy"],
     relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "postoyannaya-trevoga-bez-prichiny", "simptomy-trevozhnogo-rasstrojstva"],
   },
   {
@@ -245,7 +245,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Парадоксально, но попытка «остановить» паническую атаку часто её усиливает. Более эффективно — позволить ей пройти, не борясь. В КПТ мы учимся именно этому.",
       },
     ],
-    relatedPages: ["anxiety", "cbt-therapy", "online-therapy"],
+    relatedPages: ["anxiety", "cbt-therapy", "online-therapy", "in-person-therapy"],
     relatedArticles: ["panicheskaya-ataka-chto-delat", "kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
   },
   {
@@ -296,7 +296,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Не обязательно. Часто проблема не в самой работе, а в том, как вы к ней относитесь и какие границы выстраиваете. Мы разберём это вместе.",
       },
     ],
-    relatedPages: ["depression", "anxiety", "cbt-therapy"],
+    relatedPages: ["depression", "anxiety", "cbt-therapy", "schema-therapy", "online-therapy"],
     relatedArticles: ["kogda-nichego-ne-hochetsya", "depressiya-ili-vygoranie", "vygoranie-ili-ustalost"],
   },
   {
@@ -347,7 +347,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Нет, это не клинический диагноз, а паттерн поведения в отношениях. Но он может приводить к тревоге, депрессии и другим проблемам.",
       },
     ],
-    relatedPages: ["anxiety", "depression", "cbt-therapy"],
+    relatedPages: ["anxiety", "depression", "cbt-therapy", "schema-therapy"],
     relatedArticles: ["perekladyvanie-otvetstvennosti"],
   },
   {
@@ -423,7 +423,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Возможно, вам нужна схема-терапия — она работает с глубинными паттернами, которые КПТ не затрагивает. Или работа была недостаточно структурированной. Мы разберёмся на первичной консультации.",
       },
     ],
-    relatedPages: ["schema-therapy", "depression", "anxiety", "panic-attacks"],
+    relatedPages: ["schema-therapy", "online-therapy", "in-person-therapy", "depression", "anxiety", "panic-attacks"],
     relatedArticles: ["chto-takoe-kpt", "kak-spravitsya-s-trevozhnostyu", "planirovanie-dnya-pri-depressii", "pervaya-sessiya-u-psihologa"],
   },
   {
@@ -629,7 +629,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Самооценка — это общее отношение к себе как к человеку. Уверенность — это вера в свои способности в конкретных ситуациях. Мы работаем с обоими уровнями.",
       },
     ],
-    relatedPages: ["anxiety", "depression", "co-dependency"],
+    relatedPages: ["anxiety", "depression", "co-dependency", "schema-therapy", "cbt-therapy"],
     relatedArticles: ["kak-spravitsya-s-trevozhnostyu"],
   },
   {
@@ -687,7 +687,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Да. Миграционный стресс — одна из самых сильных нагрузок на психику. Потеря привычного окружения, языковой барьер, культурные различия — всё это требует серьёзной адаптации.",
       },
     ],
-    relatedPages: ["burnout", "anxiety", "depression"],
+    relatedPages: ["burnout", "anxiety", "depression", "cbt-therapy", "online-therapy"],
     relatedArticles: ["kogda-nichego-ne-hochetsya", "vygoranie-ili-ustalost"],
   },
   {
@@ -748,7 +748,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Обычно 16-24 сессии. Первые изменения заметны через 6-8 встреч. Важна регулярность и выполнение заданий между сессиями.",
       },
     ],
-    relatedPages: ["depression", "stress", "anxiety"],
+    relatedPages: ["depression", "stress", "anxiety", "cbt-therapy", "schema-therapy"],
     relatedArticles: [],
   },
 ];
