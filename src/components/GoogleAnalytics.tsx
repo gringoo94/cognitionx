@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
-const GA_ID = import.meta.env.VITE_GA_ID as string | undefined;
+const GA_ID = "G-F3Q3QHT1V5";
 
 const GoogleAnalytics = () => {
   if (!GA_ID) return null;
