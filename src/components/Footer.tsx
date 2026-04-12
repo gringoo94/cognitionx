@@ -7,6 +7,7 @@ const specLinks = [
   { label: "Панические атаки", href: "/panic-attacks" },
   { label: "Выгорание", href: "/burnout" },
   { label: "Созависимость", href: "/co-dependency" },
+  { label: "Зависимости", href: "/addiction" },
   { label: "КПТ-терапия", href: "/cbt-therapy" },
   { label: "Онлайн-терапия", href: "/online-therapy" },
 ];
