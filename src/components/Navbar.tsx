@@ -15,6 +15,7 @@ const specLinks = [
   { label: "Стресс", href: "/stress", icon: Sparkles },
   { label: "Зависимость", href: "/addiction", icon: Pill },
   { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
+  { label: "Схема-терапия", href: "/schema-therapy", icon: Brain },
   { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
 ];
 

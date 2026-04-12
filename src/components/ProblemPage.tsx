@@ -46,7 +46,7 @@ const ProblemPage = () => {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Дмитрий Яцко",
-    jobTitle: "Психолог, КПТ-терапевт",
+    jobTitle: "Психолог, КПТ и схема-терапевт",
     url: "https://yatsko-psy.ru",
   };
 
