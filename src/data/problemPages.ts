@@ -498,7 +498,7 @@ export const problemPages: ProblemPageData[] = [
         answer: "Да, если вы в Кишинёве — можно гибко чередовать форматы в зависимости от обстоятельств.",
       },
     ],
-    relatedPages: ["cbt-therapy", "in-person-therapy", "depression", "anxiety"],
+    relatedPages: ["cbt-therapy", "in-person-therapy", "depression", "anxiety", "psiholog-moskva", "psiholog-europa"],
     relatedArticles: ["kak-vybrat-psihologa", "pervaya-sessiya-u-psihologa"],
   },
   {
