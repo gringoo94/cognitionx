@@ -45,7 +45,7 @@ const AboutDetailed = () => (
             <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
             
             <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
-            <p>• Волонтёрская практика в MedHub и Initiativa Pozitiva</p>
+            <p>• Работа в MedHub и Initiativa Pozitiva - психотерапия зависимости, созависимости. Работа с беженцами войны, людьми живущими с ВИЧ, а также проведение групповой терапии</p>
           </AccordionContent>
         </AccordionItem>
 
