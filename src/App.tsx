@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/AdminDashboard.tsx";
 import ProblemPage from "./components/ProblemPage.tsx";
 import PageViewTracker from "./components/PageViewTracker.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import GoogleAnalytics from "./components/GoogleAnalytics.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
 
