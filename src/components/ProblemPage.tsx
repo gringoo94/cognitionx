@@ -89,7 +89,7 @@ const ProblemPage = () => {
 
         {/* 1. Symptoms */}
         <motion.section {...fade(0.1)} className="mb-14">
-          <h2 className="text-xl font-bold mb-5">Знакомо?</h2>
+          <h2 className="text-xl font-bold mb-5">{page.symptomsTitle || "Знакомо?"}</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {page.symptoms.map((s, i) => (
               <div key={i} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
@@ -102,13 +102,13 @@ const ProblemPage = () => {
 
         {/* 2. CBT conceptualization */}
         <motion.section {...fade(0.1)} className="mb-14">
-          <h2 className="text-xl font-bold mb-5">Как это работает: модель КПТ</h2>
+          <h2 className="text-xl font-bold mb-5">{page.conceptTitle || "Как это работает: модель КПТ"}</h2>
           <div className="rounded-xl border border-border bg-card p-6 space-y-4">
             {[
-              { label: "Ситуация", value: page.cbtExample.situation },
-              { label: "Мысли", value: page.cbtExample.thoughts },
-              { label: "Эмоции", value: page.cbtExample.emotions },
-              { label: "Поведение", value: page.cbtExample.behavior },
+              { label: page.conceptLabels?.situation || "Ситуация", value: page.cbtExample.situation },
+              { label: page.conceptLabels?.thoughts || "Мысли", value: page.cbtExample.thoughts },
+              { label: page.conceptLabels?.emotions || "Эмоции", value: page.cbtExample.emotions },
+              { label: page.conceptLabels?.behavior || "Поведение", value: page.cbtExample.behavior },
             ].map((item, i) => (
               <div key={i} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
                 <span className="text-xs font-semibold uppercase tracking-wider text-primary shrink-0 w-24">
