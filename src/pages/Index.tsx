@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import TelegramCTA from "@/components/TelegramCTA";
 import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
+import AboutEvidence from "@/components/AboutEvidence";
 import Approach from "@/components/Approach";
 import Specializations from "@/components/Specializations";
 import HowWeStart from "@/components/HowWeStart";
@@ -51,6 +52,7 @@ const Index = () => (
       <TelegramCTA />
       <About />
       <AboutDetailed />
+      <AboutEvidence />
       <Approach />
       <Specializations />
       <HowWeStart />
