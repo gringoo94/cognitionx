@@ -1,4 +1,4 @@
-import { Mail, Send, Phone, Instagram } from "lucide-react";
+import { Mail, Send, Phone, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const specLinks = [
@@ -7,6 +7,7 @@ const specLinks = [
   { label: "Панические атаки", href: "/panic-attacks" },
   { label: "Выгорание", href: "/burnout" },
   { label: "Созависимость", href: "/co-dependency" },
+  { label: "Зависимости", href: "/addiction" },
   { label: "КПТ-терапия", href: "/cbt-therapy" },
   { label: "Онлайн-терапия", href: "/online-therapy" },
 ];
@@ -30,6 +31,9 @@ const Footer = () => (
             </a>
             <a href="mailto:digitalgringoo@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="w-4 h-4" /> Email
+            </a>
+            <a href="https://www.linkedin.com/in/dmitrii-iatco/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Linkedin className="w-4 h-4" /> LinkedIn
             </a>
           </div>
         </div>

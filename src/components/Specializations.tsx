@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, AlertCircle, CloudRain, Flame, Heart, Shield, Sparkles, BookOpen } from "lucide-react";
+import { ArrowRight, AlertCircle, CloudRain, Flame, Heart, Shield, Sparkles, BookOpen, Wine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -46,6 +46,12 @@ const specs = [
     desc: "Переезд, увольнение, развод — когда всё навалилось и непонятно как справляться",
     icon: Sparkles,
     slug: "stress",
+  },
+  {
+    title: "Зависимости",
+    desc: "Алкоголь, вещества, поведенческие зависимости — когда хочется остановиться, но не получается",
+    icon: Wine,
+    slug: "addiction",
   },
 ];
 
