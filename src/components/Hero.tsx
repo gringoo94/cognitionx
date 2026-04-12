@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import heroPhoto from "@/assets/hero-photo.png";
+import heroPhoto from "@/assets/hero-photo.webp";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },

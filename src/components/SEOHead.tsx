@@ -20,7 +20,7 @@ const SITE_URL = "https://cognitionx.cloud";
 
 const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema, noindex, breadcrumbs }: SEOHeadProps) => {
   const url = `${SITE_URL}${path}`;
-  const image = ogImage || `${SITE_URL}/og-default.jpg`;
+  const image = ogImage || `${SITE_URL}/og-default.webp`;
 
   const breadcrumbSchema = breadcrumbs?.length
     ? {

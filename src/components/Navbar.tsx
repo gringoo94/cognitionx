@@ -3,7 +3,7 @@ import { Menu, X, ChevronDown, Brain, HeartPulse, Flame, Users, Shield, Zap, Mon
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 const specLinks = [
   { label: "Депрессия", href: "/depression", icon: Brain },
