@@ -96,6 +96,10 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Админ-панель | Дмитрий Яцко</title>
+      </Helmet>
       <header className="border-b border-border bg-card">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
