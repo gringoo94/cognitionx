@@ -18,9 +18,9 @@ const projects = [
   },
   {
     icon: Brain,
-    title: "CBTLAB",
-    desc: "Первый КПТ-центр в Молдове. Сооснователь проекта — обучение и супервизия.",
-    url: "https://cbtlab.md",
+    title: "Rolelit",
+    desc: "AI-тренажёр для психологов. Практика КПТ-навыков с симулированными клиническими кейсами.",
+    url: "https://rolelit.lovable.app",
   },
   {
     icon: HeartHandshake,
