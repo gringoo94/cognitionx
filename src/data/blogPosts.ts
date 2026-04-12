@@ -5,6 +5,7 @@ export interface BlogPost {
   description: string;
   image: string;
   date: string;
+  tags: string[];
   content: ContentBlock[];
 }
 
