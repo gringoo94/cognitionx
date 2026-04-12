@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, AlertCircle, CloudRain, Flame, Heart, Shield, Sparkles, Wine, Brain, Layers, Globe, BookOpen } from "lucide-react";
+import { ArrowRight, AlertCircle, CloudRain, Flame, Heart, Shield, Sparkles, Wine, Brain, Layers, Globe, MapPin, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -24,6 +24,7 @@ const methods = [
   { title: "КПТ-терапия", desc: "Когнитивно-поведенческая терапия — золотой стандарт с доказательной базой для тревоги, депрессии и других расстройств", icon: Brain, slug: "cbt-therapy" },
   { title: "Схема-терапия", desc: "Глубинная работа с ранними дезадаптивными схемами — когда проблемы повторяются и КПТ недостаточно", icon: Layers, slug: "schema-therapy" },
   { title: "Онлайн-терапия", desc: "Полноценные сессии из любой точки мира — такая же эффективность, как и очный формат", icon: Globe, slug: "online-therapy" },
+  { title: "Очная терапия", desc: "Индивидуальные консультации в кабинете в центре Кишинёва — живой контакт и безопасное пространство", icon: MapPin, slug: "in-person-therapy" },
 ];
 
 const Card = ({ item, accentLeft }: { item: typeof problems[0]; accentLeft?: boolean }) => (
