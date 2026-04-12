@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import {
   Brain, BookOpen, Target, Leaf, Zap, Shield,
-  AlertTriangle, Lightbulb, Compass, Heart, ArrowLeft, ExternalLink
+  AlertTriangle, Lightbulb, Compass, Heart, ArrowLeft, ExternalLink, Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -138,6 +138,36 @@ const Tools = () => {
             Интерактивные рабочие инструменты когнитивно-поведенческой терапии. 
             Каждый инструмент включает теорию, пошаговые инструкции, примеры и упражнение для самостоятельной работы.
           </p>
+        </motion.div>
+
+        {/* Schema Quiz highlight */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-10"
+        >
+          <Link
+            to="/tools/schema-quiz"
+            className="block rounded-2xl border border-primary/20 bg-primary/5 p-6 hover:border-primary/40 transition-all group"
+          >
+            <div className="flex items-start gap-4">
+              <div className="inline-flex p-2.5 rounded-xl bg-primary/10">
+                <Search className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h2 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                  Тест: определите свои схемы
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Экспресс-версия YSQ — 36 вопросов за 5-7 минут. Узнайте, какие из 18 ранних дезадаптивных схем могут быть активны у вас.
+                </p>
+                <span className="inline-flex items-center gap-1.5 text-sm text-primary mt-2">
+                  Пройти тест <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+                </span>
+              </div>
+            </div>
+          </Link>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
