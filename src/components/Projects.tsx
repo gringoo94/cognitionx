@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Send, Brain, HeartHandshake } from "lucide-react";
+import { ExternalLink, Send, Brain, HeartHandshake, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const fade = (delay = 0) => ({
