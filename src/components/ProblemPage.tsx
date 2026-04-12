@@ -59,42 +59,58 @@ const ProblemPage = () => {
     ],
   };
 
-  const localBusinessSchema = slug === "in-person-therapy" ? {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://cognitionx.cloud/in-person-therapy#business",
-    name: "Психолог Дмитрий Яцко — КПТ и схема-терапия в Кишинёве",
-    description: "Очные консультации психолога в Кишинёве. Когнитивно-поведенческая и схема-терапия: депрессия, тревога, панические атаки, выгорание.",
-    url: "https://cognitionx.cloud/in-person-therapy",
-    telephone: "+447599880865",
-    email: "digitalgringoo@gmail.com",
-    image: "https://cognitionx.cloud/placeholder.svg",
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Кишинёв",
-      addressRegion: "Кишинёв",
-      addressCountry: "MD",
+  const geoSchemas: Record<string, object> = {
+    "in-person-therapy": {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://cognitionx.cloud/in-person-therapy#business",
+      name: "Психолог Дмитрий Яцко — КПТ и схема-терапия в Кишинёве",
+      description: "Очные консультации психолога в Кишинёве. Когнитивно-поведенческая и схема-терапия: депрессия, тревога, панические атаки, выгорание.",
+      url: "https://cognitionx.cloud/in-person-therapy",
+      telephone: "+447599880865",
+      email: "digitalgringoo@gmail.com",
+      image: "https://cognitionx.cloud/placeholder.svg",
+      priceRange: "$$",
+      address: { "@type": "PostalAddress", addressLocality: "Кишинёв", addressRegion: "Кишинёв", addressCountry: "MD" },
+      geo: { "@type": "GeoCoordinates", latitude: 47.0105, longitude: 28.8638 },
+      areaServed: [{ "@type": "City", name: "Кишинёв" }, { "@type": "Country", name: "Молдова" }],
+      serviceType: ["Психологическая консультация", "КПТ-терапия", "Схема-терапия"],
+      openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" }],
+      sameAs: ["https://t.me/gringoo94", "https://www.instagram.com/gringo.journal", "https://www.linkedin.com/in/dmitrii-iatco/"],
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 47.0105,
-      longitude: 28.8638,
+    "psiholog-moskva": {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://cognitionx.cloud/psiholog-moskva#service",
+      name: "Психолог онлайн для Москвы и России — Дмитрий Яцко",
+      description: "Онлайн-психолог для клиентов из Москвы и России. КПТ и схема-терапия: депрессия, тревога, выгорание. Сессии по московскому времени.",
+      url: "https://cognitionx.cloud/psiholog-moskva",
+      telephone: "+447599880865",
+      email: "digitalgringoo@gmail.com",
+      priceRange: "$$",
+      areaServed: [{ "@type": "City", name: "Москва" }, { "@type": "Country", name: "Россия" }],
+      serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
+      availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: "https://cognitionx.cloud/psiholog-moskva" },
+      sameAs: ["https://t.me/gringoo94", "https://www.instagram.com/gringo.journal", "https://www.linkedin.com/in/dmitrii-iatco/"],
     },
-    areaServed: [
-      { "@type": "City", name: "Кишинёв" },
-      { "@type": "Country", name: "Молдова" },
-    ],
-    serviceType: ["Психологическая консультация", "КПТ-терапия", "Схема-терапия"],
-    openingHoursSpecification: [
-      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "19:00" },
-    ],
-    sameAs: [
-      "https://t.me/gringoo94",
-      "https://www.instagram.com/gringo.journal",
-      "https://www.linkedin.com/in/dmitrii-iatco/",
-    ],
-  } : null;
+    "psiholog-europa": {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://cognitionx.cloud/psiholog-europa#service",
+      name: "Русскоязычный психолог онлайн для экспатов в Европе — Дмитрий Яцко",
+      description: "Русскоязычный психолог для экспатов в Европе. КПТ и схема-терапия на русском языке: адаптация, одиночество, тревога.",
+      url: "https://cognitionx.cloud/psiholog-europa",
+      telephone: "+447599880865",
+      email: "digitalgringoo@gmail.com",
+      priceRange: "$$",
+      areaServed: [{ "@type": "Continent", name: "Европа" }],
+      serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
+      availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: "https://cognitionx.cloud/psiholog-europa" },
+      sameAs: ["https://t.me/gringoo94", "https://www.instagram.com/gringo.journal", "https://www.linkedin.com/in/dmitrii-iatco/"],
+    },
+  };
+
+  const localBusinessSchema = geoSchemas[slug] || null;
 
   const schemas = [faqSchema, personSchema, breadcrumbSchema, ...(localBusinessSchema ? [localBusinessSchema] : [])];
 

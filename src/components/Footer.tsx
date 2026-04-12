@@ -17,10 +17,15 @@ const methodLinks = [
   { label: "Очная терапия в Кишинёве", href: "/in-person-therapy" },
 ];
 
+const geoLinks = [
+  { label: "Психолог онлайн — Москва", href: "/psiholog-moskva" },
+  { label: "Психолог для экспатов — Европа", href: "/psiholog-europa" },
+];
+
 const Footer = () => (
   <footer className="border-t border-border">
     <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
         {/* Brand + contacts */}
         <div>
           <p className="text-lg font-bold tracking-tight mb-4">CognitionX</p>
@@ -60,6 +65,18 @@ const Footer = () => (
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Методы</p>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
             {methodLinks.map((l) => (
+              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Geography */}
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">География</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            {geoLinks.map((l) => (
               <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
                 {l.label}
               </Link>
