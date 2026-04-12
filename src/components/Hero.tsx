@@ -81,7 +81,7 @@ const Hero = () => (
           <div className="relative w-72 h-80 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
             <img
               src={heroPhoto}
-              alt="Дмитрий Яцко — психолог"
+              alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
               className="w-full h-full object-cover object-top"
             />
           </div>

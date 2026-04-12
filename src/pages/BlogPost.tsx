@@ -46,6 +46,11 @@ const BlogPost = () => {
         path={`/blog/${post.slug}`}
         ogImage={post.image}
         schema={articleSchema}
+        breadcrumbs={[
+          { name: "Главная", url: "https://yatsko-psy.ru/" },
+          { name: "Блог", url: "https://yatsko-psy.ru/blog" },
+          { name: post.title, url: `https://yatsko-psy.ru/blog/${post.slug}` },
+        ]}
       />
       <Navbar />
       <main className="max-w-3xl mx-auto px-6 pt-24 pb-20">
@@ -71,8 +76,9 @@ const BlogPost = () => {
           <div className="mt-8 rounded-2xl overflow-hidden">
             <img
               src={post.image}
-              alt={post.title}
+              alt={`Иллюстрация к статье: ${post.title}`}
               className="w-full h-auto object-cover"
+              loading="lazy"
             />
           </div>
 

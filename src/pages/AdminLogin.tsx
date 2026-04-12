@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -50,6 +51,10 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+        <title>Вход в админ-панель</title>
+      </Helmet>
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center">
           <h1 className="text-2xl font-bold">Вход в админ-панель</h1>
