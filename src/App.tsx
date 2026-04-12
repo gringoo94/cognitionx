@@ -8,6 +8,7 @@ import Index from "./pages/Index.tsx";
 import BlogList from "./pages/BlogList.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
 import Tools from "./pages/Tools.tsx";
+import SchemaQuizPage from "./pages/SchemaQuizPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/tools/schema-quiz" element={<SchemaQuizPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/admin/login" element={<AdminLogin />} />
