@@ -17,6 +17,11 @@ const methodLinks = [
   { label: "Очная терапия в Кишинёве", href: "/in-person-therapy" },
 ];
 
+const geoLinks = [
+  { label: "Психолог онлайн — Москва", href: "/psiholog-moskva" },
+  { label: "Психолог для экспатов — Европа", href: "/psiholog-europa" },
+];
+
 const Footer = () => (
   <footer className="border-t border-border">
     <div className="max-w-6xl mx-auto px-6 py-12">
@@ -67,8 +72,22 @@ const Footer = () => (
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* Geography */}
         <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">География</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            {geoLinks.map((l) => (
+              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Second row - Navigation */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mt-8">
+        <div className="md:col-start-4">
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Навигация</p>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
