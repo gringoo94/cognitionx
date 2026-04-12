@@ -14,6 +14,7 @@ import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import ProblemPage from "./components/ProblemPage.tsx";
 import PageViewTracker from "./components/PageViewTracker.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
 
@@ -26,6 +27,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <PageViewTracker />
           
           <Routes>
