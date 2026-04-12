@@ -11,10 +11,10 @@ const fade = (delay = 0) => ({
 
 const projects = [
   {
-    icon: BookOpen,
+    icon: Send,
     title: "CognitionX",
-    desc: "Блог и практика. Статьи о КПТ, психообразование, инструменты самопомощи.",
-    url: "https://cognitionx.cloud",
+    desc: "Telegram-канал о КПТ, психообразование, инструменты самопомощи и практические материалы.",
+    url: "https://t.me/cognitionx",
   },
   {
     icon: Brain,
