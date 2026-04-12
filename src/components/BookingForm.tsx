@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,6 +17,7 @@ const fade = (delay = 0) => ({
 
 const BookingForm = () => {
   const [form, setForm] = useState({ name: "", email: "", messenger: "", message: "" });
+  const [wellbeing, setWellbeing] = useState([5]);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,7 +27,7 @@ const BookingForm = () => {
       name: form.name,
       email: form.email,
       messenger: form.messenger || null,
-      message: form.message || "Заявка с главной страницы",
+      message: form.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)`,
     });
     setLoading(false);
     if (error) {
@@ -37,7 +39,7 @@ const BookingForm = () => {
 
     // Send Telegram notification (fire-and-forget)
     supabase.functions.invoke("notify-telegram", {
-      body: { name: form.name, email: form.email, messenger: form.messenger, message: form.message || "Заявка с главной страницы" },
+      body: { name: form.name, email: form.email, messenger: form.messenger, message: form.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)` },
     }).catch(() => {});
   };
 
@@ -75,6 +77,23 @@ const BookingForm = () => {
             onChange={(e) => setForm({ ...form, messenger: e.target.value })}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
+          <div className="space-y-2">
+            <label className="text-xs opacity-60">
+              Как вы оцениваете своё самочувствие сейчас? <span className="font-bold text-sm opacity-100">{wellbeing[0]}/10</span>
+            </label>
+            <Slider
+              value={wellbeing}
+              onValueChange={setWellbeing}
+              max={10}
+              min={0}
+              step={1}
+              className="[&_[role=slider]]:bg-background [&_[role=slider]]:border-background/40"
+            />
+            <div className="flex justify-between text-[10px] opacity-40">
+              <span>Очень плохо</span>
+              <span>Отлично</span>
+            </div>
+          </div>
           <Textarea
             placeholder="Ваш запрос (необязательно)"
             value={form.message}
