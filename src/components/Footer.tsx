@@ -25,7 +25,7 @@ const geoLinks = [
 const Footer = () => (
   <footer className="border-t border-border">
     <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
         {/* Brand + contacts */}
         <div>
           <p className="text-lg font-bold tracking-tight mb-4">CognitionX</p>
@@ -83,11 +83,9 @@ const Footer = () => (
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Second row - Navigation */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mt-8">
-        <div className="md:col-start-4">
+        {/* Navigation */}
+        <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Навигация</p>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
