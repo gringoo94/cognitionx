@@ -48,7 +48,7 @@ export const blogPosts: BlogPost[] = [
     slug: "8-prepyatstvij-na-puti-k-peremenam",
     title: "8 препятствий на пути к переменам — навигатор по схема-терапии",
     description: "Почему мы повторяем одни и те же ошибки? 8 главных препятствий на пути к разрушению деструктивных жизненных сценариев. Сводная статья с навигацией.",
-    image: "/blog/obstacles-navigator.jpg",
+    image: "/blog/obstacles-navigator.webp",
     date: "2026-04-12",
     tags: ["Схема-терапия", "Самопомощь"],
     content: parseContent(`[
