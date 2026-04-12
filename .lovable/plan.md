@@ -1,25 +1,36 @@
 
 
-## Обновить домен на cognitionx.cloud
+## Пересмотр страницы /schema-therapy
 
-Глобальная замена `yatsko-psy.ru` → `cognitionx.cloud` во всех файлах проекта.
+### Проблема
+Страница схема-терапии использует тот же шаблон, что и проблемные страницы (депрессия, тревога и т.д.), но схема-терапия — это **метод**, а не проблема. Сейчас есть несколько нестыковок:
 
-### Затронутые файлы (11 файлов)
+1. Секция «Как это работает: модель КПТ» — на странице о схема-терапии заголовок упоминает КПТ, что сбивает
+2. Секция «Знакомо?» подана как симптомы, хотя для метода это скорее «Когда подходит схема-терапия»
+3. Блок `cbtExample` вынужденно переиспользует КПТ-формат (Ситуация → Мысли → Эмоции → Поведение), хотя в схема-терапии ключевые концепции — это схемы, режимы и потребности
 
-| Файл | Что меняется |
-|---|---|
-| `src/components/SEOHead.tsx` | `SITE_URL` константа |
-| `src/pages/Index.tsx` | URL в schema Person и ProfessionalService |
-| `src/pages/AboutPage.tsx` | URL в schema и breadcrumbs |
-| `src/pages/ContactPage.tsx` | URL в schema и breadcrumbs |
-| `src/pages/BlogPost.tsx` | URL автора и breadcrumbs |
-| `src/pages/BlogList.tsx` | breadcrumbs |
-| `src/pages/Tools.tsx` | breadcrumbs |
-| `src/components/ProblemPage.tsx` | URL в schema и breadcrumbs |
-| `public/sitemap.xml` | Все URL (30+ записей) |
-| `public/robots.txt` | Sitemap URL |
+### Что сделаем
 
-### Техническая деталь
+**1. Расширим интерфейс `ProblemPageData`** (`src/data/problemPages.ts`)
+- Добавим опциональные поля для кастомизации заголовков секций:
+  - `symptomsTitle?: string` (по умолчанию «Знакомо?»)
+  - `conceptTitle?: string` (по умолчанию «Как это работает: модель КПТ»)
+  - `conceptLabels?: { situation: string; thoughts: string; emotions: string; behavior: string }` (позволит переименовать лейблы)
 
-Все замены — простая текстовая подстановка `yatsko-psy.ru` → `cognitionx.cloud`. Логика и структура кода не меняются.
+**2. Обновим шаблон `ProblemPage.tsx`**
+- Используем кастомные заголовки секций из данных, если заданы, иначе — дефолтные
+
+**3. Обновим данные страницы schema-therapy** (`src/data/problemPages.ts`)
+- `symptomsTitle`: «Когда нужна схема-терапия»
+- `conceptTitle`: «Как это выглядит: модель схема-терапии»
+- `conceptLabels`: Ситуация → Триггер, Мысли → Схема, Эмоции → Режим, Поведение → Копинг
+- Обновим содержимое `cbtExample` под схема-терапевтическую модель (триггер → активированная схема → режим → копинговая стратегия)
+- Улучшим контент: более развёрнутая психоедукация о 18 схемах и 5 доменах, добавим упоминание imagery rescripting и chair work в howIWork
+
+**4. Аналогично подправим cbt-therapy**
+- `symptomsTitle`: «Когда подходит КПТ» (вместо «Знакомо?»)
+
+### Файлы
+- `src/data/problemPages.ts` — интерфейс + данные schema-therapy и cbt-therapy
+- `src/components/ProblemPage.tsx` — шаблон с поддержкой кастомных заголовков
 
