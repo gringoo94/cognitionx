@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, AlertCircle, CloudRain, Flame, Heart, Shield, Sparkles } from "lucide-react";
+import { ArrowRight, AlertCircle, CloudRain, Flame, Heart, Shield, Sparkles, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -12,33 +13,39 @@ const fade = (delay = 0) => ({
 const specs = [
   {
     title: "Тревога и панические атаки",
-    desc: "Навязчивые мысли, постоянное беспокойство, приступы паники. Работаем с когнитивными искажениями и учимся управлять тревогой.",
+    desc: "Постоянное беспокойство, навязчивые мысли, ощущение что вот-вот случится что-то плохое",
     icon: AlertCircle,
+    slug: "anxiety",
   },
   {
     title: "Депрессия",
-    desc: "Потеря интереса, апатия, чувство безнадёжности. Помогаю восстановить активность и изменить негативные паттерны мышления.",
+    desc: "Нет сил, ничего не радует, утром не хочется вставать — и это длится неделями",
     icon: CloudRain,
+    slug: "depression",
   },
   {
     title: "Выгорание",
-    desc: "Эмоциональное истощение, потеря мотивации. Находим баланс между работой и отдыхом, выстраиваем границы.",
+    desc: "Работа высасывает все силы, а на жизнь их уже не остаётся",
     icon: Flame,
+    slug: "burnout",
   },
   {
     title: "Отношения",
-    desc: "Сложности в общении, конфликты, созависимость. Учимся выстраивать здоровые и поддерживающие связи.",
+    desc: "Конфликты, обиды, ощущение что вас не слышат — или невозможность уйти",
     icon: Heart,
+    slug: "co-dependency",
   },
   {
     title: "Самооценка",
-    desc: "Неуверенность, самокритика, синдром самозванца. Работаем с глубинными убеждениями и формируем устойчивый образ себя.",
+    desc: "Постоянная самокритика, ощущение что вы хуже других, синдром самозванца",
     icon: Shield,
+    slug: null,
   },
   {
     title: "Стресс и адаптация",
-    desc: "Сложные жизненные ситуации, переезд, смена работы. Помогаю адаптироваться и находить ресурсы для изменений.",
+    desc: "Переезд, увольнение, развод — когда всё навалилось и непонятно как справляться",
     icon: Sparkles,
+    slug: null,
   },
 ];
 
@@ -46,10 +53,10 @@ const Specializations = () => (
   <section id="specs" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
     <motion.div {...fade()} className="text-center mb-14">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-        С чем я работаю
+        Узнаёте себя?
       </h2>
       <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-        Основные направления, в которых я специализируюсь
+        Выберите свою тему — я расскажу, как мы будем работать
       </p>
     </motion.div>
 
@@ -58,16 +65,29 @@ const Specializations = () => (
         <motion.div
           key={s.title}
           {...fade(0.06 * i)}
-          className="rounded-2xl border border-border bg-card p-6 flex flex-col gap-4 hover:border-primary/30 transition-colors"
+          whileHover={{ scale: 1.02, y: -4 }}
+          transition={{ duration: 0.25 }}
+          className="rounded-2xl border border-border bg-card p-6 flex flex-col gap-4 hover:border-primary/40 hover:shadow-lg transition-all cursor-pointer"
         >
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <s.icon className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-base font-bold">{s.title}</h3>
           <p className="text-sm text-muted-foreground leading-relaxed flex-1">{s.desc}</p>
-          <Button variant="outline" size="sm" className="w-fit gap-1.5" asChild>
-            <a href="#booking">Записаться <ArrowRight className="w-3.5 h-3.5" /></a>
-          </Button>
+          <div className="flex gap-2 flex-wrap">
+            {s.slug && (
+              <Button variant="outline" size="sm" className="gap-1.5" asChild>
+                <Link to={`/problems/${s.slug}`}>
+                  <BookOpen className="w-3.5 h-3.5" /> Подробнее
+                </Link>
+              </Button>
+            )}
+            <Button variant="outline" size="sm" className="gap-1.5" asChild>
+              <a href="#booking">
+                Записаться <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </Button>
+          </div>
         </motion.div>
       ))}
     </div>
