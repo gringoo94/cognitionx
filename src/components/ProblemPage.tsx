@@ -120,6 +120,42 @@ const ProblemPage = () => {
           </div>
         </motion.section>
 
+        {/* 2b. Schema Domains (optional) */}
+        {page.schemaDomains && (
+          <motion.section {...fade(0.1)} className="mb-14">
+            <h2 className="text-xl font-bold mb-5">18 ранних дезадаптивных схем</h2>
+            <div className="space-y-4">
+              {page.schemaDomains.map((d, i) => (
+                <div key={i} className="rounded-xl border border-border bg-card p-5">
+                  <h3 className="text-sm font-semibold text-primary mb-3">{d.domain}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {d.schemas.map((s, j) => (
+                      <span key={j} className="text-xs bg-muted px-3 py-1.5 rounded-full text-foreground">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* 2c. Coping Styles (optional) */}
+        {page.copingStyles && (
+          <motion.section {...fade(0.1)} className="mb-14">
+            <h2 className="text-xl font-bold mb-5">Три копинговые стратегии</h2>
+            <div className="grid gap-4">
+              {page.copingStyles.map((cs, i) => (
+                <div key={i} className="rounded-xl border border-border bg-card p-5">
+                  <h3 className="text-sm font-semibold mb-2">{cs.name}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{cs.description}</p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
         {/* 3. Psychoeducation */}
         <motion.section {...fade(0.1)} className="mb-14">
           <h2 className="text-xl font-bold mb-5">Что происходит</h2>
