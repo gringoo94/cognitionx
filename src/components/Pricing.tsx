@@ -12,22 +12,22 @@ const fade = (delay = 0) => ({
 const plans = [
   {
     title: "Первая встреча",
-    price: "2 500",
+    price: "20",
     duration: "50 мин",
     features: ["Знакомство и определение запроса", "Диагностика проблемы", "План работы"],
   },
   {
     title: "Сессия",
-    price: "4 000",
+    price: "30",
     duration: "50 мин",
     featured: true,
     features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
   },
   {
     title: "Пакет × 4",
-    price: "14 000",
+    price: "100",
     duration: "4 × 50 мин",
-    features: ["Экономия 2 000 ₽", "Регулярная работа", "Приоритетная запись"],
+    features: ["25 € за сессию", "Регулярная работа", "Приоритетная запись"],
   },
 ];
 
@@ -64,7 +64,7 @@ const Pricing = () => (
             </div>
             <div className="mt-6">
               <span className="text-4xl font-bold tracking-tight">{p.price}</span>
-              <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>₽</span>
+              <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>€</span>
             </div>
             <ul className="mt-6 space-y-3 flex-1">
               {p.features.map((f) => (
