@@ -5,18 +5,33 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.webp";
 
-const specLinks = [
-  { label: "Депрессия", href: "/depression", icon: Brain },
-  { label: "Тревога", href: "/anxiety", icon: HeartPulse },
-  { label: "Панические атаки", href: "/panic-attacks", icon: Zap },
-  { label: "Выгорание", href: "/burnout", icon: Flame },
-  { label: "Созависимость", href: "/co-dependency", icon: Users },
-  { label: "Самооценка", href: "/self-esteem", icon: Shield },
-  { label: "Стресс", href: "/stress", icon: Sparkles },
-  { label: "Зависимость", href: "/addiction", icon: Pill },
-  { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
-  { label: "Схема-терапия", href: "/schema-therapy", icon: Brain },
-  { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
+const specGroups = [
+  {
+    title: "Проблемы",
+    links: [
+      { label: "Депрессия", href: "/depression", icon: Brain },
+      { label: "Тревога", href: "/anxiety", icon: HeartPulse },
+      { label: "Панические атаки", href: "/panic-attacks", icon: Zap },
+      { label: "Выгорание", href: "/burnout", icon: Flame },
+      { label: "Созависимость", href: "/co-dependency", icon: Users },
+      { label: "Самооценка", href: "/self-esteem", icon: Shield },
+      { label: "Стресс", href: "/stress", icon: Sparkles },
+      { label: "Зависимость", href: "/addiction", icon: Pill },
+    ],
+  },
+  {
+    title: "Методы",
+    links: [
+      { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
+      { label: "Схема-терапия", href: "/schema-therapy", icon: Brain },
+    ],
+  },
+  {
+    title: "Формат",
+    links: [
+      { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
+    ],
+  },
 ];
 
 const links = [
