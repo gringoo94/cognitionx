@@ -44,6 +44,8 @@ const App = () => (
             <Route path="/co-dependency" element={<ProblemPage />} />
             <Route path="/cbt-therapy" element={<ProblemPage />} />
             <Route path="/online-therapy" element={<ProblemPage />} />
+            <Route path="/self-esteem" element={<ProblemPage />} />
+            <Route path="/stress" element={<ProblemPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
