@@ -1,56 +1,83 @@
 
 
-## Гео-лендинги: Москва и Европа
+## Полная SEO-диагностика сайта cognitionx.cloud
 
-### Что создадим
+### Критические проблемы (High Priority)
 
-Два новых гео-лендинга для привлечения русскоязычных клиентов из других регионов:
+| # | Проблема | Где | Влияние |
+|---|---------|-----|---------|
+| 1 | **Canonical в index.html указывает на старый домен** `yatsko-psy.ru` | `index.html:10` | Google может считать основным другой домен. Каноникал должен быть `https://cognitionx.cloud/` |
+| 2 | **Дублирование meta в index.html и SEOHead** | `index.html` + `src/pages/Index.tsx` | Два title, два description, два canonical на главной. React Helmet перезаписывает, но при SSR/прекраткинге могут быть конфликты |
+| 3 | **JSON-LD в index.html устарел** — цена 2500 RUB, areaServed "Россия" | `index.html:19-46` | Конфликт с актуальными данными (25 €, Кишинёв/Молдова/Онлайн) из SEOHead на главной |
+| 4 | **Sitemap без `<lastmod>`** | `public/sitemap.xml` | Google рекомендует lastmod для приоритезации краулинга |
 
-1. **`/psiholog-moskva`** — «Психолог онлайн для Москвы и России»
-2. **`/psiholog-europa`** — «Русскоязычный психолог для экспатов в Европе»
+### Средние проблемы (Medium Priority)
 
-Оба — про онлайн-формат, с уникальным контентом под каждую аудиторию.
+| # | Проблема | Где | Влияние |
+|---|---------|-----|---------|
+| 5 | **og:type="website" для блог-постов** | `SEOHead.tsx` всегда ставит `website` | Для статей должен быть `og:type="article"` |
+| 6 | **Hero-фото без `loading="eager"`** | `Hero.tsx:84` | LCP-элемент не должен быть lazy; сейчас нет атрибута, но стоит явно указать `eager` |
+| 7 | **BlogPost hero image с `loading="lazy"`** | `BlogPost.tsx:81` | Главное изображение статьи — LCP, не должно быть lazy |
+| 8 | **Нет `<meta name="robots">` по умолчанию** | `SEOHead.tsx` | Без noindex не ставится `index, follow` — не критично, но явный сигнал лучше |
+| 9 | **Telegram CTA ссылка без `rel="noopener noreferrer"`** | Несколько компонентов | Безопасность внешних ссылок; некоторые уже имеют, некоторые нет |
+| 10 | **`meta keywords` в index.html** | `index.html:9` | Google игнорирует keywords с 2009, лишний код |
 
-### Контент-стратегия (избегаем doorway pages)
+### Низкие проблемы (Low Priority)
 
-| Страница | Уникальный акцент |
-|---|---|
-| **Москва** | Часовой пояс, удобство онлайн vs пробки, специфика запросов (темп жизни, выгорание), расписание по МСК |
-| **Европа** | Языковой барьер с местными психологами, адаптация, одиночество в эмиграции, гибкие часовые пояса CET/EET |
+| # | Проблема | Где | Влияние |
+|---|---------|-----|---------|
+| 11 | **Нет `twitter:image`** | `SEOHead.tsx` | Twitter/X не покажет preview-картинку |
+| 12 | **Breadcrumbs дублируются** — ProblemPage сам создаёт breadcrumbSchema + SEOHead может добавить второй через `breadcrumbs` prop | `ProblemPage.tsx:53-60` | Два BreadcrumbList в JSON-LD |
+| 13 | **Нет `dateModified` в Article schema** | `BlogPost.tsx:27-39` | Google предпочитает видеть dateModified |
+| 14 | **SPA без SSR** | Архитектура | Поисковики рендерят JS, но SSR/prerendering ускоряет индексацию |
+| 15 | **Нет `x-default` hreflang** | `SEOHead.tsx:47` | Есть только `ru`, нет fallback |
 
-### Технические изменения
+### Что уже хорошо
 
-**1. `src/data/problemPages.ts`** — добавляем 2 записи:
-- `psiholog-moskva` с LocalBusiness schema (виртуальный офис), уникальными симптомами, FAQ, psychoeducation
-- `psiholog-europa` с аналогичной структурой, но другим контентом про экспатов
+- Уникальные title и description на каждой странице
+- FAQPage schema на всех problem pages и главной
+- BreadcrumbList schema
+- LocalBusiness / ProfessionalService для гео-лендингов
+- Canonical URLs через SEOHead
+- og:image fallback
+- robots.txt + sitemap.xml
+- 404 с noindex
+- Хорошая внутренняя перелинковка (relatedPages, relatedArticles)
+- Lazy loading для неосновных изображений
+- Semantic HTML (h1/h2/h3, main, nav, footer, article)
 
-**2. `src/App.tsx`** — 2 новых маршрута
+---
 
-**3. `src/components/ProblemPage.tsx`** — добавляем LocalBusiness schema для обоих гео-лендингов (как уже сделано для in-person-therapy)
+### План исправлений
 
-**4. `src/components/Specializations.tsx`** — не добавляем в основную навигацию (это SEO-лендинги, не основные услуги)
+**1. `index.html`** — убрать дублирующие meta (title, description, canonical, keywords) и устаревший JSON-LD. Оставить только базовый HTML-каркас, шрифты и favicon. React Helmet управляет всеми мета-тегами.
 
-**5. `src/components/Footer.tsx`** — добавляем колонку «География» с двумя ссылками
+**2. `src/components/SEOHead.tsx`**:
+- Добавить prop `ogType` (default `"website"`, для статей `"article"`)
+- Добавить `<meta name="twitter:image">`
+- Добавить `<link rel="alternate" hrefLang="x-default">`
 
-**6. `public/sitemap.xml`** — добавляем оба URL с priority 0.8
+**3. `src/pages/BlogPost.tsx`**:
+- Передавать `ogType="article"` в SEOHead
+- Добавить `dateModified` в Article schema
+- Убрать `loading="lazy"` с hero-изображения
 
-**7. Перелинковка** — гео-лендинги ссылаются на online-therapy, depression, anxiety, burnout; а online-therapy получает ссылки обратно
+**4. `src/components/Hero.tsx`** — добавить `loading="eager"` и `fetchPriority="high"` на hero-фото
 
-### SEO-разметка каждого лендинга
+**5. `src/components/ProblemPage.tsx`** — убрать дублирование breadcrumbSchema (оно уже создаётся вручную в schemas, не нужно передавать `breadcrumbs` prop)
 
-- `LocalBusiness` schema с `areaServed` (Россия / Европа)
-- `ServiceType`: Онлайн-психотерапия
-- Уникальные `title`, `description`, `h1`
-- `hreflang="ru"` 
-- Breadcrumbs schema
+**6. `public/sitemap.xml`** — добавить `<lastmod>` ко всем URL
 
-### Файлы
+**7. Внешние ссылки** — пройтись по Telegram/WhatsApp/Instagram ссылкам и добавить `rel="noopener noreferrer"` где отсутствует
 
-| Файл | Действие |
-|---|---|
-| `src/data/problemPages.ts` | +2 записи с уникальным контентом |
-| `src/App.tsx` | +2 маршрута |
-| `src/components/ProblemPage.tsx` | Расширить LocalBusiness логику |
-| `src/components/Footer.tsx` | Колонка «География» |
-| `public/sitemap.xml` | +2 URL |
+### Файлы для изменения
+
+| Файл | Что делаем |
+|------|-----------|
+| `index.html` | Убрать дублирующие мета и устаревший JSON-LD |
+| `src/components/SEOHead.tsx` | ogType prop, twitter:image, x-default hreflang |
+| `src/pages/BlogPost.tsx` | ogType="article", dateModified, eager loading |
+| `src/components/Hero.tsx` | loading="eager", fetchPriority="high" |
+| `src/components/ProblemPage.tsx` | Убрать дубль breadcrumbs |
+| `public/sitemap.xml` | Добавить lastmod |
 
