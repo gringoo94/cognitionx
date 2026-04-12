@@ -43,7 +43,7 @@ const AboutDetailed = () => (
           <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
             <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
             <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
-            <p>• Сооснователь <a href="https://cbtlab.md" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CBTLAB</a> — первый КПТ-центр в Молдове</p>
+            
             <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
             <p>• Волонтёрская практика в MedHub и Initiativa Pozitiva</p>
           </AccordionContent>
