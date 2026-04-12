@@ -5,18 +5,33 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.webp";
 
-const specLinks = [
-  { label: "Депрессия", href: "/depression", icon: Brain },
-  { label: "Тревога", href: "/anxiety", icon: HeartPulse },
-  { label: "Панические атаки", href: "/panic-attacks", icon: Zap },
-  { label: "Выгорание", href: "/burnout", icon: Flame },
-  { label: "Созависимость", href: "/co-dependency", icon: Users },
-  { label: "Самооценка", href: "/self-esteem", icon: Shield },
-  { label: "Стресс", href: "/stress", icon: Sparkles },
-  { label: "Зависимость", href: "/addiction", icon: Pill },
-  { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
-  { label: "Схема-терапия", href: "/schema-therapy", icon: Brain },
-  { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
+const specGroups = [
+  {
+    title: "Проблемы",
+    links: [
+      { label: "Депрессия", href: "/depression", icon: Brain },
+      { label: "Тревога", href: "/anxiety", icon: HeartPulse },
+      { label: "Панические атаки", href: "/panic-attacks", icon: Zap },
+      { label: "Выгорание", href: "/burnout", icon: Flame },
+      { label: "Созависимость", href: "/co-dependency", icon: Users },
+      { label: "Самооценка", href: "/self-esteem", icon: Shield },
+      { label: "Стресс", href: "/stress", icon: Sparkles },
+      { label: "Зависимость", href: "/addiction", icon: Pill },
+    ],
+  },
+  {
+    title: "Методы",
+    links: [
+      { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
+      { label: "Схема-терапия", href: "/schema-therapy", icon: Brain },
+    ],
+  },
+  {
+    title: "Формат",
+    links: [
+      { label: "Онлайн-терапия", href: "/online-therapy", icon: MonitorSmartphone },
+    ],
+  },
 ];
 
 const links = [
@@ -148,27 +163,38 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-xl border border-border/60 bg-card/95 backdrop-blur-md shadow-xl py-2 z-50"
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] rounded-xl border border-border/60 bg-card/95 backdrop-blur-md shadow-xl p-4 z-50"
                 >
-                  {specLinks.map((l) => {
-                    const Icon = l.icon;
-                    const active = isActive(l.href);
-                    return (
-                      <Link
-                        key={l.href}
-                        to={l.href}
-                        onClick={() => setSpecOpen(false)}
-                        className={`flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors duration-150 ${
-                          active
-                            ? "text-primary bg-primary/5 font-medium"
-                            : "text-muted-foreground hover:text-primary hover:bg-muted/60"
-                        }`}
-                      >
-                        <Icon className="w-4 h-4 shrink-0" />
-                        {l.label}
-                      </Link>
-                    );
-                  })}
+                  <div className="grid grid-cols-3 gap-4">
+                    {specGroups.map((group) => (
+                      <div key={group.title}>
+                        <h4 className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold mb-2 px-2">
+                          {group.title}
+                        </h4>
+                        <div className="space-y-0.5">
+                          {group.links.map((l) => {
+                            const Icon = l.icon;
+                            const active = isActive(l.href);
+                            return (
+                              <Link
+                                key={l.href}
+                                to={l.href}
+                                onClick={() => setSpecOpen(false)}
+                                className={`flex items-center gap-2 px-2 py-2 rounded-lg text-sm transition-colors duration-150 ${
+                                  active
+                                    ? "text-primary bg-primary/5 font-medium"
+                                    : "text-muted-foreground hover:text-primary hover:bg-muted/60"
+                                }`}
+                              >
+                                <Icon className="w-4 h-4 shrink-0" />
+                                {l.label}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -251,26 +277,33 @@ const Navbar = () => {
                       transition={{ duration: 0.2 }}
                       className="overflow-hidden"
                     >
-                      <div className="ml-2 pl-3 border-l-2 border-primary/20 space-y-0.5 py-1">
-                        {specLinks.map((l) => {
-                          const Icon = l.icon;
-                          const active = isActive(l.href);
-                          return (
-                            <Link
-                              key={l.href}
-                              to={l.href}
-                              onClick={() => { setOpen(false); setSpecOpen(false); }}
-                              className={`flex items-center gap-2.5 py-2.5 px-2 rounded-lg text-sm transition-colors duration-150 ${
-                                active
-                                  ? "text-primary font-medium bg-primary/5"
-                                  : "hover:text-primary hover:bg-muted/60"
-                              }`}
-                            >
-                              <Icon className="w-4 h-4 shrink-0" />
-                              {l.label}
-                            </Link>
-                          );
-                        })}
+                      <div className="ml-2 pl-3 border-l-2 border-primary/20 space-y-1 py-1">
+                        {specGroups.map((group) => (
+                          <div key={group.title}>
+                            <h4 className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold mt-2 mb-1 px-2">
+                              {group.title}
+                            </h4>
+                            {group.links.map((l) => {
+                              const Icon = l.icon;
+                              const active = isActive(l.href);
+                              return (
+                                <Link
+                                  key={l.href}
+                                  to={l.href}
+                                  onClick={() => { setOpen(false); setSpecOpen(false); }}
+                                  className={`flex items-center gap-2.5 py-2.5 px-2 rounded-lg text-sm transition-colors duration-150 ${
+                                    active
+                                      ? "text-primary font-medium bg-primary/5"
+                                      : "hover:text-primary hover:bg-muted/60"
+                                  }`}
+                                >
+                                  <Icon className="w-4 h-4 shrink-0" />
+                                  {l.label}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        ))}
                       </div>
                     </motion.div>
                   )}
