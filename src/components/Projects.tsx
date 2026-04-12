@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Send, Brain, HeartHandshake } from "lucide-react";
+import { ExternalLink, Send, Brain, HeartHandshake, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const fade = (delay = 0) => ({
@@ -23,6 +23,12 @@ const projects = [
     url: "https://rolelit.lovable.app",
   },
   {
+    icon: BookOpen,
+    title: "CBT Workbook",
+    desc: "Интерактивная платформа для терапевтов и клиентов — инструменты КПТ, трекинг настроения, безопасный обмен сообщениями.",
+    url: "https://cbt-workbook.lovable.app",
+  },
+  {
     icon: HeartHandshake,
     title: "MedHub & Initiativa Pozitiva",
     desc: "Волонтёрские бесплатные консультации для тех, кто не может позволить себе частную терапию.",
@@ -39,7 +45,7 @@ const Projects = () => (
       </p>
     </motion.div>
 
-    <div className="grid md:grid-cols-3 gap-6">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {projects.map((p, i) => (
         <motion.div
           key={p.title}
