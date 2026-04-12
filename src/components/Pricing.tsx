@@ -25,10 +25,11 @@ const plans = [
   },
   {
     title: "Пакет × 4",
-    price: "100",
+    price: "25",
+    priceNote: "за сессию",
+    totalPrice: "100 € за 4 сессии",
     duration: "4 × 50 мин",
-    features: ["25 € за сессию", "Регулярная работа", "Приоритетная запись"],
-    boldFirst: true,
+    features: ["Экономия 20 € по сравнению с разовыми", "Регулярная работа", "Приоритетная запись"],
   },
 ];
 
@@ -65,7 +66,10 @@ const Pricing = () => (
             </div>
             <div className="mt-6">
               <span className="text-4xl font-bold tracking-tight">{p.price}</span>
-              <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>€</span>
+              <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>€{(p as any).priceNote ? ` ${(p as any).priceNote}` : ""}</span>
+              {(p as any).totalPrice && (
+                <p className={`text-xs mt-1 ${p.featured ? "text-primary-foreground/60" : "text-muted-foreground/70"}`}>{(p as any).totalPrice}</p>
+              )}
             </div>
             <ul className="mt-6 space-y-3 flex-1">
               {p.features.map((f, fi) => (
