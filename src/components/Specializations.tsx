@@ -77,7 +77,7 @@ const Specializations = () => (
           <div className="flex gap-2 flex-wrap">
             {s.slug && (
               <Button variant="outline" size="sm" className="gap-1.5" asChild>
-                <Link to={`/problems/${s.slug}`}>
+                <Link to={`/${s.slug}`}>
                   <BookOpen className="w-3.5 h-3.5" /> Подробнее
                 </Link>
               </Button>
