@@ -156,7 +156,7 @@ const LandingPageEuropa = () => {
 
           <motion.div {...fade(0.15)} className="flex-shrink-0">
             <img
-              src="/hero-photo.webp"
+              src={heroPhoto}
               alt="Психолог Дмитрий Яцко"
               width={340}
               height={420}
