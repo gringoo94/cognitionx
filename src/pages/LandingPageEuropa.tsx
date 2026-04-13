@@ -355,6 +355,9 @@ const LandingPageEuropa = () => (
       {/* ── Approach (reused from main) ── */}
       <Approach />
 
+      {/* ── Specializations (reused from main) ── */}
+      <Specializations />
+
       {/* ── Pain Points (expat-specific) ── */}
       <section className="bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
