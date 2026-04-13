@@ -312,7 +312,7 @@ const LandingPageEuropa = () => (
             {[
               { icon: MessageCircle, text: "Обсудим ваш запрос" },
               { icon: CheckCircle2, text: "Отвечу на вопросы" },
-              { icon: Users, text: "Решите, подходим ли мы" },
+              { icon: Users, text: "Решите, подходим ли мы друг другу" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2 text-sm">
                 <item.icon className="w-4 h-4 shrink-0 opacity-80" />
