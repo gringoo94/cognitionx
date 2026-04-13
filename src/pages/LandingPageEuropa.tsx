@@ -9,6 +9,7 @@ import {
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import heroPhoto from "@/assets/hero-photo.webp";
 import {
   Users,
   Globe,
