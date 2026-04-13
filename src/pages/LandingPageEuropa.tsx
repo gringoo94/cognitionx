@@ -315,9 +315,9 @@ const LandingPageEuropa = () => {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
+                variant="secondary"
                 asChild
-                className="rounded-xl text-base px-8 border-background/20 text-background hover:bg-background/10"
+                className="rounded-xl text-base px-8"
               >
                 <a href="/contact">Оставить заявку</a>
               </Button>
