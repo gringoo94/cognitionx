@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 const testimonials = [
   {
@@ -64,26 +71,31 @@ const Testimonials = () => (
       </p>
     </motion.div>
 
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {testimonials.map((t, i) => (
-        <motion.div
-          key={i}
-          {...fade(i * 0.05)}
-          className="relative rounded-2xl border border-border bg-card p-6 flex flex-col gap-4"
-        >
-          <Quote className="w-5 h-5 text-primary/40" />
-          <p className="text-sm leading-relaxed text-muted-foreground flex-1">
-            {t.text}
-          </p>
-          <div className="flex items-center gap-3 pt-2 border-t border-border">
-            <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-xs font-semibold text-primary">
-              {t.initials}
+    <Carousel
+      opts={{ align: "start", loop: true }}
+      className="w-full"
+    >
+      <CarouselContent className="-ml-4">
+        {testimonials.map((t, i) => (
+          <CarouselItem key={i} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+            <div className="relative rounded-2xl border border-border bg-card p-6 flex flex-col gap-4 h-full">
+              <Quote className="w-5 h-5 text-primary/40" />
+              <p className="text-sm leading-relaxed text-muted-foreground flex-1">
+                {t.text}
+              </p>
+              <div className="flex items-center gap-3 pt-2 border-t border-border">
+                <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-xs font-semibold text-primary">
+                  {t.initials}
+                </div>
+                <span className="text-xs text-muted-foreground">{t.topic}</span>
+              </div>
             </div>
-            <span className="text-xs text-muted-foreground">{t.topic}</span>
-          </div>
-        </motion.div>
-      ))}
-    </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="-left-4 md:-left-12" />
+      <CarouselNext className="-right-4 md:-right-12" />
+    </Carousel>
   </section>
 );
 
