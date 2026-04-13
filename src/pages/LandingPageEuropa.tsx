@@ -461,7 +461,7 @@ const LandingPageEuropa = () => (
       </section>
 
       {/* ── 12. About Detailed (образование — для тех кто копает глубже) ── */}
-      <section className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+      <section id="about-detailed" className="max-w-3xl mx-auto px-6 py-20 md:py-28 scroll-mt-20">
         <motion.div {...fade()} className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
           <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
