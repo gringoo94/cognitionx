@@ -17,8 +17,6 @@ import {
   ShieldCheck,
   Brain,
   MessageCircle,
-  CalendarCheck,
-  Sparkles,
   CheckCircle2,
   ArrowRight,
   Star,
