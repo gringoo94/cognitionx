@@ -11,7 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
-import Pricing from "@/components/Pricing";
+import { Badge } from "@/components/ui/badge";
 import Ethics from "@/components/Ethics";
 import Projects from "@/components/Projects";
 import SessionPrep from "@/components/SessionPrep";
