@@ -519,7 +519,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: "cbt-principles",
-    slug: "chto-takoe-kpt",
+    slug: "5-principov-kpt",
     title: "Что такое КПТ и почему она работает: 5 принципов когнитивно-поведенческой терапии",
     description: "Разбираю главные принципы КПТ — от треугольника «мысли-эмоции-поведение» до поведенческих экспериментов. Как это работает и кому подходит.",
     image: "/blog/cbt-principles.jpg",
