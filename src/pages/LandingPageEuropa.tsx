@@ -143,7 +143,11 @@ const LandingPageEuropa = () => {
               <Button size="lg" onClick={scrollToBooking} className="gap-2 rounded-xl shadow-lg shadow-primary/20 text-base px-8">
                 Записаться — первая сессия 25 € <ArrowRight className="w-4 h-4" />
               </Button>
-              <TelegramCTA variant="outline" size="lg" className="rounded-xl text-base" />
+              <Button variant="outline" size="lg" asChild className="rounded-xl text-base gap-2">
+                <a href="https://t.me/cognitionx" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-4 h-4" /> Написать в Telegram
+                </a>
+              </Button>
             </div>
             <div className="mt-8 flex gap-8 justify-center md:justify-start text-sm text-muted-foreground">
               <div><span className="block text-2xl font-bold text-foreground">200+</span>клиентов</div>
