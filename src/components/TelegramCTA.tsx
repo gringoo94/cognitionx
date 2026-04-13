@@ -19,7 +19,16 @@ const TelegramCTA = () => (
         className="gap-2 rounded-full"
         asChild
       >
-        <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://t.me/gringoo94"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            if (typeof window !== "undefined" && (window as any).fbq) {
+              (window as any).fbq("track", "Contact", { content_name: "telegram_cta" });
+            }
+          }}
+        >
           <Send className="w-4 h-4" /> Написать в Telegram
         </a>
       </Button>

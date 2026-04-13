@@ -35,6 +35,10 @@ const BookingForm = () => {
       return;
     }
     toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
+    // Meta Pixel: Lead event
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Lead", { content_name: "booking_form" });
+    }
     setForm({ name: "", email: "", messenger: "", message: "" });
 
     // Send Telegram notification (fire-and-forget)
