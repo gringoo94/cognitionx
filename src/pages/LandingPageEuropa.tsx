@@ -17,6 +17,7 @@ import Projects from "@/components/Projects";
 import SessionPrep from "@/components/SessionPrep";
 import Blog from "@/components/Blog";
 import Approach from "@/components/Approach";
+import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import heroPhoto from "@/assets/hero-photo.webp";
 import {
