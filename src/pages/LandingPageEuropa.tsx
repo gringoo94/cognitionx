@@ -9,6 +9,7 @@ import {
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import heroPhoto from "@/assets/hero-photo.webp";
 import {
   Users,
   Globe,
@@ -155,7 +156,7 @@ const LandingPageEuropa = () => {
 
           <motion.div {...fade(0.15)} className="flex-shrink-0">
             <img
-              src="/hero-photo.webp"
+              src={heroPhoto}
               alt="Психолог Дмитрий Яцко"
               width={340}
               height={420}
@@ -314,9 +315,9 @@ const LandingPageEuropa = () => {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
+                variant="secondary"
                 asChild
-                className="rounded-xl text-base px-8 border-background/20 text-background hover:bg-background/10"
+                className="rounded-xl text-base px-8"
               >
                 <a href="/contact">Оставить заявку</a>
               </Button>
