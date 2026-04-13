@@ -58,7 +58,7 @@ const Specializations = () => (
   <section id="specs" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
     {/* Problems */}
     <motion.div {...fade()} className="text-center mb-14">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">На чём специализируюсь</h2>
       <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
         Выберите свою тему — я расскажу, как мы будем работать
       </p>
