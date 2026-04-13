@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +17,7 @@ const fade = (delay = 0) => ({
 });
 
 const BookingForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", messenger: "", message: "" });
   const [wellbeing, setWellbeing] = useState([5]);
   const [loading, setLoading] = useState(false);
@@ -34,17 +36,13 @@ const BookingForm = () => {
       toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте позже.", variant: "destructive" });
       return;
     }
-    toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
-    // Meta Pixel: Lead event
-    if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Lead", { content_name: "booking_form" });
-    }
-    setForm({ name: "", email: "", messenger: "", message: "" });
-
     // Send Telegram notification (fire-and-forget)
     supabase.functions.invoke("notify-telegram", {
       body: { name: form.name, email: form.email, messenger: form.messenger, message: form.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)` },
     }).catch(() => {});
+
+    setForm({ name: "", email: "", messenger: "", message: "" });
+    navigate("/thank-you");
   };
 
   return (
