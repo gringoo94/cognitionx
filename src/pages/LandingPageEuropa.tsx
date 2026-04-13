@@ -9,7 +9,6 @@ import {
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import TelegramCTA from "@/components/TelegramCTA";
 import {
   Users,
   Globe,
