@@ -287,6 +287,11 @@ const LandingPageEuropa = () => (
           >
             Меня зовут Дмитрий. Я — психолог, практикующий КПТ и схема-терапию. Работаю онлайн с русскоязычными экспатами по всей Европе из Кишинёва (EET, UTC+2/+3).
           </motion.p>
+          <motion.div {...fade(0.15)} className="mt-6">
+            <Button variant="outline" size="sm" className="border-background/30 text-background hover:bg-background/10" asChild>
+              <a href="#about-detailed">Подробнее об образовании →</a>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
