@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Send, MessageCircle, Mail, Phone, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,8 +44,8 @@ const breadcrumbSchema = {
 };
 
 const ContactPage = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", messenger: "", message: "" });
-
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,14 +59,13 @@ const ContactPage = () => {
         message: form.message.trim(),
       });
       if (error) throw error;
-      toast({ title: "Заявка отправлена", description: "Я свяжусь с вами в ближайшее время." });
-      
       // Send Telegram notification (fire-and-forget)
       supabase.functions.invoke("notify-telegram", {
         body: { name: form.name.trim(), email: form.email.trim(), messenger: form.messenger.trim(), message: form.message.trim() },
       }).catch(() => {});
-      
+
       setForm({ name: "", email: "", messenger: "", message: "" });
+      navigate("/thank-you");
     } catch {
       toast({ title: "Ошибка", description: "Не удалось отправить заявку. Попробуйте ещё раз.", variant: "destructive" });
     } finally {
