@@ -98,7 +98,12 @@ const Footer = () => (
       </div>
 
       <div className="mt-10 pt-6 border-t border-border text-center">
-        <p className="text-xs text-muted-foreground">© 2026 CognitionX. Все права защищены.</p>
+        <p className="text-xs text-muted-foreground">
+          © 2026 CognitionX. Все права защищены. ·{" "}
+          <Link to="/privacy" className="hover:text-foreground transition-colors underline">
+            Политика конфиденциальности
+          </Link>
+        </p>
       </div>
     </div>
   </footer>

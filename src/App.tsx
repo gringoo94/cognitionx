@@ -19,6 +19,7 @@ import PageViewTracker from "./components/PageViewTracker.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import GoogleAnalytics from "./components/GoogleAnalytics.tsx";
 
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/psiholog-moskva" element={<ProblemPage />} />
             <Route path="/psiholog-europa" element={<LandingPageEuropa />} />
             <Route path="/psiholog-usa" element={<ProblemPage />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             
             {/* Redirects from old Tilda URLs */}
             <Route path="/about_cognitionx" element={<Navigate to="/about" replace />} />
