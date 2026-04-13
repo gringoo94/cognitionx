@@ -224,7 +224,7 @@ const LandingPageEuropa = () => (
             viewport={{ once: true }}
             className="text-sm font-medium"
           >
-            Живёте в Европе? Напишите — отвечу в течение дня
+            Запишитесь на бесплатную 20-минутную встречу — напишите в Telegram
           </motion.p>
           <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
             <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">
