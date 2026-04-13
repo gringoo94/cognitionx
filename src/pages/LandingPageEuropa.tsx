@@ -151,9 +151,9 @@ const LandingPageEuropa = () => (
               {...fade(0.05)}
               className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
             >
-              Психолог
+              Русскоязычный психолог
               <br />
-              <span className="text-primary">для экспатов</span>
+              <span className="text-primary">в Европе</span>
             </motion.h1>
 
             <motion.p
