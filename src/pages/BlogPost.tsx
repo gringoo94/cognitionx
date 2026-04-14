@@ -91,6 +91,9 @@ const BlogPost = () => {
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
                 return <BehavioralActivationDiary key={i} />;
               }
+              if (block.type === "component" && block.componentId === "emotion-wheel") {
+                return <EmotionWheel key={i} />;
+              }
               if (block.type === "preface") {
                 return (
                   <p
