@@ -1,4 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 interface EmotionCategory {
   label: string[];
@@ -6,6 +8,7 @@ interface EmotionCategory {
   tc: string;
   emotions: string[];
   hint: string;
+  slug: string;
 }
 
 const DATA: EmotionCategory[] = [
