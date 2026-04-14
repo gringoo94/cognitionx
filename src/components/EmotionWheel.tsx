@@ -161,9 +161,9 @@ const EmotionWheel = () => {
     ctx.fillStyle = "#73726d";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("THE PLACES", CX, CY - 13);
-    ctx.fillText("WE GO", CX, CY);
-    ctx.fillText("WHEN...", CX, CY + 13);
+    ctx.fillText("КУДА МЫ", CX, CY - 13);
+    ctx.fillText("УХОДИМ,", CX, CY);
+    ctx.fillText("КОГДА...", CX, CY + 13);
   }, []);
 
   useEffect(() => {
