@@ -50,13 +50,13 @@ const DATA: EmotionCategory[] = [
     hint: "Социальное сравнение работает в обе стороны — может подавлять или вдохновлять." },
 ];
 
-const SIZE = 660;
-const CX = 330;
-const CY = 330;
+const SIZE = 740;
+const CX = 370;
+const CY = 370;
 const R_IN = 58;
 const R_CAT_IN = 118;
 const R_CAT_OUT = 214;
-const R_EM_OUT = 322;
+const R_EM_OUT = 360;
 const N = DATA.length;
 const SLICE = (2 * Math.PI) / N;
 const START = -Math.PI / 2;
@@ -137,7 +137,7 @@ const EmotionWheel = () => {
         const emFill = active ? lighter(d.color, 65) : lighter(d.color, 32);
         wedge(ctx, ea1, ea2, R_CAT_OUT, R_EM_OUT, emFill);
         const emid = ea1 + SLICE / ne / 2;
-        radialText(ctx, [d.emotions[j]], emid, (R_CAT_OUT + R_EM_OUT) / 2, 8.5, d.tc);
+        radialText(ctx, [d.emotions[j]], emid, (R_CAT_OUT + R_EM_OUT) / 2, 10, d.tc);
       }
 
       radialText(ctx, d.label, mid, (R_CAT_IN + R_CAT_OUT) / 2, 9.5, active ? lighter(d.tc, 30) : d.tc, 13);
