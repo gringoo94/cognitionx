@@ -9,45 +9,45 @@ interface EmotionCategory {
 }
 
 const DATA: EmotionCategory[] = [
-  { label: ["Things aren't", "what they seem"], color: "#c8b0e0", tc: "#5a3585",
-    emotions: ["Nostalgia", "Cognitive dissonance", "Paradox", "Irony", "Sarcasm", "Schadenfreude", "Freudenfreude"],
-    hint: "Feelings that arise when reality and expectation don't match." },
-  { label: ["We fall", "short"], color: "#d8a8cc", tc: "#7a2a60",
-    emotions: ["Shame", "Self-compassion", "Perfectionism", "Guilt", "Embarrassment", "Humiliation", "Amusement", "Bittersweetness"],
-    hint: "Emotions tied to measuring ourselves against a standard — and finding a gap." },
-  { label: ["We search", "for connection"], color: "#a0c8a0", tc: "#2a5a2a",
-    emotions: ["Loneliness", "Invisibility", "Insecurity", "Disconnection", "Connection", "Fitting in", "Belonging"],
-    hint: "The longing to be seen, known and accepted by others." },
-  { label: ["To", "self-assess"], color: "#f0c87a", tc: "#7a5000",
-    emotions: ["Humility", "Hubris", "Pride"],
-    hint: "How we evaluate our own worth, ability and place in the world." },
-  { label: ["Life is", "good"], color: "#f5a050", tc: "#7a3800",
-    emotions: ["Joy", "Happiness", "Calm", "Contentment", "Gratitude", "Foreboding joy", "Relief", "Tranquility"],
-    hint: "Positive states — some carry the shadow of fearing their loss." },
-  { label: ["We're with", "others"], color: "#b0cce0", tc: "#1a4060",
-    emotions: ["Comparative suffering", "Hurt", "Boundaries", "Sympathy", "Empathy", "Pity", "Compassion"],
-    hint: "Emotions that arise specifically in response to other people's pain." },
-  { label: ["The heart", "is open"], color: "#e8a898", tc: "#7a2a1a",
-    emotions: ["Love", "Lovelessness", "Defensiveness", "Betrayal", "Self-trust", "Heartbreak", "Flooding", "Trust"],
-    hint: "At the intersection of vulnerability and intimacy." },
-  { label: ["We feel", "wronged"], color: "#e8c840", tc: "#6a5000",
-    emotions: ["Anger", "Contempt", "Disgust", "Dehumanization", "Hate", "Self-righteousness"],
-    hint: "Moral emotions signalling a perceived violation of fairness or dignity." },
-  { label: ["Things don't", "go as planned"], color: "#b0c890", tc: "#3a5020",
-    emotions: ["Frustration", "Resignation", "Discouragement", "Regret", "Expectations", "Disappointment", "Boredom"],
-    hint: "When outcomes diverge from what we hoped, planned or needed." },
-  { label: ["It's beyond", "us"], color: "#80b8a8", tc: "#1a5040",
-    emotions: ["Surprise", "Interest", "Curiosity", "Confusion", "Wonder", "Awe"],
-    hint: "Expansive emotions that open us to something larger than ourselves." },
-  { label: ["We're", "hurting"], color: "#88bc90", tc: "#1a4a28",
-    emotions: ["Grief", "Sadness", "Despair", "Hopelessness", "Anguish"],
-    hint: "The deep pain emotions — often the most isolating to carry alone." },
-  { label: ["Things are", "uncertain"], color: "#e08080", tc: "#7a1a1a",
-    emotions: ["Stress", "Overwhelm", "Anxiety", "Worry", "Avoidance", "Excitement", "Dread", "Fear", "Vulnerability"],
-    hint: "Our nervous system's response to threat, real or imagined." },
-  { label: ["We", "compare"], color: "#e8a858", tc: "#7a4000",
-    emotions: ["Jealousy", "Envy", "Resentment", "Admiration", "Reverence", "Comparison"],
-    hint: "Social comparison cuts both ways — it can diminish or inspire." },
+  { label: ["Всё не то,", "чем кажется"], color: "#c8b0e0", tc: "#5a3585",
+    emotions: ["Ностальгия", "Когнитивный диссонанс", "Парадокс", "Ирония", "Сарказм", "Злорадство", "Сорадование"],
+    hint: "Чувства, возникающие когда реальность не совпадает с ожиданиями." },
+  { label: ["Мы не", "дотягиваем"], color: "#d8a8cc", tc: "#7a2a60",
+    emotions: ["Стыд", "Самосострадание", "Перфекционизм", "Вина", "Смущение", "Унижение", "Веселье", "Горько-сладкое"],
+    hint: "Эмоции, связанные с оценкой себя по стандарту — и обнаружением разрыва." },
+  { label: ["Мы ищем", "связь"], color: "#a0c8a0", tc: "#2a5a2a",
+    emotions: ["Одиночество", "Невидимость", "Неуверенность", "Разобщённость", "Связь", "Принадлежность", "Причастность"],
+    hint: "Стремление быть увиденным, понятым и принятым другими." },
+  { label: ["Оценка", "себя"], color: "#f0c87a", tc: "#7a5000",
+    emotions: ["Смирение", "Высокомерие", "Гордость"],
+    hint: "Как мы оцениваем собственную ценность, способности и место в мире." },
+  { label: ["Жизнь", "хороша"], color: "#f5a050", tc: "#7a3800",
+    emotions: ["Радость", "Счастье", "Спокойствие", "Удовлетворённость", "Благодарность", "Тревожная радость", "Облегчение", "Умиротворение"],
+    hint: "Позитивные состояния — некоторые несут в себе тень страха их потерять." },
+  { label: ["Мы рядом", "с другими"], color: "#b0cce0", tc: "#1a4060",
+    emotions: ["Сравнительное страдание", "Боль", "Границы", "Сочувствие", "Эмпатия", "Жалость", "Сострадание"],
+    hint: "Эмоции, возникающие в ответ на боль других людей." },
+  { label: ["Сердце", "открыто"], color: "#e8a898", tc: "#7a2a1a",
+    emotions: ["Любовь", "Нелюбовь", "Защита", "Предательство", "Самодоверие", "Разбитое сердце", "Захлёст", "Доверие"],
+    hint: "На пересечении уязвимости и близости." },
+  { label: ["Нас", "обидели"], color: "#e8c840", tc: "#6a5000",
+    emotions: ["Гнев", "Презрение", "Отвращение", "Дегуманизация", "Ненависть", "Самоправедность"],
+    hint: "Моральные эмоции, сигнализирующие о нарушении справедливости или достоинства." },
+  { label: ["Всё идёт", "не по плану"], color: "#b0c890", tc: "#3a5020",
+    emotions: ["Фрустрация", "Смирение", "Обескураженность", "Сожаление", "Ожидания", "Разочарование", "Скука"],
+    hint: "Когда результаты расходятся с тем, на что мы надеялись или что планировали." },
+  { label: ["Это больше", "нас"], color: "#80b8a8", tc: "#1a5040",
+    emotions: ["Удивление", "Интерес", "Любопытство", "Замешательство", "Изумление", "Трепет"],
+    hint: "Расширяющие эмоции, открывающие нас чему-то большему." },
+  { label: ["Нам", "больно"], color: "#88bc90", tc: "#1a4a28",
+    emotions: ["Горе", "Печаль", "Отчаяние", "Безнадёжность", "Мука"],
+    hint: "Глубокие болезненные эмоции — часто самые изолирующие." },
+  { label: ["Всё", "неопределённо"], color: "#e08080", tc: "#7a1a1a",
+    emotions: ["Стресс", "Перегрузка", "Тревога", "Беспокойство", "Избегание", "Возбуждение", "Страх", "Ужас", "Уязвимость"],
+    hint: "Реакция нервной системы на угрозу — реальную или воображаемую." },
+  { label: ["Мы", "сравниваем"], color: "#e8a858", tc: "#7a4000",
+    emotions: ["Ревность", "Зависть", "Обида", "Восхищение", "Благоговение", "Сравнение"],
+    hint: "Социальное сравнение работает в обе стороны — может подавлять или вдохновлять." },
 ];
 
 const SIZE = 660;
@@ -161,9 +161,9 @@ const EmotionWheel = () => {
     ctx.fillStyle = "#73726d";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("THE PLACES", CX, CY - 13);
-    ctx.fillText("WE GO", CX, CY);
-    ctx.fillText("WHEN...", CX, CY + 13);
+    ctx.fillText("КУДА МЫ", CX, CY - 13);
+    ctx.fillText("УХОДИМ,", CX, CY);
+    ctx.fillText("КОГДА...", CX, CY + 13);
   }, []);
 
   useEffect(() => {
