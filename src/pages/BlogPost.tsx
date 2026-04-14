@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
+import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
 
 const BlogPost = () => {

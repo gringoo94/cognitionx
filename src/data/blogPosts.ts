@@ -20,11 +20,12 @@ function parseContent(raw: string): ContentBlock[] {
   try {
     const arr = JSON.parse(raw);
     return arr
-      .filter((b: any) => ["text", "heading", "quote", "preface"].includes(b.ty))
+      .filter((b: any) => ["text", "heading", "quote", "preface", "component"].includes(b.ty))
       .map((b: any) => ({
-        type: b.ty === "preface" ? "preface" : b.ty === "heading" ? "heading" : b.ty === "quote" ? "quote" : "text",
+        type: b.ty as ContentBlock["type"],
         text: b.te || "",
         ...(b.le ? { level: b.le } : {}),
+        ...(b.cid ? { componentId: b.cid } : {}),
       }));
   } catch {
     return [{ type: "text", text: raw }];
