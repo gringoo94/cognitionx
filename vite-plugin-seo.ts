@@ -21,6 +21,10 @@ export function seoPlugin(): Plugin {
     closeBundle() {
       const distDir = path.resolve(process.cwd(), "dist");
       const indexPath = path.join(distDir, "index.html");
+      if (!fs.existsSync(indexPath)) {
+        console.warn("[seo-plugin] dist/index.html not found, skipping SEO pre-render");
+        return;
+      }
       const baseHtml = fs.readFileSync(indexPath, "utf-8");
 
       let count = 0;
