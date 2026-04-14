@@ -273,6 +273,12 @@ const EmotionWheel = () => {
                 </span>
               ))}
             </div>
+            <Link
+              to={`/blog/${selectedData.slug}`}
+              className="inline-flex items-center gap-1.5 mt-3 text-xs font-medium text-primary hover:underline"
+            >
+              Читать подробнее об этой категории <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         )}
       </div>
