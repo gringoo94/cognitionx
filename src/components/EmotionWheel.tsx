@@ -137,10 +137,10 @@ const EmotionWheel = () => {
         const emFill = active ? lighter(d.color, 65) : lighter(d.color, 32);
         wedge(ctx, ea1, ea2, R_CAT_OUT, R_EM_OUT, emFill);
         const emid = ea1 + SLICE / ne / 2;
-        radialText(ctx, [d.emotions[j]], emid, (R_CAT_OUT + R_EM_OUT) / 2, 10, d.tc);
+        radialText(ctx, [d.emotions[j]], emid, (R_CAT_OUT + R_EM_OUT) / 2, 11.5, d.tc);
       }
 
-      radialText(ctx, d.label, mid, (R_CAT_IN + R_CAT_OUT) / 2, 9.5, active ? lighter(d.tc, 30) : d.tc, 13);
+      radialText(ctx, d.label, mid, (R_CAT_IN + R_CAT_OUT) / 2, 12, active ? lighter(d.tc, 30) : d.tc, 15);
     }
 
     // Center circle
@@ -152,13 +152,13 @@ const EmotionWheel = () => {
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    ctx.font = "600 10px Inter,system-ui,sans-serif";
+    ctx.font = "600 12px Inter,system-ui,sans-serif";
     ctx.fillStyle = "#73726d";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("КУДА МЫ", CX, CY - 13);
+    ctx.fillText("КУДА МЫ", CX, CY - 15);
     ctx.fillText("УХОДИМ,", CX, CY);
-    ctx.fillText("КОГДА...", CX, CY + 13);
+    ctx.fillText("КОГДА...", CX, CY + 15);
   }, []);
 
   useEffect(() => {
