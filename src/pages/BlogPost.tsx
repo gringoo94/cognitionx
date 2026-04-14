@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
+import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
 
 const BlogPost = () => {
@@ -89,6 +90,9 @@ const BlogPost = () => {
             {post.content.map((block, i) => {
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
                 return <BehavioralActivationDiary key={i} />;
+              }
+              if (block.type === "component" && block.componentId === "emotion-wheel") {
+                return <EmotionWheel key={i} />;
               }
               if (block.type === "preface") {
                 return (
