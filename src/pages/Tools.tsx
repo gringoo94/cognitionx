@@ -140,35 +140,64 @@ const Tools = () => {
           </p>
         </motion.div>
 
-        {/* Schema Quiz highlight */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-10"
-        >
-          <Link
-            to="/tools/schema-quiz"
-            className="block rounded-2xl border border-primary/20 bg-primary/5 p-6 hover:border-primary/40 transition-all group"
+        {/* Highlighted tools */}
+        <div className="grid sm:grid-cols-2 gap-5 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="flex items-start gap-4">
-              <div className="inline-flex p-2.5 rounded-xl bg-primary/10">
-                <Search className="h-5 w-5 text-primary" />
+            <Link
+              to="/tools/schema-quiz"
+              className="block h-full rounded-2xl border border-primary/20 bg-primary/5 p-6 hover:border-primary/40 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-flex p-2.5 rounded-xl bg-primary/10">
+                  <Search className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                    Тест: определите свои схемы
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Экспресс-версия YSQ — 36 вопросов за 5-7 минут. Узнайте, какие из 18 ранних дезадаптивных схем могут быть активны у вас.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-primary mt-2">
+                    Пройти тест <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+                  </span>
+                </div>
               </div>
-              <div>
-                <h2 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
-                  Тест: определите свои схемы
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Экспресс-версия YSQ — 36 вопросов за 5-7 минут. Узнайте, какие из 18 ранних дезадаптивных схем могут быть активны у вас.
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-sm text-primary mt-2">
-                  Пройти тест <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
-                </span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            <Link
+              to="/tools/emotion-wheel"
+              className="block h-full rounded-2xl border border-orange-500/20 bg-orange-500/5 p-6 hover:border-orange-500/40 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-flex p-2.5 rounded-xl bg-orange-500/10">
+                  <Compass className="h-5 w-5 text-orange-500" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-foreground group-hover:text-orange-500 transition-colors mb-1">
+                    Колесо эмоций
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Интерактивное колесо: 13 категорий переживаний и 87 эмоций. Нажмите на сектор, чтобы исследовать.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-orange-500 mt-2">
+                    Открыть колесо <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+                  </span>
+                </div>
               </div>
-            </div>
-          </Link>
-        </motion.div>
+            </Link>
+          </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {tools.map((tool, i) => (
