@@ -53,8 +53,8 @@ const DATA: EmotionCategory[] = [
 const SIZE = 740;
 const CX = 370;
 const CY = 370;
-const R_IN = 58;
-const R_CAT_IN = 118;
+const R_IN = 62;
+const R_CAT_IN = 62;
 const R_CAT_OUT = 214;
 const R_EM_OUT = 360;
 const N = DATA.length;
@@ -143,19 +143,14 @@ const EmotionWheel = () => {
       radialText(ctx, d.label, mid, (R_CAT_IN + R_CAT_OUT) / 2, 9.5, active ? lighter(d.tc, 30) : d.tc, 13);
     }
 
-    // Inner circles
-    ctx.beginPath();
-    ctx.arc(CX, CY, R_CAT_IN, 0, 2 * Math.PI);
-    ctx.fillStyle = "#f7f6f3";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(55,53,47,.08)";
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
+    // Center circle
     ctx.beginPath();
     ctx.arc(CX, CY, R_IN, 0, 2 * Math.PI);
     ctx.fillStyle = "#ffffff";
     ctx.fill();
+    ctx.strokeStyle = "rgba(55,53,47,.08)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
 
     ctx.font = "600 10px Inter,system-ui,sans-serif";
     ctx.fillStyle = "#73726d";
