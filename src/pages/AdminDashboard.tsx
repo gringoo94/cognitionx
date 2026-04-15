@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, Mail, Eye, Calendar, ArrowLeft } from "lucide-react";
+import { Loader2, LogOut, Mail, Eye, Calendar, ArrowLeft, FileText } from "lucide-react";
+import AdminBlog from "@/components/AdminBlog";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
@@ -27,7 +28,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [pageViews, setPageViews] = useState<PageView[]>([]);
-  const [tab, setTab] = useState<"submissions" | "analytics">("submissions");
+  const [tab, setTab] = useState<"submissions" | "analytics" | "blog">("submissions");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -161,6 +162,13 @@ const AdminDashboard = () => {
           >
             Аналитика
           </Button>
+          <Button
+            variant={tab === "blog" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setTab("blog")}
+          >
+            <FileText className="w-4 h-4 mr-1" /> Блог
+          </Button>
         </div>
 
         {tab === "submissions" && (
@@ -224,6 +232,8 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+
+        {tab === "blog" && <AdminBlog />}
       </div>
     </div>
   );
