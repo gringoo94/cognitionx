@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { blogPosts } from "@/data/blogPosts";
-import { ArrowRight } from "lucide-react";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -10,6 +11,7 @@ const fade = (delay = 0) => ({
 });
 
 const Blog = () => {
+  const { data: blogPosts = [], isLoading } = useBlogPosts();
   const posts = blogPosts.slice(0, 6);
 
   return (
@@ -27,52 +29,58 @@ const Blog = () => {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post, i) => (
-            <motion.a
-              key={post.id}
-              href={`/blog/${post.slug}`}
-              {...fade(0.05 * (i + 1))}
-              className="group glass rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-lg"
-            >
-              <div className="aspect-[16/10] overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5">
-                <time className="text-xs text-muted-foreground">
-                  {new Date(post.date).toLocaleDateString("ru", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </time>
-                <h3 className="mt-2 font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
-                  {post.title}
-                </h3>
-                <p className="mt-2 text-xs text-muted-foreground line-clamp-2">
-                  {post.description}
-                </p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                  Читать <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
-            </motion.a>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center py-12">
+            <Loader2 className="w-6 h-6 animate-spin text-primary" />
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post, i) => (
+              <motion.div key={post.id} {...fade(0.05 * (i + 1))}>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="group glass rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-lg block h-full"
+                >
+                  <div className="aspect-[16/10] overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={`Иллюстрация: ${post.title}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <time className="text-xs text-muted-foreground">
+                      {new Date(post.date).toLocaleDateString("ru", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </time>
+                    <h3 className="mt-2 font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-xs text-muted-foreground line-clamp-2">
+                      {post.description}
+                    </p>
+                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                      Читать <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {blogPosts.length > 6 && (
           <motion.div {...fade(0.3)} className="mt-10 text-center">
-            <a
-              href="/blog"
+            <Link
+              to="/blog"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
             >
               Все статьи <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </motion.div>
         )}
       </div>
