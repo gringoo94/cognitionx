@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { useBlogPost } from "@/hooks/useBlogPosts";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { useBlogPost, useBlogPosts } from "@/hooks/useBlogPosts";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,6 +11,12 @@ import SEOHead from "@/components/SEOHead";
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: post, isLoading } = useBlogPost(slug);
+  const { data: allPosts = [] } = useBlogPosts();
+
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== slug)
+    .filter((p) => post?.tags?.some((t) => p.tags.includes(t)))
+    .slice(0, 3);
 
   if (isLoading) {
     return (
@@ -151,6 +157,46 @@ const BlogPost = () => {
               <a href="/#booking">Записаться на консультацию</a>
             </Button>
           </div>
+
+          {relatedPosts.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-2xl font-bold mb-6">Читайте также</h2>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {relatedPosts.map((rp) => (
+                  <Link
+                    key={rp.slug}
+                    to={`/blog/${rp.slug}`}
+                    className="group rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all"
+                  >
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={rp.image}
+                        alt={`Иллюстрация: ${rp.title}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-sm font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                        {rp.title}
+                      </h3>
+                      <span className="mt-2 inline-flex items-center gap-1 text-xs text-primary">
+                        Читать <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-6 text-center">
+                <Link
+                  to="/blog"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                >
+                  Все статьи <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          )}
         </article>
       </main>
       <Footer />
