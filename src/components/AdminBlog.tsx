@@ -103,13 +103,13 @@ const AdminBlog = () => {
     setSaving(true);
 
     const payload = {
-      slug: editPost.slug,
-      title: editPost.title,
+      slug: editPost.slug!,
+      title: editPost.title!,
       description: editPost.description || "",
       image: editPost.image || "",
       date: editPost.date || new Date().toISOString().slice(0, 10),
       tags: editPost.tags || [],
-      content: editPost.content || [],
+      content: (editPost.content || []) as unknown as import("@/integrations/supabase/types").Json,
       published: editPost.published || false,
     };
 
@@ -117,7 +117,7 @@ const AdminBlog = () => {
     if (editPost.id) {
       ({ error } = await supabase.from("blog_posts").update(payload).eq("id", editPost.id));
     } else {
-      ({ error } = await supabase.from("blog_posts").insert(payload));
+      ({ error } = await supabase.from("blog_posts").insert([payload]));
     }
 
     if (error) {
