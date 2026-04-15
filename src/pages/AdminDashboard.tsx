@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [pageViews, setPageViews] = useState<PageView[]>([]);
-  const [tab, setTab] = useState<"submissions" | "analytics">("submissions");
+  const [tab, setTab] = useState<"submissions" | "analytics" | "blog">("submissions");
   const navigate = useNavigate();
 
   useEffect(() => {
