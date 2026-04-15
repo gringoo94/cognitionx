@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { blogPosts } from "@/data/blogPosts";
-import { ArrowLeft } from "lucide-react";
+import { useBlogPost } from "@/hooks/useBlogPosts";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,7 +10,15 @@ import SEOHead from "@/components/SEOHead";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find((p) => p.slug === slug);
+  const { data: post, isLoading } = useBlogPost(slug);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (!post) {
     return (
