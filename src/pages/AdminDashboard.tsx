@@ -162,6 +162,13 @@ const AdminDashboard = () => {
           >
             Аналитика
           </Button>
+          <Button
+            variant={tab === "blog" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setTab("blog")}
+          >
+            <FileText className="w-4 h-4 mr-1" /> Блог
+          </Button>
         </div>
 
         {tab === "submissions" && (
