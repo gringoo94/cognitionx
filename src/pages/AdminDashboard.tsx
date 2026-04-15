@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, Mail, Eye, Calendar, ArrowLeft } from "lucide-react";
+import { Loader2, LogOut, Mail, Eye, Calendar, ArrowLeft, FileText } from "lucide-react";
+import AdminBlog from "@/components/AdminBlog";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
