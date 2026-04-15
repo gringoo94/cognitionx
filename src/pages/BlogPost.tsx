@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { useBlogPost } from "@/hooks/useBlogPosts";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { useBlogPost, useBlogPosts } from "@/hooks/useBlogPosts";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
