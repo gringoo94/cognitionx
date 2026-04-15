@@ -232,6 +232,8 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+
+        {tab === "blog" && <AdminBlog />}
       </div>
     </div>
   );
