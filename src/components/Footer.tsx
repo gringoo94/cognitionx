@@ -103,6 +103,10 @@ const Footer = () => (
           <Link to="/privacy" className="hover:text-foreground transition-colors underline">
             Политика конфиденциальности
           </Link>
+          {" · "}
+          <Link to="/informed-consent" className="hover:text-foreground transition-colors underline">
+            Информированное согласие
+          </Link>
         </p>
       </div>
     </div>
