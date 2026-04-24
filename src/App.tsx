@@ -22,6 +22,7 @@ import ScrollToTop from "./components/ScrollToTop.tsx";
 import GoogleAnalytics from "./components/GoogleAnalytics.tsx";
 
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import InformedConsent from "./pages/InformedConsent.tsx";
 import ThankYou from "./pages/ThankYou.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -66,6 +67,7 @@ const App = () => (
             <Route path="/psiholog-dlya-it" element={<LandingPageIT />} />
             <Route path="/psiholog-usa" element={<ProblemPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/informed-consent" element={<InformedConsent />} />
             <Route path="/thank-you" element={<ThankYou />} />
             
             {/* Redirects from old Tilda URLs */}
