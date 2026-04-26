@@ -39,19 +39,27 @@ const BlogPost = () => {
     );
   }
 
+  const wordCount = post.content
+    .filter((b: any) => typeof b.text === "string")
+    .reduce((sum: number, b: any) => sum + b.text.replace(/<[^>]+>/g, " ").trim().split(/\s+/).length, 0);
+
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://cognitionx.cloud/blog/${post.slug}`,
+    },
     headline: post.title,
     description: post.description,
-    image: post.image,
+    image: [post.image],
     datePublished: post.date,
     dateModified: post.date,
-    author: {
-      "@type": "Person",
-      name: "Дмитрий Яцко",
-      url: "https://cognitionx.cloud",
-    },
+    inLanguage: "ru-RU",
+    wordCount,
+    keywords: post.tags?.join(", "),
+    author: { "@id": "https://cognitionx.cloud/#person" },
+    publisher: { "@id": "https://cognitionx.cloud/#organization" },
   };
 
   return (
