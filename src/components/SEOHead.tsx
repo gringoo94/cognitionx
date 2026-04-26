@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { globalSchema, SITE_URL } from "@/lib/globalSchema";
 
 interface BreadcrumbItem {
   name: string;
@@ -15,8 +16,6 @@ interface SEOHeadProps {
   noindex?: boolean;
   breadcrumbs?: BreadcrumbItem[];
 }
-
-const SITE_URL = "https://cognitionx.cloud";
 
 const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema, noindex, breadcrumbs }: SEOHeadProps) => {
   const url = `${SITE_URL}${path}`;
@@ -35,13 +34,17 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
       }
     : null;
 
+  // Merge: global schema (Person/Org/WebSite) + page-specific + breadcrumbs.
+  // noindex pages (privacy, informed consent) skip global schema to avoid noise.
   const allSchema = [
+    ...(noindex ? [] : globalSchema),
     ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
     ...(breadcrumbSchema ? [breadcrumbSchema] : []),
   ];
 
   return (
     <Helmet>
+      <html lang="ru" />
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
@@ -57,6 +60,8 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="ru_RU" />
       <meta property="og:site_name" content="Психолог Дмитрий Яцко" />
 
@@ -67,7 +72,7 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
 
       {allSchema.length > 0 && (
         <script type="application/ld+json">
-          {JSON.stringify(allSchema.length === 1 ? allSchema[0] : allSchema)}
+          {JSON.stringify(allSchema)}
         </script>
       )}
     </Helmet>
@@ -75,3 +80,4 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
 };
 
 export default SEOHead;
+
