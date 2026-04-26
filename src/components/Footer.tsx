@@ -20,6 +20,7 @@ const methodLinks = [
 const geoLinks = [
   { label: "Психолог онлайн — Москва", href: "/psiholog-moskva" },
   { label: "Психолог для экспатов — Европа", href: "/psiholog-europa" },
+  { label: "Психолог для экспатов — Азия (Бали, Таиланд)", href: "/psiholog-aziya" },
   { label: "Психолог онлайн — США и Канада", href: "/psiholog-usa" },
 ];
 

@@ -1,0 +1,576 @@
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import SEOHead from "@/components/SEOHead";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import BookingForm from "@/components/BookingForm";
+import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
+import { Badge } from "@/components/ui/badge";
+import Ethics from "@/components/Ethics";
+import Projects from "@/components/Projects";
+import SessionPrep from "@/components/SessionPrep";
+import Blog from "@/components/Blog";
+import Approach from "@/components/Approach";
+import Specializations from "@/components/Specializations";
+import Expectations from "@/components/Expectations";
+import heroPhoto from "@/assets/hero-photo.webp";
+import {
+  ArrowRight,
+  Sparkles,
+  Users,
+  Sun,
+  HeartCrack,
+  Plane,
+  Wifi,
+  Brain,
+  GraduationCap,
+  Award,
+  Globe,
+  Send,
+  CheckCircle2,
+  Star,
+  MessageCircle,
+} from "lucide-react";
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.5, delay },
+});
+
+/* ─── Asia-specific data ─── */
+
+const painPoints = [
+  { icon: Users, title: "Одиночество среди «своих»", text: "Тусовка digital-nomad большая, но настоящих близких нет — все «временные»" },
+  { icon: Sun, title: "Вечное лето без структуры", text: "Дни сливаются в один, нет смены сезонов — теряется ощущение времени и движения" },
+  { icon: Plane, title: "Тревога за визы и переезды", text: "Постоянная неопределённость: visa run, релокация, аренда на месяц вперёд" },
+  { icon: Wifi, title: "Выгорание на удалёнке", text: "Работа на разнице 5–8 часов с командой, вечные созвоны ночью, нет отдыха" },
+  { icon: HeartCrack, title: "«Я тут навсегда или нет»", text: "Кризис идентичности: дом — там, жизнь — здесь, корни нигде" },
+  { icon: Brain, title: "«Рай-ловушка»", text: "Переехали в красивое место, но проблемы остались — и это бьёт сильнее, чем дома" },
+];
+
+const asiaFaq = [
+  {
+    question: "Удобно ли работать со мной по времени из Бали или Таиланда?",
+    answer: "Да. Я нахожусь в Кишинёве (UTC+2/+3). Разница с Бали (UTC+8) — 5–6 часов, с Таиландом (UTC+7) — 4–5 часов. Для вас это утренние слоты (8:00–13:00 по местному времени) — это моё раннее утро / ранний день. Для многих клиентов утренняя сессия даже удобнее: день начинается с проработки, а не с задач.",
+  },
+  {
+    question: "Почему важно работать на родном языке?",
+    answer: "Эмоции, детские воспоминания и глубинные убеждения «живут» на том языке, на котором вы выросли. Терапия на английском (даже если он у вас отличный) часто остаётся поверхностной — как чинить часы в перчатках. Особенно это критично при работе с травмой, отношениями и схемами.",
+  },
+  {
+    question: "Может ли в тропиках быть сезонная депрессия?",
+    answer: "Да, и это частая жалоба у экспатов в Азии. Парадоксально — но «вечное лето» само по себе становится фактором риска: пропадает естественная смена ритма, телу не на что опираться. Плюс сезон дождей, влажность, изоляция — всё это даёт устойчивое снижение настроения. С этим хорошо работает поведенческая активация и структурирование дня.",
+  },
+  {
+    question: "Я переехал на Бали, чтобы стало легче — а стало хуже. Это нормально?",
+    answer: "Очень частая история. Эффект «рай-ловушки»: красивое место создаёт ожидание, что внутри тоже всё наладится. Когда этого не происходит, появляется вина («я в раю — а мне плохо, что со мной не так?»). Проблемы не остаются на родине — они едут с вами. Но и работать с ними стало проще: теперь они выпуклее видны.",
+  },
+  {
+    question: "Как проходит первая консультация?",
+    answer: "Первый шаг — бесплатная 20-минутная встреча-знакомство. Это не терапия, а возможность обсудить ваш запрос, задать вопросы и понять, подходим ли мы друг другу. После этого, если решите продолжить, начнём полноценную диагностическую сессию (50 мин, 25 €).",
+  },
+  {
+    question: "Что с интернетом? У меня в Убуде/на Самуи бывают перебои.",
+    answer: "Работаем в Zoom, который отлично держит даже слабый канал. Если вдруг связь подвиснет — переключимся на голос или перенесём сессию без оплаты. У большинства клиентов на Бали и в Таиланде стабильный интернет в коворкингах и виллах — проблем почти не бывает.",
+  },
+  {
+    question: "Сколько сессий нужно для результата?",
+    answer: "Зависит от запроса. Обычно 8–20 сессий. Первые улучшения часто заметны через 4–6 встреч. Точнее скажу после первичной консультации, когда увидим картину.",
+  },
+  {
+    question: "Как оплатить из Азии?",
+    answer: "Удобнее всего — Wise или Revolut в EUR (комиссия минимальная). Также подойдёт обычный банковский перевод или другие способы — обсудим индивидуально на первой сессии.",
+  },
+];
+
+const asiaFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: asiaFaq.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Дмитрий Яцко",
+  jobTitle: "Психолог, КПТ и схема-терапевт",
+  url: "https://cognitionx.cloud/psiholog-aziya",
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Русскоязычный психолог для экспатов в Азии — Дмитрий Яцко",
+  url: "https://cognitionx.cloud/psiholog-aziya",
+  description:
+    "Русскоязычный психолог онлайн для экспатов на Бали, в Таиланде, Вьетнаме и других странах Юго-Восточной Азии. КПТ и схема-терапия на русском языке.",
+  areaServed: [
+    { "@type": "Place", name: "Индонезия" },
+    { "@type": "Place", name: "Таиланд" },
+    { "@type": "Place", name: "Вьетнам" },
+    { "@type": "Place", name: "Малайзия" },
+    { "@type": "Place", name: "Юго-Восточная Азия" },
+  ],
+  serviceType: "Психотерапия онлайн",
+  availableLanguage: "Russian",
+  provider: { "@type": "Person", name: "Дмитрий Яцко" },
+};
+
+const LandingPageAsia = () => (
+  <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <SEOHead
+      title="Психолог для экспатов в Азии онлайн | Бали, Таиланд — Дмитрий Яцко"
+      description="Русскоязычный психолог онлайн для экспатов на Бали, в Таиланде, Вьетнаме. КПТ и схема-терапия на русском. Удобное время для UTC+7/+8. Первая встреча — бесплатно."
+      path="/psiholog-aziya"
+      schema={[personSchema, serviceSchema, asiaFaqSchema, testimonialsSchema]}
+      breadcrumbs={[
+        { name: "Главная", url: "https://cognitionx.cloud/" },
+        { name: "Психолог для экспатов — Азия", url: "https://cognitionx.cloud/psiholog-aziya" },
+      ]}
+    />
+    <Navbar />
+    <main>
+      {/* ── Hero ── */}
+      <section className="max-w-7xl mx-auto px-6 pt-20 md:pt-32 pb-24">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div className="text-center md:text-left order-2 md:order-1">
+            <motion.div
+              {...fade(0)}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              Онлайн · Zoom · На русском · Удобно для UTC+7/+8
+            </motion.div>
+
+            <motion.h1
+              {...fade(0.05)}
+              className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+            >
+              Русскоязычный психолог
+              <br />
+              <span className="text-primary">для экспатов в Азии</span>
+            </motion.h1>
+
+            <motion.p
+              {...fade(0.1)}
+              className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
+            >
+              КПТ и схема-терапия онлайн для тех, кто живёт на Бали, в Таиланде, Вьетнаме и других странах Азии. Сессии — в ваше утро.
+            </motion.p>
+
+            <motion.div
+              {...fade(0.15)}
+              className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
+            >
+              <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
+                <a href="#booking">
+                  Бесплатная встреча — 20 мин <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
+                <a href="#approach">Как я работаю</a>
+              </Button>
+            </motion.div>
+
+            <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
+              Бесплатная 20-минутная встреча — познакомимся и я отвечу на ваши вопросы
+            </motion.p>
+
+            <motion.div
+              {...fade(0.25)}
+              className="mt-8 flex items-center justify-center md:justify-start gap-6 text-sm text-muted-foreground"
+            >
+              {[
+                { value: "200+", label: "клиентов" },
+                { value: "5 лет", label: "опыта" },
+                { value: "Онлайн", label: "из любой точки" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <span className="block text-lg font-bold text-foreground">{s.value}</span>
+                  <span className="text-xs">{s.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div {...fade(0.2)} className="flex justify-center order-1 md:order-2">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl scale-110" />
+              <div className="relative w-72 h-80 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src={heroPhoto}
+                  alt="Психолог Дмитрий Яцко — русскоязычный КПТ-терапевт для экспатов в Азии (Бали, Таиланд)"
+                  className="w-full h-full object-cover object-top"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Telegram CTA ── */}
+      <section className="bg-primary text-primary-foreground">
+        <div className="max-w-3xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-sm font-medium"
+          >
+            Запишитесь на бесплатную 20-минутную встречу — напишите в Telegram
+          </motion.p>
+          <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
+            <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">
+              <Send className="w-4 h-4" /> Написать в Telegram
+            </a>
+          </Button>
+        </div>
+      </section>
+
+      {/* ── Pain Points ── */}
+      <section className="bg-card border-y border-border">
+        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+          <motion.div {...fade()} className="text-center mb-14">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
+            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+              С чем сталкиваются русскоязычные экспаты на Бали, в Таиланде и других странах Азии
+            </p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {painPoints.map((p, i) => (
+              <motion.div
+                key={i}
+                {...fade(i * 0.04)}
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ duration: 0.25 }}
+                className="rounded-2xl border border-border bg-background p-6 flex gap-4 items-start hover:border-primary/40 hover:shadow-lg transition-all"
+              >
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <p.icon className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{p.text}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── About ── */}
+      <section className="bg-foreground text-background">
+        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
+          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
+            Обо мне
+          </motion.h2>
+          <motion.blockquote
+            {...fade(0.05)}
+            className="mt-8 text-base sm:text-lg md:text-xl leading-relaxed opacity-80 max-w-2xl mx-auto italic"
+          >
+            "Переезд в красивое место не лечит внутреннюю боль — но даёт шанс наконец её увидеть."
+          </motion.blockquote>
+          <motion.p {...fade(0.1)} className="mt-5 text-xs sm:text-sm opacity-50">
+            Меня зовут Дмитрий. Я — психолог, практикующий КПТ и схема-терапию. Работаю онлайн с русскоязычными экспатами в Азии из Кишинёва (UTC+2/+3). Для Бали (UTC+8) и Таиланда (UTC+7) — удобные утренние слоты по вашему времени.
+          </motion.p>
+          <motion.div {...fade(0.15)} className="mt-6">
+            <Button variant="outline" size="sm" className="border-background/60 text-background bg-background/10 hover:bg-background/20" asChild>
+              <a href="#about-detailed">Подробнее об образовании →</a>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Free Meeting ── */}
+      <section className="bg-primary text-primary-foreground">
+        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
+          <motion.div {...fade()} className="inline-flex items-center gap-2 mb-6">
+            <Star className="w-5 h-5" />
+            <span className="text-sm font-semibold uppercase tracking-widest opacity-80">Рекомендую начать с этого</span>
+          </motion.div>
+          <motion.h2 {...fade(0.05)} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
+            Бесплатная 20-минутная встреча
+          </motion.h2>
+          <motion.p {...fade(0.1)} className="mt-5 text-sm md:text-base leading-relaxed opacity-85 max-w-xl mx-auto">
+            Это знакомство, не терапия. Без обязательств — просто поговорим и поймём, подходим ли мы друг другу.
+          </motion.p>
+          <motion.div {...fade(0.15)} className="mt-8 grid sm:grid-cols-3 gap-4 max-w-lg mx-auto text-left">
+            {[
+              { icon: MessageCircle, text: "Обсудим ваш запрос" },
+              { icon: CheckCircle2, text: "Отвечу на вопросы" },
+              { icon: Users, text: "Решите, подходим ли мы друг другу" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 text-sm">
+                <item.icon className="w-4 h-4 shrink-0 opacity-80" />
+                <span>{item.text}</span>
+              </div>
+            ))}
+          </motion.div>
+          <motion.div {...fade(0.2)} className="mt-8">
+            <Button size="lg" variant="secondary" className="gap-2 text-base px-8" asChild>
+              <a href="#booking">Записаться на встречу <ArrowRight className="w-4 h-4" /></a>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      <Specializations />
+      <Approach />
+
+      {/* ── Evidence-based ── */}
+      <section className="bg-primary text-primary-foreground">
+        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
+          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
+            Доказательный подход
+            <br className="hidden sm:block" /> к вашему благополучию
+          </motion.h2>
+          <motion.p {...fade(0.05)} className="mt-6 text-sm md:text-base leading-relaxed opacity-85 max-w-2xl mx-auto">
+            КПТ — один из самых исследованных методов психотерапии. Исследования подтверждают:
+            терапия на родном языке значительно эффективнее. Эмоции, детские воспоминания и
+            внутренний голос «говорят» по-русски — и работать с ними нужно на русском.
+          </motion.p>
+        </div>
+      </section>
+
+      <Expectations />
+      <Testimonials />
+
+      {/* ── Pricing ── */}
+      <section id="pricing" className="bg-card border-y border-border">
+        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+          <motion.div {...fade()} className="text-center mb-14">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Стоимость</h2>
+            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+              Прозрачные цены без скрытых платежей
+            </p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Знакомство",
+                price: "0",
+                duration: "20 мин",
+                badge: "⭐ Бесплатно",
+                accent: true,
+                features: ["Обсудим ваш запрос", "Отвечу на вопросы", "Без обязательств"],
+              },
+              {
+                title: "Первая сессия",
+                price: "25",
+                duration: "50 мин",
+                features: ["Диагностика проблемы", "План работы", "Домашние задания"],
+              },
+              {
+                title: "Сессия",
+                price: "30",
+                duration: "50 мин",
+                featured: true,
+                features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
+              },
+              {
+                title: "Пакет × 4",
+                price: "25",
+                priceNote: "за сессию",
+                totalPrice: "100 € за 4 сессии",
+                duration: "4 × 50 мин",
+                features: ["Экономия 20 €", "Регулярная работа", "Приоритетная запись"],
+              },
+            ].map((p, i) => (
+              <motion.div
+                key={p.title}
+                {...fade(0.06 * i)}
+                className={`rounded-2xl p-6 md:p-8 flex flex-col border transition-colors ${
+                  p.featured
+                    ? "border-primary bg-primary text-primary-foreground shadow-lg"
+                    : (p as any).accent
+                    ? "border-accent bg-accent/5 hover:border-accent/60 shadow-md"
+                    : "border-border bg-background hover:border-primary/30"
+                }`}
+              >
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <p className={`text-xs uppercase tracking-widest font-medium ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                      {p.title}
+                    </p>
+                    {(p as any).badge && (
+                      <Badge variant="secondary" className="text-[10px] px-2 py-0">
+                        {(p as any).badge}
+                      </Badge>
+                    )}
+                  </div>
+                  <p className={`text-sm ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                    {p.duration}
+                  </p>
+                </div>
+                <div className="mt-6">
+                  <span className="text-4xl font-bold tracking-tight">{p.price}</span>
+                  <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                    €{(p as any).priceNote ? ` ${(p as any).priceNote}` : ""}
+                  </span>
+                  {(p as any).totalPrice && (
+                    <p className={`text-xs mt-1 ${p.featured ? "text-primary-foreground/60" : "text-muted-foreground/70"}`}>{(p as any).totalPrice}</p>
+                  )}
+                </div>
+                <ul className="mt-6 space-y-3 flex-1">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm">
+                      <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 text-accent`} />
+                      <span className={p.featured ? "text-primary-foreground/90" : "text-muted-foreground"}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className={`mt-8 w-full ${
+                    p.featured ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90" : ""
+                  }`}
+                  variant={p.featured ? "default" : "outline"}
+                  asChild
+                >
+                  <a href="#booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── About Detailed ── */}
+      <section id="about-detailed" className="max-w-3xl mx-auto px-6 py-20 md:py-28 scroll-mt-20">
+        <motion.div {...fade()} className="text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
+          <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+            Прозрачность — часть моей профессиональной этики
+          </p>
+        </motion.div>
+        <motion.div {...fade(0.05)}>
+          <Accordion type="multiple" className="space-y-3">
+            <AccordionItem value="education" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <GraduationCap className="w-5 h-5 text-primary" /> Образование
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
+                <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
+                <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
+                <p>• Курсы и конференции Минского центра КПТ</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="certs" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <Award className="w-5 h-5 text-primary" /> Сертификаты и верификация
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
+                <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
+                <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
+                <p>• Работа в MedHub и Initiativa Pozitiva — психотерапия зависимости, созависимости</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="methods" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <Brain className="w-5 h-5 text-primary" /> Методы и подходы
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• <span className="font-medium">КПТ</span> (когнитивно-поведенческая терапия) — основное направление</p>
+                <p>• <span className="font-medium">Схема-терапия</span> — работа с глубинными схемами и паттернами</p>
+                <p>• ACT (терапия принятия и ответственности)</p>
+                <p>• Мотивационное интервьюирование (MI)</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="asia-context" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <Globe className="w-5 h-5 text-primary" /> Опыт работы с экспатами в Азии
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• Работаю с клиентами на Бали, в Таиланде, Вьетнаме, Малайзии, Индонезии</p>
+                <p>• Понимаю специфику жизни экспата в Азии: digital-nomad-цикл, визовые тревоги, «рай-ловушка»</p>
+                <p>• Удобные слоты в ваше утро (UTC+7/+8) — день начинается с проработки, не с задач</p>
+                <p>• Опыт онлайн-работы со стабильным результатом независимо от страны клиента</p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </motion.div>
+      </section>
+
+      <Ethics />
+      <SessionPrep />
+
+      {/* ── FAQ ── */}
+      <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+        <motion.h2
+          {...fade()}
+          className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center"
+        >
+          Частые <span className="text-primary">вопросы</span>
+        </motion.h2>
+        <motion.p
+          {...fade(0.05)}
+          className="mt-3 text-sm text-muted-foreground text-center max-w-lg mx-auto"
+        >
+          Ответы на вопросы, которые чаще всего задают экспаты в Азии перед первой консультацией
+        </motion.p>
+        <motion.div {...fade(0.1)} className="mt-10">
+          <Accordion type="single" collapsible className="space-y-3">
+            {asiaFaq.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="border border-border rounded-xl px-5 data-[state=open]:border-primary/20 transition-colors"
+              >
+                <AccordionTrigger className="text-sm font-medium text-left py-4 hover:no-underline">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </motion.div>
+      </section>
+
+      <Projects />
+      <Blog />
+      <BookingForm />
+
+      {/* ── SEO footer block ── */}
+      <section className="max-w-3xl mx-auto px-6 py-16 text-center">
+        <h2 className="text-lg font-semibold text-muted-foreground mb-4">
+          Русскоязычный психолог для экспатов в Азии онлайн
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Если вы переехали на Бали, в Таиланд, Вьетнам, Малайзию, Камбоджу, Индонезию или Шри-Ланку
+          и хотите работать с психологом на родном языке — эта страница для вас. Я работаю онлайн с
+          русскоязычными экспатами в Юго-Восточной Азии в подходах когнитивно-поведенческой и
+          схема-терапии. Удобные слоты по местному времени (UTC+7/+8), бесплатная первая встреча,
+          оплата в EUR через Wise или Revolut.
+        </p>
+      </section>
+    </main>
+    <Footer />
+  </div>
+);
+
+export default LandingPageAsia;
