@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/login
+Disallow: /thank-you
+Disallow: /privacy
+Disallow: /informed-consent
 
 Sitemap: https://cognitionx.cloud/sitemap.xml
