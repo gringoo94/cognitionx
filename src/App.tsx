@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import LandingPageEuropa from "./pages/LandingPageEuropa.tsx";
 import LandingPageIT from "./pages/LandingPageIT.tsx";
 import LandingPageAsia from "./pages/LandingPageAsia.tsx";
+import CityLandingPage from "./pages/CityLandingPage.tsx";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -68,6 +69,10 @@ const App = () => (
             <Route path="/psiholog-dlya-it" element={<LandingPageIT />} />
             <Route path="/psiholog-aziya" element={<LandingPageAsia />} />
             <Route path="/psiholog-usa" element={<ProblemPage />} />
+            <Route path="/psiholog-berlin" element={<CityLandingPage />} />
+            <Route path="/psiholog-amsterdam" element={<CityLandingPage />} />
+            <Route path="/psiholog-lissabon" element={<CityLandingPage />} />
+            <Route path="/psiholog-tbilisi" element={<CityLandingPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/informed-consent" element={<InformedConsent />} />
             <Route path="/thank-you" element={<ThankYou />} />
