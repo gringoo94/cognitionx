@@ -4,6 +4,7 @@ import LandingPageEuropa from "./pages/LandingPageEuropa.tsx";
 import LandingPageIT from "./pages/LandingPageIT.tsx";
 import LandingPageAsia from "./pages/LandingPageAsia.tsx";
 import CityLandingPage from "./pages/CityLandingPage.tsx";
+import LandingPageKishinev from "./pages/LandingPageKishinev.tsx";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
