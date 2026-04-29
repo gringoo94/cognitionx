@@ -1,9 +1,53 @@
+# robots.txt — cognitionx.cloud
+# Управляет индексацией публичных, geo- и служебных страниц.
+
 User-agent: *
 Allow: /
+
+# --- Служебные / приватные страницы (не индексировать) ---
 Disallow: /admin
 Disallow: /admin/login
 Disallow: /thank-you
 Disallow: /privacy
 Disallow: /informed-consent
 
+# --- Технические параметры URL (UTM и трекинг) ---
+Disallow: /*?utm_*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
+Disallow: /*?yclid=*
+Disallow: /*?ref=*
+
+# --- Geo-страницы (явно разрешены для индексации) ---
+Allow: /psiholog-moskva
+Allow: /psiholog-europa
+Allow: /psiholog-usa
+Allow: /psiholog-aziya
+Allow: /psiholog-berlin
+Allow: /psiholog-amsterdam
+Allow: /psiholog-lissabon
+Allow: /psiholog-tbilisi
+Allow: /psiholog-kishinev
+Allow: /psiholog-dlya-it
+
+# --- Поисковые боты с особыми правилами ---
+User-agent: GPTBot
+Disallow: /admin
+Disallow: /admin/login
+
+User-agent: CCBot
+Disallow: /admin
+Disallow: /admin/login
+
+# --- Запрет агрессивных скрейперов ---
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+# --- Sitemap ---
 Sitemap: https://cognitionx.cloud/sitemap.xml
