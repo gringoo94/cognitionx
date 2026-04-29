@@ -73,6 +73,7 @@ const App = () => (
             <Route path="/psiholog-amsterdam" element={<CityLandingPage />} />
             <Route path="/psiholog-lissabon" element={<CityLandingPage />} />
             <Route path="/psiholog-tbilisi" element={<CityLandingPage />} />
+            <Route path="/psiholog-kishinev" element={<CityLandingPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/informed-consent" element={<InformedConsent />} />
             <Route path="/thank-you" element={<ThankYou />} />
