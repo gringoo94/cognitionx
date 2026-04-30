@@ -17,11 +17,38 @@ const methodLinks = [
   { label: "Очная терапия в Кишинёве", href: "/in-person-therapy" },
 ];
 
-const geoLinks = [
-  { label: "Психолог онлайн — Москва", href: "/psiholog-moskva" },
-  { label: "Психолог для экспатов — Европа", href: "/psiholog-europa" },
-  { label: "Психолог для экспатов — Азия (Бали, Таиланд)", href: "/psiholog-aziya" },
-  { label: "Психолог онлайн — США и Канада", href: "/psiholog-usa" },
+type GeoGroup = {
+  region: string;
+  href?: string;
+  cities?: { label: string; href: string }[];
+};
+
+const geoGroups: GeoGroup[] = [
+  {
+    region: "Европа",
+    href: "/psiholog-europa",
+    cities: [
+      { label: "Берлин", href: "/psiholog-berlin" },
+      { label: "Амстердам", href: "/psiholog-amsterdam" },
+      { label: "Лиссабон", href: "/psiholog-lissabon" },
+    ],
+  },
+  {
+    region: "Кавказ и СНГ",
+    cities: [
+      { label: "Тбилиси", href: "/psiholog-tbilisi" },
+      { label: "Кишинёв", href: "/psiholog-kishinev" },
+      { label: "Москва (онлайн)", href: "/psiholog-moskva" },
+    ],
+  },
+  {
+    region: "Азия (Бали, Таиланд)",
+    href: "/psiholog-aziya",
+  },
+  {
+    region: "США и Канада (онлайн)",
+    href: "/psiholog-usa",
+  },
 ];
 
 const Footer = () => (
