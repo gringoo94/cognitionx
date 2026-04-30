@@ -17,11 +17,38 @@ const methodLinks = [
   { label: "Очная терапия в Кишинёве", href: "/in-person-therapy" },
 ];
 
-const geoLinks = [
-  { label: "Психолог онлайн — Москва", href: "/psiholog-moskva" },
-  { label: "Психолог для экспатов — Европа", href: "/psiholog-europa" },
-  { label: "Психолог для экспатов — Азия (Бали, Таиланд)", href: "/psiholog-aziya" },
-  { label: "Психолог онлайн — США и Канада", href: "/psiholog-usa" },
+type GeoGroup = {
+  region: string;
+  href?: string;
+  cities?: { label: string; href: string }[];
+};
+
+const geoGroups: GeoGroup[] = [
+  {
+    region: "Европа",
+    href: "/psiholog-europa",
+    cities: [
+      { label: "Берлин", href: "/psiholog-berlin" },
+      { label: "Амстердам", href: "/psiholog-amsterdam" },
+      { label: "Лиссабон", href: "/psiholog-lissabon" },
+    ],
+  },
+  {
+    region: "Кавказ и СНГ",
+    cities: [
+      { label: "Тбилиси", href: "/psiholog-tbilisi" },
+      { label: "Кишинёв", href: "/psiholog-kishinev" },
+      { label: "Москва (онлайн)", href: "/psiholog-moskva" },
+    ],
+  },
+  {
+    region: "Азия (Бали, Таиланд)",
+    href: "/psiholog-aziya",
+  },
+  {
+    region: "США и Канада (онлайн)",
+    href: "/psiholog-usa",
+  },
 ];
 
 const Footer = () => (
@@ -77,11 +104,26 @@ const Footer = () => (
         {/* Geography */}
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">География</p>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            {geoLinks.map((l) => (
-              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
-                {l.label}
-              </Link>
+          <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+            {geoGroups.map((g) => (
+              <div key={g.region} className="flex flex-col gap-1">
+                {g.href ? (
+                  <Link to={g.href} className="hover:text-foreground transition-colors font-medium text-foreground/80">
+                    {g.region}
+                  </Link>
+                ) : (
+                  <span className="font-medium text-foreground/80">{g.region}</span>
+                )}
+                {g.cities && (
+                  <div className="flex flex-col gap-1 pl-3 border-l border-border">
+                    {g.cities.map((c) => (
+                      <Link key={c.href} to={c.href} className="hover:text-foreground transition-colors text-xs">
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
