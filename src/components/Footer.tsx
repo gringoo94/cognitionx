@@ -104,11 +104,26 @@ const Footer = () => (
         {/* Geography */}
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">География</p>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            {geoLinks.map((l) => (
-              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
-                {l.label}
-              </Link>
+          <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+            {geoGroups.map((g) => (
+              <div key={g.region} className="flex flex-col gap-1">
+                {g.href ? (
+                  <Link to={g.href} className="hover:text-foreground transition-colors font-medium text-foreground/80">
+                    {g.region}
+                  </Link>
+                ) : (
+                  <span className="font-medium text-foreground/80">{g.region}</span>
+                )}
+                {g.cities && (
+                  <div className="flex flex-col gap-1 pl-3 border-l border-border">
+                    {g.cities.map((c) => (
+                      <Link key={c.href} to={c.href} className="hover:text-foreground transition-colors text-xs">
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
