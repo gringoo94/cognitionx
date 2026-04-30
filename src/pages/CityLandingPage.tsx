@@ -48,8 +48,9 @@ const fade = (delay = 0) => ({
 });
 
 const CityLandingPage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const page = getCityBySlug(slug || "");
+  const { pathname } = useLocation();
+  const slug = pathname.replace(/^\/+/, "").split("/")[0];
+  const page = getCityBySlug(slug);
 
   if (!page) return <NotFound />;
 
