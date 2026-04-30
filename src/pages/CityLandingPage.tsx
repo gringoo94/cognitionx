@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -48,8 +48,9 @@ const fade = (delay = 0) => ({
 });
 
 const CityLandingPage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const page = getCityBySlug(slug || "");
+  const { pathname } = useLocation();
+  const slug = pathname.replace(/^\/+/, "").split("/")[0];
+  const page = getCityBySlug(slug);
 
   if (!page) return <NotFound />;
 
