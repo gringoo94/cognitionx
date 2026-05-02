@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
 import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
+import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -108,6 +109,10 @@ const BlogPost = () => {
             />
           </div>
 
+          <div className="mt-8">
+            <BlogSubscribeForm variant="inline" source="blog-post-top" />
+          </div>
+
           <div className="mt-10 space-y-6">
             {post.content.map((block, i) => {
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
@@ -156,7 +161,11 @@ const BlogPost = () => {
             })}
           </div>
 
-          <div className="mt-16 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center">
+          <div className="mt-16">
+            <BlogSubscribeForm source="blog-post-bottom" />
+          </div>
+
+          <div className="mt-10 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center">
             <h3 className="text-xl font-bold mb-2">Готовы начать?</h3>
             <p className="text-sm text-muted-foreground mb-5">
               Первая консультация — 25 €
