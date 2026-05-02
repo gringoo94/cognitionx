@@ -161,7 +161,11 @@ const BlogPost = () => {
             })}
           </div>
 
-          <div className="mt-16 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center">
+          <div className="mt-16">
+            <BlogSubscribeForm source="blog-post-bottom" />
+          </div>
+
+          <div className="mt-10 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center">
             <h3 className="text-xl font-bold mb-2">Готовы начать?</h3>
             <p className="text-sm text-muted-foreground mb-5">
               Первая консультация — 25 €
