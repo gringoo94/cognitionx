@@ -109,6 +109,10 @@ const BlogPost = () => {
             />
           </div>
 
+          <div className="mt-8">
+            <BlogSubscribeForm variant="inline" source="blog-post-top" />
+          </div>
+
           <div className="mt-10 space-y-6">
             {post.content.map((block, i) => {
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
