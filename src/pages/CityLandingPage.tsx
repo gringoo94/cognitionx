@@ -229,31 +229,7 @@ const CityLandingPage = () => {
           </div>
         </section>
 
-        {/* ── Pain points ── */}
-        <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              С чем приходят клиенты {page.cityIn}
-            </h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              Узнаёте себя? Это не «слабость» и не «лень» — это типичные запросы экспата.
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {page.painPoints.map((p, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.04)}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-border bg-background p-6 hover:border-primary/40 hover:shadow-lg transition-all"
-              >
-                <h3 className="text-base font-bold mb-2">{p.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+
 
         {/* ── Practical info bar ── */}
         <section className="bg-foreground text-background">
