@@ -161,45 +161,45 @@ const AbcAnalysis = () => {
         <section className="space-y-4">
           <h2 className="text-xl font-semibold">Как это работает — на примере</h2>
           <p className="text-sm text-muted-foreground">
-            Коллега прошёл мимо и не поздоровался. Одно и то же событие — разные мысли —
-            совершенно разные эмоции.
+            Коллега прошёл по коридору и не поздоровался. Событие одно, но в зависимости от мысли
+            эмоция получается совершенно разной.
           </p>
           <div className="rounded-xl border border-border bg-card overflow-hidden">
             <table className="w-full text-sm">
               <tbody className="divide-y divide-border">
                 <tr>
-                  <td className="px-4 py-3 font-semibold text-sky-400 w-28">A — факт</td>
+                  <td className="px-4 py-3 font-semibold text-sky-400 w-28 align-top">A — факт</td>
                   <td className="px-4 py-3 text-muted-foreground">
-                    Коллега прошёл мимо и не поздоровался
+                    Коллега прошёл мимо в коридоре и не поздоровался
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-semibold text-violet-400">B — мысль 1</td>
+                  <td className="px-4 py-3 font-semibold text-violet-400 align-top">B — мысль 1</td>
                   <td className="px-4 py-3 text-muted-foreground">
-                    «Он злится на меня. Я что-то сделал не так. Меня уволят»
+                    «Он на меня злится. Значит, я что-то сделал не так. Вдруг это плохо кончится»
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-semibold text-rose-400">C — эмоция</td>
-                  <td className="px-4 py-3 text-muted-foreground">Тревога 80%, ком в горле</td>
+                  <td className="px-4 py-3 font-semibold text-rose-400 align-top">C — эмоция</td>
+                  <td className="px-4 py-3 text-muted-foreground">Тревога 80, ком в горле, тянет перепроверять переписку</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-semibold text-violet-400">B — мысль 2</td>
+                  <td className="px-4 py-3 font-semibold text-violet-400 align-top">B — мысль 2</td>
                   <td className="px-4 py-3 text-muted-foreground">
-                    «Скорее всего, он просто торопился или задумался»
+                    «Скорее всего, он торопился или о чём-то задумался»
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-semibold text-rose-400">C — эмоция</td>
+                  <td className="px-4 py-3 font-semibold text-rose-400 align-top">C — эмоция</td>
                   <td className="px-4 py-3 text-muted-foreground">
-                    Лёгкое любопытство, почти ничего
+                    Лёгкое любопытство, в целом — почти ничего
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="text-sm text-muted-foreground">
-            Событие то же самое. Мысль — разная. Эмоция — противоположная.
+            Событие одно и то же. Меняется только мысль — а вместе с ней меняется и эмоция.
           </p>
         </section>
 
