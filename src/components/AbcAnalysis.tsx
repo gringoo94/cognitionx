@@ -270,9 +270,11 @@ const AbcAnalysis = () => {
           className="text-center space-y-3"
         >
           <CheckCircle2 className="h-10 w-10 text-primary mx-auto" />
-          <h2 className="text-2xl font-bold">Ваш ABC-разбор</h2>
+          <h2 className="text-2xl font-bold">Ваш разбор по ABC</h2>
           <p className="text-sm text-muted-foreground">
-            Сохраните этот текст или скопируйте — это первая запись вашего «дневника мыслей».
+            Сохраните или скопируйте этот текст — это уже первая запись вашего «дневника мыслей».
+            Чем больше таких разборов накапливается, тем заметнее становятся повторяющиеся
+            паттерны.
           </p>
         </motion.div>
 
@@ -303,8 +305,9 @@ const AbcAnalysis = () => {
           <MessageCircle className="w-8 h-8 text-primary mx-auto" />
           <h3 className="text-xl font-bold">Хотите разобрать сложную ситуацию вместе?</h3>
           <p className="text-sm text-muted-foreground max-w-md mx-auto">
-            ABC-анализ — базовый инструмент КПТ. На терапии мы идём глубже: к ключевым убеждениям,
-            схемам и ранним опытам, которые формируют автоматические мысли.
+            ABC-анализ — базовый рабочий инструмент КПТ. На терапии мы используем его как точку
+            входа и идём дальше: к ключевым убеждениям, ранним схемам и опыту, из которого выросли
+            автоматические мысли.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild>
