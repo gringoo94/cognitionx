@@ -99,6 +99,15 @@ const App = () => (
               <Route path="/it-specialist" element={<Navigate to="/psiholog-dlya-it" replace />} />
               <Route path="/css/*" element={<Navigate to="/" replace />} />
 
+              {/* Lost Tilda URLs with active impressions in GSC — redirect to closest content */}
+              <Route path="/dehumanization" element={<Navigate to="/blog/nas-obideli" replace />} />
+              <Route path="/cbtworkbook" element={<Navigate to="/tools" replace />} />
+              <Route path="/popcornbrain" element={<Navigate to="/blog/postoyannaya-trevoga-bez-prichiny" replace />} />
+              <Route path="/koleso-emocij" element={<Navigate to="/tools/emotion-wheel" replace />} />
+              <Route path="/abc-analysis" element={<Navigate to="/tools/abc-analysis" replace />} />
+              <Route path="/schema-quiz" element={<Navigate to="/tools/schema-quiz" replace />} />
+              <Route path="/emotion-wheel" element={<Navigate to="/tools/emotion-wheel" replace />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
