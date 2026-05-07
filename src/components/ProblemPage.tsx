@@ -25,6 +25,12 @@ import {
   Phone,
   Quote,
   GraduationCap,
+  Lightbulb,
+  ListChecks,
+  Wrench,
+  Wallet,
+  FileCheck2,
+  List,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,11 +40,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPageBySlug, problemPages } from "@/data/problemPages";
 import { blogPosts } from "@/data/blogPosts";
+import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtras";
+import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
 
 const fade = (delay = 0) => ({
@@ -387,15 +402,24 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
   },
 };
 
-const buildToc = (page: ReturnType<typeof getPageBySlug>) =>
+const buildToc = (
+  page: ReturnType<typeof getPageBySlug>,
+  hasMyths: boolean,
+  hasSelfCheck: boolean,
+  hasCasebook: boolean,
+) =>
   [
     { id: "symptoms", label: page?.symptomsTitle || "Знакомо?" },
+    hasSelfCheck ? { id: "self-check", label: "Самопроверка" } : null,
     { id: "concept", label: "Как это работает" },
+    hasMyths ? { id: "myths", label: "Мифы и факты" } : null,
     { id: "evidence", label: "Доказательная база" },
     { id: "process", label: "Как я работаю" },
+    hasCasebook ? { id: "casebook", label: "Пример работы" } : null,
     { id: "outcomes", label: "Результаты" },
+    { id: "pricing", label: "Стоимость" },
     { id: "faq", label: "FAQ" },
-  ];
+  ].filter(Boolean) as { id: string; label: string }[];
 
 const ProblemPage = () => {
   const location = useLocation();
@@ -408,7 +432,19 @@ const ProblemPage = () => {
   if (!meta) return <NotFound />;
 
   const { Icon } = meta;
-  const toc = buildToc(page);
+  const extras = getProblemExtras(slug);
+  const toc = buildToc(
+    page,
+    !!extras.myths?.length,
+    !!extras.selfCheck?.length,
+    !!extras.casebook,
+  );
+  const tocIds = toc.map((t) => t.id);
+  const activeId = useActiveSection(tocIds);
+  const scrollProgress = useScrollProgress();
+
+  // Augment FAQ schema with common addons (price, online format)
+  const fullFaq = [...page.faq, ...COMMON_FAQ_ADDONS];
 
   const relatedPages = page.relatedPages
     .map((s) => problemPages.find((p) => p.slug === s))
@@ -421,7 +457,7 @@ const ProblemPage = () => {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: page.faq.map((f) => ({
+    mainEntity: fullFaq.map((f) => ({
       "@type": "Question",
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
@@ -467,7 +503,29 @@ const ProblemPage = () => {
     })),
   };
 
-  const schemas = [faqSchema, breadcrumbSchema, medicalConditionSchema, howToSchema];
+  const medicalWebPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name: page.metaTitle,
+    description: page.metaDescription,
+    url: `https://cognitionx.cloud/${page.slug}`,
+    inLanguage: "ru-RU",
+    lastReviewed: "2026-05-01",
+    reviewedBy: { "@id": "https://cognitionx.cloud/#person" },
+    about: { "@id": `https://cognitionx.cloud/${page.slug}#condition` },
+    mainContentOfPage: {
+      "@type": "WebPageElement",
+      cssSelector: "main",
+    },
+  };
+
+  const schemas = [
+    faqSchema,
+    breadcrumbSchema,
+    medicalConditionSchema,
+    medicalWebPageSchema,
+    howToSchema,
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -478,6 +536,56 @@ const ProblemPage = () => {
         schema={schemas}
       />
       <Navbar />
+
+      {/* Reading progress bar */}
+      <div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary/15 z-50 pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="h-full bg-gradient-to-r from-primary to-accent transition-[width] duration-150"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Mobile floating TOC button */}
+      <Sheet>
+        <SheetTrigger asChild>
+          <button
+            className="lg:hidden fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 transition-transform"
+            aria-label="Открыть содержание страницы"
+          >
+            <List className="w-5 h-5" />
+          </button>
+        </SheetTrigger>
+        <SheetContent side="right" className="w-72">
+          <SheetHeader>
+            <SheetTitle>На странице</SheetTitle>
+          </SheetHeader>
+          <ul className="space-y-1 mt-4">
+            {toc.map((t) => (
+              <li key={t.id}>
+                <a
+                  href={`#${t.id}`}
+                  className={`block py-2 px-3 rounded-md text-sm transition-colors ${
+                    activeId === t.id
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-muted-foreground hover:bg-muted"
+                  }`}
+                >
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <Button size="sm" className="w-full mt-6" asChild>
+            <a href="https://t.me/gringoo94" className="gap-1.5">
+              <MessageCircle className="w-3.5 h-3.5" />
+              Записаться
+            </a>
+          </Button>
+        </SheetContent>
+      </Sheet>
 
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden border-b border-border">
@@ -647,7 +755,49 @@ const ProblemPage = () => {
             </div>
           </motion.section>
 
-          {/* 2. CBT model */}
+          {/* Self-check */}
+          {extras.selfCheck && extras.selfCheck.length > 0 && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="self-check"
+              aria-labelledby="self-check-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <ListChecks className="w-5 h-5 text-primary" />
+                <h2 id="self-check-h" className="text-2xl md:text-3xl font-bold">
+                  Самопроверка
+                </h2>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
+                Ответьте «да» или «нет» на каждый пункт. Если согласились с{" "}
+                <strong className="text-foreground">
+                  {extras.selfCheckThreshold || 3} и более
+                </strong>{" "}
+                — стоит обсудить это с психологом.
+              </p>
+              <ol className="rounded-2xl border border-border bg-card divide-y divide-border overflow-hidden">
+                {extras.selfCheck.map((q, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-4 p-4 md:p-5 hover:bg-muted/30 transition-colors"
+                  >
+                    <span className="text-xs font-mono font-bold text-primary bg-primary/10 rounded-md px-2 py-0.5 mt-0.5">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm md:text-[15px] leading-relaxed flex-1">
+                      {q}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              <p className="text-xs text-muted-foreground mt-4 italic">
+                Это не диагностический инструмент — только ориентир. Точный
+                диагноз ставит специалист.
+              </p>
+            </motion.section>
+          )}
+
           <motion.section
             {...fade()}
             className="mb-20 scroll-mt-24"
@@ -831,6 +981,187 @@ const ProblemPage = () => {
             </div>
           </motion.section>
 
+          {/* Myths */}
+          {extras.myths && extras.myths.length > 0 && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="myths"
+              aria-labelledby="myths-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Lightbulb className="w-5 h-5 text-primary" />
+                <h2 id="myths-h" className="text-2xl md:text-3xl font-bold">
+                  Мифы и факты
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                {extras.myths.map((m, i) => (
+                  <motion.div
+                    key={i}
+                    {...fade(0.05 * i)}
+                    className="rounded-xl border border-border bg-card overflow-hidden"
+                  >
+                    <div className="p-5 bg-destructive/5 border-b border-destructive/10">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-destructive/80 mb-2">
+                        Миф
+                      </div>
+                      <p className="text-sm leading-relaxed">{m.myth}</p>
+                    </div>
+                    <div className="p-5">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">
+                        Факт
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {m.fact}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Casebook */}
+          {extras.casebook && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="casebook"
+              aria-labelledby="casebook-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <FileCheck2 className="w-5 h-5 text-primary" />
+                <h2 id="casebook-h" className="text-2xl md:text-3xl font-bold">
+                  Один из примеров работы
+                </h2>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
+                Деперсонализированный кейс — детали изменены, суть сохранена.
+              </p>
+              <div className="rounded-2xl border border-border bg-card p-6 md:p-8 grid md:grid-cols-3 gap-6">
+                {[
+                  { label: "Запрос", value: extras.casebook.request },
+                  { label: "Что делали", value: extras.casebook.work },
+                  { label: "Результат", value: extras.casebook.outcome },
+                ].map((b) => (
+                  <div key={b.label}>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">
+                      {b.label}
+                    </div>
+                    <p className="text-sm leading-relaxed text-foreground/90">
+                      {b.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 text-xs text-muted-foreground italic">
+                Длительность: {extras.casebook.duration}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Pricing */}
+          <motion.section
+            {...fade()}
+            className="mb-20 scroll-mt-24"
+            id="pricing"
+            aria-labelledby="pricing-h"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <Wallet className="w-5 h-5 text-primary" />
+              <h2 id="pricing-h" className="text-2xl md:text-3xl font-bold">
+                Сколько стоит и сколько займёт
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-5">
+                <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                  Первая встреча
+                </div>
+                <div className="text-2xl font-bold">
+                  {PRICING.firstSession.price} {PRICING.firstSession.currency}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  {PRICING.firstSession.duration} · диагностика и план
+                </div>
+              </div>
+              <div className="rounded-xl border border-primary/30 bg-primary/5 p-5">
+                <div className="text-xs uppercase tracking-wider text-primary mb-2">
+                  Сессия
+                </div>
+                <div className="text-2xl font-bold">
+                  {PRICING.regularSession.price} {PRICING.regularSession.currency}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  {PRICING.regularSession.duration} · онлайн или очно
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-5">
+                <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                  Пакет × {PRICING.pack.count}
+                </div>
+                <div className="text-2xl font-bold">
+                  {PRICING.pack.price} {PRICING.firstSession.currency}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  По {PRICING.pack.perSession} {PRICING.firstSession.currency} за сессию
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Related tools */}
+          {extras.relatedTools && extras.relatedTools.length > 0 && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              aria-labelledby="tools-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Wrench className="w-5 h-5 text-primary" />
+                <h2 id="tools-h" className="text-2xl md:text-3xl font-bold">
+                  Инструменты для самостоятельной работы
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {extras.relatedTools.map((t) => (
+                  <Link
+                    key={t.href}
+                    to={t.href}
+                    className="rounded-xl border border-border bg-card p-5 hover:border-primary/30 hover:shadow-sm transition-all group flex items-start gap-4"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <t.Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold group-hover:text-primary transition-colors">
+                        {t.title}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                        {t.description}
+                      </p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary mt-1 transition-colors" />
+                  </Link>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Author note */}
+          {extras.authorNote && (
+            <motion.section {...fade()} className="mb-20">
+              <blockquote className="rounded-2xl border-l-4 border-primary bg-muted/30 p-6 md:p-8 italic text-sm md:text-base text-foreground/90 leading-relaxed">
+                <Quote className="w-5 h-5 text-primary/40 mb-3" />
+                {extras.authorNote}
+                <footer className="not-italic text-xs text-muted-foreground mt-4 font-mono">
+                  — Дмитрий Яцко, психолог
+                </footer>
+              </blockquote>
+            </motion.section>
+          )}
+
           {/* 6. FAQ */}
           <motion.section
             {...fade()}
@@ -849,7 +1180,7 @@ const ProblemPage = () => {
               collapsible
               className="rounded-2xl border border-border bg-card overflow-hidden"
             >
-              {page.faq.map((f, i) => (
+              {fullFaq.map((f, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
@@ -980,16 +1311,23 @@ const ProblemPage = () => {
               На странице
             </div>
             <ul className="space-y-2">
-              {toc.map((t) => (
-                <li key={t.id}>
-                  <a
-                    href={`#${t.id}`}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors block leading-snug"
-                  >
-                    {t.label}
-                  </a>
-                </li>
-              ))}
+              {toc.map((t) => {
+                const isActive = activeId === t.id;
+                return (
+                  <li key={t.id}>
+                    <a
+                      href={`#${t.id}`}
+                      className={`text-sm transition-colors block leading-snug border-l-2 pl-3 -ml-px py-0.5 ${
+                        isActive
+                          ? "border-primary text-primary font-medium"
+                          : "border-transparent text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {t.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
             <div className="mt-5 pt-5 border-t border-border">
               <Button size="sm" className="w-full" asChild>
