@@ -4,6 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0F172A" />
+
+    <!--
+      Content Security Policy.
+      - Blocks eval() and arbitrary string-to-JS evaluation (no 'unsafe-eval').
+      - Allows inline scripts/styles (required by GTM, Yandex Metrika, Tailwind runtime, Vite HMR in dev).
+      - Whitelists analytics, fonts and Lovable preview origins.
+      - frame-ancestors 'self' https://*.lovable.app https://*.lovableproject.com — keeps the editor preview working
+        while preventing clickjacking from third parties.
+      - upgrade-insecure-requests forces http:// subresources to https://.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' data: https://fonts.gstatic.com;
+        img-src 'self' data: blob: https:;
+        connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://connect.facebook.net https://*.facebook.com https://mc.yandex.ru https://mc.yandex.com;
+        frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://mc.yandex.ru;
+        media-src 'self';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        frame-ancestors 'self' https://*.lovable.app https://*.lovableproject.com https://lovable.dev;
+        upgrade-insecure-requests;
+      "
+    />
     <title>Психолог Дмитрий Яцко — КПТ терапия онлайн</title>
     <meta name="description" content="Когнитивно-поведенческая терапия онлайн. Психолог Дмитрий Яцко — помощь при тревоге, депрессии, выгорании. Запишитесь на консультацию." />
     <link rel="canonical" href="https://cognitionx.cloud/" />
