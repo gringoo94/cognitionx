@@ -100,7 +100,7 @@ const App = () => (
               <Route path="/css/*" element={<Navigate to="/" replace />} />
 
               {/* Lost Tilda URLs with active impressions in GSC — redirect to closest content */}
-              <Route path="/dehumanization" element={<Navigate to="/blog/nas-obideli" replace />} />
+              <Route path="/dehumanization" element={<Navigate to="/blog/dehumanizaciya-chto-eto" replace />} />
               <Route path="/cbtworkbook" element={<Navigate to="/tools" replace />} />
               <Route path="/popcornbrain" element={<Navigate to="/blog/postoyannaya-trevoga-bez-prichiny" replace />} />
               <Route path="/koleso-emocij" element={<Navigate to="/tools/emotion-wheel" replace />} />
