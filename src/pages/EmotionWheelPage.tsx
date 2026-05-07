@@ -28,6 +28,13 @@ const EmotionWheelPage = () => {
           </Link>
         </Button>
 
+        <header className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Колесо эмоций</h1>
+          <p className="mt-3 text-muted-foreground leading-relaxed">
+            Интерактивная карта чувств: 13 категорий и 87 эмоций. Помогает точно назвать переживание и отличить базовые эмоции от их оттенков.
+          </p>
+        </header>
+
         <EmotionWheel />
       </main>
 
