@@ -432,7 +432,19 @@ const ProblemPage = () => {
   if (!meta) return <NotFound />;
 
   const { Icon } = meta;
-  const toc = buildToc(page);
+  const extras = getProblemExtras(slug);
+  const toc = buildToc(
+    page,
+    !!extras.myths?.length,
+    !!extras.selfCheck?.length,
+    !!extras.casebook,
+  );
+  const tocIds = toc.map((t) => t.id);
+  const activeId = useActiveSection(tocIds);
+  const scrollProgress = useScrollProgress();
+
+  // Augment FAQ schema with common addons (price, online format)
+  const fullFaq = [...page.faq, ...COMMON_FAQ_ADDONS];
 
   const relatedPages = page.relatedPages
     .map((s) => problemPages.find((p) => p.slug === s))
