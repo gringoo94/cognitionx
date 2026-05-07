@@ -70,8 +70,8 @@ const principles = [
 const AboutPage = () => (
   <div className="min-h-screen bg-background text-foreground">
     <SEOHead
-      title="Обо мне — Психолог Дмитрий Яцко | КПТ и схема-терапия"
-      description="Психолог Дмитрий Яцко — КПТ и схема-терапия. Образование, подход, принципы работы. Помощь при депрессии, тревоге, панических атаках."
+      title="Обо мне — психолог Дмитрий Яцко | КПТ"
+      description="Психолог Дмитрий Яцко: образование, КПТ и схема-терапия, принципы работы. Помощь при депрессии, тревоге, выгорании."
       path="/about"
       schema={[personSchema, breadcrumbSchema]}
     />
