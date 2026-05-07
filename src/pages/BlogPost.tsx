@@ -129,7 +129,7 @@ const BlogPost = () => {
         path={`/blog/${post.slug}`}
         ogImage={post.image}
         ogType="article"
-        schema={articleSchema}
+        schema={allSchema}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Блог", url: "https://cognitionx.cloud/blog" },
