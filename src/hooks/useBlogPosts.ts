@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { blogPosts as staticPosts, type BlogPost, type ContentBlock } from "@/data/blogPosts";
+import type { BlogPost, ContentBlock } from "@/data/blogPosts";
 
 function parseDbPost(row: any): BlogPost {
   return {
@@ -15,6 +15,12 @@ function parseDbPost(row: any): BlogPost {
   };
 }
 
+// Lazy-load the heavy static blog data only when DB returns nothing
+async function getStaticPosts(): Promise<BlogPost[]> {
+  const mod = await import("@/data/blogPosts");
+  return mod.blogPosts;
+}
+
 export function useBlogPosts() {
   return useQuery({
     queryKey: ["blog-posts"],
@@ -26,7 +32,7 @@ export function useBlogPosts() {
         .order("date", { ascending: false });
 
       if (error || !data || data.length === 0) {
-        return staticPosts;
+        return await getStaticPosts();
       }
 
       return data.map(parseDbPost);
@@ -41,7 +47,7 @@ export function useBlogPost(slug: string | undefined) {
     queryFn: async (): Promise<BlogPost | null> => {
       if (!slug) return null;
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("blog_posts")
         .select("*")
         .eq("slug", slug)
@@ -53,6 +59,7 @@ export function useBlogPost(slug: string | undefined) {
       }
 
       // Fallback to static
+      const staticPosts = await getStaticPosts();
       return staticPosts.find((p) => p.slug === slug) || null;
     },
     enabled: !!slug,
