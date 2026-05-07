@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import heroPhoto from "@/assets/hero-photo.webp";
+import heroPhotoAvif from "@/assets/hero-photo.avif";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -79,13 +80,20 @@ const Hero = () => (
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl scale-110" />
           <div className="relative w-72 h-80 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
-            <img
-              src={heroPhoto}
-              alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
-              className="w-full h-full object-cover object-top"
-              loading="eager"
-              fetchPriority="high"
-            />
+            <picture>
+              <source srcSet={heroPhotoAvif} type="image/avif" />
+              <source srcSet={heroPhoto} type="image/webp" />
+              <img
+                src={heroPhoto}
+                alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
+                className="w-full h-full object-cover object-top"
+                loading="eager"
+                fetchPriority="high"
+                width={1080}
+                height={1350}
+                decoding="async"
+              />
+            </picture>
           </div>
         </div>
       </motion.div>
