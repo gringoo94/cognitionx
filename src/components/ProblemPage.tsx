@@ -981,6 +981,187 @@ const ProblemPage = () => {
             </div>
           </motion.section>
 
+          {/* Myths */}
+          {extras.myths && extras.myths.length > 0 && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="myths"
+              aria-labelledby="myths-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Lightbulb className="w-5 h-5 text-primary" />
+                <h2 id="myths-h" className="text-2xl md:text-3xl font-bold">
+                  Мифы и факты
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                {extras.myths.map((m, i) => (
+                  <motion.div
+                    key={i}
+                    {...fade(0.05 * i)}
+                    className="rounded-xl border border-border bg-card overflow-hidden"
+                  >
+                    <div className="p-5 bg-destructive/5 border-b border-destructive/10">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-destructive/80 mb-2">
+                        Миф
+                      </div>
+                      <p className="text-sm leading-relaxed">{m.myth}</p>
+                    </div>
+                    <div className="p-5">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">
+                        Факт
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {m.fact}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Casebook */}
+          {extras.casebook && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="casebook"
+              aria-labelledby="casebook-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <FileCheck2 className="w-5 h-5 text-primary" />
+                <h2 id="casebook-h" className="text-2xl md:text-3xl font-bold">
+                  Один из примеров работы
+                </h2>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
+                Деперсонализированный кейс — детали изменены, суть сохранена.
+              </p>
+              <div className="rounded-2xl border border-border bg-card p-6 md:p-8 grid md:grid-cols-3 gap-6">
+                {[
+                  { label: "Запрос", value: extras.casebook.request },
+                  { label: "Что делали", value: extras.casebook.work },
+                  { label: "Результат", value: extras.casebook.outcome },
+                ].map((b) => (
+                  <div key={b.label}>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">
+                      {b.label}
+                    </div>
+                    <p className="text-sm leading-relaxed text-foreground/90">
+                      {b.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 text-xs text-muted-foreground italic">
+                Длительность: {extras.casebook.duration}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Pricing */}
+          <motion.section
+            {...fade()}
+            className="mb-20 scroll-mt-24"
+            id="pricing"
+            aria-labelledby="pricing-h"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <Wallet className="w-5 h-5 text-primary" />
+              <h2 id="pricing-h" className="text-2xl md:text-3xl font-bold">
+                Сколько стоит и сколько займёт
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="rounded-xl border border-border bg-card p-5">
+                <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                  Первая встреча
+                </div>
+                <div className="text-2xl font-bold">
+                  {PRICING.firstSession.price} {PRICING.firstSession.currency}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  {PRICING.firstSession.duration} · диагностика и план
+                </div>
+              </div>
+              <div className="rounded-xl border border-primary/30 bg-primary/5 p-5">
+                <div className="text-xs uppercase tracking-wider text-primary mb-2">
+                  Сессия
+                </div>
+                <div className="text-2xl font-bold">
+                  {PRICING.regularSession.price} {PRICING.regularSession.currency}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  {PRICING.regularSession.duration} · онлайн или очно
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-5">
+                <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                  Пакет × {PRICING.pack.count}
+                </div>
+                <div className="text-2xl font-bold">
+                  {PRICING.pack.price} {PRICING.firstSession.currency}
+                </div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  По {PRICING.pack.perSession} {PRICING.firstSession.currency} за сессию
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Related tools */}
+          {extras.relatedTools && extras.relatedTools.length > 0 && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              aria-labelledby="tools-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Wrench className="w-5 h-5 text-primary" />
+                <h2 id="tools-h" className="text-2xl md:text-3xl font-bold">
+                  Инструменты для самостоятельной работы
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {extras.relatedTools.map((t) => (
+                  <Link
+                    key={t.href}
+                    to={t.href}
+                    className="rounded-xl border border-border bg-card p-5 hover:border-primary/30 hover:shadow-sm transition-all group flex items-start gap-4"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <t.Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold group-hover:text-primary transition-colors">
+                        {t.title}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                        {t.description}
+                      </p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary mt-1 transition-colors" />
+                  </Link>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
+          {/* Author note */}
+          {extras.authorNote && (
+            <motion.section {...fade()} className="mb-20">
+              <blockquote className="rounded-2xl border-l-4 border-primary bg-muted/30 p-6 md:p-8 italic text-sm md:text-base text-foreground/90 leading-relaxed">
+                <Quote className="w-5 h-5 text-primary/40 mb-3" />
+                {extras.authorNote}
+                <footer className="not-italic text-xs text-muted-foreground mt-4 font-mono">
+                  — Дмитрий Яцко, психолог
+                </footer>
+              </blockquote>
+            </motion.section>
+          )}
+
           {/* 6. FAQ */}
           <motion.section
             {...fade()}
