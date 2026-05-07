@@ -86,6 +86,7 @@ const App = () => (
             <Route path="/oursolution" element={<Navigate to="/" replace />} />
             <Route path="/practice/generator" element={<Navigate to="/tools" replace />} />
             <Route path="/tpost/*" element={<Navigate to="/blog" replace />} />
+            <Route path="/it-specialist" element={<Navigate to="/psiholog-dlya-it" replace />} />
             <Route path="/css/*" element={<Navigate to="/" replace />} />
             
             <Route path="*" element={<NotFound />} />
