@@ -5,6 +5,7 @@ export interface SeoRoute {
   path: string;
   title: string;
   description: string;
+  noindex?: boolean;
 }
 
 export const seoRoutes: SeoRoute[] = [
@@ -166,6 +167,7 @@ export const seoRoutes: SeoRoute[] = [
     path: "/thank-you",
     title: "Спасибо за заявку — Психолог Дмитрий Яцко",
     description: "Ваша заявка отправлена. Я свяжусь с вами в ближайшее время.",
+    noindex: true,
   },
 
   // Blog posts
