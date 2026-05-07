@@ -131,8 +131,8 @@ const serviceSchema = {
 const LandingPageAsia = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог для экспатов в Азии онлайн | Бали, Таиланд — Дмитрий Яцко"
-      description="Русскоязычный психолог онлайн для экспатов на Бали, в Таиланде, Вьетнаме. КПТ и схема-терапия на русском. Удобное время для UTC+7/+8. Первая встреча — бесплатно."
+      title="Психолог онлайн — Бали, Таиланд | КПТ — Дмитрий Яцко"
+      description="Психолог на русском для экспатов в Азии: Бали, Таиланд, Вьетнам. КПТ онлайн. Удобное время для UTC+7/+8."
       path="/psiholog-aziya"
       schema={[personSchema, serviceSchema, asiaFaqSchema, testimonialsSchema]}
       breadcrumbs={[

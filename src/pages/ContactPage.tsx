@@ -100,8 +100,8 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Контакты — Психолог Дмитрий Яцко | Запись на консультацию"
-        description="Запишитесь на консультацию к психологу. Онлайн и очно. Telegram, форма записи, email. Первая сессия — знакомство и диагностика."
+        title="Контакты — психолог Дмитрий Яцко | Запись"
+        description="Запись к психологу: онлайн и очно. Telegram, форма, email. Первая сессия — знакомство и диагностика."
         path="/contact"
         schema={[serviceSchema, breadcrumbSchema]}
       />
