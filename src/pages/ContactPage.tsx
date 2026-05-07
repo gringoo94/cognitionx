@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Send, MessageCircle, Mail, Phone, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,13 @@ import { toast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, { message: "Укажите имя (минимум 2 символа)" }).max(100),
+  email: z.string().trim().email({ message: "Введите корректный email" }).max(255),
+  messenger: z.string().trim().max(100).optional().or(z.literal("")),
+  message: z.string().trim().max(2000).optional().or(z.literal("")),
+});
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -50,18 +58,34 @@ const ContactPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const parsed = contactSchema.safeParse(form);
+    if (!parsed.success) {
+      toast({
+        title: "Проверьте форму",
+        description: parsed.error.errors[0].message,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
       const { error } = await supabase.from("contact_submissions").insert({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        messenger: form.messenger.trim() || null,
-        message: form.message.trim(),
+        name: parsed.data.name,
+        email: parsed.data.email,
+        messenger: parsed.data.messenger || null,
+        message: parsed.data.message || "",
       });
       if (error) throw error;
       // Send Telegram notification (fire-and-forget)
       supabase.functions.invoke("notify-telegram", {
-        body: { name: form.name.trim(), email: form.email.trim(), messenger: form.messenger.trim(), message: form.message.trim() },
+        body: {
+          name: parsed.data.name,
+          email: parsed.data.email,
+          messenger: parsed.data.messenger,
+          message: parsed.data.message,
+        },
       }).catch(() => {});
 
       setForm({ name: "", email: "", messenger: "", message: "" });
@@ -168,6 +192,8 @@ const ContactPage = () => {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
+              maxLength={100}
+              autoComplete="name"
               className="h-12 rounded-lg"
             />
             <Input
@@ -176,18 +202,22 @@ const ContactPage = () => {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
+              maxLength={255}
+              autoComplete="email"
               className="h-12 rounded-lg"
             />
             <Input
               placeholder="Telegram / WhatsApp (@username или номер)"
               value={form.messenger}
               onChange={(e) => setForm({ ...form, messenger: e.target.value })}
+              maxLength={100}
               className="h-12 rounded-lg"
             />
             <Textarea
               placeholder="Ваш запрос (необязательно)"
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
+              maxLength={2000}
               className="rounded-lg min-h-[100px]"
             />
             <Button type="submit" size="lg" className="w-full rounded-lg gap-2" disabled={loading}>

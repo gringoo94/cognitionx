@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +17,13 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
+const bookingSchema = z.object({
+  name: z.string().trim().min(2, { message: "Укажите имя (минимум 2 символа)" }).max(100),
+  email: z.string().trim().email({ message: "Введите корректный email" }).max(255),
+  messenger: z.string().trim().max(100).optional().or(z.literal("")),
+  message: z.string().trim().max(2000).optional().or(z.literal("")),
+});
+
 const BookingForm = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", messenger: "", message: "" });
@@ -24,12 +32,24 @@ const BookingForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const parsed = bookingSchema.safeParse(form);
+    if (!parsed.success) {
+      toast({
+        title: "Проверьте форму",
+        description: parsed.error.errors[0].message,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
+    const messageText = parsed.data.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)`;
     const { error } = await supabase.from("contact_submissions").insert({
-      name: form.name,
-      email: form.email,
-      messenger: form.messenger || null,
-      message: form.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)`,
+      name: parsed.data.name,
+      email: parsed.data.email,
+      messenger: parsed.data.messenger || null,
+      message: messageText,
     });
     setLoading(false);
     if (error) {
@@ -38,7 +58,7 @@ const BookingForm = () => {
     }
     // Send Telegram notification (fire-and-forget)
     supabase.functions.invoke("notify-telegram", {
-      body: { name: form.name, email: form.email, messenger: form.messenger, message: form.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)` },
+      body: { name: parsed.data.name, email: parsed.data.email, messenger: parsed.data.messenger, message: messageText },
     }).catch(() => {});
 
     setForm({ name: "", email: "", messenger: "", message: "" });
@@ -63,6 +83,8 @@ const BookingForm = () => {
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
+            maxLength={100}
+            autoComplete="name"
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <Input
@@ -71,12 +93,15 @@ const BookingForm = () => {
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             required
+            maxLength={255}
+            autoComplete="email"
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <Input
             placeholder="Telegram / WhatsApp (@username или номер)"
             value={form.messenger}
             onChange={(e) => setForm({ ...form, messenger: e.target.value })}
+            maxLength={100}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <div className="space-y-2">
@@ -100,6 +125,7 @@ const BookingForm = () => {
             placeholder="Ваш запрос (необязательно)"
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
+            maxLength={2000}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 rounded-lg min-h-[100px] focus:border-accent focus:ring-accent"
           />
           <Button type="submit" size="lg" disabled={loading} className="w-full rounded-lg gap-2 shadow-lg shadow-primary/25">
