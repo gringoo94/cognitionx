@@ -755,7 +755,49 @@ const ProblemPage = () => {
             </div>
           </motion.section>
 
-          {/* 2. CBT model */}
+          {/* Self-check */}
+          {extras.selfCheck && extras.selfCheck.length > 0 && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="self-check"
+              aria-labelledby="self-check-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <ListChecks className="w-5 h-5 text-primary" />
+                <h2 id="self-check-h" className="text-2xl md:text-3xl font-bold">
+                  Самопроверка
+                </h2>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
+                Ответьте «да» или «нет» на каждый пункт. Если согласились с{" "}
+                <strong className="text-foreground">
+                  {extras.selfCheckThreshold || 3} и более
+                </strong>{" "}
+                — стоит обсудить это с психологом.
+              </p>
+              <ol className="rounded-2xl border border-border bg-card divide-y divide-border overflow-hidden">
+                {extras.selfCheck.map((q, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-4 p-4 md:p-5 hover:bg-muted/30 transition-colors"
+                  >
+                    <span className="text-xs font-mono font-bold text-primary bg-primary/10 rounded-md px-2 py-0.5 mt-0.5">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-sm md:text-[15px] leading-relaxed flex-1">
+                      {q}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              <p className="text-xs text-muted-foreground mt-4 italic">
+                Это не диагностический инструмент — только ориентир. Точный
+                диагноз ставит специалист.
+              </p>
+            </motion.section>
+          )}
+
           <motion.section
             {...fade()}
             className="mb-20 scroll-mt-24"
