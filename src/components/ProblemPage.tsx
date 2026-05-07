@@ -1184,6 +1184,34 @@ const ProblemPage = () => {
             </motion.section>
           )}
 
+          {/* 5b. Long-form SEO content */}
+          {page.longRead && (
+            <motion.section
+              {...fade()}
+              className="mb-20 scroll-mt-24"
+              id="longread"
+              aria-labelledby="longread-h"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <BookOpen className="w-5 h-5 text-primary" />
+                <h2 id="longread-h" className="text-2xl md:text-3xl font-bold">
+                  {page.longRead.title}
+                </h2>
+              </div>
+              <div className="space-y-8 rounded-2xl border border-border bg-card p-6 md:p-8">
+                {page.longRead.sections.map((s, i) => (
+                  <div key={i}>
+                    <h3 className="text-lg md:text-xl font-semibold mb-3">{s.heading}</h3>
+                    <div
+                      className="prose prose-sm md:prose-base prose-invert max-w-none text-muted-foreground leading-relaxed [&_a]:text-primary [&_a]:underline [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mb-1"
+                      dangerouslySetInnerHTML={{ __html: s.html }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+          )}
+
           {/* 6. FAQ */}
           <motion.section
             {...fade()}
