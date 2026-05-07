@@ -28,6 +28,13 @@ const SchemaQuizPage = () => {
           </Link>
         </Button>
 
+        <header className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Тест на ранние дезадаптивные схемы</h1>
+          <p className="mt-3 text-muted-foreground leading-relaxed">
+            Экспресс-версия опросника YSQ Джеффри Янга: 36 утверждений, 5–7 минут. Узнайте, какие глубинные паттерны включаются в трудных ситуациях.
+          </p>
+        </header>
+
         <SchemaQuiz />
       </main>
 

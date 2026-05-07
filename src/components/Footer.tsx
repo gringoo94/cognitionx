@@ -65,20 +65,20 @@ const Footer = () => (
         <div>
           <p className="text-lg font-bold tracking-tight mb-4">CognitionX</p>
           <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-            <a href="https://t.me/gringoo94" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Send className="w-4 h-4" /> Telegram
+            <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Send className="w-4 h-4" aria-hidden="true" /> Telegram
             </a>
-            <a href="https://wa.me/447599880865" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Phone className="w-4 h-4" /> WhatsApp
+            <a href="https://wa.me/447599880865" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Phone className="w-4 h-4" aria-hidden="true" /> WhatsApp
             </a>
-            <a href="https://www.instagram.com/gringo.journal" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Instagram className="w-4 h-4" /> Instagram
+            <a href="https://www.instagram.com/gringo.journal" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Instagram className="w-4 h-4" aria-hidden="true" /> Instagram
             </a>
-            <a href="mailto:digitalgringoo@gmail.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Mail className="w-4 h-4" /> Email
+            <a href="mailto:digitalgringoo@gmail.com" aria-label="Email" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Mail className="w-4 h-4" aria-hidden="true" /> Email
             </a>
-            <a href="https://www.linkedin.com/in/dmitrii-iatco/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Linkedin className="w-4 h-4" /> LinkedIn
+            <a href="https://www.linkedin.com/in/dmitrii-iatco/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex items-center gap-2 hover:text-foreground transition-colors">
+              <Linkedin className="w-4 h-4" aria-hidden="true" /> LinkedIn
             </a>
           </div>
         </div>
