@@ -537,6 +537,56 @@ const ProblemPage = () => {
       />
       <Navbar />
 
+      {/* Reading progress bar */}
+      <div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary/15 z-50 pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="h-full bg-gradient-to-r from-primary to-accent transition-[width] duration-150"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
+      {/* Mobile floating TOC button */}
+      <Sheet>
+        <SheetTrigger asChild>
+          <button
+            className="lg:hidden fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:scale-105 transition-transform"
+            aria-label="Открыть содержание страницы"
+          >
+            <List className="w-5 h-5" />
+          </button>
+        </SheetTrigger>
+        <SheetContent side="right" className="w-72">
+          <SheetHeader>
+            <SheetTitle>На странице</SheetTitle>
+          </SheetHeader>
+          <ul className="space-y-1 mt-4">
+            {toc.map((t) => (
+              <li key={t.id}>
+                <a
+                  href={`#${t.id}`}
+                  className={`block py-2 px-3 rounded-md text-sm transition-colors ${
+                    activeId === t.id
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-muted-foreground hover:bg-muted"
+                  }`}
+                >
+                  {t.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <Button size="sm" className="w-full mt-6" asChild>
+            <a href="https://t.me/gringoo94" className="gap-1.5">
+              <MessageCircle className="w-3.5 h-3.5" />
+              Записаться
+            </a>
+          </Button>
+        </SheetContent>
+      </Sheet>
+
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden border-b border-border">
         <div
@@ -1038,7 +1088,25 @@ const ProblemPage = () => {
               На странице
             </div>
             <ul className="space-y-2">
-              {toc.map((t) => (
+              {toc.map((t) => {
+                const isActive = activeId === t.id;
+                return (
+                  <li key={t.id}>
+                    <a
+                      href={`#${t.id}`}
+                      className={`text-sm transition-colors block leading-snug border-l-2 pl-3 -ml-px py-0.5 ${
+                        isActive
+                          ? "border-primary text-primary font-medium"
+                          : "border-transparent text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {t.label}
+                    </a>
+                  </li>
+                );
+              })}
+              {/* eslint-disable-next-line */}
+              {false && toc.map((t) => (
                 <li key={t.id}>
                   <a
                     href={`#${t.id}`}
