@@ -83,6 +83,8 @@ const BookingForm = () => {
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
+            maxLength={100}
+            autoComplete="name"
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <Input
@@ -91,12 +93,15 @@ const BookingForm = () => {
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             required
+            maxLength={255}
+            autoComplete="email"
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <Input
             placeholder="Telegram / WhatsApp (@username или номер)"
             value={form.messenger}
             onChange={(e) => setForm({ ...form, messenger: e.target.value })}
+            maxLength={100}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
           <div className="space-y-2">
@@ -120,6 +125,7 @@ const BookingForm = () => {
             placeholder="Ваш запрос (необязательно)"
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
+            maxLength={2000}
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 rounded-lg min-h-[100px] focus:border-accent focus:ring-accent"
           />
           <Button type="submit" size="lg" disabled={loading} className="w-full rounded-lg gap-2 shadow-lg shadow-primary/25">
