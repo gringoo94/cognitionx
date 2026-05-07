@@ -38,6 +38,8 @@ export function seoPlugin(): Plugin {
           `<title>${escapeHtml(route.title)}</title>`,
           `<meta name="description" content="${escapeAttr(route.description)}" />`,
           `<link rel="canonical" href="${url}" />`,
+          `<link rel="alternate" hreflang="ru" href="${url}" />`,
+          `<link rel="alternate" hreflang="x-default" href="${url}" />`,
           `<meta name="robots" content="index, follow" />`,
           `<meta name="theme-color" content="#0F172A" />`,
           `<meta property="og:type" content="website" />`,
