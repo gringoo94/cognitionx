@@ -25,6 +25,12 @@ import {
   Phone,
   Quote,
   GraduationCap,
+  Lightbulb,
+  ListChecks,
+  Wrench,
+  Wallet,
+  FileCheck2,
+  List,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,11 +40,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getPageBySlug, problemPages } from "@/data/problemPages";
 import { blogPosts } from "@/data/blogPosts";
+import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtras";
+import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
 
 const fade = (delay = 0) => ({
@@ -387,15 +402,24 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
   },
 };
 
-const buildToc = (page: ReturnType<typeof getPageBySlug>) =>
+const buildToc = (
+  page: ReturnType<typeof getPageBySlug>,
+  hasMyths: boolean,
+  hasSelfCheck: boolean,
+  hasCasebook: boolean,
+) =>
   [
     { id: "symptoms", label: page?.symptomsTitle || "Знакомо?" },
+    hasSelfCheck ? { id: "self-check", label: "Самопроверка" } : null,
     { id: "concept", label: "Как это работает" },
+    hasMyths ? { id: "myths", label: "Мифы и факты" } : null,
     { id: "evidence", label: "Доказательная база" },
     { id: "process", label: "Как я работаю" },
+    hasCasebook ? { id: "casebook", label: "Пример работы" } : null,
     { id: "outcomes", label: "Результаты" },
+    { id: "pricing", label: "Стоимость" },
     { id: "faq", label: "FAQ" },
-  ];
+  ].filter(Boolean) as { id: string; label: string }[];
 
 const ProblemPage = () => {
   const location = useLocation();
