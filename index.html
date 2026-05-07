@@ -7,18 +7,31 @@
 
     <!--
       Content Security Policy.
-      - Blocks eval() and arbitrary string-to-JS evaluation (no 'unsafe-eval').
-      - Allows inline scripts/styles (required by GTM, Yandex Metrika, Tailwind runtime, Vite HMR in dev).
-      - Whitelists analytics, fonts and Lovable preview origins.
-      - frame-ancestors 'self' https://*.lovable.app https://*.lovableproject.com — keeps the editor preview working
-        while preventing clickjacking from third parties.
-      - upgrade-insecure-requests forces http:// subresources to https://.
+
+      Hardened (vs typical default):
+        • No 'unsafe-eval'  — blocks eval() / new Function() / setTimeout("string").
+        • No 'unsafe-inline' on script-src — arbitrary <script>…</script> from XSS is rejected.
+          Our single legitimate inline loader (analytics deferral, see below) is whitelisted by
+          its sha256 hash. <script type="application/ld+json"> is data, not code, so it doesn't
+          need a hash.
+        • object-src 'none', base-uri 'self', form-action 'self', frame-ancestors restricted.
+        • upgrade-insecure-requests forces http subresources to https.
+
+      Note about 'strict-dynamic':
+        strict-dynamic requires either a per-response nonce or a hash on EVERY <script src=…>.
+        Lovable hosting serves static HTML with no server-side templating, so per-request
+        nonces aren't possible. Hash-based CSP without strict-dynamic is the strongest option
+        available here and already neutralises arbitrary <script> injection.
+
+      If you change the inline analytics loader below, regenerate its hash:
+        node -e "let s=require('fs').readFileSync('index.html','utf8').match(/<script>([\\s\\S]*?)<\\/script>/)[1];console.log('sha256-'+require('crypto').createHash('sha256').update(s).digest('base64'))"
     -->
     <meta
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        script-src 'self' 'sha256-FXIy+BSxCBbe9thjLczDaUdW3U1r7KYzfP9nt+idlTc=' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        script-src-attr 'none';
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' data: https://fonts.gstatic.com;
         img-src 'self' data: blob: https:;
