@@ -91,6 +91,8 @@ const App = () => (
 
               {/* Redirects from old Tilda URLs */}
               <Route path="/about_cognitionx" element={<Navigate to="/about" replace />} />
+              <Route path="/cognitionx" element={<Navigate to="/" replace />} />
+              <Route path="/cognitionx/" element={<Navigate to="/" replace />} />
               <Route path="/oursolution" element={<Navigate to="/" replace />} />
               <Route path="/practice/generator" element={<Navigate to="/tools" replace />} />
               <Route path="/tpost/*" element={<Navigate to="/blog" replace />} />
