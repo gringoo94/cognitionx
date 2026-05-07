@@ -503,6 +503,14 @@ const ProblemPage = () => {
     })),
   };
 
+  const LAST_REVIEWED: Record<string, string> = {
+    burnout: "2026-05-07",
+    "co-dependency": "2026-05-07",
+    "self-esteem": "2026-05-07",
+    stress: "2026-05-07",
+  };
+  const lastReviewed = LAST_REVIEWED[page.slug] ?? "2026-05-01";
+
   const medicalWebPageSchema = {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
@@ -510,12 +518,26 @@ const ProblemPage = () => {
     description: page.metaDescription,
     url: `https://cognitionx.cloud/${page.slug}`,
     inLanguage: "ru-RU",
-    lastReviewed: "2026-05-01",
-    reviewedBy: { "@id": "https://cognitionx.cloud/#person" },
+    lastReviewed,
+    reviewedBy: {
+      "@id": "https://cognitionx.cloud/#person",
+      "@type": "Person",
+      name: "Дмитрий Яцко",
+      jobTitle: "Психолог, КПТ и схема-терапевт",
+      url: "https://cognitionx.cloud/about",
+    },
     about: { "@id": `https://cognitionx.cloud/${page.slug}#condition` },
     mainContentOfPage: {
       "@type": "WebPageElement",
       cssSelector: "main",
+    },
+    specialty: {
+      "@type": "MedicalSpecialty",
+      name: "Psychiatry",
+    },
+    audience: {
+      "@type": "PeopleAudience",
+      audienceType: "Adults seeking psychotherapy",
     },
   };
 
