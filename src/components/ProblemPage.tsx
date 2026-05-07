@@ -323,6 +323,68 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
       text: "Резкая отмена алкоголя или ряда веществ опасна для жизни. Сначала — медицинская детоксикация под наблюдением врача, затем психотерапия. Я работаю с поддерживающим этапом, не заменяю нарколога.",
     },
   },
+  "psiholog-moskva": {
+    Icon: Brain,
+    badge: "Онлайн для Москвы и России",
+    tagline:
+      "Работаю с русскоязычными клиентами из Москвы и всей России. Онлайн-формат: без пробок, очередей и привязки к району.",
+    accent: "from-primary/20 via-accent/10 to-transparent",
+    stats: [
+      { label: "Часовой пояс", value: "Удобно для МСК", Icon: Clock },
+      { label: "Длительность сессии", value: "50 минут", Icon: Clock },
+      { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
+      { label: "Эффективность", value: "= очной", Icon: Award },
+    ],
+    trustChips: COMMON_TRUST,
+    evidence: [
+      {
+        source: "Luo et al. (2021)",
+        finding:
+          "Онлайн-КПТ сопоставима с очной по эффективности при депрессии и тревоге.",
+      },
+      {
+        source: "NICE Guidelines",
+        finding:
+          "КПТ — метод первой линии при тревожных и депрессивных расстройствах.",
+      },
+      {
+        source: "Norwood et al. (2018)",
+        finding:
+          "Терапевтический альянс в онлайн-формате формируется так же надёжно, как и очно.",
+      },
+    ],
+  },
+  "psiholog-usa": {
+    Icon: Brain,
+    badge: "Онлайн для США и Канады",
+    tagline:
+      "Русскоязычный психолог для эмигрантов в США и Канаде. КПТ и схема-терапия на родном языке — там, где найти своего сложно.",
+    accent: "from-primary/20 via-accent/10 to-transparent",
+    stats: [
+      { label: "Язык", value: "Русский", Icon: BookOpen },
+      { label: "Длительность сессии", value: "50 минут", Icon: Clock },
+      { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
+      { label: "Часовые пояса", value: "EST / PST", Icon: Clock },
+    ],
+    trustChips: COMMON_TRUST,
+    evidence: [
+      {
+        source: "Carlbring et al. (2018)",
+        finding:
+          "Онлайн-терапия не уступает очной по результатам и удержанию клиентов.",
+      },
+      {
+        source: "APA Guidelines",
+        finding:
+          "Видеоформат рекомендован APA как полноценная альтернатива при отсутствии локального специалиста.",
+      },
+      {
+        source: "Hofmann et al. (2012)",
+        finding:
+          "КПТ — наиболее исследованный психотерапевтический подход с большой доказательной базой.",
+      },
+    ],
+  },
 };
 
 const buildToc = (page: ReturnType<typeof getPageBySlug>) =>
