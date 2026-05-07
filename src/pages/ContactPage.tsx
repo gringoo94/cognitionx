@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Send, MessageCircle, Mail, Phone, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,13 @@ import { toast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, { message: "Укажите имя (минимум 2 символа)" }).max(100),
+  email: z.string().trim().email({ message: "Введите корректный email" }).max(255),
+  messenger: z.string().trim().max(100).optional().or(z.literal("")),
+  message: z.string().trim().max(2000).optional().or(z.literal("")),
+});
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
