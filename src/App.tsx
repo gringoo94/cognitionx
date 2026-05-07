@@ -28,6 +28,7 @@ const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard.tsx"));
 const ProblemPage = lazy(() => import("./components/ProblemPage.tsx"));
+const MethodPage = lazy(() => import("./components/MethodPage.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const InformedConsent = lazy(() => import("./pages/InformedConsent.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
@@ -67,13 +68,13 @@ const App = () => (
               <Route path="/panic-attacks" element={<ProblemPage />} />
               <Route path="/burnout" element={<ProblemPage />} />
               <Route path="/co-dependency" element={<ProblemPage />} />
-              <Route path="/cbt-therapy" element={<ProblemPage />} />
-              <Route path="/online-therapy" element={<ProblemPage />} />
-              <Route path="/schema-therapy" element={<ProblemPage />} />
+              <Route path="/cbt-therapy" element={<MethodPage />} />
+              <Route path="/online-therapy" element={<MethodPage />} />
+              <Route path="/schema-therapy" element={<MethodPage />} />
               <Route path="/self-esteem" element={<ProblemPage />} />
               <Route path="/stress" element={<ProblemPage />} />
               <Route path="/addiction" element={<ProblemPage />} />
-              <Route path="/in-person-therapy" element={<ProblemPage />} />
+              <Route path="/in-person-therapy" element={<MethodPage />} />
               <Route path="/psiholog-moskva" element={<ProblemPage />} />
               <Route path="/psiholog-europa" element={<LandingPageEuropa />} />
               <Route path="/psiholog-dlya-it" element={<LandingPageIT />} />
