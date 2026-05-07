@@ -238,6 +238,76 @@ const BlogList = () => {
                 </Pagination>
               </div>
             )}
+
+            {/* SEO long-form content */}
+            <section className="mt-20 grid md:grid-cols-2 gap-8 text-sm text-muted-foreground leading-relaxed">
+              <div>
+                <h2 className="text-xl font-bold text-foreground mb-3">О чём этот блог</h2>
+                <p>
+                  Здесь я разбираю темы, с которыми чаще всего обращаются клиенты:{" "}
+                  <Link to="/depression" className="text-primary underline">
+                    депрессия
+                  </Link>
+                  ,{" "}
+                  <Link to="/anxiety" className="text-primary underline">
+                    тревожные расстройства
+                  </Link>
+                  ,{" "}
+                  <Link to="/panic-attacks" className="text-primary underline">
+                    панические атаки
+                  </Link>
+                  ,{" "}
+                  <Link to="/burnout" className="text-primary underline">
+                    выгорание
+                  </Link>
+                  ,{" "}
+                  <Link to="/self-esteem" className="text-primary underline">
+                    самооценка
+                  </Link>
+                  ,{" "}
+                  <Link to="/co-dependency" className="text-primary underline">
+                    созависимость
+                  </Link>
+                  . Все статьи опираются на доказательную базу — метаанализы, клинические руководства, проверенные
+                  техники КПТ и схема-терапии.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-foreground mb-3">Популярные темы</h2>
+                <ul className="space-y-2">
+                  <li>
+                    →{" "}
+                    <Link to="/blog/postoyannaya-trevoga-bez-prichiny" className="text-primary underline">
+                      Постоянная тревога без причины
+                    </Link>
+                  </li>
+                  <li>
+                    →{" "}
+                    <Link to="/blog/sindrom-samozvantsa" className="text-primary underline">
+                      Синдром самозванца
+                    </Link>
+                  </li>
+                  <li>
+                    →{" "}
+                    <Link to="/blog/planirovanie-dnya-pri-depressii" className="text-primary underline">
+                      Поведенческая активация при депрессии
+                    </Link>
+                  </li>
+                  <li>
+                    →{" "}
+                    <Link to="/blog/perekladyvanie-otvetstvennosti" className="text-primary underline">
+                      Перекладывание ответственности
+                    </Link>
+                  </li>
+                  <li>
+                    →{" "}
+                    <Link to="/tools/schema-quiz" className="text-primary underline">
+                      Тест на схемы Янга
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </section>
           </>
         )}
       </main>
