@@ -957,7 +957,7 @@ const ProblemPage = () => {
               collapsible
               className="rounded-2xl border border-border bg-card overflow-hidden"
             >
-              {page.faq.map((f, i) => (
+              {fullFaq.map((f, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
