@@ -8,6 +8,16 @@
     <meta name="description" content="Когнитивно-поведенческая терапия онлайн. Психолог Дмитрий Яцко — помощь при тревоге, депрессии, выгорании. Запишитесь на консультацию." />
     <link rel="canonical" href="https://cognitionx.cloud/" />
 
+    <!-- Preload LCP hero image (AVIF preferred, only on home route) -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-photo.avif"
+      type="image/avif"
+      fetchpriority="high"
+      media="(min-width: 768px)"
+    />
+
     <!-- Default OpenGraph (overridden per-route by build-time SEO plugin / react-helmet) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cognitionx.cloud/" />
