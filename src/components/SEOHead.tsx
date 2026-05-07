@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { globalSchema, SITE_URL } from "@/lib/globalSchema";
 
@@ -20,6 +21,17 @@ interface SEOHeadProps {
 const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema, noindex, breadcrumbs }: SEOHeadProps) => {
   const url = `${SITE_URL}${path}`;
   const image = ogImage || `${SITE_URL}/og-default.webp`;
+
+  // Remove any pre-rendered static canonical/hreflang tags so Helmet remains the
+  // single source of truth at runtime and we don't end up with duplicate tags
+  // in the DOM after hydration (prerender injects them for crawlers without JS).
+  useEffect(() => {
+    document
+      .querySelectorAll(
+        'link[rel="canonical"]:not([data-rh]), link[rel="alternate"][hreflang]:not([data-rh])'
+      )
+      .forEach((el) => el.parentNode?.removeChild(el));
+  }, [url]);
 
   const breadcrumbSchema = breadcrumbs?.length
     ? {
