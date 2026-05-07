@@ -503,7 +503,29 @@ const ProblemPage = () => {
     })),
   };
 
-  const schemas = [faqSchema, breadcrumbSchema, medicalConditionSchema, howToSchema];
+  const medicalWebPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name: page.metaTitle,
+    description: page.metaDescription,
+    url: `https://cognitionx.cloud/${page.slug}`,
+    inLanguage: "ru-RU",
+    lastReviewed: "2026-05-01",
+    reviewedBy: { "@id": "https://cognitionx.cloud/#person" },
+    about: { "@id": `https://cognitionx.cloud/${page.slug}#condition` },
+    mainContentOfPage: {
+      "@type": "WebPageElement",
+      cssSelector: "main",
+    },
+  };
+
+  const schemas = [
+    faqSchema,
+    breadcrumbSchema,
+    medicalConditionSchema,
+    medicalWebPageSchema,
+    howToSchema,
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
