@@ -41,8 +41,8 @@ const serviceSchema = {
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог онлайн | КПТ и схема-терапия — Дмитрий Яцко"
-      description="Когнитивно-поведенческая и схема-терапия онлайн. Помогаю при депрессии, тревоге, панических атаках, выгорании. Запись на консультацию."
+      title="CognitionX — психолог Дмитрий Яцко | КПТ онлайн"
+      description="CognitionX — практика психолога Дмитрия Яцко. КПТ и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание. Запишитесь."
       path="/"
       schema={[personSchema, serviceSchema, homeFaqSchema, testimonialsSchema]}
     />
