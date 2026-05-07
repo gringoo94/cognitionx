@@ -54,7 +54,7 @@ const Pricing = () => (
             <Gift className="w-6 h-6 text-accent" />
           </div>
           <div>
-            <p className="font-semibold text-sm sm:text-base">Бесплатная встреча-знакомство — 15 минут</p>
+            <p className="font-semibold text-sm sm:text-base">Бесплатная встреча-знакомство — 20 минут</p>
             <p className="text-muted-foreground text-xs sm:text-sm mt-0.5">
               Познакомимся, обсудим ваш запрос и решим, подходим ли мы друг другу
             </p>
@@ -62,7 +62,7 @@ const Pricing = () => (
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
           <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full whitespace-nowrap">
-            Осталось 3 места в этом месяце
+            Без обязательств
           </span>
           <Button size="sm" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
             <a href="#booking">Записаться</a>
