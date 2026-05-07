@@ -94,7 +94,7 @@ const AboutPage = () => (
       </motion.p>
 
       <motion.blockquote {...fade(0.15)} className="mt-8 border-l-4 border-primary pl-5 py-2 text-muted-foreground italic text-lg">
-        "Каждый человек способен измениться — ему нужно лишь безопасное пространство и правильные инструменты."
+        «Каждый человек способен измениться — нужно только безопасное пространство и подходящие инструменты».
       </motion.blockquote>
 
       {/* Qualifications */}
@@ -151,14 +151,14 @@ const AboutPage = () => (
         <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8">
           <h2 className="text-xl font-bold mb-2">Готовы начать?</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Первая сессия — знакомство и диагностика.
+            Бесплатная встреча-знакомство — 15 минут. Полная первая консультация — 25 €.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild>
-              <Link to="/contact">Записаться</Link>
+              <Link to="/contact">Оставить заявку</Link>
             </Button>
             <Button variant="outline" asChild>
-              <a href="https://t.me/gringoo94">Telegram</a>
+              <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
             </Button>
           </div>
         </div>
