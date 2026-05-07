@@ -43,6 +43,11 @@ export interface ProblemPageData {
   faq: FAQ[];
   relatedPages: string[];
   relatedArticles: string[];
+  /** Optional long-form SEO content rendered after FAQ. Each section is an HTML block. */
+  longRead?: {
+    title: string;
+    sections: { heading: string; html: string }[];
+  };
 }
 
 export const problemPages: ProblemPageData[] = [
