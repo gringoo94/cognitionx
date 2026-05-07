@@ -8,6 +8,8 @@ const problemLinks = [
   { label: "Выгорание", href: "/burnout" },
   { label: "Созависимость", href: "/co-dependency" },
   { label: "Зависимости", href: "/addiction" },
+  { label: "Самооценка", href: "/self-esteem" },
+  { label: "Стресс", href: "/stress" },
 ];
 
 const methodLinks = [
@@ -48,6 +50,10 @@ const geoGroups: GeoGroup[] = [
   {
     region: "США и Канада (онлайн)",
     href: "/psiholog-usa",
+  },
+  {
+    region: "Для IT-специалистов",
+    href: "/psiholog-dlya-it",
   },
 ];
 
@@ -133,8 +139,10 @@ const Footer = () => (
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Навигация</p>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
+            <Link to="/about" className="hover:text-foreground transition-colors">Обо мне</Link>
             <Link to="/blog" className="hover:text-foreground transition-colors">Блог</Link>
             <Link to="/tools" className="hover:text-foreground transition-colors">Инструменты</Link>
+            <Link to="/contact" className="hover:text-foreground transition-colors">Контакты</Link>
             <a href="/#booking" className="hover:text-foreground transition-colors">Записаться</a>
           </div>
         </div>
