@@ -58,18 +58,34 @@ const ContactPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const parsed = contactSchema.safeParse(form);
+    if (!parsed.success) {
+      toast({
+        title: "Проверьте форму",
+        description: parsed.error.errors[0].message,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     try {
       const { error } = await supabase.from("contact_submissions").insert({
-        name: form.name.trim(),
-        email: form.email.trim(),
-        messenger: form.messenger.trim() || null,
-        message: form.message.trim(),
+        name: parsed.data.name,
+        email: parsed.data.email,
+        messenger: parsed.data.messenger || null,
+        message: parsed.data.message || "",
       });
       if (error) throw error;
       // Send Telegram notification (fire-and-forget)
       supabase.functions.invoke("notify-telegram", {
-        body: { name: form.name.trim(), email: form.email.trim(), messenger: form.messenger.trim(), message: form.message.trim() },
+        body: {
+          name: parsed.data.name,
+          email: parsed.data.email,
+          messenger: parsed.data.messenger,
+          message: parsed.data.message,
+        },
       }).catch(() => {});
 
       setForm({ name: "", email: "", messenger: "", message: "" });
