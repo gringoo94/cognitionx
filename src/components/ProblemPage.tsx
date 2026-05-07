@@ -1105,17 +1105,6 @@ const ProblemPage = () => {
                   </li>
                 );
               })}
-              {/* eslint-disable-next-line */}
-              {false && toc.map((t) => (
-                <li key={t.id}>
-                  <a
-                    href={`#${t.id}`}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors block leading-snug"
-                  >
-                    {t.label}
-                  </a>
-                </li>
-              ))}
             </ul>
             <div className="mt-5 pt-5 border-t border-border">
               <Button size="sm" className="w-full" asChild>
