@@ -40,7 +40,7 @@ export function seoPlugin(): Plugin {
           `<link rel="canonical" href="${url}" />`,
           `<link rel="alternate" hreflang="ru" href="${url}" />`,
           `<link rel="alternate" hreflang="x-default" href="${url}" />`,
-          `<meta name="robots" content="index, follow" />`,
+          `<meta name="robots" content="${route.noindex ? "noindex, nofollow" : "index, follow"}" />`,
           `<meta name="theme-color" content="#0F172A" />`,
           `<meta property="og:type" content="website" />`,
           `<meta property="og:url" content="${url}" />`,
