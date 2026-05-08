@@ -60,6 +60,7 @@ const App = () => (
               <Route path="/tools/schema-quiz" element={<SchemaQuizPage />} />
               <Route path="/tools/emotion-wheel" element={<EmotionWheelPage />} />
               <Route path="/tools/abc-analysis" element={<AbcAnalysisPage />} />
+              <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />
