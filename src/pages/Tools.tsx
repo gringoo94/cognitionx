@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import {
   Brain, BookOpen, Target, Leaf, Zap, Shield,
-  AlertTriangle, Lightbulb, Compass, Heart, ArrowLeft, ExternalLink, Search
+  AlertTriangle, Lightbulb, Compass, Heart, ArrowLeft, ExternalLink, Search, Activity
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
