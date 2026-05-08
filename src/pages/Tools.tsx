@@ -224,6 +224,34 @@ const Tools = () => {
               </div>
             </Link>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+          >
+            <Link
+              to="/tools/behavioral-activation"
+              className="block h-full rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 hover:border-amber-500/40 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-flex p-2.5 rounded-xl bg-amber-500/10">
+                  <Activity className="h-5 w-5 text-amber-500" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-foreground group-hover:text-amber-500 transition-colors mb-1">
+                    Дневник поведенческой активации
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Фиксируйте активности и их влияние на настроение, мастерство и удовольствие. Метод первой линии при депрессии.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-amber-500 mt-2">
+                    Открыть дневник <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
