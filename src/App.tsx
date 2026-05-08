@@ -23,6 +23,7 @@ const Tools = lazy(() => import("./pages/Tools.tsx"));
 const SchemaQuizPage = lazy(() => import("./pages/SchemaQuizPage.tsx"));
 const EmotionWheelPage = lazy(() => import("./pages/EmotionWheelPage.tsx"));
 const AbcAnalysisPage = lazy(() => import("./pages/AbcAnalysisPage.tsx"));
+const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivationPage.tsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
@@ -59,6 +60,7 @@ const App = () => (
               <Route path="/tools/schema-quiz" element={<SchemaQuizPage />} />
               <Route path="/tools/emotion-wheel" element={<EmotionWheelPage />} />
               <Route path="/tools/abc-analysis" element={<AbcAnalysisPage />} />
+              <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />
