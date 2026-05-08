@@ -23,6 +23,7 @@ const Tools = lazy(() => import("./pages/Tools.tsx"));
 const SchemaQuizPage = lazy(() => import("./pages/SchemaQuizPage.tsx"));
 const EmotionWheelPage = lazy(() => import("./pages/EmotionWheelPage.tsx"));
 const AbcAnalysisPage = lazy(() => import("./pages/AbcAnalysisPage.tsx"));
+const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivationPage.tsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
