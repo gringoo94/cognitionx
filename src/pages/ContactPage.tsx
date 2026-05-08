@@ -70,12 +70,13 @@ const ContactPage = () => {
     }
 
     setLoading(true);
+    const messageText = parsed.data.message || "Заявка со страницы контактов (без дополнительного запроса)";
     try {
       const { error } = await supabase.from("contact_submissions").insert({
         name: parsed.data.name,
         email: parsed.data.email,
         messenger: parsed.data.messenger || null,
-        message: parsed.data.message || "",
+        message: messageText,
       });
       if (error) throw error;
       // Send Telegram notification (fire-and-forget)
@@ -84,7 +85,7 @@ const ContactPage = () => {
           name: parsed.data.name,
           email: parsed.data.email,
           messenger: parsed.data.messenger,
-          message: parsed.data.message,
+          message: messageText,
         },
       }).catch(() => {});
 
