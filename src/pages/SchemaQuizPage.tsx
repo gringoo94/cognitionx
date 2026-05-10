@@ -68,9 +68,9 @@ const quizSchema = {
     position: i + 1,
     name: q.text,
     eduQuestionType: "Multiple choice",
-    suggestedAnswer: scaleLabels.map((label: string) => ({
+    suggestedAnswer: scaleLabels.map((opt) => ({
       "@type": "Answer",
-      text: label,
+      text: opt.label,
     })),
   })),
 };
