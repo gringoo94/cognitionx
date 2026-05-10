@@ -257,6 +257,37 @@ const Tools = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.21 }}
+          >
+            <Link
+              to="/tools/tests"
+              className="block h-full rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-6 hover:border-cyan-500/40 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-flex p-2.5 rounded-xl bg-cyan-500/10">
+                  <Search className="h-5 w-5 text-cyan-500" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="font-semibold text-foreground group-hover:text-cyan-500 transition-colors">
+                      Психологические тесты
+                    </h2>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 font-medium">10 шкал</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    PHQ-9, GAD-7, выгорание (BAT), синдром самозванца, стресс, самооценка, перфекционизм. Валидированные шкалы, бесплатно и анонимно.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-cyan-500 mt-2">
+                    Открыть раздел тестов <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.24 }}
             className="sm:col-span-2"
           >
             <Link

@@ -20,6 +20,8 @@ const LandingPageKishinev = lazy(() => import("./pages/LandingPageKishinev.tsx")
 const BlogList = lazy(() => import("./pages/BlogList.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
 const Tools = lazy(() => import("./pages/Tools.tsx"));
+const TestsHub = lazy(() => import("./pages/TestsHub.tsx"));
+const TestPage = lazy(() => import("./pages/TestPage.tsx"));
 const SchemaQuizPage = lazy(() => import("./pages/SchemaQuizPage.tsx"));
 const EmotionWheelPage = lazy(() => import("./pages/EmotionWheelPage.tsx"));
 const AbcAnalysisPage = lazy(() => import("./pages/AbcAnalysisPage.tsx"));
@@ -58,6 +60,8 @@ const App = () => (
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/tools" element={<Tools />} />
+              <Route path="/tools/tests" element={<TestsHub />} />
+              <Route path="/tools/tests/:slug" element={<TestPage />} />
               <Route path="/tools/schema-quiz" element={<SchemaQuizPage />} />
               <Route path="/tools/emotion-wheel" element={<EmotionWheelPage />} />
               <Route path="/tools/abc-analysis" element={<AbcAnalysisPage />} />
