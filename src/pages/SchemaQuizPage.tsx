@@ -51,6 +51,30 @@ const faqSchema = {
   })),
 };
 
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  name: "Тест на ранние дезадаптивные схемы — опросник Янга (YSQ)",
+  description: "Экспресс-версия Young Schema Questionnaire: 36 вопросов, 18 ранних дезадаптивных схем.",
+  educationalLevel: "professional",
+  inLanguage: "ru",
+  about: { "@type": "Thing", name: "Схема-терапия" },
+  isAccessibleForFree: true,
+  url: `${SITE_URL}/tools/schema-quiz`,
+  numberOfQuestions: questions.length,
+  timeRequired: "PT7M",
+  hasPart: questions.map((q, i) => ({
+    "@type": "Question",
+    position: i + 1,
+    name: q.text,
+    eduQuestionType: "Multiple choice",
+    suggestedAnswer: scaleLabels.map((label: string) => ({
+      "@type": "Answer",
+      text: label,
+    })),
+  })),
+};
+
 const SchemaQuizPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
