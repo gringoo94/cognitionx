@@ -373,6 +373,42 @@ const Tools = () => {
             ))}
           </div>
 
+          {/* Schema-quiz: extended diagnostic test (YSQ) */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.4 }}
+            className="mt-4"
+          >
+            <Link
+              to="/tools/schema-quiz"
+              className="group relative flex flex-col md:flex-row items-start md:items-center gap-5 rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
+            >
+              <div className="inline-flex p-3 rounded-xl bg-primary/10 shrink-0">
+                <Compass className="h-5 w-5 text-primary" />
+              </div>
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-semibold uppercase tracking-wider">
+                    YSQ · 18 схем
+                  </span>
+                  <span className="text-[11px] text-muted-foreground">36 вопросов · 5–7 мин</span>
+                </div>
+                <h3 className="font-semibold text-foreground mb-1 leading-snug group-hover:text-primary transition-colors">
+                  Опросник ранних дезадаптивных схем
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Расширенный тест по схема-терапии Янга. Покажет, какие из 18 ранних схем (брошенность,
+                  дефективность, недоверие, эмоц. депривация и др.) могут быть активны.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1 text-sm text-primary font-medium opacity-80 group-hover:opacity-100 transition-opacity shrink-0">
+                Пройти <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+          </motion.div>
+
           <div className="mt-8 text-center">
             <Button asChild variant="outline" size="lg">
               <Link to="/tools/tests">
