@@ -16,6 +16,7 @@ import { SITE_URL } from "@/lib/globalSchema";
 import TestRunner from "./TestRunner";
 import TestResult from "./TestResult";
 import type { TestConfig } from "@/data/tests/types";
+import { tests } from "@/data/tests";
 
 interface TestLayoutProps {
   config: TestConfig;
@@ -41,13 +42,26 @@ const TestLayout = ({ config }: TestLayoutProps) => {
     description: config.tagline,
     educationalLevel: "professional",
     inLanguage: "ru",
-    about: {
-      "@type": "Thing",
-      name: config.clusterLabel,
-    },
+    about: { "@type": "Thing", name: config.clusterLabel },
     isAccessibleForFree: true,
     url: `${SITE_URL}${path}`,
+    numberOfQuestions: config.questions.length,
+    timeRequired: `PT${config.durationMin}M`,
+    hasPart: config.questions.map((q, i) => ({
+      "@type": "Question",
+      position: i + 1,
+      name: q,
+      eduQuestionType: "Multiple choice",
+      suggestedAnswer: config.scale.map((opt) => ({
+        "@type": "Answer",
+        text: opt.label,
+      })),
+    })),
   };
+
+  const relatedTests = (config.related || [])
+    .map((slug) => tests.find((t) => t.slug === slug))
+    .filter(Boolean) as TestConfig[];
 
   const faqSchema = {
     "@context": "https://schema.org",
