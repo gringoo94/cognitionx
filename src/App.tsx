@@ -24,6 +24,7 @@ const SchemaQuizPage = lazy(() => import("./pages/SchemaQuizPage.tsx"));
 const EmotionWheelPage = lazy(() => import("./pages/EmotionWheelPage.tsx"));
 const AbcAnalysisPage = lazy(() => import("./pages/AbcAnalysisPage.tsx"));
 const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivationPage.tsx"));
+const CbtWorkbookPage = lazy(() => import("./pages/CbtWorkbookPage.tsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
@@ -61,6 +62,7 @@ const App = () => (
               <Route path="/tools/emotion-wheel" element={<EmotionWheelPage />} />
               <Route path="/tools/abc-analysis" element={<AbcAnalysisPage />} />
               <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
+              <Route path="/cbtworkbook" element={<CbtWorkbookPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -103,7 +105,7 @@ const App = () => (
 
               {/* Lost Tilda URLs with active impressions in GSC — redirect to closest content */}
               <Route path="/dehumanization" element={<Navigate to="/blog/dehumanizaciya-chto-eto" replace />} />
-              <Route path="/cbtworkbook" element={<Navigate to="/tools" replace />} />
+              
               <Route path="/popcornbrain" element={<Navigate to="/blog/postoyannaya-trevoga-bez-prichiny" replace />} />
               <Route path="/koleso-emocij" element={<Navigate to="/tools/emotion-wheel" replace />} />
               <Route path="/abc-analysis" element={<Navigate to="/tools/abc-analysis" replace />} />
