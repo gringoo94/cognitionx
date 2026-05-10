@@ -237,10 +237,10 @@ const Tools = () => {
                     {t.title}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed flex-1 line-clamp-3">
-                    {t.shortDescription || t.seo?.description}
+                    {t.tagline || t.seoDescription}
                   </p>
                   <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/60">
-                    <span className="text-[11px] text-muted-foreground">{t.estimatedMinutes} мин</span>
+                    <span className="text-[11px] text-muted-foreground">{t.durationMin} мин</span>
                     <span className="inline-flex items-center gap-1 text-xs text-primary opacity-70 group-hover:opacity-100 transition-opacity">
                       Пройти <ArrowRight className="h-3.5 w-3.5" />
                     </span>
