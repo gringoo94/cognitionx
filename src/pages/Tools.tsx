@@ -50,14 +50,6 @@ type ToolCard = {
 
 const interactiveTools: ToolCard[] = [
   {
-    to: "/tools/schema-quiz",
-    title: "Тест: ваши ранние схемы",
-    description:
-      "Экспресс-версия YSQ — 36 вопросов за 5–7 минут. Покажет, какие из 18 ранних дезадаптивных схем могут быть активны.",
-    icon: Compass,
-    meta: "36 вопросов · 5–7 мин",
-  },
-  {
     to: "/tools/abc-analysis",
     title: "ABC-анализ",
     description:
