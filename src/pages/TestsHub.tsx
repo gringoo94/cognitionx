@@ -28,17 +28,25 @@ const TestsHub = () => {
     return tests.filter((t) => t.cluster === filter);
   }, [filter]);
 
-  // ItemList schema
+  // ItemList schema (10 valid scales + YSQ schema-quiz)
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Психологические тесты онлайн",
-    itemListElement: tests.map((t, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      url: `${SITE_URL}/tools/tests/${t.slug}`,
-      name: t.title,
-    })),
+    itemListElement: [
+      ...tests.map((t, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${SITE_URL}/tools/tests/${t.slug}`,
+        name: t.title,
+      })),
+      {
+        "@type": "ListItem",
+        position: tests.length + 1,
+        url: `${SITE_URL}/tools/schema-quiz`,
+        name: "Опросник ранних дезадаптивных схем (YSQ)",
+      },
+    ],
   };
 
   return (

@@ -228,8 +228,9 @@ const Tools = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="КПТ-инструменты и психологические тесты | Дмитрий Яцко"
-        description="Бесплатные интерактивные инструменты КПТ и схема-терапии: 10 валидированных тестов (PHQ-9, GAD-7, BAT), ABC-анализ, колесо эмоций, дневник активации, рабочая тетрадь."
+        description="Бесплатные интерактивные инструменты КПТ и схема-терапии: 11 валидированных тестов (PHQ-9, GAD-7, BAT, YSQ), ABC-анализ, колесо эмоций, дневник активации, рабочая тетрадь."
         path="/tools"
+        ogImage={`${SITE_URL}/og-tools.webp`}
         schema={[itemListSchema, faqSchema]}
         breadcrumbs={[
           { name: "Главная", url: `${SITE_URL}/` },
@@ -255,7 +256,7 @@ const Tools = () => {
             transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full mb-6"
           >
-            <Sparkles className="h-3.5 w-3.5" /> 16 бесплатных инструментов · доказательная психология
+            <Sparkles className="h-3.5 w-3.5" /> 11 тестов · 4 техники КПТ · доказательная психология
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
@@ -307,8 +308,8 @@ const Tools = () => {
         <div className="relative border-t border-border/60 bg-card/40 backdrop-blur">
           <div className="max-w-6xl mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { v: "10", l: "психологических тестов" },
-              { v: "4", l: "интерактивных техники" },
+              { v: "11", l: "психологических тестов" },
+              { v: "4", l: "интерактивные техники" },
               { v: "10", l: "модулей рабочей тетради" },
               { v: "0 €", l: "стоимость использования" },
             ].map((s) => (

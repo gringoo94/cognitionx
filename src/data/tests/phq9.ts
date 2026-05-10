@@ -84,7 +84,7 @@ export const phq9: TestConfig = {
 
     return { score, maxScore: 27, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["gad-7", "bat", "rosenberg"],
+  related: ["gad-7", "bat-burnout", "rosenberg-self-esteem"],
   faq: [
     {
       q: "Что значит PHQ-9?",

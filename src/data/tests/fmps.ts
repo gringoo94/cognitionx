@@ -114,7 +114,7 @@ export const fmps: TestConfig = {
     }
     return { score, maxScore: 100, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["cips-impostor", "lay-procrastination", "atq"],
+  related: ["cips-impostor", "lay-procrastination", "atq-automatic-thoughts"],
   faq: [
     { q: "Перфекционизм — это плохо?", a: "Часть перфекционизма (высокие стандарты) — ресурс. Дезадаптивные части (страх ошибки, сомнения, родительские ожидания) — мишени терапии." },
     { q: "Подшкалы — это что?", a: "FMPS делит перфекционизм на 4 части. После теста вы увидите свой балл по каждой — это поможет понять, где главная точка работы." },

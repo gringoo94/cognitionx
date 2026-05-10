@@ -11,6 +11,8 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SchemaQuiz from "@/components/SchemaQuiz";
+import { SITE_URL } from "@/lib/globalSchema";
+import { questions, scaleLabels } from "@/data/schemaQuizData";
 
 const faq = [
   {
@@ -49,6 +51,30 @@ const faqSchema = {
   })),
 };
 
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  name: "Тест на ранние дезадаптивные схемы — опросник Янга (YSQ)",
+  description: "Экспресс-версия Young Schema Questionnaire: 36 вопросов, 18 ранних дезадаптивных схем.",
+  educationalLevel: "professional",
+  inLanguage: "ru",
+  about: { "@type": "Thing", name: "Схема-терапия" },
+  isAccessibleForFree: true,
+  url: `${SITE_URL}/tools/schema-quiz`,
+  numberOfQuestions: questions.length,
+  timeRequired: "PT7M",
+  hasPart: questions.map((q, i) => ({
+    "@type": "Question",
+    position: i + 1,
+    name: q.text,
+    eduQuestionType: "Multiple choice",
+    suggestedAnswer: scaleLabels.map((opt) => ({
+      "@type": "Answer",
+      text: opt.label,
+    })),
+  })),
+};
+
 const SchemaQuizPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -56,7 +82,7 @@ const SchemaQuizPage = () => {
         title="Тест на схемы — экспресс-версия YSQ Янга | Психолог Дмитрий Яцко"
         description="Бесплатный экспресс-тест на 18 ранних дезадаптивных схем по модели Джеффри Янга. 36 вопросов, 5-7 минут. Узнайте свои глубинные паттерны."
         path="/tools/schema-quiz"
-        schema={faqSchema}
+        schema={[quizSchema, faqSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },

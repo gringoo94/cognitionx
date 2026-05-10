@@ -89,7 +89,7 @@ export const cips: TestConfig = {
 
     return { score, maxScore: 100, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["fmps-perfectionism", "lay-procrastination", "rosenberg"],
+  related: ["fmps-perfectionism", "lay-procrastination", "rosenberg-self-esteem"],
   faq: [
     { q: "Это болезнь?", a: "Нет. Это устойчивый паттерн мышления, не диагноз. Но он сильно ухудшает качество жизни и связан с тревогой, депрессией и выгоранием." },
     { q: "Почему он часто у IT-специалистов?", a: "В IT быстрая смена технологий и постоянное сравнение с коллегами. Это благоприятная среда для самозванческих мыслей." },

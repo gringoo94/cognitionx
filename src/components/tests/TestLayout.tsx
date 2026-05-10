@@ -16,6 +16,7 @@ import { SITE_URL } from "@/lib/globalSchema";
 import TestRunner from "./TestRunner";
 import TestResult from "./TestResult";
 import type { TestConfig } from "@/data/tests/types";
+import { tests } from "@/data/tests";
 
 interface TestLayoutProps {
   config: TestConfig;
@@ -41,13 +42,26 @@ const TestLayout = ({ config }: TestLayoutProps) => {
     description: config.tagline,
     educationalLevel: "professional",
     inLanguage: "ru",
-    about: {
-      "@type": "Thing",
-      name: config.clusterLabel,
-    },
+    about: { "@type": "Thing", name: config.clusterLabel },
     isAccessibleForFree: true,
     url: `${SITE_URL}${path}`,
+    numberOfQuestions: config.questions.length,
+    timeRequired: `PT${config.durationMin}M`,
+    hasPart: config.questions.map((q, i) => ({
+      "@type": "Question",
+      position: i + 1,
+      name: q,
+      eduQuestionType: "Multiple choice",
+      suggestedAnswer: config.scale.map((opt) => ({
+        "@type": "Answer",
+        text: opt.label,
+      })),
+    })),
   };
+
+  const relatedTests = (config.related || [])
+    .map((slug) => tests.find((t) => t.slug === slug))
+    .filter(Boolean) as TestConfig[];
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -190,6 +204,35 @@ const TestLayout = ({ config }: TestLayoutProps) => {
             ))}
           </Accordion>
         </section>
+
+        {/* Related tests */}
+        {relatedTests.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-xl font-semibold text-foreground mb-4">Похожие тесты</h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              {relatedTests.map((rt) => (
+                <Link
+                  key={rt.slug}
+                  to={`/tools/tests/${rt.slug}`}
+                  className="group flex flex-col rounded-xl border border-border bg-card p-4 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md transition-all"
+                >
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-semibold uppercase tracking-wider self-start mb-2">
+                    {rt.code}
+                  </span>
+                  <h3 className="text-sm font-semibold text-foreground leading-snug group-hover:text-primary transition-colors mb-1.5">
+                    {rt.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-3 flex-1">
+                    {rt.tagline}
+                  </p>
+                  <span className="text-[11px] text-muted-foreground inline-flex items-center gap-1">
+                    {rt.questions.length} вопр. · {rt.durationMin} мин →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Final CTA */}
         <section className="rounded-2xl border border-border bg-card p-6 md:p-8 text-center">
