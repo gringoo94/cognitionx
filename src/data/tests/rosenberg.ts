@@ -75,7 +75,7 @@ export const rosenberg: TestConfig = {
 
     return { score, maxScore: 30, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["cips-impostor", "phq-9", "atq"],
+  related: ["cips-impostor", "phq-9", "atq-automatic-thoughts"],
   faq: [
     { q: "Что значит «низкая самооценка»?", a: "Это устойчиво негативное отношение к себе. Не временное настроение, а паттерн, который проявляется в большинстве сфер жизни." },
     { q: "Высокая самооценка — это всегда хорошо?", a: "В норме — да. Но патологически высокая самооценка с обесцениванием других может говорить о нарциссических чертах. Шкала Розенберга это не различает." },

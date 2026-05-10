@@ -81,7 +81,7 @@ export const das: TestConfig = {
     }
     return { score, maxScore: 119, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["atq", "phq-9", "cips-impostor"],
+  related: ["atq-automatic-thoughts", "phq-9", "cips-impostor"],
   faq: [
     { q: "Что такое «дисфункциональная установка»?", a: "Жёсткое условное убеждение типа «если…, то…», которое не учитывает контекст и приводит к страданию. Пример: «если я ошибусь — я неудачник»." },
     { q: "Можно ли изменить такие установки?", a: "Да. Это центральная задача когнитивной терапии. Работа занимает месяцы, но даёт устойчивый результат." },

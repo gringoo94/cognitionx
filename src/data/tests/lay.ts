@@ -87,7 +87,7 @@ export const lay: TestConfig = {
 
     return { score, maxScore: 100, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["cips-impostor", "fmps-perfectionism", "atq"],
+  related: ["cips-impostor", "fmps-perfectionism", "atq-automatic-thoughts"],
   faq: [
     { q: "Прокрастинация — это лень?", a: "Нет. Лень — отсутствие желания что-то делать. Прокрастинация — желание есть, но действие откладывается. Часто это форма избегания тревоги." },
     { q: "Связана ли прокрастинация с депрессией?", a: "Да. Хроническая прокрастинация — фактор риска депрессии и тревоги. Это работает в обе стороны: депрессия усиливает прокрастинацию, прокрастинация усиливает депрессию." },
