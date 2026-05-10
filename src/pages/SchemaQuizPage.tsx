@@ -82,7 +82,7 @@ const SchemaQuizPage = () => {
         title="Тест на схемы — экспресс-версия YSQ Янга | Психолог Дмитрий Яцко"
         description="Бесплатный экспресс-тест на 18 ранних дезадаптивных схем по модели Джеффри Янга. 36 вопросов, 5-7 минут. Узнайте свои глубинные паттерны."
         path="/tools/schema-quiz"
-        schema={faqSchema}
+        schema={[quizSchema, faqSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },
