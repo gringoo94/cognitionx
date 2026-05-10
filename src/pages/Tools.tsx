@@ -308,8 +308,8 @@ const Tools = () => {
         <div className="relative border-t border-border/60 bg-card/40 backdrop-blur">
           <div className="max-w-6xl mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { v: "10", l: "психологических тестов" },
-              { v: "4", l: "интерактивных техники" },
+              { v: "11", l: "психологических тестов" },
+              { v: "4", l: "интерактивные техники" },
               { v: "10", l: "модулей рабочей тетради" },
               { v: "0 €", l: "стоимость использования" },
             ].map((s) => (
