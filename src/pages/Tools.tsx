@@ -89,7 +89,8 @@ const externalTools = [
 ];
 
 const KNOWLEDGE_FORGE_URL = "https://knowledge-forge.lovable.app";
-const featuredTestSlugs = ["phq9", "gad7", "bat", "cips", "pss10", "rosenberg"];
+// Top-3 most-searched tests (SEO): депрессия, тревога, выгорание
+const featuredTestSlugs = ["phq9", "gad7", "bat"];
 
 const benefits = [
   {
