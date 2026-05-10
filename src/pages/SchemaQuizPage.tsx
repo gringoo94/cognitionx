@@ -11,6 +11,8 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SchemaQuiz from "@/components/SchemaQuiz";
+import { SITE_URL } from "@/lib/globalSchema";
+import { questions, scaleLabels } from "@/data/schemaQuizData";
 
 const faq = [
   {
