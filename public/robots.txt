@@ -17,6 +17,7 @@ Disallow: /*?fbclid=*
 Disallow: /*?gclid=*
 Disallow: /*?yclid=*
 Disallow: /*?ref=*
+Disallow: /*?__lovable_token=*
 
 # --- Geo-страницы (явно разрешены для индексации) ---
 Allow: /psiholog-moskva
@@ -29,6 +30,16 @@ Allow: /psiholog-lissabon
 Allow: /psiholog-tbilisi
 Allow: /psiholog-kishinev
 Allow: /psiholog-dlya-it
+
+# --- Инструменты и психологические тесты (явно разрешены) ---
+Allow: /tools
+Allow: /tools/tests
+Allow: /tools/tests/*
+Allow: /tools/schema-quiz
+Allow: /tools/abc-analysis
+Allow: /tools/emotion-wheel
+Allow: /tools/behavioral-activation
+Allow: /cbtworkbook
 
 # --- Поисковые боты с особыми правилами ---
 User-agent: GPTBot
