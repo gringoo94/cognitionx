@@ -256,7 +256,7 @@ const Tools = () => {
             transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full mb-6"
           >
-            <Sparkles className="h-3.5 w-3.5" /> 16 бесплатных инструментов · доказательная психология
+            <Sparkles className="h-3.5 w-3.5" /> 11 тестов · 4 техники КПТ · доказательная психология
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
