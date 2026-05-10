@@ -278,7 +278,7 @@ const CbtWorkbookPage = () => {
                   className="rounded-xl border border-border bg-background p-5 hover:border-primary/30 transition-colors"
                 >
                   <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                    <m.icon className="h-4.5 w-4.5 text-primary" />
+                    <m.icon className="h-4 w-4 text-primary" />
                   </div>
                   <h3 className="font-semibold text-foreground mb-1.5">{m.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
