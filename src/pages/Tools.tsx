@@ -252,6 +252,38 @@ const Tools = () => {
               </div>
             </Link>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.21 }}
+            className="sm:col-span-2"
+          >
+            <Link
+              to="/cbtworkbook"
+              className="block h-full rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 p-6 hover:border-primary/40 transition-all group"
+            >
+              <div className="flex items-start gap-4">
+                <div className="inline-flex p-2.5 rounded-xl bg-primary/10">
+                  <Brain className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                      CBT Workbook — полный курс КПТ
+                    </h2>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary/15 text-primary font-medium">Beta</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Бесплатная цифровая тетрадь: 10 модулей КПТ, трекер настроения, упражнения по протоколам Beck, Ellis, Lewinsohn.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-primary mt-2">
+                    Узнать подробнее <ArrowLeft className="h-3.5 w-3.5 rotate-180" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
