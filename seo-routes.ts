@@ -6,6 +6,10 @@ export interface SeoRoute {
   title: string;
   description: string;
   noindex?: boolean;
+  /** Open Graph type. Defaults to "website". Use "article" for blog posts. */
+  ogType?: "website" | "article";
+  /** Absolute URL of an OG image specific to this route. Falls back to og-default.webp. */
+  ogImage?: string;
 }
 
 export const seoRoutes: SeoRoute[] = [
