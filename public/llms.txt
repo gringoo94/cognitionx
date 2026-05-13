@@ -1,0 +1,59 @@
+# CognitionX — Психолог Дмитрий Яцко
+
+> Практика психолога Дмитрия Яцко: когнитивно-поведенческая терапия (КПТ) и схема-терапия онлайн на русском языке. Работа с депрессией, тревогой, паническими атаками, выгоранием, низкой самооценкой и созависимостью.
+
+CognitionX — сайт практикующего психолога Дмитрия Яцко (КПТ, схема-терапия). Консультации проходят онлайн на русском языке для клиентов по всему миру (Европа, США, Азия, СНГ). Помимо приёма, на сайте опубликованы валидированные психологические тесты (PHQ-9, GAD-7, шкала Розенберга и др.), интерактивные КПТ-инструменты (ABC-анализ, дневник поведенческой активации, колесо эмоций, тест схема-терапии) и блог о доказательной психотерапии.
+
+## Основные страницы
+
+- [Главная](https://cognitionx.cloud/): психолог Дмитрий Яцко, описание подхода КПТ и схема-терапии, запись на консультацию
+- [О специалисте](https://cognitionx.cloud/about): образование, опыт, методы работы, этика
+- [Контакты и запись](https://cognitionx.cloud/contact): форма записи на онлайн-консультацию
+
+## Психологические инструменты
+
+- [Каталог инструментов](https://cognitionx.cloud/tools): все бесплатные интерактивные психологические инструменты сайта
+- [Психологические тесты](https://cognitionx.cloud/tools/tests): хаб валидированных самоопросников (депрессия, тревога, самооценка, перфекционизм, прокрастинация)
+- [Тест на схемы (Schema Quiz)](https://cognitionx.cloud/tools/schema-quiz): диагностика ранних дезадаптивных схем по модели Дж. Янга
+- [ABC-анализ](https://cognitionx.cloud/tools/abc-analysis): КПТ-техника разбора ситуаций «событие → мысль → эмоция → поведение»
+- [Колесо эмоций](https://cognitionx.cloud/tools/emotion-wheel): интерактивная карта 87 эмоций для развития эмоциональной грамотности
+- [Дневник поведенческой активации](https://cognitionx.cloud/tools/behavioral-activation): инструмент для работы с депрессией методом BA
+- [CBT Workbook](https://cognitionx.cloud/cbtworkbook): рабочая тетрадь упражнений КПТ
+
+## Психологические тесты
+
+- [PHQ-9 — шкала депрессии](https://cognitionx.cloud/tools/tests/phq9): валидированный опросник на симптомы депрессии
+- [GAD-7 — шкала тревоги](https://cognitionx.cloud/tools/tests/gad7): опросник генерализованного тревожного расстройства
+- [Шкала самооценки Розенберга](https://cognitionx.cloud/tools/tests/rosenberg): измерение глобальной самооценки
+- [DAS — дисфункциональные установки](https://cognitionx.cloud/tools/tests/das): шкала Вейссмана и Бека
+- [ATQ — автоматические мысли](https://cognitionx.cloud/tools/tests/atq): опросник негативных автоматических мыслей
+- [FMPS — многомерный перфекционизм](https://cognitionx.cloud/tools/tests/fmps): шкала Фроста
+- [CIPS — синдром самозванца](https://cognitionx.cloud/tools/tests/cips): шкала Кланс
+- [LAY — прокрастинация](https://cognitionx.cloud/tools/tests/lay): шкала общей прокрастинации
+- [BAT — выгорание](https://cognitionx.cloud/tools/tests/bat): Burnout Assessment Tool
+- [PSS-10 — воспринимаемый стресс](https://cognitionx.cloud/tools/tests/pss10): шкала Коэна
+
+## Темы (запросы клиентов)
+
+- [Депрессия](https://cognitionx.cloud/depression): подход КПТ к депрессивным расстройствам
+- [Тревога](https://cognitionx.cloud/anxiety): работа с тревожными расстройствами
+- [Панические атаки](https://cognitionx.cloud/panic): протоколы КПТ при панике
+- [Выгорание](https://cognitionx.cloud/burnout): диагностика и восстановление
+- [Низкая самооценка](https://cognitionx.cloud/self-esteem): работа со схемой дефективности
+- [Синдром самозванца](https://cognitionx.cloud/imposter): когнитивная переработка
+- [Созависимость](https://cognitionx.cloud/codependency): схема-терапия отношений
+- [Перфекционизм](https://cognitionx.cloud/perfectionism): работа со схемой жёстких стандартов
+
+## Блог
+
+- [Все статьи](https://cognitionx.cloud/blog): материалы о доказательной психотерапии, КПТ и схема-терапии
+
+## Optional
+
+- [Гео: психолог в Кишинёве](https://cognitionx.cloud/psiholog-kishinev)
+- [Гео: психолог в Европе](https://cognitionx.cloud/psiholog-europa)
+- [Гео: психолог в США](https://cognitionx.cloud/psiholog-usa)
+- [Гео: психолог в Азии](https://cognitionx.cloud/psiholog-aziya)
+- [Гео: психолог для IT-специалистов](https://cognitionx.cloud/psiholog-dlya-it)
+- [Политика конфиденциальности](https://cognitionx.cloud/privacy)
+- [Информированное согласие](https://cognitionx.cloud/informed-consent)
