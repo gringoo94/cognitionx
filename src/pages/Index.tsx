@@ -19,23 +19,82 @@ import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
-const personSchema = {
+// MedicalBusiness — более специфичная разметка для health-вертикали,
+// чем общий ProfessionalService. Google и AI-краулеры используют
+// medicalSpecialty и availableService для классификации практики.
+const medicalBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Дмитрий Яцко",
-  jobTitle: "Психолог, КПТ и схема-терапевт",
+  "@type": ["MedicalBusiness", "ProfessionalService"],
+  "@id": "https://cognitionx.cloud/#medicalbusiness",
+  name: "CognitionX — Психолог Дмитрий Яцко",
+  alternateName: "Кабинет КПТ и схема-терапии Дмитрия Яцко",
   url: "https://cognitionx.cloud",
+  image: "https://cognitionx.cloud/og-default.webp",
+  logo: "https://cognitionx.cloud/favicon.png",
+  description:
+    "Онлайн-практика психолога Дмитрия Яцко: когнитивно-поведенческая и схема-терапия. Депрессия, тревога, панические атаки, выгорание, низкая самооценка, созависимость.",
+  priceRange: "€€",
+  email: "digitalgringoo@gmail.com",
+  telephone: "+447599880865",
+  medicalSpecialty: ["Psychiatric", "Psychological"],
+  areaServed: [
+    { "@type": "Country", name: "Молдова" },
+    { "@type": "Country", name: "Германия" },
+    { "@type": "Country", name: "Нидерланды" },
+    { "@type": "Country", name: "Португалия" },
+    { "@type": "Country", name: "Грузия" },
+    { "@type": "Place", name: "Онлайн / по всему миру" },
+  ],
+  availableLanguage: ["ru", "ro", "en"],
+  founder: { "@id": "https://cognitionx.cloud/#person" },
+  employee: { "@id": "https://cognitionx.cloud/#person" },
+  parentOrganization: { "@id": "https://cognitionx.cloud/#organization" },
+  availableService: [
+    {
+      "@type": "MedicalTherapy",
+      name: "Когнитивно-поведенческая терапия (КПТ)",
+      alternateName: "Cognitive Behavioral Therapy",
+      relevantSpecialty: "Psychological",
+    },
+    {
+      "@type": "MedicalTherapy",
+      name: "Схема-терапия",
+      alternateName: "Schema Therapy",
+      relevantSpecialty: "Psychological",
+    },
+    {
+      "@type": "MedicalTherapy",
+      name: "Терапия тревожных расстройств",
+      relevantSpecialty: "Psychological",
+    },
+    {
+      "@type": "MedicalTherapy",
+      name: "Терапия депрессии",
+      relevantSpecialty: "Psychological",
+    },
+  ],
 };
 
-const serviceSchema = {
+// Physician — отдельная сущность, описывающая Дмитрия как практикующего
+// специалиста. Связывается с MedicalBusiness через @id из globalSchema.
+const physicianSchema = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Психолог Дмитрий Яцко — КПТ и схема-терапия",
+  "@type": "Physician",
+  "@id": "https://cognitionx.cloud/#physician",
+  name: "Дмитрий Яцко",
+  alternateName: "Dmitrii Iatco",
   url: "https://cognitionx.cloud",
-  description: "Когнитивно-поведенческая и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание.",
-  areaServed: ["Кишинёв", "Молдова", "Онлайн"],
-  serviceType: "Психологическая консультация",
-  provider: { "@type": "Person", name: "Дмитрий Яцко" },
+  image: "https://cognitionx.cloud/og-default.webp",
+  medicalSpecialty: "Psychological",
+  availableService: { "@id": "https://cognitionx.cloud/#medicalbusiness" },
+  worksFor: { "@id": "https://cognitionx.cloud/#medicalbusiness" },
+  knowsLanguage: ["ru", "ro", "en"],
+  sameAs: [
+    "https://t.me/gringoo94",
+    "https://www.instagram.com/gringo.journal",
+    "https://www.linkedin.com/in/dmitrii-iatco/",
+    "https://www.b17.ru/",
+  ],
 };
 
 const Index = () => (
@@ -44,7 +103,7 @@ const Index = () => (
       title="CognitionX — психолог Дмитрий Яцко | КПТ онлайн"
       description="CognitionX — практика психолога Дмитрия Яцко. КПТ и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание. Запишитесь."
       path="/"
-      schema={[personSchema, serviceSchema, homeFaqSchema, testimonialsSchema]}
+      schema={[medicalBusinessSchema, physicianSchema, homeFaqSchema, testimonialsSchema]}
     />
     <Navbar />
     <main>
