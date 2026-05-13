@@ -49,6 +49,24 @@ const TOOL_SCHEMA: RelatedTool = {
   description: "Определите свои ранние дезадаптивные схемы по Янгу",
   Icon: Sparkles,
 };
+const TOOL_CIPS: RelatedTool = {
+  href: "/tools/tests/cips-impostor",
+  title: "Тест на синдром самозванца (CIPS)",
+  description: "Шкала Кланс — самый известный тест на феномен самозванца, 20 вопросов",
+  Icon: ListChecks,
+};
+const TOOL_BAT: RelatedTool = {
+  href: "/tools/tests/bat-burnout",
+  title: "Тест на выгорание (BAT-12)",
+  description: "Современная альтернатива опроснику Маслач, валидирована в Европе",
+  Icon: ListChecks,
+};
+const TOOL_DAS: RelatedTool = {
+  href: "/tools/tests/das-dysfunctional-attitudes",
+  title: "Дисфункциональные установки (DAS)",
+  description: "Шкала Бека/Вайсман — иррациональные убеждения, уязвимость к депрессии",
+  Icon: BookHeart,
+};
 
 export const problemExtras: Record<string, ProblemExtras> = {
   depression: {
