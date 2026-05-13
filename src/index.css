@@ -20,7 +20,8 @@
     --secondary-foreground: 220 25% 10%;
 
     --muted: 220 15% 94%;
-    --muted-foreground: 220 12% 38%;
+    /* Darkened from 38% → 30% L so muted body text and faded /70 utilities still meet WCAG AA 4.5:1 on light backgrounds. */
+    --muted-foreground: 220 14% 30%;
 
     --accent: 170 70% 45%;
     --accent-foreground: 0 0% 100%;
