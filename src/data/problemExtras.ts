@@ -67,6 +67,12 @@ const TOOL_DAS: RelatedTool = {
   description: "Шкала Бека/Вайсман — иррациональные убеждения, уязвимость к депрессии",
   Icon: BookHeart,
 };
+const TOOL_PSS: RelatedTool = {
+  href: "/tools/tests/pss-10",
+  title: "Шкала воспринимаемого стресса (PSS-10)",
+  description: "Тест Коэна — оцените уровень хронического стресса за последний месяц, 10 вопросов",
+  Icon: ListChecks,
+};
 
 export const problemExtras: Record<string, ProblemExtras> = {
   depression: {
@@ -279,7 +285,7 @@ export const problemExtras: Record<string, ProblemExtras> = {
       "Трудно принимать даже мелкие решения — ступор",
     ],
     selfCheckThreshold: 3,
-    relatedTools: [TOOL_ABC, TOOL_EMOTIONS],
+    relatedTools: [TOOL_PSS, TOOL_ABC, TOOL_EMOTIONS],
     casebook: {
       request: "Клиентка 41 год: переезд в новую страну + смена работы + развод. Не справляется.",
       work: "Стабилизация (сон, питание, движение), приоритизация, копинг-стратегии, постепенное расширение социального круга.",
