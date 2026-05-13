@@ -186,7 +186,7 @@ export const problemExtras: Record<string, ProblemExtras> = {
       "Трудно радоваться достижениям — «и это нормально, могло быть лучше»",
     ],
     selfCheckThreshold: 3,
-    relatedTools: [TOOL_ABC, TOOL_SCHEMA],
+    relatedTools: [TOOL_BAT, TOOL_ABC, TOOL_SCHEMA],
     casebook: {
       request: "IT-руководитель 38 лет: работа 70 ч/нед, потеря смысла, цинизм к команде.",
       work: "Разбор схем «жёсткие стандарты» и «самопожертвование», тренинг ассертивности, реструктуризация недели по принципу «энергия = ресурс».",
@@ -248,7 +248,7 @@ export const problemExtras: Record<string, ProblemExtras> = {
       "Боитесь проявиться: высказать мнение, попросить, начать новое",
     ],
     selfCheckThreshold: 3,
-    relatedTools: [TOOL_SCHEMA, TOOL_ABC],
+    relatedTools: [TOOL_CIPS, TOOL_SCHEMA, TOOL_ABC],
     casebook: {
       request: "Клиент 29 лет, синдром самозванца: успешный разработчик, но «вот-вот разоблачат».",
       work: "Выявление схемы «дефективность/стыд», поведенческие эксперименты (рассказать коллеге о незнании), развитие самосострадания.",
