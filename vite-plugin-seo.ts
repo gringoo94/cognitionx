@@ -32,6 +32,8 @@ export function seoPlugin(): Plugin {
       for (const route of seoRoutes) {
         const routePath = route.path;
         const url = `${SITE_URL}${routePath}`;
+        const ogType = route.ogType || "website";
+        const ogImage = route.ogImage || OG_IMAGE;
 
         // Build static meta tags block
         const metaBlock = [
@@ -42,11 +44,11 @@ export function seoPlugin(): Plugin {
           `<link rel="alternate" hreflang="x-default" href="${url}" />`,
           `<meta name="robots" content="${route.noindex ? "noindex, nofollow" : "index, follow"}" />`,
           `<meta name="theme-color" content="#0F172A" />`,
-          `<meta property="og:type" content="website" />`,
+          `<meta property="og:type" content="${ogType}" />`,
           `<meta property="og:url" content="${url}" />`,
           `<meta property="og:title" content="${escapeAttr(route.title)}" />`,
           `<meta property="og:description" content="${escapeAttr(route.description)}" />`,
-          `<meta property="og:image" content="${OG_IMAGE}" />`,
+          `<meta property="og:image" content="${ogImage}" />`,
           `<meta property="og:image:width" content="1200" />`,
           `<meta property="og:image:height" content="630" />`,
           `<meta property="og:locale" content="ru_RU" />`,
@@ -54,7 +56,7 @@ export function seoPlugin(): Plugin {
           `<meta name="twitter:card" content="summary_large_image" />`,
           `<meta name="twitter:title" content="${escapeAttr(route.title)}" />`,
           `<meta name="twitter:description" content="${escapeAttr(route.description)}" />`,
-          `<meta name="twitter:image" content="${OG_IMAGE}" />`,
+          `<meta name="twitter:image" content="${ogImage}" />`,
         ].join("\n    ");
 
         // Replace fallback title/description/canonical in the base HTML
