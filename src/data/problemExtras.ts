@@ -49,6 +49,24 @@ const TOOL_SCHEMA: RelatedTool = {
   description: "Определите свои ранние дезадаптивные схемы по Янгу",
   Icon: Sparkles,
 };
+const TOOL_CIPS: RelatedTool = {
+  href: "/tools/tests/cips-impostor",
+  title: "Тест на синдром самозванца (CIPS)",
+  description: "Шкала Кланс — самый известный тест на феномен самозванца, 20 вопросов",
+  Icon: ListChecks,
+};
+const TOOL_BAT: RelatedTool = {
+  href: "/tools/tests/bat-burnout",
+  title: "Тест на выгорание (BAT-12)",
+  description: "Современная альтернатива опроснику Маслач, валидирована в Европе",
+  Icon: ListChecks,
+};
+const TOOL_DAS: RelatedTool = {
+  href: "/tools/tests/das-dysfunctional-attitudes",
+  title: "Дисфункциональные установки (DAS)",
+  description: "Шкала Бека/Вайсман — иррациональные убеждения, уязвимость к депрессии",
+  Icon: BookHeart,
+};
 
 export const problemExtras: Record<string, ProblemExtras> = {
   depression: {
@@ -168,7 +186,7 @@ export const problemExtras: Record<string, ProblemExtras> = {
       "Трудно радоваться достижениям — «и это нормально, могло быть лучше»",
     ],
     selfCheckThreshold: 3,
-    relatedTools: [TOOL_ABC, TOOL_SCHEMA],
+    relatedTools: [TOOL_BAT, TOOL_ABC, TOOL_SCHEMA],
     casebook: {
       request: "IT-руководитель 38 лет: работа 70 ч/нед, потеря смысла, цинизм к команде.",
       work: "Разбор схем «жёсткие стандарты» и «самопожертвование», тренинг ассертивности, реструктуризация недели по принципу «энергия = ресурс».",
@@ -230,7 +248,7 @@ export const problemExtras: Record<string, ProblemExtras> = {
       "Боитесь проявиться: высказать мнение, попросить, начать новое",
     ],
     selfCheckThreshold: 3,
-    relatedTools: [TOOL_SCHEMA, TOOL_ABC],
+    relatedTools: [TOOL_CIPS, TOOL_SCHEMA, TOOL_ABC],
     casebook: {
       request: "Клиент 29 лет, синдром самозванца: успешный разработчик, но «вот-вот разоблачат».",
       work: "Выявление схемы «дефективность/стыд», поведенческие эксперименты (рассказать коллеге о незнании), развитие самосострадания.",
