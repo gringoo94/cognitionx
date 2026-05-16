@@ -202,7 +202,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["panic-attacks", "depression", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "postoyannaya-trevoga-bez-prichiny", "simptomy-trevozhnogo-rasstrojstva"],
+    relatedArticles: ["kak-uspokoitsya", "povyshennaya-trevozhnost", "kak-spravitsya-s-trevozhnostyu", "postoyannaya-trevoga-bez-prichiny", "simptomy-trevozhnogo-rasstrojstva"],
     longRead: {
       title: "Как справиться с тревогой: 6 техник КПТ, которые работают",
       sections: [
