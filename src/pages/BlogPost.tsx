@@ -8,6 +8,7 @@ import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
 import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
 import BlogSubscribeForm from "@/components/BlogSubscribeForm";
+import BlogCover from "@/components/BlogCover";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
