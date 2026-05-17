@@ -534,7 +534,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["schema-therapy", "online-therapy", "in-person-therapy", "depression", "anxiety", "panic-attacks"],
-    relatedArticles: ["chto-takoe-kpt", "kak-spravitsya-s-trevozhnostyu", "planirovanie-dnya-pri-depressii", "pervaya-sessiya-u-psihologa"],
+    relatedArticles: ["dokazatelnaya-baza-kpt", "10-mifov-o-kpt", "kpt-vs-psihoanaliz", "skolko-dlitsya-kpt", "kpt-pri-trevoge", "kpt-pri-depressii", "5-kpt-uprazhnenij", "kak-vybrat-kpt-psihologa", "chto-takoe-kpt", "pervaya-sessiya-u-psihologa"],
   },
   {
     slug: "online-therapy",
