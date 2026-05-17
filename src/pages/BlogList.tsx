@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import BlogCover from "@/components/BlogCover";
 import { Badge } from "@/components/ui/badge";
 import {
   Pagination,
