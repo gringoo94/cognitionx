@@ -202,7 +202,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["panic-attacks", "depression", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["kpt-pri-trevoge", "kak-uspokoitsya", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost", "trevoga-bez-prichiny", "pristup-trevogi-chto-delat", "trevoga-po-utram", "trevoga-pered-snom", "somaticheskie-simptomy-trevogi", "5-kpt-uprazhnenij", "kak-spravitsya-s-trevozhnostyu"],
+    relatedArticles: ["kpt-pri-trevoge", "kak-uspokoitsya", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost", "trevoga-bez-prichiny", "pristup-trevogi-chto-delat", "trevoga-po-utram", "trevoga-pered-snom", "somaticheskie-simptomy-trevogi", "5-kpt-uprazhnenij", "kak-spravitsya-s-trevozhnostyu", "strah-byt-neljubimym", "malenkie-pobedy-ekspozicii", "trevoga-pered-vstrechej", "bud-sebe-luchshim-drugom", "kto-tebe-eto-skazal"],
     longRead: {
       title: "Как справиться с тревогой: 6 техник КПТ, которые работают",
       sections: [
