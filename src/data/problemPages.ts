@@ -120,7 +120,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "burnout", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii"],
+    relatedArticles: ["kpt-pri-depressii", "utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii", "5-kpt-uprazhnenij"],
   },
   {
     slug: "anxiety",
@@ -202,7 +202,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["panic-attacks", "depression", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["kak-uspokoitsya", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost", "trevoga-bez-prichiny", "pristup-trevogi-chto-delat", "trevoga-po-utram", "trevoga-pered-snom", "somaticheskie-simptomy-trevogi", "kak-spravitsya-s-trevozhnostyu"],
+    relatedArticles: ["kpt-pri-trevoge", "kak-uspokoitsya", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost", "trevoga-bez-prichiny", "pristup-trevogi-chto-delat", "trevoga-po-utram", "trevoga-pered-snom", "somaticheskie-simptomy-trevogi", "5-kpt-uprazhnenij", "kak-spravitsya-s-trevozhnostyu"],
     longRead: {
       title: "Как справиться с тревогой: 6 техник КПТ, которые работают",
       sections: [
@@ -534,7 +534,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["schema-therapy", "online-therapy", "in-person-therapy", "depression", "anxiety", "panic-attacks"],
-    relatedArticles: ["chto-takoe-kpt", "kak-spravitsya-s-trevozhnostyu", "planirovanie-dnya-pri-depressii", "pervaya-sessiya-u-psihologa"],
+    relatedArticles: ["dokazatelnaya-baza-kpt", "10-mifov-o-kpt", "kpt-vs-psihoanaliz", "skolko-dlitsya-kpt", "kpt-pri-trevoge", "kpt-pri-depressii", "5-kpt-uprazhnenij", "kak-vybrat-kpt-psihologa", "chto-takoe-kpt", "pervaya-sessiya-u-psihologa"],
   },
   {
     slug: "online-therapy",
