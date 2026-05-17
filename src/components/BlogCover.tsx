@@ -47,13 +47,9 @@ const BlogCover = ({ slug, title, tag, className = "", large = false }: BlogCove
     };
   }, [slug]);
 
-  // Short typographic mark: first meaningful word of title
-  const mark = useMemo(() => {
-    const words = title.replace(/[«»"'—:]/g, "").split(/\s+/).filter(Boolean);
-    return (words[0] || "").slice(0, 14);
-  }, [title]);
-
-  const titleSize = large ? "text-5xl md:text-7xl" : "text-2xl md:text-3xl";
+  const titleSize = large
+    ? "text-3xl md:text-5xl"
+    : "text-base md:text-lg";
   const tagSize = large ? "text-xs md:text-sm" : "text-[10px]";
 
   return (
@@ -99,10 +95,10 @@ const BlogCover = ({ slug, title, tag, className = "", large = false }: BlogCove
         </div>
 
         <div
-          className={`font-serif font-light leading-[0.95] tracking-tight ${titleSize}`}
+          className={`font-serif font-light leading-[1.05] tracking-tight ${large ? "" : "line-clamp-4"} ${titleSize}`}
           style={{ textShadow: "0 2px 30px rgba(0,0,0,0.35)" }}
         >
-          {mark}
+          {title}
           <span style={{ color: accent }}>.</span>
         </div>
 
