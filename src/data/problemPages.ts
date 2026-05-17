@@ -120,7 +120,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "burnout", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii"],
+    relatedArticles: ["kpt-pri-depressii", "utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii", "5-kpt-uprazhnenij"],
   },
   {
     slug: "anxiety",
