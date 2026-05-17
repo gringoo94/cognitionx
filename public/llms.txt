@@ -1,59 +1,113 @@
 # CognitionX — Психолог Дмитрий Яцко
 
-> Практика психолога Дмитрия Яцко: когнитивно-поведенческая терапия (КПТ) и схема-терапия онлайн на русском языке. Работа с депрессией, тревогой, паническими атаками, выгоранием, низкой самооценкой и созависимостью.
+> Практика КПТ и схема-терапии онлайн на русском языке. Дмитрий Яцко — практикующий психолог; работа с депрессией, тревогой, паническими атаками, выгоранием, низкой самооценкой, прокрастинацией, перфекционизмом, синдромом самозванца и созависимостью. На сайте опубликованы валидированные психологические тесты, интерактивные КПТ-инструменты и блог по доказательной психотерапии.
 
-CognitionX — сайт практикующего психолога Дмитрия Яцко (КПТ, схема-терапия). Консультации проходят онлайн на русском языке для клиентов по всему миру (Европа, США, Азия, СНГ). Помимо приёма, на сайте опубликованы валидированные психологические тесты (PHQ-9, GAD-7, шкала Розенберга и др.), интерактивные КПТ-инструменты (ABC-анализ, дневник поведенческой активации, колесо эмоций, тест схема-терапии) и блог о доказательной психотерапии.
+CognitionX — сайт практикующего психолога Дмитрия Яцко. Подход: когнитивно-поведенческая терапия (КПТ) как метод первой линии при тревожных и депрессивных расстройствах, плюс схема-терапия для работы с глубинными ранними дезадаптивными схемами и повторяющимися жизненными паттернами. Консультации проходят онлайн на русском языке (для клиентов из Европы, СНГ, США, Азии) и очно в Кишинёве. Стоимость первой консультации — 25 €, доступно бесплатное 20-минутное знакомство.
 
 ## Основные страницы
 
-- [Главная](https://cognitionx.cloud/): психолог Дмитрий Яцко, описание подхода КПТ и схема-терапии, запись на консультацию
-- [О специалисте](https://cognitionx.cloud/about): образование, опыт, методы работы, этика
-- [Контакты и запись](https://cognitionx.cloud/contact): форма записи на онлайн-консультацию
+- [Главная](https://cognitionx.cloud/): практика психолога Дмитрия Яцко, описание подхода КПТ и схема-терапии, услуги и запись
+- [О специалисте](https://cognitionx.cloud/about): образование, опыт, методы работы, профессиональная этика, доказательная база
+- [Контакты и запись](https://cognitionx.cloud/contact): форма записи на онлайн-консультацию, бесплатное 20-минутное знакомство
+- [Информированное согласие](https://cognitionx.cloud/informed-consent): условия работы, конфиденциальность, границы терапевтических отношений
+
+## Методы работы
+
+- [Когнитивно-поведенческая терапия (КПТ)](https://cognitionx.cloud/cbt-therapy): метод первой линии при тревоге, депрессии, ОКР, ПТСР, фобиях
+- [Схема-терапия](https://cognitionx.cloud/schema-therapy): работа с ранними дезадаптивными схемами и повторяющимися паттернами в отношениях и жизни
+- [Онлайн-терапия](https://cognitionx.cloud/online-therapy): формат, технические требования, эффективность по сравнению с очной
+- [Очная терапия](https://cognitionx.cloud/in-person-therapy): консультации в Кишинёве
+
+## Запросы клиентов (проблемные страницы)
+
+- [Депрессия](https://cognitionx.cloud/depression): КПТ-протокол при депрессивных расстройствах, поведенческая активация
+- [Тревога](https://cognitionx.cloud/anxiety): работа с ГТР и тревожными расстройствами, экспозиция и когнитивная реструктуризация
+- [Панические атаки](https://cognitionx.cloud/panic-attacks): протоколы КПТ при панике, интероцептивная экспозиция
+- [Выгорание](https://cognitionx.cloud/burnout): диагностика по BAT, фазы и восстановление
+- [Стресс](https://cognitionx.cloud/stress): хронический стресс и техники регуляции
+- [Низкая самооценка](https://cognitionx.cloud/self-esteem): работа со схемой дефективности
+- [Созависимость](https://cognitionx.cloud/co-dependency): схема-терапия отношений
+- [Зависимости](https://cognitionx.cloud/addiction): работа с поведенческими и химическими зависимостями
 
 ## Психологические инструменты
 
-- [Каталог инструментов](https://cognitionx.cloud/tools): все бесплатные интерактивные психологические инструменты сайта
-- [Психологические тесты](https://cognitionx.cloud/tools/tests): хаб валидированных самоопросников (депрессия, тревога, самооценка, перфекционизм, прокрастинация)
-- [Тест на схемы (Schema Quiz)](https://cognitionx.cloud/tools/schema-quiz): диагностика ранних дезадаптивных схем по модели Дж. Янга
-- [ABC-анализ](https://cognitionx.cloud/tools/abc-analysis): КПТ-техника разбора ситуаций «событие → мысль → эмоция → поведение»
-- [Колесо эмоций](https://cognitionx.cloud/tools/emotion-wheel): интерактивная карта 87 эмоций для развития эмоциональной грамотности
-- [Дневник поведенческой активации](https://cognitionx.cloud/tools/behavioral-activation): инструмент для работы с депрессией методом BA
-- [CBT Workbook](https://cognitionx.cloud/cbtworkbook): рабочая тетрадь упражнений КПТ
+- [Каталог инструментов](https://cognitionx.cloud/tools): все бесплатные интерактивные КПТ-инструменты
+- [ABC-анализ](https://cognitionx.cloud/tools/abc-analysis): базовая КПТ-техника «событие → мысль → эмоция → поведение» с интерактивным разбором
+- [Дневник поведенческой активации](https://cognitionx.cloud/tools/behavioral-activation): инструмент работы с депрессией методом BA, шкалы удовольствия и мастерства
+- [Колесо эмоций](https://cognitionx.cloud/tools/emotion-wheel): интерактивная карта эмоций для развития эмоциональной грамотности
+- [Тест на схемы (Schema Quiz)](https://cognitionx.cloud/tools/schema-quiz): диагностика 18 ранних дезадаптивных схем по модели Дж. Янга
+- [CBT Workbook](https://cognitionx.cloud/cbtworkbook): структурированная рабочая тетрадь упражнений КПТ
 
-## Психологические тесты
+## Валидированные психологические тесты
 
-- [PHQ-9 — шкала депрессии](https://cognitionx.cloud/tools/tests/phq9): валидированный опросник на симптомы депрессии
-- [GAD-7 — шкала тревоги](https://cognitionx.cloud/tools/tests/gad7): опросник генерализованного тревожного расстройства
-- [Шкала самооценки Розенберга](https://cognitionx.cloud/tools/tests/rosenberg): измерение глобальной самооценки
-- [DAS — дисфункциональные установки](https://cognitionx.cloud/tools/tests/das): шкала Вейссмана и Бека
-- [ATQ — автоматические мысли](https://cognitionx.cloud/tools/tests/atq): опросник негативных автоматических мыслей
-- [FMPS — многомерный перфекционизм](https://cognitionx.cloud/tools/tests/fmps): шкала Фроста
-- [CIPS — синдром самозванца](https://cognitionx.cloud/tools/tests/cips): шкала Кланс
-- [LAY — прокрастинация](https://cognitionx.cloud/tools/tests/lay): шкала общей прокрастинации
-- [BAT — выгорание](https://cognitionx.cloud/tools/tests/bat): Burnout Assessment Tool
-- [PSS-10 — воспринимаемый стресс](https://cognitionx.cloud/tools/tests/pss10): шкала Коэна
+- [Хаб тестов](https://cognitionx.cloud/tools/tests): каталог самоопросников с интерпретацией результатов
+- [PHQ-9 — шкала депрессии](https://cognitionx.cloud/tools/tests/phq-9): валидированный опросник симптомов депрессии (Spitzer et al.)
+- [GAD-7 — генерализованная тревога](https://cognitionx.cloud/tools/tests/gad-7): скрининг тревожных расстройств
+- [PSS-10 — воспринимаемый стресс](https://cognitionx.cloud/tools/tests/pss-10): шкала Коэна
+- [Шкала самооценки Розенберга](https://cognitionx.cloud/tools/tests/rosenberg-self-esteem): глобальная самооценка
+- [DAS — дисфункциональные установки](https://cognitionx.cloud/tools/tests/das-dysfunctional-attitudes): шкала Вейссмана и Бека
+- [ATQ — автоматические мысли](https://cognitionx.cloud/tools/tests/atq-automatic-thoughts): опросник негативных автоматических мыслей
+- [FMPS — многомерный перфекционизм](https://cognitionx.cloud/tools/tests/fmps-perfectionism): шкала Фроста
+- [CIPS — синдром самозванца](https://cognitionx.cloud/tools/tests/cips-impostor): шкала Кланс
+- [LAY — прокрастинация](https://cognitionx.cloud/tools/tests/lay-procrastination): шкала общей прокрастинации
+- [BAT — выгорание](https://cognitionx.cloud/tools/tests/bat-burnout): Burnout Assessment Tool
 
-## Темы (запросы клиентов)
-
-- [Депрессия](https://cognitionx.cloud/depression): подход КПТ к депрессивным расстройствам
-- [Тревога](https://cognitionx.cloud/anxiety): работа с тревожными расстройствами
-- [Панические атаки](https://cognitionx.cloud/panic): протоколы КПТ при панике
-- [Выгорание](https://cognitionx.cloud/burnout): диагностика и восстановление
-- [Низкая самооценка](https://cognitionx.cloud/self-esteem): работа со схемой дефективности
-- [Синдром самозванца](https://cognitionx.cloud/imposter): когнитивная переработка
-- [Созависимость](https://cognitionx.cloud/codependency): схема-терапия отношений
-- [Перфекционизм](https://cognitionx.cloud/perfectionism): работа со схемой жёстких стандартов
-
-## Блог
+## Блог: КПТ и доказательная психотерапия
 
 - [Все статьи](https://cognitionx.cloud/blog): материалы о доказательной психотерапии, КПТ и схема-терапии
 
+### Серия по КПТ
+
+- [Доказательная база КПТ](https://cognitionx.cloud/blog/dokazatelnaya-baza-kpt): мета-анализы, рекомендации NICE и APA, границы эффективности
+- [10 мифов о КПТ](https://cognitionx.cloud/blog/10-mifov-o-kpt): «позитивное мышление», «игнорирует чувства», «поверхностна» — разбор
+- [Сколько длится КПТ](https://cognitionx.cloud/blog/skolko-dlitsya-kpt): средние сроки по расстройствам, факторы скорости
+- [КПТ или психоанализ или гештальт](https://cognitionx.cloud/blog/kpt-vs-psihoanaliz): сравнение методов, как выбрать под запрос
+- [КПТ при тревоге](https://cognitionx.cloud/blog/kpt-pri-trevoge): протокол по сессиям, техники, реальные результаты
+- [КПТ при депрессии](https://cognitionx.cloud/blog/kpt-pri-depressii): поведенческая активация, работа с автоматическими мыслями, сроки
+- [5 КПТ-упражнений для самопомощи](https://cognitionx.cloud/blog/5-kpt-uprazhnenij): ABC, дневник мыслей, экспозиция, колесо эмоций
+- [Как выбрать КПТ-психолога](https://cognitionx.cloud/blog/kak-vybrat-kpt-psihologa): 10 критериев, красные флаги, вопросы на первой сессии
+- [Как выбрать психолога онлайн](https://cognitionx.cloud/blog/kak-vybrat-psihologa): универсальные критерии выбора специалиста
+- [Первая сессия у психолога](https://cognitionx.cloud/blog/pervaya-sessiya-u-psihologa): чего ждать, как готовиться
+
+### Тревожные расстройства
+
+- [Как быстро успокоиться](https://cognitionx.cloud/blog/kak-uspokoitsya): 5 техник из КПТ за 2 минуты
+- [Повышенная тревожность](https://cognitionx.cloud/blog/povyshennaya-trevozhnost): симптомы, причины, методы лечения
+- [Постоянная тревога без причины](https://cognitionx.cloud/blog/trevoga-bez-prichiny): механизм ГТР и что делать
+- [Приступ тревоги — что делать](https://cognitionx.cloud/blog/pristup-trevogi-chto-delat): протокол первой помощи
+- [Тревога по утрам](https://cognitionx.cloud/blog/trevoga-po-utram): кортизоловое пробуждение и работа с ним
+- [Тревога перед сном](https://cognitionx.cloud/blog/trevoga-pered-snom): CBT-I и техники засыпания
+- [Соматические симптомы тревоги](https://cognitionx.cloud/blog/somaticheskie-simptomy-trevogi): телесные проявления, дифференциальная диагностика
+- [Симптомы тревожного расстройства](https://cognitionx.cloud/blog/simptomy-trevozhnogo-rasstrojstva): критерии и диагностика
+- [Как избавиться от тревоги](https://cognitionx.cloud/blog/kak-izbavitsya-ot-trevogi): рабочий маршрут самопомощи и терапии
+
+### Депрессия и состояния
+
+- [Признаки депрессии](https://cognitionx.cloud/blog/priznaki-depressii): как отличить от усталости
+- [Когда ничего не хочется](https://cognitionx.cloud/blog/kogda-nichego-ne-hochetsya): ангедония и поведенческая активация
+- [Выгорание или усталость](https://cognitionx.cloud/blog/vygoranie-ili-ustalost): дифференциальный разбор
+
+### Схема-терапия и психология отношений
+
+- [Онтология психотерапии](https://cognitionx.cloud/blog/ontologiya-psihoterapii): почему КПТ, психоанализ и схема-терапия видят клиента по-разному
+- [Три карты реальности в психотерапии](https://cognitionx.cloud/blog/tri-karty-realnosti-v-psihoterapii): позитивизм, постпозитивизм, конструктивизм
+- [8 препятствий на пути к переменам](https://cognitionx.cloud/blog/8-prepyatstvij-na-puti-k-peremenam): схема-терапевтический навигатор
+- [Перекладывание ответственности](https://cognitionx.cloud/blog/perekladyvanie-otvetstvennosti): механизм и работа в терапии
+- [Почему мы боимся просить о помощи](https://cognitionx.cloud/blog/pochemu-my-boimsya-prosit-o-pomoshchi): схема уязвимости и недоверия
+- [Дегуманизация](https://cognitionx.cloud/blog/dehumanizaciya-chto-eto): механизм, признаки, защита
+- [Синдром самозванца](https://cognitionx.cloud/blog/sindrom-samozvantsa): КПТ-разбор и работа со схемой
+- [Прокрастинация](https://cognitionx.cloud/blog/prokrastinaciya): причины и протокол работы
+
 ## Optional
 
-- [Гео: психолог в Кишинёве](https://cognitionx.cloud/psiholog-kishinev)
-- [Гео: психолог в Европе](https://cognitionx.cloud/psiholog-europa)
-- [Гео: психолог в США](https://cognitionx.cloud/psiholog-usa)
-- [Гео: психолог в Азии](https://cognitionx.cloud/psiholog-aziya)
-- [Гео: психолог для IT-специалистов](https://cognitionx.cloud/psiholog-dlya-it)
+- [Психолог в Кишинёве](https://cognitionx.cloud/psiholog-kishinev)
+- [Психолог в Берлине](https://cognitionx.cloud/psiholog-berlin)
+- [Психолог в Амстердаме](https://cognitionx.cloud/psiholog-amsterdam)
+- [Психолог в Лиссабоне](https://cognitionx.cloud/psiholog-lissabon)
+- [Психолог в Тбилиси](https://cognitionx.cloud/psiholog-tbilisi)
+- [Психолог в Европе](https://cognitionx.cloud/psiholog-europa)
+- [Психолог в США](https://cognitionx.cloud/psiholog-usa)
+- [Психолог в Азии](https://cognitionx.cloud/psiholog-aziya)
+- [Психолог в Москве](https://cognitionx.cloud/psiholog-moskva)
+- [Психолог для IT-специалистов](https://cognitionx.cloud/psiholog-dlya-it)
 - [Политика конфиденциальности](https://cognitionx.cloud/privacy)
-- [Информированное согласие](https://cognitionx.cloud/informed-consent)
