@@ -98,6 +98,18 @@ CognitionX — сайт практикующего психолога Дмитр
 - [Синдром самозванца](https://cognitionx.cloud/blog/sindrom-samozvantsa): КПТ-разбор и работа со схемой
 - [Прокрастинация](https://cognitionx.cloud/blog/prokrastinaciya): причины и протокол работы
 
+### Практические техники (серия по мотивам r/CBT)
+
+- [60-секундное дофаминовое окно](https://cognitionx.cloud/blog/60-sekund-dofamin-tyaga): нейропластичность и переучивание тяги
+- [«Я должен» — почему саботирует цели](https://cognitionx.cloud/blog/lovushka-dolzhen): should-statements как когнитивное искажение
+- [«Кто тебе это сказал?»](https://cognitionx.cloud/blog/kto-tebe-eto-skazal): приём против руминации за 30 секунд
+- [Выгорание от домашних заданий КПТ](https://cognitionx.cloud/blog/vygoranie-ot-domashek-v-terapii): регулярность важнее интенсивности
+- [Будь себе лучшим другом](https://cognitionx.cloud/blog/bud-sebe-luchshim-drugom): техника самосострадания при тревоге
+- [Страх быть нелюбимым](https://cognitionx.cloud/blog/strah-byt-neljubimym): схема одобрения и социальная тревога
+- [Маленькие победы экспозиции](https://cognitionx.cloud/blog/malenkie-pobedy-ekspozicii): лестница страхов при социальной тревоге
+- [Тревога перед важной встречей](https://cognitionx.cloud/blog/trevoga-pered-vstrechej): протокол остановки спирали за 5 минут
+- [КПТ при отчаянии и дереализации](https://cognitionx.cloud/blog/kpt-pri-otchayanii-i-derealizacii): что работает, когда «думать иначе» не помогает
+
 ## Optional
 
 - [Психолог в Кишинёве](https://cognitionx.cloud/psiholog-kishinev)
