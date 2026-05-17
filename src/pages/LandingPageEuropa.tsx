@@ -208,7 +208,7 @@ const LandingPageEuropa = () => (
                   alt="Психолог Дмитрий Яцко — русскоязычный КПТ-терапевт для экспатов в Европе"
                   className="w-full h-full object-cover object-top"
                   loading="eager"
-                  fetchPriority="high"
+                  {...({ fetchpriority: "high" } as any)}
                 />
               </div>
             </div>

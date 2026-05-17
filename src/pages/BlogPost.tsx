@@ -163,7 +163,7 @@ const BlogPost = () => {
               alt={`Иллюстрация к статье: ${post.title}`}
               className="w-full h-auto object-cover"
               loading="eager"
-              fetchPriority="high"
+              {...({ fetchpriority: "high" } as any)}
             />
           </div>
 

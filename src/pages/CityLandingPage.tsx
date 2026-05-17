@@ -198,7 +198,7 @@ const CityLandingPage = () => {
                     alt={`Психолог Дмитрий Яцко — русскоязычный КПТ-терапевт ${page.cityFor}, ${page.country}`}
                     className="w-full h-full object-cover object-top"
                     loading="eager"
-                    fetchPriority="high"
+                    {...({ fetchpriority: "high" } as any)}
                   />
                 </div>
               </div>
