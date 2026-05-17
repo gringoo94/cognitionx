@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import BlogCover from "@/components/BlogCover";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
