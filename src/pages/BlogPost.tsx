@@ -158,13 +158,12 @@ const BlogPost = () => {
             {post.title}
           </h1>
 
-          <div className="mt-8 rounded-2xl overflow-hidden">
-            <img
-              src={post.image}
-              alt={`Иллюстрация к статье: ${post.title}`}
-              className="w-full h-auto object-cover"
-              loading="eager"
-              {...({ fetchpriority: "high" } as any)}
+          <div className="mt-8 rounded-2xl overflow-hidden aspect-[16/9]">
+            <BlogCover
+              slug={post.slug}
+              title={post.title}
+              tag={post.tags?.[0]}
+              large
             />
           </div>
 
