@@ -95,10 +95,10 @@ const BlogCover = ({ slug, title, tag, className = "", large = false }: BlogCove
         </div>
 
         <div
-          className={`font-serif font-light leading-[0.95] tracking-tight ${titleSize}`}
+          className={`font-serif font-light leading-[1.05] tracking-tight ${large ? "" : "line-clamp-4"} ${titleSize}`}
           style={{ textShadow: "0 2px 30px rgba(0,0,0,0.35)" }}
         >
-          {mark}
+          {title}
           <span style={{ color: accent }}>.</span>
         </div>
 
