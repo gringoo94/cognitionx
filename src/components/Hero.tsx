@@ -88,7 +88,7 @@ const Hero = () => (
                 alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
                 className="w-full h-full object-cover object-top"
                 loading="eager"
-                fetchPriority="high"
+                {...({ fetchpriority: "high" } as any)}
                 width={1080}
                 height={1350}
                 decoding="async"

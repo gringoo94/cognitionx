@@ -212,7 +212,7 @@ const LandingPageKishinev = () => (
                   alt="Психолог Дмитрий Яцко — КПТ-терапевт в Кишинёве, Молдова"
                   className="w-full h-full object-cover object-top"
                   loading="eager"
-                  fetchPriority="high"
+                  {...({ fetchpriority: "high" } as any)}
                 />
               </div>
             </div>

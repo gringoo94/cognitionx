@@ -199,7 +199,7 @@ const LandingPageIT = () => (
                   alt="Психолог Дмитрий Яцко — КПТ-терапевт для IT-специалистов онлайн"
                   className="w-full h-full object-cover object-top"
                   loading="eager"
-                  fetchPriority="high"
+                  {...({ fetchpriority: "high" } as any)}
                 />
               </div>
             </div>
