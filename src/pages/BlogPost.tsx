@@ -244,11 +244,11 @@ const BlogPost = () => {
                     className="group rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all"
                   >
                     <div className="aspect-[16/10] overflow-hidden">
-                      <img
-                        src={rp.image}
-                        alt={`Иллюстрация: ${rp.title}`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
+                      <BlogCover
+                        slug={rp.slug}
+                        title={rp.title}
+                        tag={rp.tags?.[0]}
+                        className="group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <div className="p-4">
