@@ -57,12 +57,19 @@ const BlogPost = () => {
     description: post.description,
     image: [post.image],
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: (post as any).updatedAt || post.date,
     inLanguage: "ru-RU",
     wordCount,
     keywords: post.tags?.join(", "),
     author: { "@id": "https://cognitionx.cloud/#person" },
     publisher: { "@id": "https://cognitionx.cloud/#organization" },
+    // Speakable: which parts AI voice agents / Google Assistant should read aloud.
+    // h1 + first paragraph of the article body are the most informative.
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "[data-speakable]"],
+    },
+    about: post.tags?.map((t) => ({ "@type": "Thing", name: t })),
   };
 
   // FAQPage schema for high-impression posts (boosts CTR via rich snippet)
@@ -187,6 +194,7 @@ const BlogPost = () => {
                 return (
                   <p
                     key={i}
+                    data-speakable
                     className="text-lg text-muted-foreground leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: block.text }}
                   />

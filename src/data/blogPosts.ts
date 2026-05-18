@@ -4,7 +4,11 @@ export interface BlogPost {
   title: string;
   description: string;
   image: string;
+  /** Original publication date (ISO YYYY-MM-DD). Used as datePublished. */
   date: string;
+  /** Optional last-edit date (ISO YYYY-MM-DD). Used as dateModified for
+   *  schema.org BlogPosting and sitemap lastmod. Falls back to `date`. */
+  updatedAt?: string;
   tags: string[];
   content: ContentBlock[];
 }
