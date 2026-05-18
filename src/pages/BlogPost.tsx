@@ -9,6 +9,7 @@ import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
 import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
+import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
