@@ -1,5 +1,5 @@
 # robots.txt — cognitionx.cloud
-# Управляет индексацией публичных, geo- и служебных страниц.
+# Управляет индексацией для классических поисковиков и ИИ-краулеров.
 
 User-agent: *
 Allow: /
@@ -39,18 +39,120 @@ Allow: /tools/schema-quiz
 Allow: /tools/abc-analysis
 Allow: /tools/emotion-wheel
 Allow: /tools/behavioral-activation
+Allow: /tools/abstract-to-concrete
 Allow: /cbtworkbook
 
-# --- Поисковые боты с особыми правилами ---
+# =====================================================================
+#  ИИ-краулеры — явные правила
+#  Без этих блоков ChatGPT/Claude/Perplexity/Google AI Overviews
+#  либо игнорируют сайт, либо краулят бессистемно.
+# =====================================================================
+
+# --- OpenAI (ChatGPT, GPT training, ChatGPT browse) ---
 User-agent: GPTBot
+Allow: /
 Disallow: /admin
 Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+# --- Anthropic (Claude, Claude.ai search) ---
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+# --- Google AI (Gemini, AI Overviews) ---
+# Без Allow здесь страницы исключаются из AI Overviews
+# (классический Googlebot управляется блоком User-agent: * выше).
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+# --- Apple Intelligence ---
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+# --- Прочие крупные ИИ-краулеры ---
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+User-agent: Diffbot
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
 
 User-agent: CCBot
+Allow: /
 Disallow: /admin
 Disallow: /admin/login
+Disallow: /thank-you
 
-# --- Запрет агрессивных скрейперов ---
+User-agent: Bytespider
+Allow: /
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /thank-you
+
+# --- Запрет агрессивных SEO-скрейперов ---
 User-agent: AhrefsBot
 Crawl-delay: 10
 
@@ -60,5 +162,5 @@ Crawl-delay: 10
 User-agent: MJ12bot
 Disallow: /
 
-# --- Sitemap ---
+# --- Sitemap и LLM-индексы ---
 Sitemap: https://cognitionx.cloud/sitemap.xml
