@@ -34,6 +34,7 @@ CognitionX — сайт практикующего психолога Дмитр
 - [Каталог инструментов](https://cognitionx.cloud/tools): все бесплатные интерактивные КПТ-инструменты
 - [ABC-анализ](https://cognitionx.cloud/tools/abc-analysis): базовая КПТ-техника «событие → мысль → эмоция → поведение» с интерактивным разбором
 - [Дневник поведенческой активации](https://cognitionx.cloud/tools/behavioral-activation): инструмент работы с депрессией методом BA, шкалы удовольствия и мастерства
+- [Как думать иначе (RFCBT)](https://cognitionx.cloud/tools/abstract-to-concrete): тренажёр переключения с абстрактных «почему» на конкретные «что» и «как» по методу Эдварда Уоткинса
 - [Колесо эмоций](https://cognitionx.cloud/tools/emotion-wheel): интерактивная карта эмоций для развития эмоциональной грамотности
 - [Тест на схемы (Schema Quiz)](https://cognitionx.cloud/tools/schema-quiz): диагностика 18 ранних дезадаптивных схем по модели Дж. Янга
 - [CBT Workbook](https://cognitionx.cloud/cbtworkbook): структурированная рабочая тетрадь упражнений КПТ
