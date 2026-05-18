@@ -9,6 +9,7 @@ import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
 import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
+import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -178,6 +179,9 @@ const BlogPost = () => {
               }
               if (block.type === "component" && block.componentId === "emotion-wheel") {
                 return <EmotionWheel key={i} />;
+              }
+              if (block.type === "component" && block.componentId === "rfcbt-modes") {
+                return <RfcbtModesDiagram key={i} />;
               }
               if (block.type === "preface") {
                 return (
