@@ -73,6 +73,14 @@ const interactiveTools: ToolCard[] = [
     icon: Activity,
     meta: "Ежедневный трекер",
   },
+  {
+    to: "/tools/abstract-to-concrete",
+    title: "Как думать иначе (RFCBT)",
+    description:
+      "Учитесь заменять руминативные «почему» на конкретные вопросы. 5 примеров с разбором — по методу Эдварда Уоткинса.",
+    icon: Lightbulb,
+    meta: "5 примеров",
+  },
 ];
 
 const externalTools = [
