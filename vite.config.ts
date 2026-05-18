@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { seoPlugin } from "./vite-plugin-seo";
+import { llmAssetsPlugin } from "./vite-plugin-llm-assets";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -13,7 +14,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger(), seoPlugin()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger(), llmAssetsPlugin(), seoPlugin()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
