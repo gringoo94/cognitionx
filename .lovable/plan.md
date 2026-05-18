@@ -1,47 +1,114 @@
-# План: 9 новых статей в блог из подборки r/CBT
+## Контекст
 
-## Что добавляем
+SEO-аудит чист (единственная находка — ложноположительная по приватным маршрутам, уже закрыта). База сильная: пререндер мета по 117 маршрутам через `vite-plugin-seo.ts`, JSON-LD Person/Organization/WebSite в `index.html`, BlogPosting + FAQPage в `BlogPost.tsx`, llms.txt с каталогом, robots.txt с правилами для GPTBot/CCBot, sitemap.
 
-Все статьи — полноформатные посты в `src/data/blogPosts.ts` (структура как у существующих: `preface`, `heading`, `text`, `quote`, теги, изображение, дата). Каждая получит внутренние ссылки на релевантные `/cbt-therapy`, проблемные страницы (`/anxiety`, `/depression`, `/panic-attacks`), инструменты (`/tools/...`) и смежные статьи КПТ — по схеме перелинковки, которую уже выстроили.
+Цель этого плана — поднять видимость в **ИИ-выдаче** (ChatGPT, Claude, Perplexity, Google AI Overviews) и догнать оставшиеся точки роста для Google.
 
-| # | Slug | Заголовок | Теги | Ключевая связка |
-|---|------|-----------|------|-----------------|
-| 1 | `60-sekund-dofamin-tyaga` | 60 секунд: как использовать дофаминовое окно, чтобы перестроить мозг | Нейронаука, Привычки, Самопомощь | `/cbt-therapy`, `5-kpt-uprazhnenij` |
-| 2 | `lovushka-dolzhen` | «Я должен» — почему это слово саботирует ваши цели | Когнитивные искажения, Самопомощь | `chto-takoe-kpt`, `prokrastinaciya` |
-| 3 | `kto-tebe-eto-skazal` | «Кто тебе это сказал?» — приём против руминации | Тревога, Самопомощь | `kak-uspokoitsya`, `/tools/abc-analysis` |
-| 4 | `vygoranie-ot-domashek-v-terapii` | Выгорание от домашних заданий в терапии: баланс регулярности и интенсивности | КПТ, Психообразование | `skolko-dlitsya-kpt`, `pervaya-sessiya-u-psihologa` |
-| 5 | `bud-sebe-luchshim-drugom` | Будь себе лучшим другом: техника самосострадания при тревоге | Самосострадание, Тревога | `kpt-pri-trevoge`, `koleso-emocij` |
-| 6 | `strah-byt-neljubimym` | Страх быть нелюбимым: взгляд КПТ | Социальная тревога, Самооценка | `/anxiety`, `ocenka-sebya` |
-| 7 | `malenkie-pobedy-ekspozicii` | Маленькие победы экспозиции: как обойти социальную тревогу | Социальная тревога, Экспозиция | `kpt-pri-trevoge`, `/anxiety` |
-| 8 | `trevoga-pered-vstrechej` | Как остановить тревожную спираль перед важной встречей | Тревога, Самопомощь | `/tools/abc-analysis`, `kak-uspokoitsya` |
-| 9 | `kpt-pri-otchayanii-i-derealizacii` | КПТ при отчаянии и дереализации: что работает | Депрессия, Психообразование | `/depression`, `kpt-pri-depressii` |
+## Что делаем
 
-## Что обновляем помимо blogPosts.ts
+### 1. robots.txt — явные правила для всех значимых ИИ-краулеров
 
-1. **`public/sitemap.xml`** — 9 новых `<url>` записей.
-2. **`seo-routes.ts`** — 9 новых маршрутов для пререндеринга.
-3. **`public/llms.txt`** — добавить 9 строк в раздел блога.
-4. **`src/data/problemPages.ts`** — расширить `relatedArticles`:
-   - `/anxiety` → +`strah-byt-neljubimym`, `malenkie-pobedy-ekspozicii`, `trevoga-pered-vstrechej`, `bud-sebe-luchshim-drugom`
-   - `/depression` → +`kpt-pri-otchayanii-i-derealizacii`
-   - `/cbt-therapy` → +`60-sekund-dofamin-tyaga`, `lovushka-dolzhen`, `vygoranie-ot-domashek-v-terapii`
+Сейчас перечислены только `GPTBot` и `CCBot` (и то только с `Disallow: /admin`). Добавляем явные блоки `Allow` для:
 
-## Что **не** добавляем и почему
+- `GPTBot` (OpenAI / ChatGPT), `OAI-SearchBot`, `ChatGPT-User`
+- `ClaudeBot`, `Claude-Web`, `anthropic-ai` (Anthropic)
+- `PerplexityBot`, `Perplexity-User`
+- `Google-Extended` (обучение Gemini — без этого нас исключают из AI Overviews)
+- `Applebot-Extended` (Apple Intelligence)
+- `Amazonbot`, `Meta-ExternalAgent`, `Bytespider` (TikTok/Doubao)
+- `Diffbot`, `Cohere-ai`
 
-- **#7 «Как найти КПТ-терапевта»** — уже есть `kak-vybrat-kpt-psihologa` + `kak-vybrat-psihologa`.
-- **#10 «КПТ и видеоигры»** — слишком нишево, не соответствует тону блога.
-- **#11 «КПТ-софт и AI»** — оффтопик для практики психолога, может конкурировать с собственным позиционированием.
+Запрет на `/admin*` и `/thank-you` сохраняем для всех.
+
+### 2. llms-full.txt — полные тексты статей для LLM
+
+Создаём `scripts/generate-llms-full.ts` (запускается в `predev`/`prebuild`), который:
+
+- Берёт все статьи из `src/data/blogPosts.ts`
+- Конвертирует структурированный `content[]` в чистый Markdown
+- Склеивает в `public/llms-full.txt` по конвенции llmstxt.org
+- Каждая статья с заголовком `# {title}`, датой, тегами, URL и полным текстом
+
+llms.txt оставляем как индекс/карту сайта; llms-full.txt — полный корпус, который ChatGPT/Claude/Perplexity забирают целиком при первом краулинге.
+
+### 3. Дискаверабилити llms.txt из HTML
+
+В `index.html` добавляем:
+
+```html
+<link rel="alternate" type="text/markdown" title="llms.txt" href="/llms.txt" />
+<link rel="alternate" type="text/markdown" title="llms-full.txt" href="/llms-full.txt" />
+```
+
+Это конвенция для LLM-агентов — они проверяют `<link rel="alternate" type="text/markdown">` так же, как браузеры читают RSS.
+
+### 4. BreadcrumbList на всех страницах
+
+Добавляем переиспользуемый компонент `Breadcrumbs` (визуальный + JSON-LD) и встраиваем на:
+
+- Блог-посты (`/blog/:slug`): Главная → Блог → Заголовок
+- Tool-страницы (`/tools/*`): Главная → Инструменты → Название
+- Гео-страницы (`/psiholog-*`): Главная → География → Город
+- Проблемные страницы (`/depression`, `/anxiety`, …)
+
+Хлебные крошки в JSON-LD дают rich snippet в Google и явный иерархический контекст ИИ-краулерам.
+
+### 5. Расширенные schema.org типы
+
+- **HowTo** на инструментах (`/tools/abc-analysis`, `/tools/behavioral-activation`, `/tools/abstract-to-concrete`, `/tools/emotion-wheel`, `/tools/schema-quiz`) — шаги, инструменты, ожидаемый результат
+- **MedicalWebPage** + **MedicalCondition** на проблемных страницах (`/depression`, `/anxiety`, `/panic-attacks`, `/burnout`, `/stress`, `/self-esteem`, `/co-dependency`, `/addiction`) с указанием `MedicalAudience`, `lastReviewed`, автора-эксперта
+- **Quiz** на `/tools/schema-quiz` и тестах в `/tools/tests/:slug`
+- **Speakable** на статьях блога — отмечает абзацы, пригодные для голосовых ассистентов и AI Overviews
+- **mentions** и **about** на BlogPosting со ссылками на Person и связанные термины
+
+### 6. dateModified отдельно от datePublished
+
+Сейчас `BlogPost.tsx` использует `datePublished == dateModified == post.date`. Добавляем поле `updatedAt?: string` в схему `blogPosts`, и если оно есть — используем его в `dateModified`. Свежесть — сильный сигнал и для Google, и для ИИ-агентов, которые отдают приоритет недавно обновлённому контенту.
+
+### 7. lastmod в sitemap
+
+Сейчас sitemap статичный. Переводим его на генерацию через `scripts/generate-sitemap.ts` (как уже есть `generate-llms.ts` паттерн), который тянет `date`/`updatedAt` из `blogPosts.ts` и `seo-routes.ts` и пишет `<lastmod>`. Краулеры тогда видят, какие страницы реально менялись.
+
+### 8. Доп. сигналы E-E-A-T
+
+- В Person JSON-LD добавить `hasCredential` (диплом, сертификаты), `memberOf` (профассоциации) — если есть данные
+- На странице `/about` отдельный Person с расширенными полями
+- На блог-постах `author` уже ссылается на `#person` — оставляем как есть
+
+## Что НЕ делаем (вне scope)
+
+- Полный SSR/миграция на TanStack Start — отдельная история, обсуждали ранее
+- Генерация новых OG-изображений под каждый пост
+- Перевод контента на EN
 
 ## Технические детали
 
-- Картинки: переиспользуем существующие из `src/assets` (по теме), без генерации новых — экономит время. Если захотите уникальные иллюстрации для каждой — отдельной задачей.
-- Длина: 8–12 блоков на статью (как `chto-takoe-kpt` после рерайта), 600–900 слов.
-- FAQPage schema: добавим в `faqBySlug` (`src/pages/BlogPost.tsx`) для топ-2 SEO-перспективных (`lovushka-dolzhen`, `trevoga-pered-vstrechej`).
-- Даты публикации: распределим по 1–2 в неделю задним числом за последние 2 месяца, чтобы не выглядело как «дамп».
+Файлы, которые трогаем:
 
-## Альтернативы, если 9 — много
+```
+public/robots.txt                          — расширяем AI-блоки
+public/llms.txt                            — индекс остаётся, добавим ссылку на llms-full
+index.html                                 — link rel=alternate
+scripts/generate-llms-full.ts              — новый
+scripts/generate-sitemap.ts                — новый (заменит ручной public/sitemap.xml)
+package.json                               — predev/prebuild хуки
+src/components/Breadcrumbs.tsx             — новый
+src/components/SchemaHowTo.tsx             — новый helper для JSON-LD
+src/components/SchemaMedicalWebPage.tsx    — новый helper
+src/pages/BlogPost.tsx                     — Breadcrumbs + Speakable + dateModified
+src/pages/Tools.tsx + tool pages           — Breadcrumbs + HowTo
+src/pages/Depression.tsx и др. проблемные  — Breadcrumbs + MedicalWebPage
+src/data/blogPosts.ts                      — опц. поле updatedAt
+```
 
-- **Мини-вариант (5 шт):** только #2, #3, #5, #7, #8 — самые «вечнозелёные» и поисково-перспективные.
-- **Расширенный (12 шт):** добавить и #10, #11 в адаптированном виде.
+## Порядок выполнения
 
-Скажите, какой объём катаем и нужны ли уникальные иллюстрации.
+1. robots.txt + link rel=alternate в index.html (5 мин, инфраструктура для ИИ)
+2. Breadcrumbs компонент + интеграция на 4 типа страниц
+3. HowTo на инструментах
+4. MedicalWebPage на проблемных
+5. Speakable + dateModified на блоге
+6. llms-full.txt генератор
+7. sitemap.xml генератор с lastmod
+
+Каждый шаг проверяется отдельно (билд + curl выдачи HTML на проверку JSON-LD).
