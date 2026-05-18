@@ -180,6 +180,9 @@ const BlogPost = () => {
               if (block.type === "component" && block.componentId === "emotion-wheel") {
                 return <EmotionWheel key={i} />;
               }
+              if (block.type === "component" && block.componentId === "rfcbt-modes") {
+                return <RfcbtModesDiagram key={i} />;
+              }
               if (block.type === "preface") {
                 return (
                   <p
