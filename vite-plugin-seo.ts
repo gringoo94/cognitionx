@@ -18,7 +18,7 @@ export function seoPlugin(): Plugin {
   return {
     name: "vite-plugin-seo-prerender",
     apply: "build",
-    closeBundle() {
+    async closeBundle() {
       const distDir = path.resolve(process.cwd(), "dist");
       const indexPath = path.join(distDir, "index.html");
       if (!fs.existsSync(indexPath)) {
@@ -27,7 +27,19 @@ export function seoPlugin(): Plugin {
       }
       const baseHtml = fs.readFileSync(indexPath, "utf-8");
 
+      // Load blog posts so we can inline article HTML into prerendered /blog/:slug pages.
+      // main.tsx uses createRoot (not hydrateRoot), so injected children inside #root are
+      // safely discarded on first client render — no hydration mismatch.
+      let blogPostsBySlug = new Map<string, any>();
+      try {
+        const mod: any = await import("./src/data/blogPosts");
+        for (const p of mod.blogPosts) blogPostsBySlug.set(p.slug, p);
+      } catch (err) {
+        console.warn("[seo-plugin] could not load blogPosts for article prerender:", err);
+      }
+
       let count = 0;
+      let blogCount = 0;
 
       for (const route of seoRoutes) {
         const routePath = route.path;
