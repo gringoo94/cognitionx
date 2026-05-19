@@ -61,6 +61,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://cognitionx.cloud/tools/thought-diary</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cognitionx.cloud/tools/tests</loc>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
