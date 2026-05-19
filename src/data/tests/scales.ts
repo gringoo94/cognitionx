@@ -73,3 +73,10 @@ export const ATQ_SCALE: LikertOption[] = [
   { value: 4, label: "Часто" },
   { value: 5, label: "Постоянно" },
 ];
+
+export const RRS_SCALE: LikertOption[] = [
+  { value: 1, label: "Почти никогда" },
+  { value: 2, label: "Иногда" },
+  { value: 3, label: "Часто" },
+  { value: 4, label: "Почти всегда" },
+];

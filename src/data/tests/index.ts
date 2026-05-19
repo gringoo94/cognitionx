@@ -9,6 +9,7 @@ import { lay } from "./lay";
 import { fmps } from "./fmps";
 import { das } from "./das";
 import { atq } from "./atq";
+import { rrs } from "./rrs";
 
 export const tests: TestConfig[] = [
   phq9,
@@ -21,6 +22,7 @@ export const tests: TestConfig[] = [
   fmps,
   das,
   atq,
+  rrs,
 ];
 
 export const testsBySlug: Record<string, TestConfig> = Object.fromEntries(
