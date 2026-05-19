@@ -18,7 +18,7 @@ export function seoPlugin(): Plugin {
   return {
     name: "vite-plugin-seo-prerender",
     apply: "build",
-    closeBundle() {
+    async closeBundle() {
       const distDir = path.resolve(process.cwd(), "dist");
       const indexPath = path.join(distDir, "index.html");
       if (!fs.existsSync(indexPath)) {
@@ -27,7 +27,19 @@ export function seoPlugin(): Plugin {
       }
       const baseHtml = fs.readFileSync(indexPath, "utf-8");
 
+      // Load blog posts so we can inline article HTML into prerendered /blog/:slug pages.
+      // main.tsx uses createRoot (not hydrateRoot), so injected children inside #root are
+      // safely discarded on first client render — no hydration mismatch.
+      let blogPostsBySlug = new Map<string, any>();
+      try {
+        const mod: any = await import("./src/data/blogPosts");
+        for (const p of mod.blogPosts) blogPostsBySlug.set(p.slug, p);
+      } catch (err) {
+        console.warn("[seo-plugin] could not load blogPosts for article prerender:", err);
+      }
+
       let count = 0;
+      let blogCount = 0;
 
       for (const route of seoRoutes) {
         const routePath = route.path;
@@ -75,6 +87,21 @@ export function seoPlugin(): Plugin {
           `$1\n    ${metaBlock}`
         );
 
+        // For blog post routes, inline the article body into #root so crawlers
+        // that don't execute JS see the full content (not just meta tags).
+        const slugMatch = routePath.match(/^\/blog\/([^/]+)$/);
+        if (slugMatch) {
+          const post = blogPostsBySlug.get(slugMatch[1]);
+          if (post) {
+            const articleHtml = renderArticleHtml(post, url);
+            html = html.replace(
+              /<div id="root"><\/div>/,
+              `<div id="root">${articleHtml}</div>`
+            );
+            blogCount++;
+          }
+        }
+
         // Determine output path
         if (routePath === "/") {
           // Overwrite the root index.html
@@ -88,9 +115,58 @@ export function seoPlugin(): Plugin {
         count++;
       }
 
-      console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files with static SEO meta tags`);
+      console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body)`);
     },
   };
+}
+
+/**
+ * Render a blog post into static HTML for crawler-visible prerender.
+ * Uses semantic tags so Google, GPTBot, ClaudeBot, PerplexityBot can ingest
+ * the article without executing JavaScript. Content is replaced on hydration
+ * since main.tsx uses createRoot (no hydration mismatch).
+ */
+function renderArticleHtml(post: any, url: string): string {
+  const dateIso = post.date;
+  const dateLabel = new Date(post.date).toLocaleDateString("ru", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const blocks: string[] = [];
+  for (const block of post.content || []) {
+    if (block.type === "preface") {
+      blocks.push(`<p data-speakable>${block.text}</p>`);
+    } else if (block.type === "heading") {
+      const tag = block.level === 2 ? "h2" : "h3";
+      blocks.push(`<${tag}>${block.text}</${tag}>`);
+    } else if (block.type === "quote") {
+      blocks.push(`<blockquote>${block.text}</blockquote>`);
+    } else if (block.type === "text") {
+      blocks.push(`<div>${block.text}</div>`);
+    }
+    // "component" blocks are interactive — skipped in static prerender.
+  }
+
+  const tags = (post.tags || [])
+    .map((t: string) => `<span>${escapeHtml(t)}</span>`)
+    .join(" ");
+
+  return [
+    `<main>`,
+    `<article>`,
+    `<header>`,
+    `<time datetime="${dateIso}">${dateLabel}</time>`,
+    `<h1>${escapeHtml(post.title)}</h1>`,
+    `<p>${escapeHtml(post.description)}</p>`,
+    tags ? `<div>${tags}</div>` : ``,
+    `</header>`,
+    blocks.join(""),
+    `<footer><p><a href="${url}">${url}</a></p></footer>`,
+    `</article>`,
+    `</main>`,
+  ].join("");
 }
 
 function escapeHtml(str: string): string {
