@@ -81,6 +81,14 @@ const interactiveTools: ToolCard[] = [
     icon: Lightbulb,
     meta: "5 примеров",
   },
+  {
+    to: "/tools/thought-diary",
+    title: "Дневник мыслей",
+    description:
+      "Рабочий лист между сессиями: что было до, какие мысли, «почему» или «что именно», что было после. По методу RFCBT.",
+    icon: ClipboardList,
+    meta: "6 шагов",
+  },
 ];
 
 const externalTools = [
