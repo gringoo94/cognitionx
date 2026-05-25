@@ -21,15 +21,20 @@ Deno.serve(async (req) => {
     console.log('TELEGRAM_CHAT_ID value:', JSON.stringify(TELEGRAM_CHAT_ID), 'as number:', Number(TELEGRAM_CHAT_ID));
     if (!TELEGRAM_CHAT_ID) throw new Error('TELEGRAM_CHAT_ID is not configured');
 
-    const { name, email, messenger, message } = await req.json();
+    const { name, email, messenger, message, source, page } = await req.json();
+
+    const escape = (v: unknown) =>
+      String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     const text = [
       '📋 <b>Новая заявка</b>',
       '',
-      `<b>Имя:</b> ${name || '—'}`,
-      `<b>Email:</b> ${email || '—'}`,
-      `<b>Мессенджер:</b> ${messenger || '—'}`,
-      `<b>Запрос:</b> ${message || '—'}`,
+      `<b>Форма:</b> ${escape(source) || '—'}`,
+      `<b>Страница:</b> ${escape(page) || '—'}`,
+      `<b>Имя:</b> ${escape(name) || '—'}`,
+      `<b>Email:</b> ${escape(email) || '—'}`,
+      `<b>Мессенджер:</b> ${escape(messenger) || '—'}`,
+      `<b>Запрос:</b> ${escape(message) || '—'}`,
     ].join('\n');
 
     const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
