@@ -5,6 +5,18 @@ const corsHeaders = {
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/telegram';
 
+const MAX = {
+  name: 200,
+  email: 320,
+  messenger: 200,
+  message: 4000,
+  source: 200,
+  page: 500,
+};
+
+const clip = (v: unknown, max: number) =>
+  String(v ?? '').slice(0, max);
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
@@ -12,19 +24,35 @@ Deno.serve(async (req) => {
 
   try {
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
-    if (!LOVABLE_API_KEY) throw new Error('LOVABLE_API_KEY is not configured');
-
     const TELEGRAM_API_KEY = Deno.env.get('TELEGRAM_API_KEY');
-    if (!TELEGRAM_API_KEY) throw new Error('TELEGRAM_API_KEY is not configured');
-
     const TELEGRAM_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID');
-    console.log('TELEGRAM_CHAT_ID value:', JSON.stringify(TELEGRAM_CHAT_ID), 'as number:', Number(TELEGRAM_CHAT_ID));
-    if (!TELEGRAM_CHAT_ID) throw new Error('TELEGRAM_CHAT_ID is not configured');
+    if (!LOVABLE_API_KEY || !TELEGRAM_API_KEY || !TELEGRAM_CHAT_ID) {
+      console.error('Missing required env vars for notify-telegram');
+      return new Response(JSON.stringify({ success: false, error: 'Notification failed' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
-    const { name, email, messenger, message, source, page } = await req.json();
+    let body: Record<string, unknown> = {};
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(JSON.stringify({ success: false, error: 'Invalid request' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
-    const escape = (v: unknown) =>
-      String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const name = clip(body.name, MAX.name);
+    const email = clip(body.email, MAX.email);
+    const messenger = clip(body.messenger, MAX.messenger);
+    const message = clip(body.message, MAX.message);
+    const source = clip(body.source, MAX.source);
+    const page = clip(body.page, MAX.page);
+
+    const escape = (v: string) =>
+      v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
     const text = [
       '📋 <b>Новая заявка</b>',
@@ -51,9 +79,13 @@ Deno.serve(async (req) => {
       }),
     });
 
-    const data = await response.json();
     if (!response.ok) {
-      throw new Error(`Telegram API failed [${response.status}]: ${JSON.stringify(data)}`);
+      const data = await response.text();
+      console.error(`Telegram API failed [${response.status}]:`, data);
+      return new Response(JSON.stringify({ success: false, error: 'Notification failed' }), {
+        status: 502,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
     return new Response(JSON.stringify({ success: true }), {
@@ -61,8 +93,7 @@ Deno.serve(async (req) => {
     });
   } catch (error: unknown) {
     console.error('Error sending Telegram notification:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return new Response(JSON.stringify({ success: false, error: errorMessage }), {
+    return new Response(JSON.stringify({ success: false, error: 'Notification failed' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
