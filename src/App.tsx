@@ -101,6 +101,7 @@ const App = () => (
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />
+              <Route path="/free-consultation" element={<FreeConsultationPage />} />
 
               {/* Redirects from old Tilda URLs */}
               <Route path="/about_cognitionx" element={<Navigate to="/about" replace />} />
