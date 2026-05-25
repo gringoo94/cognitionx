@@ -6,6 +6,20 @@ const PageViewTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Push SPA route change to GTM dataLayer so GA4 / Pixel tags can fire on every navigation
+    try {
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: "page_view",
+        page_path: location.pathname + location.search,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    } catch {
+      // ignore
+    }
+
     const trackView = async () => {
       try {
         await supabase.from("page_views").insert({
