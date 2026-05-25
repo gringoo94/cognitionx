@@ -67,15 +67,17 @@ const BlogSubscribeForm = ({
       return;
     }
 
-    // Telegram notification (fire-and-forget)
+    // Telegram notification (fire-and-forget — здесь нет навигации, поэтому безопасно)
     supabase.functions.invoke("notify-telegram", {
       body: {
         name: "Подписка на блог",
         email: parsed.data,
         messenger: null,
         message: `Новая подписка на рассылку (source: ${source})`,
+        source: `BlogSubscribeForm (${source})`,
+        page: typeof window !== "undefined" ? window.location.href : null,
       },
-    }).catch(() => {});
+    }).catch((e) => console.error("notify-telegram failed", e));
 
     setDone(true);
     setEmail("");
