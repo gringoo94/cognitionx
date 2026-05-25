@@ -64,7 +64,7 @@ const BookingForm = () => {
           email: parsed.data.email,
           messenger: parsed.data.messenger,
           message: messageText,
-          source: "BookingForm (главная — секция записи)",
+          source: "💳 Платная консультация — главная (секция записи)",
           page: typeof window !== "undefined" ? window.location.href : null,
         },
       });
