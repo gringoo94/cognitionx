@@ -356,6 +356,7 @@ const AdminBlog = () => {
                   className="h-8 w-8"
                   onClick={() => handleTogglePublished(post)}
                   title={post.published ? "Скрыть" : "Опубликовать"}
+                  aria-label={post.published ? "Скрыть пост" : "Опубликовать пост"}
                 >
                   {post.published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 </Button>
@@ -364,6 +365,7 @@ const AdminBlog = () => {
                   size="icon"
                   className="h-8 w-8"
                   onClick={() => handleEdit(post)}
+                  aria-label="Редактировать пост"
                 >
                   <Pencil className="w-4 h-4" />
                 </Button>
@@ -372,6 +374,7 @@ const AdminBlog = () => {
                   size="icon"
                   className="h-8 w-8 text-destructive"
                   onClick={() => handleDelete(post.id)}
+                  aria-label="Удалить пост"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
