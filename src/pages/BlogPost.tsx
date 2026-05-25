@@ -10,6 +10,9 @@ import SEOHead from "@/components/SEOHead";
 import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
+import DOMPurify from "dompurify";
+
+const sanitize = (html: string) => DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
