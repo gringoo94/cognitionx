@@ -53,7 +53,6 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <GoogleAnalytics />
           <ScrollToTop />
           <PageViewTracker />
 
