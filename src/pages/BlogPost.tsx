@@ -10,6 +10,9 @@ import SEOHead from "@/components/SEOHead";
 import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
+import DOMPurify from "dompurify";
+
+const sanitize = (html: string) => DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -196,7 +199,7 @@ const BlogPost = () => {
                     key={i}
                     data-speakable
                     className="text-lg text-muted-foreground leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: block.text }}
+                    dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
               }
@@ -208,7 +211,7 @@ const BlogPost = () => {
                     className={`font-bold tracking-tight ${
                       block.level === 2 ? "text-2xl mt-10" : "text-xl mt-8"
                     }`}
-                    dangerouslySetInnerHTML={{ __html: block.text }}
+                    dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
               }
@@ -217,7 +220,7 @@ const BlogPost = () => {
                   <blockquote
                     key={i}
                     className="border-l-4 border-primary pl-5 py-2 text-muted-foreground italic"
-                    dangerouslySetInnerHTML={{ __html: block.text }}
+                    dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
               }
@@ -225,7 +228,7 @@ const BlogPost = () => {
                 <div
                   key={i}
                   className="text-base leading-relaxed text-foreground/90 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:text-foreground/80 [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline"
-                  dangerouslySetInnerHTML={{ __html: block.text }}
+                  dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                 />
               );
             })}
