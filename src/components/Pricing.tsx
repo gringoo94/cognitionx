@@ -66,7 +66,7 @@ const Pricing = () => (
             Без обязательств
           </span>
           <Button size="sm" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
-            <a href="#booking">Записаться</a>
+            <Link to="/free-consultation">Записаться</Link>
           </Button>
         </div>
       </motion.div>
