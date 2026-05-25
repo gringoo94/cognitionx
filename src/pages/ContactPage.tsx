@@ -79,15 +79,21 @@ const ContactPage = () => {
         message: messageText,
       });
       if (error) throw error;
-      // Send Telegram notification (fire-and-forget)
-      supabase.functions.invoke("notify-telegram", {
-        body: {
-          name: parsed.data.name,
-          email: parsed.data.email,
-          messenger: parsed.data.messenger,
-          message: messageText,
-        },
-      }).catch(() => {});
+      // Send Telegram notification — await to avoid request being cancelled by navigation
+      try {
+        await supabase.functions.invoke("notify-telegram", {
+          body: {
+            name: parsed.data.name,
+            email: parsed.data.email,
+            messenger: parsed.data.messenger,
+            message: messageText,
+            source: "ContactPage (страница контактов)",
+            page: typeof window !== "undefined" ? window.location.href : null,
+          },
+        });
+      } catch (e) {
+        console.error("notify-telegram failed", e);
+      }
 
       setForm({ name: "", email: "", messenger: "", message: "" });
       navigate("/thank-you");
