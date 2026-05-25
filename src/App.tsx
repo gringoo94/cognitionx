@@ -38,6 +38,7 @@ const MethodPage = lazy(() => import("./components/MethodPage.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const InformedConsent = lazy(() => import("./pages/InformedConsent.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
+const FreeConsultationPage = lazy(() => import("./pages/FreeConsultationPage.tsx"));
 
 const queryClient = new QueryClient();
 
