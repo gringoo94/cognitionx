@@ -120,6 +120,24 @@ const App = () => (
               <Route path="/schema-quiz" element={<Navigate to="/tools/schema-quiz" replace />} />
               <Route path="/emotion-wheel" element={<Navigate to="/tools/emotion-wheel" replace />} />
 
+              {/* Old Tilda URLs found in analytics hitting 404 */}
+              <Route path="/etonormalno" element={<Navigate to="/anxiety" replace />} />
+              <Route path="/oprosnikbeka" element={<Navigate to="/tools/tests/phq-9" replace />} />
+              <Route path="/mnetakskazali" element={<Navigate to="/blog/kto-tebe-eto-skazal" replace />} />
+              <Route path="/uspeh" element={<Navigate to="/thank-you" replace />} />
+              <Route path="/insomnia" element={<Navigate to="/anxiety" replace />} />
+              <Route path="/cbt_depression" element={<Navigate to="/blog/kpt-pri-depressii" replace />} />
+              <Route path="/Contact Us" element={<Navigate to="/contact" replace />} />
+              <Route path="/Contact%20Us" element={<Navigate to="/contact" replace />} />
+              <Route path="/problems/self-esteem" element={<Navigate to="/self-esteem" replace />} />
+              <Route path="/problems/stress" element={<Navigate to="/stress" replace />} />
+              <Route path="/problems/burnout" element={<Navigate to="/burnout" replace />} />
+              <Route path="/problems/co-dependency" element={<Navigate to="/co-dependency" replace />} />
+              <Route path="/problems/depression" element={<Navigate to="/depression" replace />} />
+              <Route path="/problems/anxiety" element={<Navigate to="/anxiety" replace />} />
+              <Route path="/tproduct/*" element={<Navigate to="/blog" replace />} />
+
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
