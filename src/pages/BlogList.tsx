@@ -133,14 +133,55 @@ const BlogList = () => {
           </div>
         ) : (
           <>
+            {/* Search + Sort */}
+            <motion.div {...fade(0.05)} className="flex flex-col sm:flex-row gap-3 mb-5">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                <Input
+                  type="search"
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  placeholder="Поиск по статьям, темам и тегам…"
+                  className="pl-9 pr-9"
+                  aria-label="Поиск по блогу"
+                />
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setQuery("");
+                      setCurrentPage(1);
+                    }}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground"
+                    aria-label="Очистить поиск"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+              <Select value={sort} onValueChange={(v) => setSort(v as SortKey)}>
+                <SelectTrigger className="sm:w-[200px]" aria-label="Сортировка">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="new">Сначала новые</SelectItem>
+                  <SelectItem value="old">Сначала старые</SelectItem>
+                  <SelectItem value="az">По алфавиту</SelectItem>
+                </SelectContent>
+              </Select>
+            </motion.div>
+
             {/* Tag filter */}
-            <motion.div {...fade(0.05)} className="flex flex-wrap gap-2 mb-10">
+            <motion.div {...fade(0.08)} className="flex flex-wrap gap-2 mb-4">
               <Badge
                 variant={activeTag === null ? "default" : "outline"}
                 className="cursor-pointer select-none px-3 py-1 text-sm transition-all duration-200 hover:scale-105"
                 onClick={() => handleTagClick(null)}
               >
-                Все
+                Все · {blogPosts.length}
               </Badge>
               {allTags.map((tag) => (
                 <Badge
@@ -149,15 +190,31 @@ const BlogList = () => {
                   className="cursor-pointer select-none px-3 py-1 text-sm transition-all duration-200 hover:scale-105"
                   onClick={() => handleTagClick(tag)}
                 >
-                  {tag}
+                  {tag} · {tagCounts.get(tag)}
                 </Badge>
               ))}
             </motion.div>
 
+            {/* Result count */}
+            <div className="flex items-center justify-between mb-6 text-xs text-muted-foreground">
+              <span>
+                Найдено: <span className="text-foreground font-medium">{filtered.length}</span>
+                {filtered.length > 0 && ` · страница ${safePage} из ${totalPages}`}
+              </span>
+              {hasFilters && (
+                <button
+                  onClick={resetFilters}
+                  className="inline-flex items-center gap-1 text-primary hover:underline"
+                >
+                  <X className="w-3 h-3" /> Сбросить фильтры
+                </button>
+              )}
+            </div>
+
             {/* Posts grid */}
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeTag ?? "all"}
+                key={`${activeTag ?? "all"}-${query}-${sort}-${safePage}`}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
@@ -165,7 +222,7 @@ const BlogList = () => {
                 className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
               >
                 {paginated.map((post, i) => (
-                  <motion.div key={post.id} {...fade(0.05 * (i + 1))}>
+                  <motion.div key={post.id} {...fade(0.04 * (i + 1))}>
                     <Link
                       to={`/blog/${post.slug}`}
                       className="group glass rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-lg block h-full"
@@ -181,12 +238,19 @@ const BlogList = () => {
                       <div className="p-5">
                         <div className="flex flex-wrap gap-1 mb-2">
                           {post.tags.map((tag) => (
-                            <span
+                            <button
                               key={tag}
-                              className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleTagClick(tag);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                              className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                             >
                               {tag}
-                            </span>
+                            </button>
                           ))}
                         </div>
                         <time className="text-xs text-muted-foreground">
@@ -216,12 +280,14 @@ const BlogList = () => {
             {filtered.length === 0 && (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <FileText className="w-12 h-12 text-muted-foreground/40 mb-4" />
-                <p className="text-muted-foreground font-medium">Статей с таким тегом пока нет</p>
+                <p className="text-muted-foreground font-medium">
+                  Ничего не нашлось по вашему запросу
+                </p>
                 <button
-                  onClick={() => handleTagClick(null)}
+                  onClick={resetFilters}
                   className="mt-3 text-sm text-primary hover:underline"
                 >
-                  Показать все статьи
+                  Сбросить фильтры
                 </button>
               </div>
             )}
