@@ -1,13 +1,21 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
-import { ArrowRight, ArrowLeft, FileText, Loader2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, FileText, Loader2, Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import BlogCover from "@/components/BlogCover";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Pagination,
   PaginationContent,
@@ -17,7 +25,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 9;
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -26,29 +34,61 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
+type SortKey = "new" | "old" | "az";
+
 const BlogList = () => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortKey>("new");
   const [currentPage, setCurrentPage] = useState(1);
   const { data: blogPosts = [], isLoading } = useBlogPosts();
 
+  const tagCounts = useMemo(() => {
+    const m = new Map<string, number>();
+    blogPosts.forEach((p) => p.tags.forEach((t) => m.set(t, (m.get(t) ?? 0) + 1)));
+    return m;
+  }, [blogPosts]);
+
   const allTags = useMemo(
-    () => Array.from(new Set(blogPosts.flatMap((p) => p.tags))).sort(),
-    [blogPosts]
+    () => Array.from(tagCounts.keys()).sort((a, b) => tagCounts.get(b)! - tagCounts.get(a)!),
+    [tagCounts]
   );
 
-  const filtered = useMemo(
-    () => (activeTag ? blogPosts.filter((p) => p.tags.includes(activeTag)) : blogPosts),
-    [activeTag, blogPosts]
-  );
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    let list = blogPosts;
+    if (activeTag) list = list.filter((p) => p.tags.includes(activeTag));
+    if (q) {
+      list = list.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    }
+    const sorted = [...list];
+    if (sort === "new") sorted.sort((a, b) => (a.date < b.date ? 1 : -1));
+    else if (sort === "old") sorted.sort((a, b) => (a.date > b.date ? 1 : -1));
+    else sorted.sort((a, b) => a.title.localeCompare(b.title, "ru"));
+    return sorted;
+  }, [activeTag, query, sort, blogPosts]);
 
-  const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
   const paginated = filtered.slice(
-    (currentPage - 1) * POSTS_PER_PAGE,
-    currentPage * POSTS_PER_PAGE
+    (safePage - 1) * POSTS_PER_PAGE,
+    safePage * POSTS_PER_PAGE
   );
 
   const handleTagClick = (tag: string | null) => {
     setActiveTag(tag);
+    setCurrentPage(1);
+  };
+
+  const hasFilters = activeTag !== null || query.trim() !== "";
+  const resetFilters = () => {
+    setActiveTag(null);
+    setQuery("");
     setCurrentPage(1);
   };
 
