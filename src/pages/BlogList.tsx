@@ -297,13 +297,14 @@ const BlogList = () => {
               <div className="mt-12">
                 <Pagination>
                   <PaginationContent>
-                    {currentPage > 1 && (
+                    {safePage > 1 && (
                       <PaginationItem>
                         <PaginationPrevious
                           href="#"
                           onClick={(e) => {
                             e.preventDefault();
-                            setCurrentPage((p) => p - 1);
+                            setCurrentPage(safePage - 1);
+                            window.scrollTo({ top: 0, behavior: "smooth" });
                           }}
                         >
                           <ArrowLeft className="h-4 w-4 mr-1" />
@@ -316,10 +317,11 @@ const BlogList = () => {
                         <PaginationItem key={page}>
                           <PaginationLink
                             href="#"
-                            isActive={page === currentPage}
+                            isActive={page === safePage}
                             onClick={(e) => {
                               e.preventDefault();
                               setCurrentPage(page);
+                              window.scrollTo({ top: 0, behavior: "smooth" });
                             }}
                           >
                             {page}
@@ -327,13 +329,14 @@ const BlogList = () => {
                         </PaginationItem>
                       )
                     )}
-                    {currentPage < totalPages && (
+                    {safePage < totalPages && (
                       <PaginationItem>
                         <PaginationNext
                           href="#"
                           onClick={(e) => {
                             e.preventDefault();
-                            setCurrentPage((p) => p + 1);
+                            setCurrentPage(safePage + 1);
+                            window.scrollTo({ top: 0, behavior: "smooth" });
                           }}
                         >
                           Вперёд
