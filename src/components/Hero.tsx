@@ -28,9 +28,10 @@ const Hero = () => (
           {...fade(0.05)}
           className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
         >
-          Дмитрий
-          <br />
-          <span className="text-primary">Яцко</span>
+          Дмитрий <span className="text-primary">Яцко</span>
+          <span className="block mt-3 text-xl sm:text-2xl md:text-2xl lg:text-3xl font-medium text-muted-foreground">
+            Психолог · КПТ и схема-терапия онлайн
+          </span>
         </motion.h1>
 
         <motion.p
