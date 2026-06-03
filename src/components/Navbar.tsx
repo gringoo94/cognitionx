@@ -131,7 +131,7 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-2.5 group">
           <img
             src={logo}
-            alt="CognitionX логотип"
+            alt="CognitionX — психологическая помощь, КПТ и схема-терапия онлайн"
             className="h-8 w-8 transition-transform duration-300 group-hover:scale-105"
           />
           <span className="text-lg font-bold tracking-tight hidden sm:inline">
