@@ -20,7 +20,7 @@ const AdminLogin = () => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      toast({ title: "Ошибка входа", description: error.message, variant: "destructive" });
+      toast({ title: "Ошибка входа", description: "Неверный email или пароль.", variant: "destructive" });
       setLoading(false);
       return;
     }
