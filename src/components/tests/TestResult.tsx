@@ -37,6 +37,20 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const result = config.scoring(answers);
   const Icon = toneIcon[result.tone];
   const pct = Math.round((result.score / result.maxScore) * 100);
+  const [userNote, setUserNote] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownload = async () => {
+    try {
+      setIsGenerating(true);
+      await generateTestReportPdf({ config, answers, userNote });
+    } catch (e) {
+      console.error(e);
+      toast.error("Не удалось создать PDF. Попробуйте ещё раз.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <motion.div
