@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, RotateCcw, AlertCircle, CheckCircle2, AlertTriangle, Info } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { ArrowRight, RotateCcw, AlertCircle, CheckCircle2, AlertTriangle, Info, Download, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
+import { generateTestReportPdf } from "@/lib/testReportPdf";
 
 interface TestResultProps {
   config: TestConfig;
