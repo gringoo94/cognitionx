@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
 import { generateTestReportPdf } from "@/lib/testReportPdf";
+import { deriveRanges } from "@/lib/testRanges";
 
 interface TestResultProps {
   config: TestConfig;
