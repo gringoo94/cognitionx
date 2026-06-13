@@ -3,6 +3,7 @@ import autoTable from "jspdf-autotable";
 import ptSansRegularUrl from "@/assets/fonts/PTSans-Regular.ttf?url";
 import ptSansBoldUrl from "@/assets/fonts/PTSans-Bold.ttf?url";
 import type { TestConfig } from "@/data/tests/types";
+import { deriveRanges } from "@/lib/testRanges";
 
 let fontsLoaded = false;
 let fontsPromise: Promise<{ regular: string; bold: string }> | null = null;
