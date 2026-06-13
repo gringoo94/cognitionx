@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
 import { generateTestReportPdf } from "@/lib/testReportPdf";
+import { deriveRanges } from "@/lib/testRanges";
 
 interface TestResultProps {
   config: TestConfig;
@@ -37,6 +38,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const result = config.scoring(answers);
   const Icon = toneIcon[result.tone];
   const pct = Math.round((result.score / result.maxScore) * 100);
+  const ranges = deriveRanges(config);
   const [userNote, setUserNote] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -79,6 +81,39 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
           </div>
         </div>
       </div>
+
+      {/* Score ranges */}
+      {ranges.length > 1 && (
+        <div className="rounded-2xl border border-border bg-card p-6">
+          <h3 className="text-sm font-semibold text-foreground mb-1">
+            Шкала интерпретации
+          </h3>
+          <p className="text-xs text-muted-foreground mb-4">
+            Ваш балл — {result.score}. Он попадает в выделенный диапазон.
+          </p>
+          <div className="space-y-2">
+            {ranges.map((r) => {
+              const isCurrent = result.score >= r.min && result.score <= r.max;
+              return (
+                <div
+                  key={`${r.min}-${r.max}`}
+                  className={cn(
+                    "flex items-center justify-between rounded-lg border px-3 py-2 text-sm transition-colors",
+                    isCurrent
+                      ? toneStyles[r.tone] + " font-medium"
+                      : "border-border bg-muted/20 text-muted-foreground",
+                  )}
+                >
+                  <span>{r.label}</span>
+                  <span className="tabular-nums text-xs">
+                    {r.min === r.max ? r.min : `${r.min}–${r.max}`} баллов
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Subscales */}
       {config.subscales && config.subscales.length > 0 && (
