@@ -38,6 +38,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const result = config.scoring(answers);
   const Icon = toneIcon[result.tone];
   const pct = Math.round((result.score / result.maxScore) * 100);
+  const ranges = deriveRanges(config);
   const [userNote, setUserNote] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
