@@ -126,6 +126,41 @@ export const generateTestReportPdf = async ({
   );
   y += 86;
 
+  // Score ranges
+  const ranges = deriveRanges(config);
+  if (ranges.length > 1) {
+    autoTable(doc, {
+      startY: y,
+      head: [["Уровень", "Диапазон баллов"]],
+      body: ranges.map((r) => [
+        r.label,
+        r.min === r.max ? String(r.min) : `${r.min}–${r.max}`,
+      ]),
+      margin: { left: margin, right: margin },
+      styles: { font: "PTSans", fontSize: 9, cellPadding: 6 },
+      headStyles: {
+        font: "PTSans",
+        fontStyle: "bold",
+        fillColor: [235, 238, 242],
+        textColor: [40, 40, 40],
+      },
+      columnStyles: {
+        1: { halign: "right", cellWidth: 120 },
+      },
+      didParseCell: (data) => {
+        if (data.section !== "body") return;
+        const r = ranges[data.row.index];
+        if (result.score >= r.min && result.score <= r.max) {
+          data.cell.styles.fillColor = [255, 244, 214];
+          data.cell.styles.fontStyle = "bold";
+        }
+      },
+    });
+    y =
+      (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable
+        .finalY + 16;
+  }
+
   // Interpretation
   doc.setFont("PTSans", "bold");
   doc.setFontSize(11);
