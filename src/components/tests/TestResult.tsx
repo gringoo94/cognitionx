@@ -120,6 +120,40 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
         <p className="text-sm text-muted-foreground leading-relaxed">{result.recommendation}</p>
       </div>
 
+      {/* Share / PDF report */}
+      <div className="rounded-2xl border border-border bg-card p-6">
+        <h3 className="text-sm font-semibold text-foreground mb-2">
+          Отчёт для психолога
+        </h3>
+        <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+          Скачайте PDF с вашими ответами, баллами и интерпретацией — его можно переслать психологу
+          до или во время первой встречи. Данные не сохраняются на сервере.
+        </p>
+        <label className="block text-xs font-medium text-foreground mb-2">
+          Что хочу обсудить (необязательно)
+        </label>
+        <Textarea
+          value={userNote}
+          onChange={(e) => setUserNote(e.target.value)}
+          placeholder="Например: симптомы появились около месяца назад, мешают работать…"
+          rows={3}
+          className="mb-4 text-sm"
+          maxLength={1500}
+        />
+        <Button onClick={handleDownload} disabled={isGenerating} className="gap-2">
+          {isGenerating ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" /> Готовлю PDF…
+            </>
+          ) : (
+            <>
+              <Download className="h-4 w-4" /> Скачать PDF-отчёт
+            </>
+          )}
+        </Button>
+      </div>
+
+
       {/* CTA */}
       <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 p-6 md:p-8 text-center">
         <h3 className="text-xl font-semibold text-foreground mb-2">
