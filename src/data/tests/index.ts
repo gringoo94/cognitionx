@@ -10,6 +10,12 @@ import { fmps } from "./fmps";
 import { das } from "./das";
 import { atq } from "./atq";
 import { rrs } from "./rrs";
+import { pcl5 } from "./pcl5";
+import { isi } from "./isi";
+import { audit } from "./audit";
+import { ecr } from "./ecr";
+import { bfi10 } from "./bfi10";
+import { ders16 } from "./ders16";
 
 export const tests: TestConfig[] = [
   phq9,
@@ -23,6 +29,12 @@ export const tests: TestConfig[] = [
   das,
   atq,
   rrs,
+  pcl5,
+  isi,
+  audit,
+  ecr,
+  bfi10,
+  ders16,
 ];
 
 export const testsBySlug: Record<string, TestConfig> = Object.fromEntries(
