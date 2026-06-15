@@ -145,6 +145,42 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://cognitionx.cloud/tools/tests/pcl-5</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/tools/tests/isi</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/tools/tests/audit</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/tools/tests/ecr-r-12</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/tools/tests/bfi-10</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/tools/tests/ders-16</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cognitionx.cloud/cbtworkbook</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
