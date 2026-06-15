@@ -184,6 +184,82 @@ const TestLayout = ({ config }: TestLayoutProps) => {
           )}
         </section>
 
+        {/* Symptoms */}
+        {config.symptoms && config.symptoms.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-xl font-semibold text-foreground mb-4">
+              Когда стоит пройти этот тест
+            </h2>
+            <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
+              {config.symptoms.map((s, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* What next */}
+        {config.whatNext && config.whatNext.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-xl font-semibold text-foreground mb-4">
+              Что делать с результатом
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-3">
+              {config.whatNext.map((step, i) => (
+                <div key={i} className="rounded-xl border border-border bg-card p-4">
+                  <p className="text-xs font-semibold text-primary mb-1.5">{step.when}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{step.action}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Compare with */}
+        {config.compareWith && config.compareWith.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-xl font-semibold text-foreground mb-4">
+              Чем отличается от похожих шкал
+            </h2>
+            <div className="space-y-3">
+              {config.compareWith.map((c, i) => (
+                <div key={i} className="rounded-xl border border-border bg-card p-4 text-sm">
+                  <p className="font-semibold text-foreground mb-1">
+                    {c.slug ? (
+                      <Link to={`/tools/tests/${c.slug}`} className="hover:text-primary">
+                        {c.code}
+                      </Link>
+                    ) : (
+                      c.code
+                    )}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">{c.note}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Related articles */}
+        {config.relatedArticles && config.relatedArticles.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-xl font-semibold text-foreground mb-4">Статьи по теме</h2>
+            <ul className="space-y-2">
+              {config.relatedArticles.map((a, i) => (
+                <li key={i}>
+                  <Link to={`/blog/${a.slug}`} className="text-sm text-primary hover:underline">
+                    {a.title} →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+
         {/* FAQ */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold text-foreground mb-4">Частые вопросы</h2>

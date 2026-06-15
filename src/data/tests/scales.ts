@@ -80,3 +80,45 @@ export const RRS_SCALE: LikertOption[] = [
   { value: 3, label: "Часто" },
   { value: 4, label: "Почти всегда" },
 ];
+
+export const PCL5_SCALE: LikertOption[] = [
+  { value: 0, label: "Совсем нет" },
+  { value: 1, label: "Немного" },
+  { value: 2, label: "Умеренно" },
+  { value: 3, label: "Довольно сильно" },
+  { value: 4, label: "Очень сильно" },
+];
+
+export const ISI_SCALE: LikertOption[] = [
+  { value: 0, label: "0 — нет" },
+  { value: 1, label: "1 — слабо" },
+  { value: 2, label: "2 — умеренно" },
+  { value: 3, label: "3 — сильно" },
+  { value: 4, label: "4 — очень сильно" },
+];
+
+export const ECR_SCALE: LikertOption[] = [
+  { value: 1, label: "1 — совсем не про меня" },
+  { value: 2, label: "2" },
+  { value: 3, label: "3" },
+  { value: 4, label: "4 — нейтрально" },
+  { value: 5, label: "5" },
+  { value: 6, label: "6" },
+  { value: 7, label: "7 — полностью про меня" },
+];
+
+export const BFI_SCALE: LikertOption[] = [
+  { value: 1, label: "Совсем не согласен" },
+  { value: 2, label: "Скорее не согласен" },
+  { value: 3, label: "Нейтрально" },
+  { value: 4, label: "Скорее согласен" },
+  { value: 5, label: "Полностью согласен" },
+];
+
+export const DERS_SCALE: LikertOption[] = [
+  { value: 1, label: "Почти никогда (0–10%)" },
+  { value: 2, label: "Иногда (11–35%)" },
+  { value: 3, label: "Примерно в половине случаев (36–65%)" },
+  { value: 4, label: "Бо́льшую часть времени (66–90%)" },
+  { value: 5, label: "Почти всегда (91–100%)" },
+];
