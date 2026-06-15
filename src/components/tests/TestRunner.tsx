@@ -40,6 +40,7 @@ const TestRunner = ({ config, onComplete }: TestRunnerProps) => {
   const renderQuestion = (qIndex: number) => {
     const q = config.questions[qIndex];
     const value = answers[qIndex];
+    const scale = config.perQuestionScale?.[qIndex] ?? config.scale;
     return (
       <div className="space-y-4">
         <div className="flex items-start gap-3">
@@ -49,7 +50,7 @@ const TestRunner = ({ config, onComplete }: TestRunnerProps) => {
           <p className="text-base text-foreground leading-relaxed">{q}</p>
         </div>
         <div className="grid gap-2 ml-9">
-          {config.scale.map((opt) => {
+          {scale.map((opt) => {
             const selected = value === opt.value;
             return (
               <button
