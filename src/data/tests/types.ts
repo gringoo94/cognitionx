@@ -31,7 +31,19 @@ export interface TestConfig {
   /** SEO description (≤160) */
   seoDescription: string;
   /** Theme cluster */
-  cluster: "depression" | "anxiety" | "burnout" | "stress" | "self-esteem" | "it" | "cbt-tools";
+  cluster:
+    | "depression"
+    | "anxiety"
+    | "burnout"
+    | "stress"
+    | "self-esteem"
+    | "it"
+    | "cbt-tools"
+    | "trauma"
+    | "sleep"
+    | "addiction"
+    | "relationships"
+    | "personality";
   /** Visible cluster label */
   clusterLabel: string;
   /** Author / source line */
@@ -48,6 +60,8 @@ export interface TestConfig {
   sources: { label: string; url?: string }[];
   /** Likert scale options shared for all questions */
   scale: LikertOption[];
+  /** Optional per-question scale override (for tests with mixed scales like AUDIT) */
+  perQuestionScale?: (LikertOption[] | null)[];
   /** Question texts in display order */
   questions: string[];
   /** 1-based question numbers that should be reverse-scored */
@@ -62,4 +76,9 @@ export interface TestConfig {
   related: string[];
   /** FAQ */
   faq: { q: string; a: string }[];
+  /** Optional SEO/UX blocks rendered on the test page */
+  symptoms?: string[];
+  whatNext?: { when: string; action: string }[];
+  compareWith?: { code: string; slug?: string; note: string }[];
+  relatedArticles?: { title: string; slug: string }[];
 }
