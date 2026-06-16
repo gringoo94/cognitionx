@@ -144,6 +144,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url><loc>https://cognitionx.cloud/tools/tests/pcl-5</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/isi</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/audit</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/ecr-r-12</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/bfi-10</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/ders-16</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/who-5</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/mdq</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/ybocs-sr</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/spin</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/eat-26</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/maas</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/cd-risc-10</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/tools/tests/ucla-3</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/who-5-blagopoluchie</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/bipolyarnoe-rasstroistvo-skrining</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/okr-priznaki-i-test</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/sotsialnaya-trevozhnost</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/rpp-rannie-priznaki</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/osoznannost-mindfulness-praktika</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/psihologicheskaya-ustoichivost</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cognitionx.cloud/blog/odinochestvo-kak-faktor-zdorovya</loc><lastmod>2026-06-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url>
     <loc>https://cognitionx.cloud/cbtworkbook</loc>
     <lastmod>2026-06-15</lastmod>
