@@ -52,6 +52,21 @@ CognitionX — сайт практикующего психолога Дмитр
 - [CIPS — синдром самозванца](https://cognitionx.cloud/tools/tests/cips-impostor): шкала Кланс
 - [LAY — прокрастинация](https://cognitionx.cloud/tools/tests/lay-procrastination): шкала общей прокрастинации
 - [BAT — выгорание](https://cognitionx.cloud/tools/tests/bat-burnout): Burnout Assessment Tool
+- [RRS — руминация](https://cognitionx.cloud/tools/tests/rrs-rumination): шкала руминативных размышлений Ноулен-Хуксема
+- [PCL-5 — ПТСР](https://cognitionx.cloud/tools/tests/pcl-5): чек-лист посттравматического стрессового расстройства по DSM-5
+- [ISI — бессонница](https://cognitionx.cloud/tools/tests/isi): Insomnia Severity Index, скрининг бессонницы
+- [AUDIT — алкоголь](https://cognitionx.cloud/tools/tests/audit): скрининг употребления алкоголя ВОЗ
+- [ECR-R-12 — привязанность](https://cognitionx.cloud/tools/tests/ecr-r-12): стили взрослой привязанности
+- [BFI-10 — Большая пятёрка](https://cognitionx.cloud/tools/tests/bfi-10): краткая Big Five (Rammstedt & John)
+- [DERS-16 — эмоциональная регуляция](https://cognitionx.cloud/tools/tests/ders-16): шкала трудностей регуляции эмоций
+- [WHO-5 — благополучие](https://cognitionx.cloud/tools/tests/who-5): индекс благополучия ВОЗ
+- [MDQ — биполярное расстройство](https://cognitionx.cloud/tools/tests/mdq): Mood Disorder Questionnaire (Hirschfeld)
+- [Y-BOCS-SR — ОКР](https://cognitionx.cloud/tools/tests/ybocs-sr): шкала обсессивно-компульсивных симптомов, самоотчёт
+- [SPIN — социальная тревожность](https://cognitionx.cloud/tools/tests/spin): Social Phobia Inventory
+- [EAT-26 — пищевое поведение](https://cognitionx.cloud/tools/tests/eat-26): скрининг расстройств пищевого поведения (Garner)
+- [MAAS — осознанность](https://cognitionx.cloud/tools/tests/maas): Mindful Attention Awareness Scale
+- [CD-RISC-10 — устойчивость](https://cognitionx.cloud/tools/tests/cd-risc-10): шкала психологической резильентности
+- [UCLA-3 — одиночество](https://cognitionx.cloud/tools/tests/ucla-3): UCLA Loneliness Scale V3
 
 ## Блог: КПТ и доказательная психотерапия
 
