@@ -67,6 +67,9 @@ CognitionX — сайт практикующего психолога Дмитр
 - [MAAS — осознанность](https://cognitionx.cloud/tools/tests/maas): Mindful Attention Awareness Scale
 - [CD-RISC-10 — устойчивость](https://cognitionx.cloud/tools/tests/cd-risc-10): шкала психологической резильентности
 - [UCLA-3 — одиночество](https://cognitionx.cloud/tools/tests/ucla-3): UCLA Loneliness Scale V3
+- [BDI-II — депрессия Бека](https://cognitionx.cloud/tools/tests/bdi-2): шкала депрессии Бека, 2-я ред., 21 пункт (Beck, Steer & Brown)
+- [BAI — тревога Бека](https://cognitionx.cloud/tools/tests/bai): шкала тревоги Бека, 21 пункт, фокус на соматических симптомах
+- [BHS — безнадёжность Бека](https://cognitionx.cloud/tools/tests/bhs): шкала безнадёжности Бека, 20 пунктов, индикатор риска при депрессии
 
 ## Блог: КПТ и доказательная психотерапия
 
