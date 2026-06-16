@@ -24,6 +24,7 @@ const clusters = [
   { key: "stress", label: "Стресс" },
   { key: "sleep", label: "Сон" },
   { key: "addiction", label: "Зависимости" },
+  { key: "eating", label: "Пищевое поведение" },
   { key: "self-esteem", label: "Самооценка" },
   { key: "relationships", label: "Отношения" },
   { key: "personality", label: "Личность" },
@@ -121,6 +122,46 @@ const seoSections = [
         для самооценки, FMPS (<Link to="/tools/tests/fmps-perfectionism" className="text-primary hover:underline">шкала Фроста</Link>)
         для перфекционизма, ATQ для негативных мыслей, RRS для руминаций и DERS-16 для оценки
         эмоциональной регуляции — всё, что нужно для самостоятельной диагностики мишеней КПТ.
+      </>
+    ),
+  },
+  {
+    h2: "Благополучие, устойчивость и осознанность",
+    body: (
+      <>
+        <Link to="/tools/tests/who-5" className="text-primary hover:underline">WHO-5</Link> от ВОЗ —
+        короткий индекс эмоционального благополучия за минуту.{" "}
+        <Link to="/tools/tests/cd-risc-10" className="text-primary hover:underline">CD-RISC-10</Link>{" "}
+        оценивает психологическую устойчивость к стрессу, а{" "}
+        <Link to="/tools/tests/maas" className="text-primary hover:underline">MAAS</Link> — уровень
+        осознанности в повседневной жизни. Три коротких теста, которые удобно использовать как точку
+        отсчёта перед терапией или практикой mindfulness.
+      </>
+    ),
+  },
+  {
+    h2: "Скрининг ОКР, социофобии и биполярного спектра",
+    body: (
+      <>
+        <Link to="/tools/tests/ybocs-sr" className="text-primary hover:underline">Y-BOCS-SR</Link> —
+        золотой стандарт оценки обсессивно-компульсивных симптомов.{" "}
+        <Link to="/tools/tests/spin" className="text-primary hover:underline">SPIN</Link> —
+        скрининг социального тревожного расстройства.{" "}
+        <Link to="/tools/tests/mdq" className="text-primary hover:underline">MDQ</Link> —
+        скрининг биполярного расстройства (важно проверять при «странной» депрессии с эпизодами
+        подъёма энергии).
+      </>
+    ),
+  },
+  {
+    h2: "Пищевое поведение и одиночество",
+    body: (
+      <>
+        <Link to="/tools/tests/eat-26" className="text-primary hover:underline">EAT-26</Link> —
+        самый используемый скрининг расстройств пищевого поведения.{" "}
+        <Link to="/tools/tests/ucla-3" className="text-primary hover:underline">UCLA Loneliness</Link>{" "}
+        — классическая шкала чувства одиночества. Оба теста закрывают темы, о которых редко
+        говорят, но которые сильно влияют на психическое и физическое здоровье.
       </>
     ),
   },

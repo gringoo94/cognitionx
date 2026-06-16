@@ -43,7 +43,8 @@ export interface TestConfig {
     | "sleep"
     | "addiction"
     | "relationships"
-    | "personality";
+    | "personality"
+    | "eating";
   /** Visible cluster label */
   clusterLabel: string;
   /** Author / source line */

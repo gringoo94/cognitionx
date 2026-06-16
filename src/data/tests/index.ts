@@ -16,6 +16,14 @@ import { audit } from "./audit";
 import { ecr } from "./ecr";
 import { bfi10 } from "./bfi10";
 import { ders16 } from "./ders16";
+import { who5 } from "./who5";
+import { mdq } from "./mdq";
+import { ybocs } from "./ybocs";
+import { spin } from "./spin";
+import { eat26 } from "./eat26";
+import { maas } from "./maas";
+import { cdrisc10 } from "./cdrisc10";
+import { ucla3 } from "./ucla3";
 
 export const tests: TestConfig[] = [
   phq9,
@@ -35,6 +43,14 @@ export const tests: TestConfig[] = [
   ecr,
   bfi10,
   ders16,
+  who5,
+  mdq,
+  ybocs,
+  spin,
+  eat26,
+  maas,
+  cdrisc10,
+  ucla3,
 ];
 
 export const testsBySlug: Record<string, TestConfig> = Object.fromEntries(
