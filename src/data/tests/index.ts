@@ -24,6 +24,9 @@ import { eat26 } from "./eat26";
 import { maas } from "./maas";
 import { cdrisc10 } from "./cdrisc10";
 import { ucla3 } from "./ucla3";
+import { bdi2 } from "./bdi2";
+import { bai } from "./bai";
+import { bhs } from "./bhs";
 
 export const tests: TestConfig[] = [
   phq9,
@@ -51,6 +54,9 @@ export const tests: TestConfig[] = [
   maas,
   cdrisc10,
   ucla3,
+  bdi2,
+  bai,
+  bhs,
 ];
 
 export const testsBySlug: Record<string, TestConfig> = Object.fromEntries(

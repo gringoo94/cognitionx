@@ -154,6 +154,22 @@ const seoSections = [
     ),
   },
   {
+    h2: "Шкалы Бека: классика когнитивной терапии",
+    body: (
+      <>
+        Аарон Бек, основатель КПТ, разработал семейство шкал, которые до сих пор используются во
+        всём мире.{" "}
+        <Link to="/tools/tests/bdi-2" className="text-primary hover:underline">BDI-II</Link> —
+        подробная шкала депрессии из 21 пункта, дополняющая короткий{" "}
+        <Link to="/tools/tests/phq-9" className="text-primary hover:underline">PHQ-9</Link>.{" "}
+        <Link to="/tools/tests/bai" className="text-primary hover:underline">BAI</Link> — шкала
+        тревоги с фокусом на соматических симптомах: помогает отличить тревогу от депрессии.{" "}
+        <Link to="/tools/tests/bhs" className="text-primary hover:underline">BHS</Link> — шкала
+        безнадёжности, важный индикатор риска при депрессии и одна из основных мишеней КПТ.
+      </>
+    ),
+  },
+  {
     h2: "Пищевое поведение и одиночество",
     body: (
       <>
@@ -254,8 +270,8 @@ const TestsHub = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Психологические тесты онлайн бесплатно — 17 валидированных шкал"
-        description="Бесплатные психологические тесты онлайн: депрессия (PHQ-9), тревога (GAD-7), ПТСР (PCL-5), бессонница (ISI), привязанность (ECR-R), Большая пятёрка (BFI-10) и др."
+        title="Психологические тесты онлайн бесплатно — валидированные шкалы"
+        description="Бесплатные психологические тесты онлайн: PHQ-9, BDI-II, BAI, BHS (шкалы Бека), GAD-7, PCL-5, ISI, ECR-R, Большая пятёрка (BFI-10), WHO-5 и другие валидированные опросники."
         path="/tools/tests"
         schema={[itemListSchema, faqSchema]}
         breadcrumbs={[
