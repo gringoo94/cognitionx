@@ -92,12 +92,34 @@ const BlogList = () => {
     setCurrentPage(1);
   };
 
+  const collectionSchema = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Блог психолога Дмитрия Яцко",
+      url: "https://cognitionx.cloud/blog",
+      description:
+        "Статьи о КПТ, схема-терапии, тревоге, депрессии и выгорании — психообразование на доказательной базе.",
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: paginated.map((post, i) => ({
+          "@type": "ListItem",
+          position: (safePage - 1) * POSTS_PER_PAGE + i + 1,
+          name: post.title,
+          url: `https://cognitionx.cloud/blog/${post.slug}`,
+        })),
+      },
+    }),
+    [paginated, safePage]
+  );
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title="Блог психолога | КПТ, схема-терапия, тревога, депрессия — Дмитрий Яцко"
         description="Статьи о когнитивно-поведенческой терапии, депрессии, тревоге и выгорании. Практические техники и психообразование."
         path="/blog"
+        schema={collectionSchema}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Блог", url: "https://cognitionx.cloud/blog" },
