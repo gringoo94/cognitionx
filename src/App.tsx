@@ -79,6 +79,7 @@ const App = () => (
               <Route path="/anxiety" element={<ProblemPage />} />
               <Route path="/panic-attacks" element={<ProblemPage />} />
               <Route path="/burnout" element={<ProblemPage />} />
+              <Route path="/ocd" element={<ProblemPage />} />
               <Route path="/co-dependency" element={<ProblemPage />} />
               <Route path="/cbt-therapy" element={<MethodPage />} />
               <Route path="/online-therapy" element={<MethodPage />} />
