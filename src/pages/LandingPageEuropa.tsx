@@ -135,14 +135,31 @@ const LandingPageEuropa = () => (
       ]}
     />
     <Navbar />
+    {/* ── Sticky Telegram FAB ── */}
+    <a
+      href="https://t.me/gringoo94"
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => {
+        if (typeof window !== "undefined" && (window as any).fbq) {
+          (window as any).fbq("track", "Contact", { content_name: "telegram_fab_europa" });
+        }
+      }}
+      aria-label="Написать в Telegram"
+      className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-3 shadow-2xl shadow-primary/30 hover:scale-105 transition-transform"
+    >
+      <Send className="w-5 h-5" />
+      <span className="hidden sm:inline text-sm font-semibold">Написать в Telegram</span>
+    </a>
+
     <main>
       {/* ── Hero (adapted for expats) ── */}
-      <section className="max-w-7xl mx-auto px-6 pt-20 md:pt-32 pb-24">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <section className="max-w-7xl mx-auto px-6 pt-10 md:pt-16 pb-16">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="text-center md:text-left order-2 md:order-1">
             <motion.div
               {...fade(0)}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               Онлайн · Zoom · На русском языке
@@ -150,7 +167,7 @@ const LandingPageEuropa = () => (
 
             <motion.h1
               {...fade(0.05)}
-              className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+              className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08]"
             >
               Русскоязычный психолог
               <br />
@@ -159,32 +176,57 @@ const LandingPageEuropa = () => (
 
             <motion.p
               {...fade(0.1)}
-              className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
+              className="mt-5 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              Сложные вещи хочется обсуждать на родном языке. КПТ и схема-терапия онлайн — из любой точки Европы.
+              КПТ и схема-терапия онлайн — из любой точки Европы. Первая встреча <strong className="text-foreground">бесплатно, 20 минут</strong> — знакомство без обязательств.
             </motion.p>
+
+            {/* Offer chips — сразу видно цену/формат */}
+            <motion.div
+              {...fade(0.12)}
+              className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs"
+            >
+              {["Бесплатное знакомство · 20 мин", "Сессия 50 мин · 25 €", "Zoom · из любой страны"].map((t) => (
+                <span key={t} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-foreground/80 border border-border">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                  {t}
+                </span>
+              ))}
+            </motion.div>
 
             <motion.div
               {...fade(0.15)}
-              className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
+              className="mt-6 flex flex-col sm:flex-row items-center md:items-start gap-3"
             >
-              <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
+              <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all w-full sm:w-auto" asChild>
                 <a href="#booking">
-                  Бесплатная встреча — 20 мин <ArrowRight className="w-4 h-4" />
+                  Записаться — бесплатно <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
-              <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
-                <a href="#approach">Как я работаю</a>
+              <Button
+                variant="outline"
+                size="lg"
+                className="gap-2 text-base px-6 hover:scale-[1.02] hover:shadow-md transition-all w-full sm:w-auto"
+                asChild
+              >
+                <a
+                  href="https://t.me/gringoo94"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    if (typeof window !== "undefined" && (window as any).fbq) {
+                      (window as any).fbq("track", "Contact", { content_name: "telegram_hero_europa" });
+                    }
+                  }}
+                >
+                  <Send className="w-4 h-4" /> Написать в Telegram
+                </a>
               </Button>
             </motion.div>
 
-            <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-              Бесплатная 20-минутная встреча — познакомимся и я отвечу на ваши вопросы
-            </motion.p>
-
             <motion.div
               {...fade(0.25)}
-              className="mt-8 flex items-center justify-center md:justify-start gap-6 text-sm text-muted-foreground"
+              className="mt-6 flex items-center justify-center md:justify-start gap-6 text-sm text-muted-foreground"
             >
               {[
                 { value: "200+", label: "клиентов" },
@@ -202,7 +244,7 @@ const LandingPageEuropa = () => (
           <motion.div {...fade(0.2)} className="flex justify-center order-1 md:order-2">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl scale-110" />
-              <div className="relative w-72 h-80 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative w-64 h-72 sm:w-72 sm:h-80 md:w-[20rem] md:h-[24rem] lg:w-[24rem] lg:h-[28rem] rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src={heroPhoto}
                   alt="Психолог Дмитрий Яцко — русскоязычный КПТ-терапевт для экспатов в Европе"
