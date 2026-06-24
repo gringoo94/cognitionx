@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, RotateCcw, AlertCircle, CheckCircle2, AlertTriangle, Info, Download, Loader2 } from "lucide-react";
+import { ArrowRight, RotateCcw, AlertCircle, CheckCircle2, AlertTriangle, Info, Download, Loader2, Send, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import type { TestConfig } from "@/data/tests/types";
@@ -189,26 +189,113 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
       </div>
 
 
-      {/* CTA */}
-      <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 p-6 md:p-8 text-center">
-        <h3 className="text-xl font-semibold text-foreground mb-2">
-          Хотите обсудить результат с психологом?
-        </h3>
-        <p className="text-sm text-muted-foreground max-w-lg mx-auto mb-6">
-          Я работаю с {config.clusterLabel.toLowerCase()} и смежными темами в формате КПТ и схема-терапии.
-          Первая встреча — знакомство и оценка запроса.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button asChild size="lg">
-            <Link to="/contact" className="gap-2">
-              Записаться на консультацию <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-          <Button variant="outline" size="lg" onClick={onRestart} className="gap-2">
-            <RotateCcw className="h-4 w-4" /> Пройти заново
-          </Button>
-        </div>
-      </div>
+      {/* CTA — cluster + severity aware */}
+      {(() => {
+        const clusterToProblem: Record<string, { href: string; label: string } | undefined> = {
+          depression: { href: "/depression", label: "Подробнее: терапия депрессии" },
+          anxiety: { href: "/anxiety", label: "Подробнее: терапия тревоги" },
+          burnout: { href: "/burnout", label: "Подробнее: работа с выгоранием" },
+          stress: { href: "/stress", label: "Подробнее: работа со стрессом" },
+          "self-esteem": { href: "/self-esteem", label: "Подробнее: самооценка" },
+          it: { href: "/psiholog-dlya-it", label: "Подробнее: психолог для IT" },
+          "cbt-tools": { href: "/cbt-therapy", label: "Что такое КПТ" },
+          trauma: { href: "/cbt-therapy", label: "КПТ при травме" },
+          sleep: { href: "/stress", label: "Сон, стресс и восстановление" },
+          addiction: { href: "/addiction", label: "Подробнее: зависимости" },
+          relationships: { href: "/co-dependency", label: "Подробнее: созависимость и отношения" },
+          personality: { href: "/schema-therapy", label: "Что такое схема-терапия" },
+          eating: undefined,
+        };
+        const problem = clusterToProblem[config.cluster];
+        const urgent = result.tone === "danger" || result.tone === "warning";
+        const tgText = encodeURIComponent(
+          `Здравствуйте! Прошёл(а) тест ${config.code} — результат: ${result.levelLabel} (${result.score}/${result.maxScore}). Хочу обсудить.`,
+        );
+        return (
+          <div
+            className={cn(
+              "rounded-2xl border p-6 md:p-8",
+              urgent
+                ? "border-primary/40 bg-gradient-to-br from-primary/10 to-primary/15"
+                : "border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10",
+            )}
+          >
+            <div className="flex items-center justify-center gap-2 mb-2 text-primary">
+              {urgent ? <AlertCircle className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
+              <span className="text-xs font-semibold uppercase tracking-wider">
+                {urgent ? "Рекомендую следующий шаг" : "Что дальше"}
+              </span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2 text-center">
+              {urgent
+                ? `Результат «${result.levelLabel}» — стоит обсудить со специалистом`
+                : `Хотите обсудить результат с психологом?`}
+            </h3>
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-6 text-center">
+              {urgent ? (
+                <>
+                  Я работаю с {config.clusterLabel.toLowerCase()} в формате КПТ и схема-терапии.
+                  Первый шаг — бесплатная 20-минутная встреча: познакомимся, обсудим запрос, без обязательств.
+                </>
+              ) : (
+                <>
+                  Если хочется разобраться глубже — приходите на бесплатное 20-минутное знакомство.
+                  Расскажу, как работаю с {config.clusterLabel.toLowerCase()}.
+                </>
+              )}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-xl mx-auto">
+              <Button asChild size="lg" className="gap-2">
+                <Link
+                  to="/free-consultation"
+                  onClick={() => {
+                    if (typeof window !== "undefined" && (window as any).fbq) {
+                      (window as any).fbq("track", "Lead", {
+                        content_name: `test_result_cta_${config.code}`,
+                        content_category: config.cluster,
+                      });
+                    }
+                  }}
+                >
+                  Бесплатная встреча — 20 мин <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2">
+                <a
+                  href={`https://t.me/gringoo94?text=${tgText}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    if (typeof window !== "undefined" && (window as any).fbq) {
+                      (window as any).fbq("track", "Contact", {
+                        content_name: `test_result_tg_${config.code}`,
+                      });
+                    }
+                  }}
+                >
+                  <Send className="h-4 w-4" /> Написать в Telegram
+                </a>
+              </Button>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 justify-center items-center mt-5 text-xs">
+              {problem && (
+                <Link
+                  to={problem.href}
+                  className="text-primary hover:underline underline-offset-4"
+                >
+                  {problem.label} →
+                </Link>
+              )}
+              <button
+                onClick={onRestart}
+                className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"
+              >
+                <RotateCcw className="h-3.5 w-3.5" /> Пройти тест заново
+              </button>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Disclaimer */}
       <div className="rounded-xl border border-border/60 bg-muted/30 p-4">
