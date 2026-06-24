@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, RotateCcw, AlertCircle, CheckCircle2, AlertTriangle, Info, Download, Loader2 } from "lucide-react";
+import { ArrowRight, RotateCcw, AlertCircle, CheckCircle2, AlertTriangle, Info, Download, Loader2, Send, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import type { TestConfig } from "@/data/tests/types";
