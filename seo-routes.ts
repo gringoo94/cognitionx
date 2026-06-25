@@ -264,6 +264,40 @@ export const seoRoutes: SeoRoute[] = [
     noindex: true,
   },
 
+  // Private / utility routes — declared so the sitemap generator knows about
+  // them, but marked noindex so they're excluded from sitemap.xml and robots.
+  {
+    path: "/privacy",
+    title: "Политика конфиденциальности — Психолог Дмитрий Яцко",
+    description: "Политика конфиденциальности сайта cognitionx.cloud: какие данные собираются и как используются.",
+    noindex: true,
+  },
+  {
+    path: "/informed-consent",
+    title: "Информированное согласие — Психолог Дмитрий Яцко",
+    description: "Информированное согласие на психологическую консультацию: условия работы, конфиденциальность, ответственность.",
+    noindex: true,
+  },
+  {
+    path: "/admin",
+    title: "Админ-панель — Психолог Дмитрий Яцко",
+    description: "Служебная страница администратора. Не предназначена для публичного просмотра.",
+    noindex: true,
+  },
+  {
+    path: "/admin/login",
+    title: "Вход в админ-панель — Психолог Дмитрий Яцко",
+    description: "Служебная страница входа администратора.",
+    noindex: true,
+  },
+  {
+    path: "/about_cognitionx",
+    title: "О проекте CognitionX — Психолог Дмитрий Яцко",
+    description: "Технический редирект на /about. Не индексируется.",
+    noindex: true,
+  },
+
+
   // Blog posts
   { path: "/blog/kak-uspokoitsya", title: "Как быстро успокоиться: 5 техник за 2 минуты — психолог КПТ", description: "Как успокоиться за 2 минуты: 5 рабочих техник из КПТ — дыхание 4-7-8, заземление, мышечная релаксация. Что делать при сильной тревоге и панике." , ogType: "article" },
   { path: "/blog/povyshennaya-trevozhnost", title: "Повышенная тревожность: симптомы, причины и что делать", description: "Повышенная тревожность — это уже не норма. Разбираем симптомы, причины, отличие от нормы и работающие методы лечения (КПТ, схема-терапия)." , ogType: "article" },
