@@ -24,7 +24,7 @@ import SEOHead from "@/components/SEOHead";
 // medicalSpecialty и availableService для классификации практики.
 const medicalBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["MedicalBusiness", "ProfessionalService"],
+  "@type": ["MedicalBusiness", "LocalBusiness", "ProfessionalService"],
   "@id": "https://cognitionx.cloud/#medicalbusiness",
   name: "CognitionX — Психолог Дмитрий Яцко",
   alternateName: "Кабинет КПТ и схема-терапии Дмитрия Яцко",
@@ -36,6 +36,34 @@ const medicalBusinessSchema = {
   priceRange: "€€",
   email: "digitalgringoo@gmail.com",
   telephone: "+447599880865",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Кишинёв",
+    addressRegion: "Chișinău",
+    addressCountry: "MD",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 47.0105,
+    longitude: 28.8638,
+  },
+  hasMap: "https://www.google.com/maps/place/Chișinău",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "20:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Saturday"],
+      opens: "10:00",
+      closes: "15:00",
+    },
+  ],
+  currenciesAccepted: "EUR, MDL, USD",
+  paymentAccepted: "Bank transfer, Card, Crypto",
   medicalSpecialty: ["Psychiatric", "Psychological"],
   areaServed: [
     { "@type": "Country", name: "Молдова" },
@@ -49,6 +77,7 @@ const medicalBusinessSchema = {
   founder: { "@id": "https://cognitionx.cloud/#person" },
   employee: { "@id": "https://cognitionx.cloud/#person" },
   parentOrganization: { "@id": "https://cognitionx.cloud/#organization" },
+
   availableService: [
     {
       "@type": "MedicalTherapy",
