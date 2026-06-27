@@ -28,6 +28,8 @@ import { bdi2 } from "./bdi2";
 import { bai } from "./bai";
 import { bhs } from "./bhs";
 import { psyage } from "./psyage";
+import { pswq } from "./pswq";
+import { miniSpin } from "./miniSpin";
 
 export const tests: TestConfig[] = [
   phq9,
@@ -59,6 +61,8 @@ export const tests: TestConfig[] = [
   bai,
   bhs,
   psyage,
+  pswq,
+  miniSpin,
 ];
 
 export const testsBySlug: Record<string, TestConfig> = Object.fromEntries(
