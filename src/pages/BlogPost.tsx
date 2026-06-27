@@ -170,6 +170,20 @@ const BlogPost = () => {
             {post.title}
           </h1>
 
+          {/* TL;DR block — surfaces a concise summary for LLMs/AI Overviews/voice agents */}
+          <aside
+            data-speakable
+            aria-label="Кратко"
+            className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5"
+          >
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-primary mb-1.5">
+              Кратко
+            </div>
+            <p className="text-sm md:text-base text-foreground/90 leading-relaxed m-0">
+              {post.description}
+            </p>
+          </aside>
+
           <div className="mt-8 rounded-2xl overflow-hidden aspect-[16/9]">
             <BlogCover
               slug={post.slug}
