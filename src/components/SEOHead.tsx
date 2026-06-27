@@ -16,11 +16,38 @@ interface SEOHeadProps {
   schema?: object | object[];
   noindex?: boolean;
   breadcrumbs?: BreadcrumbItem[];
+  /** Optional locale alternates for hreflang. Keys: 'ru' | 'ro' | 'en' | 'x-default'.
+   *  Pass absolute or root-relative URLs. When provided, replaces the default
+   *  single-locale (ru + x-default) alternates emitted by SEOHead. */
+  alternates?: { hreflang: string; href: string }[];
+  /** OG locale (defaults to ru_RU). */
+  ogLocale?: string;
 }
 
-const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema, noindex, breadcrumbs }: SEOHeadProps) => {
+const SEOHead = ({
+  title,
+  description,
+  path,
+  ogImage,
+  ogType = "website",
+  schema,
+  noindex,
+  breadcrumbs,
+  alternates,
+  ogLocale = "ru_RU",
+}: SEOHeadProps) => {
   const url = `${SITE_URL}${path}`;
   const image = ogImage || `${SITE_URL}/og-default.webp`;
+  const resolvedAlternates =
+    alternates && alternates.length > 0
+      ? alternates.map((a) => ({
+          hreflang: a.hreflang,
+          href: a.href.startsWith("http") ? a.href : `${SITE_URL}${a.href}`,
+        }))
+      : [
+          { hreflang: "ru", href: url },
+          { hreflang: "x-default", href: url },
+        ];
 
   // Remove any pre-rendered static canonical/hreflang tags so Helmet remains the
   // single source of truth at runtime and we don't end up with duplicate tags
@@ -60,8 +87,9 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      <link rel="alternate" hrefLang="ru" href={url} />
-      <link rel="alternate" hrefLang="x-default" href={url} />
+      {resolvedAlternates.map((a) => (
+        <link key={a.hreflang} rel="alternate" hrefLang={a.hreflang} href={a.href} />
+      ))}
 
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
@@ -76,7 +104,7 @@ const SEOHead = ({ title, description, path, ogImage, ogType = "website", schema
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content="ru_RU" />
+      <meta property="og:locale" content={ogLocale} />
       <meta property="og:site_name" content="Психолог Дмитрий Яцко" />
 
       <meta name="twitter:card" content="summary_large_image" />
