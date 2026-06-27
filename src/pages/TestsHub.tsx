@@ -311,7 +311,7 @@ const TestsHub = () => {
           className="mb-10 max-w-2xl"
         >
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-            Психологические тесты онлайн — 17 валидированных шкал
+            Психологические тесты онлайн — 30+ валидированных шкал
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed mb-4">
             Скрининги, которыми пользуются психологи и врачи во всём мире: депрессия, тревога,
