@@ -129,6 +129,13 @@ const LandingPageEuropa = () => (
       description="Психолог онлайн на русском для экспатов в Европе. КПТ и схема-терапия. Адаптация, одиночество, тревога."
       path="/psiholog-europa"
       schema={[personSchema, serviceSchema, expatFaqSchema, testimonialsSchema]}
+      alternates={[
+        { hreflang: "ru", href: "/psiholog-europa" },
+        { hreflang: "ru-RU", href: "/psiholog-europa" },
+        { hreflang: "ru-DE", href: "/psiholog-europa" },
+        { hreflang: "ru-IT", href: "/psiholog-europa" },
+        { hreflang: "x-default", href: "/psiholog-europa" },
+      ]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для экспатов — Европа", url: "https://cognitionx.cloud/psiholog-europa" },
