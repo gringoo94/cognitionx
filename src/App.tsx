@@ -8,6 +8,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import PageViewTracker from "./components/PageViewTracker.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import FloatingTelegramFab from "./components/FloatingTelegramFab.tsx";
+import ExitIntentPopup from "./components/ExitIntentPopup.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
 
@@ -142,6 +144,8 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <FloatingTelegramFab />
+          <ExitIntentPopup />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
