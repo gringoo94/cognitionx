@@ -440,7 +440,7 @@
   </url>
   <url>
     <loc>https://cognitionx.cloud/blog/kak-vybrat-psihologa</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -725,5 +725,17 @@
     <lastmod>2026-05-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/blog/kpt-polnyj-gajd</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/blog/kak-vybrat-psihologa</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
