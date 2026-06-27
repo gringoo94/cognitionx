@@ -15,13 +15,15 @@ export const trackCta = (name: string, meta?: Record<string, unknown>) => {
 
     void supabase
       .from("cta_clicks")
-      .insert({
-        name,
-        path,
-        referrer,
-        user_agent: userAgent,
-        meta: meta ?? null,
-      })
+      .insert([
+        {
+          name,
+          path: path ?? undefined,
+          referrer: referrer ?? undefined,
+          user_agent: userAgent ?? undefined,
+          meta: (meta ?? null) as never,
+        },
+      ])
       .then(() => undefined, () => undefined);
   } catch {
     /* analytics never blocks UX */
