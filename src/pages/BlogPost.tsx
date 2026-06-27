@@ -9,6 +9,7 @@ import EmotionWheel from "@/components/EmotionWheel";
 import SEOHead from "@/components/SEOHead";
 import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
+import BlogCtaBridge from "@/components/BlogCtaBridge";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
 import DOMPurify from "dompurify";
 
@@ -238,15 +239,7 @@ const BlogPost = () => {
             <BlogSubscribeForm source="blog-post-bottom" />
           </div>
 
-          <div className="mt-10 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center">
-            <h3 className="text-xl font-bold mb-2">Готовы начать?</h3>
-            <p className="text-sm text-muted-foreground mb-5">
-              Первая консультация — 25 €
-            </p>
-            <Button size="lg" asChild>
-              <a href="/#booking">Записаться на консультацию</a>
-            </Button>
-          </div>
+          <BlogCtaBridge topic={post.title} />
 
           {relatedPosts.length > 0 && (
             <div className="mt-16">
