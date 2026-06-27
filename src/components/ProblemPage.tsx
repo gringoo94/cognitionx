@@ -401,6 +401,37 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
       },
     ],
   },
+  ocd: {
+    Icon: Repeat,
+    badge: "ОКР — обсессивно-компульсивное расстройство",
+    tagline:
+      "Навязчивые мысли и ритуалы — не «странности характера». ОКР хорошо поддаётся работе: протокол ERP (экспозиция и предотвращение реакции) считается золотым стандартом.",
+    accent: "from-primary/20 via-accent/10 to-transparent",
+    stats: [
+      { label: "Длительность курса", value: "12–20 сессий", Icon: Clock },
+      { label: "Первые улучшения", value: "4–6 встреч", Icon: Sparkles },
+      { label: "Метод", value: "КПТ + ERP", Icon: Brain },
+      { label: "Эффективность", value: "60–85%", Icon: Award },
+    ],
+    trustChips: COMMON_TRUST,
+    evidence: [
+      {
+        source: "NICE CG31",
+        finding:
+          "КПТ с ERP — метод первой линии при ОКР у взрослых, подростков и детей.",
+      },
+      {
+        source: "APA Practice Guideline",
+        finding:
+          "Экспозиция с предотвращением реакции (ERP) — наиболее эффективный психотерапевтический подход при ОКР.",
+      },
+      {
+        source: "Öst et al. (2015), meta-analysis",
+        finding:
+          "ERP показывает большие размеры эффекта при ОКР и устойчивые результаты в долгосрочной перспективе.",
+      },
+    ],
+  },
 };
 
 const buildToc = (
