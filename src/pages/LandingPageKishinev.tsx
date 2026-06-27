@@ -133,6 +133,12 @@ const LandingPageKishinev = () => (
       description="Психолог в Кишинёве и по Молдове (psiholog Chișinău online). КПТ и схема-терапия на русском. Тревога, выгорание, отношения."
       path="/psiholog-kishinev"
       schema={[serviceSchema, localFaqSchema, testimonialsSchema]}
+      alternates={[
+        { hreflang: "ru", href: "/psiholog-kishinev" },
+        { hreflang: "ro-MD", href: "/psiholog-kishinev" },
+        { hreflang: "ro", href: "/psiholog-kishinev" },
+        { hreflang: "x-default", href: "/psiholog-kishinev" },
+      ]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог в Кишинёве", url: "https://cognitionx.cloud/psiholog-kishinev" },
