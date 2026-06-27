@@ -87,8 +87,9 @@ const SEOHead = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
-      <link rel="alternate" hrefLang="ru" href={url} />
-      <link rel="alternate" hrefLang="x-default" href={url} />
+      {resolvedAlternates.map((a) => (
+        <link key={a.hreflang} rel="alternate" hrefLang={a.hreflang} href={a.href} />
+      ))}
 
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
