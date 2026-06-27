@@ -104,7 +104,7 @@ const SEOHead = ({
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content="ru_RU" />
+      <meta property="og:locale" content={ogLocale} />
       <meta property="og:site_name" content="Психолог Дмитрий Яцко" />
 
       <meta name="twitter:card" content="summary_large_image" />
