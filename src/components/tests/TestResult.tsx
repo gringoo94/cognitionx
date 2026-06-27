@@ -43,6 +43,20 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const [userNote, setUserNote] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
+  useEffect(() => {
+    saveTestHistory({
+      slug: config.slug,
+      code: config.code,
+      title: config.title,
+      score: result.score,
+      maxScore: result.maxScore,
+      levelLabel: result.levelLabel,
+      tone: result.tone,
+      takenAt: new Date().toISOString(),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.slug]);
+
   const handleDownload = async () => {
     try {
       setIsGenerating(true);
