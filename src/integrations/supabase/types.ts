@@ -104,6 +104,36 @@ export type Database = {
         }
         Relationships: []
       }
+      cta_clicks: {
+        Row: {
+          created_at: string
+          id: string
+          meta: Json | null
+          name: string
+          path: string | null
+          referrer: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          meta?: Json | null
+          name: string
+          path?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          meta?: Json | null
+          name?: string
+          path?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       page_views: {
         Row: {
           created_at: string
