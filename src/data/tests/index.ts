@@ -58,6 +58,7 @@ export const tests: TestConfig[] = [
   bdi2,
   bai,
   bhs,
+  psyage,
 ];
 
 export const testsBySlug: Record<string, TestConfig> = Object.fromEntries(
