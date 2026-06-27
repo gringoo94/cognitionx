@@ -14,6 +14,7 @@ import { tests } from "@/data/tests";
 import { ArrowLeft, ArrowRight, Clock, Lock, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SITE_URL } from "@/lib/globalSchema";
+import TestHistoryWidget from "@/components/tests/TestHistoryWidget";
 
 const clusters = [
   { key: "all", label: "Все" },
@@ -333,8 +334,10 @@ const TestsHub = () => {
             </span>
           </div>
         </motion.div>
+        <TestHistoryWidget />
 
         <div className="flex flex-wrap gap-2 mb-8">
+
           {clusters.map((c) => (
             <button
               key={c.key}

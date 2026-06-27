@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
 import { generateTestReportPdf } from "@/lib/testReportPdf";
 import { deriveRanges } from "@/lib/testRanges";
+import { saveTestHistory } from "@/lib/testHistory";
 
 interface TestResultProps {
   config: TestConfig;
@@ -41,6 +42,20 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const ranges = deriveRanges(config);
   const [userNote, setUserNote] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+
+  useEffect(() => {
+    saveTestHistory({
+      slug: config.slug,
+      code: config.code,
+      title: config.title,
+      score: result.score,
+      maxScore: result.maxScore,
+      levelLabel: result.levelLabel,
+      tone: result.tone,
+      takenAt: new Date().toISOString(),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.slug]);
 
   const handleDownload = async () => {
     try {
