@@ -244,7 +244,7 @@ const Tools = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="КПТ-инструменты и психологические тесты | Дмитрий Яцко"
-        description="Бесплатные интерактивные инструменты КПТ и схема-терапии: 11 валидированных тестов (PHQ-9, GAD-7, BAT, YSQ), ABC-анализ, колесо эмоций, дневник активации, рабочая тетрадь."
+        description="Бесплатные КПТ-инструменты и валидированные психологические тесты: PHQ-9, GAD-7, ABC-анализ, колесо эмоций, дневник."
         path="/tools"
         ogImage={`${SITE_URL}/og-tools.webp`}
         schema={[itemListSchema, faqSchema]}
