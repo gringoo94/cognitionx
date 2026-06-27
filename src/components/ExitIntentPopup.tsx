@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Gift, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackCta } from "@/lib/trackCta";
 
 const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/free-consultation", "/contact"];
 const STORAGE_KEY = "exit_intent_seen_at";
@@ -33,6 +34,7 @@ const ExitIntentPopup = () => {
       } catch {
         /* ignore */
       }
+      trackCta("exit_intent_shown", { path: pathname });
       if ((window as any).fbq) {
         (window as any).fbq("trackCustom", "ExitIntentShown");
       }
@@ -105,7 +107,13 @@ const ExitIntentPopup = () => {
 
         <div className="mt-5 flex flex-col gap-2">
           <Button asChild size="lg" className="w-full rounded-lg gap-2">
-            <Link to="/free-consultation" onClick={close}>
+            <Link
+              to="/free-consultation"
+              onClick={() => {
+                trackCta("exit_intent_free_consultation");
+                close();
+              }}
+            >
               <Gift className="w-4 h-4" /> Записаться бесплатно
             </Link>
           </Button>
@@ -115,6 +123,7 @@ const ExitIntentPopup = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
+                trackCta("exit_intent_telegram");
                 if ((window as any).fbq) {
                   (window as any).fbq("track", "Contact", { content_name: "exit_intent_telegram" });
                 }

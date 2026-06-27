@@ -11,6 +11,27 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
+const PILLAR_GUIDES: { slug: string; title: string; description: string; badge: string }[] = [
+  {
+    slug: "kpt-polnyj-gajd",
+    title: "КПТ: полный гайд 2026",
+    description: "Модель ABC, искажения, техники и доказательная база — всё в одном месте.",
+    badge: "Pillar",
+  },
+  {
+    slug: "kak-vybrat-psihologa",
+    title: "Как выбрать психолога",
+    description: "12 пунктов чек-листа: образование, цены, красные флаги и первая сессия.",
+    badge: "Гайд",
+  },
+  {
+    slug: "kognitivnyj-barjer-vera-v-istinnost",
+    title: "Когда веришь в свою ловушку",
+    description: "Что делать, если схема ощущается правдой — пошаговая работа с убеждениями.",
+    badge: "Схема-терапия",
+  },
+];
+
 const Blog = () => {
   const { data: blogPosts = [], isLoading } = useBlogPosts();
   const posts = blogPosts.slice(0, 6);
@@ -18,9 +39,9 @@ const Blog = () => {
   return (
     <section id="blog" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...fade(0)} className="text-center mb-16">
+        <motion.div {...fade(0)} className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-4">
-            Блог
+            Блог и гайды
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             Полезные <span className="text-primary">статьи</span>
@@ -29,6 +50,31 @@ const Blog = () => {
             Разбираю темы тревоги, депрессии, выгорания и самопомощи — доступно и с опорой на науку.
           </p>
         </motion.div>
+
+        {/* Featured pillar guides — самые большие материалы, прокладывают внутренние ссылки */}
+        <motion.div {...fade(0.05)} className="mb-14 grid sm:grid-cols-3 gap-4">
+          {PILLAR_GUIDES.map((g) => (
+            <Link
+              key={g.slug}
+              to={`/blog/${g.slug}`}
+              className="group relative rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 p-5 hover:border-primary/40 hover:shadow-lg transition-all"
+            >
+              <span className="inline-block px-2 py-0.5 rounded-full bg-primary/10 text-[10px] font-semibold uppercase tracking-wider text-primary mb-3">
+                {g.badge}
+              </span>
+              <h3 className="font-semibold text-base leading-snug group-hover:text-primary transition-colors">
+                {g.title}
+              </h3>
+              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                {g.description}
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                Открыть гайд <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
+          ))}
+        </motion.div>
+
 
         {isLoading ? (
           <div className="flex justify-center py-12">
