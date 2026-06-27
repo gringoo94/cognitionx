@@ -27,6 +27,7 @@ import { ucla3 } from "./ucla3";
 import { bdi2 } from "./bdi2";
 import { bai } from "./bai";
 import { bhs } from "./bhs";
+import { psyage } from "./psyage";
 
 export const tests: TestConfig[] = [
   phq9,
