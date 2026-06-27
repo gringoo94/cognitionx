@@ -334,8 +334,10 @@ const TestsHub = () => {
             </span>
           </div>
         </motion.div>
+        <TestHistoryWidget />
 
         <div className="flex flex-wrap gap-2 mb-8">
+
           {clusters.map((c) => (
             <button
               key={c.key}
