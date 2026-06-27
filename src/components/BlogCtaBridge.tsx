@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Gift, Send, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackCta } from "@/lib/trackCta";
 
 interface BlogCtaBridgeProps {
   topic?: string;
@@ -26,7 +27,10 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
       </p>
       <div className="mt-5 flex flex-col sm:flex-row gap-3">
         <Button asChild size="lg" className="rounded-lg gap-2">
-          <Link to="/free-consultation">
+          <Link
+            to="/free-consultation"
+            onClick={() => trackCta("blog_cta_free_consultation", { topic })}
+          >
             <Gift className="w-4 h-4" /> Бесплатная встреча
           </Link>
         </Button>
@@ -36,6 +40,7 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
+              trackCta("blog_cta_telegram", { topic });
               if ((window as any).fbq) {
                 (window as any).fbq("track", "Contact", { content_name: "blog_cta_telegram" });
               }
@@ -45,7 +50,7 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
           </a>
         </Button>
         <Button asChild size="lg" variant="ghost" className="rounded-lg gap-2">
-          <a href="/#booking">
+          <a href="/#booking" onClick={() => trackCta("blog_cta_paid_booking", { topic })}>
             Платная консультация <ArrowRight className="w-4 h-4" />
           </a>
         </Button>
