@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
 import { generateTestReportPdf } from "@/lib/testReportPdf";
 import { deriveRanges } from "@/lib/testRanges";
+import { saveTestHistory } from "@/lib/testHistory";
 
 interface TestResultProps {
   config: TestConfig;
