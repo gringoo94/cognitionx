@@ -122,15 +122,15 @@ const serviceSchema = {
     { "@type": "Country", name: "Молдова" },
   ],
   serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
-  availableLanguage: "Russian",
+  availableLanguage: ["Russian", "Romanian"],
   provider: { "@id": "https://cognitionx.cloud/#person" },
 };
 
 const LandingPageKishinev = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог в Кишинёве — КПТ онлайн | Дмитрий Яцко"
-      description="Психолог в Кишинёве и по Молдове. КПТ и схема-терапия онлайн. Тревога, выгорание, отношения."
+      title="Психолог в Кишинёве · Psiholog Chișinău — КПТ онлайн"
+      description="Психолог в Кишинёве и по Молдове (psiholog Chișinău online). КПТ и схема-терапия на русском. Тревога, выгорание, отношения."
       path="/psiholog-kishinev"
       schema={[serviceSchema, localFaqSchema, testimonialsSchema]}
       breadcrumbs={[
@@ -162,10 +162,17 @@ const LandingPageKishinev = () => (
             </motion.h1>
 
             <motion.p
+              {...fade(0.08)}
+              className="mt-2 text-sm text-muted-foreground/80 italic"
+            >
+              Psiholog Chișinău · online · în limba rusă
+            </motion.p>
+
+            <motion.p
               {...fade(0.1)}
               className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              КПТ и схема-терапия для жителей Кишинёва и Молдовы. Онлайн в Zoom — на русском, в одном с вами часовом поясе.
+              КПТ и схема-терапия для жителей Кишинёва и Молдовы. Онлайн в Zoom — на русском, в одном с вами часовом поясе. Pentru clienții din Chișinău, Bălți și toată Moldova.
             </motion.p>
 
             <motion.div
