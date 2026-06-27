@@ -40,6 +40,30 @@ export const personSchema = {
     "@type": "CollegeOrUniversity",
     name: "Молдавский государственный университет",
   },
+  hasCredential: [
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "degree",
+      educationalLevel: "Master's degree",
+      name: "Магистр клинической психологии",
+      recognizedBy: { "@type": "CollegeOrUniversity", name: "Молдавский государственный университет" },
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "certificate",
+      name: "Когнитивно-поведенческая терапия (базовый курс + специализация по депрессии)",
+      recognizedBy: { "@type": "Organization", name: "CBTLAB" },
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "certificate",
+      name: "Схема-терапия",
+    },
+  ],
+  memberOf: {
+    "@type": "Organization",
+    name: "EABCT — European Association for Behavioural and Cognitive Therapies",
+  },
   worksFor: { "@id": `${SITE_URL}/#organization` },
   sameAs: SAME_AS,
 };
