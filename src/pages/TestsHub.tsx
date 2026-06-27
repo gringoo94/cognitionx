@@ -14,6 +14,7 @@ import { tests } from "@/data/tests";
 import { ArrowLeft, ArrowRight, Clock, Lock, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SITE_URL } from "@/lib/globalSchema";
+import TestHistoryWidget from "@/components/tests/TestHistoryWidget";
 
 const clusters = [
   { key: "all", label: "Все" },
