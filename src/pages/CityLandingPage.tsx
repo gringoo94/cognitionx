@@ -15,6 +15,10 @@ import {
   GraduationCap,
   Award,
   Brain,
+  Heart,
+  Compass,
+  BookOpen,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +42,25 @@ import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug, cityPages } from "@/data/cityPages";
+import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
+
+// Hour offset for "min" side of utcOffset string (e.g. "UTC+1/+2" -> 1).
+// Used for the "session times in your timezone" mini-table.
+function minOffsetHours(utcOffset: string): number {
+  const m = utcOffset.match(/UTC([+-]\d+)/);
+  return m ? parseInt(m[1], 10) : 0;
+}
+// Kishinev (host) min offset is +2 (winter). We compute diff = clientMin - hostMin.
+function shiftToKishinev(clientHour: number, clientUtcOffset: string): number {
+  const diff = minOffsetHours(clientUtcOffset) - 2;
+  let h = clientHour - diff;
+  if (h < 0) h += 24;
+  if (h >= 24) h -= 24;
+  return h;
+}
+const fmtH = (h: number) => `${String(h).padStart(2, "0")}:00`;
+
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
