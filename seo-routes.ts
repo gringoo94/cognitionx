@@ -10,6 +10,12 @@ export interface SeoRoute {
   ogType?: "website" | "article";
   /** Absolute URL of an OG image specific to this route. Falls back to og-default.webp. */
   ogImage?: string;
+  /**
+   * For legacy URLs that client-side redirect to a new target. When set,
+   * canonical/og:url/hreflang point to this new path so search engines
+   * consolidate signals on the destination page.
+   */
+  canonicalPath?: string;
 }
 
 export const seoRoutes: SeoRoute[] = [
