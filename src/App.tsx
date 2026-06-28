@@ -41,6 +41,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const InformedConsent = lazy(() => import("./pages/InformedConsent.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
 const FreeConsultationPage = lazy(() => import("./pages/FreeConsultationPage.tsx"));
+const StartQuizPage = lazy(() => import("./pages/StartQuizPage.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -104,6 +105,7 @@ const App = () => (
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/free-consultation" element={<FreeConsultationPage />} />
+              <Route path="/start" element={<StartQuizPage />} />
 
               {/* Redirects from old Tilda URLs */}
               <Route path="/about_cognitionx" element={<Navigate to="/about" replace />} />
