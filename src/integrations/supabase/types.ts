@@ -134,6 +134,48 @@ export type Database = {
         }
         Relationships: []
       }
+      indexation_status: {
+        Row: {
+          checked_at: string
+          coverage_state: string | null
+          fetch_state: string | null
+          google_canonical: string | null
+          indexing_state: string | null
+          last_crawl_time: string | null
+          raw: Json | null
+          robots_state: string | null
+          url: string
+          user_canonical: string | null
+          verdict: string | null
+        }
+        Insert: {
+          checked_at?: string
+          coverage_state?: string | null
+          fetch_state?: string | null
+          google_canonical?: string | null
+          indexing_state?: string | null
+          last_crawl_time?: string | null
+          raw?: Json | null
+          robots_state?: string | null
+          url: string
+          user_canonical?: string | null
+          verdict?: string | null
+        }
+        Update: {
+          checked_at?: string
+          coverage_state?: string | null
+          fetch_state?: string | null
+          google_canonical?: string | null
+          indexing_state?: string | null
+          last_crawl_time?: string | null
+          raw?: Json | null
+          robots_state?: string | null
+          url?: string
+          user_canonical?: string | null
+          verdict?: string | null
+        }
+        Relationships: []
+      }
       page_views: {
         Row: {
           created_at: string
