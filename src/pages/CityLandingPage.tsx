@@ -292,6 +292,148 @@ const CityLandingPage = () => {
           </div>
         </section>
 
+        {/* ── Why Russian online ── */}
+        {page.whyRussianOnline && page.whyRussianOnline.length > 0 && (
+          <section className="bg-background">
+            <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
+              <motion.div {...fade()} className="text-center mb-12">
+                <Heart className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                  Почему русскоязычная терапия онлайн<br className="hidden sm:block" /> может быть удобнее {page.cityFor}
+                </h2>
+                <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                  Не «лучше местной системы» — а другой формат, который подходит части людей.
+                </p>
+              </motion.div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {page.whyRussianOnline.map((point, i) => (
+                  <motion.div
+                    key={i}
+                    {...fade(0.05 * i)}
+                    className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                    <p className="text-sm leading-relaxed text-muted-foreground">{point}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Help routes (local system + steps) ── */}
+        {page.helpRoutes && page.helpRoutes.length > 0 && (
+          <section className="bg-card border-y border-border">
+            <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
+              <motion.div {...fade()} className="text-center mb-12">
+                <Compass className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                  Маршрут помощи в {page.country === "Германия" ? "Германии" : page.country === "Грузия" ? "Грузии" : page.country === "Молдова" ? "Молдове" : page.country === "Нидерланды" ? "Нидерландах" : page.country === "Португалия" ? "Португалии" : page.country}
+                </h2>
+                <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                  Не каждому нужен именно я. Вот как выбрать формат под вашу ситуацию.
+                </p>
+              </motion.div>
+              <div className="space-y-3">
+                {page.helpRoutes.map((r, i) => (
+                  <motion.div
+                    key={i}
+                    {...fade(0.05 * i)}
+                    className={`rounded-xl border p-5 ${
+                      i === 0 ? "border-destructive/30 bg-destructive/5" : "border-border bg-background"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      {i === 0 ? (
+                        <AlertTriangle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+                      ) : (
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold shrink-0 mt-0.5">
+                          {i}
+                        </span>
+                      )}
+                      <div className="space-y-1.5">
+                        <h3 className="text-sm font-semibold">{r.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{r.text}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              {page.localSystem && (
+                <motion.div {...fade(0.3)} className="mt-8 rounded-xl border border-border bg-background p-5 text-xs text-muted-foreground leading-relaxed">
+                  <p className="font-semibold text-foreground mb-2">Контекст по страховке и системе</p>
+                  <p className="mb-1"><span className="font-medium text-foreground">Страховка:</span> {page.localSystem.insurance}</p>
+                  <p className="mb-1"><span className="font-medium text-foreground">Публичный путь:</span> {page.localSystem.publicRoute}</p>
+                  <p className="mb-1"><span className="font-medium text-foreground">Частный путь:</span> {page.localSystem.privateRoute}</p>
+                  <p className="mt-2 italic opacity-80">{page.localSystem.disclaimer}</p>
+                </motion.div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* ── Common requests from this city ── */}
+        <section className="bg-background">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+            <motion.div {...fade()} className="text-center mb-12">
+              <Users className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                С какими запросами чаще приходят {page.cityFor}
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                Не диагнозы — а живые формулировки, которые я слышу на первой встрече.
+              </p>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {page.painPoints.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  {...fade(0.04 * i)}
+                  className="rounded-xl border border-border bg-card p-5 hover:border-primary/40 transition-colors"
+                >
+                  <h3 className="text-sm font-semibold mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Timezone mini-table ── */}
+        <section className="bg-card border-y border-border">
+          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
+            <motion.div {...fade()} className="text-center mb-8">
+              <Clock className="w-7 h-7 text-primary mx-auto mb-3 opacity-80" />
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
+                Время сессий по вашему часовому поясу
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm max-w-lg mx-auto">
+                Я в Кишинёве (EET, {`UTC+2/+3`}). Вот как ваше локальное время соотносится с моим.
+              </p>
+            </motion.div>
+            <motion.div {...fade(0.1)} className="rounded-xl border border-border overflow-hidden bg-background max-w-md mx-auto">
+              <div className="grid grid-cols-2 px-4 py-2 text-xs uppercase tracking-wider text-muted-foreground bg-muted/40 border-b border-border">
+                <div>У вас ({page.city})</div>
+                <div className="text-right">У меня (Кишинёв)</div>
+              </div>
+              {tzRows.map((r, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-2 px-4 py-2.5 text-sm border-b border-border last:border-b-0"
+                >
+                  <div className="font-medium">{r.client}</div>
+                  <div className="text-right text-muted-foreground">{r.host}</div>
+                </div>
+              ))}
+            </motion.div>
+            <p className="text-center text-xs text-muted-foreground mt-4">
+              Расчёт по зимнему смещению. Летом разница может быть на час меньше из-за DST.
+            </p>
+          </div>
+        </section>
+
+
+
         {/* ── Free meeting block ── */}
         <section className="bg-primary text-primary-foreground">
           <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
