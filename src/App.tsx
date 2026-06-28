@@ -42,6 +42,7 @@ const InformedConsent = lazy(() => import("./pages/InformedConsent.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
 const FreeConsultationPage = lazy(() => import("./pages/FreeConsultationPage.tsx"));
 const StartQuizPage = lazy(() => import("./pages/StartQuizPage.tsx"));
+const CountryHubPage = lazy(() => import("./pages/CountryHubPage.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -101,6 +102,11 @@ const App = () => (
               <Route path="/psiholog-lissabon" element={<CityLandingPage />} />
               <Route path="/psiholog-tbilisi" element={<CityLandingPage />} />
               <Route path="/psiholog-kishinev" element={<LandingPageKishinev />} />
+              <Route path="/psiholog-germaniya" element={<CountryHubPage />} />
+              <Route path="/psiholog-niderlandy" element={<CountryHubPage />} />
+              <Route path="/psiholog-portugaliya" element={<CountryHubPage />} />
+              <Route path="/psiholog-gruziya" element={<CountryHubPage />} />
+              <Route path="/psiholog-moldova" element={<CountryHubPage />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />
