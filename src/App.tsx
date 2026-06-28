@@ -101,6 +101,10 @@ const App = () => (
               <Route path="/psiholog-amsterdam" element={<CityLandingPage />} />
               <Route path="/psiholog-lissabon" element={<CityLandingPage />} />
               <Route path="/psiholog-tbilisi" element={<CityLandingPage />} />
+              <Route path="/psiholog-myunhen" element={<CityLandingPage />} />
+              <Route path="/psiholog-gamburg" element={<CityLandingPage />} />
+              <Route path="/psiholog-rotterdam" element={<CityLandingPage />} />
+              <Route path="/psiholog-porto" element={<CityLandingPage />} />
               <Route path="/psiholog-kishinev" element={<LandingPageKishinev />} />
               <Route path="/psiholog-germaniya" element={<CountryHubPage />} />
               <Route path="/psiholog-niderlandy" element={<CountryHubPage />} />

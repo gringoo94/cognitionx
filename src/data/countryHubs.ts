@@ -98,8 +98,8 @@ export const countryHubs: CountryHubData[] = [
       "Разница с Кишинёвом — 1 час. Удобно встречаться до или после рабочего дня.",
       "Понятная стоимость в EUR, без сюрпризов от Krankenkasse и Beihilfe.",
     ],
-    cities: ["psiholog-berlin"],
-    plannedCities: ["Мюнхен", "Гамбург", "Кёльн", "Франкфурт"],
+    cities: ["psiholog-berlin", "psiholog-myunhen", "psiholog-gamburg"],
+    plannedCities: ["Кёльн", "Франкфурт"],
     relatedArticleSlugs: [
       "kpt-pri-trevoge",
       "vygoranie-ili-ustalost",
@@ -192,8 +192,8 @@ export const countryHubs: CountryHubData[] = [
       "Разница с Кишинёвом — 1 час. Удобные слоты до или после работы.",
       "Многие компании компенсируют сессии в рамках wellness budget — чек выдаю.",
     ],
-    cities: ["psiholog-amsterdam"],
-    plannedCities: ["Роттердам", "Гаага", "Утрехт", "Эйндховен"],
+    cities: ["psiholog-amsterdam", "psiholog-rotterdam"],
+    plannedCities: ["Гаага", "Утрехт", "Эйндховен"],
     relatedArticleSlugs: [
       "vygoranie-ili-ustalost",
       "kpt-pri-trevoge",
@@ -280,8 +280,8 @@ export const countryHubs: CountryHubData[] = [
       "Разница с Кишинёвом — 2 часа летом, 2 зимой. Удобные слоты в первой половине дня и вечером.",
       "Понятная стоимость в EUR.",
     ],
-    cities: ["psiholog-lissabon"],
-    plannedCities: ["Порту", "Алгарве", "Мадейра"],
+    cities: ["psiholog-lissabon", "psiholog-porto"],
+    plannedCities: ["Алгарве", "Мадейра"],
     relatedArticleSlugs: [
       "kpt-pri-trevoge",
       "kogda-nichego-ne-hochetsya",

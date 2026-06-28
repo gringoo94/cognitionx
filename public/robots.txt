@@ -29,6 +29,10 @@ Allow: /psiholog-amsterdam
 Allow: /psiholog-lissabon
 Allow: /psiholog-tbilisi
 Allow: /psiholog-kishinev
+Allow: /psiholog-myunhen
+Allow: /psiholog-gamburg
+Allow: /psiholog-rotterdam
+Allow: /psiholog-porto
 Allow: /psiholog-dlya-it
 
 # --- Инструменты и психологические тесты (явно разрешены) ---

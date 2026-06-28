@@ -31,8 +31,12 @@ const geoGroups: GeoGroup[] = [
     href: "/psiholog-europa",
     cities: [
       { label: "Берлин", href: "/psiholog-berlin" },
+      { label: "Мюнхен", href: "/psiholog-myunhen" },
+      { label: "Гамбург", href: "/psiholog-gamburg" },
       { label: "Амстердам", href: "/psiholog-amsterdam" },
+      { label: "Роттердам", href: "/psiholog-rotterdam" },
       { label: "Лиссабон", href: "/psiholog-lissabon" },
+      { label: "Порту", href: "/psiholog-porto" },
     ],
   },
   {
