@@ -47,8 +47,8 @@ export function seoPlugin(): Plugin {
         const ogType = route.ogType || "website";
         const ogImage = route.ogImage || OG_IMAGE;
 
-        // Build static meta tags block
-        const metaBlock = [
+        // Build static meta tags
+        const metaTags = [
           `<title>${escapeHtml(route.title)}</title>`,
           `<meta name="description" content="${escapeAttr(route.description)}" />`,
           `<link rel="canonical" href="${url}" />`,
@@ -69,17 +69,49 @@ export function seoPlugin(): Plugin {
           `<meta name="twitter:title" content="${escapeAttr(route.title)}" />`,
           `<meta name="twitter:description" content="${escapeAttr(route.description)}" />`,
           `<meta name="twitter:image" content="${ogImage}" />`,
-        ].join("\n    ");
+        ];
 
-        // Replace fallback title/description/canonical in the base HTML
         let html = baseHtml;
 
-        // Remove existing fallback <title> and replace
-        html = html.replace(/<title>[^<]*<\/title>/, "");
-        // Remove existing fallback meta description
-        html = html.replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/, "");
-        // Remove existing fallback canonical
-        html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/, "");
+        // Strip every tag we re-emit so we don't end up with duplicates
+        // from the static index.html fallback head.
+        const stripPatterns: RegExp[] = [
+          /<title>[\s\S]*?<\/title>\s*/gi,
+          /<meta\s+name="description"[^>]*>\s*/gi,
+          /<link\s+rel="canonical"[^>]*>\s*/gi,
+          /<link\s+rel="alternate"\s+hreflang="[^"]*"[^>]*>\s*/gi,
+          /<meta\s+name="robots"[^>]*>\s*/gi,
+          /<meta\s+name="theme-color"[^>]*>\s*/gi,
+          /<meta\s+property="og:(?:type|url|title|description|image|image:width|image:height|locale|site_name)"[^>]*>\s*/gi,
+          /<meta\s+name="twitter:(?:card|title|description|image)"[^>]*>\s*/gi,
+        ];
+        for (const re of stripPatterns) html = html.replace(re, "");
+
+        // Append BlogPosting JSON-LD for blog post routes.
+        if (route.path.startsWith("/blog/") && route.path !== "/blog/") {
+          const slug = route.path.replace(/^\/blog\//, "").replace(/\/$/, "");
+          const post = blogPostsBySlug.get(slug);
+          if (post) {
+            const blogPosting = {
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: route.title,
+              description: route.description,
+              image: ogImage,
+              datePublished: post.date,
+              dateModified: post.dateModified || post.date,
+              mainEntityOfPage: { "@type": "WebPage", "@id": url },
+              author: { "@type": "Person", name: "Дмитрий Яцко", url: `${SITE_URL}/` },
+              publisher: { "@id": `${SITE_URL}/#organization` },
+              inLanguage: "ru-RU",
+            };
+            metaTags.push(
+              `<script type="application/ld+json">${JSON.stringify(blogPosting)}</script>`
+            );
+          }
+        }
+
+        const metaBlock = metaTags.join("\n    ");
 
         // Inject full meta block after <head> opening + charset + viewport
         html = html.replace(
