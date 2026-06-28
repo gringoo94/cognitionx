@@ -7,11 +7,20 @@ interface BreadcrumbItem {
   url: string;
 }
 
+interface ArticleMeta {
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+}
+
 interface SEOHeadProps {
   title: string;
   description: string;
   path: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
   schema?: object | object[];
   noindex?: boolean;
@@ -22,22 +31,31 @@ interface SEOHeadProps {
   alternates?: { hreflang: string; href: string }[];
   /** OG locale (defaults to ru_RU). */
   ogLocale?: string;
+  /** Article-specific OG meta. Used when ogType === "article". */
+  article?: ArticleMeta;
 }
+
+const toAbsolute = (u: string) =>
+  u.startsWith("http://") || u.startsWith("https://") ? u : `${SITE_URL}${u.startsWith("/") ? "" : "/"}${u}`;
 
 const SEOHead = ({
   title,
   description,
   path,
   ogImage,
+  ogImageAlt,
   ogType = "website",
   schema,
   noindex,
   breadcrumbs,
   alternates,
   ogLocale = "ru_RU",
+  article,
 }: SEOHeadProps) => {
   const url = `${SITE_URL}${path}`;
-  const image = ogImage || `${SITE_URL}/og-default.webp`;
+  const image = toAbsolute(ogImage || `${SITE_URL}/og-default.webp`);
+  const imageAlt = ogImageAlt || title;
+
   const resolvedAlternates =
     alternates && alternates.length > 0
       ? alternates.map((a) => ({
@@ -102,15 +120,36 @@ const SEOHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:secure_url" content={image} />
+      <meta property="og:image:alt" content={imageAlt} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content={ogLocale} />
       <meta property="og:site_name" content="Психолог Дмитрий Яцко" />
 
+      {ogType === "article" && article?.publishedTime && (
+        <meta property="article:published_time" content={article.publishedTime} />
+      )}
+      {ogType === "article" && article?.modifiedTime && (
+        <meta property="article:modified_time" content={article.modifiedTime} />
+      )}
+      {ogType === "article" && article?.author && (
+        <meta property="article:author" content={article.author} />
+      )}
+      {ogType === "article" && article?.section && (
+        <meta property="article:section" content={article.section} />
+      )}
+      {ogType === "article" &&
+        article?.tags?.map((tag) => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content={imageAlt} />
+
 
       {allSchema.length > 0 && (
         <script type="application/ld+json">
