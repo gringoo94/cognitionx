@@ -384,18 +384,9 @@ export const seoRoutes: SeoRoute[] = [
     description: "Информированное согласие на психологическую консультацию: условия работы, конфиденциальность, ответственность.",
     noindex: true,
   },
-  {
-    path: "/admin",
-    title: "Админ-панель — Психолог Дмитрий Яцко",
-    description: "Служебная страница администратора. Не предназначена для публичного просмотра.",
-    noindex: true,
-  },
-  {
-    path: "/admin/login",
-    title: "Вход в админ-панель — Психолог Дмитрий Яцко",
-    description: "Служебная страница входа администратора.",
-    noindex: true,
-  },
+  // /admin and /admin/login are intentionally NOT declared here.
+  // They are blocked at the crawler level via robots.txt and at runtime via SEOHead noindex.
+  // Adding them to seo-routes.ts would prerender static HTML for admin URLs — we don't want that.
   {
     path: "/about_cognitionx",
     title: "Редирект на /about — CognitionX",
@@ -621,12 +612,7 @@ export const seoRoutes: SeoRoute[] = [
   { path: "/blog/vsyo-neopredelyonno", title: "Куда мы уходим, когда всё неопределённо", description: "Тревога, страх, стресс, уязвимость — реакция на угрозу, реальную или воображаемую." , ogType: "article" },
   { path: "/blog/my-sravnivaem", title: "Куда мы уходим, когда мы сравниваем", description: "Зависть, ревность, восхищение — социальное сравнение и его эмоциональные последствия." , ogType: "article" },
 
-  // Legal
-  {
-    path: "/informed-consent",
-    title: "Информированное согласие — Психолог Дмитрий Яцко",
-    description: "Условия психологического консультирования: формат сессий, конфиденциальность и её границы, права клиента, оплата и отмена.",
-  },
+  // /informed-consent declared once above with noindex: true. Duplicate removed.
 
   // Blog — Reddit/r/CBT inspired series (May 2026)
   { path: "/blog/60-sekund-dofamin-tyaga", title: "60 секунд: дофаминовое окно и переучивание мозга — психолог КПТ", description: "Тяга — это всплеск дофамина ожидания, и у вас есть 60 секунд нейропластичности, чтобы переучить мозг. Протокол на основе нейронауки и КПТ.", ogType: "article" },
