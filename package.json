@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "seo:check": "node scripts/verify-prerender-seo.mjs",
+    "build:seo": "vite build && node scripts/verify-prerender-seo.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
