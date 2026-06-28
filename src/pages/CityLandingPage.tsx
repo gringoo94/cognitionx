@@ -181,18 +181,19 @@ const CityLandingPage = () => {
                 className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
               >
                 <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-                  <a href="#booking">
-                    Бесплатная встреча — 20 мин <ArrowRight className="w-4 h-4" />
-                  </a>
+                  <Link to="/start">
+                    Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
-                  <a href="#approach">Как я работаю</a>
+                  <a href="#booking">Записаться на диагностику</a>
                 </Button>
               </motion.div>
 
-              <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-                Бесплатная 20-минутная встреча — познакомимся и я отвечу на ваши вопросы
+              <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground max-w-md">
+                Короткий опросник на 3–5 минут. Вы опишете ситуацию, а я отправлю первичный разбор в Telegram. Без оплаты и обязательств.
               </motion.p>
+
 
               <motion.div
                 {...fade(0.25)}
