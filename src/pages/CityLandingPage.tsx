@@ -15,6 +15,10 @@ import {
   GraduationCap,
   Award,
   Brain,
+  Heart,
+  Compass,
+  BookOpen,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +42,25 @@ import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug, cityPages } from "@/data/cityPages";
+import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
+
+// Hour offset for "min" side of utcOffset string (e.g. "UTC+1/+2" -> 1).
+// Used for the "session times in your timezone" mini-table.
+function minOffsetHours(utcOffset: string): number {
+  const m = utcOffset.match(/UTC([+-]\d+)/);
+  return m ? parseInt(m[1], 10) : 0;
+}
+// Kishinev (host) min offset is +2 (winter). We compute diff = clientMin - hostMin.
+function shiftToKishinev(clientHour: number, clientUtcOffset: string): number {
+  const diff = minOffsetHours(clientUtcOffset) - 2;
+  let h = clientHour - diff;
+  if (h < 0) h += 24;
+  if (h >= 24) h -= 24;
+  return h;
+}
+const fmtH = (h: number) => `${String(h).padStart(2, "0")}:00`;
+
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -93,6 +115,18 @@ const CityLandingPage = () => {
   };
 
   const otherCities = cityPages.filter((c) => c.slug !== page.slug);
+
+  // Related articles by slug from blogPosts
+  const relatedArticles = (page.relatedArticleSlugs ?? [])
+    .map((s) => blogPosts.find((p) => p.slug === s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    .slice(0, 5);
+
+  // Timezone mini-table: client local hours -> Kishinev hours
+  const tzRows = [9, 12, 18, 21].map((h) => ({
+    client: fmtH(h),
+    host: fmtH(shiftToKishinev(h, page.utcOffset)),
+  }));
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -159,18 +193,19 @@ const CityLandingPage = () => {
                 className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
               >
                 <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-                  <a href="#booking">
-                    Бесплатная встреча — 20 мин <ArrowRight className="w-4 h-4" />
-                  </a>
+                  <Link to="/start">
+                    Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
-                  <a href="#approach">Как я работаю</a>
+                  <a href="#booking">Записаться на диагностику</a>
                 </Button>
               </motion.div>
 
-              <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-                Бесплатная 20-минутная встреча — познакомимся и я отвечу на ваши вопросы
+              <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground max-w-md">
+                Короткий опросник на 3–5 минут. Вы опишете ситуацию, а я отправлю первичный разбор в Telegram. Без оплаты и обязательств.
               </motion.p>
+
 
               <motion.div
                 {...fade(0.25)}
@@ -257,6 +292,148 @@ const CityLandingPage = () => {
           </div>
         </section>
 
+        {/* ── Why Russian online ── */}
+        {page.whyRussianOnline && page.whyRussianOnline.length > 0 && (
+          <section className="bg-background">
+            <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
+              <motion.div {...fade()} className="text-center mb-12">
+                <Heart className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                  Почему русскоязычная терапия онлайн<br className="hidden sm:block" /> может быть удобнее {page.cityFor}
+                </h2>
+                <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                  Не «лучше местной системы» — а другой формат, который подходит части людей.
+                </p>
+              </motion.div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {page.whyRussianOnline.map((point, i) => (
+                  <motion.div
+                    key={i}
+                    {...fade(0.05 * i)}
+                    className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                    <p className="text-sm leading-relaxed text-muted-foreground">{point}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── Help routes (local system + steps) ── */}
+        {page.helpRoutes && page.helpRoutes.length > 0 && (
+          <section className="bg-card border-y border-border">
+            <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
+              <motion.div {...fade()} className="text-center mb-12">
+                <Compass className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                  Маршрут помощи в {page.country === "Германия" ? "Германии" : page.country === "Грузия" ? "Грузии" : page.country === "Молдова" ? "Молдове" : page.country === "Нидерланды" ? "Нидерландах" : page.country === "Португалия" ? "Португалии" : page.country}
+                </h2>
+                <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                  Не каждому нужен именно я. Вот как выбрать формат под вашу ситуацию.
+                </p>
+              </motion.div>
+              <div className="space-y-3">
+                {page.helpRoutes.map((r, i) => (
+                  <motion.div
+                    key={i}
+                    {...fade(0.05 * i)}
+                    className={`rounded-xl border p-5 ${
+                      i === 0 ? "border-destructive/30 bg-destructive/5" : "border-border bg-background"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      {i === 0 ? (
+                        <AlertTriangle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+                      ) : (
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold shrink-0 mt-0.5">
+                          {i}
+                        </span>
+                      )}
+                      <div className="space-y-1.5">
+                        <h3 className="text-sm font-semibold">{r.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{r.text}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              {page.localSystem && (
+                <motion.div {...fade(0.3)} className="mt-8 rounded-xl border border-border bg-background p-5 text-xs text-muted-foreground leading-relaxed">
+                  <p className="font-semibold text-foreground mb-2">Контекст по страховке и системе</p>
+                  <p className="mb-1"><span className="font-medium text-foreground">Страховка:</span> {page.localSystem.insurance}</p>
+                  <p className="mb-1"><span className="font-medium text-foreground">Публичный путь:</span> {page.localSystem.publicRoute}</p>
+                  <p className="mb-1"><span className="font-medium text-foreground">Частный путь:</span> {page.localSystem.privateRoute}</p>
+                  <p className="mt-2 italic opacity-80">{page.localSystem.disclaimer}</p>
+                </motion.div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* ── Common requests from this city ── */}
+        <section className="bg-background">
+          <div className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+            <motion.div {...fade()} className="text-center mb-12">
+              <Users className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                С какими запросами чаще приходят {page.cityFor}
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                Не диагнозы — а живые формулировки, которые я слышу на первой встрече.
+              </p>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {page.painPoints.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  {...fade(0.04 * i)}
+                  className="rounded-xl border border-border bg-card p-5 hover:border-primary/40 transition-colors"
+                >
+                  <h3 className="text-sm font-semibold mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Timezone mini-table ── */}
+        <section className="bg-card border-y border-border">
+          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
+            <motion.div {...fade()} className="text-center mb-8">
+              <Clock className="w-7 h-7 text-primary mx-auto mb-3 opacity-80" />
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
+                Время сессий по вашему часовому поясу
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm max-w-lg mx-auto">
+                Я в Кишинёве (EET, {`UTC+2/+3`}). Вот как ваше локальное время соотносится с моим.
+              </p>
+            </motion.div>
+            <motion.div {...fade(0.1)} className="rounded-xl border border-border overflow-hidden bg-background max-w-md mx-auto">
+              <div className="grid grid-cols-2 px-4 py-2 text-xs uppercase tracking-wider text-muted-foreground bg-muted/40 border-b border-border">
+                <div>У вас ({page.city})</div>
+                <div className="text-right">У меня (Кишинёв)</div>
+              </div>
+              {tzRows.map((r, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-2 px-4 py-2.5 text-sm border-b border-border last:border-b-0"
+                >
+                  <div className="font-medium">{r.client}</div>
+                  <div className="text-right text-muted-foreground">{r.host}</div>
+                </div>
+              ))}
+            </motion.div>
+            <p className="text-center text-xs text-muted-foreground mt-4">
+              Расчёт по зимнему смещению. Летом разница может быть на час меньше из-за DST.
+            </p>
+          </div>
+        </section>
+
+
+
         {/* ── Free meeting block ── */}
         <section className="bg-primary text-primary-foreground">
           <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
@@ -331,10 +508,10 @@ const CityLandingPage = () => {
                   features: ["Обсудим ваш запрос", "Отвечу на вопросы", "Без обязательств"],
                 },
                 {
-                  title: "Первая сессия",
+                  title: "Диагностическая консультация",
                   price: "25",
                   duration: "50 мин",
-                  features: ["Диагностика проблемы", "План работы", "Домашние задания"],
+                  features: ["Разбор запроса", "План работы", "Домашние задания"],
                 },
                 {
                   title: "Сессия",
@@ -344,7 +521,7 @@ const CityLandingPage = () => {
                   features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
                 },
                 {
-                  title: "Пакет × 4",
+                  title: "Стартовый курс — 4 сессии",
                   price: "25",
                   priceNote: "за сессию",
                   totalPrice: "100 € за 4 сессии",
@@ -492,8 +669,46 @@ const CityLandingPage = () => {
         </section>
 
         <Projects />
-        <Blog />
+
+        {/* ── Related articles (city-specific) ── */}
+        {relatedArticles.length > 0 ? (
+          <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+            <motion.div {...fade()} className="text-center mb-10">
+              <BookOpen className="w-7 h-7 text-primary mx-auto mb-3 opacity-80" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                Что почитать, если вы живёте {page.cityIn}
+              </h2>
+              <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+                Статьи под темы, с которыми чаще всего обращаются из {page.city === "Кишинёв" ? "Молдовы" : page.country}.
+              </p>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {relatedArticles.map((post, i) => (
+                <motion.div key={post.slug} {...fade(0.05 * i)}>
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    className="block rounded-xl border border-border bg-card p-5 h-full hover:border-primary/40 transition-colors group"
+                  >
+                    <h3 className="text-sm font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">{post.description}</p>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link to="/blog" className="text-sm text-primary hover:underline">
+                Все статьи блога →
+              </Link>
+            </div>
+          </section>
+        ) : (
+          <Blog />
+        )}
+
         <BookingForm />
+
 
         {/* ── Other cities (internal linking) ── */}
         <section className="max-w-5xl mx-auto px-6 py-16 border-t border-border">

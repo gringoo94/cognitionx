@@ -206,8 +206,8 @@ const LandingPageEuropa = () => (
               className="mt-6 flex flex-col sm:flex-row items-center md:items-start gap-3"
             >
               <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all w-full sm:w-auto" asChild>
-                <a href="#booking">
-                  Записаться — бесплатно <ArrowRight className="w-4 h-4" />
+                <a href="/start">
+                  Понять, с чего начать <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
               <Button
