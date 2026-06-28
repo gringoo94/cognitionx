@@ -43,6 +43,7 @@ export function seoPlugin(): Plugin {
 
       for (const route of seoRoutes) {
         const routePath = route.path;
+        const canonicalUrl = `${SITE_URL}${route.canonicalPath || routePath}`;
         const url = `${SITE_URL}${routePath}`;
         const ogType = route.ogType || "website";
         const ogImage = route.ogImage || OG_IMAGE;
