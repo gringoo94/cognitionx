@@ -56,6 +56,7 @@ import { blogPosts } from "@/data/blogPosts";
 import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtras";
 import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
+import { sanitizeHtml } from "@/lib/sanitizeHtml";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -1236,7 +1237,7 @@ const ProblemPage = () => {
                     <h3 className="text-lg md:text-xl font-semibold mb-3">{s.heading}</h3>
                     <div
                       className="prose prose-sm md:prose-base prose-invert max-w-none text-muted-foreground leading-relaxed [&_a]:text-primary [&_a]:underline [&_strong]:text-foreground [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mb-1"
-                      dangerouslySetInnerHTML={{ __html: s.html }}
+                      dangerouslySetInnerHTML={{ __html: sanitizeHtml(s.html) }}
                     />
                   </div>
                 ))}

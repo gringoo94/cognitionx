@@ -11,9 +11,7 @@ import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
 import BlogCtaBridge from "@/components/BlogCtaBridge";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
-import DOMPurify from "dompurify";
-
-const sanitize = (html: string) => DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
+import { sanitizeHtml as sanitize } from "@/lib/sanitizeHtml";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
