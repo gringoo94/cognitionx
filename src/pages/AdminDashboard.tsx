@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Loader2, LogOut, Mail, Eye, Calendar, ArrowLeft, FileText } from "lucide-react";
+import { Loader2, LogOut, Mail, Eye, Calendar, ArrowLeft, FileText, Search } from "lucide-react";
 import AdminBlog from "@/components/AdminBlog";
+import AdminIndexation from "@/components/AdminIndexation";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
@@ -28,7 +29,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [pageViews, setPageViews] = useState<PageView[]>([]);
-  const [tab, setTab] = useState<"submissions" | "analytics" | "blog">("submissions");
+  const [tab, setTab] = useState<"submissions" | "analytics" | "blog" | "indexation">("submissions");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -169,6 +170,13 @@ const AdminDashboard = () => {
           >
             <FileText className="w-4 h-4 mr-1" /> Блог
           </Button>
+          <Button
+            variant={tab === "indexation" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setTab("indexation")}
+          >
+            <Search className="w-4 h-4 mr-1" /> Индексация
+          </Button>
         </div>
 
         {tab === "submissions" && (
@@ -234,6 +242,8 @@ const AdminDashboard = () => {
         )}
 
         {tab === "blog" && <AdminBlog />}
+
+        {tab === "indexation" && <AdminIndexation />}
       </div>
     </div>
   );
