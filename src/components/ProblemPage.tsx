@@ -56,6 +56,7 @@ import { blogPosts } from "@/data/blogPosts";
 import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtras";
 import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
+import { sanitizeHtml } from "@/lib/sanitizeHtml";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
