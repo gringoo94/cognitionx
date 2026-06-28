@@ -131,7 +131,7 @@ export const cityPages: CityPageData[] = [
       "pervaya-sessiya-u-psihologa",
     ],
     countryPageSlug: "psiholog-germaniya",
-    nearbyCities: ["psiholog-amsterdam"],
+    nearbyCities: ["psiholog-myunhen", "psiholog-gamburg", "psiholog-amsterdam"],
     localKeywords: [
       "психолог онлайн Берлин",
       "русскоязычный психолог в Германии",
@@ -254,7 +254,7 @@ export const cityPages: CityPageData[] = [
       "kpt-pri-trevoge",
     ],
     countryPageSlug: "psiholog-niderlandy",
-    nearbyCities: ["psiholog-berlin"],
+    nearbyCities: ["psiholog-rotterdam", "psiholog-berlin"],
     localKeywords: [
       "психолог онлайн Амстердам",
       "русскоязычный психолог Нидерланды",
@@ -377,7 +377,7 @@ export const cityPages: CityPageData[] = [
       "vygoranie-ili-ustalost",
     ],
     countryPageSlug: "psiholog-portugaliya",
-    nearbyCities: ["psiholog-berlin", "psiholog-amsterdam"],
+    nearbyCities: ["psiholog-porto", "psiholog-berlin", "psiholog-amsterdam"],
     localKeywords: [
       "психолог онлайн Лиссабон",
       "русскоязычный психолог Португалия",
