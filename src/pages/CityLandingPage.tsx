@@ -116,6 +116,18 @@ const CityLandingPage = () => {
 
   const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
+  // Related articles by slug from blogPosts
+  const relatedArticles = (page.relatedArticleSlugs ?? [])
+    .map((s) => blogPosts.find((p) => p.slug === s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    .slice(0, 5);
+
+  // Timezone mini-table: client local hours -> Kishinev hours
+  const tzRows = [9, 12, 18, 21].map((h) => ({
+    client: fmtH(h),
+    host: fmtH(shiftToKishinev(h, page.utcOffset)),
+  }));
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEOHead
