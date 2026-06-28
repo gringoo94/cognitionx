@@ -43,6 +43,7 @@ export function seoPlugin(): Plugin {
 
       for (const route of seoRoutes) {
         const routePath = route.path;
+        const canonicalUrl = `${SITE_URL}${route.canonicalPath || routePath}`;
         const url = `${SITE_URL}${routePath}`;
         const ogType = route.ogType || "website";
         const ogImage = route.ogImage || OG_IMAGE;
@@ -51,13 +52,13 @@ export function seoPlugin(): Plugin {
         const metaTags = [
           `<title>${escapeHtml(route.title)}</title>`,
           `<meta name="description" content="${escapeAttr(route.description)}" />`,
-          `<link rel="canonical" href="${url}" />`,
-          `<link rel="alternate" hreflang="ru" href="${url}" />`,
-          `<link rel="alternate" hreflang="x-default" href="${url}" />`,
+          `<link rel="canonical" href="${canonicalUrl}" />`,
+          `<link rel="alternate" hreflang="ru" href="${canonicalUrl}" />`,
+          `<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />`,
           `<meta name="robots" content="${route.noindex ? "noindex, nofollow" : "index, follow"}" />`,
           `<meta name="theme-color" content="#0F172A" />`,
           `<meta property="og:type" content="${ogType}" />`,
-          `<meta property="og:url" content="${url}" />`,
+          `<meta property="og:url" content="${canonicalUrl}" />`,
           `<meta property="og:title" content="${escapeAttr(route.title)}" />`,
           `<meta property="og:description" content="${escapeAttr(route.description)}" />`,
           `<meta property="og:image" content="${ogImage}" />`,
