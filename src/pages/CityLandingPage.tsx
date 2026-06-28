@@ -151,7 +151,17 @@ const CityLandingPage = () => {
           >
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
             <ChevronRight className="w-3 h-3" />
-            {isEurope && (
+            {page.countryPageSlug ? (
+              <>
+                <Link
+                  to={`/${page.countryPageSlug}`}
+                  className="hover:text-foreground transition-colors"
+                >
+                  {page.country}
+                </Link>
+                <ChevronRight className="w-3 h-3" />
+              </>
+            ) : isEurope && (
               <>
                 <Link to="/psiholog-europa" className="hover:text-foreground transition-colors">
                   Европа
