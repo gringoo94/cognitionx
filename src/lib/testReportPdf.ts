@@ -332,7 +332,7 @@ export const generateTestReportPdf = async ({
     doc.setFontSize(8);
     doc.setTextColor(120, 120, 120);
     doc.text(
-      "↺ — вопрос с обратной кодировкой: «Балл» уже учитывает инверсию.",
+      "(R) — вопрос с обратной кодировкой: «Балл» уже учитывает инверсию.",
       margin,
       y,
     );
