@@ -61,15 +61,7 @@ const CountryHubPage = () => {
     },
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: page.faq.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
-    })),
-  };
+  const faqSchema = buildFaqSchema(page.faq);
 
   const itemListSchema = cities.length > 0 ? {
     "@context": "https://schema.org",
