@@ -607,27 +607,27 @@ const DecisionMatrix = () => {
       <div className="grid sm:grid-cols-2 gap-3">
         <Block title="Тема">{answers.topic || "—"}</Block>
         <Block title="Формат выбора">{answers.format || "—"}</Block>
-        {answers.topicNote.trim() && (
+        {(answers.topicNote || "").trim() && (
           <div className="sm:col-span-2">
-            <Block title="Своими словами">{answers.topicNote.trim()}</Block>
+            <Block title="Своими словами">{(answers.topicNote || "").trim()}</Block>
           </div>
         )}
         <div className="sm:col-span-2">
           <Block title="Варианты, которые сейчас видны">
-            <List items={answers.variants} />
+            <List items={answers.variants || []} />
           </Block>
         </div>
         <Block title="Что влияет на выбор">
-          <List items={answers.factors} />
+          <List items={answers.factors || []} />
         </Block>
         <Block title="Какие ценности затронуты">
-          <List items={answers.values} />
+          <List items={answers.values || []} />
         </Block>
         <Block title="Если ничего не менять">{answers.inaction || "—"}</Block>
         <Block title="Первый безопасный шаг">{answers.nextStep || "—"}</Block>
-        {answers.comment.trim() && (
+        {(answers.comment || "").trim() && (
           <div className="sm:col-span-2">
-            <Block title="Дополнительный комментарий">{answers.comment.trim()}</Block>
+            <Block title="Дополнительный комментарий">{(answers.comment || "").trim()}</Block>
           </div>
         )}
       </div>
