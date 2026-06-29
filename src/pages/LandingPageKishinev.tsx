@@ -125,7 +125,7 @@ const LandingPageKishinev = () => (
       title="Психолог в Кишинёве · Psiholog Chișinău — КПТ онлайн"
       description="Психолог в Кишинёве и по Молдове (psiholog Chișinău online). КПТ и схема-терапия на русском. Тревога, выгорание, отношения."
       path="/psiholog-kishinev"
-      schema={[serviceSchema, localFaqSchema, testimonialsSchema]}
+      schema={[serviceSchema, ...(localFaqSchema ? [localFaqSchema] : []), testimonialsSchema]}
       alternates={[
         { hreflang: "ru", href: "/psiholog-kishinev" },
         { hreflang: "ro-MD", href: "/psiholog-kishinev" },
