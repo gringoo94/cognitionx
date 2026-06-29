@@ -58,14 +58,13 @@
     <link rel="alternate" type="text/markdown" title="llms.txt — site catalogue for LLMs" href="/llms.txt" />
     <link rel="alternate" type="text/markdown" title="llms-full.txt — full content corpus for LLMs" href="/llms-full.txt" />
 
-    <!-- Preload LCP hero image (AVIF preferred, only on home route) -->
+    <!-- Preload LCP hero image (AVIF, all viewports — mobile shows it first) -->
     <link
       rel="preload"
       as="image"
       href="/hero-photo.avif"
       type="image/avif"
       fetchpriority="high"
-      media="(min-width: 768px)"
     />
 
     <!-- Default OpenGraph (overridden per-route by build-time SEO plugin / react-helmet) -->
