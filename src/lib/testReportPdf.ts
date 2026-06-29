@@ -283,7 +283,7 @@ export const generateTestReportPdf = async ({
       const label = findOptionLabel(scale, ans);
       const scored = scoredValueForQuestion(config, i, ans);
       const isReverse = config.reverseItems?.includes(i + 1) ?? false;
-      const reverseMark = isReverse ? "↺ " : "";
+      const reverseMark = isReverse ? "(R) " : "";
       const questionCell = `${reverseMark}${q}`;
       if (hasReverse) {
         return [
