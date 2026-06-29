@@ -81,15 +81,7 @@ const itFaq = [
   { question: "Как оплатить из Европы?", answer: "Принимаю оплату через Stripe (карта), PayPal и банковский перевод. Детали обсудим на знакомстве." },
 ];
 
-const itFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: itFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const itFaqSchema = buildFaqSchema(itFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
