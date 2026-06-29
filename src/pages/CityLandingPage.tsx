@@ -127,7 +127,7 @@ const CityLandingPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[personSchema, serviceSchema, faqSchema, testimonialsSchema]}
+        schema={[personSchema, serviceSchema, ...(faqSchema ? [faqSchema] : []), testimonialsSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: `Психолог ${page.cityIn}`, url },
