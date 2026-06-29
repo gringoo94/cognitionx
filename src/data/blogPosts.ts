@@ -2993,7 +2993,7 @@ export const blogPosts: BlogPost[] = [
       {"ty":"text","te":"Если откладывание превратилось в стиль жизни — это уже не про конкретный выбор, а про общий паттерн избегания. С этим хорошо работает <a href='/cbt-therapy'>КПТ</a>. Можно начать с <a href='/free-consultation'>бесплатной встречи-знакомства</a>."},
 
       {"ty":"heading","te":"Читать дальше","le":2},
-      {"ty":"text","te":"<ul><li><a href='/blog/tsena-bezdejstviya'>Цена бездействия</a></li><li><a href='/blog/paralich-analiza'>Паралич анализа</a></li><li><a href='/blog/pervyj-shag-v-vybore'>Первый шаг</a></li></ul>"}
+      {"ty":"text","te":"<ul><li><a href='/blog/tsena-bezdejstviya'>Цена бездействия</a></li><li><a href='/blog/paralich-analiza'>Паралич анализа</a></li><li><a href='/blog/pervyj-bezopasnyj-shag'>Первый шаг</a></li></ul>"}
     ]`),
   },
 
