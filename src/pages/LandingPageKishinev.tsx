@@ -100,15 +100,7 @@ const localFaq = [
   },
 ];
 
-const localFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: localFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const localFaqSchema = buildFaqSchema(localFaq);
 
 const serviceSchema = {
   "@context": "https://schema.org",
