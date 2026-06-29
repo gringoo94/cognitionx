@@ -27,6 +27,7 @@ const TestPage = lazy(() => import("./pages/TestPage.tsx"));
 const SchemaQuizPage = lazy(() => import("./pages/SchemaQuizPage.tsx"));
 const EmotionWheelPage = lazy(() => import("./pages/EmotionWheelPage.tsx"));
 const AbcAnalysisPage = lazy(() => import("./pages/AbcAnalysisPage.tsx"));
+const DecisionMatrixPage = lazy(() => import("./pages/DecisionMatrixPage.tsx"));
 const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivationPage.tsx"));
 const AbstractToConcretePage = lazy(() => import("./pages/AbstractToConcretePage.tsx"));
 const CbtWorkbookPage = lazy(() => import("./pages/CbtWorkbookPage.tsx"));
@@ -71,6 +72,7 @@ const App = () => (
               <Route path="/tools/schema-quiz" element={<SchemaQuizPage />} />
               <Route path="/tools/emotion-wheel" element={<EmotionWheelPage />} />
               <Route path="/tools/abc-analysis" element={<AbcAnalysisPage />} />
+              <Route path="/tools/decision-matrix" element={<DecisionMatrixPage />} />
               <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
               <Route path="/tools/abstract-to-concrete" element={<AbstractToConcretePage />} />
               <Route path="/tools/thought-diary" element={<ThoughtDiaryPage />} />
