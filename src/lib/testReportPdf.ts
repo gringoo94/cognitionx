@@ -283,7 +283,7 @@ export const generateTestReportPdf = async ({
       const label = findOptionLabel(scale, ans);
       const scored = scoredValueForQuestion(config, i, ans);
       const isReverse = config.reverseItems?.includes(i + 1) ?? false;
-      const reverseMark = isReverse ? "↺ " : "";
+      const reverseMark = isReverse ? "(R) " : "";
       const questionCell = `${reverseMark}${q}`;
       if (hasReverse) {
         return [
@@ -332,7 +332,7 @@ export const generateTestReportPdf = async ({
     doc.setFontSize(8);
     doc.setTextColor(120, 120, 120);
     doc.text(
-      "↺ — вопрос с обратной кодировкой: «Балл» уже учитывает инверсию.",
+      "(R) — вопрос с обратной кодировкой: «Балл» уже учитывает инверсию.",
       margin,
       y,
     );
