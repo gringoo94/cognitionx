@@ -44,6 +44,7 @@ import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug, cityPages } from "@/data/cityPages";
 import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
+import { buildFaqSchema } from "@/lib/geoSchema";
 
 // Hour offset for "min" side of utcOffset string (e.g. "UTC+1/+2" -> 1).
 // Used for the "session times in your timezone" mini-table.
