@@ -76,8 +76,8 @@ const Hero = () => (
         </motion.div>
       </div>
 
-      {/* Photo */}
-      <motion.div {...fade(0.2)} className="flex justify-center order-1 md:order-2">
+      {/* Photo — статическая разметка для быстрого LCP, без framer-motion обёртки */}
+      <div className="flex justify-center order-1 md:order-2">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl scale-110" />
           <div className="relative w-72 h-80 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
@@ -97,7 +97,7 @@ const Hero = () => (
             </picture>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   </section>
 );
