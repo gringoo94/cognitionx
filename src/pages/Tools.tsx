@@ -46,6 +46,7 @@ type ToolCard = {
   description: string;
   icon: LucideIcon;
   meta?: string;
+  badge?: string;
 };
 
 const interactiveTools: ToolCard[] = [
