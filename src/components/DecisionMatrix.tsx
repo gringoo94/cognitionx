@@ -304,12 +304,48 @@ const DecisionMatrix = () => {
             <span className="text-primary">Матрица выбора:</span> разберите сложное решение без давления
           </h1>
           <p className="text-muted-foreground leading-relaxed">
-            Когда решение кажется невозможным, проблема часто не только в логике. На выбор влияют
-            страхи, ценности, вина, усталость, чужие ожидания и цена бездействия. Этот инструмент
-            поможет разложить выбор на части и найти первый безопасный шаг — без попытки «выбрать
-            идеально».
+            Сначала спокойно распишите свой выбор здесь: варианты, сомнения, страхи, ценности и
+            возможный первый шаг. А когда получите результат, сможете открыть GPT-помощника и
+            глубже разобрать ситуацию в диалоге.
+          </p>
+          <p className="text-sm text-muted-foreground/90 italic">
+            Не нужно принимать окончательное решение прямо сейчас. Задача матрицы — сначала
+            навести порядок в мыслях.
           </p>
         </motion.div>
+
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold">Как это работает</h2>
+          <div className="grid sm:grid-cols-3 gap-3">
+            {[
+              { n: "1", t: "Заполните матрицу", d: "Опишите варианты, что вас притягивает, что тревожит и что будет ценой бездействия." },
+              { n: "2", t: "Получите структурированный результат", d: "Инструмент соберёт ваши ответы в понятную карту выбора — без попытки решить за вас." },
+              { n: "3", t: "Разберите глубже в GPT", d: "Скопируйте готовый промпт и откройте GPT-помощника, чтобы уточнить ценности, страхи и следующий безопасный шаг." },
+            ].map((s) => (
+              <div key={s.n} className="rounded-xl border border-border bg-card p-4">
+                <div className="text-xs font-semibold text-primary mb-2">Шаг {s.n}</div>
+                <div className="font-semibold text-sm mb-1.5 leading-snug">{s.t}</div>
+                <div className="text-xs text-muted-foreground leading-relaxed">{s.d}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-xl border border-primary/20 bg-primary/5 p-5 space-y-3">
+          <div className="flex items-center gap-2 text-primary">
+            <MessageCircle className="h-4 w-4" />
+            <h2 className="text-base font-semibold">Можно продолжить разбор в GPT</h2>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            После заполнения матрицы вы сможете скопировать готовый промпт и открыть
+            GPT-помощника. Он задаст уточняющие вопросы, поможет отделить факты от страхов и
+            сформулировать следующий небольшой шаг. GPT не выбирает за вас и не заменяет
+            консультацию.
+          </p>
+          <Button size="sm" variant="outline" onClick={startPractice} className="gap-2">
+            Сначала заполнить матрицу <ArrowRight className="h-4 w-4" />
+          </Button>
+        </section>
 
         {hasDraft && (
           <div className="rounded-xl border border-primary/30 bg-primary/5 p-5 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
