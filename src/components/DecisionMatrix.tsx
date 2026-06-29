@@ -651,16 +651,29 @@ const DecisionMatrix = () => {
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             {copied ? "Скопировано" : "Скопировать промпт для GPT"}
           </Button>
-          <Button
-            variant="outline"
-            onClick={openGpt}
-            disabled={!gptReady}
-            className="gap-2"
-            title={gptReady ? "" : "GPT-помощник скоро будет доступен."}
-          >
-            <ExternalLink className="h-4 w-4" />
-            {gptReady ? "Открыть GPT-помощника" : "GPT-помощник скоро будет доступен"}
-          </Button>
+          {gptReady ? (
+            <Button variant="outline" asChild className="gap-2">
+              <a
+                href={DECISION_MATRIX_GPT_URL}
+                target="_blank"
+                rel="noopener noreferrer external"
+                onClick={() => track("decision_matrix_gpt_opened")}
+              >
+                <ExternalLink className="h-4 w-4" />
+                Открыть GPT-помощника
+              </a>
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              disabled
+              className="gap-2"
+              title="GPT-помощник скоро будет доступен."
+            >
+              <ExternalLink className="h-4 w-4" />
+              GPT-помощник скоро будет доступен
+            </Button>
+          )}
           <Button variant="ghost" asChild className="gap-2">
             <Link
               to="/start?source=decision-matrix-clickable-result"
