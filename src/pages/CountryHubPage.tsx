@@ -86,7 +86,7 @@ const CountryHubPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[serviceSchema, faqSchema, ...(itemListSchema ? [itemListSchema] : [])]}
+        schema={[serviceSchema, ...(faqSchema ? [faqSchema] : []), ...(itemListSchema ? [itemListSchema] : [])]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: `Психолог ${page.countryIn}`, url },
