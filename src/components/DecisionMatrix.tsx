@@ -1218,3 +1218,68 @@ const buildResultText = (a: Answers): string => {
 };
 
 export default DecisionMatrix;
+
+// ---------- GPT prompt builder ----------
+const orNotSpecified = (s: string) => (s.trim() ? s.trim() : "не указано");
+const joinOrSkip = (arr: string[]) => (arr.length ? arr.join(", ") : "");
+
+function buildGptPrompt(a: Answers): string {
+  const variants: string[] = [];
+  if (a.nameA || a.descriptionA) {
+    variants.push(`A — ${a.nameA || "вариант A"}${a.descriptionA ? `: ${a.descriptionA}` : ""}`);
+  }
+  if (a.nameB || a.descriptionB) {
+    variants.push(`B — ${a.nameB || "вариант B"}${a.descriptionB ? `: ${a.descriptionB}` : ""}`);
+  }
+
+  const attractParts: string[] = [];
+  if (a.prosA) attractParts.push(`в варианте A: ${a.prosA}`);
+  if (a.prosB) attractParts.push(`в варианте B: ${a.prosB}`);
+
+  const fearParts: string[] = [];
+  const fearsList = joinOrSkip(a.fears);
+  if (fearsList) fearParts.push(fearsList);
+  if (a.worstCase) fearParts.push(`страшный сценарий: ${a.worstCase}`);
+  if (a.consA) fearParts.push(`цена варианта A: ${a.consA}`);
+  if (a.consB) fearParts.push(`цена варианта B: ${a.consB}`);
+
+  const valuesParts: string[] = [];
+  const valuesList = joinOrSkip(a.values);
+  if (valuesList) valuesParts.push(valuesList);
+  if (a.mainValue) valuesParts.push(`главная: ${a.mainValue}`);
+
+  const lines: string[] = [];
+  lines.push("Я прошёл(ла) инструмент «Матрица выбора» на сайте CognitionX.");
+  lines.push("");
+  lines.push("Моя ситуация:");
+  lines.push(orNotSpecified(a.decision));
+  lines.push("");
+  lines.push("Варианты, между которыми я выбираю:");
+  lines.push(variants.length ? variants.join("\n") : "не указано");
+  lines.push("");
+  lines.push("Что меня притягивает в вариантах:");
+  lines.push(attractParts.length ? attractParts.join("\n") : "не указано");
+  lines.push("");
+  lines.push("Что меня тревожит:");
+  lines.push(fearParts.length ? fearParts.join("\n") : "не указано");
+  lines.push("");
+  lines.push("Какие ценности здесь затронуты:");
+  lines.push(valuesParts.length ? valuesParts.join("; ") : "не указано");
+  lines.push("");
+  lines.push("Цена бездействия:");
+  lines.push(orNotSpecified(a.inactionCost));
+  lines.push("");
+  lines.push("Первый безопасный шаг, который я вижу:");
+  lines.push(orNotSpecified(a.nextStep || a.experiment));
+  lines.push("");
+  lines.push("Помоги мне глубже разобрать этот выбор.");
+  lines.push("");
+  lines.push("Важно:");
+  lines.push("- не выбирай за меня;");
+  lines.push("- не давай категоричных советов;");
+  lines.push("- помоги отделить факты от страхов;");
+  lines.push("- помоги понять, какие ценности стоят за каждым вариантом;");
+  lines.push("- задай мне 3–5 уточняющих вопросов;");
+  lines.push("- в конце помоги сформулировать один маленький безопасный шаг на ближайшие 24–72 часа.");
+  return lines.join("\n");
+}
