@@ -37,14 +37,16 @@ const toneIcon = {
   danger: AlertCircle,
 };
 
-const sumByItems = (answers: number[], items: number[]) =>
-  items.reduce((s, n) => s + (answers[n - 1] ?? 0), 0);
-
 const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const result = config.scoring(answers);
   const Icon = toneIcon[result.tone];
-  const pct = Math.round((result.score / result.maxScore) * 100);
-  const ranges = deriveRanges(config);
+  const safeMax = result.maxScore > 0 ? result.maxScore : 1;
+  const pct = Math.max(
+    0,
+    Math.min(100, Math.round((result.score / safeMax) * 100)),
+  );
+  const rawRanges = deriveRanges(config);
+  const ranges = rawRanges.length <= 20 ? rawRanges : [];
   const [userNote, setUserNote] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
