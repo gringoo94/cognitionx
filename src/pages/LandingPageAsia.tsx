@@ -127,7 +127,7 @@ const LandingPageAsia = () => (
       title="Психолог онлайн — Бали, Таиланд | КПТ — Дмитрий Яцко"
       description="Психолог на русском для экспатов в Азии: Бали, Таиланд, Вьетнам. КПТ онлайн. Удобное время для UTC+7/+8."
       path="/psiholog-aziya"
-      schema={[personSchema, serviceSchema, asiaFaqSchema, testimonialsSchema]}
+      schema={[personSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для экспатов — Азия", url: "https://cognitionx.cloud/psiholog-aziya" },
