@@ -25,6 +25,7 @@ import Footer from "@/components/Footer";
 import { getCountryHubBySlug, getCitiesForCountry } from "@/data/countryHubs";
 import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
+import { buildFaqSchema } from "@/lib/geoSchema";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
