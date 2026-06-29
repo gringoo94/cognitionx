@@ -110,7 +110,7 @@ const LandingPageIT = () => (
       title="Психолог для IT онлайн | КПТ — Дмитрий Яцко"
       description="Психолог для IT-специалистов в Европе. КПТ онлайн: выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
       path="/psiholog-dlya-it"
-      schema={[personSchema, serviceSchema, itFaqSchema, testimonialsSchema]}
+      schema={[personSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для IT-специалистов", url: "https://cognitionx.cloud/psiholog-dlya-it" },
