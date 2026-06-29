@@ -49,7 +49,7 @@ const EMPTY: Answers = {
   comment: "",
 };
 
-const STORAGE_KEY = "decisionMatrixDraft";
+const STORAGE_KEY = "decisionMatrixDraft.v2";
 
 // ---------- Options ----------
 const TOPICS = [
