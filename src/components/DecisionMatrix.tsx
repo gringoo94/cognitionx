@@ -657,7 +657,15 @@ const DecisionMatrix = () => {
                 href={DECISION_MATRIX_GPT_URL}
                 target="_blank"
                 rel="noopener noreferrer external"
-                onClick={() => track("decision_matrix_gpt_opened")}
+                onClick={(e) => {
+                  track("decision_matrix_gpt_opened");
+                  // Fallback for sandboxed iframes (Lovable preview) that may
+                  // block default target="_blank" navigation.
+                  const win = window.open(DECISION_MATRIX_GPT_URL, "_blank", "noopener,noreferrer");
+                  if (win) {
+                    e.preventDefault();
+                  }
+                }}
               >
                 <ExternalLink className="h-4 w-4" />
                 Открыть GPT-помощника
@@ -688,6 +696,20 @@ const DecisionMatrix = () => {
           💡 Сначала нажмите «Скопировать промпт», затем откройте GPT-помощника и вставьте текст в чат вручную (Ctrl/Cmd + V) — промпт не передаётся автоматически.
         </p>
 
+
+        {gptReady && (
+          <p className="text-xs text-muted-foreground leading-relaxed break-all">
+            Если кнопка не открывает новую вкладку (например, в режиме предпросмотра или из-за блокировки попапов), откройте ссылку вручную:{" "}
+            <a
+              href={DECISION_MATRIX_GPT_URL}
+              target="_blank"
+              rel="noopener noreferrer external"
+              className="underline text-primary hover:text-primary/80"
+            >
+              {DECISION_MATRIX_GPT_URL}
+            </a>
+          </p>
+        )}
 
         <details className="text-xs text-muted-foreground">
           <summary className="cursor-pointer hover:text-foreground">Показать текст промпта</summary>
