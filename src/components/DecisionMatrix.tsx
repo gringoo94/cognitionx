@@ -18,7 +18,7 @@ import { toast } from "sonner";
 
 // External GPT helper link. Leave as "PASTE_GPT_LINK_HERE" to keep the button
 // disabled until a real link is provided.
-export const DECISION_MATRIX_GPT_URL = "PASTE_GPT_LINK_HERE";
+export const DECISION_MATRIX_GPT_URL = "https://chatgpt.com/g/g-6a420060fe84819184d505b64a86603d-matritsa-vybora-cognitionx";
 const isGptLinkReady = (url: string) =>
   !!url && url.trim() !== "" && url !== "PASTE_GPT_LINK_HERE";
 
