@@ -2790,7 +2790,7 @@ export const blogPosts: BlogPost[] = [
       {"ty":"text","te":"Если вы систематически не понимаете свои ощущения, путаете тревогу с интуицией, не можете доверять ни телу, ни голове — это часто следствие травматичного опыта, когда учиться слышать себя было небезопасно. Это хорошая зона для <a href='/cbt-therapy'>работы со специалистом</a>."},
 
       {"ty":"heading","te":"Читать дальше","le":2},
-      {"ty":"text","te":"<ul><li>'<a href='/blog/kak-ponyat-chego-ya-hochu'>Как понять, чего я хочу</a></li><li><a href='/blog/somaticheskie-simptomy-trevogi'>Соматика тревоги</a></li><li><a href='/blog/kak-prinyat-slozhnoe-reshenie'>Как принять сложное решение</a></li></ul>"}
+      {"ty":"text","te":"<ul><li><a href='/blog/kak-ponyat-chego-ya-hochu'>Как понять, чего я хочу</a></li><li><a href='/blog/somaticheskie-simptomy-trevogi'>Соматика тревоги</a></li><li><a href='/blog/kak-prinyat-slozhnoe-reshenie'>Как принять сложное решение</a></li></ul>"}
     ]`),
   },
 
