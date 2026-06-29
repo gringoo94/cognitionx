@@ -27,6 +27,7 @@ const TestPage = lazy(() => import("./pages/TestPage.tsx"));
 const SchemaQuizPage = lazy(() => import("./pages/SchemaQuizPage.tsx"));
 const EmotionWheelPage = lazy(() => import("./pages/EmotionWheelPage.tsx"));
 const AbcAnalysisPage = lazy(() => import("./pages/AbcAnalysisPage.tsx"));
+const DecisionMatrixPage = lazy(() => import("./pages/DecisionMatrixPage.tsx"));
 const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivationPage.tsx"));
 const AbstractToConcretePage = lazy(() => import("./pages/AbstractToConcretePage.tsx"));
 const CbtWorkbookPage = lazy(() => import("./pages/CbtWorkbookPage.tsx"));
