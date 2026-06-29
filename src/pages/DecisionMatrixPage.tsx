@@ -5,15 +5,7 @@ import {
   Clock,
   Lock,
   Sparkles,
-  Heart,
   Compass,
-  Plane,
-  Briefcase,
-  Users,
-  Home,
-  MessageCircleQuestion,
-  Map,
-  Footprints,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
@@ -33,86 +25,35 @@ const faq = [
   {
     question: "Матрица выбора принимает решение за меня?",
     answer:
-      "Нет. Инструмент не выбирает за вас и не говорит, какой вариант правильный. Он помогает увидеть структуру выбора: ценности, страхи, цену бездействия и первый безопасный шаг.",
+      "Нет. Инструмент не выбирает за вас. Он помогает увидеть структуру выбора: ценности, страхи, цену бездействия и первый безопасный шаг.",
   },
   {
     question: "Чем это отличается от списка плюсов и минусов?",
     answer:
-      "Обычный список плюсов и минусов часто остаётся на рациональном уровне. Матрица выбора добавляет психологические факторы: страхи, чужие ожидания, телесную реакцию, обратимость решения и цену бездействия.",
+      "Матрица добавляет психологические факторы: страхи, чужие ожидания, телесную реакцию, обратимость и цену бездействия.",
   },
   {
-    question: "Подходит ли инструмент для решения об эмиграции?",
+    question: "Подходит ли для решения об эмиграции или отношениях?",
     answer:
-      "Да. Инструмент особенно полезен для решений с высокой неопределённостью: уехать или остаться, менять страну, возвращаться или строить жизнь дальше.",
-  },
-  {
-    question: "Можно ли использовать для отношений?",
-    answer:
-      "Да, если решение не связано с угрозой безопасности. Если есть насилие или риск вреда, лучше обратиться за срочной помощью и поддержкой.",
+      "Да — для развилок с высокой неопределённостью. Если в отношениях есть угроза безопасности, обратитесь за срочной помощью.",
   },
   {
     question: "Что делать, если после прохождения стало тревожнее?",
     answer:
-      "Это может означать, что решение сильно заряжено и связано с важными страхами или ценностями. Сделайте паузу, вернитесь к телу, не принимайте решение в пике тревоги. Можно принести результат на диагностическую консультацию.",
-  },
-  {
-    question: "Можно ли отправить результат психологу?",
-    answer:
-      "Да. Вы можете скопировать результат и отправить его через короткий опросник /start или принести на первую диагностическую консультацию.",
+      "Сделайте паузу, не принимайте решение в пике тревоги. Можно принести результат на диагностическую консультацию.",
   },
   {
     question: "Заменяет ли это консультацию?",
     answer:
-      "Нет. Инструмент помогает структурировать мысли, но не заменяет консультацию психолога, особенно если выбор связан с кризисом, травмой, насилием, зависимостью или сильным ухудшением состояния.",
+      "Нет. Инструмент структурирует мысли, но не заменяет работу с психологом — особенно при кризисе, травме или насилии.",
   },
-];
-
-const useCases = [
-  { icon: Plane, title: "Эмиграция", text: "Уезжать или остаться, возвращаться или нет." },
-  { icon: Briefcase, title: "Работа", text: "Менять профессию, увольняться, принимать оффер." },
-  { icon: Heart, title: "Отношения", text: "Расставаться или работать дальше, съезжаться, замужество." },
-  { icon: Home, title: "Большие траты", text: "Ипотека, переезд, учёба, длительные обязательства." },
 ];
 
 const steps = [
-  {
-    n: "01",
-    title: "Назовите выбор",
-    text: "Сформулируйте развилку в одной фразе — это уже половина ясности.",
-  },
-  {
-    n: "02",
-    title: "Пройдите 7 коротких шагов",
-    text: "Варианты, ценности, страхи, чужие ожидания, тело, обратимость, цена бездействия.",
-  },
-  {
-    n: "03",
-    title: "Получите карту выбора",
-    text: "Структурированный разбор того, что на самом деле стоит за вашим решением.",
-  },
-  {
-    n: "04",
-    title: "Углубите в GPT-помощнике",
-    text: "Скопируйте готовый промпт и продолжите диалог — или принесите карту на консультацию.",
-  },
-];
-
-const outcomes = [
-  {
-    icon: Map,
-    title: "Карта выбора",
-    text: "Все варианты, ценности и страхи на одном экране — без хаоса в голове.",
-  },
-  {
-    icon: MessageCircleQuestion,
-    title: "Готовый промпт для GPT",
-    text: "Не нужно объяснять контекст заново — продолжите разбор там, где остановились.",
-  },
-  {
-    icon: Footprints,
-    title: "Первый безопасный шаг",
-    text: "Маленькое действие, которое можно сделать в ближайшие 48 часов.",
-  },
+  { n: "01", title: "Назовите выбор", text: "Сформулируйте развилку одной фразой." },
+  { n: "02", title: "7 коротких шагов", text: "Варианты, ценности, страхи, тело, цена бездействия." },
+  { n: "03", title: "Карта выбора", text: "Структурированный разбор того, что стоит за решением." },
+  { n: "04", title: "GPT или психолог", text: "Скопируйте промпт для GPT или принесите на консультацию." },
 ];
 
 const DecisionMatrixPage = () => {
@@ -134,8 +75,8 @@ const DecisionMatrixPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Матрица выбора — инструмент для принятия решений с GPT-разбором"
-        description="Разложите сложный выбор по вариантам, страхам, ценностям и первым шагам. После заполнения можно скопировать результат и продолжить глубокий разбор в GPT-помощнике."
+        title="Матрица выбора — инструмент для принятия решений"
+        description="Разложите сложный выбор по вариантам, страхам, ценностям и первым шагам. После заполнения можно продолжить разбор в GPT-помощнике."
         path="/tools/decision-matrix"
         schema={schemas}
         breadcrumbs={[
@@ -148,156 +89,84 @@ const DecisionMatrixPage = () => {
 
       <main className="print:py-6">
         {/* Hero */}
-        <section className="border-b border-border/60 bg-muted/30 print:hidden">
-          <div className="max-w-6xl mx-auto px-6 pt-10 pb-16 md:pt-14 md:pb-24">
+        <section className="border-b border-border print:hidden">
+          <div className="max-w-4xl mx-auto px-6 pt-10 pb-14 md:pt-14 md:pb-20">
             <Button
               variant="ghost"
               size="sm"
               asChild
-              className="gap-2 mb-10 text-muted-foreground -ml-2"
+              className="gap-2 mb-8 text-muted-foreground -ml-2"
             >
               <Link to="/tools">
                 <ArrowLeft className="w-4 h-4" /> Все инструменты
               </Link>
             </Button>
 
-            <div className="grid md:grid-cols-[1.2fr_1fr] gap-12 md:gap-16 items-start">
-              <div>
-                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground mb-6">
-                  <Compass className="w-3.5 h-3.5" />
-                  <span>Инструмент · бесплатно</span>
-                </div>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight mb-6">
-                  Когда выбор кажется{" "}
-                  <em className="italic text-primary">неподъёмным —</em>{" "}
-                  разложите его на части
-                </h1>
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-xl">
-                  Матрица выбора помогает увидеть, что на самом деле стоит за вашим решением: ценности, страхи, чужие ожидания и цена бездействия. Без советов и «правильных» ответов.
-                </p>
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground mb-5">
+              <Compass className="w-3.5 h-3.5" />
+              <span>Инструмент · бесплатно</span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight tracking-tight mb-5">
+              Матрица выбора
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-7 max-w-2xl">
+              Разложите сложное решение на части: ценности, страхи, чужие ожидания и цена бездействия. Без советов и «правильных» ответов.
+            </p>
 
-                <div className="flex flex-wrap gap-3 mb-8">
-                  <Button size="lg" asChild className="gap-2">
-                    <a href="#tool">
-                      Начать разбор <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <a href="#how">Как это работает</a>
-                  </Button>
-                </div>
+            <div className="flex flex-wrap gap-3 mb-6">
+              <Button size="lg" asChild className="gap-2">
+                <a href="#tool">
+                  Начать разбор <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a href="#how">Как это работает</a>
+              </Button>
+            </div>
 
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Clock className="w-4 h-4" /> 5–7 минут
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Lock className="w-4 h-4" /> Ничего не отправляется на сервер
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4" /> Готовый промпт для GPT
-                  </span>
-                </div>
-              </div>
-
-              {/* Use cases card */}
-              <aside className="rounded-2xl border border-border bg-card p-6 md:p-7">
-                <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-5">
-                  Помогает с такими развилками
-                </div>
-                <ul className="space-y-4">
-                  {useCases.map(({ icon: Icon, title, text }) => (
-                    <li key={title} className="flex gap-4">
-                      <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <div className="font-semibold mb-0.5">{title}</div>
-                        <div className="text-sm text-muted-foreground leading-snug">
-                          {text}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="w-4 h-4" /> 5–7 минут
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Lock className="w-4 h-4" /> Данные не уходят на сервер
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4" /> Промпт для GPT
+              </span>
             </div>
           </div>
         </section>
 
         {/* How it works */}
-        <section id="how" className="border-b border-border/60 print:hidden">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
-            <div className="max-w-2xl mb-12">
-              <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-                Как это работает
-              </div>
-              <h2 className="font-serif text-3xl md:text-4xl leading-tight tracking-tight">
-                Четыре шага от тумана{" "}
-                <em className="italic text-primary">до ясности</em>
-              </h2>
-            </div>
-
-            <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
+        <section id="how" className="border-b border-border print:hidden">
+          <div className="max-w-4xl mx-auto px-6 py-14 md:py-20">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">
+              Как это работает
+            </h2>
+            <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {steps.map(({ n, title, text }) => (
-                <li key={n} className="bg-background p-6 md:p-8">
-                  <div className="font-serif text-3xl text-primary/70 mb-4">{n}</div>
-                  <div className="font-semibold mb-2">{title}</div>
-                  <div className="text-sm text-muted-foreground leading-relaxed">
-                    {text}
-                  </div>
+                <li key={n} className="rounded-xl border border-border bg-card p-5">
+                  <div className="text-sm font-mono text-primary mb-3">{n}</div>
+                  <div className="font-semibold mb-1.5">{title}</div>
+                  <div className="text-sm text-muted-foreground leading-relaxed">{text}</div>
                 </li>
               ))}
             </ol>
           </div>
         </section>
 
-        {/* Outcomes */}
-        <section className="border-b border-border/60 bg-muted/30 print:hidden">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
-            <div className="max-w-2xl mb-12">
-              <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-                Что вы получите
-              </div>
-              <h2 className="font-serif text-3xl md:text-4xl leading-tight tracking-tight">
-                Не «правильный ответ», а{" "}
-                <em className="italic text-primary">опору для решения</em>
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {outcomes.map(({ icon: Icon, title, text }) => (
-                <div
-                  key={title}
-                  className="rounded-2xl border border-border bg-card p-6 md:p-7"
-                >
-                  <div className="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-5">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div className="font-semibold text-lg mb-2">{title}</div>
-                  <div className="text-sm text-muted-foreground leading-relaxed">
-                    {text}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Tool */}
         <section id="tool" className="scroll-mt-24">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-24 print:py-6">
+          <div className="max-w-3xl mx-auto px-6 py-14 md:py-20 print:py-6">
             <DecisionMatrix />
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="border-t border-border/60 bg-muted/30 print:hidden">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
-            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-              Вопросы и ответы
-            </div>
-            <h2 className="font-serif text-3xl md:text-4xl leading-tight tracking-tight mb-8">
+        <section className="border-t border-border bg-muted/30 print:hidden">
+          <div className="max-w-3xl mx-auto px-6 py-14 md:py-20">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">
               Частые вопросы
             </h2>
             <Accordion type="single" collapsible className="space-y-2">
@@ -321,65 +190,29 @@ const DecisionMatrixPage = () => {
 
         {/* Related */}
         <section className="print:hidden">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
-            <div className="max-w-2xl mb-10">
-              <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
-                Если матрица не подошла
-              </div>
-              <h2 className="font-serif text-3xl md:text-4xl leading-tight tracking-tight">
-                Другие инструменты,{" "}
-                <em className="italic text-primary">которые могут помочь</em>
-              </h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Link
-                to="/tools/emotion-wheel"
-                className="group rounded-2xl border border-border p-6 hover:border-primary/40 hover:bg-muted/40 transition-colors"
-              >
-                <div className="font-semibold mb-1 flex items-center justify-between">
-                  Колесо эмоций
-                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Если трудно назвать чувства, которые мешают выбрать.
-                </div>
-              </Link>
-              <Link
-                to="/tools/abc-analysis"
-                className="group rounded-2xl border border-border p-6 hover:border-primary/40 hover:bg-muted/40 transition-colors"
-              >
-                <div className="font-semibold mb-1 flex items-center justify-between">
-                  ABC-анализ
-                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Если много тревожных мыслей вокруг решения.
-                </div>
-              </Link>
-              <Link
-                to="/tools/schema-quiz"
-                className="group rounded-2xl border border-border p-6 hover:border-primary/40 hover:bg-muted/40 transition-colors"
-              >
-                <div className="font-semibold mb-1 flex items-center justify-between">
-                  Тест на схемы
-                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Если решение повторяет старый сценарий из жизни.
-                </div>
-              </Link>
-              <Link
-                to="/start"
-                className="group rounded-2xl border border-border p-6 hover:border-primary/40 hover:bg-muted/40 transition-colors"
-              >
-                <div className="font-semibold mb-1 flex items-center justify-between">
-                  Понять, с чего начать
-                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Короткий опросник для запроса в Telegram.
-                </div>
-              </Link>
+          <div className="max-w-4xl mx-auto px-6 py-14 md:py-20">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">
+              Другие инструменты
+            </h2>
+            <div className="grid md:grid-cols-2 gap-3">
+              {[
+                { to: "/tools/emotion-wheel", title: "Колесо эмоций", text: "Если трудно назвать чувства." },
+                { to: "/tools/abc-analysis", title: "ABC-анализ", text: "Если много тревожных мыслей." },
+                { to: "/tools/schema-quiz", title: "Тест на схемы", text: "Если решение повторяет старый сценарий." },
+                { to: "/start", title: "С чего начать", text: "Короткий опросник для запроса." },
+              ].map(({ to, title, text }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="group rounded-xl border border-border p-5 hover:border-primary/40 hover:bg-muted/40 transition-colors"
+                >
+                  <div className="font-semibold mb-1 flex items-center justify-between">
+                    {title}
+                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </div>
+                  <div className="text-sm text-muted-foreground">{text}</div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
