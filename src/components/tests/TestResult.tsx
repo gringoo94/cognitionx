@@ -10,6 +10,11 @@ import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
 import { generateTestReportPdf } from "@/lib/testReportPdf";
 import { deriveRanges } from "@/lib/testRanges";
+import {
+  subscaleScore,
+  subscaleMaxScore,
+  subscaleMinScore,
+} from "@/lib/testScoring";
 import { saveTestHistory } from "@/lib/testHistory";
 
 interface TestResultProps {
