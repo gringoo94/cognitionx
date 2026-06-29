@@ -58,6 +58,14 @@ const interactiveTools: ToolCard[] = [
     meta: "5 шагов",
   },
   {
+    to: "/tools/decision-matrix",
+    title: "Матрица выбора",
+    description:
+      "Разберите два варианта, ценности, страхи, цену бездействия и первый безопасный шаг — без давления выбирать «идеально».",
+    icon: Compass,
+    meta: "17 шагов",
+  },
+  {
     to: "/tools/emotion-wheel",
     title: "Колесо эмоций",
     description:
