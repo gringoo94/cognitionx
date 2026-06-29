@@ -104,15 +104,7 @@ const CityLandingPage = () => {
     availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: url },
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: page.faq.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
-    })),
-  };
+  const faqSchema = buildFaqSchema(page.faq);
 
   const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
