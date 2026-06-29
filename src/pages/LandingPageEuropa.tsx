@@ -121,7 +121,7 @@ const LandingPageEuropa = () => (
       title="Психолог на русском для Европы онлайн | КПТ — Дмитрий Яцко"
       description="Психолог онлайн на русском для экспатов в Европе. КПТ и схема-терапия. Адаптация, одиночество, тревога."
       path="/psiholog-europa"
-      schema={[personSchema, serviceSchema, expatFaqSchema, testimonialsSchema]}
+      schema={[personSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
       alternates={[
         { hreflang: "ru", href: "/psiholog-europa" },
         { hreflang: "ru-RU", href: "/psiholog-europa" },
