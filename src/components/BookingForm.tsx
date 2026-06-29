@@ -125,6 +125,7 @@ const BookingForm = () => {
               max={10}
               min={0}
               step={1}
+              thumbAriaLabel="Самочувствие сейчас"
               className="[&_[role=slider]]:bg-background [&_[role=slider]]:border-background/40"
             />
             <div className="flex justify-between text-[10px] opacity-40">
