@@ -91,15 +91,7 @@ const asiaFaq = [
   },
 ];
 
-const asiaFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: asiaFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const asiaFaqSchema = buildFaqSchema(asiaFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
