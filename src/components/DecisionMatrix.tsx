@@ -684,6 +684,11 @@ const DecisionMatrix = () => {
           </Button>
         </div>
 
+        <p className="text-xs text-muted-foreground leading-relaxed -mt-1">
+          💡 Сначала нажмите «Скопировать промпт», затем откройте GPT-помощника и вставьте текст в чат вручную (Ctrl/Cmd + V) — промпт не передаётся автоматически.
+        </p>
+
+
         <details className="text-xs text-muted-foreground">
           <summary className="cursor-pointer hover:text-foreground">Показать текст промпта</summary>
           <pre className="mt-2 whitespace-pre-wrap break-words rounded-lg bg-background border border-border p-3 text-xs leading-relaxed max-h-72 overflow-auto">
