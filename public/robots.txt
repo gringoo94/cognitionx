@@ -41,6 +41,7 @@ Allow: /tools/tests
 Allow: /tools/tests/*
 Allow: /tools/schema-quiz
 Allow: /tools/abc-analysis
+Allow: /tools/decision-matrix
 Allow: /tools/emotion-wheel
 Allow: /tools/behavioral-activation
 Allow: /tools/abstract-to-concrete
