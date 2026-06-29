@@ -1,24 +1,18 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
   RotateCcw,
   Copy,
-  Printer,
   Check,
   MessageCircle,
-  Compass,
-  CheckCircle2,
   AlertTriangle,
+  ExternalLink,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
 
@@ -29,160 +23,156 @@ const isGptLinkReady = (url: string) =>
   !!url && url.trim() !== "" && url !== "PASTE_GPT_LINK_HERE";
 
 // ---------- Types ----------
-type Stage = "intro" | "setup" | "practice" | "result";
-
-type DecisionType =
-  | "work"
-  | "emigration"
-  | "relationships"
-  | "therapy"
-  | "family"
-  | "money"
-  | "study"
-  | "other";
+type Stage = "intro" | "practice" | "result";
 
 interface Answers {
-  decisionType: DecisionType | "";
-  decision: string;
-  nameA: string;
-  descriptionA: string;
-  nameB: string;
-  descriptionB: string;
-  prosA: string;
-  consA: string;
-  prosB: string;
-  consB: string;
-  values: string[];
-  mainValue: string;
-  fears: string[];
-  worstCase: string;
-  externalInfluences: string[];
-  expectations: string;
-  inactionCost: string;
-  reversibility: string;
-  bodyA: string[];
-  bodyB: string[];
-  catastrophizing: string;
-  factsVsAssumptions: string;
-  experiment: string;
-  nextStep: string;
-  clarity: number;
+  topic: string;            // single
+  topicNote: string;        // optional free text
+  format: string;           // single
+  variants: string[];       // multi (<=4)
+  factors: string[];        // multi (<=5)
+  values: string[];         // multi (<=5)
+  inaction: string;         // single
+  nextStep: string;         // single
+  comment: string;          // optional free text
 }
 
 const EMPTY: Answers = {
-  decisionType: "",
-  decision: "",
-  nameA: "",
-  descriptionA: "",
-  nameB: "",
-  descriptionB: "",
-  prosA: "",
-  consA: "",
-  prosB: "",
-  consB: "",
+  topic: "",
+  topicNote: "",
+  format: "",
+  variants: [],
+  factors: [],
   values: [],
-  mainValue: "",
-  fears: [],
-  worstCase: "",
-  externalInfluences: [],
-  expectations: "",
-  inactionCost: "",
-  reversibility: "",
-  bodyA: [],
-  bodyB: [],
-  catastrophizing: "",
-  factsVsAssumptions: "",
-  experiment: "",
+  inaction: "",
   nextStep: "",
-  clarity: 5,
+  comment: "",
 };
 
 const STORAGE_KEY = "decisionMatrixDraft";
 
-const DECISION_TYPES: { value: DecisionType; label: string }[] = [
-  { value: "work", label: "Работа / карьера" },
-  { value: "emigration", label: "Эмиграция / переезд" },
-  { value: "relationships", label: "Отношения" },
-  { value: "therapy", label: "Терапия / помощь" },
-  { value: "family", label: "Семья" },
-  { value: "money", label: "Деньги" },
-  { value: "study", label: "Учёба" },
-  { value: "other", label: "Другое" },
+// ---------- Options ----------
+const TOPICS = [
+  "Отношения",
+  "Работа / карьера",
+  "Деньги",
+  "Переезд",
+  "Обучение",
+  "Здоровье / образ жизни",
+  "Семья",
+  "Личный проект",
+  "Другое",
+];
+
+const FORMATS = [
+  "Я выбираю между двумя вариантами",
+  "У меня 3+ вариантов",
+  "Я выбираю: делать или не делать",
+  "Я пока не понимаю, какие варианты есть",
+  "Я скорее пытаюсь понять, чего хочу",
+];
+
+const VARIANTS = [
+  "Остаться как есть",
+  "Сделать шаг вперёд",
+  "Отложить решение",
+  "Поговорить с человеком",
+  "Сменить работу / проект",
+  "Завершить отношения / процесс",
+  "Начать обучение",
+  "Попросить помощи",
+  "Провести маленький эксперимент",
+  "Собрать больше информации",
+  "Другое",
+];
+
+const FACTORS = [
+  "Страх ошибиться",
+  "Страх потерять стабильность",
+  "Страх разочаровать других",
+  "Желание роста",
+  "Желание безопасности",
+  "Усталость",
+  "Вина",
+  "Обида",
+  "Надежда, что станет лучше",
+  "Деньги",
+  "Время",
+  "Ответственность перед другими",
+  "Давление со стороны",
+  "Непонимание, чего я хочу",
+  "Другое",
 ];
 
 const VALUES = [
-  "Безопасность", "Свобода", "Близость", "Развитие", "Стабильность",
-  "Здоровье", "Деньги", "Семья", "Честность", "Автономия",
-  "Принадлежность", "Смысл", "Спокойствие", "Профессиональный рост",
-  "Творчество", "Забота о себе", "Справедливость", "Признание",
-  "Духовность", "Игра / лёгкость",
+  "Свобода",
+  "Безопасность",
+  "Близость",
+  "Честность",
+  "Развитие",
+  "Спокойствие",
+  "Деньги",
+  "Самоуважение",
+  "Семья",
+  "Здоровье",
+  "Творчество",
+  "Профессиональный рост",
+  "Стабильность",
+  "Новизна",
+  "Забота о себе",
+  "Ответственность",
 ];
 
-const FEARS = [
-  "Ошибиться", "Разочаровать других", "Потерять деньги", "Остаться одному",
-  "Потерять стабильность", "Не справиться", "Пожалеть", "Быть осуждённым",
-  "Сделать больно другому", "Выбрать неправильно", "Начать и бросить",
-  "Столкнуться с неизвестностью", "Потерять время", "Потерять отношения",
-  "Потерять себя",
+const INACTIONS = [
+  "Скорее всего, станет хуже",
+  "Ничего критичного, но будет неприятно",
+  "Я буду дальше сомневаться",
+  "Я могу потерять возможность",
+  "Я сохраню стабильность",
+  "Я выиграю время",
+  "Я не знаю",
 ];
 
-const INFLUENCES = [
-  "Партнёр", "Родители", "Дети", "Друзья", "Коллеги", "Руководитель",
-  "Общество / культура", "Финансовые обязательства",
-  "Никто явно, но я чувствую давление",
-];
-
-const REVERSIBILITY = [
-  "Почти полностью обратимо",
-  "Частично обратимо",
-  "Трудно обратимо",
-  "Почти необратимо",
-  "Не знаю",
-];
-
-const BODY_SENSATIONS = [
-  "Облегчение", "Напряжение", "Сжатие в груди", "Тяжесть",
-  "Энергию", "Спокойствие", "Страх", "Злость", "Пустоту",
-  "Интерес", "Не понимаю",
+const NEXT_STEPS = [
+  "Взять паузу на 24–72 часа",
+  "Собрать больше информации",
+  "Поговорить с человеком",
+  "Посчитать риски, деньги или ресурсы",
+  "Провести маленький эксперимент",
+  "Обсудить с психологом или специалистом",
+  "Заполнить короткий опросник для мини-разбора",
+  "Перейти в GPT и разобрать глубже",
 ];
 
 // ---------- Step definitions ----------
 type StepId =
-  | "decision" | "varA" | "varB" | "prosA" | "consA" | "prosB" | "consB"
-  | "values" | "fears" | "external" | "inaction" | "reversibility"
-  | "body" | "catastrophizing" | "experiment" | "nextStep" | "clarity";
+  | "topic" | "format" | "variants" | "factors"
+  | "values" | "inaction" | "nextStep";
 
 interface StepDef {
   id: StepId;
   title: string;
+  subtitle?: string;
+  type: "single" | "multi";
+  options: string[];
+  max?: number;
+  field: keyof Answers;
   required: boolean;
-  isValid: (a: Answers) => boolean;
+  withTopicNote?: boolean;
+  withComment?: boolean;
 }
 
 const STEPS: StepDef[] = [
-  { id: "decision", title: "Решение", required: true, isValid: (a) => a.decision.trim().length > 0 },
-  { id: "varA", title: "Вариант A", required: true, isValid: (a) => a.nameA.trim().length > 0 },
-  { id: "varB", title: "Вариант B", required: true, isValid: (a) => a.nameB.trim().length > 0 },
-  { id: "prosA", title: "Плюсы A", required: false, isValid: () => true },
-  { id: "consA", title: "Цена A", required: false, isValid: () => true },
-  { id: "prosB", title: "Плюсы B", required: false, isValid: () => true },
-  { id: "consB", title: "Цена B", required: false, isValid: () => true },
-  { id: "values", title: "Ценности", required: false, isValid: () => true },
-  { id: "fears", title: "Страхи", required: false, isValid: () => true },
-  { id: "external", title: "Чужие ожидания", required: false, isValid: () => true },
-  { id: "inaction", title: "Цена бездействия", required: false, isValid: () => true },
-  { id: "reversibility", title: "Обратимость", required: false, isValid: () => true },
-  { id: "body", title: "Тело", required: false, isValid: () => true },
-  { id: "catastrophizing", title: "Катастрофизация", required: false, isValid: () => true },
-  { id: "experiment", title: "Эксперимент", required: true, isValid: (a) => a.experiment.trim().length > 0 },
-  { id: "nextStep", title: "Шаг на 48 часов", required: true, isValid: (a) => a.nextStep.trim().length > 0 },
-  { id: "clarity", title: "Ясность", required: false, isValid: () => true },
+  { id: "topic", title: "О чём ваш выбор?", type: "single", options: TOPICS, field: "topic", required: true, withTopicNote: true },
+  { id: "format", title: "Как выглядит выбор?", type: "single", options: FORMATS, field: "format", required: true },
+  { id: "variants", title: "Какие варианты сейчас есть в голове?", subtitle: "Можно выбрать до 4 вариантов.", type: "multi", options: VARIANTS, max: 4, field: "variants", required: true },
+  { id: "factors", title: "Что сейчас сильнее всего влияет на выбор?", subtitle: "Можно выбрать до 5 вариантов.", type: "multi", options: FACTORS, max: 5, field: "factors", required: true },
+  { id: "values", title: "Что для вас здесь важно?", subtitle: "Можно выбрать до 5 ценностей.", type: "multi", options: VALUES, max: 5, field: "values", required: true },
+  { id: "inaction", title: "Что будет, если пока ничего не менять?", type: "single", options: INACTIONS, field: "inaction", required: true },
+  { id: "nextStep", title: "Какой следующий шаг кажется самым безопасным?", type: "single", options: NEXT_STEPS, field: "nextStep", required: true, withComment: true },
 ];
 
 // ---------- Helpers ----------
-const toggle = (arr: string[], v: string) =>
-  arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v];
-
 const track = (event: string) => {
   try {
     // @ts-expect-error gtag
@@ -190,9 +180,71 @@ const track = (event: string) => {
       // @ts-expect-error gtag
       window.gtag("event", event, { tool: "decision_matrix" });
     }
-  } catch {
-    /* noop */
+  } catch { /* noop */ }
+};
+
+const buildGptPrompt = (a: Answers): string => {
+  const parts: string[] = [];
+  parts.push("Я прошёл(ла) кликабельную Матрицу выбора на сайте CognitionX.");
+  parts.push("");
+  parts.push("Моя карта выбора:");
+  parts.push("");
+  if (a.topic) {
+    parts.push("Тема:");
+    parts.push(a.topic);
+    parts.push("");
   }
+  if (a.topicNote.trim()) {
+    parts.push("Если я описал(а) ситуацию своими словами:");
+    parts.push(a.topicNote.trim());
+    parts.push("");
+  }
+  if (a.format) {
+    parts.push("Формат выбора:");
+    parts.push(a.format);
+    parts.push("");
+  }
+  if (a.variants.length) {
+    parts.push("Варианты, которые сейчас видны:");
+    a.variants.forEach((v) => parts.push(`— ${v}`));
+    parts.push("");
+  }
+  if (a.factors.length) {
+    parts.push("Что сильнее всего влияет на выбор:");
+    a.factors.forEach((v) => parts.push(`— ${v}`));
+    parts.push("");
+  }
+  if (a.values.length) {
+    parts.push("Какие ценности здесь затронуты:");
+    a.values.forEach((v) => parts.push(`— ${v}`));
+    parts.push("");
+  }
+  if (a.inaction) {
+    parts.push("Если ничего не менять:");
+    parts.push(a.inaction);
+    parts.push("");
+  }
+  if (a.nextStep) {
+    parts.push("Первый безопасный шаг:");
+    parts.push(a.nextStep);
+    parts.push("");
+  }
+  if (a.comment.trim()) {
+    parts.push("Дополнительный комментарий:");
+    parts.push(a.comment.trim());
+    parts.push("");
+  }
+  parts.push("Помоги мне глубже разобрать этот выбор.");
+  parts.push("");
+  parts.push("Важно:");
+  parts.push("— не выбирай за меня;");
+  parts.push("— не давай категоричных советов;");
+  parts.push("— не ставь диагнозов;");
+  parts.push("— помоги отделить факты от страхов;");
+  parts.push("— помоги понять, какие ценности стоят за каждым вариантом;");
+  parts.push("— задай мне 3–5 уточняющих вопросов;");
+  parts.push("— в конце помоги сформулировать один маленький безопасный шаг на ближайшие 24–72 часа.");
+  return parts.join("\n");
 };
 
 // ---------- Component ----------
@@ -205,7 +257,6 @@ const DecisionMatrix = () => {
   const [copied, setCopied] = useState(false);
   const restoredRef = useRef(false);
 
-  // Detect existing draft on mount
   useEffect(() => {
     if (restoredRef.current) return;
     restoredRef.current = true;
@@ -213,26 +264,16 @@ const DecisionMatrix = () => {
       const raw = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === "object" && parsed.answers) {
-          setHasDraft(true);
-        }
+        if (parsed && typeof parsed === "object" && parsed.answers) setHasDraft(true);
       }
-    } catch {
-      /* noop */
-    }
+    } catch { /* noop */ }
   }, []);
 
-  // Autosave
   useEffect(() => {
     if (stage === "intro") return;
     try {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ stage, current, answers, timestamp: Date.now() }),
-      );
-    } catch {
-      /* noop */
-    }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ stage, current, answers, timestamp: Date.now() }));
+    } catch { /* noop */ }
   }, [stage, current, answers]);
 
   const continueDraft = () => {
@@ -244,9 +285,7 @@ const DecisionMatrix = () => {
       setCurrent(typeof parsed.current === "number" ? parsed.current : 0);
       setStage(parsed.stage === "result" ? "result" : "practice");
       setHasDraft(false);
-    } catch {
-      /* noop */
-    }
+    } catch { /* noop */ }
   };
 
   const restart = () => {
@@ -260,21 +299,24 @@ const DecisionMatrix = () => {
   };
 
   const startPractice = () => {
-    setStage("setup");
-    track("decision_matrix_start");
-  };
-
-  const beginSteps = () => {
     setStage("practice");
     setCurrent(0);
+    track("decision_matrix_start");
   };
 
   const step = STEPS[current];
   const progress = ((current + 1) / STEPS.length) * 100;
 
+  const isStepValid = (s: StepDef, a: Answers): boolean => {
+    if (!s.required) return true;
+    const v = a[s.field];
+    if (s.type === "single") return typeof v === "string" && v.length > 0;
+    return Array.isArray(v) && v.length > 0;
+  };
+
   const next = () => {
-    if (step.required && !step.isValid(answers)) {
-      setValidationError("Заполните коротко — даже одной фразы достаточно.");
+    if (!isStepValid(step, answers)) {
+      setValidationError("Выберите хотя бы один вариант.");
       return;
     }
     setValidationError(null);
@@ -289,39 +331,72 @@ const DecisionMatrix = () => {
   const prev = () => {
     setValidationError(null);
     if (current > 0) setCurrent((c) => c - 1);
-    else setStage("setup");
+    else setStage("intro");
+  };
+
+  const toggleSingle = (s: StepDef, value: string) => {
+    setAnswers((a) => ({ ...a, [s.field]: value }));
+    setValidationError(null);
+  };
+
+  const toggleMulti = (s: StepDef, value: string) => {
+    setAnswers((a) => {
+      const arr = (a[s.field] as string[]) || [];
+      const has = arr.includes(value);
+      if (has) return { ...a, [s.field]: arr.filter((x) => x !== value) };
+      if (s.max && arr.length >= s.max) {
+        toast.message(`Можно выбрать не больше ${s.max}.`);
+        return a;
+      }
+      return { ...a, [s.field]: [...arr, value] };
+    });
+    setValidationError(null);
+  };
+
+  const copyPrompt = async () => {
+    const prompt = buildGptPrompt(answers);
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true);
+      toast.success("Промпт скопирован. Теперь откройте GPT и вставьте его в чат.");
+      track("decision_matrix_gpt_prompt_copied");
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      toast.error("Не удалось скопировать. Скопируйте промпт вручную из текстового поля ниже.");
+    }
+  };
+
+  const openGpt = () => {
+    if (!isGptLinkReady(DECISION_MATRIX_GPT_URL)) return;
+    track("decision_matrix_gpt_opened");
+    window.open(DECISION_MATRIX_GPT_URL, "_blank", "noopener,noreferrer");
   };
 
   // ---------- INTRO ----------
   if (stage === "intro") {
     return (
-      <div className="space-y-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="space-y-4"
-        >
+      <div className="space-y-10">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-            <span className="text-primary">Матрица выбора:</span> разберите сложное решение без давления
+            <span className="text-primary">Матрица выбора:</span> соберите карту сложного решения за 2–3 минуты
           </h1>
           <p className="text-muted-foreground leading-relaxed">
-            Сначала спокойно распишите свой выбор здесь: варианты, сомнения, страхи, ценности и
-            возможный первый шаг. А когда получите результат, сможете открыть GPT-помощника и
-            глубже разобрать ситуацию в диалоге.
+            Не нужно сразу формулировать идеальный ответ. Вы можете пройти матрицу в кликабельном
+            формате: выбрать тему, факторы, страхи, ценности и возможный следующий шаг. А если
+            захотите разобрать ситуацию глубже — после результата можно открыть GPT-помощника.
           </p>
           <p className="text-sm text-muted-foreground/90 italic">
-            Не нужно принимать окончательное решение прямо сейчас. Задача матрицы — сначала
-            навести порядок в мыслях.
+            Большую часть инструмента можно пройти без текста — просто выбирая подходящие варианты.
           </p>
         </motion.div>
 
-        <section className="space-y-4">
+        <section className="space-y-3">
           <h2 className="text-xl font-semibold">Как это работает</h2>
           <div className="grid sm:grid-cols-3 gap-3">
             {[
-              { n: "1", t: "Заполните матрицу", d: "Опишите варианты, что вас притягивает, что тревожит и что будет ценой бездействия." },
-              { n: "2", t: "Получите структурированный результат", d: "Инструмент соберёт ваши ответы в понятную карту выбора — без попытки решить за вас." },
-              { n: "3", t: "Разберите глубже в GPT", d: "Скопируйте готовый промпт и откройте GPT-помощника, чтобы уточнить ценности, страхи и следующий безопасный шаг." },
+              { n: "1", t: "10–15 кликов", d: "Выбираете тему, варианты, факторы, ценности и следующий шаг." },
+              { n: "2", t: "Карта выбора", d: "Инструмент собирает ваши ответы в понятную структуру — без диагнозов." },
+              { n: "3", t: "GPT или мини-разбор", d: "Можно скопировать промпт для GPT-помощника или отправить результат Дмитрию." },
             ].map((s) => (
               <div key={s.n} className="rounded-xl border border-border bg-card p-4">
                 <div className="text-xs font-semibold text-primary mb-2">Шаг {s.n}</div>
@@ -338,10 +413,9 @@ const DecisionMatrix = () => {
             <h2 className="text-base font-semibold">Можно продолжить разбор в GPT</h2>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            После заполнения матрицы вы сможете скопировать готовый промпт и открыть
-            GPT-помощника. Он задаст уточняющие вопросы, поможет отделить факты от страхов и
-            сформулировать следующий небольшой шаг. GPT не выбирает за вас и не заменяет
-            консультацию.
+            После заполнения матрицы вы сможете скопировать готовый промпт и открыть GPT-помощника.
+            Он задаст уточняющие вопросы, поможет отделить факты от страхов и сформулировать
+            следующий небольшой шаг. GPT не выбирает за вас и не заменяет консультацию.
           </p>
           <Button size="sm" variant="outline" onClick={startPractice} className="gap-2">
             Сначала заполнить матрицу <ArrowRight className="h-4 w-4" />
@@ -361,31 +435,6 @@ const DecisionMatrix = () => {
           </div>
         )}
 
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">Для каких решений подходит</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[
-              "Уехать или остаться?",
-              "Менять работу или нет?",
-              "Начинать терапию или подождать?",
-              "Расставаться или пробовать восстановить отношения?",
-              "Переезжать в другую страну?",
-              "Говорить прямо или промолчать?",
-              "Брать новый проект или отказаться?",
-              "Идти к психологу или справиться самому?",
-            ].map((t) => (
-              <div key={t} className="rounded-xl border border-border bg-card p-3 text-xs text-muted-foreground leading-snug">
-                {t}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground leading-relaxed">
-          Инструмент не принимает решение за вас и не заменяет консультацию психолога. Он помогает
-          структурировать мысли и подготовиться к разговору со специалистом.
-        </section>
-
         <section className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-5 flex gap-3">
           <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
           <p className="text-sm text-foreground/90 leading-relaxed">
@@ -397,51 +446,121 @@ const DecisionMatrix = () => {
 
         <div className="text-center">
           <Button size="lg" onClick={startPractice} className="gap-2">
-            Начать разбор <ArrowRight className="h-4 w-4" />
+            Начать <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
       </div>
     );
   }
 
-  // ---------- SETUP ----------
-  if (stage === "setup") {
+  // ---------- PRACTICE ----------
+  if (stage === "practice") {
+    const selectedSingle = answers[step.field] as string;
+    const selectedMulti = (answers[step.field] as string[]) || [];
+
     return (
       <div className="space-y-8 max-w-2xl mx-auto">
         <div className="space-y-2">
-          <div className="text-xs uppercase tracking-wider text-primary font-semibold">Шаг 1 из 2</div>
-          <h2 className="text-2xl font-bold">Какой выбор вы сейчас разбираете?</h2>
-          <p className="text-sm text-muted-foreground">
-            Это нужно, чтобы в конце дать чуть более точные подсказки. Можно выбрать «Другое».
-          </p>
+          <div className="flex items-center justify-between text-xs text-muted-foreground">
+            <span className="font-semibold text-primary uppercase tracking-wider">
+              Шаг {current + 1} из {STEPS.length}
+            </span>
+            <span>{Math.round(progress)}%</span>
+          </div>
+          <Progress value={progress} className="h-1.5" />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {DECISION_TYPES.map((t) => {
-            const active = answers.decisionType === t.value;
-            return (
-              <button
-                key={t.value}
-                type="button"
-                onClick={() => setAnswers((a) => ({ ...a, decisionType: t.value }))}
-                className={`rounded-xl border p-3 text-sm text-left transition-colors ${
-                  active
-                    ? "border-primary bg-primary/10 text-foreground"
-                    : "border-border bg-card text-muted-foreground hover:border-primary/40"
-                }`}
-              >
-                {t.label}
-              </button>
-            );
-          })}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step.id}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-5"
+          >
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold leading-tight">{step.title}</h2>
+              {step.subtitle && (
+                <p className="text-sm text-muted-foreground">{step.subtitle}</p>
+              )}
+            </div>
 
-        <div className="flex justify-between">
-          <Button variant="ghost" onClick={() => setStage("intro")} className="gap-2">
+            <div className="grid sm:grid-cols-2 gap-2">
+              {step.options.map((opt) => {
+                const active =
+                  step.type === "single" ? selectedSingle === opt : selectedMulti.includes(opt);
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() =>
+                      step.type === "single" ? toggleSingle(step, opt) : toggleMulti(step, opt)
+                    }
+                    className={`text-left rounded-xl border p-3.5 text-sm transition-colors ${
+                      active
+                        ? "border-primary bg-primary/10 text-foreground"
+                        : "border-border bg-card hover:border-primary/40"
+                    }`}
+                  >
+                    <div className="flex items-start gap-2">
+                      <div
+                        className={`mt-0.5 h-4 w-4 rounded-full border shrink-0 flex items-center justify-center ${
+                          active ? "border-primary bg-primary" : "border-muted-foreground/40"
+                        }`}
+                      >
+                        {active && <Check className="h-3 w-3 text-primary-foreground" />}
+                      </div>
+                      <span className="leading-snug">{opt}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {step.withTopicNote && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Если хотите, опишите выбор одной фразой
+                  <span className="text-muted-foreground font-normal"> (необязательно)</span>
+                </label>
+                <Textarea
+                  value={answers.topicNote}
+                  onChange={(e) => setAnswers((a) => ({ ...a, topicNote: e.target.value }))}
+                  placeholder="Например: не понимаю, оставаться ли на текущей работе или искать новую"
+                  className="min-h-[80px]"
+                />
+              </div>
+            )}
+
+            {step.withComment && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium">
+                  Что важно добавить своими словами?
+                  <span className="text-muted-foreground font-normal"> (необязательно)</span>
+                </label>
+                <Textarea
+                  value={answers.comment}
+                  onChange={(e) => setAnswers((a) => ({ ...a, comment: e.target.value }))}
+                  placeholder="Любые детали, которые не поместились в варианты. Это попадёт в промпт для GPT."
+                  className="min-h-[80px]"
+                />
+              </div>
+            )}
+
+            {validationError && (
+              <div className="text-sm text-destructive">{validationError}</div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="flex items-center justify-between gap-3 pt-2">
+          <Button variant="ghost" onClick={prev} className="gap-2">
             <ArrowLeft className="h-4 w-4" /> Назад
           </Button>
-          <Button onClick={beginSteps} disabled={!answers.decisionType} className="gap-2">
-            Дальше <ArrowRight className="h-4 w-4" />
+          <Button onClick={next} className="gap-2">
+            {current === STEPS.length - 1 ? "Показать карту выбора" : "Далее"}
+            <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -449,653 +568,116 @@ const DecisionMatrix = () => {
   }
 
   // ---------- RESULT ----------
-  if (stage === "result") {
-    return <ResultView answers={answers} onRestart={restart} onCopied={() => setCopied(true)} copied={copied} setCopied={setCopied} />;
-  }
-
-  // ---------- PRACTICE ----------
-  return (
-    <div className="space-y-6 max-w-2xl mx-auto">
-      <div className="space-y-2">
-        <div className="flex justify-between text-xs text-muted-foreground">
-          <span>Шаг {current + 1} из {STEPS.length}</span>
-          <span>{step.title}</span>
-        </div>
-        <Progress value={progress} />
-      </div>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step.id}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.2 }}
-          className="space-y-5"
-        >
-          <StepBody step={step} answers={answers} setAnswers={setAnswers} />
-        </motion.div>
-      </AnimatePresence>
-
-      {validationError && (
-        <div className="rounded-lg border border-amber-500/40 bg-amber-500/5 p-3 text-sm text-amber-600 dark:text-amber-400">
-          {validationError}
-        </div>
-      )}
-
-      <div className="flex justify-between pt-2">
-        <Button variant="ghost" onClick={prev} className="gap-2">
-          <ArrowLeft className="h-4 w-4" /> Назад
-        </Button>
-        <Button onClick={next} className="gap-2">
-          {current === STEPS.length - 1 ? "Показать результат" : "Дальше"}
-          <ArrowRight className="h-4 w-4" />
-        </Button>
-      </div>
-    </div>
-  );
-};
-
-// ---------- Step body renderer ----------
-const StepBody = ({
-  step,
-  answers,
-  setAnswers,
-}: {
-  step: StepDef;
-  answers: Answers;
-  setAnswers: React.Dispatch<React.SetStateAction<Answers>>;
-}) => {
-  switch (step.id) {
-    case "decision":
-      return (
-        <Field
-          title="Какое решение вы пытаетесь принять?"
-          hint="Сформулируйте выбор как вопрос между вариантами."
-        >
-          <Textarea
-            maxLength={500}
-            placeholder="Например: уехать или остаться? менять работу или нет? начинать терапию или подождать?"
-            value={answers.decision}
-            onChange={(e) => setAnswers((a) => ({ ...a, decision: e.target.value }))}
-            className="min-h-[120px]"
-          />
-        </Field>
-      );
-
-    case "varA":
-      return (
-        <div className="space-y-5">
-          <Field title="Вариант A">
-            <Input
-              placeholder="Например: остаться на текущей работе"
-              value={answers.nameA}
-              onChange={(e) => setAnswers((a) => ({ ...a, nameA: e.target.value }))}
-            />
-          </Field>
-          <Field
-            title="Что будет, если вы выберете этот вариант?"
-            hint="Опишите, как может выглядеть жизнь через неделю, месяц или год."
-          >
-            <Textarea
-              value={answers.descriptionA}
-              onChange={(e) => setAnswers((a) => ({ ...a, descriptionA: e.target.value }))}
-              className="min-h-[120px]"
-            />
-          </Field>
-        </div>
-      );
-
-    case "varB":
-      return (
-        <div className="space-y-5">
-          <Field title="Вариант B">
-            <Input
-              placeholder="Например: уволиться и искать новую работу"
-              value={answers.nameB}
-              onChange={(e) => setAnswers((a) => ({ ...a, nameB: e.target.value }))}
-            />
-          </Field>
-          <Field title="Что будет, если вы выберете этот вариант?">
-            <Textarea
-              value={answers.descriptionB}
-              onChange={(e) => setAnswers((a) => ({ ...a, descriptionB: e.target.value }))}
-              className="min-h-[120px]"
-            />
-          </Field>
-        </div>
-      );
-
-    case "prosA":
-      return (
-        <Field
-          title="Что хорошего может дать вариант A?"
-          hint="Подумайте не только о рациональных плюсах. Что этот вариант даёт телу, нервной системе, отношениям, деньгам, безопасности, ценностям?"
-        >
-          <Textarea
-            value={answers.prosA}
-            onChange={(e) => setAnswers((a) => ({ ...a, prosA: e.target.value }))}
-            className="min-h-[140px]"
-          />
-        </Field>
-      );
-
-    case "consA":
-      return (
-        <Field
-          title="Какую цену вы заплатите за вариант A?"
-          hint="Что придётся терпеть, откладывать или потерять? Что может ухудшиться через месяц или год?"
-        >
-          <Textarea
-            value={answers.consA}
-            onChange={(e) => setAnswers((a) => ({ ...a, consA: e.target.value }))}
-            className="min-h-[140px]"
-          />
-        </Field>
-      );
-
-    case "prosB":
-      return (
-        <Field title="Что хорошего может дать вариант B?">
-          <Textarea
-            value={answers.prosB}
-            onChange={(e) => setAnswers((a) => ({ ...a, prosB: e.target.value }))}
-            className="min-h-[140px]"
-          />
-        </Field>
-      );
-
-    case "consB":
-      return (
-        <Field title="Какую цену вы заплатите за вариант B?">
-          <Textarea
-            value={answers.consB}
-            onChange={(e) => setAnswers((a) => ({ ...a, consB: e.target.value }))}
-            className="min-h-[140px]"
-          />
-        </Field>
-      );
-
-    case "values":
-      return (
-        <div className="space-y-5">
-          <Field title="Какие ценности стоят за этим выбором?" hint="Выберите всё, что откликается.">
-            <ChipMulti
-              options={VALUES}
-              value={answers.values}
-              onChange={(v) => setAnswers((a) => ({ ...a, values: v }))}
-              accent="emerald"
-            />
-          </Field>
-          <Field title="Какая ценность сейчас кажется самой важной?">
-            <Input
-              value={answers.mainValue}
-              onChange={(e) => setAnswers((a) => ({ ...a, mainValue: e.target.value }))}
-            />
-          </Field>
-        </div>
-      );
-
-    case "fears":
-      return (
-        <div className="space-y-5">
-          <Field title="Чего вы больше всего боитесь?">
-            <ChipMulti
-              options={FEARS}
-              value={answers.fears}
-              onChange={(v) => setAnswers((a) => ({ ...a, fears: v }))}
-              accent="amber"
-            />
-          </Field>
-          <Field title="Если самый страшный сценарий случится, что именно произойдёт?">
-            <Textarea
-              value={answers.worstCase}
-              onChange={(e) => setAnswers((a) => ({ ...a, worstCase: e.target.value }))}
-            />
-          </Field>
-        </div>
-      );
-
-    case "external":
-      return (
-        <div className="space-y-5">
-          <Field title="Кто ещё влияет на это решение?">
-            <ChipMulti
-              options={INFLUENCES}
-              value={answers.externalInfluences}
-              onChange={(v) => setAnswers((a) => ({ ...a, externalInfluences: v }))}
-            />
-          </Field>
-          <Field title="Чего, как вам кажется, от вас ждут?">
-            <Textarea
-              value={answers.expectations}
-              onChange={(e) => setAnswers((a) => ({ ...a, expectations: e.target.value }))}
-            />
-          </Field>
-        </div>
-      );
-
-    case "inaction":
-      return (
-        <Field
-          title="Что будет, если вы ничего не выберете?"
-          hint="Иногда «не выбирать» — тоже выбор. Какую цену вы уже платите за откладывание?"
-        >
-          <Textarea
-            value={answers.inactionCost}
-            onChange={(e) => setAnswers((a) => ({ ...a, inactionCost: e.target.value }))}
-            className="min-h-[140px]"
-          />
-        </Field>
-      );
-
-    case "reversibility":
-      return (
-        <Field
-          title="Насколько это решение обратимо?"
-          hint="Если решение хотя бы частично обратимо, возможно, не нужно выбирать «навсегда». Можно начать с эксперимента."
-        >
-          <RadioGroup
-            value={answers.reversibility}
-            onValueChange={(v) => setAnswers((a) => ({ ...a, reversibility: v }))}
-            className="space-y-2"
-          >
-            {REVERSIBILITY.map((r) => (
-              <label
-                key={r}
-                className="flex items-center gap-3 rounded-xl border border-border bg-card p-3 cursor-pointer hover:border-primary/40"
-              >
-                <RadioGroupItem value={r} id={r} />
-                <span className="text-sm">{r}</span>
-              </label>
-            ))}
-          </RadioGroup>
-        </Field>
-      );
-
-    case "body":
-      return (
-        <div className="space-y-5">
-          <Field title={`Когда я представляю вариант A${answers.nameA ? ` (${answers.nameA})` : ""}, я чувствую…`}>
-            <ChipMulti
-              options={BODY_SENSATIONS}
-              value={answers.bodyA}
-              onChange={(v) => setAnswers((a) => ({ ...a, bodyA: v }))}
-            />
-          </Field>
-          <Field title={`Когда я представляю вариант B${answers.nameB ? ` (${answers.nameB})` : ""}, я чувствую…`}>
-            <ChipMulti
-              options={BODY_SENSATIONS}
-              value={answers.bodyB}
-              onChange={(v) => setAnswers((a) => ({ ...a, bodyB: v }))}
-            />
-          </Field>
-        </div>
-      );
-
-    case "catastrophizing":
-      return (
-        <div className="space-y-5">
-          <Field
-            title="Какие страшные сценарии крутятся в голове?"
-            hint="Катастрофизация — когда мозг сразу показывает худший сценарий как почти неизбежный."
-          >
-            <Textarea
-              value={answers.catastrophizing}
-              onChange={(e) => setAnswers((a) => ({ ...a, catastrophizing: e.target.value }))}
-            />
-          </Field>
-          <Field title="Что из этого факт, а что предположение?">
-            <Textarea
-              value={answers.factsVsAssumptions}
-              onChange={(e) => setAnswers((a) => ({ ...a, factsVsAssumptions: e.target.value }))}
-            />
-          </Field>
-        </div>
-      );
-
-    case "experiment":
-      return (
-        <Field
-          title="Какой маленький эксперимент можно сделать без окончательного решения?"
-          hint={experimentHintByType(answers.decisionType)}
-        >
-          <Textarea
-            value={answers.experiment}
-            onChange={(e) => setAnswers((a) => ({ ...a, experiment: e.target.value }))}
-            className="min-h-[140px]"
-          />
-        </Field>
-      );
-
-    case "nextStep":
-      return (
-        <Field
-          title="Какой один шаг вы готовы сделать в ближайшие 48 часов?"
-          hint="Маленький, реальный шаг. Не «решить всю жизнь», а сделать одно действие."
-        >
-          <Textarea
-            value={answers.nextStep}
-            onChange={(e) => setAnswers((a) => ({ ...a, nextStep: e.target.value }))}
-            className="min-h-[120px]"
-          />
-        </Field>
-      );
-
-    case "clarity":
-      return (
-        <Field title="Насколько стало яснее?">
-          <div className="space-y-4">
-            <Slider
-              min={0}
-              max={10}
-              step={1}
-              value={[answers.clarity]}
-              onValueChange={([v]) => setAnswers((a) => ({ ...a, clarity: v }))}
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>0 — всё так же запутано</span>
-              <span className="font-semibold text-foreground">{answers.clarity}</span>
-              <span>10 — понимаю следующий шаг</span>
-            </div>
-          </div>
-        </Field>
-      );
-
-    default:
-      return null;
-  }
-};
-
-const experimentHintByType = (t: DecisionType | ""): string => {
-  switch (t) {
-    case "work":
-      return "Например: обновить резюме, поговорить с руководителем, взять отпуск, обсудить нагрузку, посмотреть вакансии.";
-    case "emigration":
-      return "Например: пожить в городе 1–2 недели, посчитать бюджет, поговорить с людьми, узнать документы.";
-    case "relationships":
-      return "Например: провести один честный разговор, договориться о сроке наблюдения, пойти на одну консультацию.";
-    case "therapy":
-      return "Например: начать с одной диагностической консультации, а не с обязательства на долгий курс.";
-    default:
-      return "Маленький шаг, который ничего не решает «навсегда», но даёт реальную информацию.";
-  }
-};
-
-// ---------- UI primitives ----------
-const Field = ({
-  title,
-  hint,
-  children,
-}: {
-  title: string;
-  hint?: string;
-  children: React.ReactNode;
-}) => (
-  <div className="space-y-3">
-    <div>
-      <h3 className="text-lg font-semibold leading-snug">{title}</h3>
-      {hint && <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{hint}</p>}
-    </div>
-    {children}
-  </div>
-);
-
-const ChipMulti = ({
-  options,
-  value,
-  onChange,
-  accent = "primary",
-}: {
-  options: string[];
-  value: string[];
-  onChange: (v: string[]) => void;
-  accent?: "primary" | "emerald" | "amber";
-}) => {
-  const activeCls =
-    accent === "emerald"
-      ? "border-emerald-500/60 bg-emerald-500/10 text-foreground"
-      : accent === "amber"
-      ? "border-amber-500/60 bg-amber-500/10 text-foreground"
-      : "border-primary bg-primary/10 text-foreground";
-  return (
-    <div className="flex flex-wrap gap-2">
-      {options.map((opt) => {
-        const active = value.includes(opt);
-        return (
-          <button
-            key={opt}
-            type="button"
-            onClick={() => onChange(toggle(value, opt))}
-            className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
-              active ? activeCls : "border-border bg-card text-muted-foreground hover:border-primary/40"
-            }`}
-          >
-            <span className="inline-flex items-center gap-1.5">
-              {active && <Check className="h-3 w-3" />}
-              {opt}
-            </span>
-          </button>
-        );
-      })}
-    </div>
-  );
-};
-
-// ---------- Result ----------
-const ResultView = ({
-  answers,
-  onRestart,
-  copied,
-  setCopied,
-  onCopied,
-}: {
-  answers: Answers;
-  onRestart: () => void;
-  copied: boolean;
-  setCopied: (v: boolean) => void;
-  onCopied: () => void;
-}) => {
-  const observations = useMemo(() => {
-    const list: string[] = [];
-    if (answers.inactionCost.trim().length > 30) {
-      list.push("Вы подробно описали цену бездействия. Возможно, откладывание уже само по себе стало источником напряжения.");
-    }
-    if (answers.fears.length >= 4) {
-      list.push("В ответах много страхов. Это не значит, что вариант плохой — возможно, нервная система пытается защитить вас от неопределённости.");
-    }
-    if (
-      answers.reversibility === "Почти полностью обратимо" ||
-      answers.reversibility === "Частично обратимо"
-    ) {
-      list.push("Если решение хотя бы частично обратимо, можно начать не с окончательного выбора, а с маленького эксперимента.");
-    }
-    if (answers.clarity <= 3) {
-      list.push("Похоже, выбор всё ещё сильно заряжен. Это нормально: иногда решение невозможно «додумать» в одиночку. Можно принести этот результат на диагностическую консультацию.");
-    }
-    if (answers.decisionType === "therapy") {
-      list.push("Если выбор связан с терапией, не обязательно сразу решаться на долгий курс. Можно начать с одной диагностической консультации.");
-    }
-    return list;
-  }, [answers]);
-
-  const text = useMemo(() => buildResultText(answers), [answers]);
-  const gptPrompt = useMemo(() => buildGptPrompt(answers), [answers]);
-  const [gptCopied, setGptCopied] = useState(false);
   const gptReady = isGptLinkReady(DECISION_MATRIX_GPT_URL);
+  const promptText = buildGptPrompt(answers);
 
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      onCopied();
-      track("decision_matrix_copy_result");
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* noop */
-    }
-  };
+  const Block = ({ title, children }: { title: string; children: React.ReactNode }) => (
+    <div className="rounded-xl border border-border bg-card p-4">
+      <div className="text-xs font-semibold text-primary uppercase tracking-wider mb-2">{title}</div>
+      <div className="text-sm text-foreground/90 leading-relaxed">{children}</div>
+    </div>
+  );
 
-  const copyGptPrompt = async () => {
-    try {
-      await navigator.clipboard.writeText(gptPrompt);
-      setGptCopied(true);
-      toast.success("Промпт скопирован. Теперь откройте GPT и вставьте его в чат.");
-      track("decision_matrix_gpt_prompt_copied");
-      setTimeout(() => setGptCopied(false), 2500);
-    } catch {
-      toast.error("Не удалось скопировать. Попробуйте выделить текст вручную.");
-    }
-  };
-
-  const handleOpenGpt = () => {
-    track("decision_matrix_gpt_opened");
-  };
-
-  const print = () => {
-    if (typeof window !== "undefined") window.print();
-  };
+  const List = ({ items }: { items: string[] }) =>
+    items.length ? (
+      <ul className="space-y-1">
+        {items.map((i) => (
+          <li key={i}>— {i}</li>
+        ))}
+      </ul>
+    ) : (
+      <span className="text-muted-foreground">—</span>
+    );
 
   return (
-    <div className="max-w-2xl mx-auto space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center space-y-3"
-      >
-        <CheckCircle2 className="h-10 w-10 text-primary mx-auto" />
-        <h2 className="text-2xl font-bold">Ваш разбор выбора</h2>
-        <p className="text-sm text-muted-foreground">
-          Это не готовый ответ, а карта: что стоит за выбором, где страхи, где ценности, и какой
-          следующий шаг можно сделать без давления.
+    <div className="space-y-8">
+      <div className="space-y-2">
+        <div className="text-xs uppercase tracking-wider text-primary font-semibold">Готово</div>
+        <h2 className="text-3xl font-bold">Ваша карта выбора</h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Это не готовое решение, а карта ситуации. Она помогает увидеть, из чего состоит выбор:
+          где факты, где страхи, где ценности и какой шаг можно сделать без резкого решения.
         </p>
-      </motion.div>
-
-      <div className="space-y-3 print:space-y-2">
-        <ResultBlock title="Решение">{answers.decision || "—"}</ResultBlock>
-
-        <ResultBlock title={`Вариант A${answers.nameA ? `: ${answers.nameA}` : ""}`}>
-          {answers.descriptionA && <p className="mb-2"><span className="text-muted-foreground">Как выглядит: </span>{answers.descriptionA}</p>}
-          {answers.prosA && <p className="mb-2"><span className="text-emerald-500">Что даёт: </span>{answers.prosA}</p>}
-          {answers.consA && <p><span className="text-amber-500">Цена: </span>{answers.consA}</p>}
-          {!answers.descriptionA && !answers.prosA && !answers.consA && <span className="text-muted-foreground italic">— не заполнено —</span>}
-        </ResultBlock>
-
-        <ResultBlock title={`Вариант B${answers.nameB ? `: ${answers.nameB}` : ""}`}>
-          {answers.descriptionB && <p className="mb-2"><span className="text-muted-foreground">Как выглядит: </span>{answers.descriptionB}</p>}
-          {answers.prosB && <p className="mb-2"><span className="text-emerald-500">Что даёт: </span>{answers.prosB}</p>}
-          {answers.consB && <p><span className="text-amber-500">Цена: </span>{answers.consB}</p>}
-          {!answers.descriptionB && !answers.prosB && !answers.consB && <span className="text-muted-foreground italic">— не заполнено —</span>}
-        </ResultBlock>
-
-        {(answers.values.length > 0 || answers.mainValue) && (
-          <ResultBlock title="Ценности">
-            {answers.values.length > 0 && <p className="mb-2">{answers.values.join(", ")}</p>}
-            {answers.mainValue && <p><span className="text-muted-foreground">Главная: </span>{answers.mainValue}</p>}
-          </ResultBlock>
-        )}
-
-        {(answers.fears.length > 0 || answers.worstCase) && (
-          <ResultBlock title="Страхи">
-            {answers.fears.length > 0 && <p className="mb-2">{answers.fears.join(", ")}</p>}
-            {answers.worstCase && <p><span className="text-muted-foreground">Страшный сценарий: </span>{answers.worstCase}</p>}
-          </ResultBlock>
-        )}
-
-        {(answers.externalInfluences.length > 0 || answers.expectations) && (
-          <ResultBlock title="Чужие ожидания">
-            {answers.externalInfluences.length > 0 && <p className="mb-2">{answers.externalInfluences.join(", ")}</p>}
-            {answers.expectations && <p>{answers.expectations}</p>}
-          </ResultBlock>
-        )}
-
-        {answers.inactionCost && <ResultBlock title="Цена бездействия">{answers.inactionCost}</ResultBlock>}
-        {answers.reversibility && <ResultBlock title="Обратимость решения">{answers.reversibility}</ResultBlock>}
-
-        {(answers.bodyA.length > 0 || answers.bodyB.length > 0) && (
-          <ResultBlock title="Телесная реакция">
-            {answers.bodyA.length > 0 && <p className="mb-1"><span className="text-muted-foreground">A: </span>{answers.bodyA.join(", ")}</p>}
-            {answers.bodyB.length > 0 && <p><span className="text-muted-foreground">B: </span>{answers.bodyB.join(", ")}</p>}
-          </ResultBlock>
-        )}
-
-        {(answers.catastrophizing || answers.factsVsAssumptions) && (
-          <ResultBlock title="Катастрофизация">
-            {answers.catastrophizing && <p className="mb-2">{answers.catastrophizing}</p>}
-            {answers.factsVsAssumptions && <p><span className="text-muted-foreground">Факты vs предположения: </span>{answers.factsVsAssumptions}</p>}
-          </ResultBlock>
-        )}
-
-        <ResultBlock title="Первый безопасный эксперимент" accent="blue">{answers.experiment}</ResultBlock>
-        <ResultBlock title="Шаг на ближайшие 48 часов" accent="primary">{answers.nextStep}</ResultBlock>
-        <ResultBlock title="Уровень ясности">{answers.clarity} из 10</ResultBlock>
       </div>
 
-      {observations.length > 0 && (
-        <section className="rounded-xl border border-primary/20 bg-primary/5 p-5 space-y-2 print:hidden">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-primary font-semibold">
-            <Compass className="h-4 w-4" /> Что заметно в ответах
+      <div className="grid sm:grid-cols-2 gap-3">
+        <Block title="Тема">{answers.topic || "—"}</Block>
+        <Block title="Формат выбора">{answers.format || "—"}</Block>
+        {answers.topicNote.trim() && (
+          <div className="sm:col-span-2">
+            <Block title="Своими словами">{answers.topicNote.trim()}</Block>
           </div>
-          <ul className="space-y-2 text-sm text-foreground/90 leading-relaxed">
-            {observations.map((o, i) => (
-              <li key={i} className="flex gap-2">
-                <span className="text-primary mt-1.5 h-1 w-1 rounded-full bg-primary shrink-0" />
-                <span>{o}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <section className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 space-y-4 print:hidden">
-        <div className="flex items-center gap-2 text-primary">
-          <Compass className="w-5 h-5" />
-          <h3 className="text-xl font-bold">Продолжить разбор в GPT</h3>
+        )}
+        <div className="sm:col-span-2">
+          <Block title="Варианты, которые сейчас видны">
+            <List items={answers.variants} />
+          </Block>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Если хотите глубже разобрать этот выбор, скопируйте готовый промпт и откройте
-          GPT-помощника. Он поможет посмотреть на ситуацию спокойнее: где факты, где страхи,
-          где ценности, а где первый безопасный шаг.
-        </p>
+        <Block title="Что влияет на выбор">
+          <List items={answers.factors} />
+        </Block>
+        <Block title="Какие ценности затронуты">
+          <List items={answers.values} />
+        </Block>
+        <Block title="Если ничего не менять">{answers.inaction || "—"}</Block>
+        <Block title="Первый безопасный шаг">{answers.nextStep || "—"}</Block>
+        {answers.comment.trim() && (
+          <div className="sm:col-span-2">
+            <Block title="Дополнительный комментарий">{answers.comment.trim()}</Block>
+          </div>
+        )}
+      </div>
+
+      {/* GPT block */}
+      <section className="rounded-xl border border-primary/20 bg-primary/5 p-5 space-y-4 print:hidden">
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2 text-primary">
+            <MessageCircle className="h-4 w-4" />
+            <h3 className="text-lg font-semibold">Разобрать глубже в GPT</h3>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Вы уже собрали основу. Теперь можно скопировать готовый промпт и открыть GPT-помощника.
+            Он задаст уточняющие вопросы, поможет отделить факты от страхов и сформулировать
+            следующий небольшой шаг.
+          </p>
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-2">
-          <Button onClick={copyGptPrompt} className="gap-2">
-            {gptCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            {gptCopied ? "Промпт скопирован" : "Скопировать промпт для GPT"}
+          <Button onClick={copyPrompt} className="gap-2">
+            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            {copied ? "Скопировано" : "Скопировать промпт для GPT"}
           </Button>
-          {gptReady ? (
-            <Button asChild variant="outline" className="gap-2">
-              <a
-                href={DECISION_MATRIX_GPT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={handleOpenGpt}
-              >
-                Открыть GPT-помощника
-              </a>
-            </Button>
-          ) : (
-            <div className="flex flex-col gap-1">
-              <Button variant="outline" disabled className="gap-2">
-                Открыть GPT-помощника
-              </Button>
-              <span className="text-xs text-muted-foreground">
-                GPT-помощник скоро будет доступен.
-              </span>
-            </div>
-          )}
-          <Button asChild variant="ghost" className="gap-2">
+          <Button
+            variant="outline"
+            onClick={openGpt}
+            disabled={!gptReady}
+            className="gap-2"
+            title={gptReady ? "" : "GPT-помощник скоро будет доступен."}
+          >
+            <ExternalLink className="h-4 w-4" />
+            {gptReady ? "Открыть GPT-помощника" : "GPT-помощник скоро будет доступен"}
+          </Button>
+          <Button variant="ghost" asChild className="gap-2">
             <Link
-              to="/start?source=decision-matrix-gpt-block"
+              to="/start?source=decision-matrix-clickable-result"
               onClick={() => track("decision_matrix_start_from_gpt_block")}
             >
               Отправить Дмитрию на мини-разбор
             </Link>
           </Button>
         </div>
-        <p className="text-xs text-muted-foreground leading-relaxed border-t border-border/60 pt-3">
-          Не вставляйте в GPT данные третьих лиц, пароли, документы и информацию, которой не
-          готовы делиться в ChatGPT. Если хотите, чтобы результат посмотрел Дмитрий лично,
-          отправьте его через{" "}
+
+        <details className="text-xs text-muted-foreground">
+          <summary className="cursor-pointer hover:text-foreground">Показать текст промпта</summary>
+          <pre className="mt-2 whitespace-pre-wrap break-words rounded-lg bg-background border border-border p-3 text-xs leading-relaxed max-h-72 overflow-auto">
+            {promptText}
+          </pre>
+        </details>
+
+        <p className="text-xs text-muted-foreground leading-relaxed border-t border-primary/10 pt-3">
+          Не вставляйте в GPT данные третьих лиц, пароли, документы и информацию, которой не готовы
+          делиться в ChatGPT. Если хотите, чтобы результат посмотрел Дмитрий лично, отправьте его
+          через{" "}
           <Link
             to="/start?source=decision-matrix-privacy-note"
             className="underline hover:text-foreground"
@@ -1106,180 +688,13 @@ const ResultView = ({
         </p>
       </section>
 
-      <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 text-center space-y-4 print:hidden">
-        <MessageCircle className="w-8 h-8 text-primary mx-auto" />
-        <h3 className="text-xl font-bold">Хотите разобрать это решение вместе?</h3>
-        <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
-          Сложные решения часто невозможно «додумать» в одиночку — внутри смешиваются страхи,
-          ценности, вина, ожидания других и усталость от неопределённости. Отправьте результат
-          через короткий опросник — я посмотрю ответы и подскажу, с чего можно начать.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-2 justify-center pt-2">
-          <Button asChild size="lg" className="gap-2">
-            <Link
-              to="/start?source=decision-matrix"
-              onClick={() => track("decision_matrix_send_to_start")}
-            >
-              Отправить на мини-разбор
-            </Link>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="gap-2">
-            <Link
-              to="/contact"
-              onClick={() => track("decision_matrix_contact_click")}
-            >
-              Записаться на диагностическую консультацию
-            </Link>
-          </Button>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap gap-2 justify-center print:hidden">
-        <Button variant="outline" size="sm" onClick={copy} className="gap-2">
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? "Скопировано" : "Скопировать результат"}
-        </Button>
-        <Button variant="outline" size="sm" onClick={print} className="gap-2">
-          <Printer className="h-4 w-4" /> Распечатать / сохранить PDF
-        </Button>
-        <Button variant="outline" size="sm" onClick={onRestart} className="gap-2">
-          <RotateCcw className="h-4 w-4" /> Пройти заново
-        </Button>
-        <Button variant="ghost" size="sm" asChild>
-          <Link to="/tools">К другим инструментам</Link>
+      <div className="flex flex-wrap gap-2 print:hidden">
+        <Button variant="outline" onClick={restart} className="gap-2">
+          <RotateCcw className="h-4 w-4" /> Начать заново
         </Button>
       </div>
     </div>
   );
-};
-
-const ResultBlock = ({
-  title,
-  children,
-  accent,
-}: {
-  title: string;
-  children: React.ReactNode;
-  accent?: "blue" | "primary";
-}) => {
-  const border =
-    accent === "blue"
-      ? "border-sky-500/30 bg-sky-500/5"
-      : accent === "primary"
-      ? "border-primary/30 bg-primary/5"
-      : "border-border bg-card";
-  return (
-    <div className={`rounded-xl border p-4 ${border}`}>
-      <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-2">
-        {title}
-      </div>
-      <div className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">{children}</div>
-    </div>
-  );
-};
-
-const buildResultText = (a: Answers): string => {
-  const lines: string[] = [];
-  lines.push("Матрица выбора — результат");
-  lines.push("");
-  lines.push(`Решение: ${a.decision || "—"}`);
-  if (a.decisionType) {
-    const t = DECISION_TYPES.find((d) => d.value === a.decisionType);
-    if (t) lines.push(`Тип выбора: ${t.label}`);
-  }
-  lines.push("");
-  lines.push(`Вариант A: ${a.nameA || "—"}`);
-  if (a.descriptionA) lines.push(`  Как выглядит: ${a.descriptionA}`);
-  if (a.prosA) lines.push(`  Что даёт: ${a.prosA}`);
-  if (a.consA) lines.push(`  Цена: ${a.consA}`);
-  lines.push("");
-  lines.push(`Вариант B: ${a.nameB || "—"}`);
-  if (a.descriptionB) lines.push(`  Как выглядит: ${a.descriptionB}`);
-  if (a.prosB) lines.push(`  Что даёт: ${a.prosB}`);
-  if (a.consB) lines.push(`  Цена: ${a.consB}`);
-  lines.push("");
-  if (a.values.length) lines.push(`Ценности: ${a.values.join(", ")}`);
-  if (a.mainValue) lines.push(`Главная ценность: ${a.mainValue}`);
-  if (a.fears.length) lines.push(`Страхи: ${a.fears.join(", ")}`);
-  if (a.worstCase) lines.push(`Страшный сценарий: ${a.worstCase}`);
-  if (a.externalInfluences.length) lines.push(`Чужое влияние: ${a.externalInfluences.join(", ")}`);
-  if (a.expectations) lines.push(`Ожидания: ${a.expectations}`);
-  if (a.inactionCost) lines.push(`Цена бездействия: ${a.inactionCost}`);
-  if (a.reversibility) lines.push(`Обратимость: ${a.reversibility}`);
-  if (a.bodyA.length) lines.push(`Тело (A): ${a.bodyA.join(", ")}`);
-  if (a.bodyB.length) lines.push(`Тело (B): ${a.bodyB.join(", ")}`);
-  if (a.catastrophizing) lines.push(`Страшные сценарии: ${a.catastrophizing}`);
-  if (a.factsVsAssumptions) lines.push(`Факты vs предположения: ${a.factsVsAssumptions}`);
-  lines.push("");
-  lines.push(`Первый безопасный эксперимент: ${a.experiment || "—"}`);
-  lines.push(`Шаг на 48 часов: ${a.nextStep || "—"}`);
-  lines.push(`Уровень ясности: ${a.clarity}/10`);
-  return lines.join("\n");
 };
 
 export default DecisionMatrix;
-
-// ---------- GPT prompt builder ----------
-const orNotSpecified = (s: string) => (s.trim() ? s.trim() : "не указано");
-const joinOrSkip = (arr: string[]) => (arr.length ? arr.join(", ") : "");
-
-function buildGptPrompt(a: Answers): string {
-  const variants: string[] = [];
-  if (a.nameA || a.descriptionA) {
-    variants.push(`A — ${a.nameA || "вариант A"}${a.descriptionA ? `: ${a.descriptionA}` : ""}`);
-  }
-  if (a.nameB || a.descriptionB) {
-    variants.push(`B — ${a.nameB || "вариант B"}${a.descriptionB ? `: ${a.descriptionB}` : ""}`);
-  }
-
-  const attractParts: string[] = [];
-  if (a.prosA) attractParts.push(`в варианте A: ${a.prosA}`);
-  if (a.prosB) attractParts.push(`в варианте B: ${a.prosB}`);
-
-  const fearParts: string[] = [];
-  const fearsList = joinOrSkip(a.fears);
-  if (fearsList) fearParts.push(fearsList);
-  if (a.worstCase) fearParts.push(`страшный сценарий: ${a.worstCase}`);
-  if (a.consA) fearParts.push(`цена варианта A: ${a.consA}`);
-  if (a.consB) fearParts.push(`цена варианта B: ${a.consB}`);
-
-  const valuesParts: string[] = [];
-  const valuesList = joinOrSkip(a.values);
-  if (valuesList) valuesParts.push(valuesList);
-  if (a.mainValue) valuesParts.push(`главная: ${a.mainValue}`);
-
-  const lines: string[] = [];
-  lines.push("Я прошёл(ла) инструмент «Матрица выбора» на сайте CognitionX.");
-  lines.push("");
-  lines.push("Моя ситуация:");
-  lines.push(orNotSpecified(a.decision));
-  lines.push("");
-  lines.push("Варианты, между которыми я выбираю:");
-  lines.push(variants.length ? variants.join("\n") : "не указано");
-  lines.push("");
-  lines.push("Что меня притягивает в вариантах:");
-  lines.push(attractParts.length ? attractParts.join("\n") : "не указано");
-  lines.push("");
-  lines.push("Что меня тревожит:");
-  lines.push(fearParts.length ? fearParts.join("\n") : "не указано");
-  lines.push("");
-  lines.push("Какие ценности здесь затронуты:");
-  lines.push(valuesParts.length ? valuesParts.join("; ") : "не указано");
-  lines.push("");
-  lines.push("Цена бездействия:");
-  lines.push(orNotSpecified(a.inactionCost));
-  lines.push("");
-  lines.push("Первый безопасный шаг, который я вижу:");
-  lines.push(orNotSpecified(a.nextStep || a.experiment));
-  lines.push("");
-  lines.push("Помоги мне глубже разобрать этот выбор.");
-  lines.push("");
-  lines.push("Важно:");
-  lines.push("- не выбирай за меня;");
-  lines.push("- не давай категоричных советов;");
-  lines.push("- помоги отделить факты от страхов;");
-  lines.push("- помоги понять, какие ценности стоят за каждым вариантом;");
-  lines.push("- задай мне 3–5 уточняющих вопросов;");
-  lines.push("- в конце помоги сформулировать один маленький безопасный шаг на ближайшие 24–72 часа.");
-  return lines.join("\n");
-}
