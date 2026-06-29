@@ -10,6 +10,11 @@ import type { TestConfig } from "@/data/tests/types";
 import { getTest } from "@/data/tests";
 import { generateTestReportPdf } from "@/lib/testReportPdf";
 import { deriveRanges } from "@/lib/testRanges";
+import {
+  subscaleScore,
+  subscaleMaxScore,
+  subscaleMinScore,
+} from "@/lib/testScoring";
 import { saveTestHistory } from "@/lib/testHistory";
 
 interface TestResultProps {
@@ -32,14 +37,16 @@ const toneIcon = {
   danger: AlertCircle,
 };
 
-const sumByItems = (answers: number[], items: number[]) =>
-  items.reduce((s, n) => s + (answers[n - 1] ?? 0), 0);
-
 const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const result = config.scoring(answers);
   const Icon = toneIcon[result.tone];
-  const pct = Math.round((result.score / result.maxScore) * 100);
-  const ranges = deriveRanges(config);
+  const safeMax = result.maxScore > 0 ? result.maxScore : 1;
+  const pct = Math.max(
+    0,
+    Math.min(100, Math.round((result.score / safeMax) * 100)),
+  );
+  const rawRanges = deriveRanges(config);
+  const ranges = rawRanges.length <= 20 ? rawRanges : [];
   const [userNote, setUserNote] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -136,11 +143,14 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
           <h3 className="text-sm font-semibold text-foreground mb-4">По подшкалам</h3>
           <div className="space-y-3">
             {config.subscales.map((sub) => {
-              const subScore = sumByItems(answers, sub.items);
-              const subMax = sub.items.length * (config.scale[config.scale.length - 1].value);
-              const subMin = sub.items.length * (config.scale[0].value);
+              const subScore = subscaleScore(config, answers, sub.items);
+              const subMax = subscaleMaxScore(config, sub.items);
+              const subMin = subscaleMinScore(config, sub.items);
               const range = subMax - subMin || 1;
-              const subPct = Math.round(((subScore - subMin) / range) * 100);
+              const subPct = Math.max(
+                0,
+                Math.min(100, Math.round(((subScore - subMin) / range) * 100)),
+              );
               return (
                 <div key={sub.key}>
                   <div className="flex items-center justify-between text-xs mb-1.5">
