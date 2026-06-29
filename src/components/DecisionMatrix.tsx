@@ -185,6 +185,10 @@ const track = (event: string) => {
 
 const buildGptPrompt = (a: Answers): string => {
   const parts: string[] = [];
+  const str = (v: unknown) => (typeof v === "string" ? v : "");
+  const arr = (v: unknown) => (Array.isArray(v) ? (v as string[]) : []);
+  const topicNote = str(a.topicNote).trim();
+  const comment = str(a.comment).trim();
   parts.push("Я прошёл(ла) кликабельную Матрицу выбора на сайте CognitionX.");
   parts.push("");
   parts.push("Моя карта выбора:");
@@ -194,9 +198,9 @@ const buildGptPrompt = (a: Answers): string => {
     parts.push(a.topic);
     parts.push("");
   }
-  if (a.topicNote.trim()) {
+  if (topicNote) {
     parts.push("Если я описал(а) ситуацию своими словами:");
-    parts.push(a.topicNote.trim());
+    parts.push(topicNote);
     parts.push("");
   }
   if (a.format) {
@@ -204,19 +208,19 @@ const buildGptPrompt = (a: Answers): string => {
     parts.push(a.format);
     parts.push("");
   }
-  if (a.variants.length) {
+  if (arr(a.variants).length) {
     parts.push("Варианты, которые сейчас видны:");
-    a.variants.forEach((v) => parts.push(`— ${v}`));
+    arr(a.variants).forEach((v) => parts.push(`— ${v}`));
     parts.push("");
   }
-  if (a.factors.length) {
+  if (arr(a.factors).length) {
     parts.push("Что сильнее всего влияет на выбор:");
-    a.factors.forEach((v) => parts.push(`— ${v}`));
+    arr(a.factors).forEach((v) => parts.push(`— ${v}`));
     parts.push("");
   }
-  if (a.values.length) {
+  if (arr(a.values).length) {
     parts.push("Какие ценности здесь затронуты:");
-    a.values.forEach((v) => parts.push(`— ${v}`));
+    arr(a.values).forEach((v) => parts.push(`— ${v}`));
     parts.push("");
   }
   if (a.inaction) {
@@ -229,9 +233,9 @@ const buildGptPrompt = (a: Answers): string => {
     parts.push(a.nextStep);
     parts.push("");
   }
-  if (a.comment.trim()) {
+  if (comment) {
     parts.push("Дополнительный комментарий:");
-    parts.push(a.comment.trim());
+    parts.push(comment);
     parts.push("");
   }
   parts.push("Помоги мне глубже разобрать этот выбор.");
