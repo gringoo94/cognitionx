@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildFaqSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -91,15 +92,7 @@ const asiaFaq = [
   },
 ];
 
-const asiaFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: asiaFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const asiaFaqSchema = buildFaqSchema(asiaFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -134,7 +127,7 @@ const LandingPageAsia = () => (
       title="Психолог онлайн — Бали, Таиланд | КПТ — Дмитрий Яцко"
       description="Психолог на русском для экспатов в Азии: Бали, Таиланд, Вьетнам. КПТ онлайн. Удобное время для UTC+7/+8."
       path="/psiholog-aziya"
-      schema={[personSchema, serviceSchema, asiaFaqSchema, testimonialsSchema]}
+      schema={[personSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для экспатов — Азия", url: "https://cognitionx.cloud/psiholog-aziya" },

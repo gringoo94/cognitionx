@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildFaqSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -81,15 +82,7 @@ const itFaq = [
   { question: "Как оплатить из Европы?", answer: "Принимаю оплату через Stripe (карта), PayPal и банковский перевод. Детали обсудим на знакомстве." },
 ];
 
-const itFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: itFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const itFaqSchema = buildFaqSchema(itFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -117,7 +110,7 @@ const LandingPageIT = () => (
       title="Психолог для IT онлайн | КПТ — Дмитрий Яцко"
       description="Психолог для IT-специалистов в Европе. КПТ онлайн: выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
       path="/psiholog-dlya-it"
-      schema={[personSchema, serviceSchema, itFaqSchema, testimonialsSchema]}
+      schema={[personSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для IT-специалистов", url: "https://cognitionx.cloud/psiholog-dlya-it" },

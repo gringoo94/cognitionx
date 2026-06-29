@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildFaqSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -92,15 +93,7 @@ const expatFaq = [
   },
 ];
 
-const expatFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: expatFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const expatFaqSchema = buildFaqSchema(expatFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -128,7 +121,7 @@ const LandingPageEuropa = () => (
       title="Психолог на русском для Европы онлайн | КПТ — Дмитрий Яцко"
       description="Психолог онлайн на русском для экспатов в Европе. КПТ и схема-терапия. Адаптация, одиночество, тревога."
       path="/psiholog-europa"
-      schema={[personSchema, serviceSchema, expatFaqSchema, testimonialsSchema]}
+      schema={[personSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
       alternates={[
         { hreflang: "ru", href: "/psiholog-europa" },
         { hreflang: "ru-RU", href: "/psiholog-europa" },

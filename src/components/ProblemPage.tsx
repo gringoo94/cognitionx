@@ -57,6 +57,7 @@ import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtr
 import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
+import { buildFaqSchema } from "@/lib/geoSchema";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -487,25 +488,13 @@ const ProblemPage = () => {
     .map((s) => blogPosts.find((p) => p.slug === s))
     .filter(Boolean);
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: fullFaq.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
-    })),
-  };
+  const faqSchema = buildFaqSchema(fullFaq);
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: "https://cognitionx.cloud/" },
-      { "@type": "ListItem", position: 2, name: "С чем работаю", item: "https://cognitionx.cloud/#specs" },
-      { "@type": "ListItem", position: 3, name: page.title, item: `https://cognitionx.cloud/${page.slug}` },
-    ],
-  };
+  const breadcrumbs = [
+    { name: "Главная", url: "https://cognitionx.cloud/" },
+    { name: "С чем работаю", url: "https://cognitionx.cloud/#specs" },
+    { name: page.title, url: `https://cognitionx.cloud/${page.slug}` },
+  ];
 
   const medicalConditionSchema = {
     "@context": "https://schema.org",
@@ -575,8 +564,7 @@ const ProblemPage = () => {
   };
 
   const schemas = [
-    faqSchema,
-    breadcrumbSchema,
+    ...(faqSchema ? [faqSchema] : []),
     medicalConditionSchema,
     medicalWebPageSchema,
     howToSchema,
@@ -589,6 +577,7 @@ const ProblemPage = () => {
         description={page.metaDescription}
         path={`/${page.slug}`}
         schema={schemas}
+        breadcrumbs={breadcrumbs}
       />
       <Navbar />
 

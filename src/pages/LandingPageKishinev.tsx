@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildFaqSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -100,15 +101,7 @@ const localFaq = [
   },
 ];
 
-const localFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: localFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const localFaqSchema = buildFaqSchema(localFaq);
 
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -132,7 +125,7 @@ const LandingPageKishinev = () => (
       title="Психолог в Кишинёве · Psiholog Chișinău — КПТ онлайн"
       description="Психолог в Кишинёве и по Молдове (psiholog Chișinău online). КПТ и схема-терапия на русском. Тревога, выгорание, отношения."
       path="/psiholog-kishinev"
-      schema={[serviceSchema, localFaqSchema, testimonialsSchema]}
+      schema={[serviceSchema, ...(localFaqSchema ? [localFaqSchema] : []), testimonialsSchema]}
       alternates={[
         { hreflang: "ru", href: "/psiholog-kishinev" },
         { hreflang: "ro-MD", href: "/psiholog-kishinev" },

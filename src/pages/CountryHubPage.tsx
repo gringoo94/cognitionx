@@ -25,6 +25,7 @@ import Footer from "@/components/Footer";
 import { getCountryHubBySlug, getCitiesForCountry } from "@/data/countryHubs";
 import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
+import { buildFaqSchema } from "@/lib/geoSchema";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -61,15 +62,7 @@ const CountryHubPage = () => {
     },
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: page.faq.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
-    })),
-  };
+  const faqSchema = buildFaqSchema(page.faq);
 
   const itemListSchema = cities.length > 0 ? {
     "@context": "https://schema.org",
@@ -93,7 +86,7 @@ const CountryHubPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[serviceSchema, faqSchema, ...(itemListSchema ? [itemListSchema] : [])]}
+        schema={[serviceSchema, ...(faqSchema ? [faqSchema] : []), ...(itemListSchema ? [itemListSchema] : [])]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: `Психолог ${page.countryIn}`, url },
