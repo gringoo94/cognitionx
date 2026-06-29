@@ -503,9 +503,16 @@ const Tools = () => {
                       <t.icon className="h-5 w-5 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-foreground mb-1.5 leading-snug group-hover:text-primary transition-colors">
-                        {t.title}
-                      </h3>
+                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                        <h3 className="font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
+                          {t.title}
+                        </h3>
+                        {t.badge && (
+                          <span className="inline-flex items-center rounded-full bg-primary/10 text-primary text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5">
+                            {t.badge}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-muted-foreground leading-relaxed">{t.description}</p>
                       {t.meta && (
                         <div className="mt-3 inline-flex items-center gap-1 text-[11px] text-muted-foreground">
