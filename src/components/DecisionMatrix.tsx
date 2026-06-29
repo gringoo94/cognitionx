@@ -920,6 +920,9 @@ const ResultView = ({
   }, [answers]);
 
   const text = useMemo(() => buildResultText(answers), [answers]);
+  const gptPrompt = useMemo(() => buildGptPrompt(answers), [answers]);
+  const [gptCopied, setGptCopied] = useState(false);
+  const gptReady = isGptLinkReady(DECISION_MATRIX_GPT_URL);
 
   const copy = async () => {
     try {
@@ -931,6 +934,22 @@ const ResultView = ({
     } catch {
       /* noop */
     }
+  };
+
+  const copyGptPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(gptPrompt);
+      setGptCopied(true);
+      toast.success("Промпт скопирован. Теперь откройте GPT и вставьте его в чат.");
+      track("decision_matrix_gpt_prompt_copied");
+      setTimeout(() => setGptCopied(false), 2500);
+    } catch {
+      toast.error("Не удалось скопировать. Попробуйте выделить текст вручную.");
+    }
+  };
+
+  const handleOpenGpt = () => {
+    track("decision_matrix_gpt_opened");
   };
 
   const print = () => {
