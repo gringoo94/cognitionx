@@ -657,7 +657,15 @@ const DecisionMatrix = () => {
                 href={DECISION_MATRIX_GPT_URL}
                 target="_blank"
                 rel="noopener noreferrer external"
-                onClick={() => track("decision_matrix_gpt_opened")}
+                onClick={(e) => {
+                  track("decision_matrix_gpt_opened");
+                  // Fallback for sandboxed iframes (Lovable preview) that may
+                  // block default target="_blank" navigation.
+                  const win = window.open(DECISION_MATRIX_GPT_URL, "_blank", "noopener,noreferrer");
+                  if (win) {
+                    e.preventDefault();
+                  }
+                }}
               >
                 <ExternalLink className="h-4 w-4" />
                 Открыть GPT-помощника
