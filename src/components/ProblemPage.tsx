@@ -563,8 +563,7 @@ const ProblemPage = () => {
   };
 
   const schemas = [
-    faqSchema,
-    breadcrumbSchema,
+    ...(faqSchema ? [faqSchema] : []),
     medicalConditionSchema,
     medicalWebPageSchema,
     howToSchema,
@@ -577,6 +576,7 @@ const ProblemPage = () => {
         description={page.metaDescription}
         path={`/${page.slug}`}
         schema={schemas}
+        breadcrumbs={breadcrumbs}
       />
       <Navbar />
 
