@@ -214,6 +214,7 @@ const BehavioralActivationDiary = () => {
                     min={1}
                     max={10}
                     step={1}
+                    thumbAriaLabel={s.label}
                   />
                 </div>
               ))}
