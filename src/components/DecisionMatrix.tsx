@@ -21,6 +21,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 
+// External GPT helper link. Leave as "PASTE_GPT_LINK_HERE" to keep the button
+// disabled until a real link is provided.
+export const DECISION_MATRIX_GPT_URL = "PASTE_GPT_LINK_HERE";
+const isGptLinkReady = (url: string) =>
+  !!url && url.trim() !== "" && url !== "PASTE_GPT_LINK_HERE";
+
 // ---------- Types ----------
 type Stage = "intro" | "setup" | "practice" | "result";
 
