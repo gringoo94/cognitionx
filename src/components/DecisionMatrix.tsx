@@ -1047,6 +1047,65 @@ const ResultView = ({
         </section>
       )}
 
+      <section className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 space-y-4 print:hidden">
+        <div className="flex items-center gap-2 text-primary">
+          <Compass className="w-5 h-5" />
+          <h3 className="text-xl font-bold">Продолжить разбор в GPT</h3>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Если хотите глубже разобрать этот выбор, скопируйте готовый промпт и откройте
+          GPT-помощника. Он поможет посмотреть на ситуацию спокойнее: где факты, где страхи,
+          где ценности, а где первый безопасный шаг.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Button onClick={copyGptPrompt} className="gap-2">
+            {gptCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            {gptCopied ? "Промпт скопирован" : "Скопировать промпт для GPT"}
+          </Button>
+          {gptReady ? (
+            <Button asChild variant="outline" className="gap-2">
+              <a
+                href={DECISION_MATRIX_GPT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleOpenGpt}
+              >
+                Открыть GPT-помощника
+              </a>
+            </Button>
+          ) : (
+            <div className="flex flex-col gap-1">
+              <Button variant="outline" disabled className="gap-2">
+                Открыть GPT-помощника
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                GPT-помощник скоро будет доступен.
+              </span>
+            </div>
+          )}
+          <Button asChild variant="ghost" className="gap-2">
+            <Link
+              to="/start?source=decision-matrix-gpt-block"
+              onClick={() => track("decision_matrix_start_from_gpt_block")}
+            >
+              Отправить Дмитрию на мини-разбор
+            </Link>
+          </Button>
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed border-t border-border/60 pt-3">
+          Не вставляйте в GPT данные третьих лиц, пароли, документы и информацию, которой не
+          готовы делиться в ChatGPT. Если хотите, чтобы результат посмотрел Дмитрий лично,
+          отправьте его через{" "}
+          <Link
+            to="/start?source=decision-matrix-privacy-note"
+            className="underline hover:text-foreground"
+          >
+            короткий опросник
+          </Link>
+          .
+        </p>
+      </section>
+
       <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 text-center space-y-4 print:hidden">
         <MessageCircle className="w-8 h-8 text-primary mx-auto" />
         <h3 className="text-xl font-bold">Хотите разобрать это решение вместе?</h3>
