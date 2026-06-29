@@ -72,6 +72,7 @@ const App = () => (
               <Route path="/tools/schema-quiz" element={<SchemaQuizPage />} />
               <Route path="/tools/emotion-wheel" element={<EmotionWheelPage />} />
               <Route path="/tools/abc-analysis" element={<AbcAnalysisPage />} />
+              <Route path="/tools/decision-matrix" element={<DecisionMatrixPage />} />
               <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
               <Route path="/tools/abstract-to-concrete" element={<AbstractToConcretePage />} />
               <Route path="/tools/thought-diary" element={<ThoughtDiaryPage />} />
