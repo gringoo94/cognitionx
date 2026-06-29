@@ -697,12 +697,6 @@ const DecisionMatrix = () => {
         </p>
 
 
-        <details className="text-xs text-muted-foreground">
-          <summary className="cursor-pointer hover:text-foreground">Показать текст промпта</summary>
-        <p className="text-xs text-muted-foreground leading-relaxed -mt-1">
-          💡 Сначала нажмите «Скопировать промпт», затем откройте GPT-помощника и вставьте текст в чат вручную (Ctrl/Cmd + V) — промпт не передаётся автоматически.
-        </p>
-
         {gptReady && (
           <p className="text-xs text-muted-foreground leading-relaxed break-all">
             Если кнопка не открывает новую вкладку (например, в режиме предпросмотра или из-за блокировки попапов), откройте ссылку вручную:{" "}
