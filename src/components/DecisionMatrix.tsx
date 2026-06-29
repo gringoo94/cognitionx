@@ -20,6 +20,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
 
 // External GPT helper link. Leave as "PASTE_GPT_LINK_HERE" to keep the button
 // disabled until a real link is provided.
