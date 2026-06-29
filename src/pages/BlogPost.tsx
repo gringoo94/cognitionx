@@ -11,6 +11,7 @@ import BlogSubscribeForm from "@/components/BlogSubscribeForm";
 import BlogCover from "@/components/BlogCover";
 import BlogCtaBridge from "@/components/BlogCtaBridge";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
+import DecisionMatrixCta from "@/components/DecisionMatrixCta";
 import { sanitizeHtml as sanitize } from "@/lib/sanitizeHtml";
 
 const BlogPost = () => {
@@ -255,6 +256,9 @@ const BlogPost = () => {
               }
               if (block.type === "component" && block.componentId === "rfcbt-modes") {
                 return <RfcbtModesDiagram key={i} />;
+              }
+              if (block.type === "component" && block.componentId === "decision-matrix-cta") {
+                return <DecisionMatrixCta key={i} topic={post.title} />;
               }
               if (block.type === "preface") {
                 return (
