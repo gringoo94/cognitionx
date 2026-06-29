@@ -49,7 +49,7 @@ const EMPTY: Answers = {
   comment: "",
 };
 
-const STORAGE_KEY = "decisionMatrixDraft";
+const STORAGE_KEY = "decisionMatrixDraft.v2";
 
 // ---------- Options ----------
 const TOPICS = [
@@ -185,6 +185,10 @@ const track = (event: string) => {
 
 const buildGptPrompt = (a: Answers): string => {
   const parts: string[] = [];
+  const str = (v: unknown) => (typeof v === "string" ? v : "");
+  const arr = (v: unknown) => (Array.isArray(v) ? (v as string[]) : []);
+  const topicNote = str(a.topicNote).trim();
+  const comment = str(a.comment).trim();
   parts.push("Я прошёл(ла) кликабельную Матрицу выбора на сайте CognitionX.");
   parts.push("");
   parts.push("Моя карта выбора:");
@@ -194,9 +198,9 @@ const buildGptPrompt = (a: Answers): string => {
     parts.push(a.topic);
     parts.push("");
   }
-  if (a.topicNote.trim()) {
+  if (topicNote) {
     parts.push("Если я описал(а) ситуацию своими словами:");
-    parts.push(a.topicNote.trim());
+    parts.push(topicNote);
     parts.push("");
   }
   if (a.format) {
@@ -204,19 +208,19 @@ const buildGptPrompt = (a: Answers): string => {
     parts.push(a.format);
     parts.push("");
   }
-  if (a.variants.length) {
+  if (arr(a.variants).length) {
     parts.push("Варианты, которые сейчас видны:");
-    a.variants.forEach((v) => parts.push(`— ${v}`));
+    arr(a.variants).forEach((v) => parts.push(`— ${v}`));
     parts.push("");
   }
-  if (a.factors.length) {
+  if (arr(a.factors).length) {
     parts.push("Что сильнее всего влияет на выбор:");
-    a.factors.forEach((v) => parts.push(`— ${v}`));
+    arr(a.factors).forEach((v) => parts.push(`— ${v}`));
     parts.push("");
   }
-  if (a.values.length) {
+  if (arr(a.values).length) {
     parts.push("Какие ценности здесь затронуты:");
-    a.values.forEach((v) => parts.push(`— ${v}`));
+    arr(a.values).forEach((v) => parts.push(`— ${v}`));
     parts.push("");
   }
   if (a.inaction) {
@@ -229,9 +233,9 @@ const buildGptPrompt = (a: Answers): string => {
     parts.push(a.nextStep);
     parts.push("");
   }
-  if (a.comment.trim()) {
+  if (comment) {
     parts.push("Дополнительный комментарий:");
-    parts.push(a.comment.trim());
+    parts.push(comment);
     parts.push("");
   }
   parts.push("Помоги мне глубже разобрать этот выбор.");
@@ -603,27 +607,27 @@ const DecisionMatrix = () => {
       <div className="grid sm:grid-cols-2 gap-3">
         <Block title="Тема">{answers.topic || "—"}</Block>
         <Block title="Формат выбора">{answers.format || "—"}</Block>
-        {answers.topicNote.trim() && (
+        {(answers.topicNote || "").trim() && (
           <div className="sm:col-span-2">
-            <Block title="Своими словами">{answers.topicNote.trim()}</Block>
+            <Block title="Своими словами">{(answers.topicNote || "").trim()}</Block>
           </div>
         )}
         <div className="sm:col-span-2">
           <Block title="Варианты, которые сейчас видны">
-            <List items={answers.variants} />
+            <List items={answers.variants || []} />
           </Block>
         </div>
         <Block title="Что влияет на выбор">
-          <List items={answers.factors} />
+          <List items={answers.factors || []} />
         </Block>
         <Block title="Какие ценности затронуты">
-          <List items={answers.values} />
+          <List items={answers.values || []} />
         </Block>
         <Block title="Если ничего не менять">{answers.inaction || "—"}</Block>
         <Block title="Первый безопасный шаг">{answers.nextStep || "—"}</Block>
-        {answers.comment.trim() && (
+        {(answers.comment || "").trim() && (
           <div className="sm:col-span-2">
-            <Block title="Дополнительный комментарий">{answers.comment.trim()}</Block>
+            <Block title="Дополнительный комментарий">{(answers.comment || "").trim()}</Block>
           </div>
         )}
       </div>
