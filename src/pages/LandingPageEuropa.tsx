@@ -92,15 +92,7 @@ const expatFaq = [
   },
 ];
 
-const expatFaqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: expatFaq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
+const expatFaqSchema = buildFaqSchema(expatFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
