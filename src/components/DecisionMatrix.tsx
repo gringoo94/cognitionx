@@ -20,6 +20,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
+
+// External GPT helper link. Leave as "PASTE_GPT_LINK_HERE" to keep the button
+// disabled until a real link is provided.
+export const DECISION_MATRIX_GPT_URL = "PASTE_GPT_LINK_HERE";
+const isGptLinkReady = (url: string) =>
+  !!url && url.trim() !== "" && url !== "PASTE_GPT_LINK_HERE";
 
 // ---------- Types ----------
 type Stage = "intro" | "setup" | "practice" | "result";
@@ -298,12 +305,48 @@ const DecisionMatrix = () => {
             <span className="text-primary">Матрица выбора:</span> разберите сложное решение без давления
           </h1>
           <p className="text-muted-foreground leading-relaxed">
-            Когда решение кажется невозможным, проблема часто не только в логике. На выбор влияют
-            страхи, ценности, вина, усталость, чужие ожидания и цена бездействия. Этот инструмент
-            поможет разложить выбор на части и найти первый безопасный шаг — без попытки «выбрать
-            идеально».
+            Сначала спокойно распишите свой выбор здесь: варианты, сомнения, страхи, ценности и
+            возможный первый шаг. А когда получите результат, сможете открыть GPT-помощника и
+            глубже разобрать ситуацию в диалоге.
+          </p>
+          <p className="text-sm text-muted-foreground/90 italic">
+            Не нужно принимать окончательное решение прямо сейчас. Задача матрицы — сначала
+            навести порядок в мыслях.
           </p>
         </motion.div>
+
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold">Как это работает</h2>
+          <div className="grid sm:grid-cols-3 gap-3">
+            {[
+              { n: "1", t: "Заполните матрицу", d: "Опишите варианты, что вас притягивает, что тревожит и что будет ценой бездействия." },
+              { n: "2", t: "Получите структурированный результат", d: "Инструмент соберёт ваши ответы в понятную карту выбора — без попытки решить за вас." },
+              { n: "3", t: "Разберите глубже в GPT", d: "Скопируйте готовый промпт и откройте GPT-помощника, чтобы уточнить ценности, страхи и следующий безопасный шаг." },
+            ].map((s) => (
+              <div key={s.n} className="rounded-xl border border-border bg-card p-4">
+                <div className="text-xs font-semibold text-primary mb-2">Шаг {s.n}</div>
+                <div className="font-semibold text-sm mb-1.5 leading-snug">{s.t}</div>
+                <div className="text-xs text-muted-foreground leading-relaxed">{s.d}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-xl border border-primary/20 bg-primary/5 p-5 space-y-3">
+          <div className="flex items-center gap-2 text-primary">
+            <MessageCircle className="h-4 w-4" />
+            <h2 className="text-base font-semibold">Можно продолжить разбор в GPT</h2>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            После заполнения матрицы вы сможете скопировать готовый промпт и открыть
+            GPT-помощника. Он задаст уточняющие вопросы, поможет отделить факты от страхов и
+            сформулировать следующий небольшой шаг. GPT не выбирает за вас и не заменяет
+            консультацию.
+          </p>
+          <Button size="sm" variant="outline" onClick={startPractice} className="gap-2">
+            Сначала заполнить матрицу <ArrowRight className="h-4 w-4" />
+          </Button>
+        </section>
 
         {hasDraft && (
           <div className="rounded-xl border border-primary/30 bg-primary/5 p-5 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
@@ -877,6 +920,9 @@ const ResultView = ({
   }, [answers]);
 
   const text = useMemo(() => buildResultText(answers), [answers]);
+  const gptPrompt = useMemo(() => buildGptPrompt(answers), [answers]);
+  const [gptCopied, setGptCopied] = useState(false);
+  const gptReady = isGptLinkReady(DECISION_MATRIX_GPT_URL);
 
   const copy = async () => {
     try {
@@ -888,6 +934,22 @@ const ResultView = ({
     } catch {
       /* noop */
     }
+  };
+
+  const copyGptPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(gptPrompt);
+      setGptCopied(true);
+      toast.success("Промпт скопирован. Теперь откройте GPT и вставьте его в чат.");
+      track("decision_matrix_gpt_prompt_copied");
+      setTimeout(() => setGptCopied(false), 2500);
+    } catch {
+      toast.error("Не удалось скопировать. Попробуйте выделить текст вручную.");
+    }
+  };
+
+  const handleOpenGpt = () => {
+    track("decision_matrix_gpt_opened");
   };
 
   const print = () => {
@@ -984,6 +1046,65 @@ const ResultView = ({
           </ul>
         </section>
       )}
+
+      <section className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 space-y-4 print:hidden">
+        <div className="flex items-center gap-2 text-primary">
+          <Compass className="w-5 h-5" />
+          <h3 className="text-xl font-bold">Продолжить разбор в GPT</h3>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Если хотите глубже разобрать этот выбор, скопируйте готовый промпт и откройте
+          GPT-помощника. Он поможет посмотреть на ситуацию спокойнее: где факты, где страхи,
+          где ценности, а где первый безопасный шаг.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Button onClick={copyGptPrompt} className="gap-2">
+            {gptCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            {gptCopied ? "Промпт скопирован" : "Скопировать промпт для GPT"}
+          </Button>
+          {gptReady ? (
+            <Button asChild variant="outline" className="gap-2">
+              <a
+                href={DECISION_MATRIX_GPT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleOpenGpt}
+              >
+                Открыть GPT-помощника
+              </a>
+            </Button>
+          ) : (
+            <div className="flex flex-col gap-1">
+              <Button variant="outline" disabled className="gap-2">
+                Открыть GPT-помощника
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                GPT-помощник скоро будет доступен.
+              </span>
+            </div>
+          )}
+          <Button asChild variant="ghost" className="gap-2">
+            <Link
+              to="/start?source=decision-matrix-gpt-block"
+              onClick={() => track("decision_matrix_start_from_gpt_block")}
+            >
+              Отправить Дмитрию на мини-разбор
+            </Link>
+          </Button>
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed border-t border-border/60 pt-3">
+          Не вставляйте в GPT данные третьих лиц, пароли, документы и информацию, которой не
+          готовы делиться в ChatGPT. Если хотите, чтобы результат посмотрел Дмитрий лично,
+          отправьте его через{" "}
+          <Link
+            to="/start?source=decision-matrix-privacy-note"
+            className="underline hover:text-foreground"
+          >
+            короткий опросник
+          </Link>
+          .
+        </p>
+      </section>
 
       <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8 text-center space-y-4 print:hidden">
         <MessageCircle className="w-8 h-8 text-primary mx-auto" />
@@ -1097,3 +1218,68 @@ const buildResultText = (a: Answers): string => {
 };
 
 export default DecisionMatrix;
+
+// ---------- GPT prompt builder ----------
+const orNotSpecified = (s: string) => (s.trim() ? s.trim() : "не указано");
+const joinOrSkip = (arr: string[]) => (arr.length ? arr.join(", ") : "");
+
+function buildGptPrompt(a: Answers): string {
+  const variants: string[] = [];
+  if (a.nameA || a.descriptionA) {
+    variants.push(`A — ${a.nameA || "вариант A"}${a.descriptionA ? `: ${a.descriptionA}` : ""}`);
+  }
+  if (a.nameB || a.descriptionB) {
+    variants.push(`B — ${a.nameB || "вариант B"}${a.descriptionB ? `: ${a.descriptionB}` : ""}`);
+  }
+
+  const attractParts: string[] = [];
+  if (a.prosA) attractParts.push(`в варианте A: ${a.prosA}`);
+  if (a.prosB) attractParts.push(`в варианте B: ${a.prosB}`);
+
+  const fearParts: string[] = [];
+  const fearsList = joinOrSkip(a.fears);
+  if (fearsList) fearParts.push(fearsList);
+  if (a.worstCase) fearParts.push(`страшный сценарий: ${a.worstCase}`);
+  if (a.consA) fearParts.push(`цена варианта A: ${a.consA}`);
+  if (a.consB) fearParts.push(`цена варианта B: ${a.consB}`);
+
+  const valuesParts: string[] = [];
+  const valuesList = joinOrSkip(a.values);
+  if (valuesList) valuesParts.push(valuesList);
+  if (a.mainValue) valuesParts.push(`главная: ${a.mainValue}`);
+
+  const lines: string[] = [];
+  lines.push("Я прошёл(ла) инструмент «Матрица выбора» на сайте CognitionX.");
+  lines.push("");
+  lines.push("Моя ситуация:");
+  lines.push(orNotSpecified(a.decision));
+  lines.push("");
+  lines.push("Варианты, между которыми я выбираю:");
+  lines.push(variants.length ? variants.join("\n") : "не указано");
+  lines.push("");
+  lines.push("Что меня притягивает в вариантах:");
+  lines.push(attractParts.length ? attractParts.join("\n") : "не указано");
+  lines.push("");
+  lines.push("Что меня тревожит:");
+  lines.push(fearParts.length ? fearParts.join("\n") : "не указано");
+  lines.push("");
+  lines.push("Какие ценности здесь затронуты:");
+  lines.push(valuesParts.length ? valuesParts.join("; ") : "не указано");
+  lines.push("");
+  lines.push("Цена бездействия:");
+  lines.push(orNotSpecified(a.inactionCost));
+  lines.push("");
+  lines.push("Первый безопасный шаг, который я вижу:");
+  lines.push(orNotSpecified(a.nextStep || a.experiment));
+  lines.push("");
+  lines.push("Помоги мне глубже разобрать этот выбор.");
+  lines.push("");
+  lines.push("Важно:");
+  lines.push("- не выбирай за меня;");
+  lines.push("- не давай категоричных советов;");
+  lines.push("- помоги отделить факты от страхов;");
+  lines.push("- помоги понять, какие ценности стоят за каждым вариантом;");
+  lines.push("- задай мне 3–5 уточняющих вопросов;");
+  lines.push("- в конце помоги сформулировать один маленький безопасный шаг на ближайшие 24–72 часа.");
+  return lines.join("\n");
+}
