@@ -143,11 +143,14 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
           <h3 className="text-sm font-semibold text-foreground mb-4">По подшкалам</h3>
           <div className="space-y-3">
             {config.subscales.map((sub) => {
-              const subScore = sumByItems(answers, sub.items);
-              const subMax = sub.items.length * (config.scale[config.scale.length - 1].value);
-              const subMin = sub.items.length * (config.scale[0].value);
+              const subScore = subscaleScore(config, answers, sub.items);
+              const subMax = subscaleMaxScore(config, sub.items);
+              const subMin = subscaleMinScore(config, sub.items);
               const range = subMax - subMin || 1;
-              const subPct = Math.round(((subScore - subMin) / range) * 100);
+              const subPct = Math.max(
+                0,
+                Math.min(100, Math.round(((subScore - subMin) / range) * 100)),
+              );
               return (
                 <div key={sub.key}>
                   <div className="flex items-center justify-between text-xs mb-1.5">
