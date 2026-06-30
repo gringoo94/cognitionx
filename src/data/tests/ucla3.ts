@@ -19,7 +19,7 @@ export const ucla3: TestConfig = {
   code: "UCLA-3",
   title: "UCLA-3 — шкала одиночества Калифорнийского университета",
   tagline: "20 вопросов: насколько вы чувствуете себя одиноким(ой) и оторванным(ой) от других.",
-  seoTitle: "Тест на одиночество онлайн — UCLA Loneliness Scale (20 вопросов)",
+  seoTitle: "Тест на одиночество онлайн — UCLA Loneliness Scale",
   seoDescription:
     "UCLA Loneliness Scale (V3) — классический научный тест на чувство одиночества. 20 вопросов, валидированный во многих странах. Бесплатно.",
   cluster: "relationships",
