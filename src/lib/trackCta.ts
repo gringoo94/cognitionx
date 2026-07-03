@@ -37,4 +37,14 @@ export const trackCta = (name: string, meta?: Record<string, unknown>) => {
   } catch {
     /* ignore */
   }
+
+  // Yandex Metrika goal
+  try {
+    const w = window as unknown as { ym?: (id: number, method: string, target: string, params?: Record<string, unknown>) => void };
+    if (typeof w.ym === "function") {
+      w.ym(97350684, "reachGoal", name, meta || {});
+    }
+  } catch {
+    /* ignore */
+  }
 };
