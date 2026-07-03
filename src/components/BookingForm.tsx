@@ -44,7 +44,10 @@ const BookingForm = () => {
     }
 
     setLoading(true);
-    const messageText = parsed.data.message || `Заявка с главной страницы (самочувствие: ${wellbeing[0]}/10)`;
+    const wellbeingLine = `Самочувствие сейчас: ${wellbeing[0]}/10`;
+    const messageText = parsed.data.message
+      ? `${wellbeingLine}\n\n${parsed.data.message}`
+      : `Заявка с главной страницы (${wellbeingLine})`;
     const { error } = await supabase.from("contact_submissions").insert({
       name: parsed.data.name,
       email: parsed.data.email,
