@@ -20,6 +20,20 @@ const PageViewTracker = () => {
       // ignore
     }
 
+    // Yandex Metrika SPA hit
+    try {
+      const w = window as any;
+      if (typeof w.ym === "function") {
+        w.ym(97350684, "hit", window.location.href, {
+          title: document.title,
+          referer: document.referrer || undefined,
+        });
+      }
+    } catch {
+      // ignore
+    }
+
+
     const trackView = async () => {
       try {
         await supabase.from("page_views").insert({
