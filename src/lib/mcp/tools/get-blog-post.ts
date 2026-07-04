@@ -1,6 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { blogPosts } from "@/data/blogPosts";
+import { blogPosts } from "../../../data/blogPosts";
 
 function stripHtml(html: string): string {
   return html

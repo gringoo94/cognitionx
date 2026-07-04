@@ -1,6 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { tests } from "@/data/tests";
+import { tests } from "../../../data/tests";
 
 export default defineTool({
   name: "list_psychological_tests",
