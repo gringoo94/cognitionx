@@ -14,7 +14,7 @@ export interface BlogPost {
 }
 
 export interface ContentBlock {
-  type: "text" | "heading" | "quote" | "preface" | "component";
+  type: "text" | "heading" | "quote" | "preface" | "component" | "faq" | "example";
   text: string;
   level?: number;
   componentId?: string;
@@ -24,7 +24,7 @@ function parseContent(raw: string): ContentBlock[] {
   try {
     const arr = JSON.parse(raw);
     return arr
-      .filter((b: any) => ["text", "heading", "quote", "preface", "component"].includes(b.ty))
+      .filter((b: any) => ["text", "heading", "quote", "preface", "component", "faq", "example"].includes(b.ty))
       .map((b: any) => ({
         type: b.ty as ContentBlock["type"],
         text: b.te || "",
