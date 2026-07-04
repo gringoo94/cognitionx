@@ -13,6 +13,12 @@ import BlogCtaBridge from "@/components/BlogCtaBridge";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
 import DecisionMatrixCta from "@/components/DecisionMatrixCta";
 import { sanitizeHtml as sanitize } from "@/lib/sanitizeHtml";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
