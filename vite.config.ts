@@ -4,6 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { seoPlugin } from "./vite-plugin-seo";
 import { llmAssetsPlugin } from "./vite-plugin-llm-assets";
+import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/supabase/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -14,7 +15,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger(), llmAssetsPlugin(), seoPlugin()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger(), llmAssetsPlugin(), seoPlugin(), mcpPlugin()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
