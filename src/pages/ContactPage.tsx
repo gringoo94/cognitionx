@@ -194,8 +194,11 @@ const ContactPage = () => {
         <motion.section {...fade(0.1)} className="mt-12">
           <h2 className="text-xl font-bold mb-6">Форма записи</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <label htmlFor="contact-name" className="sr-only">Имя</label>
             <Input
+              id="contact-name"
               placeholder="Имя"
+              aria-label="Имя"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
@@ -203,9 +206,12 @@ const ContactPage = () => {
               autoComplete="name"
               className="h-12 rounded-lg"
             />
+            <label htmlFor="contact-email" className="sr-only">Email</label>
             <Input
+              id="contact-email"
               type="email"
               placeholder="Email"
+              aria-label="Email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
@@ -213,15 +219,21 @@ const ContactPage = () => {
               autoComplete="email"
               className="h-12 rounded-lg"
             />
+            <label htmlFor="contact-messenger" className="sr-only">Telegram или WhatsApp</label>
             <Input
+              id="contact-messenger"
               placeholder="Telegram / WhatsApp (@username или номер)"
+              aria-label="Telegram или WhatsApp"
               value={form.messenger}
               onChange={(e) => setForm({ ...form, messenger: e.target.value })}
               maxLength={100}
               className="h-12 rounded-lg"
             />
+            <label htmlFor="contact-message" className="sr-only">Ваш запрос</label>
             <Textarea
+              id="contact-message"
               placeholder="Ваш запрос (необязательно)"
+              aria-label="Ваш запрос"
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               maxLength={2000}

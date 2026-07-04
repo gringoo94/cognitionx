@@ -92,8 +92,11 @@ const BookingForm = () => {
         </motion.div>
 
         <motion.form {...fade(0.05)} onSubmit={handleSubmit} className="space-y-4">
+          <label htmlFor="booking-name" className="sr-only">Имя</label>
           <Input
+            id="booking-name"
             placeholder="Имя"
+            aria-label="Имя"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
@@ -101,9 +104,12 @@ const BookingForm = () => {
             autoComplete="name"
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
+          <label htmlFor="booking-email" className="sr-only">Email</label>
           <Input
+            id="booking-email"
             type="email"
             placeholder="Email"
+            aria-label="Email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             required
@@ -111,8 +117,11 @@ const BookingForm = () => {
             autoComplete="email"
             className="bg-background/5 border-background/15 text-background placeholder:text-background/30 h-12 rounded-lg focus:border-accent focus:ring-accent"
           />
+          <label htmlFor="booking-messenger" className="sr-only">Telegram или WhatsApp</label>
           <Input
+            id="booking-messenger"
             placeholder="Telegram / WhatsApp (@username или номер)"
+            aria-label="Telegram или WhatsApp"
             value={form.messenger}
             onChange={(e) => setForm({ ...form, messenger: e.target.value })}
             maxLength={100}
@@ -136,8 +145,11 @@ const BookingForm = () => {
               <span>Отлично</span>
             </div>
           </div>
+          <label htmlFor="booking-message" className="sr-only">Ваш запрос</label>
           <Textarea
+            id="booking-message"
             placeholder="Ваш запрос (необязательно)"
+            aria-label="Ваш запрос"
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             maxLength={2000}
