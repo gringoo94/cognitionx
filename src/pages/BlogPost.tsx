@@ -297,6 +297,43 @@ const BlogPost = () => {
                   />
                 );
               }
+              if (block.type === "example") {
+                return (
+                  <div
+                    key={i}
+                    className="rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6 text-base leading-relaxed text-foreground/90 [&_strong]:text-foreground [&_p]:mb-2 last:[&_p]:mb-0"
+                    dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
+                  />
+                );
+              }
+              if (block.type === "faq") {
+                let items: Array<{ q: string; a: string }> = [];
+                try {
+                  items = JSON.parse(block.text);
+                } catch {
+                  items = [];
+                }
+                if (!items.length) return null;
+                return (
+                  <Accordion
+                    key={i}
+                    type="single"
+                    collapsible
+                    className="rounded-2xl border border-border divide-y divide-border overflow-hidden"
+                  >
+                    {items.map((it, j) => (
+                      <AccordionItem key={j} value={`item-${j}`} className="border-none">
+                        <AccordionTrigger className="px-5 py-4 text-left font-medium hover:no-underline">
+                          {it.q}
+                        </AccordionTrigger>
+                        <AccordionContent className="px-5 pb-4 text-foreground/85 leading-relaxed [&_a]:text-primary [&_a]:underline">
+                          <div dangerouslySetInnerHTML={{ __html: sanitize(it.a) }} />
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                );
+              }
               return (
                 <div
                   key={i}
