@@ -145,8 +145,11 @@ const BookingForm = () => {
               <span>Отлично</span>
             </div>
           </div>
+          <label htmlFor="booking-message" className="sr-only">Ваш запрос</label>
           <Textarea
+            id="booking-message"
             placeholder="Ваш запрос (необязательно)"
+            aria-label="Ваш запрос"
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             maxLength={2000}
