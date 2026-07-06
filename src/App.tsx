@@ -77,6 +77,7 @@ const App = () => (
               <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
               <Route path="/tools/abstract-to-concrete" element={<AbstractToConcretePage />} />
               <Route path="/tools/thought-diary" element={<ThoughtDiaryPage />} />
+              <Route path="/tools/breathing" element={<BreathingPage />} />
               <Route path="/cbtworkbook" element={<CbtWorkbookPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
