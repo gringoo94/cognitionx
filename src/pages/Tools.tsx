@@ -14,6 +14,7 @@ import {
   Lightbulb,
   Compass,
   Heart,
+  Wind,
   ArrowRight,
   ExternalLink,
   ClipboardList,
