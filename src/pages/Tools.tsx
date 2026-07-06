@@ -100,6 +100,14 @@ const interactiveTools: ToolCard[] = [
     icon: ClipboardList,
     meta: "6 шагов",
   },
+  {
+    to: "/tools/breathing",
+    title: "Дыхание для успокоения",
+    description:
+      "Интерактивный таймер: 4-6, 4-7-8 и квадратное дыхание. Длинный выдох снижает тревогу за 1–2 минуты.",
+    icon: Wind,
+    meta: "1–2 минуты",
+  },
 ];
 
 const externalTools = [
