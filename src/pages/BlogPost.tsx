@@ -337,7 +337,7 @@ const BlogPost = () => {
               return (
                 <div
                   key={i}
-                  className="text-base leading-relaxed text-foreground/90 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:text-foreground/80 [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline"
+                  className="text-base leading-relaxed text-foreground/90 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:text-foreground/80 [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline [&_table]:w-full [&_table]:my-4 [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-lg [&_table]:border [&_table]:border-border [&_table]:text-sm [&_thead]:bg-muted/60 [&_th]:p-3 [&_th]:text-left [&_th]:font-semibold [&_th]:border-b [&_th]:border-border [&_td]:p-3 [&_td]:align-top [&_td]:border-b [&_td]:border-border/60 [&_tbody_tr:last-child_td]:border-b-0"
                   dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                 />
               );
