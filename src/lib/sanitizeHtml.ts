@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 
-const ALLOWED_TAGS = ["a", "b", "br", "em", "i", "li", "ol", "p", "strong", "u", "ul"];
-const ALLOWED_ATTR = ["href", "target", "rel"];
+const ALLOWED_TAGS = ["a", "b", "br", "em", "i", "li", "ol", "p", "strong", "u", "ul", "table", "thead", "tbody", "tr", "th", "td"];
+const ALLOWED_ATTR = ["href", "target", "rel", "colspan", "rowspan", "scope"];
 // Allow only http, https, mailto, tel protocols (and relative URLs).
 const ALLOWED_URI_REGEXP = /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i;
 
