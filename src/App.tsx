@@ -32,6 +32,7 @@ const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivation
 const AbstractToConcretePage = lazy(() => import("./pages/AbstractToConcretePage.tsx"));
 const CbtWorkbookPage = lazy(() => import("./pages/CbtWorkbookPage.tsx"));
 const ThoughtDiaryPage = lazy(() => import("./pages/ThoughtDiaryPage.tsx"));
+const BreathingPage = lazy(() => import("./pages/BreathingPage.tsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin.tsx"));
