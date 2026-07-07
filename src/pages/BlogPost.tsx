@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useBlogPost, useBlogPosts } from "@/hooks/useBlogPosts";
-import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, Clock, Sparkles, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
