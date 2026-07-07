@@ -368,6 +368,46 @@ const BlogPost = () => {
                   />
                 );
               }
+              if (block.type === "table") {
+                const headers = block.headers ?? [];
+                const rows = block.rows ?? [];
+                if (!rows.length && !headers.length) return null;
+                return (
+                  <div key={i} className="my-2 overflow-x-auto rounded-xl border border-border bg-card/40">
+                    <table className="w-full text-sm">
+                      {headers.length > 0 && (
+                        <thead className="bg-muted/70">
+                          <tr className="border-b border-border">
+                            {headers.map((h, k) => (
+                              <th
+                                key={k}
+                                className="p-3.5 text-left font-semibold text-foreground align-bottom"
+                                dangerouslySetInnerHTML={{ __html: sanitize(h) }}
+                              />
+                            ))}
+                          </tr>
+                        </thead>
+                      )}
+                      <tbody>
+                        {rows.map((row, r) => (
+                          <tr
+                            key={r}
+                            className="border-b border-border/50 last:border-b-0 hover:bg-muted/30 transition-colors"
+                          >
+                            {row.map((cell, c) => (
+                              <td
+                                key={c}
+                                className="p-3.5 align-top text-foreground/85"
+                                dangerouslySetInnerHTML={{ __html: sanitize(cell) }}
+                              />
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              }
               if (block.type === "faq") {
                 let items: Array<{ q: string; a: string }> = [];
                 try {
