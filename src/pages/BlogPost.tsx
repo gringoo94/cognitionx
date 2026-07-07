@@ -25,6 +25,20 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: post, isLoading } = useBlogPost(slug);
   const { data: allPosts = [] } = useBlogPosts();
+  const [readProgress, setReadProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop;
+      const height = h.scrollHeight - h.clientHeight;
+      setReadProgress(height > 0 ? Math.min(100, (scrolled / height) * 100) : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [slug]);
+
 
   const relatedPosts = allPosts
     .filter((p) => p.slug !== slug)
