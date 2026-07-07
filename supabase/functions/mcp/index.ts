@@ -13,11 +13,13 @@ import { z } from "npm:zod@^3.25.76";
 function parseContent(raw) {
   try {
     const arr = JSON.parse(raw);
-    return arr.filter((b) => ["text", "heading", "quote", "preface", "component", "faq", "example"].includes(b.ty)).map((b) => ({
+    return arr.filter((b) => ["text", "heading", "quote", "preface", "component", "faq", "example", "table"].includes(b.ty)).map((b) => ({
       type: b.ty,
       text: b.te || "",
       ...b.le ? { level: b.le } : {},
-      ...b.cid ? { componentId: b.cid } : {}
+      ...b.cid ? { componentId: b.cid } : {},
+      ...b.headers ? { headers: b.headers } : {},
+      ...b.rows ? { rows: b.rows } : {}
     }));
   } catch {
     return [{ type: "text", text: raw }];
