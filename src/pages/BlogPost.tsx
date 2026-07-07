@@ -204,6 +204,10 @@ const BlogPost = () => {
 
   const allSchema = faqSchema ? [articleSchema, faqSchema] : articleSchema;
 
+  const readingMin = Math.max(1, Math.round(wordCount / 180));
+  const primaryTag = post.tags?.[0];
+  const updatedAt = (post as any).updatedAt as string | undefined;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
@@ -220,6 +224,15 @@ const BlogPost = () => {
         ]}
       />
       <Navbar />
+
+      {/* Reading progress bar */}
+      <div className="fixed top-0 left-0 right-0 h-0.5 z-40 bg-transparent pointer-events-none">
+        <div
+          className="h-full bg-gradient-to-r from-primary via-primary to-accent transition-[width] duration-150"
+          style={{ width: `${readProgress}%` }}
+        />
+      </div>
+
       <main className="max-w-3xl mx-auto px-6 pt-24 pb-20">
         <Link
           to="/#blog"
@@ -229,14 +242,39 @@ const BlogPost = () => {
         </Link>
 
         <article>
-          <time className="text-xs text-muted-foreground">
-            {new Date(post.date).toLocaleDateString("ru", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </time>
-          <h1 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight leading-tight">
+          {/* Meta chips */}
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            {primaryTag && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                {primaryTag}
+              </span>
+            )}
+            <span className="text-muted-foreground">
+              {new Date(post.date).toLocaleDateString("ru", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </span>
+            <span className="text-muted-foreground/50">·</span>
+            <span className="inline-flex items-center gap-1 text-muted-foreground">
+              <Clock className="w-3 h-3" /> {readingMin} мин чтения
+            </span>
+            {updatedAt && updatedAt !== post.date && (
+              <>
+                <span className="text-muted-foreground/50">·</span>
+                <span className="text-muted-foreground">
+                  обновлено{" "}
+                  {new Date(updatedAt).toLocaleDateString("ru", {
+                    day: "numeric",
+                    month: "short",
+                  })}
+                </span>
+              </>
+            )}
+          </div>
+
+          <h1 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight leading-[1.1]">
             {post.title}
           </h1>
 
@@ -244,21 +282,24 @@ const BlogPost = () => {
           <aside
             data-speakable
             aria-label="Кратко"
-            className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5"
+            className="mt-8 relative rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/[0.07] via-primary/[0.04] to-transparent p-5 md:p-6 shadow-[0_1px_0_0_hsl(var(--primary)/0.08)]"
           >
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-primary mb-1.5">
-              Кратко
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+                Кратко
+              </div>
             </div>
-            <p className="text-sm md:text-base text-foreground/90 leading-relaxed m-0">
+            <p className="text-[15px] md:text-base text-foreground/90 leading-relaxed m-0">
               {post.description}
             </p>
           </aside>
 
-          <div className="mt-8 rounded-2xl overflow-hidden aspect-[16/9]">
+          <div className="mt-8 rounded-2xl overflow-hidden aspect-[16/9] ring-1 ring-border/60 shadow-sm">
             <BlogCover
               slug={post.slug}
               title={post.title}
-              tag={post.tags?.[0]}
+              tag={primaryTag}
               large
             />
           </div>
@@ -267,7 +308,7 @@ const BlogPost = () => {
             <BlogSubscribeForm variant="inline" source="blog-post-top" />
           </div>
 
-          <div className="mt-10 space-y-6">
+          <div className="mt-12 space-y-6">
             {post.content.map((block, i) => {
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
                 return <BehavioralActivationDiary key={i} />;
@@ -286,19 +327,25 @@ const BlogPost = () => {
                   <p
                     key={i}
                     data-speakable
-                    className="text-lg text-muted-foreground leading-relaxed"
+                    className="text-lg md:text-xl text-foreground/80 leading-relaxed font-light first-letter:text-5xl first-letter:font-serif first-letter:font-semibold first-letter:mr-2 first-letter:float-left first-letter:leading-[0.95] first-letter:text-primary"
                     dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
               }
               if (block.type === "heading") {
-                const Tag = block.level === 2 ? "h2" : "h3";
+                if (block.level === 2) {
+                  return (
+                    <h2
+                      key={i}
+                      className="relative font-bold tracking-tight text-2xl md:text-[28px] leading-tight mt-14 pt-2 pl-4 border-l-[3px] border-primary/70 scroll-mt-24"
+                      dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
+                    />
+                  );
+                }
                 return (
-                  <Tag
+                  <h3
                     key={i}
-                    className={`font-bold tracking-tight ${
-                      block.level === 2 ? "text-2xl mt-10" : "text-xl mt-8"
-                    }`}
+                    className="font-semibold tracking-tight text-xl md:text-[22px] mt-8 text-foreground/95 scroll-mt-24"
                     dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
@@ -307,7 +354,7 @@ const BlogPost = () => {
                 return (
                   <blockquote
                     key={i}
-                    className="border-l-4 border-primary pl-5 py-2 text-muted-foreground italic"
+                    className="relative rounded-2xl bg-muted/40 border-l-4 border-primary pl-6 pr-5 py-4 text-foreground/85 italic text-lg leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
@@ -316,7 +363,7 @@ const BlogPost = () => {
                 return (
                   <div
                     key={i}
-                    className="rounded-2xl border border-primary/20 bg-primary/5 p-5 md:p-6 text-base leading-relaxed text-foreground/90 [&_strong]:text-foreground [&_p]:mb-2 last:[&_p]:mb-0"
+                    className="rounded-2xl border border-accent/25 bg-accent/5 p-5 md:p-6 text-base leading-relaxed text-foreground/90 [&_strong]:text-foreground [&_p]:mb-2 last:[&_p]:mb-0"
                     dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                   />
                 );
@@ -330,29 +377,34 @@ const BlogPost = () => {
                 }
                 if (!items.length) return null;
                 return (
-                  <Accordion
-                    key={i}
-                    type="single"
-                    collapsible
-                    className="rounded-2xl border border-border divide-y divide-border overflow-hidden"
-                  >
-                    {items.map((it, j) => (
-                      <AccordionItem key={j} value={`item-${j}`} className="border-none">
-                        <AccordionTrigger className="px-5 py-4 text-left font-medium hover:no-underline">
-                          {it.q}
-                        </AccordionTrigger>
-                        <AccordionContent className="px-5 pb-4 text-foreground/85 leading-relaxed [&_a]:text-primary [&_a]:underline">
-                          <div dangerouslySetInnerHTML={{ __html: sanitize(it.a) }} />
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
+                  <div key={i} className="mt-4">
+                    <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      <HelpCircle className="w-3.5 h-3.5" />
+                      Частые вопросы
+                    </div>
+                    <Accordion
+                      type="single"
+                      collapsible
+                      className="rounded-2xl border border-border bg-card/50 divide-y divide-border overflow-hidden"
+                    >
+                      {items.map((it, j) => (
+                        <AccordionItem key={j} value={`item-${j}`} className="border-none">
+                          <AccordionTrigger className="px-5 py-4 text-left font-medium hover:no-underline hover:bg-muted/40 transition-colors">
+                            {it.q}
+                          </AccordionTrigger>
+                          <AccordionContent className="px-5 pb-4 text-foreground/85 leading-relaxed [&_a]:text-primary [&_a]:underline">
+                            <div dangerouslySetInnerHTML={{ __html: sanitize(it.a) }} />
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </div>
                 );
               }
               return (
                 <div
                   key={i}
-                  className="text-base leading-relaxed text-foreground/90 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:text-foreground/80 [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline [&_table]:w-full [&_table]:my-4 [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-lg [&_table]:border [&_table]:border-border [&_table]:text-sm [&_thead]:bg-muted/60 [&_th]:p-3 [&_th]:text-left [&_th]:font-semibold [&_th]:border-b [&_th]:border-border [&_td]:p-3 [&_td]:align-top [&_td]:border-b [&_td]:border-border/60 [&_tbody_tr:last-child_td]:border-b-0"
+                  className="text-[17px] leading-[1.75] text-foreground/85 [&_ul]:list-none [&_ul]:pl-0 [&_ul]:space-y-2 [&_ul>li]:relative [&_ul>li]:pl-6 [&_ul>li]:before:content-[''] [&_ul>li]:before:absolute [&_ul>li]:before:left-1 [&_ul>li]:before:top-[0.7em] [&_ul>li]:before:w-1.5 [&_ul>li]:before:h-1.5 [&_ul>li]:before:rounded-full [&_ul>li]:before:bg-primary/60 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_ol]:marker:text-primary/70 [&_ol]:marker:font-semibold [&_li]:text-foreground/85 [&_strong]:text-foreground [&_strong]:font-semibold [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-primary/40 hover:[&_a]:decoration-primary [&_em]:text-foreground/90 [&_table]:block [&_table]:w-full [&_table]:my-5 [&_table]:overflow-x-auto [&_table]:rounded-xl [&_table]:border [&_table]:border-border [&_table]:text-sm [&_table]:bg-card/40 [&_thead]:bg-muted/70 [&_thead_tr]:border-b [&_thead_tr]:border-border [&_th]:p-3.5 [&_th]:text-left [&_th]:font-semibold [&_th]:text-foreground [&_th]:whitespace-nowrap [&_td]:p-3.5 [&_td]:align-top [&_td]:border-b [&_td]:border-border/50 [&_tbody_tr:last-child_td]:border-b-0 [&_tbody_tr:hover]:bg-muted/30 [&_tbody_tr]:transition-colors"
                   dangerouslySetInnerHTML={{ __html: sanitize(block.text) }}
                 />
               );
@@ -362,6 +414,8 @@ const BlogPost = () => {
           <div className="mt-16">
             <BlogSubscribeForm source="blog-post-bottom" />
           </div>
+
+
 
           <BlogCtaBridge topic={post.title} />
 
