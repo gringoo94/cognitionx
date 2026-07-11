@@ -489,7 +489,7 @@ export const seoRoutes: SeoRoute[] = [
     title: "Редирект на статью о постоянной тревоге",
     description: "Старый URL Tilda. Перенаправление на статью о постоянной тревоге без причины.",
     noindex: true,
-    canonicalPath: "/blog/postoyannaya-trevoga-bez-prichiny",
+    canonicalPath: "/blog/trevoga-bez-prichiny",
   },
   {
     path: "/koleso-emocij",
