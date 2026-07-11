@@ -126,7 +126,7 @@ const FreeConsultationPage = () => {
         title="Бесплатная встреча-знакомство — психолог Дмитрий Яцко"
         description="20-минутная бесплатная встреча-знакомство с психологом. Познакомимся, обсудим запрос и решим, подходим ли друг другу. Без обязательств."
         path="/free-consultation"
-        schema={[breadcrumbSchema]}
+        schema={[serviceSchema, breadcrumbSchema]}
       />
       <Navbar />
 
