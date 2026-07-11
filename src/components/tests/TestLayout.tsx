@@ -34,17 +34,44 @@ const TestLayout = ({ config }: TestLayoutProps) => {
 
   const path = `/tools/tests/${config.slug}`;
 
-  // Schema: Quiz + FAQPage + BreadcrumbList
+  const testUrl = `${SITE_URL}${path}`;
+
+  // WebPage + MedicalWebPage: primary page-level schema for a psychological
+  // screening tool. lastReviewed signals clinical vetting to E-E-A-T crawlers.
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": ["WebPage", "MedicalWebPage"],
+    "@id": `${testUrl}#webpage`,
+    url: testUrl,
+    name: config.seoTitle,
+    description: config.seoDescription,
+    inLanguage: "ru-RU",
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    author: { "@id": `${SITE_URL}/#person` },
+    reviewedBy: { "@id": `${SITE_URL}/#person` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    lastReviewed: "2026-07-11",
+    dateModified: "2026-07-11",
+    about: { "@type": "Thing", name: config.clusterLabel },
+    audience: {
+      "@type": "PeopleAudience",
+      audienceType: "Русскоязычные взрослые, интересующиеся психологической самопомощью",
+    },
+    mainEntity: { "@id": `${testUrl}#quiz` },
+  };
+
+  // Schema: Quiz (kept for LLM/AI-search understanding of the instrument)
   const quizSchema = {
     "@context": "https://schema.org",
     "@type": "Quiz",
+    "@id": `${testUrl}#quiz`,
     name: config.title,
     description: config.tagline,
     educationalLevel: "professional",
-    inLanguage: "ru",
+    inLanguage: "ru-RU",
     about: { "@type": "Thing", name: config.clusterLabel },
     isAccessibleForFree: true,
-    url: `${SITE_URL}${path}`,
+    url: testUrl,
     numberOfQuestions: config.questions.length,
     timeRequired: `PT${config.durationMin}M`,
     hasPart: config.questions.map((q, i) => ({
@@ -63,23 +90,13 @@ const TestLayout = ({ config }: TestLayoutProps) => {
     .map((slug) => tests.find((t) => t.slug === slug))
     .filter(Boolean) as TestConfig[];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: config.faq.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={config.seoTitle}
         description={config.seoDescription}
         path={path}
-        schema={[quizSchema, faqSchema]}
+        schema={[webPageSchema, quizSchema]}
         breadcrumbs={[
           { name: "Главная", url: `${SITE_URL}/` },
           { name: "Инструменты", url: `${SITE_URL}/tools` },
