@@ -36,6 +36,32 @@ const breadcrumbSchema = {
   ],
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://cognitionx.cloud/free-consultation#service",
+  name: "Бесплатная встреча-знакомство с психологом (20 минут)",
+  serviceType: "Психологическое консультирование",
+  description:
+    "20-минутная онлайн-встреча-знакомство с психологом Дмитрием Яцко. Обсуждаем запрос, формат работы и решаем, подходим ли друг другу. Без обязательств.",
+  url: "https://cognitionx.cloud/free-consultation",
+  provider: { "@id": "https://cognitionx.cloud/#person" },
+  brand: { "@id": "https://cognitionx.cloud/#organization" },
+  areaServed: { "@type": "Place", name: "Онлайн / по всему миру" },
+  availableLanguage: ["Russian", "Romanian", "English"],
+  audience: {
+    "@type": "PeopleAudience",
+    audienceType: "Взрослые, рассматривающие психотерапию",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "EUR",
+    availability: "https://schema.org/InStock",
+    url: "https://cognitionx.cloud/free-consultation",
+  },
+};
+
 const FreeConsultationPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", messenger: "", preferredTime: "", topic: "" });
@@ -100,7 +126,7 @@ const FreeConsultationPage = () => {
         title="Бесплатная встреча-знакомство — психолог Дмитрий Яцко"
         description="20-минутная бесплатная встреча-знакомство с психологом. Познакомимся, обсудим запрос и решим, подходим ли друг другу. Без обязательств."
         path="/free-consultation"
-        schema={[breadcrumbSchema]}
+        schema={[serviceSchema, breadcrumbSchema]}
       />
       <Navbar />
 

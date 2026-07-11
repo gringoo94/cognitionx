@@ -44,7 +44,7 @@ import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug, cityPages } from "@/data/cityPages";
 import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
-import { buildFaqSchema } from "@/lib/geoSchema";
+
 
 // Hour offset for "min" side of utcOffset string (e.g. "UTC+1/+2" -> 1).
 // Used for the "session times in your timezone" mini-table.
@@ -105,7 +105,8 @@ const CityLandingPage = () => {
     availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: url },
   };
 
-  const faqSchema = buildFaqSchema(page.faq);
+  // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
+  // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
 
   const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
@@ -127,7 +128,7 @@ const CityLandingPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[personSchema, serviceSchema, ...(faqSchema ? [faqSchema] : []), testimonialsSchema]}
+        schema={[personSchema, serviceSchema, testimonialsSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: `Психолог ${page.cityIn}`, url },
