@@ -258,15 +258,8 @@ const TestsHub = () => {
     ],
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: hubFaq.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
+  // FAQPage schema removed: Google deprecated FAQ rich results (May 2026).
+  // The visible FAQ section stays for users; no need to emit structured data.
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -274,7 +267,7 @@ const TestsHub = () => {
         title="Психологические тесты онлайн бесплатно — валидированные шкалы"
         description="Бесплатные психологические тесты онлайн: PHQ-9, BDI-II, BAI, BHS (шкалы Бека), GAD-7, PCL-5, ISI, ECR-R, Большая пятёрка (BFI-10), WHO-5 и другие валидированные опросники."
         path="/tools/tests"
-        schema={[itemListSchema, faqSchema]}
+        schema={[itemListSchema]}
         breadcrumbs={[
           { name: "Главная", url: `${SITE_URL}/` },
           { name: "Инструменты", url: `${SITE_URL}/tools` },
