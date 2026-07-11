@@ -247,6 +247,12 @@ const BlogPost = () => {
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Блог", url: "https://cognitionx.cloud/blog" },
+          ...(primarySection
+            ? [{
+                name: primarySection,
+                url: `https://cognitionx.cloud/blog?tag=${encodeURIComponent(primarySection)}`,
+              }]
+            : []),
           { name: post.title, url: `https://cognitionx.cloud/blog/${post.slug}` },
         ]}
       />
