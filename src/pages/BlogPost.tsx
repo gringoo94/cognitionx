@@ -70,20 +70,35 @@ const BlogPost = () => {
     .filter((b: any) => typeof b.text === "string")
     .reduce((sum: number, b: any) => sum + b.text.replace(/<[^>]+>/g, " ").trim().split(/\s+/).length, 0);
 
+  const canonicalUrl = `https://cognitionx.cloud/blog/${post.slug}`;
+  const absImage = post.image?.startsWith("http")
+    ? post.image
+    : `https://cognitionx.cloud${post.image?.startsWith("/") ? "" : "/"}${post.image || "og-default.webp"}`;
+  const primarySection = post.tags?.[0];
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${canonicalUrl}#article`,
+    url: canonicalUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://cognitionx.cloud/blog/${post.slug}`,
+      "@id": canonicalUrl,
     },
+    isPartOf: { "@id": "https://cognitionx.cloud/#website" },
     headline: post.title,
     description: post.description,
-    image: [post.image],
+    image: {
+      "@type": "ImageObject",
+      url: absImage,
+      width: 1200,
+      height: 630,
+    },
     datePublished: post.date,
     dateModified: (post as any).updatedAt || post.date,
     inLanguage: "ru-RU",
     wordCount,
+    ...(primarySection ? { articleSection: primarySection } : {}),
     keywords: post.tags?.join(", "),
     author: { "@id": "https://cognitionx.cloud/#person" },
     publisher: { "@id": "https://cognitionx.cloud/#organization" },
@@ -232,6 +247,12 @@ const BlogPost = () => {
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Блог", url: "https://cognitionx.cloud/blog" },
+          ...(primarySection
+            ? [{
+                name: primarySection,
+                url: `https://cognitionx.cloud/blog?tag=${encodeURIComponent(primarySection)}`,
+              }]
+            : []),
           { name: post.title, url: `https://cognitionx.cloud/blog/${post.slug}` },
         ]}
       />

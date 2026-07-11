@@ -13,21 +13,19 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.45, delay },
 });
 
-const personSchema = {
+// ProfilePage wraps the global Person (@id: /#person) so BlogPosting.author
+// and Organization.founder resolve into a single graph node with an "about"
+// landing page. No local Person copy — that would create a duplicate node.
+const profilePageSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Дмитрий Яцко",
-  jobTitle: "Психолог, КПТ и схема-терапевт",
-  url: "https://cognitionx.cloud",
-  description: "Психолог, практикующий КПТ и схема-терапию. Работаю с депрессией, тревогой, паническими атаками, выгоранием.",
-  knowsAbout: [
-    "Когнитивно-поведенческая терапия",
-    "Схема-терапия",
-    "Депрессия",
-    "Тревожные расстройства",
-    "Панические атаки",
-    "Выгорание",
-  ],
+  "@type": "ProfilePage",
+  "@id": "https://cognitionx.cloud/about#profile",
+  url: "https://cognitionx.cloud/about",
+  name: "Обо мне — психолог Дмитрий Яцко",
+  inLanguage: "ru-RU",
+  isPartOf: { "@id": "https://cognitionx.cloud/#website" },
+  mainEntity: { "@id": "https://cognitionx.cloud/#person" },
+  dateModified: "2026-07-11",
 };
 
 const breadcrumbSchema = {
@@ -73,7 +71,7 @@ const AboutPage = () => (
       title="Обо мне — психолог Дмитрий Яцко | КПТ"
       description="Психолог Дмитрий Яцко: образование, КПТ и схема-терапия, принципы работы. Помощь при депрессии, тревоге, выгорании."
       path="/about"
-      schema={[personSchema, breadcrumbSchema]}
+      schema={[profilePageSchema, breadcrumbSchema]}
     />
     <Navbar />
 
