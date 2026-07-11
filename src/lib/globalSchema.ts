@@ -20,7 +20,8 @@ export const personSchema = {
   jobTitle: "Психолог, КПТ и схема-терапевт",
   description:
     "Психолог, специалист по когнитивно-поведенческой и схема-терапии. Работаю онлайн с русскоязычными клиентами по всему миру.",
-  url: SITE_URL,
+  url: `${SITE_URL}/about`,
+  mainEntityOfPage: { "@id": `${SITE_URL}/about#profile` },
   image: `${SITE_URL}/og-default.webp`,
   email: "digitalgringoo@gmail.com",
   telephone: "+447599880865",
