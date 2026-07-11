@@ -71,7 +71,7 @@ const AboutPage = () => (
       title="Обо мне — психолог Дмитрий Яцко | КПТ"
       description="Психолог Дмитрий Яцко: образование, КПТ и схема-терапия, принципы работы. Помощь при депрессии, тревоге, выгорании."
       path="/about"
-      schema={[personSchema, breadcrumbSchema]}
+      schema={[profilePageSchema, breadcrumbSchema]}
     />
     <Navbar />
 
