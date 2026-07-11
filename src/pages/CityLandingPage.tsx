@@ -105,7 +105,8 @@ const CityLandingPage = () => {
     availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: url },
   };
 
-  const faqSchema = buildFaqSchema(page.faq);
+  // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
+  // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
 
   const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
