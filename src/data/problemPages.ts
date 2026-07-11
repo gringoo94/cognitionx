@@ -120,7 +120,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "burnout", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["kpt-pri-depressii", "utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "priznaki-depressii", "5-kpt-uprazhnenij", "kpt-pri-otchayanii-i-derealizacii"],
+    relatedArticles: ["kpt-pri-depressii", "utrom-net-sil-zhit", "kogda-nichego-ne-hochetsya", "planirovanie-dnya-pri-depressii", "depressiya-ili-vygoranie", "kak-ponyat-chto-u-menya-depressiya", "5-kpt-uprazhnenij", "kpt-pri-otchayanii-i-derealizacii"],
   },
   {
     slug: "anxiety",
@@ -202,7 +202,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["panic-attacks", "depression", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["kpt-pri-trevoge", "kak-uspokoitsya", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost", "trevoga-bez-prichiny", "pristup-trevogi-chto-delat", "trevoga-po-utram", "trevoga-pered-snom", "somaticheskie-simptomy-trevogi", "5-kpt-uprazhnenij", "kak-spravitsya-s-trevozhnostyu", "strah-byt-neljubimym", "malenkie-pobedy-ekspozicii", "trevoga-pered-vstrechej", "bud-sebe-luchshim-drugom", "kto-tebe-eto-skazal"],
+    relatedArticles: ["kpt-pri-trevoge", "kak-uspokoitsya", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost", "trevoga-bez-prichiny", "pristup-trevogi-chto-delat", "trevoga-po-utram", "trevoga-pered-snom", "somaticheskie-simptomy-trevogi", "5-kpt-uprazhnenij", "kak-izbavitsya-ot-trevogi", "strah-byt-neljubimym", "malenkie-pobedy-ekspozicii", "trevoga-pered-vstrechej", "bud-sebe-luchshim-drugom", "kto-tebe-eto-skazal"],
     longRead: {
       title: "Как справиться с тревогой: 6 техник КПТ, которые работают",
       sections: [
@@ -314,7 +314,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "cbt-therapy", "online-therapy", "in-person-therapy"],
-    relatedArticles: ["panicheskaya-ataka-chto-delat", "kak-spravitsya-s-trevozhnostyu", "simptomy-trevozhnogo-rasstrojstva"],
+    relatedArticles: ["panicheskaya-ataka-chto-delat", "kak-izbavitsya-ot-trevogi", "povyshennaya-trevozhnost"],
   },
   {
     slug: "burnout",
@@ -462,7 +462,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "panic-attacks", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["postoyannaya-trevoga-bez-prichiny", "trevozhnost-simptomy"],
+    relatedArticles: ["trevoga-bez-prichiny", "trevozhnost-simptomy"],
     longRead: {
       title: "Подробнее о терапии ОКР",
       sections: [
@@ -627,7 +627,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["schema-therapy", "online-therapy", "in-person-therapy", "depression", "anxiety", "panic-attacks"],
-    relatedArticles: ["dokazatelnaya-baza-kpt", "10-mifov-o-kpt", "kpt-vs-psihoanaliz", "skolko-dlitsya-kpt", "kpt-pri-trevoge", "kpt-pri-depressii", "5-kpt-uprazhnenij", "kak-vybrat-kpt-psihologa", "chto-takoe-kpt", "pervaya-sessiya-u-psihologa", "60-sekund-dofamin-tyaga", "lovushka-dolzhen", "vygoranie-ot-domashek-v-terapii"],
+    relatedArticles: ["dokazatelnaya-baza-kpt", "10-mifov-o-kpt", "kpt-vs-psihoanaliz", "skolko-dlitsya-kpt", "kpt-pri-trevoge", "kpt-pri-depressii", "5-kpt-uprazhnenij", "kak-vybrat-kpt-psihologa", "kpt-polnyj-gajd", "pervaya-sessiya-u-psihologa", "60-sekund-dofamin-tyaga", "lovushka-dolzhen", "vygoranie-ot-domashek-v-terapii"],
   },
   {
     slug: "online-therapy",
@@ -843,7 +843,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["anxiety", "depression", "co-dependency", "schema-therapy", "cbt-therapy"],
-    relatedArticles: ["kak-spravitsya-s-trevozhnostyu"],
+    relatedArticles: ["kak-izbavitsya-ot-trevogi"],
   },
   {
     slug: "stress",
@@ -1121,7 +1121,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["online-therapy", "depression", "anxiety", "co-dependency", "burnout", "schema-therapy"],
-    relatedArticles: ["kak-spravitsya-s-trevozhnostyu", "kogda-nichego-ne-hochetsya", "sindrom-samozvantsa"],
+    relatedArticles: ["kak-izbavitsya-ot-trevogi", "kogda-nichego-ne-hochetsya", "sindrom-samozvantsa"],
   },
   {
     slug: "psiholog-usa",
@@ -1188,7 +1188,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["online-therapy", "burnout", "anxiety", "depression", "self-esteem", "cbt-therapy"],
-    relatedArticles: ["sindrom-samozvantsa", "prokrastinaciya", "kak-spravitsya-s-trevozhnostyu"],
+    relatedArticles: ["sindrom-samozvantsa", "prokrastinaciya", "kak-izbavitsya-ot-trevogi"],
     longRead: {
       title: "Русскоязычный психолог онлайн в США и Канаде: подробный гид",
       sections: [
