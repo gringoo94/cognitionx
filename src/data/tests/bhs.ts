@@ -125,7 +125,7 @@ export const bhs: TestConfig = {
     { code: "ATQ", slug: "atq-automatic-thoughts", note: "Опросник негативных автоматических мыслей. Помогает увидеть конкретные когнитивные мишени для терапии." },
   ],
   relatedArticles: [
-    { title: "Признаки депрессии", slug: "priznaki-depressii" },
+    { title: "Признаки депрессии", slug: "kak-ponyat-chto-u-menya-depressiya" },
     { title: "КПТ при депрессии", slug: "kpt-pri-depressii" },
   ],
 };

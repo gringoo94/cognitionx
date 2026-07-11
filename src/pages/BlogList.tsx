@@ -409,7 +409,7 @@ const BlogList = () => {
                 <ul className="space-y-2">
                   <li>
                     →{" "}
-                    <Link to="/blog/postoyannaya-trevoga-bez-prichiny" className="text-primary underline">
+                    <Link to="/blog/trevoga-bez-prichiny" className="text-primary underline">
                       Постоянная тревога без причины
                     </Link>
                   </li>

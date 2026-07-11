@@ -133,7 +133,16 @@ const App = () => (
 
               {/* Lost Tilda URLs with active impressions in GSC — redirect to closest content */}
               <Route path="/dehumanization" element={<Navigate to="/blog/dehumanizaciya-chto-eto" replace />} />
-              <Route path="/popcornbrain" element={<Navigate to="/blog/postoyannaya-trevoga-bez-prichiny" replace />} />
+              <Route path="/popcornbrain" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />
+
+              {/* 301 redirects: merged/renamed blog posts */}
+              <Route path="/blog/who-5-blagopoluchie" element={<Navigate to="/tools/tests/who-5" replace />} />
+              <Route path="/blog/lovushka-yarlykov-kategorii" element={<Navigate to="/blog/lovushka-yarlykov" replace />} />
+              <Route path="/blog/postoyannaya-trevoga-bez-prichiny" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />
+              <Route path="/blog/simptomy-trevozhnogo-rasstrojstva" element={<Navigate to="/blog/povyshennaya-trevozhnost" replace />} />
+              <Route path="/blog/kak-spravitsya-s-trevozhnostyu" element={<Navigate to="/blog/kak-izbavitsya-ot-trevogi" replace />} />
+              <Route path="/blog/priznaki-depressii" element={<Navigate to="/blog/kak-ponyat-chto-u-menya-depressiya" replace />} />
+              <Route path="/blog/chto-takoe-kpt" element={<Navigate to="/blog/kpt-polnyj-gajd" replace />} />
               <Route path="/koleso-emocij" element={<Navigate to="/tools/emotion-wheel" replace />} />
               <Route path="/abc-analysis" element={<Navigate to="/tools/abc-analysis" replace />} />
               <Route path="/schema-quiz" element={<Navigate to="/tools/schema-quiz" replace />} />

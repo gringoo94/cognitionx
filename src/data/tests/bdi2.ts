@@ -164,7 +164,7 @@ export const bdi2: TestConfig = {
     { code: "BHS", slug: "bhs", note: "Шкала безнадёжности Бека — отдельно измеряет ожидания будущего, тесно связана с риском суицида." },
   ],
   relatedArticles: [
-    { title: "Признаки депрессии", slug: "priznaki-depressii" },
+    { title: "Признаки депрессии", slug: "kak-ponyat-chto-u-menya-depressiya" },
     { title: "КПТ при депрессии", slug: "kpt-pri-depressii" },
   ],
 };

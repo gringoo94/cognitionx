@@ -249,7 +249,7 @@ export const cityPages: CityPageData[] = [
     relatedArticleSlugs: [
       "vygoranie-ili-ustalost",
       "sindrom-samozvantsa",
-      "kak-spravitsya-s-trevozhnostyu",
+      "kak-izbavitsya-ot-trevogi",
       "prokrastinaciya",
       "kpt-pri-trevoge",
     ],
@@ -370,7 +370,7 @@ export const cityPages: CityPageData[] = [
       },
     ],
     relatedArticleSlugs: [
-      "kak-spravitsya-s-trevozhnostyu",
+      "kak-izbavitsya-ot-trevogi",
       "kpt-pri-trevoge",
       "kogda-nichego-ne-hochetsya",
       "vsyo-neopredelyonno",
@@ -493,7 +493,7 @@ export const cityPages: CityPageData[] = [
       },
     ],
     relatedArticleSlugs: [
-      "kak-spravitsya-s-trevozhnostyu",
+      "kak-izbavitsya-ot-trevogi",
       "vsyo-neopredelyonno",
       "kpt-pri-trevoge",
       "kogda-nichego-ne-hochetsya",

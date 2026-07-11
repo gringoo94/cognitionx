@@ -98,12 +98,10 @@ CognitionX — сайт практикующего психолога Дмитр
 - [Тревога по утрам](https://cognitionx.cloud/blog/trevoga-po-utram): кортизоловое пробуждение и работа с ним
 - [Тревога перед сном](https://cognitionx.cloud/blog/trevoga-pered-snom): CBT-I и техники засыпания
 - [Соматические симптомы тревоги](https://cognitionx.cloud/blog/somaticheskie-simptomy-trevogi): телесные проявления, дифференциальная диагностика
-- [Симптомы тревожного расстройства](https://cognitionx.cloud/blog/simptomy-trevozhnogo-rasstrojstva): критерии и диагностика
 - [Как избавиться от тревоги](https://cognitionx.cloud/blog/kak-izbavitsya-ot-trevogi): рабочий маршрут самопомощи и терапии
 
 ### Депрессия и состояния
 
-- [Признаки депрессии](https://cognitionx.cloud/blog/priznaki-depressii): как отличить от усталости
 - [Когда ничего не хочется](https://cognitionx.cloud/blog/kogda-nichego-ne-hochetsya): ангедония и поведенческая активация
 - [Выгорание или усталость](https://cognitionx.cloud/blog/vygoranie-ili-ustalost): дифференциальный разбор
 

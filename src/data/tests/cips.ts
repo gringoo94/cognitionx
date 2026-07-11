@@ -134,7 +134,7 @@ export const cips: TestConfig = {
   relatedArticles: [
     { title: "Синдром самозванца: 7 признаков и что с ним делать", slug: "sindrom-samozvantsa" },
     { title: "5 КПТ-упражнений на каждый день", slug: "5-kpt-uprazhnenij" },
-    { title: "Что такое КПТ и как она работает", slug: "chto-takoe-kpt" },
+    { title: "Что такое КПТ и как она работает", slug: "kpt-polnyj-gajd" },
     { title: "Как выбрать КПТ-психолога", slug: "kak-vybrat-kpt-psihologa" },
   ],
   faq: [

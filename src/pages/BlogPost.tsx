@@ -98,7 +98,7 @@ const BlogPost = () => {
 
   // FAQPage schema for high-impression posts (boosts CTR via rich snippet)
   const faqBySlug: Record<string, { question: string; answer: string }[]> = {
-    "postoyannaya-trevoga-bez-prichiny": [
+    "trevoga-bez-prichiny": [
       {
         question: "Почему возникает постоянная тревога без причины?",
         answer:
