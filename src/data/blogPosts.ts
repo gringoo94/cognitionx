@@ -2556,7 +2556,6 @@ export const blogPosts: BlogPost[] = [
     ]`),
   },
   {
-  {
     id: "trevozhnost-simptomy-proverka",
     slug: "trevozhnost-simptomy-proverka",
     title: "Как проверить тревожность: симптомы и тест GAD-7",
