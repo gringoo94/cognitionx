@@ -60,11 +60,8 @@ const TestLayout = ({ config }: TestLayoutProps) => {
     mainEntity: { "@id": `${testUrl}#quiz` },
   };
 
-  // Schema: Quiz (kept for LLM/AI-search understanding of the instrument).
-  // Suppressed for license-gated tests where questions are not published.
-  const quizSchema = config.licenseGate
-    ? null
-    : {
+  // Schema: Quiz (kept for LLM/AI-search understanding of the instrument)
+  const quizSchema = {
     "@context": "https://schema.org",
     "@type": "Quiz",
     "@id": `${testUrl}#quiz`,
@@ -99,7 +96,7 @@ const TestLayout = ({ config }: TestLayoutProps) => {
         title={config.seoTitle}
         description={config.seoDescription}
         path={path}
-        schema={quizSchema ? [webPageSchema, quizSchema] : [webPageSchema]}
+        schema={[webPageSchema, quizSchema]}
         breadcrumbs={[
           { name: "Главная", url: `${SITE_URL}/` },
           { name: "Инструменты", url: `${SITE_URL}/tools` },
@@ -132,20 +129,15 @@ const TestLayout = ({ config }: TestLayoutProps) => {
             <span className="px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
               {config.clusterLabel}
             </span>
-            {!config.licenseGate && (
-              <span className="inline-flex items-center gap-1 text-muted-foreground">
-                <Clock className="h-3 w-3" /> ~{config.durationMin} мин
-              </span>
-            )}
             <span className="inline-flex items-center gap-1 text-muted-foreground">
-              <Lock className="h-3 w-3" />
-              {config.licenseGate ? "Лицензируемый инструмент" : "Анонимно"}
+              <Clock className="h-3 w-3" /> ~{config.durationMin} мин
             </span>
-            {!config.licenseGate && (
-              <span className="inline-flex items-center gap-1 text-muted-foreground">
-                <Sparkles className="h-3 w-3" /> Бесплатно
-              </span>
-            )}
+            <span className="inline-flex items-center gap-1 text-muted-foreground">
+              <Lock className="h-3 w-3" /> Анонимно
+            </span>
+            <span className="inline-flex items-center gap-1 text-muted-foreground">
+              <Sparkles className="h-3 w-3" /> Бесплатно
+            </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
             {config.title}
@@ -166,49 +158,14 @@ const TestLayout = ({ config }: TestLayoutProps) => {
           </p>
         </div>
 
-        {/* Test, Result, or License gate */}
+        {/* Test or Result */}
         <div ref={resultRef} className="mb-12">
-          {config.licenseGate ? (
-            <div className="rounded-2xl border border-border bg-muted/30 p-6 md:p-8">
-              <div className="flex items-center gap-2 mb-3 text-primary">
-                <Lock className="h-4 w-4" />
-                <span className="text-xs font-semibold uppercase tracking-wider">
-                  Опросник временно недоступен
-                </span>
-              </div>
-              <h2 className="text-lg font-semibold text-foreground mb-3">
-                {config.licenseGate.title}
-              </h2>
-              <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-                {config.licenseGate.body.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-              {config.licenseGate.alternative && (
-                <div className="mt-5 rounded-xl border border-border bg-card p-4">
-                  <p className="text-xs font-semibold text-foreground mb-2">
-                    Альтернатива для первичной оценки
-                  </p>
-                  {config.licenseGate.alternative.note && (
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                      {config.licenseGate.alternative.note}
-                    </p>
-                  )}
-                  <Button asChild size="sm">
-                    <Link to={`/tools/tests/${config.licenseGate.alternative.slug}`}>
-                      Перейти к {config.licenseGate.alternative.label} →
-                    </Link>
-                  </Button>
-                </div>
-              )}
-            </div>
-          ) : answers === null ? (
+          {answers === null ? (
             <TestRunner config={config} onComplete={setAnswers} />
           ) : (
             <TestResult config={config} answers={answers} onRestart={() => setAnswers(null)} />
           )}
         </div>
-
 
         {/* About the method */}
         <section className="mb-12">

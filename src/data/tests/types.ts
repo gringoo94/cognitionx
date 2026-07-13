@@ -82,14 +82,4 @@ export interface TestConfig {
   whatNext?: { when: string; action: string }[];
   compareWith?: { code: string; slug?: string; note: string }[];
   relatedArticles?: { title: string; slug: string }[];
-  /**
-   * If set, the interactive runner is hidden and a license/informational notice
-   * is shown in its place. Used for licensed instruments (e.g. BDI-II) where
-   * we may not publish the full item set.
-   */
-  licenseGate?: {
-    title: string;
-    body: string[];
-    alternative?: { slug: string; label: string; note?: string };
-  };
 }
