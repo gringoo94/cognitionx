@@ -14,6 +14,7 @@ import BlogCtaBridge from "@/components/BlogCtaBridge";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
 import DecisionMatrixCta from "@/components/DecisionMatrixCta";
 import { sanitizeHtml as sanitize } from "@/lib/sanitizeHtml";
+import MarkdownBlock from "@/components/MarkdownBlock";
 import {
   Accordion,
   AccordionContent,
