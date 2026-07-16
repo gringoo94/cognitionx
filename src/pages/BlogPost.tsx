@@ -14,6 +14,7 @@ import BlogCtaBridge from "@/components/BlogCtaBridge";
 import RfcbtModesDiagram from "@/components/RfcbtModesDiagram";
 import DecisionMatrixCta from "@/components/DecisionMatrixCta";
 import { sanitizeHtml as sanitize } from "@/lib/sanitizeHtml";
+import MarkdownBlock from "@/components/MarkdownBlock";
 import {
   Accordion,
   AccordionContent,
@@ -351,6 +352,9 @@ const BlogPost = () => {
 
           <div className="mt-12 space-y-6">
             {post.content.map((block, i) => {
+              if (block.type === "markdown") {
+                return <MarkdownBlock key={i} markdown={block.text} topic={post.title} />;
+              }
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
                 return <BehavioralActivationDiary key={i} />;
               }
