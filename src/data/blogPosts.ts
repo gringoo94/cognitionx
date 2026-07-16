@@ -14,7 +14,7 @@ export interface BlogPost {
 }
 
 export interface ContentBlock {
-  type: "text" | "heading" | "quote" | "preface" | "component" | "faq" | "example" | "table";
+  type: "text" | "heading" | "quote" | "preface" | "component" | "faq" | "example" | "table" | "markdown";
   text: string;
   level?: number;
   componentId?: string;
