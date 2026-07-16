@@ -352,6 +352,9 @@ const BlogPost = () => {
 
           <div className="mt-12 space-y-6">
             {post.content.map((block, i) => {
+              if (block.type === "markdown") {
+                return <MarkdownBlock key={i} markdown={block.text} topic={post.title} />;
+              }
               if (block.type === "component" && block.componentId === "behavioral-activation-diary") {
                 return <BehavioralActivationDiary key={i} />;
               }
