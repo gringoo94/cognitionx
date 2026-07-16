@@ -4,16 +4,21 @@
 // by BlogPost.tsx with react-markdown (rehype-raw enabled).
 import type { BlogPost, ContentBlock } from "../data/blogPosts";
 
-// `import.meta.glob` is a Vite-only feature. When this module is loaded from
-// plain Node ESM (e.g. by vite-plugin-seo during closeBundle), fall back to an
-// empty set so `blogPosts` remains a valid iterable array.
-const files = ((import.meta as any).glob
-  ? (import.meta as any).glob("/src/content/blog/*.md", {
-      eager: true,
-      query: "?raw",
-      import: "default",
-    })
-  : {}) as Record<string, string>;
+// `import.meta.glob(...)` MUST appear as a direct call expression for Vite's
+// static analyser to replace it with an object literal at build/serve time.
+// Wrapping it in a ternary or guard prevents the transform and returns {}.
+// Under plain Node ESM (vite-plugin-seo importing this at build closeBundle),
+// the untransformed call throws — we swallow it and fall back to {}.
+let files: Record<string, string> = {};
+try {
+  files = import.meta.glob("/src/content/blog/*.md", {
+    eager: true,
+    query: "?raw",
+    import: "default",
+  }) as Record<string, string>;
+} catch {
+  files = {};
+}
 
 /**
  * Minimal frontmatter parser. Supports:
