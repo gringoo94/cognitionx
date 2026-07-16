@@ -61,20 +61,66 @@ function slugFromPath(path: string): string {
   return base.replace(/\.md$/i, "");
 }
 
+/**
+ * Validate frontmatter. Throws a readable error (fails Vite build) on any
+ * missing/malformed required field so authors get immediate feedback.
+ *
+ * Required: title, slug, date (YYYY-MM-DD), tags (non-empty list), cover (or image).
+ * Optional: description, updatedAt.
+ */
+function validate(path: string, data: Record<string, any>): void {
+  const errors: string[] = [];
+  const rel = path.replace(/^.*\/src\/content\/blog\//, "src/content/blog/");
+
+  const isNonEmptyStr = (v: any) => typeof v === "string" && v.trim().length > 0;
+
+  if (!isNonEmptyStr(data.title)) errors.push('missing or empty "title"');
+  if (!isNonEmptyStr(data.slug)) errors.push('missing or empty "slug"');
+  else if (!/^[a-z0-9-]+$/.test(data.slug))
+    errors.push(`"slug" must be lowercase kebab-case (got "${data.slug}")`);
+
+  if (!isNonEmptyStr(data.date)) errors.push('missing "date"');
+  else if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date))
+    errors.push(`"date" must be YYYY-MM-DD (got "${data.date}")`);
+
+  if (data.updatedAt !== undefined && !/^\d{4}-\d{2}-\d{2}$/.test(String(data.updatedAt)))
+    errors.push(`"updatedAt" must be YYYY-MM-DD (got "${data.updatedAt}")`);
+
+  if (!Array.isArray(data.tags) || data.tags.length === 0)
+    errors.push('"tags" must be a non-empty YAML list');
+  else if (!data.tags.every(isNonEmptyStr))
+    errors.push('"tags" entries must all be non-empty strings');
+
+  const cover = data.cover ?? data.image;
+  if (!isNonEmptyStr(cover)) errors.push('missing "cover" (or "image")');
+
+  const slugFile = slugFromPath(path);
+  if (isNonEmptyStr(data.slug) && data.slug !== slugFile)
+    errors.push(`"slug" (${data.slug}) must match filename (${slugFile}.md)`);
+
+  if (errors.length) {
+    throw new Error(
+      `[blog-md] Invalid frontmatter in ${rel}:\n  - ${errors.join("\n  - ")}\n` +
+        `Required fields: title, slug, date (YYYY-MM-DD), tags (list), cover.`
+    );
+  }
+}
+
 export const mdBlogPosts: BlogPost[] = Object.entries(files)
   .map(([path, raw]) => {
     const { data, body } = parseFrontmatter(raw);
-    const slug = (data.slug as string) || slugFromPath(path);
+    validate(path, data);
+    const slug = data.slug as string;
     const content: ContentBlock[] = [{ type: "markdown", text: body }];
     return {
       id: slug,
       slug,
-      title: (data.title as string) || slug,
+      title: data.title as string,
       description: (data.description as string) || "",
-      image: (data.image as string) || "/blog/ontologiya-psihoterapii.png",
-      date: (data.date as string) || "",
+      image: (data.cover ?? data.image) as string,
+      date: data.date as string,
       updatedAt: (data.updatedAt as string) || undefined,
-      tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
+      tags: data.tags as string[],
       content,
     } as BlogPost;
   })

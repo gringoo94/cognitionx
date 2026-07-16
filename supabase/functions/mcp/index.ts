@@ -56,19 +56,50 @@ function slugFromPath(path) {
   const base = path.split("/").pop() || "";
   return base.replace(/\.md$/i, "");
 }
+function validate(path, data) {
+  const errors = [];
+  const rel = path.replace(/^.*\/src\/content\/blog\//, "src/content/blog/");
+  const isNonEmptyStr = (v) => typeof v === "string" && v.trim().length > 0;
+  if (!isNonEmptyStr(data.title)) errors.push('missing or empty "title"');
+  if (!isNonEmptyStr(data.slug)) errors.push('missing or empty "slug"');
+  else if (!/^[a-z0-9-]+$/.test(data.slug))
+    errors.push(`"slug" must be lowercase kebab-case (got "${data.slug}")`);
+  if (!isNonEmptyStr(data.date)) errors.push('missing "date"');
+  else if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date))
+    errors.push(`"date" must be YYYY-MM-DD (got "${data.date}")`);
+  if (data.updatedAt !== void 0 && !/^\d{4}-\d{2}-\d{2}$/.test(String(data.updatedAt)))
+    errors.push(`"updatedAt" must be YYYY-MM-DD (got "${data.updatedAt}")`);
+  if (!Array.isArray(data.tags) || data.tags.length === 0)
+    errors.push('"tags" must be a non-empty YAML list');
+  else if (!data.tags.every(isNonEmptyStr))
+    errors.push('"tags" entries must all be non-empty strings');
+  const cover = data.cover ?? data.image;
+  if (!isNonEmptyStr(cover)) errors.push('missing "cover" (or "image")');
+  const slugFile = slugFromPath(path);
+  if (isNonEmptyStr(data.slug) && data.slug !== slugFile)
+    errors.push(`"slug" (${data.slug}) must match filename (${slugFile}.md)`);
+  if (errors.length) {
+    throw new Error(
+      `[blog-md] Invalid frontmatter in ${rel}:
+  - ${errors.join("\n  - ")}
+Required fields: title, slug, date (YYYY-MM-DD), tags (list), cover.`
+    );
+  }
+}
 var mdBlogPosts = Object.entries(files).map(([path, raw]) => {
   const { data, body } = parseFrontmatter(raw);
-  const slug = data.slug || slugFromPath(path);
+  validate(path, data);
+  const slug = data.slug;
   const content = [{ type: "markdown", text: body }];
   return {
     id: slug,
     slug,
-    title: data.title || slug,
+    title: data.title,
     description: data.description || "",
-    image: data.image || "/blog/ontologiya-psihoterapii.png",
-    date: data.date || "",
+    image: data.cover ?? data.image,
+    date: data.date,
     updatedAt: data.updatedAt || void 0,
-    tags: Array.isArray(data.tags) ? data.tags : [],
+    tags: data.tags,
     content
   };
 }).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
