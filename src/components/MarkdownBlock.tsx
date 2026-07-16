@@ -37,11 +37,12 @@ function preprocess(md: string): string {
 
   // Container directives: :::name\n...body...\n:::
   out = out.replace(
-    /^:::(preface|quote|example|faq)\s*\n([\s\S]*?)\n:::\s*$/gm,
+    /^:::(preface|quote|example|faq)[ \t]*\r?\n([\s\S]*?)\r?\n:::[ \t]*$/gm,
     (_m, name, body) => {
       // Encode body so it survives markdown parsing intact; we'll decode in the div renderer.
       const encoded = encodeURIComponent(body);
-      return `<div data-block="${name}" data-body="${encoded}"></div>`;
+      // Trailing blank line ensures remark closes the HTML block before the next heading/list.
+      return `<div data-block="${name}" data-body="${encoded}"></div>\n`;
     }
   );
 
