@@ -305,7 +305,15 @@ const BlogPost = () => {
                 </span>
               </>
             )}
+            <span className="text-muted-foreground/50">·</span>
+            <span className="text-muted-foreground">
+              Автор:{" "}
+              <Link to="/about" className="underline hover:text-primary">
+                Дмитрий Яцко, психолог
+              </Link>
+            </span>
           </div>
+
 
           <h1 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight leading-[1.1]">
             {post.title}
