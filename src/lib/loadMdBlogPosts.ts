@@ -2,7 +2,7 @@
 // Each file must have YAML frontmatter (title, description, date, tags, image, updatedAt?).
 // Body is exposed as a single ContentBlock of type "markdown" and rendered
 // by BlogPost.tsx with react-markdown (rehype-raw enabled).
-import type { BlogPost, ContentBlock } from "@/data/blogPosts";
+import type { BlogPost, ContentBlock } from "../data/blogPosts";
 
 const files = import.meta.glob("/src/content/blog/*.md", {
   eager: true,
