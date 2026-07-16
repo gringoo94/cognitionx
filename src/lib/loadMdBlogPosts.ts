@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // Load Markdown blog posts at build time via Vite raw glob import.
 // Each file must have YAML frontmatter (title, description, date, tags, image, updatedAt?).
 // Body is exposed as a single ContentBlock of type "markdown" and rendered
