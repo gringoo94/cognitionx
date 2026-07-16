@@ -9,8 +9,102 @@ import { defineMcp } from "npm:@lovable.dev/mcp-js@0.20.0";
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
 import { z } from "npm:zod@^3.25.76";
 
+// src/lib/loadMdBlogPosts.ts
+var files = import.meta.glob ? import.meta.glob("/src/content/blog/*.md", {
+  eager: true,
+  query: "?raw",
+  import: "default"
+}) : {};
+function parseFrontmatter(src) {
+  const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!m) return { data: {}, body: src };
+  const [, yaml, body] = m;
+  const data = {};
+  const lines = yaml.split(/\r?\n/);
+  let currentKey = null;
+  for (const raw of lines) {
+    if (!raw.trim()) continue;
+    const listMatch = raw.match(/^\s*-\s+(.*)$/);
+    if (listMatch && currentKey) {
+      const v = stripQuotes(listMatch[1].trim());
+      if (!Array.isArray(data[currentKey])) data[currentKey] = [];
+      data[currentKey].push(v);
+      continue;
+    }
+    const kv = raw.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.*)$/);
+    if (kv) {
+      const key = kv[1];
+      const val = kv[2].trim();
+      if (val === "") {
+        currentKey = key;
+        data[key] = [];
+      } else {
+        currentKey = key;
+        data[key] = stripQuotes(val);
+      }
+    }
+  }
+  return { data, body: body ?? "" };
+}
+function stripQuotes(s) {
+  if (s.startsWith('"') && s.endsWith('"') || s.startsWith("'") && s.endsWith("'")) {
+    return s.slice(1, -1);
+  }
+  return s;
+}
+function slugFromPath(path) {
+  const base = path.split("/").pop() || "";
+  return base.replace(/\.md$/i, "");
+}
+function validate(path, data) {
+  const errors = [];
+  const rel = path.replace(/^.*\/src\/content\/blog\//, "src/content/blog/");
+  const isNonEmptyStr = (v) => typeof v === "string" && v.trim().length > 0;
+  if (!isNonEmptyStr(data.title)) errors.push('missing or empty "title"');
+  if (!isNonEmptyStr(data.slug)) errors.push('missing or empty "slug"');
+  else if (!/^[a-z0-9-]+$/.test(data.slug))
+    errors.push(`"slug" must be lowercase kebab-case (got "${data.slug}")`);
+  if (!isNonEmptyStr(data.date)) errors.push('missing "date"');
+  else if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date))
+    errors.push(`"date" must be YYYY-MM-DD (got "${data.date}")`);
+  if (data.updatedAt !== void 0 && !/^\d{4}-\d{2}-\d{2}$/.test(String(data.updatedAt)))
+    errors.push(`"updatedAt" must be YYYY-MM-DD (got "${data.updatedAt}")`);
+  if (!Array.isArray(data.tags) || data.tags.length === 0)
+    errors.push('"tags" must be a non-empty YAML list');
+  else if (!data.tags.every(isNonEmptyStr))
+    errors.push('"tags" entries must all be non-empty strings');
+  const cover = data.cover ?? data.image;
+  if (!isNonEmptyStr(cover)) errors.push('missing "cover" (or "image")');
+  const slugFile = slugFromPath(path);
+  if (isNonEmptyStr(data.slug) && data.slug !== slugFile)
+    errors.push(`"slug" (${data.slug}) must match filename (${slugFile}.md)`);
+  if (errors.length) {
+    throw new Error(
+      `[blog-md] Invalid frontmatter in ${rel}:
+  - ${errors.join("\n  - ")}
+Required fields: title, slug, date (YYYY-MM-DD), tags (list), cover.`
+    );
+  }
+}
+var mdBlogPosts = Object.entries(files).map(([path, raw]) => {
+  const { data, body } = parseFrontmatter(raw);
+  validate(path, data);
+  const slug = data.slug;
+  const content = [{ type: "markdown", text: body }];
+  return {
+    id: slug,
+    slug,
+    title: data.title,
+    description: data.description || "",
+    image: data.cover ?? data.image,
+    date: data.date,
+    updatedAt: data.updatedAt || void 0,
+    tags: data.tags,
+    content
+  };
+}).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
 // src/data/blogPosts.ts
-import { mdBlogPosts } from "npm:@/lib/loadMdBlogPosts";
 function parseContent(raw) {
   try {
     const arr = JSON.parse(raw);
