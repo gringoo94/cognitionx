@@ -4,11 +4,16 @@
 // by BlogPost.tsx with react-markdown (rehype-raw enabled).
 import type { BlogPost, ContentBlock } from "../data/blogPosts";
 
-const files = import.meta.glob("/src/content/blog/*.md", {
-  eager: true,
-  query: "?raw",
-  import: "default",
-}) as Record<string, string>;
+// `import.meta.glob` is a Vite-only feature. When this module is loaded from
+// plain Node ESM (e.g. by vite-plugin-seo during closeBundle), fall back to an
+// empty set so `blogPosts` remains a valid iterable array.
+const files = ((import.meta as any).glob
+  ? (import.meta as any).glob("/src/content/blog/*.md", {
+      eager: true,
+      query: "?raw",
+      import: "default",
+    })
+  : {}) as Record<string, string>;
 
 /**
  * Minimal frontmatter parser. Supports:

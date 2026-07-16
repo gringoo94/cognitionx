@@ -10,11 +10,11 @@ import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
 import { z } from "npm:zod@^3.25.76";
 
 // src/lib/loadMdBlogPosts.ts
-var files = import.meta.glob("/src/content/blog/*.md", {
+var files = import.meta.glob ? import.meta.glob("/src/content/blog/*.md", {
   eager: true,
   query: "?raw",
   import: "default"
-});
+}) : {};
 function parseFrontmatter(src) {
   const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!m) return { data: {}, body: src };
