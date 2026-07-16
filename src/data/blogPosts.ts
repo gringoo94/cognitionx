@@ -4347,7 +4347,7 @@ export const blogPosts: BlogPost[] = [
 
 
 // -------- Markdown-sourced posts (merged into blogPosts) --------
-import { mdBlogPosts } from "@/lib/loadMdBlogPosts";
+import { mdBlogPosts } from "../lib/loadMdBlogPosts";
 
 {
   const _slugs = new Set(mdBlogPosts.map((p) => p.slug));

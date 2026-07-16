@@ -9,8 +9,71 @@ import { defineMcp } from "npm:@lovable.dev/mcp-js@0.20.0";
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
 import { z } from "npm:zod@^3.25.76";
 
+// src/lib/loadMdBlogPosts.ts
+var files = import.meta.glob("/src/content/blog/*.md", {
+  eager: true,
+  query: "?raw",
+  import: "default"
+});
+function parseFrontmatter(src) {
+  const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!m) return { data: {}, body: src };
+  const [, yaml, body] = m;
+  const data = {};
+  const lines = yaml.split(/\r?\n/);
+  let currentKey = null;
+  for (const raw of lines) {
+    if (!raw.trim()) continue;
+    const listMatch = raw.match(/^\s*-\s+(.*)$/);
+    if (listMatch && currentKey) {
+      const v = stripQuotes(listMatch[1].trim());
+      if (!Array.isArray(data[currentKey])) data[currentKey] = [];
+      data[currentKey].push(v);
+      continue;
+    }
+    const kv = raw.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.*)$/);
+    if (kv) {
+      const key = kv[1];
+      const val = kv[2].trim();
+      if (val === "") {
+        currentKey = key;
+        data[key] = [];
+      } else {
+        currentKey = key;
+        data[key] = stripQuotes(val);
+      }
+    }
+  }
+  return { data, body: body ?? "" };
+}
+function stripQuotes(s) {
+  if (s.startsWith('"') && s.endsWith('"') || s.startsWith("'") && s.endsWith("'")) {
+    return s.slice(1, -1);
+  }
+  return s;
+}
+function slugFromPath(path) {
+  const base = path.split("/").pop() || "";
+  return base.replace(/\.md$/i, "");
+}
+var mdBlogPosts = Object.entries(files).map(([path, raw]) => {
+  const { data, body } = parseFrontmatter(raw);
+  const slug = data.slug || slugFromPath(path);
+  const content = [{ type: "markdown", text: body }];
+  return {
+    id: slug,
+    slug,
+    title: data.title || slug,
+    description: data.description || "",
+    image: data.image || "/blog/ontologiya-psihoterapii.png",
+    date: data.date || "",
+    updatedAt: data.updatedAt || void 0,
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    content
+  };
+}).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
 // src/data/blogPosts.ts
-import { mdBlogPosts } from "npm:@/lib/loadMdBlogPosts";
 function parseContent(raw) {
   try {
     const arr = JSON.parse(raw);
