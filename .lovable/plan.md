@@ -1,62 +1,57 @@
-Шаг 1 (усиление 5 существующих городов + мягкий CTA `/start`) уже сделан. Ниже — что осталось по гео-направлению, в порядке приоритета.
+## Цель
 
-## Шаг 2. Закрыть долги Шага 1
+Добавить возможность писать статьи блога одним `.md` файлом, не меняя существующие статьи (они продолжат жить в `blogPosts.ts` как блоки). URL, SEO, JSON-LD (BlogPosting/FAQPage), автор, стили и CTA остаются как есть — Markdown лишь заменяет источник тела статьи.
 
-Прежде чем масштабироваться — починить то, что уже начато:
+## Как это будет работать
 
-1. **Роут `/start` пока не существует**, а все новые CTA на него ведут. Нужно либо:
-   - создать страницу-квиз `/start` (короткий опросник 5–7 вопросов → отправка в Telegram через `notify-telegram` edge-function), либо
-   - временно редиректить `/start` → `/contact?source=quiz` и пометить TODO.
-2. **Заменить CTA на оставшихся гео-лендингах**: `LandingPageAsia.tsx`, `LandingPageIT.tsx`, `LandingPageKishinev.tsx` (в Шаге 1 обновили только Europa).
-3. **Доработать Moscow и USA** в `problemPages.ts`: дисклеймеры про онлайн-формат, часовые пояса (MSK / NY-LA-Chicago-Miami slots), убрать намёки на очный приём.
-4. **Расширить FAQ** до 8–10 вопросов на каждый из 5 городов (часовой пояс, оплата, страховка, острое состояние, первая встреча, /start, параллельная терапия, язык).
-5. **SEO sanity check**: `seo-routes.ts` + `public/sitemap.xml` + `npm run seo:check` для всех гео-URL.
+1. **Хранение**: новые статьи — файлы `src/content/blog/<slug>.md` с YAML frontmatter (title, description, date, updatedAt, tags, image, faq?).
+2. **Регистрация**: Vite через `import.meta.glob('/src/content/blog/*.md', { eager: true, as: 'raw' })` собирает все `.md` в массив `mdPosts: BlogPost[]` в момент сборки. Frontmatter парсится (простой парсер — без внешней зависимости), тело Markdown кладётся в один блок нового типа `markdown` (без ре-парсинга в блоки).
+3. **Слияние источников**: `blogPosts.ts` экспортирует объединённый массив `[...mdPosts, ...legacyBlockPosts]`, сортированный по `date desc`. Дубли по `slug` — приоритет у `.md` (миграционный путь).
+4. **Рендеринг**: в `ContentBlock.type` добавляем `"markdown"`. В `BlogPost.tsx` в цикле `post.content.map` — новая ветка: `if (block.type === "markdown")` → `<ReactMarkdown remarkPlugins={[remarkGfm]} components={{...}} />` в тот же самый обёрточный `div` со всеми существующими Tailwind-стилями (списки, таблицы, ссылки, `strong`, `em`). Ничего в шапке статьи (дата, автор, TL;DR, обложка, subscribe, JSON-LD, FAQPage, related, CTA-мост) не меняется.
+5. **Кастомные вставки**: в Markdown поддерживаем «магические» строки-плейсхолдеры на отдельной строке, которые Markdown-рендер перехватывает и заменяет на существующие React-компоненты — так же как сейчас работают `component` блоки:
+   ```
+   ::component{id=emotion-wheel}
+   ::component{id=behavioral-activation-diary}
+   ::component{id=rfcbt-modes}
+   ::component{id=decision-matrix-cta}
+   ```
+   Реализуется через `remark-directive` + маленький ремарк-визитор (или простой pre-парсинг строк перед `ReactMarkdown`).
+6. **FAQ**: FAQ по-прежнему живёт в `faqBySlug` в `BlogPost.tsx` — миграция статьи не затрагивает FAQPage JSON-LD и Accordion. Дополнительно frontmatter поле `faq: [{q,a}]` можно добавить позже — но в этой задаче не трогаем, чтобы не задеть существующий JSON-LD.
+7. **SEO / sitemap / llms.txt**: `seo-routes.ts`, `sitemap.xml`, `public/llms-full.txt`, MCP `list_blog_posts` уже читают массив `blogPosts` — поскольку `.md`-посты вливаются в тот же массив с теми же полями, ничего в этих файлах менять не нужно. `updatedAt` для sitemap берётся из frontmatter.
 
-## Шаг 3. Country hubs (страновые хабы)
+## Миграция одной статьи
 
-Создать 4–6 страновых страниц, чтобы перехватывать запросы вида «психолог в Германии», «русскоязычный психолог в Нидерландах»:
+Уточните, какую статью мигрировать первой (кандидаты — последняя отредактированная):
+- `rfcbt-dva-stilya-myshleniya` («Два режима мышления при руминации»)
+- `shema-terapiya-polnyj-gajd` (сейчас открыта в превью)
+- иная — назовите slug.
 
-- `/psiholog-germaniya` (хаб → Берлин + позже Мюнхен/Гамбург)
-- `/psiholog-niderlandy` (хаб → Амстердам + позже Роттердам)
-- `/psiholog-portugaliya` (→ Лиссабон + позже Порту)
-- `/psiholog-gruziya` (→ Тбилиси + Батуми)
-- `/psiholog-moldova` (→ Кишинёв)
-- опционально `/psiholog-izrail`, `/psiholog-kipr`
+По умолчанию беру `rfcbt-dva-stilya-myshleniya` (последняя из редактированных, компактнее для проверки миграционного пайплайна). URL `/blog/rfcbt-dva-stilya-myshleniya` сохраняется, `title`/`description`/`date`/`updatedAt`/`tags`/`image` переносятся в frontmatter, тело — в Markdown, вставка `RfcbtModesDiagram` — через `::component{id=rfcbt-modes}`. Запись в `blogPosts.ts` удаляется; при следующей сборке статья приходит из `.md`.
 
-Каждый хаб = уникальный контент про систему здравоохранения страны, страховки, легальный статус, эмиграционный контекст + список городов с карточками. Не дубль city-страниц.
+## Технические детали
 
-Технически: новый тип `CountryHubData` в `src/data/countryHubs.ts`, новый роут `/psiholog-:countrySlug`, компонент `CountryHubPage.tsx`, перелинковка city ↔ country.
+- Зависимости: `react-markdown`, `remark-gfm`, `remark-directive` (для `::component`). Всё легковесное, tree-shakeable.
+- Frontmatter парсер: минимальный собственный (~40 строк) — без `gray-matter`, чтобы не тащить Buffer-полифиллы в браузер. Парсинг происходит в build-time через Vite raw import.
+- `parseContent` в `blogPosts.ts` не трогаем — он обслуживает только legacy JSON строки в БД/`mcp/index.ts`.
+- Тип `ContentBlock["type"]` расширяется значением `"markdown"`.
+- В `BlogPost.tsx` `wordCount` продолжит работать: `.replace(/<[^>]+>/g,'')` заменим на общую очистку от markdown/HTML (regex достаточно), чтобы JSON-LD `wordCount` остался разумным.
+- Стили: обёртка `div` вокруг `ReactMarkdown` наследует те же `[&_ul]`, `[&_ol]`, `[&_a]`, `[&_table]`, `[&_strong]` классы, что и текущий text-блок → визуально Markdown-статья неотличима от блочной.
+- Supabase `blog_posts` таблица и `useBlogPosts` (БД-first, статик-fallback) не меняются: если статья есть в БД — она грузится оттуда как раньше; `.md` источник задействуется только когда БД пуста или статьи в ней нет.
 
-## Шаг 4. Расширение списка городов
+## Файлы, которые изменятся
 
-Добавить 4–6 новых city-страниц только там, где есть реальный спрос русскоязычной аудитории:
+- `package.json` — `react-markdown`, `remark-gfm`, `remark-directive` (+ типы).
+- `src/data/blogPosts.ts` — новый тип `markdown`, glob-импорт `.md`, слияние массивов, удаление записи мигрированной статьи.
+- `src/content/blog/<slug>.md` — новый файл с одной статьёй.
+- `src/pages/BlogPost.tsx` — рендер `type: "markdown"` блока через `ReactMarkdown` + обработка `::component{...}`.
+- (при необходимости) `src/lib/parseFrontmatter.ts` — минимальный YAML-парсер.
 
-- Мюнхен, Гамбург (DE)
-- Роттердам, Гаага (NL)
-- Порту (PT)
-- Батуми (GE)
-- Варшава, Краков (PL)
-- Прага (CZ)
+Не меняются: `seo-routes.ts`, `public/sitemap.xml` (перегенерируется автоматически), `public/llms-full.txt` (то же), `supabase/functions/mcp/index.ts` (читает slug из БД), FAQ схема, компонент автора, CTA-мост, обложки.
 
-Каждая = полный набор полей `CityPageData` из Шага 1 (localSystem, helpRoutes, relatedArticles, timezone, FAQ). Без копипасты — иначе вернёмся к doorway-проблеме.
+## После внедрения
 
-## Шаг 5. Перелинковка и UX-склейка
+Добавление новой статьи = положить один файл `src/content/blog/moya-statya.md`. Никаких правок TS, JSON-LD, sitemap или SEO-роутов — всё подтянется автоматически при сборке.
 
-- Блок «Другие города рядом» (`nearbyCities`) на каждой city-странице.
-- Breadcrumbs: Главная → Страна → Город.
-- Footer: компактный список всех гео-страниц, сгруппированный по странам.
-- Hreflang/canonical аудит (сейчас всё `ru` — оставить так, но убедиться, что нет дубль-canonical).
+## Уточнение
 
-## Шаг 6. Аналитика гео-конверсии
-
-- Разметить CTA `/start` отдельным `cta_source` (city, country, landing).
-- В админке — отчёт «конверсия по гео-страницам» (визиты → /start → Telegram).
-- A/B: «Понять, с чего начать» vs «Бесплатная диагностика 20 мин» на 2–3 страницах.
-
----
-
-## Что предлагаю сделать сейчас
-
-Браться за всё сразу — слишком много. Логичный следующий шаг — **Шаг 2** (закрыть долги): создать `/start`, доделать CTA на остальных лендингах, починить Moscow/USA, расширить FAQ. Это 1 проход, после него уже честно идём в Шаг 3 (country hubs).
-
-Подтвердите, что начинаем с Шага 2 — или скажите, если хотите сразу прыгнуть в country hubs / новые города.
+Подтвердите slug статьи для миграции (или согласитесь на `rfcbt-dva-stilya-myshleniya` по умолчанию) — начну реализацию.
