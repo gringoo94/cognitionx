@@ -137,6 +137,7 @@ const App = () => (
 
               {/* 301 redirects: merged/renamed blog posts */}
               <Route path="/blog/who-5-blagopoluchie" element={<Navigate to="/tools/tests/who-5" replace />} />
+              <Route path="/blog/tri-karty-realnosti-v-psihoterapii" element={<Navigate to="/blog/ontologiya-psihoterapii" replace />} />
               <Route path="/blog/lovushka-yarlykov-kategorii" element={<Navigate to="/blog/lovushka-yarlykov" replace />} />
               <Route path="/blog/postoyannaya-trevoga-bez-prichiny" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />
               <Route path="/blog/simptomy-trevozhnogo-rasstrojstva" element={<Navigate to="/blog/povyshennaya-trevozhnost" replace />} />
