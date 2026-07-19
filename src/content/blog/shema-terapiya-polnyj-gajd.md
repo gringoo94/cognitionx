@@ -651,4 +651,4 @@ tags:
 - Zhang, M., Hu, Q., Ma, R., Xie, Q., Wang, Y., Fan, H., & Li, X. (2023). The efficacy of schema therapy for personality disorders: A systematic review and meta-analysis. Nordic Journal of Psychiatry, 77(7), 641–650. [DOI: 10.1080/08039488.2023.2228304](https://doi.org/10.1080/08039488.2023.2228304).
 - Arntz, A., & Jacob, G. (2012). Schema Therapy in Practice: An Introductory Guide to the Schema Mode Approach. Wiley-Blackwell.
 - [International Society of Schema Therapy — Schema Therapy Central Concepts](https://schematherapysociety.org/Schema-Therapy).
-- [International Society of Schema Therapy — Limited Reparenting](https://schematherapysociety.org/).
+- [International Society of Schema Therapy — Limited Reparenting](https://www.schematherapysociety.org/Limited-Reparenting).
