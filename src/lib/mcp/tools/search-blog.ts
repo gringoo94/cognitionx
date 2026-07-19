@@ -1,6 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { blogPosts } from "../../../data/blogPosts";
+import { mcpPosts } from "../posts.generated";
 
 export default defineTool({
   name: "search_blog",
@@ -14,10 +14,9 @@ export default defineTool({
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ query, limit }) => {
     const q = query.toLowerCase();
-    const results = blogPosts
+    const results = mcpPosts
       .map((p) => {
-        const body = p.content.map((b) => b.text).join(" ").replace(/<[^>]+>/g, " ");
-        const haystack = `${p.title}\n${p.description}\n${p.tags.join(" ")}\n${body}`.toLowerCase();
+        const haystack = `${p.title}\n${p.description}\n${p.tags.join(" ")}\n${p.body}`.toLowerCase();
         const idx = haystack.indexOf(q);
         if (idx === -1) return null;
         const snippet = haystack.slice(Math.max(0, idx - 80), idx + 200).replace(/\s+/g, " ").trim();
@@ -32,7 +31,6 @@ export default defineTool({
       })
       .filter((x): x is NonNullable<typeof x> => x !== null)
       .slice(0, limit ?? 10);
-
     return {
       content: [{ type: "text", text: JSON.stringify(results, null, 2) }],
       structuredContent: { results, total: results.length },
