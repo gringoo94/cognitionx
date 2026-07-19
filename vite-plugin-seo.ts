@@ -100,7 +100,7 @@ export function seoPlugin(): Plugin {
               description: route.description,
               image: ogImage,
               datePublished: post.date,
-              dateModified: post.dateModified || post.date,
+              dateModified: post.dateModified || post.updatedAt || post.date,
               mainEntityOfPage: { "@type": "WebPage", "@id": url },
               author: { "@type": "Person", name: "Дмитрий Яцко", url: `${SITE_URL}/` },
               publisher: { "@id": `${SITE_URL}/#organization` },
