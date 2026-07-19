@@ -12,6 +12,7 @@ import FloatingTelegramFab from "./components/FloatingTelegramFab.tsx";
 import ExitIntentPopup from "./components/ExitIntentPopup.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
+import Gone from "./pages/Gone.tsx";
 
 // Lazy-load everything below the home page to keep initial JS small
 const LandingPageEuropa = lazy(() => import("./pages/LandingPageEuropa.tsx"));
@@ -139,6 +140,8 @@ const App = () => (
               <Route path="/blog/who-5-blagopoluchie" element={<Navigate to="/tools/tests/who-5" replace />} />
               <Route path="/blog/tri-karty-realnosti-v-psihoterapii" element={<Navigate to="/blog/ontologiya-psihoterapii" replace />} />
               <Route path="/blog/lovushka-yarlykov-kategorii" element={<Navigate to="/blog/lovushka-yarlykov" replace />} />
+              {/* 410 Gone: permanently removed */}
+              <Route path="/blog/ponchik-i-prestuplenie" element={<Gone />} />
               <Route path="/blog/postoyannaya-trevoga-bez-prichiny" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />
               <Route path="/blog/simptomy-trevozhnogo-rasstrojstva" element={<Navigate to="/blog/povyshennaya-trevozhnost" replace />} />
               <Route path="/blog/kak-spravitsya-s-trevozhnostyu" element={<Navigate to="/blog/kak-izbavitsya-ot-trevogi" replace />} />

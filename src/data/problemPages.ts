@@ -1349,7 +1349,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["cbt-therapy", "depression", "anxiety", "co-dependency", "self-esteem", "online-therapy"],
-    relatedArticles: ["lovushka-yarlykov", "ponchik-i-prestuplenie"],
+    relatedArticles: ["lovushka-yarlykov"],
   },
 ];
 
