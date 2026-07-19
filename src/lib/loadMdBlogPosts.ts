@@ -4,12 +4,12 @@
 // Body is exposed as a single ContentBlock of type "markdown" and rendered
 // by BlogPost.tsx with react-markdown (rehype-raw enabled).
 import type { BlogPost, ContentBlock } from "../data/blogPosts";
+import { blogMdManifest } from "../content/blog/_manifest.generated";
 
-// `import.meta.glob(...)` MUST appear as a direct call expression for Vite's
-// static analyser to replace it with an object literal at build/serve time.
-// Wrapping it in a ternary or guard prevents the transform and returns {}.
-// Under plain Node ESM (vite-plugin-seo importing this at build closeBundle),
-// the untransformed call throws — we swallow it and fall back to {}.
+// Prefer Vite's `import.meta.glob` (dev HMR + browser build). Under non-Vite
+// runtimes (Deno MCP edge function bundle, prerender via plain Node), fall back
+// to the generated manifest that inlines every .md file as a raw string.
+// Regenerate with: `node scripts/gen-blog-manifest.mjs` after adding/editing md.
 let files: Record<string, string> = {};
 try {
   files = import.meta.glob("/src/content/blog/*.md", {
@@ -19,6 +19,9 @@ try {
   }) as Record<string, string>;
 } catch {
   files = {};
+}
+if (!files || Object.keys(files).length === 0) {
+  files = blogMdManifest;
 }
 
 /**
