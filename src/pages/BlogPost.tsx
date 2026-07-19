@@ -41,10 +41,23 @@ const BlogPost = () => {
   }, [slug]);
 
 
-  const relatedPosts = allPosts
-    .filter((p) => p.slug !== slug)
-    .filter((p) => post?.tags?.some((t) => p.tags.includes(t)))
-    .slice(0, 3);
+  // Per-slug related-post overrides. When present, replaces the tag-based auto pick.
+  const RELATED_OVERRIDES: Record<string, string[]> = {
+    "shema-terapiya-polnyj-gajd": [
+      "8-prepyatstvij-na-puti-k-peremenam",
+      "emocionalnaya-vera",
+      "izbeganie-pobeg-ot-lovushki",
+    ],
+  };
+  const overrideSlugs = slug ? RELATED_OVERRIDES[slug] : undefined;
+  const relatedPosts = overrideSlugs
+    ? overrideSlugs
+        .map((s) => allPosts.find((p) => p.slug === s))
+        .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    : allPosts
+        .filter((p) => p.slug !== slug)
+        .filter((p) => post?.tags?.some((t) => p.tags.includes(t)))
+        .slice(0, 3);
 
   if (isLoading) {
     return (
