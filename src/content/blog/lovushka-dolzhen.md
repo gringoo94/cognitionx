@@ -4,6 +4,7 @@ description: "Как отличить реальную обязанность о
 slug: "lovushka-dolzhen"
 date: "2026-03-25"
 updatedAt: "2026-07-20"
+cover: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1200&h=630&fit=crop"
 tags:
   - "Когнитивные искажения"
   - "КПТ"
