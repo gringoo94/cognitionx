@@ -141,6 +141,7 @@ const App = () => (
               <Route path="/blog/tri-karty-realnosti-v-psihoterapii" element={<Navigate to="/blog/ontologiya-psihoterapii" replace />} />
               <Route path="/blog/lovushka-yarlykov-kategorii" element={<Navigate to="/blog/lovushka-yarlykov" replace />} />
               <Route path="/blog/kak-vybrat-kpt-psihologa" element={<Navigate to="/blog/kak-vybrat-psihologa" replace />} />
+              <Route path="/blog/vygoranie-ili-ustalost" element={<Navigate to="/blog/vygoranie-simptomy-vosstanovlenie" replace />} />
               {/* 410 Gone: permanently removed */}
               <Route path="/blog/ponchik-i-prestuplenie" element={<Gone />} />
               <Route path="/blog/postoyannaya-trevoga-bez-prichiny" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />

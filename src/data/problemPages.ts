@@ -386,7 +386,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["depression", "anxiety", "cbt-therapy", "schema-therapy", "online-therapy"],
-    relatedArticles: ["kogda-nichego-ne-hochetsya", "depressiya-ili-vygoranie", "vygoranie-ili-ustalost"],
+    relatedArticles: ["kogda-nichego-ne-hochetsya", "depressiya-ili-vygoranie", "vygoranie-simptomy-vosstanovlenie"],
   },
   {
     slug: "ocd",
@@ -925,7 +925,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["burnout", "anxiety", "depression", "cbt-therapy", "online-therapy"],
-    relatedArticles: ["kogda-nichego-ne-hochetsya", "vygoranie-ili-ustalost"],
+    relatedArticles: ["kogda-nichego-ne-hochetsya", "vygoranie-simptomy-vosstanovlenie"],
   },
   {
     slug: "addiction",
@@ -1054,7 +1054,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["online-therapy", "burnout", "depression", "anxiety", "stress", "cbt-therapy"],
-    relatedArticles: ["vygoranie-ili-ustalost", "depressiya-ili-vygoranie", "prokrastinaciya"],
+    relatedArticles: ["vygoranie-simptomy-vosstanovlenie", "depressiya-ili-vygoranie", "prokrastinaciya"],
   },
   {
     slug: "psiholog-europa",

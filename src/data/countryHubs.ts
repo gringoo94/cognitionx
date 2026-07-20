@@ -102,7 +102,7 @@ export const countryHubs: CountryHubData[] = [
     plannedCities: ["Кёльн", "Франкфурт"],
     relatedArticleSlugs: [
       "kpt-pri-trevoge",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kak-vybrat-kpt-psihologa",
       "pervaya-sessiya-u-psihologa",
     ],
@@ -195,7 +195,7 @@ export const countryHubs: CountryHubData[] = [
     cities: ["psiholog-amsterdam", "psiholog-rotterdam"],
     plannedCities: ["Гаага", "Утрехт", "Эйндховен"],
     relatedArticleSlugs: [
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kpt-pri-trevoge",
       "kak-vybrat-kpt-psihologa",
     ],
@@ -371,7 +371,7 @@ export const countryHubs: CountryHubData[] = [
     cities: ["psiholog-tbilisi"],
     plannedCities: ["Батуми", "Кутаиси"],
     relatedArticleSlugs: [
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kpt-pri-trevoge",
       "kogda-nichego-ne-hochetsya",
     ],
@@ -460,7 +460,7 @@ export const countryHubs: CountryHubData[] = [
     plannedCities: ["Бельцы", "Тирасполь", "Комрат"],
     relatedArticleSlugs: [
       "kpt-pri-trevoge",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kak-vybrat-kpt-psihologa",
       "pervaya-sessiya-u-psihologa",
     ],
