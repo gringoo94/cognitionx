@@ -4,10 +4,16 @@
  * Checks that each prerendered route has exactly one of each required tag,
  * an absolute https og:image, and (for blog posts) BlogPosting JSON-LD.
  *
+ * On failure, prints a diff of expected vs actual metadata
+ * (title/description/canonical/og:url/og:title/og:description) sourced from
+ * seo-routes.ts to speed up investigation.
+ *
  * Usage: node scripts/verify-prerender-seo.mjs
  */
 import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import esbuild from "esbuild";
 
 const DIST = resolve(process.cwd(), "dist");
 const SITE = "https://cognitionx.cloud";
@@ -15,6 +21,30 @@ const SITE = "https://cognitionx.cloud";
 if (!existsSync(DIST)) {
   console.error("✖ dist/ not found — run `npm run build` first.");
   process.exit(1);
+}
+
+// ---------- Load expected metadata from seo-routes.ts ----------
+async function loadSeoRoutes() {
+  const src = readFileSync(resolve(process.cwd(), "seo-routes.ts"), "utf-8");
+  const { code } = await esbuild.transform(src, { loader: "ts", format: "esm" });
+  const mod = await import(
+    "data:text/javascript;base64," + Buffer.from(code).toString("base64")
+  );
+  return mod.seoRoutes ?? [];
+}
+
+const seoRoutes = await loadSeoRoutes();
+/** @type {Map<string, {title:string,description:string,canonical:string,ogUrl:string}>} */
+const expectedByPath = new Map();
+for (const r of seoRoutes) {
+  const canonicalPath = r.canonicalPath ?? r.path;
+  const canonical = `${SITE}${canonicalPath === "/" ? "/" : canonicalPath.replace(/\/$/, "")}`;
+  expectedByPath.set(r.path.replace(/\/$/, "") || "/", {
+    title: r.title,
+    description: r.description,
+    canonical,
+    ogUrl: canonical,
+  });
 }
 
 /** Recursively list every index.html under dist/. */
@@ -39,12 +69,26 @@ function countMatches(re, str) {
 }
 
 function attr(name, str) {
-  // Find content="..." values for tags matched by `name` regex
   const out = [];
   const re = new RegExp(`<meta[^>]+${name}[^>]*content=["']([^"']+)["']`, "gi");
   let m;
   while ((m = re.exec(str))) out.push(m[1]);
   return out;
+}
+
+function firstTitle(str) {
+  const m = str.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  return m ? m[1].trim() : undefined;
+}
+
+function firstMeta(nameAttr, str) {
+  return attr(nameAttr, str)[0];
+}
+
+function firstLinkHref(rel, str) {
+  const re = new RegExp(`<link[^>]+rel=["']${rel}["'][^>]*href=["']([^"']+)["']`, "i");
+  const m = str.match(re);
+  return m ? m[1] : undefined;
 }
 
 const REQUIRED = [
@@ -61,11 +105,9 @@ const REQUIRED = [
 
 const files = listIndexHtml(DIST).sort();
 let totalErrors = 0;
-let totalWarns = 0;
 const failed = [];
 
 function extractRoot(html) {
-  // Match <div id="root">...</div> — non-greedy, but #root is a leaf in prerender.
   const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*<script/i);
   return m ? m[1] : "";
 }
@@ -75,6 +117,44 @@ function stripTags(str) {
 }
 
 const MIN_BODY_CHARS = 400;
+
+function norm(u) {
+  if (!u) return u;
+  return u.replace(/\/$/, "") || "/";
+}
+
+function buildDiff(rel, head) {
+  const key = norm(rel);
+  const exp = expectedByPath.get(key) || expectedByPath.get(rel);
+  if (!exp) return null;
+  const actual = {
+    title: firstTitle(head),
+    description: firstMeta(`name=["']description["']`, head),
+    canonical: firstLinkHref("canonical", head),
+    "og:url": firstMeta(`property=["']og:url["']`, head),
+    "og:title": firstMeta(`property=["']og:title["']`, head),
+    "og:description": firstMeta(`property=["']og:description["']`, head),
+  };
+  const expected = {
+    title: exp.title,
+    description: exp.description,
+    canonical: exp.canonical,
+    "og:url": exp.ogUrl,
+    "og:title": exp.title,
+    "og:description": exp.description,
+  };
+  const rows = [];
+  for (const k of Object.keys(expected)) {
+    const e = expected[k];
+    const a = actual[k];
+    const eq =
+      k === "canonical" || k === "og:url"
+        ? norm(a) === norm(e)
+        : (a ?? "") === (e ?? "");
+    if (!eq) rows.push({ field: k, expected: e, actual: a });
+  }
+  return rows;
+}
 
 for (const file of files) {
   const rel = "/" + relative(DIST, file).replace(/\\/g, "/").replace(/index\.html$/, "");
@@ -88,14 +168,11 @@ for (const file of files) {
     if (r.max !== undefined && n > r.max) errs.push(`${r.id}: duplicated (got ${n})`);
   }
 
-  // og:image must be absolute https URL
   const ogImg = attr("property=[\"']og:image[\"']", head)[0];
   if (ogImg && !/^https:\/\//i.test(ogImg)) {
     errs.push(`og:image: not absolute https (${ogImg})`);
   }
 
-  // Canonical must match this file's actual route path (self-reference).
-  // Prevents prerender mistakes where every page points canonical at "/".
   const canonicalHref = (head.match(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [])[1];
   if (canonicalHref) {
     const expected = `${SITE}${rel === "/" ? "/" : rel.replace(/\/$/, "")}`;
@@ -104,22 +181,18 @@ for (const file of files) {
     if (actual !== expectedNorm && actual !== expected) {
       errs.push(`canonical: mismatch (page ${rel} → ${canonicalHref})`);
     }
-    // og:url should match canonical
     const ogUrl = attr("property=[\"']og:url[\"']", head)[0];
     if (ogUrl && ogUrl.replace(/\/$/, "") !== actual) {
       errs.push(`og:url: does not match canonical (${ogUrl} vs ${canonicalHref})`);
     }
   }
 
-  // Blog post: og:type=article + BlogPosting schema + non-empty body
   const isBlogPost = /^\/blog\/[^/]+\/?$/.test(rel);
   if (isBlogPost) {
     const ogType = attr("property=[\"']og:type[\"']", head)[0];
     if (ogType !== "article") errs.push(`og:type: expected "article", got "${ogType ?? "missing"}"`);
     if (!/"@type"\s*:\s*"BlogPosting"/.test(head)) errs.push(`BlogPosting JSON-LD: missing`);
 
-    // Empty-body guard: the prerendered #root must contain the article body.
-    // Catches broken markdown pipelines that ship meta tags but no visible content.
     const rootHtml = extractRoot(html);
     const bodyText = stripTags(rootHtml);
     if (!/<article[\s>]/i.test(rootHtml)) {
@@ -127,8 +200,6 @@ for (const file of files) {
     } else if (bodyText.length < MIN_BODY_CHARS) {
       errs.push(`body: too short — ${bodyText.length} chars (min ${MIN_BODY_CHARS})`);
     } else {
-      // Snippet-vs-meta drift: the <title> content should appear in the body,
-      // or at least the H1 should exist. Catches stale meta after content updates.
       const h1 = (rootHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i) || [])[1];
       if (!h1 || stripTags(h1).length < 5) {
         errs.push(`body: missing meaningful <h1>`);
@@ -138,7 +209,8 @@ for (const file of files) {
 
   if (errs.length) {
     totalErrors += errs.length;
-    failed.push({ rel, errs });
+    const diff = buildDiff(rel, head);
+    failed.push({ rel, errs, diff });
   }
 }
 
@@ -148,9 +220,25 @@ if (failed.length === 0) {
   process.exit(0);
 }
 
+function truncate(v, n = 120) {
+  if (v == null) return "<missing>";
+  const s = String(v);
+  return s.length > n ? s.slice(0, n - 1) + "…" : s;
+}
+
 console.log(`\n✖ ${failed.length} file(s) failed (${totalErrors} issue(s)):\n`);
 for (const f of failed) {
   console.log(`  ${f.rel}`);
   for (const e of f.errs) console.log(`    - ${e}`);
+  if (f.diff && f.diff.length) {
+    console.log(`    diff vs seo-routes.ts:`);
+    for (const row of f.diff) {
+      console.log(`      ${row.field}`);
+      console.log(`        expected: ${truncate(row.expected)}`);
+      console.log(`        actual:   ${truncate(row.actual)}`);
+    }
+  } else if (f.diff === null) {
+    console.log(`    (no seo-routes.ts entry for ${f.rel} — cannot diff metadata)`);
+  }
 }
 process.exit(1);
