@@ -4,6 +4,7 @@ description: "Как ярлыки превращают отдельный пос
 slug: "lovushka-yarlykov"
 date: "2026-04-12"
 updatedAt: "2026-07-20"
+cover: "https://images.unsplash.com/photo-1517842645767-c639042777db?w=1200&h=630&fit=crop"
 tags:
   - "КПТ"
   - "Когнитивные искажения"
