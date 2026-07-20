@@ -125,7 +125,7 @@ export const cityPages: CityPageData[] = [
     ],
     relatedArticleSlugs: [
       "kpt-pri-trevoge",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kogda-nichego-ne-hochetsya",
       "kak-vybrat-kpt-psihologa",
       "pervaya-sessiya-u-psihologa",
@@ -247,7 +247,7 @@ export const cityPages: CityPageData[] = [
       },
     ],
     relatedArticleSlugs: [
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "sindrom-samozvantsa",
       "kak-izbavitsya-ot-trevogi",
       "prokrastinaciya",
@@ -374,7 +374,7 @@ export const cityPages: CityPageData[] = [
       "kpt-pri-trevoge",
       "kogda-nichego-ne-hochetsya",
       "vsyo-neopredelyonno",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
     ],
     countryPageSlug: "psiholog-portugaliya",
     nearbyCities: ["psiholog-porto", "psiholog-berlin", "psiholog-amsterdam"],
@@ -617,7 +617,7 @@ export const cityPages: CityPageData[] = [
     ],
     relatedArticleSlugs: [
       "kpt-pri-trevoge",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kogda-nichego-ne-hochetsya",
       "sindrom-samozvantsa",
       "5-principov-kpt",
@@ -739,7 +739,7 @@ export const cityPages: CityPageData[] = [
       },
     ],
     relatedArticleSlugs: [
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kpt-pri-trevoge",
       "kak-vybrat-kpt-psihologa",
       "pervaya-sessiya-u-psihologa",
@@ -848,7 +848,7 @@ export const cityPages: CityPageData[] = [
     relatedArticleSlugs: [
       "kogda-nichego-ne-hochetsya",
       "kpt-pri-trevoge",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kak-vybrat-kpt-psihologa",
     ],
     countryPageSlug: "psiholog-germaniya",
@@ -953,7 +953,7 @@ export const cityPages: CityPageData[] = [
       },
     ],
     relatedArticleSlugs: [
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kpt-pri-trevoge",
       "kak-vybrat-kpt-psihologa",
       "pervaya-sessiya-u-psihologa",
@@ -1061,7 +1061,7 @@ export const cityPages: CityPageData[] = [
     ],
     relatedArticleSlugs: [
       "kogda-nichego-ne-hochetsya",
-      "vygoranie-ili-ustalost",
+      "vygoranie-simptomy-vosstanovlenie",
       "kpt-pri-trevoge",
       "kak-vybrat-kpt-psihologa",
     ],
