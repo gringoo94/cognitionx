@@ -2,6 +2,7 @@ import { Plugin } from "vite";
 import { seoRoutes } from "./seo-routes";
 import * as fs from "fs";
 import * as path from "path";
+import { marked } from "marked";
 
 const SITE_URL = "https://cognitionx.cloud";
 const OG_IMAGE = `${SITE_URL}/og-default.webp`;
@@ -178,6 +179,15 @@ function renderArticleHtml(post: any, url: string): string {
       blocks.push(`<blockquote>${block.text}</blockquote>`);
     } else if (block.type === "text") {
       blocks.push(`<div>${block.text}</div>`);
+    } else if (block.type === "markdown") {
+      // Strip custom directives (:::preface, ::component{#id}) so marked
+      // renders plain markdown for crawlers; the interactive React path
+      // handles them at runtime.
+      const cleaned = String(block.text || "")
+        .replace(/^::[a-zA-Z][\w-]*\{[^}]*\}\s*$/gm, "")
+        .replace(/^:::\s*[a-zA-Z][\w-]*\s*$/gm, "")
+        .replace(/^:::\s*$/gm, "");
+      blocks.push(marked.parse(cleaned, { async: false }) as string);
     }
     // "component" blocks are interactive — skipped in static prerender.
   }
