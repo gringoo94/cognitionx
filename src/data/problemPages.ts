@@ -627,7 +627,7 @@ export const problemPages: ProblemPageData[] = [
       },
     ],
     relatedPages: ["schema-therapy", "online-therapy", "in-person-therapy", "depression", "anxiety", "panic-attacks"],
-    relatedArticles: ["dokazatelnaya-baza-kpt", "10-mifov-o-kpt", "kpt-vs-psihoanaliz", "skolko-dlitsya-kpt", "kpt-pri-trevoge", "kpt-pri-depressii", "5-kpt-uprazhnenij", "kak-vybrat-kpt-psihologa", "kpt-polnyj-gajd", "pervaya-sessiya-u-psihologa", "60-sekund-dofamin-tyaga", "lovushka-dolzhen", "vygoranie-ot-domashek-v-terapii"],
+    relatedArticles: ["dokazatelnaya-baza-kpt", "10-mifov-o-kpt", "kpt-vs-psihoanaliz", "skolko-dlitsya-kpt", "kpt-pri-trevoge", "kpt-pri-depressii", "5-kpt-uprazhnenij", "kak-vybrat-psihologa", "kpt-polnyj-gajd", "pervaya-sessiya-u-psihologa", "60-sekund-dofamin-tyaga", "lovushka-dolzhen", "vygoranie-ot-domashek-v-terapii"],
   },
   {
     slug: "online-therapy",
