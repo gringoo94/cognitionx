@@ -321,6 +321,19 @@ const BlogList = () => {
     return s ? `/blog?${s}` : "/blog";
   };
 
+  // ItemList отражает статьи, реально отображаемые на текущем экране:
+  // на дефолтной первой странице — рекомендуемые (hero + secondary) плюс грид,
+  // на остальных — только карточки грида.
+  const displayedPosts = useMemo(() => {
+    const list: BlogPost[] = [];
+    if (isDefaultView) {
+      if (featuredPosts.hero) list.push(featuredPosts.hero);
+      list.push(...featuredPosts.secondary);
+    }
+    list.push(...paginated);
+    return list;
+  }, [isDefaultView, featuredPosts, paginated]);
+
   const collectionSchema = useMemo(
     () => ({
       "@context": "https://schema.org",
@@ -331,15 +344,17 @@ const BlogList = () => {
         "Статьи о КПТ, схема-терапии, тревоге, депрессии и выгорании — психообразование на доказательной базе.",
       mainEntity: {
         "@type": "ItemList",
-        itemListElement: paginated.map((post, i) => ({
+        numberOfItems: displayedPosts.length,
+        itemListOrder: "https://schema.org/ItemListOrderAscending",
+        itemListElement: displayedPosts.map((post, i) => ({
           "@type": "ListItem",
-          position: (safePage - 1) * POSTS_PER_PAGE + i + 1,
-          name: post.title,
+          position: i + 1,
           url: `https://cognitionx.cloud/blog/${post.slug}`,
+          name: post.title,
         })),
       },
     }),
-    [paginated, safePage]
+    [displayedPosts]
   );
 
   return (
