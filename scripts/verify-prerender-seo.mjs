@@ -66,7 +66,7 @@ const redirectFromPaths = new Set(
 
 // Phase 5: unified blog registry is the source of truth for /blog/* metadata.
 // Overrides seo-routes.ts so stale hand-edited titles/descriptions can't drift.
-const blogPosts = (await loadTs("src/data/blogPosts.ts", "blogPosts")) ?? [];
+const blogPosts = (await loadBundled("src/data/blogPosts.ts", "blogPosts")) ?? [];
 const postBySlug = new Map(blogPosts.map((p) => [p.slug, p]));
 
 /** @type {Map<string, {title:string,description:string,canonical:string,ogUrl:string}>} */
