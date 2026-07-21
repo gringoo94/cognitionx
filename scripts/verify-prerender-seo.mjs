@@ -41,14 +41,42 @@ const redirectFromPaths = new Set(
     .map((r) => (r.from.replace(/\/$/, "") || "/"))
 );
 
+// Phase 5: unified blog registry is the source of truth for /blog/* metadata.
+// Overrides seo-routes.ts so stale hand-edited titles/descriptions can't drift.
+const blogPosts = (await loadTs("src/data/blogPosts.ts", "blogPosts")) ?? [];
+const postBySlug = new Map(blogPosts.map((p) => [p.slug, p]));
+
 /** @type {Map<string, {title:string,description:string,canonical:string,ogUrl:string}>} */
 const expectedByPath = new Map();
 for (const r of seoRoutes) {
   const canonicalPath = r.canonicalPath ?? r.path;
   const canonical = `${SITE}${canonicalPath === "/" ? "/" : canonicalPath.replace(/\/$/, "")}`;
+  let title = r.title;
+  let description = r.description;
+  const isSoftRedirect = !!r.canonicalPath && r.canonicalPath !== r.path;
+  const m = !isSoftRedirect && r.path.match(/^\/blog\/([^/]+)$/);
+  if (m) {
+    const post = postBySlug.get(m[1]);
+    if (post) {
+      title = post.title;
+      description = post.description || post.title;
+    }
+  }
   expectedByPath.set(r.path.replace(/\/$/, "") || "/", {
-    title: r.title,
-    description: r.description,
+    title,
+    description,
+    canonical,
+    ogUrl: canonical,
+  });
+}
+// Also register auto-prerendered blog posts (those not present in seo-routes.ts).
+for (const post of blogPosts) {
+  const key = `/blog/${post.slug}`;
+  if (expectedByPath.has(key)) continue;
+  const canonical = `${SITE}${key}`;
+  expectedByPath.set(key, {
+    title: post.title,
+    description: post.description || post.title,
     canonical,
     ogUrl: canonical,
   });
