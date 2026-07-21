@@ -13,6 +13,7 @@ import ExitIntentPopup from "./components/ExitIntentPopup.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
 import Gone from "./pages/Gone.tsx";
+import { redirects } from "./lib/redirects";
 
 // Lazy-load everything below the home page to keep initial JS small
 const LandingPageEuropa = lazy(() => import("./pages/LandingPageEuropa.tsx"));
