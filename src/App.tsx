@@ -13,6 +13,7 @@ import ExitIntentPopup from "./components/ExitIntentPopup.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
 import Gone from "./pages/Gone.tsx";
+import { redirects } from "./lib/redirects";
 
 // Lazy-load everything below the home page to keep initial JS small
 const LandingPageEuropa = lazy(() => import("./pages/LandingPageEuropa.tsx"));
@@ -122,54 +123,18 @@ const App = () => (
               <Route path="/free-consultation" element={<FreeConsultationPage />} />
               <Route path="/start" element={<StartQuizPage />} />
 
-              {/* Redirects from old Tilda URLs */}
-              <Route path="/about_cognitionx" element={<Navigate to="/about" replace />} />
-              <Route path="/cognitionx" element={<Navigate to="/" replace />} />
-              <Route path="/cognitionx/" element={<Navigate to="/" replace />} />
-              <Route path="/oursolution" element={<Navigate to="/" replace />} />
-              <Route path="/practice/generator" element={<Navigate to="/tools" replace />} />
-              <Route path="/tpost/*" element={<Navigate to="/blog" replace />} />
-              <Route path="/it-specialist" element={<Navigate to="/psiholog-dlya-it" replace />} />
-              <Route path="/css/*" element={<Navigate to="/" replace />} />
-
-              {/* Lost Tilda URLs with active impressions in GSC — redirect to closest content */}
-              <Route path="/dehumanization" element={<Navigate to="/blog/dehumanizaciya-chto-eto" replace />} />
-              <Route path="/popcornbrain" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />
-
-              {/* 301 redirects: merged/renamed blog posts */}
-              <Route path="/blog/who-5-blagopoluchie" element={<Navigate to="/tools/tests/who-5" replace />} />
-              <Route path="/blog/tri-karty-realnosti-v-psihoterapii" element={<Navigate to="/blog/ontologiya-psihoterapii" replace />} />
-              <Route path="/blog/lovushka-yarlykov-kategorii" element={<Navigate to="/blog/lovushka-yarlykov" replace />} />
-              <Route path="/blog/kak-vybrat-kpt-psihologa" element={<Navigate to="/blog/kak-vybrat-psihologa" replace />} />
-              <Route path="/blog/vygoranie-ili-ustalost" element={<Navigate to="/blog/vygoranie-simptomy-vosstanovlenie" replace />} />
-              {/* 410 Gone: permanently removed */}
-              <Route path="/blog/ponchik-i-prestuplenie" element={<Gone />} />
-              <Route path="/blog/postoyannaya-trevoga-bez-prichiny" element={<Navigate to="/blog/trevoga-bez-prichiny" replace />} />
-              <Route path="/blog/simptomy-trevozhnogo-rasstrojstva" element={<Navigate to="/blog/povyshennaya-trevozhnost" replace />} />
-              <Route path="/blog/kak-spravitsya-s-trevozhnostyu" element={<Navigate to="/blog/kak-izbavitsya-ot-trevogi" replace />} />
-              <Route path="/blog/priznaki-depressii" element={<Navigate to="/blog/kak-ponyat-chto-u-menya-depressiya" replace />} />
-              <Route path="/blog/chto-takoe-kpt" element={<Navigate to="/blog/kpt-polnyj-gajd" replace />} />
-              <Route path="/koleso-emocij" element={<Navigate to="/tools/emotion-wheel" replace />} />
-              <Route path="/abc-analysis" element={<Navigate to="/tools/abc-analysis" replace />} />
-              <Route path="/schema-quiz" element={<Navigate to="/tools/schema-quiz" replace />} />
-              <Route path="/emotion-wheel" element={<Navigate to="/tools/emotion-wheel" replace />} />
-
-              {/* Old Tilda URLs found in analytics hitting 404 */}
-              <Route path="/etonormalno" element={<Navigate to="/anxiety" replace />} />
-              <Route path="/oprosnikbeka" element={<Navigate to="/tools/tests/phq-9" replace />} />
-              <Route path="/mnetakskazali" element={<Navigate to="/blog/kto-tebe-eto-skazal" replace />} />
-              <Route path="/uspeh" element={<Navigate to="/thank-you" replace />} />
-              <Route path="/insomnia" element={<Navigate to="/anxiety" replace />} />
-              <Route path="/cbt_depression" element={<Navigate to="/blog/kpt-pri-depressii" replace />} />
-              <Route path="/Contact Us" element={<Navigate to="/contact" replace />} />
-              <Route path="/Contact%20Us" element={<Navigate to="/contact" replace />} />
-              <Route path="/problems/self-esteem" element={<Navigate to="/self-esteem" replace />} />
-              <Route path="/problems/stress" element={<Navigate to="/stress" replace />} />
-              <Route path="/problems/burnout" element={<Navigate to="/burnout" replace />} />
-              <Route path="/problems/co-dependency" element={<Navigate to="/co-dependency" replace />} />
-              <Route path="/problems/depression" element={<Navigate to="/depression" replace />} />
-              <Route path="/problems/anxiety" element={<Navigate to="/anxiety" replace />} />
-              <Route path="/tproduct/*" element={<Navigate to="/blog" replace />} />
+              {/* Redirects and gone pages — single source in src/lib/redirects.ts */}
+              {redirects.map((r) =>
+                r.type === "410" ? (
+                  <Route key={r.from} path={r.from} element={<Gone />} />
+                ) : (
+                  <Route
+                    key={r.from}
+                    path={r.from}
+                    element={<Navigate to={r.to} replace />}
+                  />
+                )
+              )}
 
 
               <Route path="*" element={<NotFound />} />

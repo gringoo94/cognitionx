@@ -1,5 +1,6 @@
 import { Plugin } from "vite";
 import { seoRoutes } from "./seo-routes";
+import { concreteRedirects } from "./src/lib/redirects";
 import * as fs from "fs";
 import * as path from "path";
 import { marked } from "marked";
@@ -186,17 +187,87 @@ export function seoPlugin(): Plugin {
 
       console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body)`);
 
+      // Emit soft-redirect/410 pages from the unified redirects registry.
+      const redirectPaths = new Set<string>();
+      const routePaths = new Set(effectiveRoutes.map((r) => r.path));
+      let redirectCount = 0;
+      for (const entry of concreteRedirects()) {
+        if (routePaths.has(entry.from)) continue; // a real route wins
+        const targetUrl = entry.type === "301" ? `${SITE_URL}${entry.to}` : "";
+        const html = renderRedirectHtml(baseHtml, entry, targetUrl);
+        const dir = path.join(distDir, entry.from);
+        fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(path.join(dir, "index.html"), html);
+        redirectPaths.add(entry.from);
+        redirectCount++;
+      }
+      console.log(`[seo-plugin] Generated ${redirectCount} redirect/gone pre-rendered HTML files`);
+
       // Regenerate dist/sitemap.xml from the effective route list so newly added
       // .md posts appear automatically and lastmod tracks each post's updatedAt.
-      writeSitemap(distDir, effectiveRoutes, blogPostsBySlug);
+      writeSitemap(distDir, effectiveRoutes, blogPostsBySlug, redirectPaths);
     },
   };
+}
+
+function renderRedirectHtml(
+  baseHtml: string,
+  entry: { from: string; to?: string; type: "301" | "410" },
+  targetUrl: string
+): string {
+  let html = baseHtml;
+  const stripPatterns: RegExp[] = [
+    /<title>[\s\S]*?<\/title>\s*/gi,
+    /<meta\s+name="description"[^>]*>\s*/gi,
+    /<link\s+rel="canonical"[^>]*>\s*/gi,
+    /<link\s+rel="alternate"\s+hreflang="[^"]*"[^>]*>\s*/gi,
+    /<meta\s+name="robots"[^>]*>\s*/gi,
+    /<meta\s+property="og:(?:type|url|title|description|image|image:width|image:height|locale|site_name)"[^>]*>\s*/gi,
+    /<meta\s+name="twitter:(?:card|title|description|image)"[^>]*>\s*/gi,
+  ];
+  for (const re of stripPatterns) html = html.replace(re, "");
+
+  const isGone = entry.type === "410";
+  const title = isGone ? "Страница удалена" : "Перенаправление…";
+  const description = isGone
+    ? "Эта страница больше не доступна."
+    : `Эта страница переехала на ${entry.to}.`;
+  const canonical = isGone ? `${SITE_URL}${entry.from}` : targetUrl;
+
+  const meta = [
+    `<title>${escapeHtml(title)}</title>`,
+    `<meta name="description" content="${escapeAttr(description)}" />`,
+    `<link rel="canonical" href="${canonical}" />`,
+    `<meta name="robots" content="${isGone ? "noindex, nofollow" : "noindex, follow"}" />`,
+    isGone
+      ? ``
+      : `<meta http-equiv="refresh" content="0; url=${targetUrl}" />`,
+    isGone ? `` : `<link rel="preload" as="fetch" href="${targetUrl}" />`,
+    `<meta property="og:type" content="website" />`,
+    `<meta property="og:url" content="${canonical}" />`,
+    `<meta property="og:title" content="${escapeAttr(title)}" />`,
+    `<meta property="og:description" content="${escapeAttr(description)}" />`,
+  ]
+    .filter(Boolean)
+    .join("\n    ");
+
+  html = html.replace(/(<meta\s+name="viewport"[^>]*>)/, `$1\n    ${meta}`);
+
+  // Visible fallback body for crawlers that ignore meta refresh and for humans
+  // hitting the URL with JS disabled.
+  const body = isGone
+    ? `<main><h1>Страница удалена (410 Gone)</h1><p>Эта публикация больше не поддерживается. Возможно, вам подойдёт <a href="/blog">блог</a>.</p></main>`
+    : `<main><h1>Страница переехала</h1><p>Открываем новую страницу: <a href="${entry.to}">${escapeHtml(entry.to || "")}</a></p></main>`;
+  html = html.replace(/<div id="root"><\/div>/, `<div id="root">${body}</div>`);
+
+  return html;
 }
 
 function writeSitemap(
   distDir: string,
   routes: { path: string; noindex?: boolean; canonicalPath?: string }[],
-  blogPostsBySlug: Map<string, any>
+  blogPostsBySlug: Map<string, any>,
+  redirectPaths: Set<string>
 ) {
   const today = new Date().toISOString().slice(0, 10);
   const seen = new Set<string>();
@@ -205,6 +276,7 @@ function writeSitemap(
     if (r.noindex) continue;
     const p = r.canonicalPath || r.path;
     if (seen.has(p)) continue;
+    if (redirectPaths.has(p)) continue; // never advertise a redirected URL
     seen.add(p);
     const isBlogPost = /^\/blog\/[^/]+$/.test(p);
     const slug = isBlogPost ? p.replace(/^\/blog\//, "") : "";

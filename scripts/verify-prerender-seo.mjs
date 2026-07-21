@@ -24,16 +24,23 @@ if (!existsSync(DIST)) {
 }
 
 // ---------- Load expected metadata from seo-routes.ts ----------
-async function loadSeoRoutes() {
-  const src = readFileSync(resolve(process.cwd(), "seo-routes.ts"), "utf-8");
+async function loadTs(relPath, exportName) {
+  const src = readFileSync(resolve(process.cwd(), relPath), "utf-8");
   const { code } = await esbuild.transform(src, { loader: "ts", format: "esm" });
   const mod = await import(
     "data:text/javascript;base64," + Buffer.from(code).toString("base64")
   );
-  return mod.seoRoutes ?? [];
+  return mod[exportName];
 }
 
-const seoRoutes = await loadSeoRoutes();
+const seoRoutes = await loadTs("seo-routes.ts", "seoRoutes");
+const redirects = (await loadTs("src/lib/redirects.ts", "redirects")) ?? [];
+const redirectFromPaths = new Set(
+  redirects
+    .filter((r) => !r.wildcard)
+    .map((r) => (r.from.replace(/\/$/, "") || "/"))
+);
+
 /** @type {Map<string, {title:string,description:string,canonical:string,ogUrl:string}>} */
 const expectedByPath = new Map();
 for (const r of seoRoutes) {
@@ -162,7 +169,16 @@ for (const file of files) {
   const head = extractHead(html);
   const errs = [];
 
+  // Redirect/gone pages are prerendered from src/lib/redirects.ts and
+  // deliberately lack blog metadata, og:image, and JSON-LD.
+  const isRedirectPage = redirectFromPaths.has(norm(rel));
+
+  const skipTags = new Set(
+    isRedirectPage ? ["og:image", "twitter:image", "ld+json"] : []
+  );
+
   for (const r of REQUIRED) {
+    if (skipTags.has(r.id)) continue;
     const n = countMatches(r.re, head);
     if (r.min !== undefined && n < r.min) errs.push(`${r.id}: missing (got ${n})`);
     if (r.max !== undefined && n > r.max) errs.push(`${r.id}: duplicated (got ${n})`);
@@ -176,7 +192,7 @@ for (const file of files) {
   const canonicalHref = (head.match(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [])[1];
   // Soft-redirect pages intentionally point canonical at their destination
   // (see seo-routes.ts `canonicalPath`). Detect them and skip the self-ref check.
-  const isSoftRedirect = /<meta[^>]+http-equiv=["']refresh["']/i.test(head);
+  const isSoftRedirect = /<meta[^>]+http-equiv=["']refresh["']/i.test(head) || isRedirectPage;
   if (canonicalHref && !isSoftRedirect) {
     const expected = `${SITE}${rel === "/" ? "/" : rel.replace(/\/$/, "")}`;
     const actual = canonicalHref.replace(/\/$/, "") || `${SITE}/`;
@@ -190,7 +206,7 @@ for (const file of files) {
     }
   }
 
-  const isBlogPost = /^\/blog\/[^/]+\/?$/.test(rel);
+  const isBlogPost = /^\/blog\/[^/]+\/?$/.test(rel) && !isRedirectPage;
   if (isBlogPost) {
     const ogType = attr("property=[\"']og:type[\"']", head)[0];
     if (ogType !== "article") errs.push(`og:type: expected "article", got "${ogType ?? "missing"}"`);
@@ -212,8 +228,8 @@ for (const file of files) {
 
   if (errs.length) {
     totalErrors += errs.length;
-    const diff = buildDiff(rel, head);
-    failed.push({ rel, errs, diff });
+    const diff = isRedirectPage ? null : buildDiff(rel, head);
+    failed.push({ rel, errs, diff, isRedirectPage });
   }
 }
 
