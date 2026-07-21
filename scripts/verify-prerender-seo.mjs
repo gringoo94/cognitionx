@@ -247,6 +247,30 @@ for (const file of files) {
         errs.push(`body: missing meaningful <h1>`);
       }
     }
+
+    // Internal /blog link integrity: every /blog/<slug> href in the body
+    // must resolve to a real prerendered slug (no legacy links, no typos).
+    const hrefRe = /href=["']\/blog\/([a-z0-9-]+)(?:\/|["'#?])/gi;
+    const seen = new Set();
+    let hm;
+    while ((hm = hrefRe.exec(rootHtml))) {
+      const slug = hm[1];
+      if (seen.has(slug)) continue;
+      seen.add(slug);
+      if (!knownBlogSlugs.has(slug)) {
+        errs.push(`body: broken /blog link → /blog/${slug} (no prerender)`);
+      }
+    }
+
+    // Sitemap presence for canonical blog pages.
+    if (sitemapUrls.size && !sitemapUrls.has(rel.replace(/\/$/, ""))) {
+      errs.push(`sitemap: missing ${rel}`);
+    }
+  }
+
+  // Redirect sources must NOT appear in the sitemap.
+  if (isRedirectPage && sitemapUrls.has(rel.replace(/\/$/, ""))) {
+    errs.push(`sitemap: redirect source ${rel} should not be listed`);
   }
 
   if (errs.length) {
