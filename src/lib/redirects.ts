@@ -46,6 +46,24 @@ export const redirects: RedirectEntry[] = [
   { from: "/blog/priznaki-depressii", to: "/blog/kak-ponyat-chto-u-menya-depressiya", type: "301" },
   { from: "/blog/chto-takoe-kpt", to: "/blog/kpt-polnyj-gajd", type: "301" },
 
+  // Legacy in-body slug variants (typos/renames surfaced by seo:check)
+  { from: "/blog/cena-bezdejstvija", to: "/blog/tsena-bezdejstviya", type: "301" },
+  { from: "/blog/cena-bezdejstviya", to: "/blog/tsena-bezdejstviya", type: "301" },
+  { from: "/blog/tsena-bezdeystviya", to: "/blog/tsena-bezdejstviya", type: "301" },
+  { from: "/blog/dva-stilya-myshleniya-pri-ruminacii", to: "/blog/rfcbt-dva-stilya-myshleniya", type: "301" },
+  { from: "/blog/ruminaciya-myslennaya-zhvachka", to: "/blog/rfcbt-dva-stilya-myshleniya", type: "301" },
+  { from: "/blog/fomo-i-vybor", to: "/blog/fomo-strah-upustit-vybor", type: "301" },
+  { from: "/blog/strah-upustit-luchshij-variant", to: "/blog/fomo-strah-upustit-vybor", type: "301" },
+  { from: "/blog/kak-bystro-uspokoitsya", to: "/blog/kak-uspokoitsya", type: "301" },
+  { from: "/blog/koleso-emocij-brene-braun", to: "/blog/koleso-emocij", type: "301" },
+  { from: "/blog/kolelso-emocij-brenne-braun-katalog", to: "/blog/koleso-emocij", type: "301" },
+  { from: "/blog/odinochestvo", to: "/blog/odinochestvo-kak-faktor-zdorovya", type: "301" },
+  { from: "/blog/pochemu-strashno-prosit-o-pomoshhi", to: "/blog/pochemu-my-boimsya-prosit-o-pomoshchi", type: "301" },
+  { from: "/blog/pochemu-strashno-prosit-o-pomoshi", to: "/blog/pochemu-my-boimsya-prosit-o-pomoshchi", type: "301" },
+  { from: "/blog/prosit-o-pomoshi", to: "/blog/pochemu-my-boimsya-prosit-o-pomoshchi", type: "301" },
+  { from: "/blog/utrennyaya-trevoga", to: "/blog/utrom-net-sil-zhit", type: "301" },
+  { from: "/blog/vygoranie-na-rabote-kak-raspoznat", to: "/blog/vygoranie-simptomy-vosstanovlenie", type: "301" },
+
   // Tools old paths
   { from: "/koleso-emocij", to: "/tools/emotion-wheel", type: "301" },
   { from: "/abc-analysis", to: "/tools/abc-analysis", type: "301" },

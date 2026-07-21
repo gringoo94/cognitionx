@@ -114,6 +114,29 @@ const files = listIndexHtml(DIST).sort();
 let totalErrors = 0;
 const failed = [];
 
+// ---------- Cross-file corpus: known blog slugs + sitemap URLs ----------
+const knownBlogSlugs = new Set();
+for (const f of files) {
+  const rel = "/" + relative(DIST, f).replace(/\\/g, "/").replace(/index\.html$/, "");
+  const norm = rel.replace(/\/$/, "");
+  const m = norm.match(/^\/blog\/([^/]+)$/);
+  if (!m) continue;
+  if (redirectFromPaths.has(norm)) continue;
+  knownBlogSlugs.add(m[1]);
+}
+
+const sitemapPath = join(DIST, "sitemap.xml");
+const sitemapUrls = new Set();
+if (existsSync(sitemapPath)) {
+  const xml = readFileSync(sitemapPath, "utf-8");
+  const re = /<loc>([^<]+)<\/loc>/g;
+  let m;
+  while ((m = re.exec(xml))) {
+    const u = m[1].replace(/^https?:\/\/[^/]+/, "").replace(/\/$/, "") || "/";
+    sitemapUrls.add(u);
+  }
+}
+
 function extractRoot(html) {
   const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*(?:<script|<\/body)/i);
   return m ? m[1] : "";
@@ -224,6 +247,30 @@ for (const file of files) {
         errs.push(`body: missing meaningful <h1>`);
       }
     }
+
+    // Internal /blog link integrity: every /blog/<slug> href in the body
+    // must resolve to a real prerendered slug (no legacy links, no typos).
+    const hrefRe = /href=["']\/blog\/([a-z0-9-]+)(?:\/|["'#?])/gi;
+    const seen = new Set();
+    let hm;
+    while ((hm = hrefRe.exec(rootHtml))) {
+      const slug = hm[1];
+      if (seen.has(slug)) continue;
+      seen.add(slug);
+      if (!knownBlogSlugs.has(slug)) {
+        errs.push(`body: broken /blog link → /blog/${slug} (no prerender)`);
+      }
+    }
+
+    // Sitemap presence for canonical blog pages.
+    if (sitemapUrls.size && !sitemapUrls.has(rel.replace(/\/$/, ""))) {
+      errs.push(`sitemap: missing ${rel}`);
+    }
+  }
+
+  // Redirect sources must NOT appear in the sitemap.
+  if (isRedirectPage && sitemapUrls.has(rel.replace(/\/$/, ""))) {
+    errs.push(`sitemap: redirect source ${rel} should not be listed`);
   }
 
   if (errs.length) {
