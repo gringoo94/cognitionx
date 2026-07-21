@@ -39,10 +39,32 @@ export function seoPlugin(): Plugin {
         console.warn("[seo-plugin] could not load blogPosts for article prerender:", err);
       }
 
+      // Build the effective route list: seoRoutes + auto-generated entries for
+      // any published blog post that lacks an explicit seo-routes.ts row. This
+      // makes new .md posts fully self-serve — no need to hand-edit seo-routes
+      // or sitemap.xml.
+      const explicitPaths = new Set(seoRoutes.map((r) => r.path.replace(/\/$/, "") || "/"));
+      const autoBlogRoutes: typeof seoRoutes = [];
+      for (const [slug, post] of blogPostsBySlug) {
+        const p = `/blog/${slug}`;
+        if (!explicitPaths.has(p)) {
+          autoBlogRoutes.push({
+            path: p,
+            title: post.title,
+            description: post.description || post.title,
+            ogType: "article",
+          });
+        }
+      }
+      if (autoBlogRoutes.length) {
+        console.log(`[seo-plugin] Auto-registered ${autoBlogRoutes.length} blog routes missing from seo-routes.ts`);
+      }
+      const effectiveRoutes = [...seoRoutes, ...autoBlogRoutes];
+
       let count = 0;
       let blogCount = 0;
 
-      for (const route of seoRoutes) {
+      for (const route of effectiveRoutes) {
         const routePath = route.path;
         const canonicalUrl = `${SITE_URL}${route.canonicalPath || routePath}`;
         const url = `${SITE_URL}${routePath}`;
@@ -150,8 +172,40 @@ export function seoPlugin(): Plugin {
       }
 
       console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body)`);
+
+      // Regenerate dist/sitemap.xml from the effective route list so newly added
+      // .md posts appear automatically and lastmod tracks each post's updatedAt.
+      writeSitemap(distDir, effectiveRoutes, blogPostsBySlug);
     },
   };
+}
+
+function writeSitemap(
+  distDir: string,
+  routes: { path: string; noindex?: boolean; canonicalPath?: string }[],
+  blogPostsBySlug: Map<string, any>
+) {
+  const today = new Date().toISOString().slice(0, 10);
+  const seen = new Set<string>();
+  const urls: string[] = [];
+  for (const r of routes) {
+    if (r.noindex) continue;
+    const p = r.canonicalPath || r.path;
+    if (seen.has(p)) continue;
+    seen.add(p);
+    const isBlogPost = /^\/blog\/[^/]+$/.test(p);
+    const slug = isBlogPost ? p.replace(/^\/blog\//, "") : "";
+    const post = slug ? blogPostsBySlug.get(slug) : null;
+    const lastmod = post?.updatedAt || post?.date || today;
+    const priority = p === "/" ? "1.0" : isBlogPost ? "0.7" : "0.6";
+    const changefreq = p === "/" || p === "/blog" ? "weekly" : "monthly";
+    urls.push(
+      `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`
+    );
+  }
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
+  fs.writeFileSync(path.join(distDir, "sitemap.xml"), xml);
+  console.log(`[seo-plugin] Wrote sitemap.xml (${urls.length} URLs)`);
 }
 
 /**
