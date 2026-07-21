@@ -108,7 +108,7 @@ let totalErrors = 0;
 const failed = [];
 
 function extractRoot(html) {
-  const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*<script/i);
+  const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*(?:<script|<\/body)/i);
   return m ? m[1] : "";
 }
 
