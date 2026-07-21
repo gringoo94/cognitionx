@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "node scripts/fetch-db-posts.mjs",
+    "prebuild": "node scripts/fetch-db-posts.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "seo:check": "node scripts/verify-prerender-seo.mjs",
