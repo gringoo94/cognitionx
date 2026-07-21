@@ -151,8 +151,8 @@ export function seoPlugin(): Plugin {
             const blogPosting = {
               "@context": "https://schema.org",
               "@type": "BlogPosting",
-              headline: route.title,
-              description: route.description,
+              headline: post.title,
+              description: post.description || post.title,
               image: ogImage,
               datePublished: post.date,
               dateModified: post.dateModified || post.updatedAt || post.date,
