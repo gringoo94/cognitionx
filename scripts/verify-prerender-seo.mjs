@@ -108,7 +108,7 @@ let totalErrors = 0;
 const failed = [];
 
 function extractRoot(html) {
-  const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*<script/i);
+  const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*(?:<script|<\/body)/i);
   return m ? m[1] : "";
 }
 
@@ -174,7 +174,10 @@ for (const file of files) {
   }
 
   const canonicalHref = (head.match(/<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [])[1];
-  if (canonicalHref) {
+  // Soft-redirect pages intentionally point canonical at their destination
+  // (see seo-routes.ts `canonicalPath`). Detect them and skip the self-ref check.
+  const isSoftRedirect = /<meta[^>]+http-equiv=["']refresh["']/i.test(head);
+  if (canonicalHref && !isSoftRedirect) {
     const expected = `${SITE}${rel === "/" ? "/" : rel.replace(/\/$/, "")}`;
     const actual = canonicalHref.replace(/\/$/, "") || `${SITE}/`;
     const expectedNorm = expected.replace(/\/$/, "") || `${SITE}/`;
