@@ -172,8 +172,40 @@ export function seoPlugin(): Plugin {
       }
 
       console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body)`);
+
+      // Regenerate dist/sitemap.xml from the effective route list so newly added
+      // .md posts appear automatically and lastmod tracks each post's updatedAt.
+      writeSitemap(distDir, effectiveRoutes, blogPostsBySlug);
     },
   };
+}
+
+function writeSitemap(
+  distDir: string,
+  routes: { path: string; noindex?: boolean; canonicalPath?: string }[],
+  blogPostsBySlug: Map<string, any>
+) {
+  const today = new Date().toISOString().slice(0, 10);
+  const seen = new Set<string>();
+  const urls: string[] = [];
+  for (const r of routes) {
+    if (r.noindex) continue;
+    const p = r.canonicalPath || r.path;
+    if (seen.has(p)) continue;
+    seen.add(p);
+    const isBlogPost = /^\/blog\/[^/]+$/.test(p);
+    const slug = isBlogPost ? p.replace(/^\/blog\//, "") : "";
+    const post = slug ? blogPostsBySlug.get(slug) : null;
+    const lastmod = post?.updatedAt || post?.date || today;
+    const priority = p === "/" ? "1.0" : isBlogPost ? "0.7" : "0.6";
+    const changefreq = p === "/" || p === "/blog" ? "weekly" : "monthly";
+    urls.push(
+      `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`
+    );
+  }
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
+  fs.writeFileSync(path.join(distDir, "sitemap.xml"), xml);
+  console.log(`[seo-plugin] Wrote sitemap.xml (${urls.length} URLs)`);
 }
 
 /**
