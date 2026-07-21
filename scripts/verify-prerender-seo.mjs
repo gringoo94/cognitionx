@@ -33,6 +33,27 @@ async function loadTs(relPath, exportName) {
   return mod[exportName];
 }
 
+// Bundle a TS entry with all its imports resolved (needed for the blog
+// registry, which imports the MD loader / manifest).
+async function loadBundled(relPath, exportName) {
+  const result = await esbuild.build({
+    entryPoints: [resolve(process.cwd(), relPath)],
+    bundle: true,
+    write: false,
+    format: "esm",
+    platform: "node",
+    target: "es2022",
+    logLevel: "silent",
+    // `import.meta.glob` is Vite-only; under Node it's undefined and the
+    // loader's try/catch falls back to the generated manifest.
+  });
+  const code = result.outputFiles[0].text;
+  const mod = await import(
+    "data:text/javascript;base64," + Buffer.from(code).toString("base64")
+  );
+  return mod[exportName];
+}
+
 const seoRoutes = await loadTs("seo-routes.ts", "seoRoutes");
 const redirects = (await loadTs("src/lib/redirects.ts", "redirects")) ?? [];
 const redirectFromPaths = new Set(
@@ -41,14 +62,42 @@ const redirectFromPaths = new Set(
     .map((r) => (r.from.replace(/\/$/, "") || "/"))
 );
 
+// Phase 5: unified blog registry is the source of truth for /blog/* metadata.
+// Overrides seo-routes.ts so stale hand-edited titles/descriptions can't drift.
+const blogPosts = (await loadBundled("src/data/blogPosts.ts", "blogPosts")) ?? [];
+const postBySlug = new Map(blogPosts.map((p) => [p.slug, p]));
+
 /** @type {Map<string, {title:string,description:string,canonical:string,ogUrl:string}>} */
 const expectedByPath = new Map();
 for (const r of seoRoutes) {
   const canonicalPath = r.canonicalPath ?? r.path;
   const canonical = `${SITE}${canonicalPath === "/" ? "/" : canonicalPath.replace(/\/$/, "")}`;
+  let title = r.title;
+  let description = r.description;
+  const isSoftRedirect = !!r.canonicalPath && r.canonicalPath !== r.path;
+  const m = !isSoftRedirect && r.path.match(/^\/blog\/([^/]+)$/);
+  if (m) {
+    const post = postBySlug.get(m[1]);
+    if (post) {
+      title = post.title;
+      description = post.description || post.title;
+    }
+  }
   expectedByPath.set(r.path.replace(/\/$/, "") || "/", {
-    title: r.title,
-    description: r.description,
+    title,
+    description,
+    canonical,
+    ogUrl: canonical,
+  });
+}
+// Also register auto-prerendered blog posts (those not present in seo-routes.ts).
+for (const post of blogPosts) {
+  const key = `/blog/${post.slug}`;
+  if (expectedByPath.has(key)) continue;
+  const canonical = `${SITE}${key}`;
+  expectedByPath.set(key, {
+    title: post.title,
+    description: post.description || post.title,
     canonical,
     ogUrl: canonical,
   });

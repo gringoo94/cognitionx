@@ -65,12 +65,11 @@ export function seoPlugin(): Plugin {
       let count = 0;
       let blogCount = 0;
 
+      let overrideCount = 0;
       for (const route of effectiveRoutes) {
         const routePath = route.path;
         const canonicalUrl = `${SITE_URL}${route.canonicalPath || routePath}`;
         const url = `${SITE_URL}${routePath}`;
-        const ogType = route.ogType || "website";
-        const ogImage = route.ogImage || OG_IMAGE;
 
         // Soft redirect: when canonicalPath differs from path (legacy URL
         // consolidating onto a new target), emit a <meta http-equiv=refresh>
@@ -79,27 +78,46 @@ export function seoPlugin(): Plugin {
         // crawlers on plain static hosting.
         const isSoftRedirect = !!route.canonicalPath && route.canonicalPath !== route.path;
 
+        // Phase 5: for any /blog/<slug> route (non-redirect), the unified
+        // registry (blogPosts.ts merges MD + legacy JSON + DB) is the source
+        // of truth for title/description/ogType. Overrides seo-routes.ts so
+        // stale hand-edited metadata cannot drift from the actual post.
+        let effTitle = route.title;
+        let effDescription = route.description;
+        let effOgType: string = route.ogType || "website";
+        const blogSlugMatch = !isSoftRedirect && routePath.match(/^\/blog\/([^/]+)$/);
+        if (blogSlugMatch) {
+          const post = blogPostsBySlug.get(blogSlugMatch[1]);
+          if (post) {
+            if (post.title && post.title !== effTitle) overrideCount++;
+            effTitle = post.title;
+            effDescription = post.description || post.title;
+            effOgType = "article";
+          }
+        }
+        const ogImage = route.ogImage || OG_IMAGE;
+
         // Build static meta tags
         const metaTags = [
-          `<title>${escapeHtml(route.title)}</title>`,
-          `<meta name="description" content="${escapeAttr(route.description)}" />`,
+          `<title>${escapeHtml(effTitle)}</title>`,
+          `<meta name="description" content="${escapeAttr(effDescription)}" />`,
           `<link rel="canonical" href="${canonicalUrl}" />`,
           `<link rel="alternate" hreflang="ru" href="${canonicalUrl}" />`,
           `<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />`,
           `<meta name="robots" content="${route.noindex ? "noindex, nofollow" : "index, follow"}" />`,
           `<meta name="theme-color" content="#0F172A" />`,
-          `<meta property="og:type" content="${ogType}" />`,
+          `<meta property="og:type" content="${effOgType}" />`,
           `<meta property="og:url" content="${canonicalUrl}" />`,
-          `<meta property="og:title" content="${escapeAttr(route.title)}" />`,
-          `<meta property="og:description" content="${escapeAttr(route.description)}" />`,
+          `<meta property="og:title" content="${escapeAttr(effTitle)}" />`,
+          `<meta property="og:description" content="${escapeAttr(effDescription)}" />`,
           `<meta property="og:image" content="${ogImage}" />`,
           `<meta property="og:image:width" content="1200" />`,
           `<meta property="og:image:height" content="630" />`,
           `<meta property="og:locale" content="ru_RU" />`,
           `<meta property="og:site_name" content="Психолог Дмитрий Яцко" />`,
           `<meta name="twitter:card" content="summary_large_image" />`,
-          `<meta name="twitter:title" content="${escapeAttr(route.title)}" />`,
-          `<meta name="twitter:description" content="${escapeAttr(route.description)}" />`,
+          `<meta name="twitter:title" content="${escapeAttr(effTitle)}" />`,
+          `<meta name="twitter:description" content="${escapeAttr(effDescription)}" />`,
           `<meta name="twitter:image" content="${ogImage}" />`,
         ];
         if (isSoftRedirect) {
@@ -133,8 +151,8 @@ export function seoPlugin(): Plugin {
             const blogPosting = {
               "@context": "https://schema.org",
               "@type": "BlogPosting",
-              headline: route.title,
-              description: route.description,
+              headline: post.title,
+              description: post.description || post.title,
               image: ogImage,
               datePublished: post.date,
               dateModified: post.dateModified || post.updatedAt || post.date,
@@ -185,7 +203,7 @@ export function seoPlugin(): Plugin {
         count++;
       }
 
-      console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body)`);
+      console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body; ${overrideCount} blog metadata overridden from registry)`);
 
       // Emit soft-redirect/410 pages from the unified redirects registry.
       const redirectPaths = new Set<string>();
