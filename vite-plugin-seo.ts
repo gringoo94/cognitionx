@@ -65,12 +65,11 @@ export function seoPlugin(): Plugin {
       let count = 0;
       let blogCount = 0;
 
+      let overrideCount = 0;
       for (const route of effectiveRoutes) {
         const routePath = route.path;
         const canonicalUrl = `${SITE_URL}${route.canonicalPath || routePath}`;
         const url = `${SITE_URL}${routePath}`;
-        const ogType = route.ogType || "website";
-        const ogImage = route.ogImage || OG_IMAGE;
 
         // Soft redirect: when canonicalPath differs from path (legacy URL
         // consolidating onto a new target), emit a <meta http-equiv=refresh>
@@ -79,10 +78,29 @@ export function seoPlugin(): Plugin {
         // crawlers on plain static hosting.
         const isSoftRedirect = !!route.canonicalPath && route.canonicalPath !== route.path;
 
+        // Phase 5: for any /blog/<slug> route (non-redirect), the unified
+        // registry (blogPosts.ts merges MD + legacy JSON + DB) is the source
+        // of truth for title/description/ogType. Overrides seo-routes.ts so
+        // stale hand-edited metadata cannot drift from the actual post.
+        let effTitle = route.title;
+        let effDescription = route.description;
+        let effOgType: string = route.ogType || "website";
+        const blogSlugMatch = !isSoftRedirect && routePath.match(/^\/blog\/([^/]+)$/);
+        if (blogSlugMatch) {
+          const post = blogPostsBySlug.get(blogSlugMatch[1]);
+          if (post) {
+            if (post.title && post.title !== effTitle) overrideCount++;
+            effTitle = post.title;
+            effDescription = post.description || post.title;
+            effOgType = "article";
+          }
+        }
+        const ogImage = route.ogImage || OG_IMAGE;
+
         // Build static meta tags
         const metaTags = [
-          `<title>${escapeHtml(route.title)}</title>`,
-          `<meta name="description" content="${escapeAttr(route.description)}" />`,
+          `<title>${escapeHtml(effTitle)}</title>`,
+          `<meta name="description" content="${escapeAttr(effDescription)}" />`,
           `<link rel="canonical" href="${canonicalUrl}" />`,
           `<link rel="alternate" hreflang="ru" href="${canonicalUrl}" />`,
           `<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />`,
