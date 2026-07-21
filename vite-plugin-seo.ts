@@ -203,7 +203,7 @@ export function seoPlugin(): Plugin {
         count++;
       }
 
-      console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body)`);
+      console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body; ${overrideCount} blog metadata overridden from registry)`);
 
       // Emit soft-redirect/410 pages from the unified redirects registry.
       const redirectPaths = new Set<string>();
