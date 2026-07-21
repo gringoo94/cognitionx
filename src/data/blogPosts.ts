@@ -3729,14 +3729,18 @@ export const blogPosts: BlogPost[] = [
 
 // -------- Markdown-sourced posts (merged into blogPosts) --------
 import { mdBlogPosts } from "../lib/loadMdBlogPosts";
+// -------- DB-sourced posts (generated at build time by scripts/fetch-db-posts.mjs) --------
+import { dbBlogPosts } from "./dbBlogPosts.generated";
 
 {
-  const _slugs = new Set(mdBlogPosts.map((p) => p.slug));
-  // Drop any legacy entries that were migrated to .md
+  const extra = [...mdBlogPosts, ...dbBlogPosts];
+  const _slugs = new Set(extra.map((p) => p.slug));
+  // Drop any legacy entries that were migrated to .md or moved to DB
   for (let i = blogPosts.length - 1; i >= 0; i--) {
     if (_slugs.has(blogPosts[i].slug)) blogPosts.splice(i, 1);
   }
-  // Prepend markdown posts, then re-sort by date desc
-  blogPosts.unshift(...mdBlogPosts);
+  // Prepend md + DB posts, then re-sort by date desc
+  blogPosts.unshift(...extra);
   blogPosts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 }
+
