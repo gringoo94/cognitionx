@@ -73,34 +73,56 @@ const FloatingTelegramFab = () => {
     }
   };
 
+  const compact = pathname === "/blog" || pathname.startsWith("/blog?");
+
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex items-end gap-2 print:hidden">
-      {expanded && (
+    <div
+      className="fixed right-5 z-50 flex items-end gap-2 print:hidden"
+      style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 1.25rem)" }}
+    >
+      {expanded && !compact && (
         <div className="hidden sm:block mb-1 max-w-[220px] rounded-xl bg-foreground text-background text-xs px-3 py-2 shadow-lg animate-in fade-in slide-in-from-bottom-2">
           Есть вопрос? Напишите — отвечу в течение дня.
         </div>
       )}
-      <div className="relative">
+      <div className="relative group">
         <button
           type="button"
           aria-label="Закрыть"
           onClick={handleDismiss}
-          className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-background border border-border text-muted-foreground hover:text-foreground flex items-center justify-center shadow-sm"
+          className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-background border border-border text-muted-foreground hover:text-foreground flex items-center justify-center shadow-sm z-10"
         >
           <X className="w-3 h-3" />
         </button>
-        <a
-          href="https://t.me/gringoo94"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleClick}
-          aria-label="Написать в Telegram"
-          className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground shadow-xl shadow-primary/30 hover:bg-primary/90 transition-colors h-12 pl-4 pr-5 text-sm font-medium"
-        >
-          <Send className="w-4 h-4" />
-          <span className="hidden sm:inline">Написать в Telegram</span>
-          <span className="sm:hidden">Telegram</span>
-        </a>
+        {compact ? (
+          <a
+            href="https://t.me/gringoo94"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleClick}
+            aria-label="Написать в Telegram"
+            title="Написать в Telegram"
+            className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl shadow-primary/30 hover:bg-primary/90 transition-colors w-[54px] h-[54px]"
+          >
+            <Send className="w-5 h-5" />
+            <span className="pointer-events-none absolute right-full mr-2 whitespace-nowrap rounded-md bg-foreground text-background text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+              Написать в Telegram
+            </span>
+          </a>
+        ) : (
+          <a
+            href="https://t.me/gringoo94"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleClick}
+            aria-label="Написать в Telegram"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground shadow-xl shadow-primary/30 hover:bg-primary/90 transition-colors h-12 pl-4 pr-5 text-sm font-medium"
+          >
+            <Send className="w-4 h-4" />
+            <span className="hidden sm:inline">Написать в Telegram</span>
+            <span className="sm:hidden">Telegram</span>
+          </a>
+        )}
       </div>
     </div>
   );
