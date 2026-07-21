@@ -71,6 +71,13 @@ export function seoPlugin(): Plugin {
         const ogType = route.ogType || "website";
         const ogImage = route.ogImage || OG_IMAGE;
 
+        // Soft redirect: when canonicalPath differs from path (legacy URL
+        // consolidating onto a new target), emit a <meta http-equiv=refresh>
+        // so browsers navigate to the destination without JS. Combined with
+        // noindex + canonical-to-target this behaves like a static 301 for
+        // crawlers on plain static hosting.
+        const isSoftRedirect = !!route.canonicalPath && route.canonicalPath !== route.path;
+
         // Build static meta tags
         const metaTags = [
           `<title>${escapeHtml(route.title)}</title>`,
@@ -94,6 +101,12 @@ export function seoPlugin(): Plugin {
           `<meta name="twitter:description" content="${escapeAttr(route.description)}" />`,
           `<meta name="twitter:image" content="${ogImage}" />`,
         ];
+        if (isSoftRedirect) {
+          metaTags.push(
+            `<meta http-equiv="refresh" content="0; url=${canonicalUrl}" />`,
+            `<link rel="preload" as="fetch" href="${canonicalUrl}" />`
+          );
+        }
 
         let html = baseHtml;
 
