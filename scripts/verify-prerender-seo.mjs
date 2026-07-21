@@ -33,6 +33,29 @@ async function loadTs(relPath, exportName) {
   return mod[exportName];
 }
 
+// Bundle a TS entry with all its imports resolved (needed for the blog
+// registry, which imports the MD loader / manifest).
+async function loadBundled(relPath, exportName) {
+  const result = await esbuild.build({
+    entryPoints: [resolve(process.cwd(), relPath)],
+    bundle: true,
+    write: false,
+    format: "esm",
+    platform: "node",
+    target: "es2022",
+    logLevel: "silent",
+    external: [],
+    // The MD loader references `import.meta.glob`, a Vite-only API.
+    // Rewrite it to an empty object so the manifest fallback kicks in.
+    define: { "import.meta.glob": "(()=>({}))" },
+  });
+  const code = result.outputFiles[0].text;
+  const mod = await import(
+    "data:text/javascript;base64," + Buffer.from(code).toString("base64")
+  );
+  return mod[exportName];
+}
+
 const seoRoutes = await loadTs("seo-routes.ts", "seoRoutes");
 const redirects = (await loadTs("src/lib/redirects.ts", "redirects")) ?? [];
 const redirectFromPaths = new Set(
