@@ -588,8 +588,11 @@ const BlogList = () => {
                 {safePage > 1 && (
                   <PaginationItem>
                     <PaginationPrevious
-                      to={pageUrl(safePage - 1)}
-                      onClick={() => goToPage(safePage - 1)}
+                      href={pageUrl(safePage - 1)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToPage(safePage - 1);
+                      }}
                     >
                       <ArrowLeft className="h-4 w-4 mr-1" />
                       Назад
@@ -599,9 +602,12 @@ const BlogList = () => {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <PaginationItem key={page}>
                     <PaginationLink
-                      to={pageUrl(page)}
+                      href={pageUrl(page)}
                       isActive={page === safePage}
-                      onClick={() => goToPage(page)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToPage(page);
+                      }}
                     >
                       {page}
                     </PaginationLink>
@@ -610,8 +616,11 @@ const BlogList = () => {
                 {safePage < totalPages && (
                   <PaginationItem>
                     <PaginationNext
-                      to={pageUrl(safePage + 1)}
-                      onClick={() => goToPage(safePage + 1)}
+                      href={pageUrl(safePage + 1)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToPage(safePage + 1);
+                      }}
                     >
                       Вперёд
                       <ArrowRight className="h-4 w-4 ml-1" />
