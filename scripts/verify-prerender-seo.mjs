@@ -44,10 +44,8 @@ async function loadBundled(relPath, exportName) {
     platform: "node",
     target: "es2022",
     logLevel: "silent",
-    external: [],
-    // The MD loader references `import.meta.glob`, a Vite-only API.
-    // Rewrite it to an empty object so the manifest fallback kicks in.
-    define: { "import.meta.glob": "(()=>({}))" },
+    // `import.meta.glob` is Vite-only; under Node it's undefined and the
+    // loader's try/catch falls back to the generated manifest.
   });
   const code = result.outputFiles[0].text;
   const mod = await import(
