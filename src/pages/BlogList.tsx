@@ -527,7 +527,7 @@ const BlogList = () => {
         )}
 
         {/* Editorial recommended block */}
-        {isDefaultView && featuredPosts.hero && (
+        {isFeaturedVisible && featuredPosts.hero && (
           <section aria-labelledby="featured-heading" className="mb-10">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="w-4 h-4 text-primary" />
