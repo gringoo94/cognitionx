@@ -249,8 +249,12 @@ const BlogList = () => {
 
   const hasFilters =
     activeTopic !== null || activeTag !== null || query.trim() !== "";
-  const isDefaultView =
-    !hasFilters && sort === "recommended" && currentPage === 1;
+  // Featured block is part of the "recommended, unfiltered" view.
+  // We must exclude featured slugs from the grid on ALL pages of this view
+  // (not just page 1) so they never appear twice, and so totalPages is stable.
+  const isDefaultView = !hasFilters && sort === "recommended";
+  // The editorial block itself only renders on page 1.
+  const isFeaturedVisible = isDefaultView && currentPage === 1;
 
   // Editorial recommended block (only on default view).
   const featuredPosts = useMemo(() => {
