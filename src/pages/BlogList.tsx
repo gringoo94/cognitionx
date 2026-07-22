@@ -330,13 +330,13 @@ const BlogList = () => {
   // на остальных — только карточки грида.
   const displayedPosts = useMemo(() => {
     const list: BlogPost[] = [];
-    if (isDefaultView) {
+    if (isFeaturedVisible) {
       if (featuredPosts.hero) list.push(featuredPosts.hero);
       list.push(...featuredPosts.secondary);
     }
     list.push(...paginated);
     return list;
-  }, [isDefaultView, featuredPosts, paginated]);
+  }, [isFeaturedVisible, featuredPosts, paginated]);
 
   const collectionSchema = useMemo(
     () => ({
