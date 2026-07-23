@@ -85,6 +85,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://cognitionx.cloud/tools/day-planner</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://cognitionx.cloud/tools/breathing</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>

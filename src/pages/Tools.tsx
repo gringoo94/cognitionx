@@ -85,6 +85,14 @@ const interactiveTools: ToolCard[] = [
     meta: "Ежедневный трекер",
   },
   {
+    to: "/tools/day-planner",
+    title: "Планировщик дня",
+    description:
+      "План на день по методу поведенческой активации: оценка энергии, три опоры с минимальной версией и история за 14 дней.",
+    icon: Clock,
+    meta: "Ежедневно",
+  },
+  {
     to: "/tools/abstract-to-concrete",
     title: "Как думать иначе (RFCBT)",
     description:
