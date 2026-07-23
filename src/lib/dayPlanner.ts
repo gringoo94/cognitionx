@@ -170,6 +170,7 @@ export const loadState = (): DayPlannerState => {
       version: 1,
       observations: Array.isArray(parsed.observations) ? parsed.observations : [],
       days: parsed.days && typeof parsed.days === "object" ? parsed.days : {},
+      activities: Array.isArray(parsed.activities) ? parsed.activities : [],
     };
   } catch {
     return emptyState();
