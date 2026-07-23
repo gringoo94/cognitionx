@@ -22,6 +22,7 @@ const DayPlanner = () => {
     version: 1,
     observations: [],
     days: {},
+    activities: [],
   }));
   const [hydrated, setHydrated] = useState(false);
   const [workingDate, setWorkingDate] = useState<string>(todayISO());
