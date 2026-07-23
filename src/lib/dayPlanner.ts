@@ -34,10 +34,23 @@ export interface DayPlan {
   updatedAt: number;
 }
 
+export type ActivityDuration = "u5" | "u15" | "u30" | "o30";
+
+export interface Activity {
+  id: string;
+  type: PillarType;
+  title: string;
+  feasibility: number; // 0..10, -1 = not rated
+  duration: ActivityDuration | null;
+  starter: boolean;
+  source: "preset" | "custom";
+}
+
 export interface DayPlannerState {
   version: 1;
   observations: Observation[];
   days: Record<string, DayPlan>;
+  activities: Activity[];
 }
 
 const STORAGE_KEY = "cx.day-planner.v1";
@@ -46,7 +59,73 @@ const emptyState = (): DayPlannerState => ({
   version: 1,
   observations: [],
   days: {},
+  activities: [],
 });
+
+export const durationLabel: Record<ActivityDuration, string> = {
+  u5: "до 5 мин",
+  u15: "5–15 мин",
+  u30: "15–30 мин",
+  o30: "более 30 мин",
+};
+
+export const durationShort: Record<ActivityDuration, string> = {
+  u5: "≤5",
+  u15: "5–15",
+  u30: "15–30",
+  o30: ">30",
+};
+
+export const ACTIVITY_PRESETS: Record<PillarType, string[]> = {
+  necessary: [
+    "принять душ",
+    "приготовить завтрак",
+    "купить продукты",
+    "оплатить счета",
+    "ответить на рабочее письмо",
+    "постирать вещи",
+    "записаться к врачу",
+    "убрать рабочий стол",
+    "выполнить учебное задание",
+    "вынести мусор",
+    "почистить зубы",
+    "принять лекарства",
+  ],
+  pleasure: [
+    "прогулка 10 минут",
+    "послушать музыку",
+    "посмотреть фильм",
+    "выпить кофе в любимом месте",
+    "встретиться с другом",
+    "почитать книгу",
+    "порисовать",
+    "приготовить новое блюдо",
+    "поиграть с питомцем",
+    "принять тёплую ванну",
+    "выпить чай у окна",
+    "полежать под пледом",
+    "посмотреть смешное видео",
+    "позвонить близкому",
+    "сделать растяжку",
+  ],
+  mastery: [
+    "закончить один раздел работы",
+    "разобрать один ящик",
+    "сделать короткую тренировку",
+    "выполнить домашнее задание",
+    "написать важное сообщение",
+    "закончить главу книги",
+    "выучить 5 иностранных слов",
+    "пройти 5000 шагов",
+    "закончить уборку кухни",
+    "выполнить задачу из списка дел",
+    "полить растения",
+    "сложить бельё",
+    "разобрать почту",
+    "заполнить один документ",
+    "сделать одну поверхность",
+  ],
+};
 
 export const emptyPillar = (type: PillarType): Pillar => ({
   type,
@@ -91,6 +170,7 @@ export const loadState = (): DayPlannerState => {
       version: 1,
       observations: Array.isArray(parsed.observations) ? parsed.observations : [],
       days: parsed.days && typeof parsed.days === "object" ? parsed.days : {},
+      activities: Array.isArray(parsed.activities) ? parsed.activities : [],
     };
   } catch {
     return emptyState();
