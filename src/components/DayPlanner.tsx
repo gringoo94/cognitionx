@@ -16,6 +16,7 @@ import ObservationLog from "./day-planner/ObservationLog";
 import PlanForm from "./day-planner/PlanForm";
 import ReviewList from "./day-planner/ReviewList";
 import HistoryPanel from "./day-planner/HistoryPanel";
+import ActivityBank from "./day-planner/ActivityBank";
 
 const DayPlanner = () => {
   const [state, setState] = useState<DayPlannerState>(() => ({
@@ -61,6 +62,10 @@ const DayPlanner = () => {
     persist({ ...state, observations });
   };
 
+  const setActivities = (activities: DayPlannerState["activities"]) => {
+    persist({ ...state, activities });
+  };
+
   const deleteDay = (date: string) => {
     const days = { ...state.days };
     delete days[date];
@@ -83,8 +88,9 @@ const DayPlanner = () => {
       </div>
 
       <Tabs defaultValue="plan" className="w-full">
-        <TabsList className="grid grid-cols-4 w-full">
+        <TabsList className="grid grid-cols-5 w-full">
           <TabsTrigger value="observe">Наблюдение</TabsTrigger>
+          <TabsTrigger value="bank">Банк активностей</TabsTrigger>
           <TabsTrigger value="plan">План на день</TabsTrigger>
           <TabsTrigger value="review">Отметка после</TabsTrigger>
           <TabsTrigger value="history">История</TabsTrigger>
@@ -94,8 +100,12 @@ const DayPlanner = () => {
           <ObservationLog observations={state.observations} onChange={setObservations} />
         </TabsContent>
 
+        <TabsContent value="bank" className="mt-6">
+          <ActivityBank activities={state.activities} onChange={setActivities} />
+        </TabsContent>
+
         <TabsContent value="plan" className="mt-6 space-y-6">
-          <PlanForm day={draft} onChange={setDraft} />
+          <PlanForm day={draft} onChange={setDraft} starters={state.activities.filter((a) => a.starter)} />
           <div className="flex justify-end">
             <Button onClick={savePlan} className="gap-2">
               <Save className="w-4 h-4" /> Сохранить план

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import {
   Select,
   SelectContent,
@@ -377,8 +377,5 @@ const StartersPanel = ({ starters }: { starters: Activity[] }) => {
     </section>
   );
 };
-
-// keep Checkbox import used to avoid tree-shake surprises in some setups
-void Checkbox;
 
 export default ActivityBank;

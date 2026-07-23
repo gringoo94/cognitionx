@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  type Activity,
   type DayPlan,
   type Pillar,
   type PillarType,
@@ -15,14 +16,17 @@ import {
 interface Props {
   day: DayPlan;
   onChange: (next: DayPlan) => void;
+  starters?: Activity[];
 }
 
 const PillarCard = ({
   pillar,
   onChange,
+  suggestions,
 }: {
   pillar: Pillar;
   onChange: (next: Pillar) => void;
+  suggestions: Activity[];
 }) => {
   const type = pillar.type;
   const tint: Record<PillarType, string> = {
@@ -39,6 +43,23 @@ const PillarCard = ({
         </div>
         <p className="text-xs text-muted-foreground italic mt-1">{pillarHint[type]}</p>
       </div>
+      {suggestions.length > 0 && (
+        <div>
+          <Label className="text-xs text-muted-foreground">Из вашего банка</Label>
+          <div className="mt-1 flex flex-wrap gap-1.5">
+            {suggestions.map((a) => (
+              <button
+                key={a.id}
+                type="button"
+                onClick={() => onChange({ ...pillar, action: a.title })}
+                className="text-xs px-2.5 py-1 rounded-full border border-border/60 bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground transition"
+              >
+                {a.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div>
         <Label className="text-xs text-muted-foreground">Действие</Label>
         <Input
@@ -67,7 +88,7 @@ const PillarCard = ({
   );
 };
 
-const PlanForm = ({ day, onChange }: Props) => {
+const PlanForm = ({ day, onChange, starters = [] }: Props) => {
   const updatePillar = (idx: number, next: Pillar) => {
     const pillars = day.pillars.slice();
     pillars[idx] = next;
@@ -110,7 +131,12 @@ const PlanForm = ({ day, onChange }: Props) => {
 
       <div className="space-y-4">
         {day.pillars.map((p, i) => (
-          <PillarCard key={i} pillar={p} onChange={(next) => updatePillar(i, next)} />
+          <PillarCard
+            key={i}
+            pillar={p}
+            onChange={(next) => updatePillar(i, next)}
+            suggestions={starters.filter((s) => s.type === p.type)}
+          />
         ))}
       </div>
 
