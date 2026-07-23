@@ -34,6 +34,7 @@ const BehavioralActivationPage = lazy(() => import("./pages/BehavioralActivation
 const AbstractToConcretePage = lazy(() => import("./pages/AbstractToConcretePage.tsx"));
 const CbtWorkbookPage = lazy(() => import("./pages/CbtWorkbookPage.tsx"));
 const ThoughtDiaryPage = lazy(() => import("./pages/ThoughtDiaryPage.tsx"));
+const DayPlannerPage = lazy(() => import("./pages/DayPlannerPage.tsx"));
 const BreathingPage = lazy(() => import("./pages/BreathingPage.tsx"));
 const AboutPage = lazy(() => import("./pages/AboutPage.tsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
@@ -79,6 +80,7 @@ const App = () => (
               <Route path="/tools/behavioral-activation" element={<BehavioralActivationPage />} />
               <Route path="/tools/abstract-to-concrete" element={<AbstractToConcretePage />} />
               <Route path="/tools/thought-diary" element={<ThoughtDiaryPage />} />
+              <Route path="/tools/day-planner" element={<DayPlannerPage />} />
               <Route path="/tools/breathing" element={<BreathingPage />} />
               <Route path="/cbtworkbook" element={<CbtWorkbookPage />} />
               <Route path="/about" element={<AboutPage />} />
