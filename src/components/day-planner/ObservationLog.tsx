@@ -53,8 +53,8 @@ const ObservationLog = ({ observations, onChange }: Props) => {
 
       <div className="rounded-xl border border-border/60 bg-card/40 p-4 md:p-5 space-y-4">
         <h3 className="text-sm font-semibold text-foreground">Добавить запись</h3>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-          <div className="col-span-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div>
             <Label className="text-xs text-muted-foreground">Дата</Label>
             <Input
               type="date"
@@ -62,7 +62,7 @@ const ObservationLog = ({ observations, onChange }: Props) => {
               onChange={(e) => setDraft({ ...draft, date: e.target.value })}
             />
           </div>
-          <div className="col-span-1">
+          <div>
             <Label className="text-xs text-muted-foreground">Время</Label>
             <Input
               type="time"
@@ -70,7 +70,7 @@ const ObservationLog = ({ observations, onChange }: Props) => {
               onChange={(e) => setDraft({ ...draft, time: e.target.value })}
             />
           </div>
-          <div className="col-span-2 md:col-span-2">
+          <div className="col-span-2">
             <Label className="text-xs text-muted-foreground">Действие</Label>
             <Input
               placeholder="Например: принял душ"
@@ -78,21 +78,8 @@ const ObservationLog = ({ observations, onChange }: Props) => {
               onChange={(e) => setDraft({ ...draft, action: e.target.value })}
             />
           </div>
-          {(["energy", "pleasure", "mastery"] as const).map((k) => (
-            <div key={k} className="col-span-2 md:col-span-2 grid grid-cols-3 gap-2 md:col-span-2 md:flex md:gap-3">
-              {(k === "energy") && (
-                <div className="col-span-1 md:flex-1">
-                  <Label className="text-xs text-muted-foreground">Энергия 0–10</Label>
-                  <Input
-                    type="number" min={0} max={10}
-                    value={draft.energy}
-                    onChange={(e) => setDraft({ ...draft, energy: Number(e.target.value) })}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
         </div>
+
         <div className="grid grid-cols-3 gap-3">
           <div>
             <Label className="text-xs text-muted-foreground">Энергия 0–10</Label>
