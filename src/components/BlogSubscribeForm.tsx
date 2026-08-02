@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { trackSubscribe } from "@/lib/metaPixel";
 
 const emailSchema = z
   .string()
@@ -53,6 +54,7 @@ const BlogSubscribeForm = ({
       // Уже подписан — обрабатываем как успех
       if (error.code === "23505") {
         setDone(true);
+        trackSubscribe(`blog_subscribe_${source}`, { already_subscribed: true });
         toast({
           title: "Вы уже подписаны",
           description: "Этот email уже в списке. Спасибо!",
@@ -79,6 +81,7 @@ const BlogSubscribeForm = ({
       },
     }).catch((e) => console.error("notify-telegram failed", e));
 
+    trackSubscribe(`blog_subscribe_${source}`);
     setDone(true);
     setEmail("");
     toast({

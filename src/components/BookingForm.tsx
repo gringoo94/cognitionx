@@ -9,6 +9,8 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { trackLead } from "@/lib/metaPixel";
+import { trackCta } from "@/lib/trackCta";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -74,6 +76,9 @@ const BookingForm = () => {
     } catch (e) {
       console.error("notify-telegram failed", e);
     }
+
+    trackCta("booking_form_submit", { wellbeing: wellbeing[0] });
+    trackLead("booking_form", { content_category: "paid_session", wellbeing: wellbeing[0] });
 
     setForm({ name: "", email: "", messenger: "", message: "" });
     navigate("/thank-you");

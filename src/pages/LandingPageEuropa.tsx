@@ -21,6 +21,7 @@ import Approach from "@/components/Approach";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import heroPhoto from "@/assets/hero-photo.webp";
+import { trackContact } from "@/lib/metaPixel";
 import {
   ArrowRight,
   Sparkles,
@@ -141,9 +142,7 @@ const LandingPageEuropa = () => (
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => {
-        if (typeof window !== "undefined" && (window as any).fbq) {
-          (window as any).fbq("track", "Contact", { content_name: "telegram_fab_europa" });
-        }
+        trackContact("telegram_fab_europa");
       }}
       aria-label="Написать в Telegram"
       className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-3 shadow-2xl shadow-primary/30 hover:scale-105 transition-transform"
@@ -214,9 +213,7 @@ const LandingPageEuropa = () => (
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
-                    if (typeof window !== "undefined" && (window as any).fbq) {
-                      (window as any).fbq("track", "Contact", { content_name: "telegram_hero_europa" });
-                    }
+                    trackContact("telegram_hero_europa");
                   }}
                 >
                   <Send className="w-4 h-4" /> Написать в Telegram

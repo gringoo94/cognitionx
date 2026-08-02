@@ -32,7 +32,7 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        script-src 'self' 'sha256-FXIy+BSxCBbe9thjLczDaUdW3U1r7KYzfP9nt+idlTc=' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        script-src 'self' 'sha256-Kebj3bZMYIaoUSCKfa9Ua/ir5Exh6J1Xb8abBlCkhFo=' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
         script-src-attr 'none';
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' data: https://fonts.gstatic.com;
@@ -130,6 +130,9 @@
           })(window, document,'script','https://mc.yandex.ru/metrika/tag.js', 'ym');
           window.ym(97350684, 'init', {webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
         }
+
+        // Позволяет приложению форсировать загрузку пикселя при конверсии
+        window.loadAnalytics = loadAnalytics;
 
         // Load on first interaction OR after 4s idle (whichever comes first)
         var events = ['scroll','mousemove','touchstart','keydown','click'];

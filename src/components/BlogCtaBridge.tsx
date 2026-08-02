@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Gift, Send, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackCta } from "@/lib/trackCta";
+import { trackContact } from "@/lib/metaPixel";
 
 interface BlogCtaBridgeProps {
   topic?: string;
@@ -41,9 +42,7 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
             rel="noopener noreferrer"
             onClick={() => {
               trackCta("blog_cta_telegram", { topic });
-              if ((window as any).fbq) {
-                (window as any).fbq("track", "Contact", { content_name: "blog_cta_telegram" });
-              }
+              trackContact("blog_cta_telegram");
             }}
           >
             <Send className="w-4 h-4" /> Написать в Telegram

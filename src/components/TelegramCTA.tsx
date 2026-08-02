@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackContact } from "@/lib/metaPixel";
 
 const TelegramCTA = () => (
   <section className="bg-primary text-primary-foreground">
@@ -24,9 +25,7 @@ const TelegramCTA = () => (
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => {
-            if (typeof window !== "undefined" && (window as any).fbq) {
-              (window as any).fbq("track", "Contact", { content_name: "telegram_cta" });
-            }
+            trackContact("telegram_cta");
           }}
         >
           <Send className="w-4 h-4" /> Написать в Telegram

@@ -11,6 +11,8 @@ import { toast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { trackLead } from "@/lib/metaPixel";
+import { trackCta } from "@/lib/trackCta";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, { message: "Укажите имя (минимум 2 символа)" }).max(100),
@@ -94,6 +96,9 @@ const ContactPage = () => {
       } catch (e) {
         console.error("notify-telegram failed", e);
       }
+
+      trackCta("contact_form_submit");
+      trackLead("contact_form", { content_category: "contact_page" });
 
       setForm({ name: "", email: "", messenger: "", message: "" });
       navigate("/thank-you");
