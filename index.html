@@ -131,6 +131,9 @@
           window.ym(97350684, 'init', {webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
         }
 
+        // Позволяет приложению форсировать загрузку пикселя при конверсии
+        window.loadAnalytics = loadAnalytics;
+
         // Load on first interaction OR after 4s idle (whichever comes first)
         var events = ['scroll','mousemove','touchstart','keydown','click'];
         events.forEach(function(ev){ window.addEventListener(ev, loadAnalytics, { once: true, passive: true }); });
