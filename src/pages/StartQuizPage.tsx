@@ -18,6 +18,7 @@ import { toast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { trackLead } from "@/lib/metaPixel";
 
 /**
  * /start — soft-offer quiz used as the primary CTA on geo / landing pages.
@@ -215,6 +216,7 @@ const StartQuizPage = () => {
         },
       });
 
+      trackLead("start_quiz_form", { content_category: "quiz" });
       navigate("/thank-you");
     } catch {
       toast({

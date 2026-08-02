@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { Gift, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackCta } from "@/lib/trackCta";
-import { trackContact } from "@/lib/metaPixel";
+import { trackContact, trackCustomPixel } from "@/lib/metaPixel";
 
 const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/free-consultation", "/contact"];
 const STORAGE_KEY = "exit_intent_seen_at";
@@ -36,9 +36,7 @@ const ExitIntentPopup = () => {
         /* ignore */
       }
       trackCta("exit_intent_shown", { path: pathname });
-      if ((window as any).fbq) {
-        (window as any).fbq("trackCustom", "ExitIntentShown");
-      }
+      trackCustomPixel("ExitIntentShown", { path: pathname });
     };
 
     // Desktop: mouse leaves top of viewport

@@ -11,6 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { trackLead } from "@/lib/metaPixel";
 
 const schema = z.object({
   name: z.string().trim().min(2, { message: "Укажите имя (минимум 2 символа)" }).max(100),
@@ -110,6 +111,9 @@ const FreeConsultationPage = () => {
       } catch (e) {
         console.error("notify-telegram failed", e);
       }
+
+      trackCta("free_consultation_form_submit");
+      trackLead("free_consultation_form", { content_category: "free_intro_call" });
 
       setForm({ name: "", email: "", messenger: "", preferredTime: "", topic: "" });
       navigate("/thank-you");

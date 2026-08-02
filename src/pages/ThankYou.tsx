@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { leadRecentlyFired, trackLead } from "@/lib/metaPixel";
 
 const ThankYou = () => {
   useEffect(() => {
-    // Fire Meta Pixel Lead event on thank-you page load
-    if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Lead", { content_name: "thank_you_page" });
+    // Форма уже отправила Lead со своим content_name — не дублируем конверсию.
+    if (!leadRecentlyFired()) {
+      trackLead("thank_you_page");
     }
   }, []);
 
