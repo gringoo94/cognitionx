@@ -287,7 +287,6 @@ function writeSitemap(
   blogPostsBySlug: Map<string, any>,
   redirectPaths: Set<string>
 ) {
-  const today = new Date().toISOString().slice(0, 10);
   const seen = new Set<string>();
   const urls: string[] = [];
   for (const r of routes) {
@@ -299,13 +298,26 @@ function writeSitemap(
     const isBlogPost = /^\/blog\/[^/]+$/.test(p);
     const slug = isBlogPost ? p.replace(/^\/blog\//, "") : "";
     const post = slug ? blogPostsBySlug.get(slug) : null;
-    const lastmod = post?.updatedAt || post?.date || today;
+    // Only blog posts have an authoritative, page-specific timestamp.
+    // Static routes get NO <lastmod> — stamping them with the build date
+    // would rewrite every entry on each deploy and devalue the signal.
+    const lastmod = post?.updatedAt || post?.date || null;
     const priority = p === "/" ? "1.0" : isBlogPost ? "0.7" : "0.6";
     const changefreq = p === "/" || p === "/blog" ? "weekly" : "monthly";
     urls.push(
-      `  <url>\n    <loc>${SITE_URL}${p}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`
+      [
+        "  <url>",
+        `    <loc>${SITE_URL}${p}</loc>`,
+        lastmod ? `    <lastmod>${lastmod}</lastmod>` : null,
+        `    <changefreq>${changefreq}</changefreq>`,
+        `    <priority>${priority}</priority>`,
+        "  </url>",
+      ]
+        .filter(Boolean)
+        .join("\n")
     );
   }
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
   fs.writeFileSync(path.join(distDir, "sitemap.xml"), xml);
   console.log(`[seo-plugin] Wrote sitemap.xml (${urls.length} URLs)`);
