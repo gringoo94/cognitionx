@@ -16,6 +16,7 @@ import {
   subscaleMinScore,
 } from "@/lib/testScoring";
 import { saveTestHistory } from "@/lib/testHistory";
+import { trackContact, trackLead } from "@/lib/metaPixel";
 
 interface TestResultProps {
   config: TestConfig;
@@ -274,12 +275,8 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                 <Link
                   to="/free-consultation"
                   onClick={() => {
-                    if (typeof window !== "undefined" && (window as any).fbq) {
-                      (window as any).fbq("track", "Lead", {
-                        content_name: `test_result_cta_${config.code}`,
-                        content_category: config.cluster,
-                      });
-                    }
+                    trackLead(`test_result_cta_${config.code, { }`,
+                        content_category: config.cluster });
                   }}
                 >
                   Бесплатная встреча — 20 мин <ArrowRight className="h-4 w-4" />
@@ -291,11 +288,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
-                    if (typeof window !== "undefined" && (window as any).fbq) {
-                      (window as any).fbq("track", "Contact", {
-                        content_name: `test_result_tg_${config.code}`,
-                      });
-                    }
+                    trackContact(`test_result_tg_${config.code, { }` });
                   }}
                 >
                   <Send className="h-4 w-4" /> Написать в Telegram

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Send, X } from "lucide-react";
 import { trackCta } from "@/lib/trackCta";
+import { trackContact } from "@/lib/metaPixel";
 
 // Routes where the FAB should NOT appear
 const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/free-consultation"];
@@ -68,9 +69,7 @@ const FloatingTelegramFab = () => {
 
   const handleClick = () => {
     trackCta("telegram_fab");
-    if (typeof window !== "undefined" && (window as any).fbq) {
-      (window as any).fbq("track", "Contact", { content_name: "telegram_fab" });
-    }
+    trackContact("telegram_fab");
   };
 
   const compact = pathname === "/blog" || pathname.startsWith("/blog?");
