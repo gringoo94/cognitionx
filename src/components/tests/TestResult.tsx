@@ -275,8 +275,9 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                 <Link
                   to="/free-consultation"
                   onClick={() => {
-                    trackLead(`test_result_cta_${config.code, { }`,
-                        content_category: config.cluster });
+                    trackLead(`test_result_cta_${config.code}`, {
+                      content_category: config.cluster,
+                    });
                   }}
                 >
                   Бесплатная встреча — 20 мин <ArrowRight className="h-4 w-4" />
