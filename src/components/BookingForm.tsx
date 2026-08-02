@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { trackLead } from "@/lib/metaPixel";
+import { trackCta } from "@/lib/trackCta";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
