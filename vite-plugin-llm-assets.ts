@@ -65,8 +65,11 @@ async function generate() {
   const today = new Date().toISOString().slice(0, 10);
 
   // ---- Sitemap -----------------------------------------------------------
-  // Index by path so blog entries (which exist in seoRoutes too) get their
-  // real `updatedAt`/`date` as lastmod.
+  // <lastmod> is emitted ONLY when we have an authoritative, page-specific
+  // timestamp. Blog posts have one (`updatedAt || date`). Static routes do
+  // not — stamping them with the build date would rewrite 80 lastmods on
+  // every deploy and destroy the value of the signal for crawlers, so we
+  // omit the element entirely for those URLs.
   const blogLastmod = new Map<string, string>();
   for (const post of blogPosts) {
     const lastmod = (post as any).updatedAt || post.date;
@@ -76,16 +79,19 @@ async function generate() {
   const urls = seoRoutes
     .filter((r) => !r.noindex)
     .map((r) => {
-      const lastmod = blogLastmod.get(r.path) || today;
+      const lastmod = blogLastmod.get(r.path);
       return [
         "  <url>",
         `    <loc>${SITE_URL}${r.path}</loc>`,
-        `    <lastmod>${lastmod}</lastmod>`,
+        lastmod ? `    <lastmod>${lastmod}</lastmod>` : null,
         `    <changefreq>${changefreqFor(r.path)}</changefreq>`,
         `    <priority>${priorityFor(r.path)}</priority>`,
         "  </url>",
-      ].join("\n");
+      ]
+        .filter(Boolean)
+        .join("\n");
     });
+
 
   const sitemap = [
     '<?xml version="1.0" encoding="UTF-8"?>',

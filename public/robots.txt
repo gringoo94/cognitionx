@@ -1,51 +1,22 @@
 # robots.txt — cognitionx.cloud
 # Управляет индексацией для классических поисковиков и ИИ-краулеров.
+#
+# Каталоги для LLM: /llms.txt (структура сайта), /llms-full.txt (полный корпус блога).
 
 User-agent: *
 Allow: /
 
 # --- Служебные / приватные страницы (не индексировать) ---
+# /privacy и /informed-consent НЕ закрыты здесь намеренно: они помечены
+# noindex в разметке страницы, а закрытая в robots страница этот noindex
+# никогда не увидит и может остаться в индексе без сниппета.
 Disallow: /admin
 Disallow: /admin/login
 Disallow: /thank-you
-Disallow: /privacy
-Disallow: /informed-consent
 
-# --- Технические параметры URL (UTM и трекинг) ---
-Disallow: /*?utm_*
-Disallow: /*?fbclid=*
-Disallow: /*?gclid=*
-Disallow: /*?yclid=*
-Disallow: /*?ref=*
-Disallow: /*?__lovable_token=*
+# --- Технические параметры URL ---
+Disallow: /*?__lovable_token=
 
-# --- Geo-страницы (явно разрешены для индексации) ---
-Allow: /psiholog-moskva
-Allow: /psiholog-europa
-Allow: /psiholog-usa
-Allow: /psiholog-aziya
-Allow: /psiholog-berlin
-Allow: /psiholog-amsterdam
-Allow: /psiholog-lissabon
-Allow: /psiholog-tbilisi
-Allow: /psiholog-kishinev
-Allow: /psiholog-myunhen
-Allow: /psiholog-gamburg
-Allow: /psiholog-rotterdam
-Allow: /psiholog-porto
-Allow: /psiholog-dlya-it
-
-# --- Инструменты и психологические тесты (явно разрешены) ---
-Allow: /tools
-Allow: /tools/tests
-Allow: /tools/tests/*
-Allow: /tools/schema-quiz
-Allow: /tools/abc-analysis
-Allow: /tools/decision-matrix
-Allow: /tools/emotion-wheel
-Allow: /tools/behavioral-activation
-Allow: /tools/abstract-to-concrete
-Allow: /cbtworkbook
 
 # =====================================================================
 #  ИИ-краулеры — явные правила

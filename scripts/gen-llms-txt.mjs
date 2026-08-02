@@ -118,14 +118,26 @@ if (!existsSync(LLMS)) {
   process.exit(1);
 }
 let text = readFileSync(LLMS, "utf-8");
+// Ignore the autoblock when collecting manually-curated links: it is rebuilt
+// from `missing` on every run, so counting its own links would make the block
+// wipe itself on the second run.
+const manualText = text.replace(
+  new RegExp(`${escapeRe(START)}[\\s\\S]*?${escapeRe(END)}`),
+  ""
+);
 const linked = new Set();
 const slugRe = /\/blog\/([a-z0-9-]+)/g;
 let hit;
-while ((hit = slugRe.exec(text))) linked.add(hit[1]);
+while ((hit = slugRe.exec(manualText))) linked.add(hit[1]);
+// Stale detection must consider the whole file (including the autoblock).
+const linkedAll = new Set();
+const slugReAll = /\/blog\/([a-z0-9-]+)/g;
+while ((hit = slugReAll.exec(text))) linkedAll.add(hit[1]);
+
 
 // ---------- Diff ----------
 const missing = [...registry.keys()].filter((s) => !linked.has(s)).sort();
-const stale = [...linked].filter(
+const stale = [...linkedAll].filter(
   (s) => !registry.has(s) && !redirectSlugs.has(s)
 );
 
