@@ -24,7 +24,7 @@ interface QueuedEvent {
 interface PixelWindow extends Window {
   fbq?: (...args: unknown[]) => void;
   loadAnalytics?: () => void;
-  dataLayer?: unknown[];
+  dataLayer?: Record<string, unknown>[];
   ym?: (id: number, method: string, target: string, params?: PixelParams) => void;
 }
 
