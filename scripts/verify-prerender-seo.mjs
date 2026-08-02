@@ -186,6 +186,40 @@ if (existsSync(sitemapPath)) {
   }
 }
 
+// ---------- llms.txt coverage ----------
+// Every indexable route must be linked from /llms.txt, otherwise AI crawlers
+// (ChatGPT / Claude / Perplexity) get a catalogue that silently drifts behind
+// the site. Fails with the exact list of missing URLs.
+{
+  const llmsPath = join(DIST, "llms.txt");
+  if (!existsSync(llmsPath)) {
+    totalErrors += 1;
+    failed.push({ rel: "/llms.txt", errs: ["llms.txt: missing in dist/"], diff: null });
+  } else {
+    const txt = readFileSync(llmsPath, "utf-8");
+    const linked = new Set();
+    const re = /https?:\/\/[^/\s)]+(\/[^\s)]*)?/g;
+    let m;
+    while ((m = re.exec(txt))) {
+      const p = (m[1] || "/").replace(/[).,]+$/, "");
+      linked.add(p.replace(/\/$/, "") || "/");
+    }
+    const missing = seoRoutes
+      .filter((r) => !r.noindex && !r.canonicalPath)
+      .map((r) => r.path.replace(/\/$/, "") || "/")
+      .filter((p) => !linked.has(p));
+    if (missing.length) {
+      totalErrors += missing.length;
+      failed.push({
+        rel: "/llms.txt",
+        errs: missing.map((p) => `llms.txt: missing link for ${p}`),
+        diff: null,
+      });
+    }
+  }
+}
+
+
 function extractRoot(html) {
   const m = html.match(/<div id="root">([\s\S]*?)<\/div>\s*(?:<script|<\/body)/i);
   return m ? m[1] : "";
