@@ -194,7 +194,7 @@ if (existsSync(sitemapPath)) {
   const llmsPath = join(DIST, "llms.txt");
   if (!existsSync(llmsPath)) {
     totalErrors += 1;
-    failed.push({ rel: "/llms.txt", errs: ["llms.txt: missing in dist/"], diff: null });
+    failed.push({ rel: "/llms.txt", errs: ["llms.txt: missing in dist/"], diff: undefined });
   } else {
     const txt = readFileSync(llmsPath, "utf-8");
     const linked = new Set();
@@ -213,7 +213,7 @@ if (existsSync(sitemapPath)) {
       failed.push({
         rel: "/llms.txt",
         errs: missing.map((p) => `llms.txt: missing link for ${p}`),
-        diff: null,
+        diff: undefined,
       });
     }
   }
