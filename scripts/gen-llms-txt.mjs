@@ -137,7 +137,7 @@ while ((hit = slugReAll.exec(text))) linkedAll.add(hit[1]);
 
 // ---------- Diff ----------
 const missing = [...registry.keys()].filter((s) => !linked.has(s)).sort();
-const stale = [...linked].filter(
+const stale = [...linkedAll].filter(
   (s) => !registry.has(s) && !redirectSlugs.has(s)
 );
 
