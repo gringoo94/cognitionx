@@ -69,6 +69,8 @@ CognitionX — сайт практикующего психолога Дмитр
 - [MDQ — биполярное расстройство](https://cognitionx.cloud/tools/tests/mdq): Mood Disorder Questionnaire (Hirschfeld)
 - [Y-BOCS-SR — ОКР](https://cognitionx.cloud/tools/tests/ybocs-sr): шкала обсессивно-компульсивных симптомов, самоотчёт
 - [SPIN — социальная тревожность](https://cognitionx.cloud/tools/tests/spin): Social Phobia Inventory
+- [Mini-SPIN — краткий скрининг социальной тревожности](https://cognitionx.cloud/tools/tests/mini-spin): 3 пункта из SPIN
+- [PSWQ — склонность к беспокойству](https://cognitionx.cloud/tools/tests/pswq): Penn State Worry Questionnaire
 - [EAT-26 — пищевое поведение](https://cognitionx.cloud/tools/tests/eat-26): скрининг расстройств пищевого поведения (Garner)
 - [MAAS — осознанность](https://cognitionx.cloud/tools/tests/maas): Mindful Attention Awareness Scale
 - [CD-RISC-10 — устойчивость](https://cognitionx.cloud/tools/tests/cd-risc-10): шкала психологической резильентности
