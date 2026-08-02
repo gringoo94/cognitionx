@@ -289,7 +289,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
-                    trackContact(`test_result_tg_${config.code, { }` });
+                    trackContact(`test_result_tg_${config.code}`);
                   }}
                 >
                   <Send className="h-4 w-4" /> Написать в Telegram

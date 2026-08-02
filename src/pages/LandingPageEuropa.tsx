@@ -21,8 +21,8 @@ import Approach from "@/components/Approach";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import heroPhoto from "@/assets/hero-photo.webp";
-import {
 import { trackContact } from "@/lib/metaPixel";
+import {
   ArrowRight,
   Sparkles,
   Users,
