@@ -135,20 +135,40 @@ CognitionX — сайт практикующего психолога Дмитр
 <!-- BLOG:AUTO-START -->
 <!-- BLOG:AUTO-END -->
 
+## География и форматы работы
+
+Все консультации ведутся на русском языке. Онлайн — из любой страны и часового пояса (Европа, СНГ, США, Азия); очно — только в Кишинёве (Молдова). Первая консультация — 25 €, бесплатное знакомство — 20 минут.
+
+### Страны и регионы
+
+- [Психолог в Европе](https://cognitionx.cloud/psiholog-europa): русскоязычная онлайн-терапия для клиентов из стран ЕС
+- [Психолог в Германии](https://cognitionx.cloud/psiholog-germaniya): русскоязычный психолог онлайн для живущих в Германии
+- [Психолог в Нидерландах](https://cognitionx.cloud/psiholog-niderlandy): русскоязычная онлайн-терапия для Нидерландов
+- [Психолог в Португалии](https://cognitionx.cloud/psiholog-portugaliya): русскоязычная онлайн-терапия для Португалии
+- [Психолог в Грузии](https://cognitionx.cloud/psiholog-gruziya): русскоязычная онлайн-терапия для Грузии
+- [Психолог в Молдове](https://cognitionx.cloud/psiholog-moldova): онлайн по всей стране и очно в Кишинёве
+- [Психолог в США](https://cognitionx.cloud/psiholog-usa): онлайн-сессии с учётом американских часовых поясов
+- [Психолог в Азии](https://cognitionx.cloud/psiholog-aziya): онлайн для релокантов в Азии
+
+### Города
+
+- [Психолог в Кишинёве](https://cognitionx.cloud/psiholog-kishinev): очный приём и онлайн
+- [Психолог в Берлине](https://cognitionx.cloud/psiholog-berlin): онлайн, русский язык
+- [Психолог в Мюнхене](https://cognitionx.cloud/psiholog-myunhen): онлайн, русский язык
+- [Психолог в Гамбурге](https://cognitionx.cloud/psiholog-gamburg): онлайн, русский язык
+- [Психолог в Амстердаме](https://cognitionx.cloud/psiholog-amsterdam): онлайн, русский язык
+- [Психолог в Роттердаме](https://cognitionx.cloud/psiholog-rotterdam): онлайн, русский язык
+- [Психолог в Лиссабоне](https://cognitionx.cloud/psiholog-lissabon): онлайн, русский язык
+- [Психолог в Порту](https://cognitionx.cloud/psiholog-porto): онлайн, русский язык
+- [Психолог в Тбилиси](https://cognitionx.cloud/psiholog-tbilisi): онлайн, русский язык
+- [Психолог в Москве](https://cognitionx.cloud/psiholog-moskva): онлайн, русский язык
+
+### Отдельные аудитории
+
+- [Психолог для IT-специалистов](https://cognitionx.cloud/psiholog-dlya-it): выгорание, синдром самозванца, перегрузка в IT
+
 ## Optional
 
-- [Психолог в Кишинёве](https://cognitionx.cloud/psiholog-kishinev)
-- [Психолог в Берлине](https://cognitionx.cloud/psiholog-berlin)
-- [Психолог в Амстердаме](https://cognitionx.cloud/psiholog-amsterdam)
-- [Психолог в Лиссабоне](https://cognitionx.cloud/psiholog-lissabon)
-- [Психолог в Тбилиси](https://cognitionx.cloud/psiholog-tbilisi)
-- [Психолог в Мюнхене](https://cognitionx.cloud/psiholog-myunhen)
-- [Психолог в Гамбурге](https://cognitionx.cloud/psiholog-gamburg)
-- [Психолог в Роттердаме](https://cognitionx.cloud/psiholog-rotterdam)
-- [Психолог в Порту](https://cognitionx.cloud/psiholog-porto)
-- [Психолог в Европе](https://cognitionx.cloud/psiholog-europa)
-- [Психолог в США](https://cognitionx.cloud/psiholog-usa)
-- [Психолог в Азии](https://cognitionx.cloud/psiholog-aziya)
-- [Психолог в Москве](https://cognitionx.cloud/psiholog-moskva)
-- [Психолог для IT-специалистов](https://cognitionx.cloud/psiholog-dlya-it)
-- [Политика конфиденциальности](https://cognitionx.cloud/privacy)
+- [Политика конфиденциальности](https://cognitionx.cloud/privacy): обработка персональных данных
+- [Информированное согласие](https://cognitionx.cloud/informed-consent): условия работы и границы терапевтических отношений
+
