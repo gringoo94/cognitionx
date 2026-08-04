@@ -132,7 +132,7 @@ const Index = () => (
       title="CognitionX — психолог Дмитрий Яцко | КПТ онлайн"
       description="CognitionX — практика психолога Дмитрия Яцко. КПТ и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание. Запишитесь."
       path="/"
-      schema={[medicalBusinessSchema, physicianSchema, testimonialsSchema]}
+      schema={[medicalBusinessSchema, physicianSchema, testimonialsSchema, homeFaqSchema]}
     />
     <Navbar />
     <main>
