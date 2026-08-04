@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -363,7 +364,7 @@ const LandingPageIT = () => (
           </motion.div>
           <motion.div {...fade(0.2)} className="mt-8">
             <Button size="lg" variant="secondary" className="gap-2 text-base px-8" asChild>
-              <a href="#booking">Записаться на встречу <ArrowRight className="w-4 h-4" /></a>
+              <Link to="/free-consultation">Записаться на встречу <ArrowRight className="w-4 h-4" /></Link>
             </Button>
           </motion.div>
         </div>
