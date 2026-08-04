@@ -2,6 +2,11 @@
 // Ensures the same shape & validation rules everywhere so we don't
 // drift into Rich Results errors per page.
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export const SITE_URL = "https://cognitionx.cloud";
 const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#organization`;
