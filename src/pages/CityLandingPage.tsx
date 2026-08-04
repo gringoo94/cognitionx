@@ -103,8 +103,9 @@ const CityLandingPage = () => {
   const businessSchema = buildGeoBusinessSchema(geoInput);
   const serviceSchema = buildGeoServiceSchema(geoInput);
 
-  // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
-  // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
+  // FAQPage разметка соответствует видимому FAQ-блоку ниже.
+  const faqSchema = buildFaqSchema(page.faq);
+
 
 
 
