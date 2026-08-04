@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
-import { buildFaqSchema } from "@/lib/geoSchema";
+import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -97,17 +97,18 @@ const personSchema = {
   url: "https://cognitionx.cloud/psiholog-dlya-it",
 };
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Психолог для IT-специалистов онлайн — Дмитрий Яцко",
+const itGeoInput = {
   url: "https://cognitionx.cloud/psiholog-dlya-it",
-  description: "Психолог онлайн для IT-специалистов в Европе. КПТ и схема-терапия. Выгорание, синдром самозванца, тревога.",
-  areaServed: { "@type": "Place", name: "Европа" },
-  serviceType: "Психотерапия онлайн",
-  availableLanguage: "Russian",
-  provider: { "@type": "Person", name: "Дмитрий Яцко" },
+  name: "Психолог для IT-специалистов онлайн — Дмитрий Яцко",
+  description:
+    "Психолог онлайн для IT-специалистов в Европе. КПТ и схема-терапия. Выгорание, синдром самозванца, тревога.",
+  places: ["Европа"],
+  languages: ["Russian", "English"],
+  timezone: "CET / CEST",
 };
+
+const businessSchema = buildGeoBusinessSchema(itGeoInput);
+const serviceSchema = buildGeoServiceSchema(itGeoInput);
 
 const LandingPageIT = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -115,7 +116,7 @@ const LandingPageIT = () => (
       title="Психолог для IT-специалистов онлайн — КПТ | Яцко"
       description="Психолог для разработчиков, PM и аналитиков в Европе: КПТ онлайн. Выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
       path="/psiholog-dlya-it"
-      schema={[personSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
+      schema={[personSchema, businessSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для IT-специалистов", url: "https://cognitionx.cloud/psiholog-dlya-it" },

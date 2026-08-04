@@ -57,7 +57,7 @@ import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtr
 import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
-import { buildFaqSchema } from "@/lib/geoSchema";
+import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -563,8 +563,28 @@ const ProblemPage = () => {
     },
   };
 
+  // Geo landings rendered through this template (Москва, США/Канада) get the
+  // same LocalBusiness-family + Service nodes as the other geo pages.
+  const geoArea: Record<string, { city?: string; country?: string; places?: string[]; timezone?: string }> = {
+    "psiholog-moskva": { city: "Москва", country: "Россия", timezone: "MSK (UTC+3)" },
+    "psiholog-usa": { country: "США", places: ["Канада"], timezone: "EST / PST" },
+  };
+  const geoConf = geoArea[page.slug];
+  const geoSchemas = geoConf
+    ? (() => {
+        const input = {
+          url: `https://cognitionx.cloud/${page.slug}`,
+          name: page.metaTitle,
+          description: page.metaDescription,
+          ...geoConf,
+        };
+        return [buildGeoBusinessSchema(input), buildGeoServiceSchema(input)];
+      })()
+    : [];
+
   const schemas = [
     ...(faqSchema ? [faqSchema] : []),
+    ...geoSchemas,
     medicalConditionSchema,
     medicalWebPageSchema,
     howToSchema,

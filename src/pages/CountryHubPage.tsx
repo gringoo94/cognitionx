@@ -25,7 +25,7 @@ import Footer from "@/components/Footer";
 import { getCountryHubBySlug, getCitiesForCountry } from "@/data/countryHubs";
 import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
-import { buildFaqSchema } from "@/lib/geoSchema";
+import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -44,23 +44,17 @@ const CountryHubPage = () => {
   const url = `https://cognitionx.cloud/${page.slug}`;
   const cities = getCitiesForCountry(page);
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": `${url}#service`,
+  const geoInput = {
+    url,
     name: `Русскоязычный психолог онлайн ${page.countryIn} — Дмитрий Яцко`,
     description: page.metaDescription,
-    url,
-    provider: { "@type": "Person", name: "Дмитрий Яцко" },
-    areaServed: { "@type": "Country", name: page.country },
-    serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
-    availableLanguage: "Russian",
-    availableChannel: {
-      "@type": "ServiceChannel",
-      serviceType: "Online",
-      serviceUrl: url,
-    },
+    country: page.country,
+    languages: page.countryCode === "MD" ? ["Russian", "Romanian"] : ["Russian"],
+    timezone: page.timezone,
   };
+
+  const businessSchema = buildGeoBusinessSchema(geoInput);
+  const serviceSchema = buildGeoServiceSchema(geoInput);
 
   const faqSchema = buildFaqSchema(page.faq);
 
@@ -86,7 +80,7 @@ const CountryHubPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[serviceSchema, ...(faqSchema ? [faqSchema] : []), ...(itemListSchema ? [itemListSchema] : [])]}
+        schema={[businessSchema, serviceSchema, ...(faqSchema ? [faqSchema] : []), ...(itemListSchema ? [itemListSchema] : [])]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: `Психолог ${page.countryIn}`, url },

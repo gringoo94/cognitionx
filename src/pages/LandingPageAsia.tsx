@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
-import { buildFaqSchema } from "@/lib/geoSchema";
+import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -105,24 +105,17 @@ const personSchema = {
   url: "https://cognitionx.cloud/psiholog-aziya",
 };
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Русскоязычный психолог для экспатов в Азии — Дмитрий Яцко",
+const asiaGeoInput = {
   url: "https://cognitionx.cloud/psiholog-aziya",
+  name: "Русскоязычный психолог для экспатов в Азии — Дмитрий Яцко",
   description:
     "Русскоязычный психолог онлайн для экспатов на Бали, в Таиланде, Вьетнаме и других странах Юго-Восточной Азии. КПТ и схема-терапия на русском языке.",
-  areaServed: [
-    { "@type": "Place", name: "Индонезия" },
-    { "@type": "Place", name: "Таиланд" },
-    { "@type": "Place", name: "Вьетнам" },
-    { "@type": "Place", name: "Малайзия" },
-    { "@type": "Place", name: "Юго-Восточная Азия" },
-  ],
-  serviceType: "Психотерапия онлайн",
-  availableLanguage: "Russian",
-  provider: { "@type": "Person", name: "Дмитрий Яцко" },
+  places: ["Индонезия", "Таиланд", "Вьетнам", "Малайзия", "Юго-Восточная Азия"],
+  timezone: "UTC+7 / UTC+8",
 };
+
+const businessSchema = buildGeoBusinessSchema(asiaGeoInput);
+const serviceSchema = buildGeoServiceSchema(asiaGeoInput);
 
 const LandingPageAsia = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -130,7 +123,7 @@ const LandingPageAsia = () => (
       title="Психолог для экспатов в Азии онлайн — КПТ | Яцко"
       description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Первая встреча — бесплатно."
       path="/psiholog-aziya"
-      schema={[personSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
+      schema={[personSchema, businessSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
         { name: "Психолог для экспатов — Азия", url: "https://cognitionx.cloud/psiholog-aziya" },

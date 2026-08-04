@@ -44,6 +44,7 @@ import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug } from "@/data/cityPages";
 import NotFound from "@/pages/NotFound";
+import { buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 
 
 // Hour offset for "min" side of utcOffset string (e.g. "UTC+1/+2" -> 1).
@@ -83,30 +84,28 @@ const CityLandingPage = () => {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://cognitionx.cloud/#person",
     name: "Дмитрий Яцко",
     jobTitle: "Психолог, КПТ и схема-терапевт",
     url,
   };
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": `${url}#service`,
+  const geoInput = {
+    url,
     name: `Русскоязычный психолог онлайн ${page.cityFor} — Дмитрий Яцко`,
     description: page.metaDescription,
-    url,
-    provider: { "@type": "Person", name: "Дмитрий Яцко" },
-    areaServed: [
-      { "@type": "City", name: page.city },
-      { "@type": "Country", name: page.country },
-    ],
-    serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
-    availableLanguage: "Russian",
-    availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: url },
+    city: page.city,
+    country: page.country,
+    languages: page.countryCode === "MD" ? ["Russian", "Romanian"] : ["Russian"],
+    timezone: page.timezone,
   };
+
+  const businessSchema = buildGeoBusinessSchema(geoInput);
+  const serviceSchema = buildGeoServiceSchema(geoInput);
 
   // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
   // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
+
 
 
 
@@ -119,7 +118,7 @@ const CityLandingPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
-        schema={[personSchema, serviceSchema, testimonialsSchema]}
+        schema={[personSchema, businessSchema, serviceSchema, testimonialsSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: `Психолог ${page.cityIn}`, url },
