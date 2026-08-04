@@ -276,7 +276,7 @@ const LandingPageEuropa = () => (
         </div>
       </section>
 
-      {/* ── 3. Pain Points (expat-specific) — боль сразу ── */}
+      {/* ── Pain Points (expat-specific) — боль сразу ── */}
       <section className="bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
           <motion.div {...fade()} className="text-center mb-14">
@@ -307,7 +307,7 @@ const LandingPageEuropa = () => (
         </div>
       </section>
 
-      {/* ── 4. About (expat focus) — кто поможет ── */}
+      {/* ── About (expat focus) — кто поможет ── */}
       <section className="bg-foreground text-background">
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
           <motion.h2
@@ -346,7 +346,7 @@ const LandingPageEuropa = () => (
 
       <Specializations />
 
-      {/* ── 5. Free Meeting — низкий барьер входа ── */}
+      {/* ── Free Meeting — низкий барьер входа ── */}
       <section className="bg-primary text-primary-foreground">
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
           <motion.div {...fade()} className="inline-flex items-center gap-2 mb-6">
@@ -373,7 +373,7 @@ const LandingPageEuropa = () => (
           </motion.div>
           <motion.div {...fade(0.2)} className="mt-8">
             <Button size="lg" variant="secondary" className="gap-2 text-base px-8" asChild>
-              <a href="#booking">Записаться на встречу <ArrowRight className="w-4 h-4" /></a>
+              <Link to="/free-consultation">Записаться на встречу <ArrowRight className="w-4 h-4" /></Link>
             </Button>
           </motion.div>
         </div>
@@ -383,7 +383,7 @@ const LandingPageEuropa = () => (
 
       <Testimonials />
 
-      {/* ── 11. Pricing ── */}
+      {/* ── Pricing ── */}
       <section id="pricing" className="bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
           <motion.div {...fade()} className="text-center mb-14">
@@ -476,7 +476,7 @@ const LandingPageEuropa = () => (
 
       <Blog />
 
-      {/* ── 15. FAQ (expat-specific) ── */}
+      {/* ── FAQ (expat-specific) ── */}
       <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
         <motion.h2
           {...fade()}
