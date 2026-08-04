@@ -17,7 +17,6 @@ import {
   Brain,
   Heart,
   Compass,
-  BookOpen,
   AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,7 +43,6 @@ import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug } from "@/data/cityPages";
-import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
 
 
@@ -111,11 +109,6 @@ const CityLandingPage = () => {
   // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
 
 
-  // Related articles by slug from blogPosts
-  const relatedArticles = (page.relatedArticleSlugs ?? [])
-    .map((s) => blogPosts.find((p) => p.slug === s))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p))
-    .slice(0, 5);
 
 
 
@@ -517,42 +510,8 @@ const CityLandingPage = () => {
         <Projects />
         <SessionPrep />
 
-        {/* ── Related articles (city-specific) ── */}
-        {relatedArticles.length > 0 ? (
-          <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
-            <motion.div {...fade()} className="text-center mb-10">
-              <BookOpen className="w-7 h-7 text-primary mx-auto mb-3 opacity-80" />
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-                Что почитать, если вы живёте {page.cityIn}
-              </h2>
-              <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-                Статьи под темы, с которыми чаще всего обращаются из {page.city === "Кишинёв" ? "Молдовы" : page.country}.
-              </p>
-            </motion.div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {relatedArticles.map((post, i) => (
-                <motion.div key={post.slug} {...fade(0.05 * i)}>
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="block rounded-xl border border-border bg-card p-5 h-full hover:border-primary/40 transition-colors group"
-                  >
-                    <h3 className="text-sm font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">{post.description}</p>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Link to="/blog" className="text-sm text-primary hover:underline">
-                Все статьи блога →
-              </Link>
-            </div>
-          </section>
-        ) : (
-          <Blog />
-        )}
+        <Blog />
+
 
         {/* ── FAQ ── */}
         <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
