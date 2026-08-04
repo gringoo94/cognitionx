@@ -17,6 +17,7 @@ import Projects from "@/components/Projects";
 import Expectations from "@/components/Expectations";
 import Approach from "@/components/Approach";
 import AboutDetailed from "@/components/AboutDetailed";
+import Blog from "@/components/Blog";
 import Ethics from "@/components/Ethics";
 import SessionPrep from "@/components/SessionPrep";
 import heroPhoto from "@/assets/hero-photo.webp";
@@ -372,9 +373,6 @@ const LandingPageIT = () => (
 
       <Testimonials />
 
-      <Ethics />
-      <SessionPrep />
-
       {/* ── Pricing ── */}
       <section id="pricing" className="bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
@@ -463,7 +461,12 @@ const LandingPageIT = () => (
         </div>
       </section>
 
+      <Ethics />
+      <SessionPrep />
       <Projects />
+      <Blog />
+
+
 
       {/* ── FAQ (IT-specific) ── */}
       <section id="faq" className="bg-card border-y border-border">
