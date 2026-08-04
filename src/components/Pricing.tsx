@@ -65,7 +65,7 @@ const Pricing = () => (
         </div>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         {plans.map((p, i) => (
           <motion.div
             key={p.title}
