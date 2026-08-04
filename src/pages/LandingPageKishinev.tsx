@@ -106,21 +106,19 @@ const localFaq = [
 
 const localFaqSchema = buildFaqSchema(localFaq);
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Психолог в Кишинёве — Дмитрий Яцко",
+const kishinevGeoInput = {
   url: "https://cognitionx.cloud/psiholog-kishinev",
+  name: "Психолог в Кишинёве — Дмитрий Яцко",
   description:
     "Русскоязычный психолог в Кишинёве и по всей Молдове. КПТ и схема-терапия онлайн.",
-  areaServed: [
-    { "@type": "City", name: "Кишинёв" },
-    { "@type": "Country", name: "Молдова" },
-  ],
-  serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
-  availableLanguage: ["Russian", "Romanian"],
-  provider: { "@id": "https://cognitionx.cloud/#person" },
+  city: "Кишинёв",
+  country: "Молдова",
+  languages: ["Russian", "Romanian"],
+  timezone: "EET / EEST",
 };
+
+const businessSchema = buildGeoBusinessSchema(kishinevGeoInput);
+const serviceSchema = buildGeoServiceSchema(kishinevGeoInput);
 
 const LandingPageKishinev = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -128,7 +126,7 @@ const LandingPageKishinev = () => (
       title="Психолог в Кишинёве онлайн на русском — КПТ | Яцко"
       description="Психолог в Кишинёве и по всей Молдове: КПТ и схема-терапия онлайн на русском. Тревога, выгорание, отношения. Первая встреча — бесплатно."
       path="/psiholog-kishinev"
-      schema={[serviceSchema, ...(localFaqSchema ? [localFaqSchema] : []), testimonialsSchema]}
+      schema={[businessSchema, serviceSchema, ...(localFaqSchema ? [localFaqSchema] : []), testimonialsSchema]}
       alternates={[
         { hreflang: "ru", href: "/psiholog-kishinev" },
         { hreflang: "ro-MD", href: "/psiholog-kishinev" },

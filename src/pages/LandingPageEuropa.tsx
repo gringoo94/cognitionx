@@ -107,17 +107,17 @@ const personSchema = {
   url: "https://cognitionx.cloud/psiholog-europa",
 };
 
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Русскоязычный психолог для экспатов в Европе — Дмитрий Яцко",
+const europaGeoInput = {
   url: "https://cognitionx.cloud/psiholog-europa",
-  description: "Русскоязычный психолог онлайн для экспатов в Европе. КПТ и схема-терапия на русском языке.",
-  areaServed: { "@type": "Place", name: "Европа" },
-  serviceType: "Психотерапия онлайн",
-  availableLanguage: "Russian",
-  provider: { "@type": "Person", name: "Дмитрий Яцко" },
+  name: "Русскоязычный психолог для экспатов в Европе — Дмитрий Яцко",
+  description:
+    "Русскоязычный психолог онлайн для экспатов в Европе. КПТ и схема-терапия на русском языке.",
+  places: ["Европа", "Европейский союз"],
+  timezone: "CET / CEST",
 };
+
+const businessSchema = buildGeoBusinessSchema(europaGeoInput);
+const serviceSchema = buildGeoServiceSchema(europaGeoInput);
 
 const LandingPageEuropa = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -125,7 +125,7 @@ const LandingPageEuropa = () => (
       title="Психолог на русском для Европы онлайн — КПТ | Яцко"
       description="Русскоязычный психолог онлайн для экспатов в Европе: КПТ и схема-терапия. Адаптация, одиночество, тревога, выгорание. Первая встреча — бесплатно."
       path="/psiholog-europa"
-      schema={[personSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
+      schema={[personSchema, businessSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
       alternates={[
         { hreflang: "ru", href: "/psiholog-europa" },
         { hreflang: "ru-RU", href: "/psiholog-europa" },
