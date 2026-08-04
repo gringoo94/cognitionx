@@ -288,6 +288,91 @@ const LandingPageAsia = () => (
         </div>
       </section>
 
+      {/* ── About Detailed ── */}
+      <section id="about-detailed" className="max-w-3xl mx-auto px-6 py-20 md:py-28 scroll-mt-20">
+        <motion.div {...fade()} className="text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
+          <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+            Прозрачность — часть моей профессиональной этики
+          </p>
+        </motion.div>
+        <motion.div {...fade(0.05)}>
+          <Accordion type="multiple" className="space-y-3">
+            <AccordionItem value="education" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <GraduationCap className="w-5 h-5 text-primary" /> Образование
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
+                <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
+                <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
+                <p>• Курсы и конференции Минского центра КПТ</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="certs" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <Award className="w-5 h-5 text-primary" /> Сертификаты и верификация
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
+                <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
+                <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
+                <p>• Работа в MedHub и Initiativa Pozitiva — психотерапия зависимости, созависимости</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="methods" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <Brain className="w-5 h-5 text-primary" /> Методы и подходы
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• <span className="font-medium">КПТ</span> (когнитивно-поведенческая терапия) — основное направление</p>
+                <p>• <span className="font-medium">Схема-терапия</span> — работа с глубинными схемами и паттернами</p>
+                <p>• ACT (терапия принятия и ответственности)</p>
+                <p>• Мотивационное интервьюирование (MI)</p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="asia-context" className="border rounded-xl px-5">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex items-center gap-3 text-sm font-semibold">
+                  <Globe className="w-5 h-5 text-primary" /> Опыт работы с экспатами в Азии
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                <p>• Работаю с клиентами на Бали, в Таиланде, Вьетнаме, Малайзии, Индонезии</p>
+                <p>• Понимаю специфику жизни экспата в Азии: digital-nomad-цикл, визовые тревоги, «рай-ловушка»</p>
+                <p>• Удобные слоты в ваше утро (UTC+7/+8) — день начинается с проработки, не с задач</p>
+                <p>• Опыт онлайн-работы со стабильным результатом независимо от страны клиента</p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </motion.div>
+      </section>
+
+      {/* ── Evidence-based ── */}
+      <section className="bg-primary text-primary-foreground">
+        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
+          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
+            Доказательный подход
+            <br className="hidden sm:block" /> к вашему благополучию
+          </motion.h2>
+          <motion.p {...fade(0.05)} className="mt-6 text-sm md:text-base leading-relaxed opacity-85 max-w-2xl mx-auto">
+            КПТ — один из самых исследованных методов психотерапии. Исследования подтверждают:
+            терапия на родном языке значительно эффективнее. Эмоции, детские воспоминания и
+            внутренний голос «говорят» по-русски — и работать с ними нужно на русском.
+          </motion.p>
+        </div>
+      </section>
+
+      <Approach />
+
+      <Specializations />
+
       {/* ── Free Meeting ── */}
       <section className="bg-primary text-primary-foreground">
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
@@ -321,25 +406,8 @@ const LandingPageAsia = () => (
         </div>
       </section>
 
-      <Specializations />
-      <Approach />
-
-      {/* ── Evidence-based ── */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-            Доказательный подход
-            <br className="hidden sm:block" /> к вашему благополучию
-          </motion.h2>
-          <motion.p {...fade(0.05)} className="mt-6 text-sm md:text-base leading-relaxed opacity-85 max-w-2xl mx-auto">
-            КПТ — один из самых исследованных методов психотерапии. Исследования подтверждают:
-            терапия на родном языке значительно эффективнее. Эмоции, детские воспоминания и
-            внутренний голос «говорят» по-русски — и работать с ними нужно на русском.
-          </motion.p>
-        </div>
-      </section>
-
       <Expectations />
+
       <Testimonials />
 
       {/* ── Pricing ── */}
@@ -427,74 +495,13 @@ const LandingPageAsia = () => (
         </div>
       </section>
 
-      {/* ── About Detailed ── */}
-      <section id="about-detailed" className="max-w-3xl mx-auto px-6 py-20 md:py-28 scroll-mt-20">
-        <motion.div {...fade()} className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
-          <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-            Прозрачность — часть моей профессиональной этики
-          </p>
-        </motion.div>
-        <motion.div {...fade(0.05)}>
-          <Accordion type="multiple" className="space-y-3">
-            <AccordionItem value="education" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <GraduationCap className="w-5 h-5 text-primary" /> Образование
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
-                <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
-                <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
-                <p>• Курсы и конференции Минского центра КПТ</p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="certs" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <Award className="w-5 h-5 text-primary" /> Сертификаты и верификация
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
-                <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
-                <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
-                <p>• Работа в MedHub и Initiativa Pozitiva — психотерапия зависимости, созависимости</p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="methods" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <Brain className="w-5 h-5 text-primary" /> Методы и подходы
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• <span className="font-medium">КПТ</span> (когнитивно-поведенческая терапия) — основное направление</p>
-                <p>• <span className="font-medium">Схема-терапия</span> — работа с глубинными схемами и паттернами</p>
-                <p>• ACT (терапия принятия и ответственности)</p>
-                <p>• Мотивационное интервьюирование (MI)</p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="asia-context" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <Globe className="w-5 h-5 text-primary" /> Опыт работы с экспатами в Азии
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• Работаю с клиентами на Бали, в Таиланде, Вьетнаме, Малайзии, Индонезии</p>
-                <p>• Понимаю специфику жизни экспата в Азии: digital-nomad-цикл, визовые тревоги, «рай-ловушка»</p>
-                <p>• Удобные слоты в ваше утро (UTC+7/+8) — день начинается с проработки, не с задач</p>
-                <p>• Опыт онлайн-работы со стабильным результатом независимо от страны клиента</p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </motion.div>
-      </section>
-
       <Ethics />
+
+      <Projects />
+
       <SessionPrep />
+
+      <Blog />
 
       {/* ── FAQ ── */}
       <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
@@ -530,8 +537,6 @@ const LandingPageAsia = () => (
         </motion.div>
       </section>
 
-      <Projects />
-      <Blog />
       <BookingForm />
 
       {/* ── SEO footer block ── */}
@@ -547,6 +552,7 @@ const LandingPageAsia = () => (
           оплата в EUR через Wise или Revolut.
         </p>
       </section>
+
     </main>
     <Footer />
   </div>
