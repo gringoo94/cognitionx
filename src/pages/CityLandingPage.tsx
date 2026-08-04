@@ -111,11 +111,6 @@ const CityLandingPage = () => {
   // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
 
 
-  // Related articles by slug from blogPosts
-  const relatedArticles = (page.relatedArticleSlugs ?? [])
-    .map((s) => blogPosts.find((p) => p.slug === s))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p))
-    .slice(0, 5);
 
 
 
