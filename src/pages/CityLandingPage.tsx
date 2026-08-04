@@ -44,7 +44,6 @@ import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug } from "@/data/cityPages";
-import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
 
 
