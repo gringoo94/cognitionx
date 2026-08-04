@@ -39,6 +39,7 @@ import {
   CheckCircle2,
   Star,
   MessageCircle,
+  Gift,
 } from "lucide-react";
 
 const fade = (delay = 0) => ({
@@ -283,7 +284,31 @@ const LandingPageEuropa = () => (
               С чем сталкиваются русскоязычные экспаты в Европе
             </p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            {...fade(0.05)}
+            className="mb-10 rounded-2xl border border-accent/30 bg-accent/5 p-5 md:p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            <div className="flex items-center gap-4">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center">
+                <Gift className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <p className="font-semibold text-sm sm:text-base">Бесплатная встреча-знакомство — 20 минут</p>
+                <p className="text-muted-foreground text-xs sm:text-sm mt-0.5">
+                  Познакомимся, обсудим ваш запрос и решим, подходим ли мы друг другу
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full whitespace-nowrap">
+                Без обязательств
+              </span>
+              <Button size="sm" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
+                <a href="/free-consultation">Записаться</a>
+              </Button>
+            </div>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {painPoints.map((p, i) => (
               <motion.div
                 key={i}
@@ -411,14 +436,6 @@ const LandingPageEuropa = () => (
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              {
-                title: "Знакомство",
-                price: "0",
-                duration: "20 мин",
-                badge: "⭐ Бесплатно",
-                accent: true,
-                features: ["Обсудим ваш запрос", "Отвечу на вопросы", "Без обязательств"],
-              },
               {
                 title: "Разовая консультация",
                 price: "40",
