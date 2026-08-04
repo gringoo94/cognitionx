@@ -15,7 +15,7 @@ import Ethics from "@/components/Ethics";
 import Projects from "@/components/Projects";
 import SessionPrep from "@/components/SessionPrep";
 import Blog from "@/components/Blog";
-import HomeFAQ from "@/components/HomeFAQ";
+import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
@@ -132,7 +132,7 @@ const Index = () => (
       title="CognitionX — психолог Дмитрий Яцко | КПТ онлайн"
       description="CognitionX — практика психолога Дмитрия Яцко. КПТ и схема-терапия онлайн: депрессия, тревога, панические атаки, выгорание. Запишитесь."
       path="/"
-      schema={[medicalBusinessSchema, physicianSchema, testimonialsSchema]}
+      schema={[medicalBusinessSchema, physicianSchema, testimonialsSchema, homeFaqSchema]}
     />
     <Navbar />
     <main>
