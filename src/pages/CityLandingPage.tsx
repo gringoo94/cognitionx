@@ -259,14 +259,8 @@ const CityLandingPage = () => {
           </div>
         </section>
 
-        {/* ── Intro ── */}
-        <section className="bg-card border-y border-border">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
-            <motion.p {...fade()} className="text-base md:text-lg leading-relaxed text-muted-foreground">
-              {page.intro}
-            </motion.p>
-          </div>
-        </section>
+
+
 
 
 
