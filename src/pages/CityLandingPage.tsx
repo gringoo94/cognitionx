@@ -381,6 +381,10 @@ const CityLandingPage = () => {
 
 
 
+        <AboutEvidence />
+        <Approach />
+        <Specializations />
+
         {/* ── Free meeting block ── */}
         <section className="bg-primary text-primary-foreground">
           <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
@@ -416,9 +420,6 @@ const CityLandingPage = () => {
           </div>
         </section>
 
-        <AboutEvidence />
-        <Approach />
-        <Specializations />
 
         <Expectations />
         <Testimonials />
