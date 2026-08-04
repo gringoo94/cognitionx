@@ -34,6 +34,7 @@ import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import Approach from "@/components/Approach";
 import AboutDetailed from "@/components/AboutDetailed";
+import AboutEvidence from "@/components/AboutEvidence";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
@@ -414,21 +415,9 @@ const CityLandingPage = () => {
         <div id="about-detailed" className="scroll-mt-20">
           <AboutDetailed />
         </div>
-        <Specializations />
+        <AboutEvidence />
         <Approach />
-
-        {/* ── Evidence-based ── */}
-        <section className="bg-primary text-primary-foreground">
-          <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-            <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-              Доказательный подход
-              <br className="hidden sm:block" /> к вашему благополучию
-            </motion.h2>
-            <motion.p {...fade(0.05)} className="mt-6 text-sm md:text-base leading-relaxed opacity-85 max-w-2xl mx-auto">
-              КПТ — один из самых исследованных методов психотерапии. Терапия на родном языке значительно эффективнее: эмоции, детские воспоминания и внутренний голос «говорят» по-русски — и работать с ними нужно на русском.
-            </motion.p>
-          </div>
-        </section>
+        <Specializations />
 
         <Expectations />
         <Testimonials />
@@ -524,34 +513,8 @@ const CityLandingPage = () => {
 
 
         <Ethics />
-        <SessionPrep />
-
-        {/* ── FAQ ── */}
-        <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
-          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
-            Частые <span className="text-primary">вопросы</span> {page.cityFor}
-          </motion.h2>
-          <motion.div {...fade(0.1)} className="mt-10">
-            <Accordion type="single" collapsible className="space-y-3">
-              {page.faq.map((faq, i) => (
-                <AccordionItem
-                  key={i}
-                  value={`faq-${i}`}
-                  className="border border-border rounded-xl px-5 data-[state=open]:border-primary/20 transition-colors"
-                >
-                  <AccordionTrigger className="text-sm font-medium text-left py-4 hover:no-underline">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </motion.div>
-        </section>
-
         <Projects />
+        <SessionPrep />
 
         {/* ── Related articles (city-specific) ── */}
         {relatedArticles.length > 0 ? (
@@ -589,6 +552,31 @@ const CityLandingPage = () => {
         ) : (
           <Blog />
         )}
+
+        {/* ── FAQ ── */}
+        <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
+            Частые <span className="text-primary">вопросы</span> {page.cityFor}
+          </motion.h2>
+          <motion.div {...fade(0.1)} className="mt-10">
+            <Accordion type="single" collapsible className="space-y-3">
+              {page.faq.map((faq, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="border border-border rounded-xl px-5 data-[state=open]:border-primary/20 transition-colors"
+                >
+                  <AccordionTrigger className="text-sm font-medium text-left py-4 hover:no-underline">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+        </section>
 
         <BookingForm />
 
