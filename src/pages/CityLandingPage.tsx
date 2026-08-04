@@ -289,6 +289,10 @@ const CityLandingPage = () => {
           </div>
         </section>
 
+        <div id="about-detailed" className="scroll-mt-20">
+          <AboutDetailed />
+        </div>
+
         {/* ── Why Russian online ── */}
         {page.whyRussianOnline && page.whyRussianOnline.length > 0 && (
           <section className="bg-background">
@@ -412,9 +416,6 @@ const CityLandingPage = () => {
           </div>
         </section>
 
-        <div id="about-detailed" className="scroll-mt-20">
-          <AboutDetailed />
-        </div>
         <AboutEvidence />
         <Approach />
         <Specializations />
