@@ -377,7 +377,7 @@ const LandingPageIT = () => (
               Прозрачные цены без скрытых платежей
             </p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "Знакомство",
@@ -388,23 +388,17 @@ const LandingPageIT = () => (
                 features: ["Обсудим ваш запрос", "Отвечу на вопросы", "Без обязательств"],
               },
               {
-                title: "Первая сессия",
-                price: "25",
-                duration: "50 мин",
-                features: ["Диагностика проблемы", "План работы", "Домашние задания"],
-              },
-              {
-                title: "Сессия",
-                price: "30",
+                title: "Разовая консультация",
+                price: "40",
                 duration: "50 мин",
                 featured: true,
                 features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
               },
               {
                 title: "Пакет × 4",
-                price: "25",
+                price: "35",
                 priceNote: "за сессию",
-                totalPrice: "100 € за 4 сессии",
+                totalPrice: "140 € за 4 сессии",
                 duration: "4 × 50 мин",
                 features: ["Экономия 20 €", "Регулярная работа", "Приоритетная запись"],
               },

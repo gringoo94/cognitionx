@@ -501,7 +501,7 @@ const CityLandingPage = () => {
                 Прозрачные цены без скрытых платежей · оплата в {page.currency}
               </p>
             </motion.div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   title: "Знакомство",
@@ -512,23 +512,17 @@ const CityLandingPage = () => {
                   features: ["Обсудим ваш запрос", "Отвечу на вопросы", "Без обязательств"],
                 },
                 {
-                  title: "Диагностическая консультация",
-                  price: "25",
+                  title: "Разовая консультация",
+                  price: "40",
                   duration: "50 мин",
+                  featured: true,
                   features: ["Разбор запроса", "План работы", "Домашние задания"],
                 },
                 {
-                  title: "Сессия",
-                  price: "30",
-                  duration: "50 мин",
-                  featured: true,
-                  features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
-                },
-                {
                   title: "Стартовый курс — 4 сессии",
-                  price: "25",
+                  price: "35",
                   priceNote: "за сессию",
-                  totalPrice: "100 € за 4 сессии",
+                  totalPrice: "140 € за 4 сессии",
                   duration: "4 × 50 мин",
                   features: ["Экономия 20 €", "Регулярная работа", "Приоритетная запись"],
                 },

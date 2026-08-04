@@ -149,7 +149,7 @@ const AboutPage = () => (
         <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8">
           <h2 className="text-xl font-bold mb-2">Готовы начать?</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Бесплатная встреча-знакомство — 20 минут. Полная первая консультация — 25 €.
+            Бесплатная встреча-знакомство — 20 минут. Разовая консультация — 40 €.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild>

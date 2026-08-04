@@ -1118,27 +1118,16 @@ const ProblemPage = () => {
                 Сколько стоит и сколько займёт
               </h2>
             </div>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="rounded-xl border border-border bg-card p-5">
-                <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
-                  Первая встреча
-                </div>
-                <div className="text-2xl font-bold">
-                  {PRICING.firstSession.price} {PRICING.firstSession.currency}
-                </div>
-                <div className="text-xs text-muted-foreground mt-1">
-                  {PRICING.firstSession.duration} · диагностика и план
-                </div>
-              </div>
+            <div className="grid md:grid-cols-2 gap-4">
               <div className="rounded-xl border border-primary/30 bg-primary/5 p-5">
                 <div className="text-xs uppercase tracking-wider text-primary mb-2">
-                  Сессия
+                  Разовая консультация
                 </div>
                 <div className="text-2xl font-bold">
-                  {PRICING.regularSession.price} {PRICING.regularSession.currency}
+                  {PRICING.session.price} {PRICING.session.currency}
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  {PRICING.regularSession.duration} · онлайн или очно
+                  {PRICING.session.duration} · онлайн или очно
                 </div>
               </div>
               <div className="rounded-xl border border-border bg-card p-5">
@@ -1146,10 +1135,10 @@ const ProblemPage = () => {
                   Пакет × {PRICING.pack.count}
                 </div>
                 <div className="text-2xl font-bold">
-                  {PRICING.pack.price} {PRICING.firstSession.currency}
+                  {PRICING.pack.price} {PRICING.pack.currency}
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  По {PRICING.pack.perSession} {PRICING.firstSession.currency} за сессию
+                  По {PRICING.pack.perSession} {PRICING.pack.currency} за сессию
                 </div>
               </div>
             </div>
