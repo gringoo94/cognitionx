@@ -15,7 +15,7 @@ import Ethics from "@/components/Ethics";
 import Projects from "@/components/Projects";
 import SessionPrep from "@/components/SessionPrep";
 import Blog from "@/components/Blog";
-import HomeFAQ from "@/components/HomeFAQ";
+import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
