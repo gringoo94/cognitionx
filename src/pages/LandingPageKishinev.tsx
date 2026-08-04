@@ -125,8 +125,8 @@ const serviceSchema = {
 const LandingPageKishinev = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог в Кишинёве · Psiholog Chișinău — КПТ онлайн"
-      description="Психолог в Кишинёве и по Молдове (psiholog Chișinău online). КПТ и схема-терапия на русском. Тревога, выгорание, отношения."
+      title="Психолог в Кишинёве онлайн на русском — КПТ | Яцко"
+      description="Психолог в Кишинёве и по всей Молдове: КПТ и схема-терапия онлайн на русском. Тревога, выгорание, отношения. Первая встреча — бесплатно."
       path="/psiholog-kishinev"
       schema={[serviceSchema, ...(localFaqSchema ? [localFaqSchema] : []), testimonialsSchema]}
       alternates={[
