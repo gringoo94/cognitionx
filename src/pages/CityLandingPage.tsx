@@ -110,7 +110,6 @@ const CityLandingPage = () => {
   // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
   // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
 
-  const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
   // Related articles by slug from blogPosts
   const relatedArticles = (page.relatedArticleSlugs ?? [])
