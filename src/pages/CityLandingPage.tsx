@@ -33,6 +33,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import Approach from "@/components/Approach";
+import AboutDetailed from "@/components/AboutDetailed";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
@@ -410,6 +411,9 @@ const CityLandingPage = () => {
           </div>
         </section>
 
+        <div id="about-detailed" className="scroll-mt-20">
+          <AboutDetailed />
+        </div>
         <Specializations />
         <Approach />
 
@@ -516,56 +520,8 @@ const CityLandingPage = () => {
           </div>
         </section>
 
-        {/* ── About Detailed ── */}
-        <section id="about-detailed" className="max-w-3xl mx-auto px-6 py-20 md:py-28 scroll-mt-20">
-          <motion.div {...fade()} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              Прозрачность — часть моей профессиональной этики
-            </p>
-          </motion.div>
-          <motion.div {...fade(0.05)}>
-            <Accordion type="multiple" className="space-y-3">
-              <AccordionItem value="education" className="border rounded-xl px-5">
-                <AccordionTrigger className="hover:no-underline">
-                  <span className="flex items-center gap-3 text-sm font-semibold">
-                    <GraduationCap className="w-5 h-5 text-primary" /> Образование
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                  <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
-                  <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
-                  <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
-                  <p>• Курсы и конференции Минского центра КПТ</p>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="certs" className="border rounded-xl px-5">
-                <AccordionTrigger className="hover:no-underline">
-                  <span className="flex items-center gap-3 text-sm font-semibold">
-                    <Award className="w-5 h-5 text-primary" /> Сертификаты и верификация
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                  <p>• Все дипломы верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
-                  <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
-                  <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="city-context" className="border rounded-xl px-5">
-                <AccordionTrigger className="hover:no-underline">
-                  <span className="flex items-center gap-3 text-sm font-semibold">
-                    <Globe className="w-5 h-5 text-primary" /> Опыт работы с экспатами {page.cityFor}
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                  <p>• Работаю с клиентами {page.cityIn} и других городов {page.country}</p>
-                  <p>• Понимаю специфику локального стресса: бюрократия, адаптация, климат, идентичность</p>
-                  <p>• Гибкие часы под {page.timezone}</p>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </motion.div>
-        </section>
+
+
 
         <Ethics />
         <SessionPrep />
