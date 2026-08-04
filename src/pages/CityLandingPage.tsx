@@ -414,21 +414,9 @@ const CityLandingPage = () => {
         <div id="about-detailed" className="scroll-mt-20">
           <AboutDetailed />
         </div>
-        <Specializations />
+        <AboutEvidence />
         <Approach />
-
-        {/* ── Evidence-based ── */}
-        <section className="bg-primary text-primary-foreground">
-          <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-            <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-              Доказательный подход
-              <br className="hidden sm:block" /> к вашему благополучию
-            </motion.h2>
-            <motion.p {...fade(0.05)} className="mt-6 text-sm md:text-base leading-relaxed opacity-85 max-w-2xl mx-auto">
-              КПТ — один из самых исследованных методов психотерапии. Терапия на родном языке значительно эффективнее: эмоции, детские воспоминания и внутренний голос «говорят» по-русски — и работать с ними нужно на русском.
-            </motion.p>
-          </div>
-        </section>
+        <Specializations />
 
         <Expectations />
         <Testimonials />
