@@ -302,7 +302,10 @@ function writeSitemap(
     // Static routes get NO <lastmod> — stamping them with the build date
     // would rewrite every entry on each deploy and devalue the signal.
     const lastmod = post?.updatedAt || post?.date || null;
-    const priority = p === "/" ? "1.0" : isBlogPost ? "0.7" : "0.6";
+    // Geo landings (/psiholog-*) are primary commercial entry points and are
+    // ranked above generic static pages so crawlers revisit them first.
+    const isGeoPage = /^\/psiholog-[^/]+$/.test(p);
+    const priority = p === "/" ? "1.0" : isGeoPage ? "0.8" : isBlogPost ? "0.7" : "0.6";
     const changefreq = p === "/" || p === "/blog" ? "weekly" : "monthly";
     urls.push(
       [
