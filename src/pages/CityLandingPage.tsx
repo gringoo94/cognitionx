@@ -524,8 +524,6 @@ const CityLandingPage = () => {
 
 
         <Ethics />
-        <SessionPrep />
-
         <Projects />
         <SessionPrep />
 
