@@ -373,38 +373,8 @@ const CityLandingPage = () => {
 
 
 
-        {/* ── Timezone mini-table ── */}
-        <section className="bg-card border-y border-border">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
-            <motion.div {...fade()} className="text-center mb-8">
-              <Clock className="w-7 h-7 text-primary mx-auto mb-3 opacity-80" />
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
-                Время сессий по вашему часовому поясу
-              </h2>
-              <p className="text-muted-foreground mt-3 text-sm max-w-lg mx-auto">
-                Я в Кишинёве (EET, {`UTC+2/+3`}). Вот как ваше локальное время соотносится с моим.
-              </p>
-            </motion.div>
-            <motion.div {...fade(0.1)} className="rounded-xl border border-border overflow-hidden bg-background max-w-md mx-auto">
-              <div className="grid grid-cols-2 px-4 py-2 text-xs uppercase tracking-wider text-muted-foreground bg-muted/40 border-b border-border">
-                <div>У вас ({page.city})</div>
-                <div className="text-right">У меня (Кишинёв)</div>
-              </div>
-              {tzRows.map((r, i) => (
-                <div
-                  key={i}
-                  className="grid grid-cols-2 px-4 py-2.5 text-sm border-b border-border last:border-b-0"
-                >
-                  <div className="font-medium">{r.client}</div>
-                  <div className="text-right text-muted-foreground">{r.host}</div>
-                </div>
-              ))}
-            </motion.div>
-            <p className="text-center text-xs text-muted-foreground mt-4">
-              Расчёт по зимнему смещению. Летом разница может быть на час меньше из-за DST.
-            </p>
-          </div>
-        </section>
+
+
 
 
 
