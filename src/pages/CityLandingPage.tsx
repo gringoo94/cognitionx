@@ -33,6 +33,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import Approach from "@/components/Approach";
+import AboutDetailed from "@/components/AboutDetailed";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
