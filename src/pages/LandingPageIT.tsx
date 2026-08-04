@@ -17,6 +17,8 @@ import Projects from "@/components/Projects";
 import Expectations from "@/components/Expectations";
 import Approach from "@/components/Approach";
 import AboutDetailed from "@/components/AboutDetailed";
+import Ethics from "@/components/Ethics";
+import SessionPrep from "@/components/SessionPrep";
 import heroPhoto from "@/assets/hero-photo.webp";
 import {
   ArrowRight,
@@ -369,6 +371,9 @@ const LandingPageIT = () => (
       <Expectations />
 
       <Testimonials />
+
+      <Ethics />
+      <SessionPrep />
 
       {/* ── Pricing ── */}
       <section id="pricing" className="bg-card border-y border-border">
