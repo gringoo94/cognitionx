@@ -410,6 +410,9 @@ const CityLandingPage = () => {
           </div>
         </section>
 
+        <div id="about-detailed" className="scroll-mt-20">
+          <AboutDetailed />
+        </div>
         <Specializations />
         <Approach />
 
