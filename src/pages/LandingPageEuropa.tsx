@@ -122,8 +122,8 @@ const serviceSchema = {
 const LandingPageEuropa = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог на русском для Европы онлайн | КПТ — Дмитрий Яцко"
-      description="Психолог онлайн на русском для экспатов в Европе. КПТ и схема-терапия. Адаптация, одиночество, тревога."
+      title="Психолог на русском для Европы онлайн — КПТ | Яцко"
+      description="Русскоязычный психолог онлайн для экспатов в Европе: КПТ и схема-терапия. Адаптация, одиночество, тревога, выгорание. Первая встреча — бесплатно."
       path="/psiholog-europa"
       schema={[personSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
       alternates={[

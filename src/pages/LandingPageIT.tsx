@@ -112,8 +112,8 @@ const serviceSchema = {
 const LandingPageIT = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог для IT онлайн | КПТ — Дмитрий Яцко"
-      description="Психолог для IT-специалистов в Европе. КПТ онлайн: выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
+      title="Психолог для IT-специалистов онлайн — КПТ | Яцко"
+      description="Психолог для разработчиков, PM и аналитиков в Европе: КПТ онлайн. Выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
       path="/psiholog-dlya-it"
       schema={[personSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
