@@ -43,7 +43,7 @@ import SessionPrep from "@/components/SessionPrep";
 import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
-import { getCityBySlug, cityPages } from "@/data/cityPages";
+import { getCityBySlug } from "@/data/cityPages";
 import { blogPosts } from "@/data/blogPosts";
 import NotFound from "@/pages/NotFound";
 
@@ -110,7 +110,6 @@ const CityLandingPage = () => {
   // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
   // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
 
-  const otherCities = cityPages.filter((c) => c.slug !== page.slug);
 
   // Related articles by slug from blogPosts
   const relatedArticles = (page.relatedArticleSlugs ?? [])
@@ -583,33 +582,8 @@ const CityLandingPage = () => {
         <BookingForm />
 
 
-        {/* ── Other cities (internal linking) ── */}
-        <section className="max-w-5xl mx-auto px-6 py-16 border-t border-border">
-          <motion.h2 {...fade()} className="text-lg font-semibold text-center mb-6">
-            Психолог в других городах
-          </motion.h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            {otherCities.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/${c.slug}`}
-                className="rounded-xl border border-border bg-card px-4 py-3 text-center hover:border-primary/40 transition-colors group"
-              >
-                <span className="text-sm font-medium group-hover:text-primary transition-colors">
-                  {c.city}
-                </span>
-                <span className="block text-xs text-muted-foreground mt-0.5">{c.country}</span>
-              </Link>
-            ))}
-          </div>
-          {isEurope && (
-            <div className="mt-6 text-center">
-              <Link to="/psiholog-europa" className="text-sm text-primary hover:underline">
-                Все направления — Европа →
-              </Link>
-            </div>
-          )}
-        </section>
+
+
 
         {/* ── SEO footer ── */}
         <section className="max-w-3xl mx-auto px-6 py-12 text-center border-t border-border">
