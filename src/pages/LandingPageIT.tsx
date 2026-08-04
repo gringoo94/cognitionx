@@ -462,8 +462,8 @@ const LandingPageIT = () => (
       </section>
 
       <Ethics />
-      <SessionPrep />
       <Projects />
+      <SessionPrep />
       <Blog />
 
 
