@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import Projects from "@/components/Projects";
 import Expectations from "@/components/Expectations";
 import Approach from "@/components/Approach";
+import AboutDetailed from "@/components/AboutDetailed";
 import heroPhoto from "@/assets/hero-photo.webp";
 import {
   ArrowRight,
@@ -271,71 +272,9 @@ const LandingPageIT = () => (
         </div>
       </section>
 
-      {/* ── About Detailed ── */}
-      <section id="about-detailed" className="max-w-3xl mx-auto px-6 py-20 md:py-28 scroll-mt-20">
-        <motion.div {...fade()} className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
-          <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-            Прозрачность — часть моей профессиональной этики
-          </p>
-        </motion.div>
-        <motion.div {...fade(0.05)}>
-          <Accordion type="multiple" className="space-y-3">
-            <AccordionItem value="education" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <GraduationCap className="w-5 h-5 text-primary" /> Образование
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
-                <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
-                <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
-                <p>• Курсы и конференции Минского центра КПТ</p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="certs" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <Award className="w-5 h-5 text-primary" /> Сертификаты и верификация
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
-                <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
-                <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
-                <p>• Работа в MedHub и Initiativa Pozitiva - психотерапия зависимости, созависимости</p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="methods" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <Brain className="w-5 h-5 text-primary" /> Методы и подходы
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• <span className="font-medium">КПТ</span> (когнитивно-поведенческая терапия) — основное направление</p>
-                <p>• <span className="font-medium">Схема-терапия</span> — работа с глубинными схемами и паттернами</p>
-                <p>• ACT (терапия принятия и ответственности)</p>
-                <p>• Мотивационное интервьюирование (MI)</p>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="it-context" className="border rounded-xl px-5">
-              <AccordionTrigger className="hover:no-underline">
-                <span className="flex items-center gap-3 text-sm font-semibold">
-                  <Globe className="w-5 h-5 text-primary" /> Опыт работы с IT-специалистами
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                <p>• Работаю с разработчиками, PM, аналитиками и тимлидами из Германии, Нидерландов, Чехии, Португалии и других стран</p>
-                <p>• Понимаю специфику IT: выгорание от перформанс-ревью, синдром самозванца, прокрастинация перфекциониста</p>
-                <p>• Создатель AI-продуктов (Rolelit, CBT Workbook) — говорю на одном языке с технарями</p>
-                <p>• Часовой пояс EET (Молдова) удобен для большинства европейских стран</p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </motion.div>
-      </section>
+      <div id="about-detailed" className="scroll-mt-20">
+        <AboutDetailed />
+      </div>
 
       {/* ── Evidence-based (IT) ── */}
       <section id="why-cbt" className="max-w-5xl mx-auto px-6 py-24 md:py-32 scroll-mt-20">
