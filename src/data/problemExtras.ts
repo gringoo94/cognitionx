@@ -331,16 +331,15 @@ export const getProblemExtras = (slug: string): ProblemExtras =>
 
 /* ─── Pricing данные (синхронизировано с Pricing.tsx) ─── */
 export const PRICING = {
-  firstSession: { price: 25, currency: "€", duration: "50 минут" },
-  regularSession: { price: 30, currency: "€", duration: "50 минут" },
-  pack: { price: 100, currency: "€", count: 4, perSession: 25 },
+  session: { price: 40, currency: "€", duration: "50 минут" },
+  pack: { price: 140, currency: "€", count: 4, perSession: 35 },
 };
 
 /* ─── Дополнительные FAQ-вопросы для добавления ко всем проблемам ─── */
 export const COMMON_FAQ_ADDONS = [
   {
     question: "Сколько стоит сессия?",
-    answer: "Первая встреча — 25 €, регулярные сессии — 30 €. Пакет из 4 сессий — 100 € (по 25 € за сессию). Длительность сессии — 50 минут. Очный и онлайн-формат — одинаковая цена.",
+    answer: "Разовая консультация — 40 €. Пакет из 4 сессий — 140 € (по 35 € за сессию). Длительность сессии — 50 минут. Очный и онлайн-формат — одинаковая цена.",
   },
   {
     question: "Работает ли терапия онлайн?",
