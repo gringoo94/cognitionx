@@ -83,30 +83,28 @@ const CityLandingPage = () => {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://cognitionx.cloud/#person",
     name: "Дмитрий Яцко",
     jobTitle: "Психолог, КПТ и схема-терапевт",
     url,
   };
 
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": `${url}#service`,
+  const geoInput = {
+    url,
     name: `Русскоязычный психолог онлайн ${page.cityFor} — Дмитрий Яцко`,
     description: page.metaDescription,
-    url,
-    provider: { "@type": "Person", name: "Дмитрий Яцко" },
-    areaServed: [
-      { "@type": "City", name: page.city },
-      { "@type": "Country", name: page.country },
-    ],
-    serviceType: ["Онлайн-психотерапия", "КПТ-терапия", "Схема-терапия"],
-    availableLanguage: "Russian",
-    availableChannel: { "@type": "ServiceChannel", serviceType: "Online", serviceUrl: url },
+    city: page.city,
+    country: page.country,
+    languages: page.countryCode === "MD" ? ["Russian", "Romanian"] : ["Russian"],
+    timezone: page.timezone,
   };
+
+  const businessSchema = buildGeoBusinessSchema(geoInput);
+  const serviceSchema = buildGeoServiceSchema(geoInput);
 
   // FAQPage schema removed (Google deprecated FAQ rich results, May 2026).
   // Visible FAQ section stays for users; buildFaqSchema import kept elsewhere.
+
 
 
 
