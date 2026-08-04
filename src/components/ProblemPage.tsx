@@ -57,7 +57,7 @@ import { getProblemExtras, PRICING, COMMON_FAQ_ADDONS } from "@/data/problemExtr
 import { useActiveSection, useScrollProgress } from "@/hooks/usePageScroll";
 import NotFound from "@/pages/NotFound";
 import { sanitizeHtml } from "@/lib/sanitizeHtml";
-import { buildFaqSchema } from "@/lib/geoSchema";
+import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
