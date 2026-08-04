@@ -171,10 +171,21 @@ const CityLandingPage = () => {
                 {...fade(0.05)}
                 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08]"
               >
-                Русскоязычный психолог
-                <br />
-                <span className="text-primary">{page.cityIn}</span>
+                {(() => {
+                  // Render the city-specific H1 from cityPages, highlighting the city part.
+                  const idx = page.h1.indexOf(page.cityIn);
+                  if (idx === -1) return page.h1;
+                  return (
+                    <>
+                      {page.h1.slice(0, idx)}
+                      <br />
+                      <span className="text-primary">{page.cityIn}</span>
+                      {page.h1.slice(idx + page.cityIn.length)}
+                    </>
+                  );
+                })()}
               </motion.h1>
+
 
               <motion.p
                 {...fade(0.1)}
