@@ -234,8 +234,13 @@ async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
         desc: clip(`${hub.metaDescription}${tz}`, 260),
       });
     } else {
-      const bucket = /dlya-/.test(slug) ? audiences : countries;
-      bucket.push({ path: r.path, label: r.title.split("|")[0].trim(), desc: clip(r.description, 260) });
+      const bucket = /dlya-/.test(slug)
+        ? audiences
+        : slug === "psiholog-moskva"
+          ? cities
+          : countries;
+      const label = r.title.split("|")[0].replace(/\s*—\s*КПТ\s*$/, "").trim();
+      bucket.push({ path: r.path, label, desc: clip(r.description, 260) });
     }
   }
 
