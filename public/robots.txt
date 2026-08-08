@@ -148,3 +148,11 @@ Disallow: /
 
 # --- Sitemap и LLM-индексы ---
 Sitemap: https://cognitionx.cloud/sitemap.xml
+
+# Каталоги для ИИ-агентов (llmstxt.org):
+#   /llms.txt      — структура сайта и все страницы
+#   /llms-full.txt — полные тексты статей блога
+#   /llms-geo.txt  — полные тексты гео-страниц (страны, города, местный контекст)
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llms-geo.txt

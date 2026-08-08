@@ -363,8 +363,42 @@ for (const file of files) {
   }
 }
 
+// ---------- Geo coverage: sitemap + llms.txt + llms-geo.txt ----------
+{
+  const geoRoutes = seoRoutes.filter(
+    (r) => !r.noindex && /^\/psiholog-[^/]+$/.test(r.path)
+  );
+  const llmsTxt = existsSync(resolve(process.cwd(), "public/llms.txt"))
+    ? readFileSync(resolve(process.cwd(), "public/llms.txt"), "utf-8")
+    : "";
+  const llmsGeo = existsSync(resolve(process.cwd(), "public/llms-geo.txt"))
+    ? readFileSync(resolve(process.cwd(), "public/llms-geo.txt"), "utf-8")
+    : "";
+  const geoErrs = [];
+  if (!llmsTxt) geoErrs.push("public/llms.txt not found");
+  if (!llmsGeo) geoErrs.push("public/llms-geo.txt not found — run the build (llm-assets plugin)");
+  for (const r of geoRoutes) {
+    if (sitemapUrls.size && !sitemapUrls.has(r.path)) {
+      geoErrs.push(`sitemap: missing geo route ${r.path}`);
+    }
+    if (llmsTxt && !llmsTxt.includes(`${SITE}${r.path})`)) {
+      geoErrs.push(`llms.txt: geo route ${r.path} not linked`);
+    }
+    if (llmsGeo && !llmsGeo.includes(`URL: ${SITE}${r.path}`)) {
+      geoErrs.push(`llms-geo.txt: no section for ${r.path}`);
+    }
+  }
+  if (geoErrs.length) {
+    totalErrors += geoErrs.length;
+    failed.push({ rel: "(geo coverage)", errs: geoErrs, diff: undefined, isRedirectPage: false });
+  } else {
+    console.log(`✓ Geo coverage: ${geoRoutes.length} routes in sitemap, llms.txt and llms-geo.txt.`);
+  }
+}
+
 console.log(`Scanned ${files.length} prerendered HTML files in dist/`);
 if (failed.length === 0) {
+
   console.log(`✓ All pages passed SEO prerender checks.`);
   process.exit(0);
 }

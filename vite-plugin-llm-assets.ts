@@ -164,11 +164,211 @@ async function generate() {
   const llmsFull = header + articles.join("");
   fs.writeFileSync(path.resolve("public/llms-full.txt"), llmsFull);
 
+  // ---- Geo assets --------------------------------------------------------
+  const geoCount = await generateGeo(seoRoutes, today);
+
   // eslint-disable-next-line no-console
   console.log(
-    `[llm-assets] sitemap.xml (${urls.length} urls) + llms-full.txt (${sortedPosts.length} posts) written`,
+    `[llm-assets] sitemap.xml (${urls.length} urls) + llms-full.txt (${sortedPosts.length} posts) + llms-geo.txt (${geoCount} pages) written`,
   );
 }
+
+const GEO_START = "<!-- GEO:AUTO-START -->";
+const GEO_END = "<!-- GEO:AUTO-END -->";
+
+const GEO_FACTS = [
+  "Язык консультаций: русский (единственный язык работы).",
+  "Формат: онлайн из любой страны и часового пояса; очно — только в Кишинёве (Молдова).",
+  "Цены: разовая консультация 40 €, пакет из 4 сессий 140 € (35 € за сессию).",
+  "Бесплатное знакомство: 20 минут, без оплаты и обязательств.",
+  "Методы: когнитивно-поведенческая терапия (КПТ) и схема-терапия.",
+  "Специалист: Дмитрий Яцко, психолог, практика CognitionX.",
+];
+
+function clip(s: string, max = 200): string {
+  const t = String(s || "").replace(/\s+/g, " ").trim();
+  return t.length <= max ? t : t.slice(0, max - 1).replace(/[\s,.;:—-]+$/, "") + "…";
+}
+
+/**
+ * Rebuilds the geo section of public/llms.txt (between GEO:AUTO markers) and
+ * writes public/llms-geo.txt — a compact plain-text corpus of every geo
+ * landing (city / country hub / region), so LLMs can cite local specifics
+ * instead of a generic "онлайн, русский язык" stub.
+ *
+ * Sources of truth: seo-routes.ts (which /psiholog-* routes exist) enriched
+ * with src/data/cityPages.ts and src/data/countryHubs.ts.
+ */
+async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
+  const { cityPages } = await import("./src/data/cityPages");
+  const { countryHubs } = await import("./src/data/countryHubs");
+
+  const cityBySlug = new Map<string, any>(cityPages.map((c: any) => [c.slug, c]));
+  const hubBySlug = new Map<string, any>(countryHubs.map((h: any) => [h.slug, h]));
+
+  const geoRoutes = seoRoutes.filter(
+    (r) => !r.noindex && /^\/psiholog-[^/]+$/.test(r.path),
+  );
+
+  type Row = { path: string; label: string; desc: string };
+  const countries: Row[] = [];
+  const cities: Row[] = [];
+  const audiences: Row[] = [];
+
+  for (const r of geoRoutes) {
+    const slug = r.path.slice(1);
+    const city = cityBySlug.get(slug);
+    const hub = hubBySlug.get(slug);
+    if (city) {
+      const tz = city.utcOffset ? ` Часовой пояс: ${city.timezone} (${city.utcOffset}).` : "";
+      cities.push({
+        path: r.path,
+        label: `Психолог ${city.cityIn}`,
+        desc: clip(`${city.metaDescription}${tz}`, 260),
+      });
+    } else if (hub) {
+      const tz = hub.utcOffset ? ` Часовой пояс: ${hub.timezone} (${hub.utcOffset}).` : "";
+      countries.push({
+        path: r.path,
+        label: `Психолог ${hub.countryIn}`,
+        desc: clip(`${hub.metaDescription}${tz}`, 260),
+      });
+    } else {
+      const bucket = /dlya-/.test(slug)
+        ? audiences
+        : slug === "psiholog-moskva"
+          ? cities
+          : countries;
+      const label = r.title.split("|")[0].replace(/\s*—\s*КПТ\s*$/, "").trim();
+      bucket.push({ path: r.path, label, desc: clip(r.description, 260) });
+    }
+  }
+
+  const section = (title: string, rows: Row[]) =>
+    rows.length
+      ? [
+          `### ${title}`,
+          "",
+          ...rows.map((x) => `- [${x.label}](${SITE_URL}${x.path}): ${x.desc}`),
+          "",
+        ]
+      : [];
+
+  const block = [
+    GEO_START,
+    "",
+    "## География и форматы работы",
+    "",
+    ...GEO_FACTS.map((f) => `- ${f}`),
+    "",
+    `Полные тексты гео-страниц (местный контекст, частые запросы, FAQ): ${SITE_URL}/llms-geo.txt`,
+    "",
+    ...section("Страны и регионы", countries),
+    ...section("Города", cities),
+    ...section("Отдельные аудитории", audiences),
+    GEO_END,
+  ].join("\n");
+
+  const llmsPath = path.resolve("public/llms.txt");
+  if (fs.existsSync(llmsPath)) {
+    let text = fs.readFileSync(llmsPath, "utf-8");
+    const re = new RegExp(
+      `${GEO_START.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[\\s\\S]*?${GEO_END.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`,
+    );
+    if (re.test(text)) {
+      text = text.replace(re, block);
+    } else {
+      const optIdx = text.indexOf("\n## Optional");
+      text =
+        optIdx >= 0
+          ? text.slice(0, optIdx) + "\n\n" + block + "\n" + text.slice(optIdx)
+          : text.replace(/\s*$/, "\n\n" + block + "\n");
+    }
+    fs.writeFileSync(llmsPath, text);
+  }
+
+  // ---- llms-geo.txt ------------------------------------------------------
+  const parts: string[] = [
+    "# CognitionX — гео-страницы (полный текст)",
+    "",
+    `> Психолог Дмитрий Яцко (КПТ и схема-терапия). Локальный контекст по странам и городам: местная система психологической помощи, частые запросы, FAQ. Каталог сайта: ${SITE_URL}/llms.txt`,
+    "",
+    `Обновлено: ${today}`,
+    `Всего гео-страниц: ${geoRoutes.length}`,
+    "",
+    ...GEO_FACTS.map((f) => `- ${f}`),
+    "",
+    "---",
+    "",
+  ];
+
+  for (const r of geoRoutes) {
+    const slug = r.path.slice(1);
+    const city = cityBySlug.get(slug);
+    const hub = hubBySlug.get(slug);
+    const lines: string[] = [];
+
+    if (city) {
+      lines.push(`## ${city.h1}`, "", `URL: ${SITE_URL}${r.path}`);
+      lines.push(`Город: ${city.city} (${city.country}, ${city.countryCode})`);
+      lines.push(`Часовой пояс: ${city.timezone} (${city.utcOffset})`);
+      lines.push("", stripHtml(city.subtitle || ""), "", stripHtml(city.intro || ""));
+      if (city.painPoints?.length) {
+        lines.push("", "### С чем обращаются");
+        for (const p of city.painPoints) lines.push(`- ${p.title}: ${stripHtml(p.text)}`);
+      }
+      if (city.localSystem) {
+        lines.push(
+          "",
+          "### Местная система помощи",
+          `- Страховка: ${stripHtml(city.localSystem.insurance)}`,
+          `- Государственный путь: ${stripHtml(city.localSystem.publicRoute)}`,
+          `- Частный путь: ${stripHtml(city.localSystem.privateRoute)}`,
+        );
+      }
+      if (city.faq?.length) {
+        lines.push("", "### FAQ");
+        for (const f of city.faq) lines.push(`**${f.question}**`, stripHtml(f.answer), "");
+      }
+      if (city.localKeywords?.length) lines.push(`Ключевые запросы: ${city.localKeywords.join(", ")}`);
+    } else if (hub) {
+      lines.push(`## ${hub.h1}`, "", `URL: ${SITE_URL}${r.path}`);
+      lines.push(`Страна: ${hub.country} (${hub.countryCode}), местный язык: ${hub.language}`);
+      lines.push(`Часовой пояс: ${hub.timezone} (${hub.utcOffset})`);
+      lines.push("", stripHtml(hub.subtitle || ""), "", stripHtml(hub.intro || ""));
+      if (hub.systemOverview?.length) {
+        lines.push("", "### Система психологической помощи");
+        for (const s of hub.systemOverview) lines.push(`- ${s.title}: ${stripHtml(s.text)}`);
+      }
+      if (hub.expatContext?.length) {
+        lines.push("", "### Контекст эмиграции");
+        for (const t of hub.expatContext) lines.push(`- ${stripHtml(t)}`);
+      }
+      if (hub.whyOnline?.length) {
+        lines.push("", "### Почему онлайн на русском");
+        for (const t of hub.whyOnline) lines.push(`- ${stripHtml(t)}`);
+      }
+      if (hub.cities?.length) {
+        lines.push(
+          "",
+          `Города: ${hub.cities.map((s: string) => `${SITE_URL}/${s}`).join(", ")}`,
+        );
+      }
+      if (hub.faq?.length) {
+        lines.push("", "### FAQ");
+        for (const f of hub.faq) lines.push(`**${f.question}**`, stripHtml(f.answer), "");
+      }
+    } else {
+      lines.push(`## ${r.title.split("|")[0].trim()}`, "", `URL: ${SITE_URL}${r.path}`, "", clip(r.description, 400));
+    }
+
+    parts.push(lines.filter((l) => l !== undefined).join("\n").replace(/\n{3,}/g, "\n\n"), "", "---", "");
+  }
+
+  fs.writeFileSync(path.resolve("public/llms-geo.txt"), parts.join("\n"));
+  return geoRoutes.length;
+}
+
 
 export function llmAssetsPlugin(): Plugin {
   return {
