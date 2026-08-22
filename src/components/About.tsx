@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { trackContact } from "@/lib/metaPixel";
 import aboutPhotoAsset from "@/assets/about-photo.jpg.asset.json";
 
 const aboutPhoto = aboutPhotoAsset.url;
