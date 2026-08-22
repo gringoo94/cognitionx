@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import aboutPhotoAsset from "@/assets/about-photo.jpg.asset.json";
 
-const aboutPhoto = "/hero-photo.webp";
-const aboutPhotoAvif = "/hero-photo.avif";
+const aboutPhoto = aboutPhotoAsset.url;
+
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -19,19 +20,16 @@ const About = () => (
           <div className="relative">
             <div className="absolute -inset-3 rounded-3xl bg-primary/20 blur-2xl" />
             <div className="relative w-56 h-64 sm:w-64 sm:h-80 md:w-72 md:h-[22rem] rounded-3xl overflow-hidden shadow-2xl">
-              <picture>
-                <source srcSet={aboutPhotoAvif} type="image/avif" />
-                <source srcSet={aboutPhoto} type="image/webp" />
-                <img
-                  src={aboutPhoto}
-                  alt="Психолог Дмитрий Яцко — КПТ и схема-терапия, консультации онлайн и очно"
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
-                  decoding="async"
-                  width={1080}
-                  height={1350}
-                />
-              </picture>
+              <img
+                src={aboutPhoto}
+                alt="Психолог Дмитрий Яцко — КПТ и схема-терапия, консультации онлайн и очно"
+                className="w-full h-full object-cover object-top"
+                loading="lazy"
+                decoding="async"
+                width={675}
+                height={900}
+              />
+
             </div>
           </div>
         </motion.div>
