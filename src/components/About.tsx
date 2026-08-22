@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import aboutPhotoAsset from "@/assets/about-photo.jpg.asset.json";
 
-const aboutPhoto = "/hero-photo.webp";
-const aboutPhotoAvif = "/hero-photo.avif";
+const aboutPhoto = aboutPhotoAsset.url;
+
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
