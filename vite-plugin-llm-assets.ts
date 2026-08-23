@@ -167,11 +167,69 @@ async function generate() {
   // ---- Geo assets --------------------------------------------------------
   const geoCount = await generateGeo(seoRoutes, today);
 
+  // ---- robots.txt --------------------------------------------------------
+  syncRobots({ urls: urls.length, posts: sortedPosts.length, geo: geoCount, today });
+
   // eslint-disable-next-line no-console
   console.log(
-    `[llm-assets] sitemap.xml (${urls.length} urls) + llms-full.txt (${sortedPosts.length} posts) + llms-geo.txt (${geoCount} pages) written`,
+    `[llm-assets] sitemap.xml (${urls.length} urls) + llms-full.txt (${sortedPosts.length} posts) + llms-geo.txt (${geoCount} pages) + robots.txt written`,
   );
 }
+
+const ROBOTS_START = "# BEGIN AUTO-GENERATED (vite-plugin-llm-assets) — не редактировать вручную";
+const ROBOTS_END = "# END AUTO-GENERATED";
+
+/**
+ * Keeps the Sitemap / LLM-catalog block of public/robots.txt in sync with the
+ * assets actually generated in this build. Only the marked block is rewritten;
+ * hand-maintained crawler rules above it stay untouched.
+ */
+function syncRobots({
+  urls,
+  posts,
+  geo,
+  today,
+}: {
+  urls: number;
+  posts: number;
+  geo: number;
+  today: string;
+}) {
+  const robotsPath = path.resolve("public/robots.txt");
+  if (!fs.existsSync(robotsPath)) return;
+
+  const existing = fs.readFileSync(robotsPath, "utf-8");
+  const files = [
+    { file: "llms.txt", note: "структура сайта и все страницы" },
+    { file: "llms-full.txt", note: `полные тексты статей блога (${posts})` },
+    { file: "llms-geo.txt", note: `полные тексты гео-страниц (${geo})` },
+  ].filter((f) => fs.existsSync(path.resolve(`public/${f.file}`)));
+
+  const block = [
+    ROBOTS_START,
+    `# Обновлено при сборке: ${today}`,
+    "",
+    "# --- Sitemap и LLM-индексы ---",
+    `Sitemap: ${SITE_URL}/sitemap.xml`,
+    `# sitemap.xml: ${urls} URL`,
+    "",
+    "# Каталоги для ИИ-агентов (llmstxt.org):",
+    ...files.map((f) => `#   /${f.file} — ${f.note}`),
+    ...files.map((f) => `Allow: /${f.file}`),
+    ROBOTS_END,
+    "",
+  ].join("\n");
+
+  const start = existing.indexOf(ROBOTS_START);
+  const end = existing.indexOf(ROBOTS_END);
+  const next =
+    start !== -1 && end !== -1
+      ? existing.slice(0, start) + block + existing.slice(end + ROBOTS_END.length + 1)
+      : existing.trimEnd() + "\n\n" + block;
+
+  if (next !== existing) fs.writeFileSync(robotsPath, next);
+}
+
 
 const GEO_START = "<!-- GEO:AUTO-START -->";
 const GEO_END = "<!-- GEO:AUTO-END -->";
