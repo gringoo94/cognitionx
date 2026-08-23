@@ -43,13 +43,15 @@ function stripHtml(html: string): string {
     .trim();
 }
 
+// Keep in sync with vite-plugin-seo.ts (which regenerates dist/sitemap.xml):
+// both generators must produce identical priorities for the same URL.
 function priorityFor(p: string): string {
   if (p === "/") return "1.0";
+  if (/^\/psiholog-[^/]+$/.test(p)) return "0.8";
   if (/^\/blog\//.test(p)) return "0.7";
-  if (/^\/tools(\/|$)/.test(p)) return "0.8";
-  if (/^\/psiholog-/.test(p)) return "0.7";
   return "0.6";
 }
+
 
 function changefreqFor(p: string): string {
   if (p === "/" || p === "/blog") return "weekly";
