@@ -9,6 +9,43 @@ const SITE_URL = "https://cognitionx.cloud";
 const OG_IMAGE = `${SITE_URL}/og-default.webp`;
 
 /**
+ * Regional hreflang targeting for geo landings. The site is single-language
+ * (ru), so every alternate is self-referencing: the same URL is declared for
+ * ru, the regional ru-<CC> variants and x-default. Must mirror the runtime
+ * alternates rendered by SEOHead / src/lib/geoAlternates.ts.
+ */
+const GEO_REGIONS: Record<string, string[]> = {
+  "/psiholog-berlin": ["DE"],
+  "/psiholog-myunhen": ["DE"],
+  "/psiholog-gamburg": ["DE"],
+  "/psiholog-germaniya": ["DE"],
+  "/psiholog-amsterdam": ["NL"],
+  "/psiholog-rotterdam": ["NL"],
+  "/psiholog-niderlandy": ["NL"],
+  "/psiholog-lissabon": ["PT"],
+  "/psiholog-porto": ["PT"],
+  "/psiholog-portugaliya": ["PT"],
+  "/psiholog-tbilisi": ["GE"],
+  "/psiholog-gruziya": ["GE"],
+  "/psiholog-kishinev": ["MD"],
+  "/psiholog-moldova": ["MD"],
+  "/psiholog-europa": ["RU", "DE", "IT"],
+  "/psiholog-aziya": ["ID", "TH", "VN"],
+  "/psiholog-usa": ["US"],
+  "/psiholog-moskva": ["RU"],
+  "/psiholog-dlya-it": ["DE", "NL", "PT", "GE"],
+};
+
+function alternateTags(routePath: string, canonicalUrl: string): string[] {
+  const key = routePath.replace(/\/$/, "") || "/";
+  const codes = ["ru", ...(GEO_REGIONS[key] || []).map((c) => `ru-${c}`), "x-default"];
+  return codes.map(
+    (hl) => `<link rel="alternate" hreflang="${hl}" href="${canonicalUrl}" />`
+  );
+}
+
+
+/**
  * Pre-renders per-route HTML files with static SEO meta tags.
  * For each route in seoRoutes, creates a copy of index.html at the
  * corresponding path (e.g. /about → dist/about/index.html) with
