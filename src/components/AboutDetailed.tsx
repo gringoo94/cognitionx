@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { GraduationCap, Award, Brain, BookOpen } from "lucide-react";
+import { ShieldCheck, Globe2, Users } from "lucide-react";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -9,76 +8,151 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
+const timeline = [
+  {
+    period: "2016",
+    title: "МолдГУ, магистратура",
+    text: "Клиническая психология. Фундаментальная база для частной практики.",
+  },
+  {
+    period: "С 2023 — повышение квалификации",
+    title: "CBTLAB — когнитивно-поведенческая терапия",
+    text: "Базовый курс КПТ и две ступени специализации по депрессии. Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA), курсы и конференции Минского центра КПТ.",
+  },
+  {
+    period: "Практический опыт",
+    title: "MedHub / Initiativa Pozitiva",
+    text: "Психотерапия зависимости и созависимости, работа с беженцами войны и людьми, живущими с ВИЧ, ведение групповой терапии.",
+  },
+];
+
+const methods = [
+  "КПТ",
+  "Схема-терапия",
+  "ACT",
+  "Мотивационное интервьюирование (MI)",
+  "Smart Recovery",
+];
+
+const trust = [
+  {
+    icon: ShieldCheck,
+    title: "Верифицирован на B17.ru",
+    text: "Все дипломы и сертификаты проверены платформой B17.ru.",
+    href: "https://www.b17.ru/",
+  },
+  {
+    icon: Globe2,
+    title: "Стандарты EABCT",
+    text: "Практика по международным стандартам Европейской ассоциации КПТ.",
+  },
+  {
+    icon: Users,
+    title: "Супервизии и сообщество",
+    text: "Регулярные супервизии. Основатель Rolelit — тренажёра для психологов.",
+  },
+];
+
 const AboutDetailed = () => (
-  <section className="max-w-3xl mx-auto px-6 py-20 md:py-28">
-    <motion.div {...fade()} className="text-center mb-12">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Образование и профессиональное развитие</h2>
+  <section className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <motion.div {...fade()} className="text-center mb-14">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+        Образование и профессиональное развитие
+      </h2>
       <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
         Прозрачность — часть моей профессиональной этики
       </p>
+      <div className="mt-6 h-1 w-20 rounded-full bg-primary/20 mx-auto" />
     </motion.div>
 
-    <motion.div {...fade(0.05)}>
-      <Accordion type="multiple" className="space-y-3">
-        <AccordionItem value="education" className="border rounded-xl px-5">
-          <AccordionTrigger className="hover:no-underline">
-            <span className="flex items-center gap-3 text-sm font-semibold">
-              <GraduationCap className="w-5 h-5 text-primary" /> Образование
-            </span>
-          </AccordionTrigger>
-          <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• МолдГУ, психология (2016); магистратура — клиническая психология</p>
-            <p>• Базовый курс КПТ + две ступени специализации по депрессии (CBTLAB, с 2023)</p>
-            <p>• Клинические аспекты тревожных, депрессивных и зависимых расстройств (стандарты APA)</p>
-            <p>• Курсы и конференции Минского центра КПТ</p>
-          </AccordionContent>
-        </AccordionItem>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      {/* Таймлайн */}
+      <div className="lg:col-span-7 space-y-12">
+        <div>
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-8">
+            Академический путь
+          </h3>
+          <div className="relative space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-border">
+            {timeline.map((item, i) => (
+              <motion.div key={item.title} {...fade(0.05 * i)} className="relative pl-10">
+                <span
+                  className="absolute left-0 top-1 h-[23px] w-[23px] rounded-full border-4 border-background bg-primary shadow-sm"
+                  style={{ opacity: 1 - i * 0.2 }}
+                />
+                <span className="text-xs font-medium text-muted-foreground">{item.period}</span>
+                <h4 className="text-base md:text-lg font-semibold mt-0.5">{item.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-        <AccordionItem value="certs" className="border rounded-xl px-5">
-          <AccordionTrigger className="hover:no-underline">
-            <span className="flex items-center gap-3 text-sm font-semibold">
-              <Award className="w-5 h-5 text-primary" /> Сертификаты и верификация
-            </span>
-          </AccordionTrigger>
-          <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• Все дипломы и сертификаты верифицированы платформой <a href="https://www.b17.ru/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">B17.ru</a></p>
-            <p>• Практика по международным стандартам <span className="font-medium">EABCT</span>, регулярные супервизии</p>
-            
-            <p>• Основатель <span className="font-medium">Rolelit</span> — тренажёр для психологов</p>
-            <p>• Работа в MedHub и Initiativa Pozitiva - психотерапия зависимости, созависимости. Работа с беженцами войны, людьми живущими с ВИЧ, а также проведение групповой терапии</p>
-          </AccordionContent>
-        </AccordionItem>
+        <motion.div {...fade(0.1)}>
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
+            Методы и подходы
+          </h3>
+          <ul className="flex flex-wrap gap-2">
+            {methods.map((m) => (
+              <li
+                key={m}
+                className="rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-foreground/80"
+              >
+                {m}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
 
-        <AccordionItem value="methods" className="border rounded-xl px-5">
-          <AccordionTrigger className="hover:no-underline">
-            <span className="flex items-center gap-3 text-sm font-semibold">
-              <Brain className="w-5 h-5 text-primary" /> Методы и подходы
-            </span>
-          </AccordionTrigger>
-          <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• <span className="font-medium">КПТ</span> (когнитивно-поведенческая терапия) — основное направление</p>
-            <p>• <span className="font-medium">Схема-терапия</span> — второе основное направление, работа с глубинными схемами и паттернами</p>
-            <p>• ACT (терапия принятия и ответственности)</p>
-            <p>• Мотивационное интервьюирование (MI)</p>
-            <p>• Элементы Smart Recovery при работе с зависимостями</p>
-          </AccordionContent>
-        </AccordionItem>
+      {/* Доверие */}
+      <div className="lg:col-span-5 space-y-8">
+        <motion.div
+          {...fade(0.1)}
+          className="rounded-2xl border border-border bg-muted/40 p-7 shadow-sm"
+        >
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6">
+            Стандарты и верификация
+          </h3>
+          <ul className="space-y-6">
+            {trust.map((t) => (
+              <li key={t.title} className="flex items-start gap-4">
+                <div className="mt-0.5 rounded-lg bg-background p-2 shadow-sm">
+                  <t.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold">
+                    {t.href ? (
+                      <a
+                        href={t.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors"
+                      >
+                        {t.title}
+                      </a>
+                    ) : (
+                      t.title
+                    )}
+                  </h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-1">{t.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
 
-        <AccordionItem value="interests" className="border rounded-xl px-5">
-          <AccordionTrigger className="hover:no-underline">
-            <span className="flex items-center gap-3 text-sm font-semibold">
-              <BookOpen className="w-5 h-5 text-primary" /> Профессиональные интересы
-            </span>
-          </AccordionTrigger>
-          <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-            <p>• Доказательная психотерапия и её популяризация</p>
-            <p>• Цифровые инструменты для психического здоровья</p>
-            <p>• Psychoeducation и self-help на основе КПТ</p>
-            <p className="italic mt-2">«Обучение не заканчивается — оно продолжается с каждым новым человеком на сессии»</p>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </motion.div>
+        <motion.div {...fade(0.15)} className="rounded-r-xl border-l-4 border-primary bg-primary/5 p-6">
+          <h4 className="text-sm font-semibold mb-2">Профессиональные интересы</h4>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Доказательная психотерапия и её популяризация, цифровые инструменты для психического
+            здоровья, психообразование и self-help на основе КПТ.
+          </p>
+          <p className="text-xs italic text-muted-foreground/80 mt-3">
+            «Обучение не заканчивается — оно продолжается с каждым новым человеком на сессии»
+          </p>
+        </motion.div>
+      </div>
+    </div>
   </section>
 );
 
