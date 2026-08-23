@@ -64,7 +64,7 @@ const trust = [
     icon: ShieldCheck,
     title: "Верифицирован на B17.ru",
     text: "Все дипломы и сертификаты проверены платформой B17.ru.",
-    href: "https://www.b17.ru/",
+    href: "https://www.b17.ru/dumitru_iatco/",
   },
   {
     icon: Globe2,
