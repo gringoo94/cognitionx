@@ -263,26 +263,9 @@ const LandingPageIT = () => (
         <AboutDetailed />
       </div>
 
-      {/* ── Evidence-based (IT) ── */}
-      <section id="why-cbt" className="max-w-5xl mx-auto px-6 py-24 md:py-32 scroll-mt-20">
-        <motion.div {...fade()} className="text-center mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">КПТ — это не «просто поговорить»</h2>
-          <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-            Если вы привыкли к структуре, данным и конкретным результатам — КПТ будет понятен
-          </p>
-        </motion.div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {cbtReasons.map((r, i) => (
-            <motion.div key={i} {...fade(i * 0.06)} className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                <r.icon className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-lg font-bold">{r.title}</h3>
-              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{r.text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* ── Evidence-based ── */}
+      <AboutEvidence />
+
 
       <Approach />
 
