@@ -139,8 +139,8 @@ export function seoPlugin(): Plugin {
           `<title>${escapeHtml(effTitle)}</title>`,
           `<meta name="description" content="${escapeAttr(effDescription)}" />`,
           `<link rel="canonical" href="${canonicalUrl}" />`,
-          `<link rel="alternate" hreflang="ru" href="${canonicalUrl}" />`,
-          `<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />`,
+          ...alternateTags(route.path, canonicalUrl),
+
           `<meta name="robots" content="${route.noindex ? "noindex, nofollow" : "index, follow"}" />`,
           `<meta name="theme-color" content="#0F172A" />`,
           `<meta property="og:type" content="${effOgType}" />`,
