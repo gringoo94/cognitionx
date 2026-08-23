@@ -129,13 +129,11 @@ const AboutDetailed = () => (
           </summary>
           <ul className="mt-4 space-y-3">
             {certificates.map((c) => (
-              <li key={c.title} className="flex gap-3 text-xs leading-relaxed">
-                <span className="w-10 shrink-0 font-medium text-muted-foreground">{c.year}</span>
-                <span className="text-foreground/80">
-                  {c.title}
-                  <span className="text-muted-foreground"> — {c.org}, {c.hours}</span>
-                </span>
+              <li key={c.title} className="text-xs leading-relaxed text-foreground/80">
+                {c.title}
+                <span className="text-muted-foreground"> — {c.org}</span>
               </li>
+
             ))}
           </ul>
         </motion.details>
