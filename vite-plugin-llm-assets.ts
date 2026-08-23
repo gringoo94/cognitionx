@@ -78,21 +78,31 @@ async function generate() {
     blogLastmod.set(`/blog/${post.slug}`, lastmod);
   }
 
-  const urls = seoRoutes
-    .filter((r) => !r.noindex)
-    .map((r) => {
-      const lastmod = blogLastmod.get(r.path);
-      return [
-        "  <url>",
-        `    <loc>${SITE_URL}${r.path}</loc>`,
-        lastmod ? `    <lastmod>${lastmod}</lastmod>` : null,
-        `    <changefreq>${changefreqFor(r.path)}</changefreq>`,
-        `    <priority>${priorityFor(r.path)}</priority>`,
-        "  </url>",
-      ]
-        .filter(Boolean)
-        .join("\n");
-    });
+  // Blog posts without an explicit seo-routes.ts row are auto-registered here,
+  // exactly like vite-plugin-seo.ts does for the prerender/dist sitemap — so
+  // public/sitemap.xml and dist/sitemap.xml stay identical.
+  const explicitPaths = new Set(seoRoutes.map((r) => r.path.replace(/\/$/, "") || "/"));
+  const indexablePaths = [
+    ...seoRoutes.filter((r) => !r.noindex).map((r) => r.path),
+    ...blogPosts
+      .map((p: any) => `/blog/${p.slug}`)
+      .filter((p) => !explicitPaths.has(p)),
+  ];
+
+  const urls = indexablePaths.map((p) => {
+    const lastmod = blogLastmod.get(p);
+    return [
+      "  <url>",
+      `    <loc>${SITE_URL}${p}</loc>`,
+      lastmod ? `    <lastmod>${lastmod}</lastmod>` : null,
+      `    <changefreq>${changefreqFor(p)}</changefreq>`,
+      `    <priority>${priorityFor(p)}</priority>`,
+      "  </url>",
+    ]
+      .filter(Boolean)
+      .join("\n");
+  });
+
 
 
   const sitemap = [
