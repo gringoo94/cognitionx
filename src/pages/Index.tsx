@@ -144,24 +144,24 @@ const Index = () => (
     <main>
       <Hero />
       <TelegramCTA />
-      <About />
-      <AboutDetailed />
-      <AboutEvidence />
-      <Approach />
-      <Specializations />
-      
-      <Expectations />
-      <Testimonials />
-      <Pricing />
-      <Ethics />
-      <Projects />
-      <SessionPrep />
-      <Blog />
-      <HomeFAQ />
-      <BookingForm />
+      <LazySection minHeight={620}><About /></LazySection>
+      <LazySection minHeight={900}><AboutDetailed /></LazySection>
+      <LazySection minHeight={520}><AboutEvidence /></LazySection>
+      <LazySection minHeight={620}><Approach /></LazySection>
+      <LazySection minHeight={620}><Specializations /></LazySection>
+      <LazySection minHeight={560}><Expectations /></LazySection>
+      <LazySection minHeight={520}><Testimonials /></LazySection>
+      <LazySection minHeight={620}><Pricing /></LazySection>
+      <LazySection minHeight={480}><Ethics /></LazySection>
+      <LazySection minHeight={480}><Projects /></LazySection>
+      <LazySection minHeight={480}><SessionPrep /></LazySection>
+      <LazySection minHeight={520}><Blog /></LazySection>
+      <LazySection minHeight={640}><HomeFAQ /></LazySection>
+      <LazySection minHeight={720}><BookingForm /></LazySection>
     </main>
-    <Footer />
+    <LazySection minHeight={420}><Footer /></LazySection>
   </div>
+
 );
 
 export default Index;
