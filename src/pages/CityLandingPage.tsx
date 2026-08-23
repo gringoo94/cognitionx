@@ -28,6 +28,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildGeoAlternates } from "@/lib/geoAlternates";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
@@ -120,6 +121,7 @@ const CityLandingPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
+        alternates={buildGeoAlternates(`/${page.slug}`, [page.countryCode])}
         schema={[personSchema, businessSchema, serviceSchema, testimonialsSchema, ...(faqSchema ? [faqSchema] : [])]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },

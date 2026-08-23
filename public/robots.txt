@@ -146,13 +146,19 @@ Crawl-delay: 10
 User-agent: MJ12bot
 Disallow: /
 
+# BEGIN AUTO-GENERATED (vite-plugin-llm-assets) — не редактировать вручную
+# Обновлено при сборке: 2026-08-23
+
 # --- Sitemap и LLM-индексы ---
 Sitemap: https://cognitionx.cloud/sitemap.xml
+# sitemap.xml: 184 URL
 
 # Каталоги для ИИ-агентов (llmstxt.org):
-#   /llms.txt      — структура сайта и все страницы
-#   /llms-full.txt — полные тексты статей блога
-#   /llms-geo.txt  — полные тексты гео-страниц (страны, города, местный контекст)
+#   /llms.txt — структура сайта и все страницы
+#   /llms-full.txt — полные тексты статей блога (101)
+#   /llms-geo.txt — полные тексты гео-страниц (19)
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /llms-geo.txt
+# END AUTO-GENERATED
+

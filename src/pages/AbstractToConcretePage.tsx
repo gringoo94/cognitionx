@@ -2,10 +2,17 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
+import { buildToolSchema } from "@/lib/toolSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AbstractToConcreteTool from "@/components/AbstractToConcreteTool";
 import { SITE_URL } from "@/lib/globalSchema";
+
+const toolSchema = buildToolSchema({
+  name: "Как думать иначе (RFCBT)",
+  description: "Интерактивный инструмент по методу RFCBT Эдварда Уоткинса: учитесь заменять руминативные «почему» на конкретные вопросы, которые открывают выход из петли.",
+  path: "/tools/abstract-to-concrete",
+});
 
 const AbstractToConcretePage = () => {
   return (
@@ -14,6 +21,7 @@ const AbstractToConcretePage = () => {
         title="Как думать иначе — переключение с «почему» на «как» | RFCBT"
         description="Интерактивный инструмент по методу RFCBT Эдварда Уоткинса: учитесь заменять руминативные «почему» на конкретные вопросы, которые открывают выход из петли."
         path="/tools/abstract-to-concrete"
+        schema={[toolSchema]}
         breadcrumbs={[
           { name: "Главная", url: `${SITE_URL}/` },
           { name: "Инструменты", url: `${SITE_URL}/tools` },

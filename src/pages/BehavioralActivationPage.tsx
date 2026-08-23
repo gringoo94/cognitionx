@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
+import { buildToolSchema } from "@/lib/toolSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BehavioralActivationDiary from "@/components/BehavioralActivationDiary";
+
+const toolSchema = buildToolSchema({
+  name: "Дневник поведенческой активации",
+  description: "Отслеживайте активности, настроение, мастерство и удовольствие. Поведенческая активация — один из самых изученных методов работы с депрессией и апатией.",
+  path: "/tools/behavioral-activation",
+});
 
 const BehavioralActivationPage = () => {
   return (
@@ -13,6 +20,7 @@ const BehavioralActivationPage = () => {
         title="Дневник поведенческой активации — бесплатный инструмент при депрессии"
         description="Отслеживайте активности, настроение, мастерство и удовольствие. Поведенческая активация — один из самых изученных методов работы с депрессией и апатией."
         path="/tools/behavioral-activation"
+        schema={[toolSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },

@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildGeoAlternates } from "@/lib/geoAlternates";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -113,6 +114,7 @@ const LandingPageIT = () => (
       title="Психолог для IT-специалистов онлайн — КПТ | Яцко"
       description="Психолог для разработчиков, PM и аналитиков в Европе: КПТ онлайн. Выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
       path="/psiholog-dlya-it"
+      alternates={buildGeoAlternates("/psiholog-dlya-it", ["DE", "NL", "PT", "GE"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },

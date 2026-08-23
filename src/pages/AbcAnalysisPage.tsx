@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
+import { buildToolSchema } from "@/lib/toolSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AbcAnalysis from "@/components/AbcAnalysis";
+
+const toolSchema = buildToolSchema({
+  name: "ABC-анализ",
+  description: "Разберите свою ситуацию по модели Эллиса: событие → мысль → эмоция → диспут → новый взгляд. Бесплатный пошаговый инструмент когнитивно-поведенческой терапии.",
+  path: "/tools/abc-analysis",
+});
 
 const AbcAnalysisPage = () => {
   return (
@@ -13,6 +20,7 @@ const AbcAnalysisPage = () => {
         title="ABC-анализ — интерактивный инструмент КПТ | Психолог Дмитрий Яцко"
         description="Разберите свою ситуацию по модели Эллиса: событие → мысль → эмоция → диспут → новый взгляд. Бесплатный пошаговый инструмент когнитивно-поведенческой терапии."
         path="/tools/abc-analysis"
+        schema={[toolSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },

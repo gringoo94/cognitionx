@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
+import { buildToolSchema } from "@/lib/toolSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DayPlanner from "@/components/DayPlanner";
+
+const toolSchema = buildToolSchema({
+  name: "Планировщик дня",
+  description: "Бесплатный инструмент планирования дня по методу поведенческой активации: оценка энергии, три опоры (необходимое, удовольствие, смысл), минимальные версии и история за 14 дней.",
+  path: "/tools/day-planner",
+});
 
 const DayPlannerPage = () => {
   return (
@@ -13,6 +20,7 @@ const DayPlannerPage = () => {
         title="Планировщик дня при депрессии — поведенческая активация | Яцко"
         description="Бесплатный инструмент планирования дня по методу поведенческой активации: оценка энергии, три опоры (необходимое, удовольствие, смысл), минимальные версии и история за 14 дней."
         path="/tools/day-planner"
+        schema={[toolSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },

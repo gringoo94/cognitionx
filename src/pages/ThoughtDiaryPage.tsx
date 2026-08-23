@@ -2,9 +2,16 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
+import { buildToolSchema } from "@/lib/toolSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ThoughtDiary from "@/components/ThoughtDiary";
+
+const toolSchema = buildToolSchema({
+  name: "Дневник мыслей",
+  description: "Бесплатный рабочий лист для работы с руминацией: что было до, какие мысли, «почему» или «что именно», что было после. Между сессиями. По методу RFCBT.",
+  path: "/tools/thought-diary",
+});
 
 const ThoughtDiaryPage = () => {
   return (
@@ -13,6 +20,7 @@ const ThoughtDiaryPage = () => {
         title="Дневник мыслей — рабочий лист РКПТ онлайн | Дмитрий Яцко"
         description="Бесплатный рабочий лист для работы с руминацией: что было до, какие мысли, «почему» или «что именно», что было после. Между сессиями. По методу RFCBT."
         path="/tools/thought-diary"
+        schema={[toolSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },
