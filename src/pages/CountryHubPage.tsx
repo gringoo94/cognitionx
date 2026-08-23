@@ -20,6 +20,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import About from "@/components/About";
+import AboutDetailed from "@/components/AboutDetailed";
+import AboutEvidence from "@/components/AboutEvidence";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getCountryHubBySlug, getCitiesForCountry } from "@/data/countryHubs";
@@ -281,6 +284,15 @@ const CountryHubPage = () => {
             </ul>
           </div>
         </section>
+
+        {/* ── About ── */}
+        <About />
+
+        <div id="about-detailed" className="scroll-mt-20">
+          <AboutDetailed />
+        </div>
+
+        <AboutEvidence />
 
         {/* ── FAQ ── */}
         <section className="max-w-3xl mx-auto px-6 py-20">
