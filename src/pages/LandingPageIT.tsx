@@ -19,6 +19,7 @@ import Expectations from "@/components/Expectations";
 import Approach from "@/components/Approach";
 import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
+import AboutEvidence from "@/components/AboutEvidence";
 import Blog from "@/components/Blog";
 import Ethics from "@/components/Ethics";
 import SessionPrep from "@/components/SessionPrep";
