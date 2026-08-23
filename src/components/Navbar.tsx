@@ -133,7 +133,11 @@ const Navbar = () => {
             src={logo}
             alt="CognitionX — психологическая помощь, КПТ и схема-терапия онлайн"
             className="h-8 w-8 transition-transform duration-300 group-hover:scale-105"
+            width={32}
+            height={32}
+            decoding="async"
           />
+
           <span className="text-lg font-bold tracking-tight hidden sm:inline">
             CognitionX
           </span>

@@ -252,6 +252,9 @@ const LandingPageEuropa = () => (
                   className="w-full h-full object-cover object-top"
                   loading="eager"
                   {...({ fetchpriority: "high" } as any)}
+                  width={1080}
+                  height={1350}
+                  decoding="async"
                 />
               </div>
             </div>
