@@ -60,8 +60,8 @@ const trust = [
 ];
 
 const AboutDetailed = () => (
-  <section className="max-w-5xl mx-auto px-6 py-20 md:py-28">
-    <motion.div {...fade()} className="text-center mb-14">
+  <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
+    <motion.div {...fade()} className="text-center mb-10">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
         Образование и профессиональное развитие
       </h2>
@@ -71,14 +71,14 @@ const AboutDetailed = () => (
       <div className="mt-6 h-1 w-20 rounded-full bg-primary/20 mx-auto" />
     </motion.div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
       {/* Таймлайн */}
-      <div className="lg:col-span-7 space-y-12">
+      <div className="lg:col-span-7 space-y-10">
         <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-8">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6">
             Академический путь
           </h3>
-          <div className="relative space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-border">
+          <div className="relative space-y-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-border">
             {timeline.map((item, i) => (
               <motion.div key={item.title} {...fade(0.05 * i)} className="relative pl-10">
                 <span
