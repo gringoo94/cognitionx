@@ -114,7 +114,7 @@ const AboutDetailed = () => (
 
         <motion.details {...fade(0.1)} className="group rounded-xl border border-border bg-muted/30 p-5">
           <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
-            Дипломы и сертификаты ({certificates.length}) — показать
+            ДИПЛОМЫ И СЕРТИФИКАТЫ — ПОКАЗАТЬ
           </summary>
           <ul className="mt-4 space-y-3">
             {certificates.map((c) => (
