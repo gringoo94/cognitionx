@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildGeoAlternates } from "@/lib/geoAlternates";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -124,6 +125,7 @@ const LandingPageAsia = () => (
       title="Психолог для экспатов в Азии онлайн — КПТ | Яцко"
       description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Первая встреча — бесплатно."
       path="/psiholog-aziya"
+      alternates={buildGeoAlternates("/psiholog-aziya", ["ID", "TH", "VN"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },

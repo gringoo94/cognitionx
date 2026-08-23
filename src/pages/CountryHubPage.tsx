@@ -20,6 +20,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
+import { buildGeoAlternates } from "@/lib/geoAlternates";
 import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
 import AboutEvidence from "@/components/AboutEvidence";
@@ -83,6 +84,7 @@ const CountryHubPage = () => {
         title={page.metaTitle}
         description={page.metaDescription}
         path={`/${page.slug}`}
+        alternates={buildGeoAlternates(`/${page.slug}`, [page.countryCode])}
         schema={[businessSchema, serviceSchema, ...(faqSchema ? [faqSchema] : []), ...(itemListSchema ? [itemListSchema] : [])]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
