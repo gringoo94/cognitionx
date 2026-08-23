@@ -148,21 +148,19 @@
     </script>
     <link rel="icon" type="image/png" href="/favicon.png">
 
-    <!-- Fonts: preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Fonts: self-hosted woff2 subsets (public/fonts, generated from Google Fonts).
+      Same-origin means no extra DNS/TLS handshake, no render-blocking third-party
+      stylesheet, and the actual font files can be preloaded with high priority.
+      DM Serif Display / Inter were removed — the design only uses Space Grotesk
+      (headings + body) and JetBrains Mono (accents).
+      Note: the previous `media="print" onload="this.media='all'"` trick was dead
+      code under our CSP (`script-src-attr 'none'` blocks inline handlers).
+    -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-400-latin.woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-700-latin.woff2" crossorigin fetchpriority="high" />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
 
-    <!-- Fonts: non-render-blocking via print-media hack -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
-
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
-    </noscript>
   </head>
 
   <body>
