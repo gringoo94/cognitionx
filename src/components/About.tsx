@@ -109,8 +109,6 @@ const About = ({
                 {ctaLabel}
               </Link>
             </Button>
-
-            </Button>
           </motion.div>
         </div>
 
