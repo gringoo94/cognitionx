@@ -10,9 +10,9 @@ const fade = (delay = 0) => ({
 
 const timeline = [
   {
-    period: "2016",
+    period: "2013 — 2016",
     title: "МолдГУ, лиценциат по психологии",
-    text: "Фундаментальная академическая база.",
+    text: "Квалификация «психолог». Фундаментальная академическая база.",
   },
   {
     period: "Сейчас",
@@ -20,17 +20,29 @@ const timeline = [
     text: "Углублённая клиническая подготовка.",
   },
   {
-    period: "С 2023",
-    title: "КПТ: CBTLAB и Минский центр КПТ",
-    text: "Базовый курс КПТ, две ступени по депрессии, тревожные и зависимые расстройства (стандарты APA). Более 10 дипломов и сертификатов — все проверены B17.ru.",
+    period: "2023 — 2026",
+    title: "КПТ, схема-терапия и клинические протоколы",
+    text: "CBTLAB (Денис Иванов), APA PsycLearn, Белорусское общество КПТ, UNICEF — 11 сертификатов, свыше 280 часов.",
   },
   {
     period: "Практика",
-    title: "MedHub / Initiativa Pozitiva",
-    text: "Зависимости и созависимость, беженцы войны, люди с ВИЧ, групповая терапия.",
+    title: "Клиника MedHub (Кишинёв) и онлайн",
+    text: "Зависимости и созависимость, беженцы войны, люди с ВИЧ, групповая терапия (Initiativa Pozitiva).",
   },
 ];
 
+const certificates = [
+  { year: "2023", title: "Когнитивно-поведенческая терапия, базовый курс", org: "CBTLAB", hours: "36 ч" },
+  { year: "2024", title: "КПТ депрессии: 1 ступень", org: "CBTLAB", hours: "12 ч" },
+  { year: "2024", title: "КПТ депрессии: 2 ступень (специалитет)", org: "CBTLAB", hours: "16 ч" },
+  { year: "2024", title: "Anxiety and Related Disorders", org: "APA PsycLearn", hours: "20 ч" },
+  { year: "2024", title: "Depressive and Bipolar Disorders", org: "APA PsycLearn", hours: "20 ч" },
+  { year: "2024", title: "Psychology of Anxiety, Mood, Substance Use and Addictive Behaviors", org: "APA", hours: "50 ч" },
+  { year: "2024", title: "Disorders Due to Substance Use and Addictive Behaviors", org: "APA PsycLearn", hours: "20 ч" },
+  { year: "2025", title: "Научно обоснованная практика: КПТ и вызовы современности", org: "Белорусское общество КПТ", hours: "30 ч" },
+  { year: "2025", title: "Предотвращение сексуальной эксплуатации и надругательств", org: "UNICEF", hours: "30 ч" },
+  { year: "2026", title: "«В объятиях Тифона» — конференция по работе с опасным поведением", org: "В 4 Стенах", hours: "30 ч" },
+];
 
 const methods = [
   "КПТ",
@@ -38,6 +50,8 @@ const methods = [
   "ACT",
   "Мотивационное интервьюирование (MI)",
   "Smart Recovery",
+  "Травматерапия",
+  "Сексология",
 ];
 
 const trust = [
@@ -108,6 +122,23 @@ const AboutDetailed = () => (
             ))}
           </ul>
         </motion.div>
+
+        <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
+          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+            Дипломы и сертификаты ({certificates.length}) — показать
+          </summary>
+          <ul className="mt-4 space-y-3">
+            {certificates.map((c) => (
+              <li key={c.title} className="flex gap-3 text-xs leading-relaxed">
+                <span className="w-10 shrink-0 font-medium text-muted-foreground">{c.year}</span>
+                <span className="text-foreground/80">
+                  {c.title}
+                  <span className="text-muted-foreground"> — {c.org}, {c.hours}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </motion.details>
       </div>
 
       {/* Доверие */}
