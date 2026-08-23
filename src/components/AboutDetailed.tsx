@@ -126,11 +126,11 @@ const AboutDetailed = () => (
           </ul>
         </motion.details>
 
-        <motion.div {...fade(0.15)}>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
-            Методы и подходы
-          </h3>
-          <ul className="flex flex-wrap gap-2">
+        <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
+          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+            МЕТОДЫ И ПОДХОДЫ — ПОКАЗАТЬ
+          </summary>
+          <ul className="mt-4 flex flex-wrap gap-2">
             {methods.map((m) => (
               <li
                 key={m}
@@ -140,7 +140,8 @@ const AboutDetailed = () => (
               </li>
             ))}
           </ul>
-        </motion.div>
+        </motion.details>
+
       </div>
 
       {/* Доверие */}
