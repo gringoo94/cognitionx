@@ -1,23 +1,29 @@
+import { lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TelegramCTA from "@/components/TelegramCTA";
-import About from "@/components/About";
-import AboutDetailed from "@/components/AboutDetailed";
-import AboutEvidence from "@/components/AboutEvidence";
-import Approach from "@/components/Approach";
-import Specializations from "@/components/Specializations";
-import HowWeStart from "@/components/HowWeStart";
-import Expectations from "@/components/Expectations";
-import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
-import Pricing from "@/components/Pricing";
-import BookingForm from "@/components/BookingForm";
-import Ethics from "@/components/Ethics";
-import Projects from "@/components/Projects";
-import SessionPrep from "@/components/SessionPrep";
-import Blog from "@/components/Blog";
-import HomeFAQ, { homeFaqSchema } from "@/components/HomeFAQ";
-import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import LazySection from "@/components/LazySection";
+import { testimonialsSchema, homeFaqSchema } from "@/data/homeSchemas";
+
+// Below-the-fold sections are code-split and mounted only when they approach
+// the viewport → smaller initial bundle, less main-thread work, lower TBT.
+const About = lazy(() => import("@/components/About"));
+const AboutDetailed = lazy(() => import("@/components/AboutDetailed"));
+const AboutEvidence = lazy(() => import("@/components/AboutEvidence"));
+const Approach = lazy(() => import("@/components/Approach"));
+const Specializations = lazy(() => import("@/components/Specializations"));
+const Expectations = lazy(() => import("@/components/Expectations"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const Pricing = lazy(() => import("@/components/Pricing"));
+const Ethics = lazy(() => import("@/components/Ethics"));
+const Projects = lazy(() => import("@/components/Projects"));
+const SessionPrep = lazy(() => import("@/components/SessionPrep"));
+const Blog = lazy(() => import("@/components/Blog"));
+const HomeFAQ = lazy(() => import("@/components/HomeFAQ"));
+const BookingForm = lazy(() => import("@/components/BookingForm"));
+const Footer = lazy(() => import("@/components/Footer"));
+
 
 // MedicalBusiness — более специфичная разметка для health-вертикали,
 // чем общий ProfessionalService. Google и AI-краулеры используют
