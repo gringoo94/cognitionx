@@ -19,6 +19,7 @@ import Expectations from "@/components/Expectations";
 import Approach from "@/components/Approach";
 import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
+import AboutEvidence from "@/components/AboutEvidence";
 import Blog from "@/components/Blog";
 import Ethics from "@/components/Ethics";
 import SessionPrep from "@/components/SessionPrep";
@@ -71,11 +72,6 @@ const specializations = [
   { title: "Стресс адаптации", text: "Переезд, новая работа, новая страна — когда всё навалилось и непонятно, как справляться.", link: "/stress" },
 ];
 
-const cbtReasons = [
-  { icon: Layers, title: "Структура", text: "Каждая сессия — с повесткой. Мы знаем, над чем работаем и куда движемся. Не бесконечное «расскажите о детстве»." },
-  { icon: BookOpen, title: "Доказательная база", text: "КПТ — один из самых исследованных методов. Тысячи клинических испытаний. Не интуиция — наука." },
-  { icon: Brain, title: "Инструменты", text: "Конкретные техники, которые работают между сессиями. Домашние задания. Прогресс, который вы видите сами." },
-];
 
 const itFaq = [
   { question: "Вы работаете с выгоранием в IT конкретно, или с выгоранием вообще?", answer: "Работаю с профессиональным и эмоциональным выгоранием вне зависимости от профессии. При этом хорошо понимаю специфику IT: высокий темп, удалёнка, постоянное давление перформанса, культура «всегда онлайн». Этот контекст учитывается в работе." },
@@ -263,26 +259,9 @@ const LandingPageIT = () => (
         <AboutDetailed />
       </div>
 
-      {/* ── Evidence-based (IT) ── */}
-      <section id="why-cbt" className="max-w-5xl mx-auto px-6 py-24 md:py-32 scroll-mt-20">
-        <motion.div {...fade()} className="text-center mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">КПТ — это не «просто поговорить»</h2>
-          <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-            Если вы привыкли к структуре, данным и конкретным результатам — КПТ будет понятен
-          </p>
-        </motion.div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {cbtReasons.map((r, i) => (
-            <motion.div key={i} {...fade(i * 0.06)} className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                <r.icon className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-lg font-bold">{r.title}</h3>
-              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{r.text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* ── Evidence-based ── */}
+      <AboutEvidence />
+
 
       <Approach />
 
