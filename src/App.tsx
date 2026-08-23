@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
@@ -59,7 +59,7 @@ const PageFallback = () => (
 );
 
 /** Mounts children once the main thread is idle (or after a short timeout). */
-const AfterIdle = ({ children }: { children: React.ReactNode }) => {
+const AfterIdle = ({ children }: { children: ReactNode }) => {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
