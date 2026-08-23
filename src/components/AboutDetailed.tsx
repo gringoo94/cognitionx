@@ -174,7 +174,23 @@ const AboutDetailed = () => (
                       t.title
                     )}
                   </h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed mt-1">{t.text}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+                    {t.text}
+                    {t.href && (
+                      <>
+                        {" "}
+                        <a
+                          href={t.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-primary underline underline-offset-2 hover:no-underline"
+                        >
+                          Смотреть профиль
+                        </a>
+                      </>
+                    )}
+                  </p>
+
                 </div>
               </li>
             ))}
