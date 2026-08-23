@@ -20,6 +20,7 @@ import SessionPrep from "@/components/SessionPrep";
 import Blog from "@/components/Blog";
 import Approach from "@/components/Approach";
 import AboutEvidence from "@/components/AboutEvidence";
+import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
@@ -262,27 +263,11 @@ const LandingPageAsia = () => (
       </section>
 
       {/* ── About ── */}
-      <section className="bg-foreground text-background">
-        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-          <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-            Обо мне
-          </motion.h2>
-          <motion.blockquote
-            {...fade(0.05)}
-            className="mt-8 text-base sm:text-lg md:text-xl leading-relaxed opacity-80 max-w-2xl mx-auto italic"
-          >
-            "Переезд в красивое место не лечит внутреннюю боль — но даёт шанс наконец её увидеть."
-          </motion.blockquote>
-          <motion.p {...fade(0.1)} className="mt-5 text-xs sm:text-sm opacity-50">
-            Меня зовут Дмитрий. Я — психолог, практикующий КПТ и схема-терапию. Работаю онлайн с русскоязычными экспатами в Азии из Кишинёва (UTC+2/+3). Для Бали (UTC+8) и Таиланда (UTC+7) — удобные утренние слоты по вашему времени.
-          </motion.p>
-          <motion.div {...fade(0.15)} className="mt-6">
-            <Button variant="outline" size="sm" className="border-background/60 text-background bg-background/10 hover:bg-background/20" asChild>
-              <a href="#about-detailed">Подробнее об образовании →</a>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <About
+        text="Меня зовут Дмитрий. Я клинический психолог, работаю в КПТ и схема-терапии. Работаю онлайн с русскоязычными экспатами в Азии из Кишинёва (UTC+2/+3). Для Бали (UTC+8) и Таиланда (UTC+7) — удобные утренние слоты по вашему времени."
+        quote="«Переезд в красивое место не лечит внутреннюю боль — но даёт шанс наконец её увидеть.»"
+        chips={["КПТ", "Схема-терапия", "На русском языке", "Удобные слоты для Азии"]}
+      />
 
       <div id="about-detailed" className="scroll-mt-20">
         <AboutDetailed />

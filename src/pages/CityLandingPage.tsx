@@ -32,6 +32,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import Approach from "@/components/Approach";
+import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
 import AboutEvidence from "@/components/AboutEvidence";
 import Specializations from "@/components/Specializations";
@@ -291,6 +292,8 @@ const CityLandingPage = () => {
             </motion.div>
           </div>
         </section>
+
+        <About />
 
         <div id="about-detailed" className="scroll-mt-20">
           <AboutDetailed />
