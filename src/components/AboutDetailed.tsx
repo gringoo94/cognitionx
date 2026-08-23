@@ -29,6 +29,11 @@ const timeline = [
     title: "Клиника MedHub (Кишинёв) и онлайн",
     text: "Зависимости и созависимость, беженцы войны, люди с ВИЧ, групповая терапия (Initiativa Pozitiva).",
   },
+  {
+    period: "Практика",
+    title: "Without Prejudice",
+    text: "Волонтёрство и работа с беженцами войны, кризисная помощь.",
+  },
 ];
 
 const certificates = [
