@@ -32,7 +32,7 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        script-src 'self' 'sha256-Kebj3bZMYIaoUSCKfa9Ua/ir5Exh6J1Xb8abBlCkhFo=' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        script-src 'self' 'sha256-Kebj3bZMYIaoUSCKfa9Ua/ir5Exh6J1Xb8abBlCkhFo=' 'sha256-bckM80Q5ONLZ4Kt7I7ipwd304FD5mb5lIzqI+4NOIko=' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
         script-src-attr 'none';
         style-src 'self' 'unsafe-inline';
         font-src 'self' data:;
@@ -160,7 +160,35 @@
     -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-400-latin.woff2" crossorigin fetchpriority="high" />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-700-latin.woff2" crossorigin fetchpriority="high" />
-    <link rel="stylesheet" href="/fonts/fonts.css" />
+
+    <!-- Critical CSS: design tokens + first-screen base styles, inlined so the
+         very first paint has the right background, colour and typography even
+         before the main Tailwind bundle arrives. -->
+    <style>
+      :root{--background:220 20% 97%;--foreground:220 25% 10%;--primary:252 85% 60%;--primary-foreground:0 0% 100%;--muted-foreground:220 14% 30%;--accent:170 70% 45%;--border:220 15% 90%;--radius:0.75rem}
+      *{box-sizing:border-box}
+      html{-webkit-text-size-adjust:100%}
+      body{margin:0;background:hsl(var(--background));color:hsl(var(--foreground));font-family:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+      #root{min-height:100vh}
+      img,picture,svg{display:block;max-width:100%}
+      h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;margin:0;letter-spacing:-.02em;line-height:1.08}
+    </style>
+
+    <!-- Remaining stylesheet (@font-face only) is loaded asynchronously:
+         media="print" until onload, so it never blocks first paint.
+         Set via JS because our CSP forbids inline event attributes. -->
+    <link rel="preload" as="style" href="/fonts/fonts.css" />
+    <noscript><link rel="stylesheet" href="/fonts/fonts.css" /></noscript>
+    <script>
+      (function () {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = '/fonts/fonts.css';
+        l.media = 'print';
+        l.onload = function () { this.media = 'all'; };
+        document.head.appendChild(l);
+      })();
+    </script>
 
   </head>
 

@@ -1,15 +1,18 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
-import PageViewTracker from "./components/PageViewTracker.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
-import FloatingTelegramFab from "./components/FloatingTelegramFab.tsx";
-import ExitIntentPopup from "./components/ExitIntentPopup.tsx";
+
+// Non-critical UI: toasts, analytics tracker, FAB and exit-intent popup are
+// code-split and mounted only after the browser is idle → no impact on TBT/INP.
+const Sonner = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
+const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
+const PageViewTracker = lazy(() => import("./components/PageViewTracker.tsx"));
+const FloatingTelegramFab = lazy(() => import("./components/FloatingTelegramFab.tsx"));
+const ExitIntentPopup = lazy(() => import("./components/ExitIntentPopup.tsx"));
 
 import NotFound from "./pages/NotFound.tsx";
 import Gone from "./pages/Gone.tsx";
@@ -55,15 +58,34 @@ const PageFallback = () => (
   <div className="min-h-screen bg-background" aria-hidden="true" />
 );
 
+/** Mounts children once the main thread is idle (or after a short timeout). */
+const AfterIdle = ({ children }: { children: ReactNode }) => {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+    if (w.requestIdleCallback) {
+      w.requestIdleCallback(() => setReady(true), { timeout: 2500 });
+    } else {
+      const t = setTimeout(() => setReady(true), 1200);
+      return () => clearTimeout(t);
+    }
+  }, []);
+  return ready ? <Suspense fallback={null}>{children}</Suspense> : null;
+};
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
+        <AfterIdle>
+          <Toaster />
+          <Sonner />
+        </AfterIdle>
         <BrowserRouter>
           <ScrollToTop />
-          <PageViewTracker />
+          <AfterIdle>
+            <PageViewTracker />
+          </AfterIdle>
 
           <Suspense fallback={<PageFallback />}>
             <Routes>
@@ -142,8 +164,10 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
-          <FloatingTelegramFab />
-          <ExitIntentPopup />
+          <AfterIdle>
+            <FloatingTelegramFab />
+            <ExitIntentPopup />
+          </AfterIdle>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

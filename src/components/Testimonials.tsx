@@ -8,50 +8,9 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 
-const testimonials = [
-  {
-    text: "После нескольких месяцев работы с Дмитрием я научилась распознавать тревожные мысли и не поддаваться им. Качество жизни изменилось кардинально.",
-    initials: "А. К.",
-    topic: "Тревога",
-  },
-  {
-    text: "Я пришёл с выгоранием — не мог заставить себя работать. КПТ-подход помог разобраться в причинах и выстроить здоровый ритм.",
-    initials: "М. С.",
-    topic: "Выгорание",
-  },
-  {
-    text: "Панические атаки мучили меня два года. Через 10 сессий я впервые за долгое время почувствовала себя в безопасности.",
-    initials: "Е. Л.",
-    topic: "Панические атаки",
-  },
-  {
-    text: "Дмитрий помог мне выйти из созависимых отношений и научиться ставить границы. Очень благодарна за структурный подход.",
-    initials: "О. В.",
-    topic: "Созависимость",
-  },
-  {
-    text: "Работаю с Дмитрием онлайн уже полгода. Депрессия отступила, появились силы и желание жить.",
-    initials: "И. Д.",
-    topic: "Депрессия",
-  },
-];
+import { testimonials, testimonialsSchema } from "@/data/homeSchemas";
 
-export const testimonialsSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Психолог Дмитрий Яцко",
-  review: testimonials.map((t) => ({
-    "@type": "Review",
-    reviewBody: t.text,
-    author: { "@type": "Person", name: t.initials },
-    reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-  })),
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5",
-    reviewCount: String(testimonials.length),
-  },
-};
+export { testimonialsSchema };
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
