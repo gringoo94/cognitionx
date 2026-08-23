@@ -91,7 +91,7 @@ const About = ({
             {...fade(0.2)}
             className="mt-6 flex flex-wrap justify-center md:justify-start gap-2"
           >
-            {["КПТ", "Схема-терапия", "Регулярная супервизия", "Онлайн и очно"].map((chip) => (
+            {chips.map((chip) => (
               <li
                 key={chip}
                 className="rounded-full border border-background/25 px-3 py-1 text-xs sm:text-sm opacity-80"
@@ -103,11 +103,13 @@ const About = ({
           <motion.div {...fade(0.25)} className="mt-8">
             <Button asChild size="lg" variant="secondary">
               <Link
-                to="/free-consultation"
+                to={ctaTo}
                 onClick={() => trackContact("about_free_consultation")}
               >
-                Бесплатное знакомство 20 минут
+                {ctaLabel}
               </Link>
+            </Button>
+
             </Button>
           </motion.div>
         </div>
