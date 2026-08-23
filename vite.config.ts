@@ -39,8 +39,6 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("@radix-ui")) return "radix-vendor";
           if (id.includes("@tanstack")) return "query-vendor";
           if (id.includes("@supabase")) return "supabase-vendor";
-          if (id.includes("react-markdown") || id.includes("remark") || id.includes("micromark") || id.includes("mdast") || id.includes("hast") || id.includes("unist"))
-            return "markdown-vendor";
           if (id.includes("recharts") || id.includes("d3-")) return "charts-vendor";
           if (id.includes("embla-carousel")) return "carousel-vendor";
           if (id.includes("react-hook-form") || id.includes("zod") || id.includes("@hookform"))
