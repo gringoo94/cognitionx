@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("react-hook-form") || id.includes("zod") || id.includes("@hookform"))
             return "forms-vendor";
           if (id.includes("web-vitals")) return "vitals";
-          return "vendor";
+          // everything else: let Rollup decide (avoids circular-init issues)
         },
       },
     },
