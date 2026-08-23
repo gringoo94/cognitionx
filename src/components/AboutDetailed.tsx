@@ -112,7 +112,21 @@ const AboutDetailed = () => (
           </div>
         </div>
 
-        <motion.div {...fade(0.1)}>
+        <motion.details {...fade(0.1)} className="group rounded-xl border border-border bg-muted/30 p-5">
+          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+            Дипломы и сертификаты ({certificates.length}) — показать
+          </summary>
+          <ul className="mt-4 space-y-3">
+            {certificates.map((c) => (
+              <li key={c.title} className="text-xs leading-relaxed text-foreground/80">
+                {c.title}
+                <span className="text-muted-foreground"> — {c.org}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.details>
+
+        <motion.div {...fade(0.15)}>
           <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-5">
             Методы и подходы
           </h3>
@@ -127,21 +141,6 @@ const AboutDetailed = () => (
             ))}
           </ul>
         </motion.div>
-
-        <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
-          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
-            Дипломы и сертификаты ({certificates.length}) — показать
-          </summary>
-          <ul className="mt-4 space-y-3">
-            {certificates.map((c) => (
-              <li key={c.title} className="text-xs leading-relaxed text-foreground/80">
-                {c.title}
-                <span className="text-muted-foreground"> — {c.org}</span>
-              </li>
-
-            ))}
-          </ul>
-        </motion.details>
       </div>
 
       {/* Доверие */}
