@@ -1,4 +1,4 @@
-import { Mail, Send, Phone, Instagram, Linkedin } from "lucide-react";
+import { Mail, Send, Phone, Instagram, Linkedin, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const problemLinks = [
