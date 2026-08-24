@@ -125,6 +125,11 @@ const CityLandingPage = () => {
         schema={[personSchema, businessSchema, serviceSchema, testimonialsSchema, ...(faqSchema ? [faqSchema] : [])]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
+          ...(page.countryPageSlug
+            ? [{ name: `Психолог — ${page.country}`, url: `https://cognitionx.cloud/${page.countryPageSlug}` }]
+            : isEurope
+              ? [{ name: "Психолог в Европе", url: "https://cognitionx.cloud/psiholog-europa" }]
+              : []),
           { name: `Психолог ${page.cityIn}`, url },
         ]}
       />
