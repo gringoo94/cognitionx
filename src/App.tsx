@@ -22,6 +22,7 @@ import { redirects } from "./lib/redirects";
 const LandingPageEuropa = lazy(() => import("./pages/LandingPageEuropa.tsx"));
 const LandingPageIT = lazy(() => import("./pages/LandingPageIT.tsx"));
 const LandingPageAsia = lazy(() => import("./pages/LandingPageAsia.tsx"));
+const LandingPageUSA = lazy(() => import("./pages/LandingPageUSA.tsx"));
 const CityLandingPage = lazy(() => import("./pages/CityLandingPage.tsx"));
 const LandingPageKishinev = lazy(() => import("./pages/LandingPageKishinev.tsx"));
 const BlogList = lazy(() => import("./pages/BlogList.tsx"));
@@ -126,7 +127,7 @@ const App = () => (
               <Route path="/psiholog-europa" element={<LandingPageEuropa />} />
               <Route path="/psiholog-dlya-it" element={<LandingPageIT />} />
               <Route path="/psiholog-aziya" element={<LandingPageAsia />} />
-              <Route path="/psiholog-usa" element={<ProblemPage />} />
+              <Route path="/psiholog-usa" element={<LandingPageUSA />} />
               <Route path="/psiholog-berlin" element={<CityLandingPage />} />
               <Route path="/psiholog-amsterdam" element={<CityLandingPage />} />
               <Route path="/psiholog-lissabon" element={<CityLandingPage />} />
