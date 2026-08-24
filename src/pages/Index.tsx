@@ -144,20 +144,20 @@ const Index = () => (
     <main>
       <Hero />
       <TelegramCTA />
-      <LazySection minHeight={620}><About /></LazySection>
+      <LazySection id="about" minHeight={620}><About /></LazySection>
       <LazySection minHeight={900}><AboutDetailed /></LazySection>
       <LazySection minHeight={520}><AboutEvidence /></LazySection>
-      <LazySection minHeight={620}><Approach /></LazySection>
-      <LazySection minHeight={620}><Specializations /></LazySection>
+      <LazySection id="approach" minHeight={620}><Approach /></LazySection>
+      <LazySection id="specs" minHeight={620}><Specializations /></LazySection>
       <LazySection minHeight={560}><Expectations /></LazySection>
       <LazySection minHeight={520}><Testimonials /></LazySection>
-      <LazySection minHeight={620}><Pricing /></LazySection>
+      <LazySection id="pricing" minHeight={620}><Pricing /></LazySection>
       <LazySection minHeight={480}><Ethics /></LazySection>
       <LazySection minHeight={480}><Projects /></LazySection>
       <LazySection minHeight={480}><SessionPrep /></LazySection>
-      <LazySection minHeight={520}><Blog /></LazySection>
-      <LazySection minHeight={640}><HomeFAQ /></LazySection>
-      <LazySection minHeight={720}><BookingForm /></LazySection>
+      <LazySection id="blog" minHeight={520}><Blog /></LazySection>
+      <LazySection id="faq" minHeight={640}><HomeFAQ /></LazySection>
+      <LazySection id="booking" minHeight={720}><BookingForm /></LazySection>
     </main>
     <LazySection minHeight={420}><Footer /></LazySection>
   </div>

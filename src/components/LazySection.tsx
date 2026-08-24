@@ -19,6 +19,8 @@ const LazySection = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  // Когда секцию открыли по якорю (#booking), нужно доскроллить после монтирования.
+  const pendingScroll = useRef(false);
 
   useEffect(() => {
     if (visible) return;
@@ -44,8 +46,38 @@ const LazySection = ({
     return () => io.disconnect();
   }, [visible, rootMargin]);
 
+  // Якорные ссылки (#booking, #approach…) должны работать даже до монтирования:
+  // wrapper несёт id, поэтому браузер находит цель, а мы монтируем контент
+  // и корректируем позицию, когда реальная высота секции станет известна.
+  useEffect(() => {
+    if (!id) return;
+    const matches = () =>
+      typeof window !== "undefined" && window.location.hash === `#${id}`;
+
+    const activate = () => {
+      if (!matches()) return;
+      pendingScroll.current = true;
+      setVisible(true);
+      ref.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+    };
+
+    activate();
+    window.addEventListener("hashchange", activate);
+    return () => window.removeEventListener("hashchange", activate);
+  }, [id]);
+
+  useEffect(() => {
+    if (!visible || !pendingScroll.current) return;
+    pendingScroll.current = false;
+    // Пара кадров, чтобы секция успела отрисоваться в реальную высоту.
+    const t = window.setTimeout(() => {
+      ref.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+    }, 250);
+    return () => window.clearTimeout(t);
+  }, [visible]);
+
   return (
-    <div ref={ref} id={id} style={visible ? undefined : { minHeight }}>
+    <div ref={ref} id={visible ? undefined : id} style={visible ? undefined : { minHeight }}>
       {visible ? <Suspense fallback={null}>{children}</Suspense> : null}
     </div>
   );
