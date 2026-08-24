@@ -136,12 +136,14 @@ const App = () => (
               <Route path="/psiholog-gamburg" element={<CityLandingPage />} />
               <Route path="/psiholog-rotterdam" element={<CityLandingPage />} />
               <Route path="/psiholog-porto" element={<CityLandingPage />} />
+              <Route path="/psiholog-london" element={<CityLandingPage />} />
               <Route path="/psiholog-kishinev" element={<LandingPageKishinev />} />
               <Route path="/psiholog-germaniya" element={<CountryHubPage />} />
               <Route path="/psiholog-niderlandy" element={<CountryHubPage />} />
               <Route path="/psiholog-portugaliya" element={<CountryHubPage />} />
               <Route path="/psiholog-gruziya" element={<CountryHubPage />} />
               <Route path="/psiholog-moldova" element={<CountryHubPage />} />
+              <Route path="/psiholog-velikobritaniya" element={<CountryHubPage />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />

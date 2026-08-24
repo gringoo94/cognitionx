@@ -27,6 +27,8 @@ const GEO_REGIONS: Record<string, string[]> = {
   "/psiholog-portugaliya": ["PT"],
   "/psiholog-tbilisi": ["GE"],
   "/psiholog-gruziya": ["GE"],
+  "/psiholog-london": ["GB"],
+  "/psiholog-velikobritaniya": ["GB"],
   "/psiholog-kishinev": ["MD"],
   "/psiholog-moldova": ["MD"],
   "/psiholog-europa": ["RU", "DE", "IT"],
