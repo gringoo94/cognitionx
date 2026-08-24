@@ -1,4 +1,4 @@
-import { Mail, Send, Phone, Instagram, Linkedin } from "lucide-react";
+import { Mail, Send, Phone, Instagram, Linkedin, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const problemLinks = [
@@ -121,28 +121,43 @@ const Footer = () => (
         {/* Geography */}
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">География</p>
-          <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-            {geoGroups.map((g) => (
-              <div key={g.region} className="flex flex-col gap-1">
-                {g.href ? (
-                  <Link to={g.href} className="hover:text-foreground transition-colors font-medium text-foreground/80">
-                    {g.region}
-                  </Link>
-                ) : (
-                  <span className="font-medium text-foreground/80">{g.region}</span>
-                )}
-                {g.cities && (
-                  <div className="flex flex-col gap-1 pl-3 border-l border-border">
+          <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+            {geoGroups.map((g) =>
+              g.cities && g.cities.length > 0 ? (
+                <details key={g.region} className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-1 font-medium text-foreground/80 hover:text-foreground transition-colors">
+                    <span>{g.region}</span>
+                    <ChevronDown className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-open:rotate-180" />
+                  </summary>
+                  <div className="flex flex-col gap-1 pl-3 pt-1 pb-2 border-l border-border">
+                    {g.href && (
+                      <Link to={g.href} className="hover:text-foreground transition-colors text-xs">
+                        Все — {g.region}
+                      </Link>
+                    )}
                     {g.cities.map((c) => (
                       <Link key={c.href} to={c.href} className="hover:text-foreground transition-colors text-xs">
                         {c.label}
                       </Link>
                     ))}
                   </div>
-                )}
-              </div>
-            ))}
+                </details>
+              ) : g.href ? (
+                <Link
+                  key={g.region}
+                  to={g.href}
+                  className="py-1 font-medium text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  {g.region}
+                </Link>
+              ) : (
+                <span key={g.region} className="py-1 font-medium text-foreground/80">
+                  {g.region}
+                </span>
+              )
+            )}
           </div>
+
         </div>
 
         {/* Navigation */}
