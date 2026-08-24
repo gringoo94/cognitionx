@@ -77,7 +77,7 @@ const LazySection = ({
   }, [visible]);
 
   return (
-    <div ref={ref} id={id} style={visible ? undefined : { minHeight }}>
+    <div ref={ref} id={visible ? undefined : id} style={visible ? undefined : { minHeight }}>
       {visible ? <Suspense fallback={null}>{children}</Suspense> : null}
     </div>
   );
