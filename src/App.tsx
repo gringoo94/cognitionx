@@ -137,6 +137,12 @@ const App = () => (
               <Route path="/psiholog-rotterdam" element={<CityLandingPage />} />
               <Route path="/psiholog-porto" element={<CityLandingPage />} />
               <Route path="/psiholog-london" element={<CityLandingPage />} />
+              <Route path="/psiholog-varshava" element={<CityLandingPage />} />
+              <Route path="/psiholog-krakov" element={<CityLandingPage />} />
+              <Route path="/psiholog-vroclav" element={<CityLandingPage />} />
+              <Route path="/psiholog-riga" element={<CityLandingPage />} />
+              <Route path="/psiholog-vilnyus" element={<CityLandingPage />} />
+              <Route path="/psiholog-belgrad" element={<CityLandingPage />} />
               <Route path="/psiholog-kishinev" element={<LandingPageKishinev />} />
               <Route path="/psiholog-germaniya" element={<CountryHubPage />} />
               <Route path="/psiholog-niderlandy" element={<CountryHubPage />} />
@@ -144,6 +150,10 @@ const App = () => (
               <Route path="/psiholog-gruziya" element={<CountryHubPage />} />
               <Route path="/psiholog-moldova" element={<CountryHubPage />} />
               <Route path="/psiholog-velikobritaniya" element={<CountryHubPage />} />
+              <Route path="/psiholog-polsha" element={<CountryHubPage />} />
+              <Route path="/psiholog-latviya" element={<CountryHubPage />} />
+              <Route path="/psiholog-litva" element={<CountryHubPage />} />
+              <Route path="/psiholog-serbiya" element={<CountryHubPage />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />
