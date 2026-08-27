@@ -118,18 +118,18 @@ const serviceSchema = buildGeoServiceSchema(usaGeoInput);
 const pricing = [
   {
     title: "Разовая консультация",
-    price: "40",
+    price: "35",
     duration: "50 мин",
     featured: true,
     features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
   },
   {
-    title: "Пакет × 4",
-    price: "35",
+    title: "Регулярная сессия",
+    price: "30",
     priceNote: "за сессию",
-    totalPrice: "140 € за 4 сессии",
-    duration: "4 × 50 мин",
-    features: ["Экономия 20 €", "Регулярная работа", "Приоритетная запись"],
+    totalPrice: "При продолжении работы",
+    duration: "50 мин",
+    features: ["Дешевле разовой консультации", "Регулярная работа над запросом", "Приоритетная запись"],
   },
 ];
 
