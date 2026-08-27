@@ -1152,13 +1152,13 @@ const ProblemPage = () => {
               </div>
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
-                  Пакет × {PRICING.pack.count}
+                  Регулярная сессия
                 </div>
                 <div className="text-2xl font-bold">
-                  {PRICING.pack.price} {PRICING.pack.currency}
+                  {PRICING.regular.price} {PRICING.regular.currency}
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  По {PRICING.pack.perSession} {PRICING.pack.currency} за сессию
+                  {PRICING.regular.duration} · при продолжении работы
                 </div>
               </div>
             </div>
