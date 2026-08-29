@@ -64,7 +64,7 @@ test.describe("geo pages: Offer nodes match current pricing", () => {
       page.on("pageerror", (e) => errors.push(e.message));
 
       await page.goto(route, { waitUntil: "domcontentloaded" });
-      await page.waitForSelector('script[type="application/ld+json"]');
+      await page.waitForSelector('script[type="application/ld+json"]', { state: "attached" });
 
       const raw = await page.$$eval(
         'script[type="application/ld+json"]',
