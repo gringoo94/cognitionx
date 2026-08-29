@@ -64,7 +64,16 @@ test.describe("geo pages: Offer nodes match current pricing", () => {
       page.on("pageerror", (e) => errors.push(e.message));
 
       await page.goto(route, { waitUntil: "domcontentloaded" });
-      await page.waitForSelector('script[type="application/ld+json"]', { state: "attached" });
+      // Page-level schema is injected by react-helmet after hydration.
+      await page.waitForFunction(
+        () =>
+          Array.from(
+            document.querySelectorAll('script[type="application/ld+json"]'),
+          ).some((s) => (s.textContent || "").includes('"Offer"')),
+        undefined,
+        { timeout: 20_000 },
+      );
+
 
       const raw = await page.$$eval(
         'script[type="application/ld+json"]',
