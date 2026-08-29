@@ -112,8 +112,8 @@ export function buildGeoServiceSchema(input: GeoSchemaInput) {
       },
       {
         "@type": "Offer",
-        name: "Пакет из 4 консультаций — цена за сессию",
-        price: String(SESSION_PRICE_PACKAGE),
+        name: "Регулярная сессия (50 минут)",
+        price: String(SESSION_PRICE_REGULAR),
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
         url: input.url,
