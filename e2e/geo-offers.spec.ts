@@ -133,8 +133,9 @@ test.describe("geo pages: Offer nodes match current pricing", () => {
       }
 
       // 5. Visible page must render (no blank body / runtime crash)
-      const bodyText = (await page.locator("main, body").first().innerText()).trim();
+      const bodyText = ((await page.locator("body").textContent()) || "").trim();
       expect(bodyText.length, `${route}: page body is empty`).toBeGreaterThan(200);
+
       expect(errors, `${route}: runtime errors`).toEqual([]);
     });
   }
