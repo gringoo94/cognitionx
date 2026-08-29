@@ -20,11 +20,14 @@ const LANDING_ROUTES = [
   "/psiholog-kishinev",
 ];
 
-const GEO_ROUTES = [
-  ...LANDING_ROUTES,
-  ...cityPages.map((c) => `/${c.slug}`),
-  ...countryHubs.map((c) => `/${c.slug}`),
-];
+const GEO_ROUTES = Array.from(
+  new Set([
+    ...LANDING_ROUTES,
+    ...cityPages.map((c) => `/${c.slug}`),
+    ...countryHubs.map((c) => `/${c.slug}`),
+  ]),
+);
+
 
 const EXPECTED_PRICES = new Set([
   String(SESSION_PRICE_SINGLE),
