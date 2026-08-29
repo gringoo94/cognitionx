@@ -70,7 +70,7 @@ export function buildGeoBusinessSchema(input: GeoSchemaInput) {
     knowsLanguage: input.languages || ["Russian"],
     currenciesAccepted: "EUR",
     paymentAccepted: "Банковская карта, банковский перевод",
-    priceRange: `€${SESSION_PRICE_PACKAGE}–€${SESSION_PRICE_SINGLE}`,
+    priceRange: `€${SESSION_PRICE_REGULAR}–€${SESSION_PRICE_SINGLE}`,
     isAccessibleForFree: false,
     ...(input.timezone ? { slogan: `Сессии по местному времени (${input.timezone})` } : {}),
   };
