@@ -12,8 +12,8 @@ const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#organization`;
 
 /** Current public pricing — keep in sync with the Pricing component. */
-export const SESSION_PRICE_SINGLE = 40;
-export const SESSION_PRICE_PACKAGE = 35;
+export const SESSION_PRICE_SINGLE = 35;
+export const SESSION_PRICE_REGULAR = 30;
 
 export interface GeoPlace {
   /** City name in nominative, e.g. "Берлин". Omitted for country/region pages. */
@@ -70,7 +70,7 @@ export function buildGeoBusinessSchema(input: GeoSchemaInput) {
     knowsLanguage: input.languages || ["Russian"],
     currenciesAccepted: "EUR",
     paymentAccepted: "Банковская карта, банковский перевод",
-    priceRange: `€${SESSION_PRICE_PACKAGE}–€${SESSION_PRICE_SINGLE}`,
+    priceRange: `€${SESSION_PRICE_REGULAR}–€${SESSION_PRICE_SINGLE}`,
     isAccessibleForFree: false,
     ...(input.timezone ? { slogan: `Сессии по местному времени (${input.timezone})` } : {}),
   };
@@ -112,8 +112,8 @@ export function buildGeoServiceSchema(input: GeoSchemaInput) {
       },
       {
         "@type": "Offer",
-        name: "Пакет из 4 консультаций — цена за сессию",
-        price: String(SESSION_PRICE_PACKAGE),
+        name: "Регулярная сессия (50 минут)",
+        price: String(SESSION_PRICE_REGULAR),
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
         url: input.url,

@@ -147,7 +147,7 @@ User-agent: MJ12bot
 Disallow: /
 
 # BEGIN AUTO-GENERATED (vite-plugin-llm-assets) — не редактировать вручную
-# Обновлено при сборке: 2026-08-27
+# Обновлено при сборке: 2026-08-29
 
 # --- Sitemap и LLM-индексы ---
 Sitemap: https://cognitionx.cloud/sitemap.xml
