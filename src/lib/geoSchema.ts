@@ -12,8 +12,8 @@ const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#organization`;
 
 /** Current public pricing — keep in sync with the Pricing component. */
-export const SESSION_PRICE_SINGLE = 40;
-export const SESSION_PRICE_PACKAGE = 35;
+export const SESSION_PRICE_SINGLE = 35;
+export const SESSION_PRICE_REGULAR = 30;
 
 export interface GeoPlace {
   /** City name in nominative, e.g. "Берлин". Omitted for country/region pages. */
