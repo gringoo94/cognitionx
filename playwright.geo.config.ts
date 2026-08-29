@@ -13,6 +13,11 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || "http://localhost:8080",
     viewport: { width: 1280, height: 1800 },
+    launchOptions: {
+      executablePath:
+        process.env.PLAYWRIGHT_CHROMIUM_PATH ||
+        "/opt/ms-playwright/chromium-1194/chrome-linux/chrome",
+    },
     ...devices["Desktop Chrome"],
   },
 });
