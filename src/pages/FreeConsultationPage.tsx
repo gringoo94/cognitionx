@@ -185,7 +185,7 @@ const FreeConsultationPage = () => {
 
   useEffect(() => {
     const preselect = getSpecialist(searchParams.get("specialist"));
-    if (preselect) {
+    if (preselect && preselect.acceptingNew !== false) {
       setSelection({ kind: "specialist", specialist: preselect });
       setTimeout(
         () => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
@@ -341,7 +341,7 @@ const FreeConsultationPage = () => {
           {...fade(0.15)}
           className="mt-6 text-sm text-muted-foreground leading-relaxed bg-muted/50 border border-border rounded-xl p-4 max-w-2xl"
         >
-          Дмитрий временно не принимает новых клиентов на бесплатные знакомства из-за высокой нагрузки. Возобновление планируется не раньше ноября 2026 года. Сейчас вы можете записаться на консультацию к одному из специалистов команды.
+          Дмитрий и Настя временно не принимают новых клиентов из-за высокой нагрузки. Возобновление записи планируется не раньше ноября 2026 года. Сейчас вы можете записаться на консультацию к одному из специалистов команды.
         </motion.p>
 
         {/* Карточки */}
