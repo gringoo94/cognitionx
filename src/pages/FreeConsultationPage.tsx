@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Send, Clock, CheckCircle2, Globe, Video, HelpCircle } from "lucide-react";
@@ -173,6 +173,18 @@ const FreeConsultationPage = () => {
   const [loading, setLoading] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const preselect = getSpecialist(searchParams.get("specialist"));
+    if (preselect) {
+      setSelection({ kind: "specialist", specialist: preselect });
+      setTimeout(
+        () => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        120
+      );
+    }
+  }, [searchParams]);
 
   const scrollTo = (ref: React.RefObject<HTMLDivElement>) =>
     setTimeout(() => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
