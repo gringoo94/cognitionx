@@ -3,6 +3,10 @@ export type Specialist = {
   name: string;
   /** Полное имя для заголовков форм и уведомлений */
   fullName: string;
+  /** Имя в творительном падеже: «консультация с ...» */
+  withName: string;
+  /** Имя в дательном падеже: «отправить заявку ...» */
+  toName: string;
   initials: string;
   role: string;
   topics: string[];
@@ -24,6 +28,8 @@ export const specialists: Specialist[] = [
   {
     id: "nastya",
     name: "Настя",
+    withName: "Настей",
+    toName: "Насте",
     fullName: "Настя",
     initials: "Н",
     role: "КПТ-психолог",
@@ -37,6 +43,8 @@ export const specialists: Specialist[] = [
   {
     id: "zhenya",
     name: "Женя",
+    withName: "Женей",
+    toName: "Жене",
     fullName: "Женя",
     initials: "Ж",
     role: "КПТ-психолог",
@@ -50,6 +58,8 @@ export const specialists: Specialist[] = [
   {
     id: "yulya",
     name: "Юля",
+    withName: "Юлей",
+    toName: "Юле",
     fullName: "Юля",
     initials: "Ю",
     role: "КПТ-психолог",
@@ -63,6 +73,8 @@ export const specialists: Specialist[] = [
   {
     id: "anna",
     name: "Анна",
+    withName: "Анной",
+    toName: "Анне",
     fullName: "Анна",
     initials: "А",
     role: "Врач-психиатр",
@@ -84,6 +96,8 @@ export const specialists: Specialist[] = [
   {
     id: "dmitrii",
     name: "Дмитрий",
+    withName: "Дмитрием",
+    toName: "Дмитрию",
     fullName: "Дмитрий Яцко",
     initials: "ДЯ",
     role: "КПТ-психолог, схема-терапевт",

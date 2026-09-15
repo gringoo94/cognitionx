@@ -361,7 +361,7 @@ const FreeConsultationPage = () => {
             <section className="max-w-2xl">
               <h2 className="text-xl md:text-2xl font-semibold">
                 {selection.kind === "specialist"
-                  ? `Заявка на консультацию с ${selection.specialist.name}`
+                  ? `Заявка на консультацию с ${selection.specialist.withName}`
                   : "Заявка на подбор специалиста"}
               </h2>
 
@@ -448,7 +448,7 @@ const FreeConsultationPage = () => {
                   {loading
                     ? "Отправка..."
                     : selection.kind === "specialist"
-                    ? `Отправить заявку ${selection.specialist.name}`
+                    ? `Отправить заявку ${selection.specialist.toName}`
                     : "Отправить заявку на подбор"}
                   {!loading && <Send className="w-4 h-4" />}
                 </Button>
