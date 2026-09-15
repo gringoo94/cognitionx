@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Send, Clock, CheckCircle2, Globe, Video, HelpCircle } from "lucide-react";
+import { ArrowLeft, Send, Clock, CheckCircle2, Globe, Video, HelpCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -341,12 +341,25 @@ const FreeConsultationPage = () => {
           </Button>
         </motion.div>
 
-        <motion.p
+        <motion.aside
           {...fade(0.15)}
-          className="mt-6 text-sm text-muted-foreground leading-relaxed bg-muted/50 border border-border rounded-xl p-4 max-w-2xl"
+          role="note"
+          className="relative mt-8 max-w-2xl overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-5 pl-6 shadow-sm"
         >
-          Дмитрий и Настя временно не принимают новых клиентов из-за высокой нагрузки. Возобновление записи планируется не раньше ноября 2026 года. Сейчас вы можете записаться на консультацию к одному из специалистов команды.
-        </motion.p>
+          <span aria-hidden className="absolute inset-y-0 left-0 w-1.5 bg-primary" />
+          <div className="flex gap-3">
+            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <div>
+              <p className="text-sm font-semibold text-foreground">
+                Я временно не принимаю новых клиентов
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                Поэтому предлагаю выбрать одного из проверенных коллег. Формат и условия
+                дальнейшей работы вы согласуете непосредственно со специалистом.
+              </p>
+            </div>
+          </div>
+        </motion.aside>
 
         {/* Карточки */}
         <div ref={listRef} className="scroll-mt-24 mt-14">
