@@ -136,7 +136,9 @@ const SpecialistCard = ({
       <span className="font-medium text-foreground">{s.price}</span>
     </p>
 
-    {s.freeIntro ? (
+    {s.acceptingNew === false ? (
+      <p className="mt-2 text-xs text-muted-foreground">Запись временно закрыта</p>
+    ) : s.freeIntro ? (
       <p className="mt-2 text-xs text-accent">
         {s.isPsychiatrist
           ? `Бесплатные 20 минут — ${PSYCHIATRIST_INTRO_LABEL.toLowerCase()}`
@@ -146,9 +148,15 @@ const SpecialistCard = ({
       <p className="mt-2 text-xs text-muted-foreground">Бесплатное знакомство сейчас недоступно</p>
     )}
 
-    <Button className="mt-5 w-full rounded-lg mt-auto" onClick={onSelect}>
-      {s.freeIntro ? "Выбрать специалиста" : "Записаться на платную консультацию"}
-    </Button>
+    {s.acceptingNew === false ? (
+      <div className="mt-5 mt-auto rounded-lg border border-border bg-muted/40 px-4 py-3 text-center text-xs text-muted-foreground">
+        Новые записи — не раньше ноября 2026 года
+      </div>
+    ) : (
+      <Button className="mt-5 w-full rounded-lg mt-auto" onClick={onSelect}>
+        {s.freeIntro ? "Выбрать специалиста" : "Записаться на платную консультацию"}
+      </Button>
+    )}
 
     <Link
       to={`/specialists/${s.id}`}
