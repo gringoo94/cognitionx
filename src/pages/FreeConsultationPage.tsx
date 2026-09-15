@@ -181,8 +181,6 @@ const FreeConsultationPage = () => {
     scrollTo(formRef);
   };
 
-  const targetName =
-    selection?.kind === "specialist" ? selection.specialist.name : "подбор специалиста";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -440,7 +438,7 @@ const FreeConsultationPage = () => {
                   />
                   <span>
                     Согласен на обработку персональных данных согласно{" "}
-                    <Link to="/privacy-policy" className="text-primary hover:underline">
+                    <Link to="/privacy" className="text-primary hover:underline">
                       политике конфиденциальности
                     </Link>
                   </span>
