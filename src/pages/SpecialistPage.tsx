@@ -157,12 +157,16 @@ const SpecialistPage = () => {
           className="mt-14 rounded-2xl border border-border bg-card p-6 md:p-8 max-w-2xl"
         >
           <h2 className="text-xl font-semibold">
-            {s.freeIntro
+            {s.acceptingNew === false
+              ? "Запись временно закрыта"
+              : s.freeIntro
               ? "Записаться на бесплатную 20-минутную консультацию"
               : "Записаться на платную консультацию"}
           </h2>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-            {s.freeIntro
+            {s.acceptingNew === false
+              ? `${s.name} не принимает новых клиентов, возобновление записи планируется не раньше ноября 2026 года. Вы можете выбрать другого специалиста команды — свободные слоты есть уже на этой неделе.`
+              : s.freeIntro
               ? s.isPsychiatrist
                 ? `Бесплатные 20 минут — ${PSYCHIATRIST_INTRO_LABEL.toLowerCase()}, а не медицинская консультация.`
                 : "Познакомьтесь, кратко расскажите о своей ситуации и уточните, подходит ли вам дальнейшая работа."
@@ -174,9 +178,15 @@ const SpecialistPage = () => {
             asChild
             onClick={() => trackCta(`specialist_page_cta_${s.id}`)}
           >
-            <Link to={`/free-consultation?specialist=${s.id}`}>
-              Оставить заявку {s.toName} <ArrowRight className="w-4 h-4" />
-            </Link>
+            {s.acceptingNew === false ? (
+              <Link to="/free-consultation">
+                Выбрать другого специалиста <ArrowRight className="w-4 h-4" />
+              </Link>
+            ) : (
+              <Link to={`/free-consultation?specialist=${s.id}`}>
+                Оставить заявку {s.toName} <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
           </Button>
         </motion.section>
 
