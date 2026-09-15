@@ -145,7 +145,11 @@ const SpecialistCard = ({
           : "Бесплатная 20-минутная консультация-знакомство"}
       </p>
     ) : (
-      <p className="mt-2 text-xs text-muted-foreground">Бесплатное знакомство сейчас недоступно</p>
+      <p className="mt-2 text-xs text-muted-foreground">
+        {s.isPsychiatrist
+          ? "Только платные консультации"
+          : "Бесплатное знакомство сейчас недоступно"}
+      </p>
     )}
 
     {s.acceptingNew === false ? (
@@ -394,8 +398,7 @@ const FreeConsultationPage = () => {
 
               {selection.kind === "specialist" && selection.specialist.isPsychiatrist && (
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed bg-muted/50 rounded-lg p-4">
-                  {selection.specialist.note} Бесплатные 20 минут — это{" "}
-                  {PSYCHIATRIST_INTRO_LABEL.toLowerCase()}, а не медицинская консультация.
+                  {selection.specialist.note}
                 </p>
               )}
 
