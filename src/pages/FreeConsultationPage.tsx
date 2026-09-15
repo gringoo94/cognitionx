@@ -149,6 +149,13 @@ const SpecialistCard = ({
     <Button className="mt-5 w-full rounded-lg mt-auto" onClick={onSelect}>
       {s.freeIntro ? "Выбрать специалиста" : "Записаться на платную консультацию"}
     </Button>
+
+    <Link
+      to={`/specialists/${s.id}`}
+      className="mt-3 text-xs text-center text-muted-foreground hover:text-primary transition-colors"
+    >
+      Подробнее о специалисте
+    </Link>
   </div>
 );
 
