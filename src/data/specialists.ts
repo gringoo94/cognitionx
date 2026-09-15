@@ -19,6 +19,14 @@ export type Specialist = {
   freeIntro: boolean;
   isPsychiatrist?: boolean;
   note?: string;
+  /** Короткое описание для страницы специалиста */
+  bio?: string;
+  /** Как проходит работа */
+  approach?: string[];
+  /** С чем помогает подробнее */
+  helpsWith?: string[];
+  /** Формат и длительность сессий */
+  sessionFormat?: string;
 };
 
 /** Цены психологов команды — синхронизированы с основным прайсом сайта */
