@@ -357,6 +357,20 @@ const FreeConsultationPage = () => {
                 Поэтому предлагаю выбрать одного из проверенных коллег. Формат и условия
                 дальнейшей работы вы согласуете непосредственно со специалистом.
               </p>
+              <p className="mt-3 text-sm leading-relaxed text-foreground">
+                Если вы хотите попасть именно ко мне — доступна разовая платная консультация
+                с записью примерно за 2 недели.
+              </p>
+              <Button
+                size="sm"
+                className="mt-4 rounded-lg"
+                onClick={() => {
+                  const d = getSpecialist("dmitrii");
+                  if (d) select({ kind: "specialist", specialist: d });
+                }}
+              >
+                Записаться на платную консультацию
+              </Button>
             </div>
           </div>
         </motion.aside>
