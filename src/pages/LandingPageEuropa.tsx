@@ -181,7 +181,7 @@ const LandingPageEuropa = () => (
               {...fade(0.1)}
               className="mt-5 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              КПТ и схема-терапия онлайн — из любой точки Европы. Первая встреча <strong className="text-foreground">бесплатно, 20 минут</strong> — знакомство без обязательств.
+              КПТ и схема-терапия онлайн — из любой точки Европы. Консультация <strong className="text-foreground">50 минут — 45 €</strong>.
             </motion.p>
 
             {/* Offer chips — сразу видно цену/формат */}

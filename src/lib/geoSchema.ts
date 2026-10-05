@@ -118,14 +118,6 @@ export function buildGeoServiceSchema(input: GeoSchemaInput) {
         availability: "https://schema.org/InStock",
         url: input.url,
       },
-      {
-        "@type": "Offer",
-        name: "Первая ознакомительная встреча (20 минут)",
-        price: "0",
-        priceCurrency: "EUR",
-        availability: "https://schema.org/InStock",
-        url: `${SITE_URL}/free-consultation`,
-      },
     ],
   };
 }
