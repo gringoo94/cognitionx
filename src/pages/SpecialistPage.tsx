@@ -157,14 +157,16 @@ const SpecialistPage = () => {
           className="mt-14 rounded-2xl border border-border bg-card p-6 md:p-8 max-w-2xl"
         >
           <h2 className="text-xl font-semibold">
-            {s.acceptingNew === false
+            {s.acceptingNew === false || (!teamBookingEnabled && s.id !== "dmitrii")
               ? "Запись временно закрыта"
               : s.freeIntro
               ? "Записаться на бесплатную 20-минутную консультацию"
               : "Записаться на платную консультацию"}
           </h2>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-            {s.acceptingNew === false
+            {!teamBookingEnabled && s.id !== "dmitrii"
+              ? "Запись к этому специалисту через сайт сейчас закрыта. Вы можете записаться на платную консультацию к Дмитрию Яцко."
+              : s.acceptingNew === false
               ? `${s.name} не принимает новых клиентов, возобновление записи планируется не раньше ноября 2026 года. Вы можете выбрать другого специалиста команды — свободные слоты есть уже на этой неделе.`
               : s.freeIntro
               ? s.isPsychiatrist
@@ -178,7 +180,11 @@ const SpecialistPage = () => {
             asChild
             onClick={() => trackCta(`specialist_page_cta_${s.id}`)}
           >
-            {s.acceptingNew === false ? (
+            {!teamBookingEnabled && s.id !== "dmitrii" ? (
+              <Link to="/free-consultation">
+                Записаться к Дмитрию <ArrowRight className="w-4 h-4" />
+              </Link>
+            ) : s.acceptingNew === false ? (
               <Link to="/free-consultation">
                 Выбрать другого специалиста <ArrowRight className="w-4 h-4" />
               </Link>
