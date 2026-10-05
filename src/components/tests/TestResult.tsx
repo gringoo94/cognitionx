@@ -261,11 +261,11 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
               {urgent ? (
                 <>
                   Я работаю с {config.clusterLabel.toLowerCase()} в формате КПТ и схема-терапии.
-                  Первый шаг — бесплатная 20-минутная встреча: познакомимся, обсудим запрос, без обязательств.
+                  Первый шаг — консультация: познакомимся, обсудим запрос, без обязательств.
                 </>
               ) : (
                 <>
-                  Если хочется разобраться глубже — приходите на бесплатное 20-минутное знакомство.
+                  Если хочется разобраться глубже — приходите на консультацию.
                   Расскажу, как работаю с {config.clusterLabel.toLowerCase()}.
                 </>
               )}
@@ -280,7 +280,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                     });
                   }}
                 >
-                  Бесплатная встреча — 20 мин <ArrowRight className="h-4 w-4" />
+                  Записаться на консультацию <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="gap-2">

@@ -15,7 +15,7 @@ export type Specialist = {
   /** Стоимость дальнейшей (платной) консультации */
   price: string;
   availability: string;
-  /** Доступно ли бесплатное 20-минутное знакомство */
+  /** Устаревшее: бесплатное знакомство отключено (всегда false) */
   freeIntro: boolean;
   isPsychiatrist?: boolean;
   note?: string;
@@ -64,7 +64,7 @@ export const specialists: Specialist[] = [
     formats: ["Онлайн"],
     price: TEAM_PRICE,
     availability: "Ближайшие слоты — на этой неделе",
-    freeIntro: true,
+    freeIntro: false,
   },
   {
     id: "yulya",
@@ -95,7 +95,7 @@ export const specialists: Specialist[] = [
     formats: ["Онлайн", "Очно (Кишинёв)"],
     price: TEAM_PRICE,
     availability: "Ближайшие слоты — на следующей неделе",
-    freeIntro: true,
+    freeIntro: false,
   },
   {
     id: "anna",
@@ -133,7 +133,7 @@ export const specialists: Specialist[] = [
     freeIntro: false,
     isPsychiatrist: true,
     note:
-      "Консультация психиатра подходит, если вам необходима медицинская оценка состояния, обсуждение медикаментозного лечения или коррекция назначенной терапии. Бесплатного знакомства нет — приём только платный.",
+      "Консультация психиатра подходит, если вам необходима медицинская оценка состояния, обсуждение медикаментозного лечения или коррекция назначенной терапии.",
   },
   {
     id: "dmitrii",
