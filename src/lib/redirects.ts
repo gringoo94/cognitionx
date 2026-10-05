@@ -87,6 +87,9 @@ export const redirects: RedirectEntry[] = [
   { from: "/problems/anxiety", to: "/anxiety", type: "301" },
   { from: "/tproduct/*", to: "/blog", type: "301", wildcard: true },
 
+  // Booking page renamed (consultation is paid)
+  { from: "/free-consultation", to: "/booking", type: "301" },
+
   // 410 Gone: permanently removed
   { from: "/blog/ponchik-i-prestuplenie", type: "410" },
 ];
