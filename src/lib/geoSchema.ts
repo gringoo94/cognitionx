@@ -12,8 +12,8 @@ const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#organization`;
 
 /** Current public pricing — keep in sync with the Pricing component. */
-export const SESSION_PRICE_SINGLE = 35;
-export const SESSION_PRICE_REGULAR = 30;
+export const SESSION_PRICE_SINGLE = 45;
+export const SESSION_PRICE_REGULAR = 40;
 
 export interface GeoPlace {
   /** City name in nominative, e.g. "Берлин". Omitted for country/region pages. */
@@ -112,7 +112,7 @@ export function buildGeoServiceSchema(input: GeoSchemaInput) {
       },
       {
         "@type": "Offer",
-        name: "Регулярная сессия (50 минут)",
+        name: "Регулярная терапия (от 4 сессий), 50 минут",
         price: String(SESSION_PRICE_REGULAR),
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",

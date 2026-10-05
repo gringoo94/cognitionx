@@ -87,7 +87,7 @@ const paidServiceSchema = {
   description:
     "Разовая платная онлайн-консультация КПТ-психолога Дмитрия Яцко (50 минут). Запись примерно за 2 недели.",
   provider: { "@id": "https://cognitionx.cloud/#person" },
-  offers: { ...serviceSchema.offers, price: "35" },
+  offers: { ...serviceSchema.offers, price: "45" },
 };
 
 type Selection = { kind: "specialist"; specialist: Specialist } | { kind: "match" } | null;
@@ -328,7 +328,7 @@ const FreeConsultationPage = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={teamBookingEnabled ? "Бесплатная 20-минутная консультация — выбрать специалиста" : "Запись на консультацию к психологу Дмитрию Яцко"}
-        description={teamBookingEnabled ? "Выберите специалиста команды CognitionX и запишитесь на бесплатную 20-минутную консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств." : "Разовая платная консультация КПТ-психолога Дмитрия Яцко онлайн — 35 €, запись примерно за 2 недели. Оставьте заявку, и мы согласуем время."}
+        description={teamBookingEnabled ? "Выберите специалиста команды CognitionX и запишитесь на бесплатную 20-минутную консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств." : "Разовая платная консультация КПТ-психолога Дмитрия Яцко онлайн — 45 €, запись примерно за 2 недели. Оставьте заявку, и мы согласуем время."}
         path="/free-consultation"
         schema={[teamBookingEnabled ? serviceSchema : paidServiceSchema, breadcrumbSchema]}
       />
@@ -359,7 +359,7 @@ const FreeConsultationPage = () => {
                     До ноября я не принимаю новых клиентов на регулярную терапию
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    Доступна разовая платная консультация (35 €, 50 минут) с записью примерно за 2 недели.
+                    Доступна разовая платная консультация (45 €, 50 минут) с записью примерно за 2 недели.
                     Оставьте заявку ниже — я или администратор свяжемся с вами, чтобы согласовать время.
                   </p>
                 </div>
