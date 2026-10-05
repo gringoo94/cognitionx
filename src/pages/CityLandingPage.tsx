@@ -453,14 +453,14 @@ const CityLandingPage = () => {
               {[
                 {
                   title: "Разовая консультация",
-                  price: "35",
+                  price: "45",
                   duration: "50 мин",
                   featured: true,
                   features: ["Разбор запроса", "План работы", "Домашние задания"],
                 },
                 {
                   title: "Регулярная сессия",
-                  price: "30",
+                  price: "40",
                   priceNote: "за сессию",
                   totalPrice: "При продолжении работы",
                   duration: "50 мин",

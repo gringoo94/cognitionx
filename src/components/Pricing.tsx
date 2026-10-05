@@ -13,14 +13,14 @@ const fade = (delay = 0) => ({
 const plans = [
   {
     title: "Разовая консультация",
-    price: "35",
+    price: "45",
     duration: "50 мин",
     featured: true,
     features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
   },
   {
     title: "Регулярная сессия",
-    price: "30",
+    price: "40",
     priceNote: "за сессию",
     totalPrice: "При продолжении работы",
     duration: "50 мин",

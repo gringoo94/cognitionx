@@ -331,8 +331,8 @@ export const getProblemExtras = (slug: string): ProblemExtras =>
 
 /* ─── Pricing данные (синхронизировано с Pricing.tsx) ─── */
 export const PRICING = {
-  session: { price: 35, currency: "€", duration: "50 минут" },
-  regular: { price: 30, currency: "€", duration: "50 минут" },
+  session: { price: 45, currency: "€", duration: "50 минут" },
+  regular: { price: 40, currency: "€", duration: "50 минут" },
 };
 
 /* ─── Дополнительные FAQ-вопросы для добавления ко всем проблемам ─── */

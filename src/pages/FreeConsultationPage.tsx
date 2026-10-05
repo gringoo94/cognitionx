@@ -87,7 +87,7 @@ const paidServiceSchema = {
   description:
     "Разовая платная онлайн-консультация КПТ-психолога Дмитрия Яцко (50 минут). Запись примерно за 2 недели.",
   provider: { "@id": "https://cognitionx.cloud/#person" },
-  offers: { ...serviceSchema.offers, price: "35" },
+  offers: { ...serviceSchema.offers, price: "45" },
 };
 
 type Selection = { kind: "specialist"; specialist: Specialist } | { kind: "match" } | null;
