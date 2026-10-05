@@ -64,7 +64,7 @@ export const specialists: Specialist[] = [
     formats: ["Онлайн"],
     price: TEAM_PRICE,
     availability: "Ближайшие слоты — на этой неделе",
-    freeIntro: true,
+    freeIntro: false,
   },
   {
     id: "yulya",
@@ -95,7 +95,7 @@ export const specialists: Specialist[] = [
     formats: ["Онлайн", "Очно (Кишинёв)"],
     price: TEAM_PRICE,
     availability: "Ближайшие слоты — на следующей неделе",
-    freeIntro: true,
+    freeIntro: false,
   },
   {
     id: "anna",

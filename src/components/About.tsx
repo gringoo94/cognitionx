@@ -39,7 +39,7 @@ const About = ({
   text = DEFAULT_TEXT,
   quote = DEFAULT_QUOTE,
   chips = ["КПТ", "Схема-терапия", "Регулярная супервизия", "Онлайн и очно"],
-  ctaLabel = "Бесплатное знакомство 20 минут",
+  ctaLabel = "Записаться на консультацию",
   ctaTo = "/free-consultation",
 }: AboutProps = {}) => (
   <section id="about" className="bg-foreground text-background">

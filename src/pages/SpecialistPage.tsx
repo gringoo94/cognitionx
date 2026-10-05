@@ -58,7 +58,7 @@ const SpecialistPage = () => {
         title={`${s.fullName} — ${s.role} | CognitionX`}
         description={
           s.bio?.slice(0, 155) ??
-          `${s.fullName}, ${s.role}. Онлайн-консультации, запись на бесплатную 20-минутную встречу.`
+          `${s.fullName}, ${s.role}. Онлайн-консультации, запись на консультацию.`
         }
         path={`/specialists/${s.id}`}
         schema={[personSchema, breadcrumbSchema]}
@@ -160,7 +160,7 @@ const SpecialistPage = () => {
             {s.acceptingNew === false || (!teamBookingEnabled && s.id !== "dmitrii")
               ? "Запись временно закрыта"
               : s.freeIntro
-              ? "Записаться на бесплатную 20-минутную консультацию"
+              ? "Записаться на консультацию"
               : "Записаться на платную консультацию"}
           </h2>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">

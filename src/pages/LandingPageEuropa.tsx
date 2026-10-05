@@ -78,7 +78,7 @@ const expatFaq = [
   },
   {
     question: "Как проходит первая консультация?",
-    answer: "Первый шаг — бесплатная 20-минутная встреча-знакомство. Это не терапия, а возможность обсудить ваш запрос, задать вопросы и понять, подходим ли мы друг другу. После этого, если решите продолжить, начнём полноценную диагностическую сессию (50 мин, 45 €).",
+    answer: "Первый шаг — консультация (50 минут, 45 €): обсудим запрос, ответите на вопросы и решите, подходим ли мы друг другу.",
   },
   {
     question: "Онлайн-терапия действительно работает?",
@@ -189,7 +189,7 @@ const LandingPageEuropa = () => (
               {...fade(0.12)}
               className="mt-5 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs"
             >
-              {["Бесплатное знакомство · 20 мин", "Сессия 50 мин · 45 €", "Zoom · из любой страны"].map((t) => (
+              {["Консультация · 50 мин", "Сессия 50 мин · 45 €", "Zoom · из любой страны"].map((t) => (
                 <span key={t} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-foreground/80 border border-border">
                   <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
                   {t}
@@ -271,7 +271,7 @@ const LandingPageEuropa = () => (
             viewport={{ once: true }}
             className="text-sm font-medium"
           >
-            Запишитесь на бесплатную 20-минутную встречу — напишите в Telegram
+            Запишитесь на консультацию — напишите в Telegram
           </motion.p>
           <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
             <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">
@@ -337,10 +337,10 @@ const LandingPageEuropa = () => (
             <span className="text-sm font-semibold uppercase tracking-widest opacity-80">Рекомендую начать с этого</span>
           </motion.div>
           <motion.h2 {...fade(0.05)} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-            Бесплатная 20-минутная встреча
+            Первая консультация — 45 €
           </motion.h2>
           <motion.p {...fade(0.1)} className="mt-5 text-sm md:text-base leading-relaxed opacity-85 max-w-xl mx-auto">
-            Это знакомство, не терапия. Без обязательств — просто поговорим и поймём, подходим ли мы друг другу.
+            50 минут: обсудим ваш запрос, разберём ситуацию и наметим план работы.
           </motion.p>
           <motion.div {...fade(0.15)} className="mt-8 grid sm:grid-cols-3 gap-4 max-w-lg mx-auto text-left">
             {[

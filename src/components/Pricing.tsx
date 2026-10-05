@@ -49,7 +49,7 @@ const Pricing = () => (
             <Gift className="w-6 h-6 text-accent" />
           </div>
           <div>
-            <p className="font-semibold text-sm sm:text-base">Бесплатная встреча-знакомство — 20 минут</p>
+            <p className="font-semibold text-sm sm:text-base">Консультация — 20 минут</p>
             <p className="text-muted-foreground text-xs sm:text-sm mt-0.5">
               Познакомимся, обсудим ваш запрос и решим, подходим ли мы друг другу
             </p>
