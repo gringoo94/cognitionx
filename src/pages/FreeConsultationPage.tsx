@@ -51,19 +51,19 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Главная", item: "https://cognitionx.cloud/" },
-    { "@type": "ListItem", position: 2, name: "Запись на консультацию", item: "https://cognitionx.cloud/free-consultation" },
+    { "@type": "ListItem", position: 2, name: "Запись на консультацию", item: "https://cognitionx.cloud/booking" },
   ],
 };
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": "https://cognitionx.cloud/free-consultation#service",
+  "@id": "https://cognitionx.cloud/booking#service",
   name: "Консультация психолога",
   serviceType: "Психологическое консультирование",
   description:
     "Онлайн-консультация психолога CognitionX, 50 минут. Обсудим запрос и формат дальнейшей работы.",
-  url: "https://cognitionx.cloud/free-consultation",
+  url: "https://cognitionx.cloud/booking",
   provider: { "@id": "https://cognitionx.cloud/#organization" },
   brand: { "@id": "https://cognitionx.cloud/#organization" },
   areaServed: { "@type": "Place", name: "Онлайн / по всему миру" },
@@ -77,7 +77,7 @@ const serviceSchema = {
     price: "45",
     priceCurrency: "EUR",
     availability: "https://schema.org/InStock",
-    url: "https://cognitionx.cloud/free-consultation",
+    url: "https://cognitionx.cloud/booking",
   },
 };
 
@@ -329,7 +329,7 @@ const FreeConsultationPage = () => {
       <SEOHead
         title={teamBookingEnabled ? "Запись на консультацию — выбрать специалиста" : "Запись на консультацию к психологу Дмитрию Яцко"}
         description={teamBookingEnabled ? "Выберите специалиста команды CognitionX и запишитесь на консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств." : "Разовая платная консультация КПТ-психолога Дмитрия Яцко онлайн — 45 €, запись примерно за 2 недели. Оставьте заявку, и мы согласуем время."}
-        path="/free-consultation"
+        path="/booking"
         schema={[teamBookingEnabled ? serviceSchema : paidServiceSchema, breadcrumbSchema]}
       />
       <Navbar />

@@ -399,7 +399,7 @@ const StartQuizPage = () => {
                 >
                   <ArrowLeft className="w-3.5 h-3.5" /> Назад к вопросам
                 </button>
-                <Link to="/free-consultation" className="text-muted-foreground hover:text-foreground">
+                <Link to="/booking" className="text-muted-foreground hover:text-foreground">
                   Или сразу записаться на встречу →
                 </Link>
               </div>

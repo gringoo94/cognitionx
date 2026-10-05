@@ -1,3 +1,4 @@
+import ToolConsultCta from "@/components/ToolConsultCta";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -502,6 +503,7 @@ const CbtWorkbookPage = () => {
         </section>
       </main>
 
+      <ToolConsultCta tool="cbt_workbook" />
       <Footer />
     </div>
   );

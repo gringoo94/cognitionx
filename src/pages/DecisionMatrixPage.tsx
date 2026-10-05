@@ -1,3 +1,4 @@
+import ToolConsultCta from "@/components/ToolConsultCta";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -218,6 +219,7 @@ const DecisionMatrixPage = () => {
         </section>
       </main>
 
+      <ToolConsultCta tool="decision_matrix" />
       <Footer />
     </div>
   );

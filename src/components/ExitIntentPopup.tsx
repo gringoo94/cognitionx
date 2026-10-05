@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { trackCta } from "@/lib/trackCta";
 import { trackContact, trackCustomPixel } from "@/lib/metaPixel";
 
-const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/free-consultation", "/contact"];
+const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/booking", "/contact"];
 const STORAGE_KEY = "exit_intent_seen_at";
 const COOLDOWN_DAYS = 7;
 
@@ -107,7 +107,7 @@ const ExitIntentPopup = () => {
         <div className="mt-5 flex flex-col gap-2">
           <Button asChild size="lg" className="w-full rounded-lg gap-2">
             <Link
-              to="/free-consultation"
+              to="/booking"
               onClick={() => {
                 trackCta("exit_intent_free_consultation");
                 close();

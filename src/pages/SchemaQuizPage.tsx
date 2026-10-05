@@ -1,3 +1,4 @@
+import ToolConsultCta from "@/components/ToolConsultCta";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -242,6 +243,7 @@ const SchemaQuizPage = () => {
         </section>
       </main>
 
+      <ToolConsultCta tool="schema_quiz" />
       <Footer />
     </div>
   );

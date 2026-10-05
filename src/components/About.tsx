@@ -40,7 +40,7 @@ const About = ({
   quote = DEFAULT_QUOTE,
   chips = ["КПТ", "Схема-терапия", "Регулярная супервизия", "Онлайн и очно"],
   ctaLabel = "Записаться на консультацию",
-  ctaTo = "/free-consultation",
+  ctaTo = "/booking",
 }: AboutProps = {}) => (
   <section id="about" className="bg-foreground text-background">
     <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">

@@ -1,3 +1,4 @@
+import ToolConsultCta from "@/components/ToolConsultCta";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -67,6 +68,7 @@ const ThoughtDiaryPage = () => {
         </section>
       </main>
 
+      <ToolConsultCta tool="thought_diary" />
       <Footer />
     </div>
   );
