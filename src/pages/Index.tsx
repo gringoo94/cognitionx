@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazyWithRetry as lazy } from "@/lib/lazyWithRetry";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TelegramCTA from "@/components/TelegramCTA";
