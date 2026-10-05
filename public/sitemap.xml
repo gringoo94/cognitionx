@@ -604,12 +604,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://cognitionx.cloud/blog/prokrastinaciya</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://cognitionx.cloud/blog/depressiya-ili-vygoranie</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -671,12 +665,6 @@
   </url>
   <url>
     <loc>https://cognitionx.cloud/blog/granicy-samopomoshchi</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://cognitionx.cloud/blog/lovushka-yarlykov</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -784,6 +772,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://cognitionx.cloud/blog/lovushka-yarlykov</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://cognitionx.cloud/blog/kto-tebe-eto-skazal</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -832,6 +826,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://cognitionx.cloud/blog/prokrastinaciya</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://cognitionx.cloud/blog/dehumanizaciya-chto-eto</loc>
     <lastmod>2026-07-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -870,12 +870,6 @@
   <url>
     <loc>https://cognitionx.cloud/blog/big-five-vs-mbti</loc>
     <lastmod>2026-07-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://cognitionx.cloud/blog/bipolyarnoe-rasstroistvo-skrining</loc>
-    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -978,6 +972,12 @@
   <url>
     <loc>https://cognitionx.cloud/blog/pervyj-bezopasnyj-shag</loc>
     <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cognitionx.cloud/blog/bipolyarnoe-rasstroistvo-skrining</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

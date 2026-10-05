@@ -82,12 +82,12 @@ async function generate() {
   // exactly like vite-plugin-seo.ts does for the prerender/dist sitemap — so
   // public/sitemap.xml and dist/sitemap.xml stay identical.
   const explicitPaths = new Set(seoRoutes.map((r) => r.path.replace(/\/$/, "") || "/"));
-  const indexablePaths = [
+  const indexablePaths = [...new Set([
     ...seoRoutes.filter((r) => !r.noindex).map((r) => r.path),
     ...blogPosts
       .map((p: any) => `/blog/${p.slug}`)
       .filter((p) => !explicitPaths.has(p)),
-  ];
+  ])];
 
   const urls = indexablePaths.map((p) => {
     const lastmod = blogLastmod.get(p);
