@@ -32,7 +32,7 @@ export type Specialist = {
 };
 
 /** Цены психологов команды — синхронизированы с основным прайсом сайта */
-export const TEAM_PRICE = "35 € разовая · 30 € регулярная";
+export const TEAM_PRICE = "45 € разовая · 40 € регулярная";
 
 export const specialists: Specialist[] = [
   {
@@ -162,7 +162,7 @@ export const specialists: Specialist[] = [
     topics: ["Депрессия", "Тревога и панические атаки", "Выгорание", "Схема-терапия"],
     languages: ["Русский", "Румынский", "Английский"],
     formats: ["Онлайн", "Очно (Кишинёв)"],
-    price: "45 € разовая · 30 € регулярная",
+    price: "45 € разовая · 40 € регулярная",
     availability: "Платная консультация — запись за 2 недели",
     freeIntro: false,
     note:
