@@ -54,6 +54,7 @@ const FreeConsultationPage = lazy(() => import("./pages/FreeConsultationPage.tsx
 const StartQuizPage = lazy(() => import("./pages/StartQuizPage.tsx"));
 const CountryHubPage = lazy(() => import("./pages/CountryHubPage.tsx"));
 const SpecialistPage = lazy(() => import("./pages/SpecialistPage.tsx"));
+const SpecialistsPage = lazy(() => import("./pages/SpecialistsPage.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -160,6 +161,7 @@ const App = () => (
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/free-consultation" element={<FreeConsultationPage />} />
+              <Route path="/specialists" element={<SpecialistsPage />} />
               <Route path="/specialists/:id" element={<SpecialistPage />} />
               <Route path="/start" element={<StartQuizPage />} />
 

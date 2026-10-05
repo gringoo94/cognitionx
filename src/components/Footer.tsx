@@ -1,6 +1,5 @@
 import { Mail, Send, Phone, Instagram, Linkedin, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { specialists } from "@/data/specialists";
 
 const problemLinks = [
   { label: "Депрессия", href: "/depression" },
@@ -117,14 +116,9 @@ const Footer = () => (
               </Link>
             ))}
           </div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mt-8 mb-4">Специалисты</p>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            {specialists.map((sp) => (
-              <Link key={sp.id} to={`/specialists/${sp.id}`} className="hover:text-foreground transition-colors">
-                {sp.fullName}
-              </Link>
-            ))}
-          </div>
+          <Link to="/specialists" className="mt-6 inline-block text-sm text-muted-foreground hover:text-foreground transition-colors">
+            Специалисты
+          </Link>
         </div>
 
         {/* Geography */}
