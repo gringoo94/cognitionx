@@ -557,6 +557,7 @@ const FreeConsultationPage = () => {
                   {!loading && <Send className="w-4 h-4" />}
                 </Button>
 
+                {teamBookingEnabled && (
                 <button
                   type="button"
                   onClick={() => {
@@ -567,6 +568,7 @@ const FreeConsultationPage = () => {
                 >
                   Выбрать другого специалиста
                 </button>
+                )}
               </form>
             </section>
           )}
