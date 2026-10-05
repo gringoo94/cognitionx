@@ -1158,7 +1158,7 @@ const ProblemPage = () => {
                   {PRICING.regular.price} {PRICING.regular.currency}
                 </div>
                 <div className="text-xs text-muted-foreground mt-1">
-                  {PRICING.regular.duration} · при продолжении работы
+                  {PRICING.regular.duration} · при оплате от 4 сессий
                 </div>
               </div>
             </div>
