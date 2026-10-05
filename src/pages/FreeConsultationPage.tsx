@@ -37,7 +37,7 @@ const schema = z.object({
   }),
 });
 
-const CHANNELS = ["Telegram", "WhatsApp", "Звонок"] as const;
+const CHANNELS = ["Telegram", "WhatsApp"] as const;
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
