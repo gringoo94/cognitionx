@@ -1,3 +1,4 @@
+import ToolConsultCta from "@/components/ToolConsultCta";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -70,6 +71,7 @@ const DayPlannerPage = () => {
         </section>
       </main>
 
+      <ToolConsultCta tool="day_planner" />
       <Footer />
     </div>
   );

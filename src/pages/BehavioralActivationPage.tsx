@@ -1,3 +1,4 @@
+import ToolConsultCta from "@/components/ToolConsultCta";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -66,6 +67,7 @@ const BehavioralActivationPage = () => {
         </section>
       </main>
 
+      <ToolConsultCta tool="behavioral_activation" />
       <Footer />
     </div>
   );
