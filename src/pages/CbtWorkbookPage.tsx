@@ -48,6 +48,10 @@ const faqs = [
     a: "Регистрация нужна, чтобы сохранять прогресс между сессиями и видеть динамику настроения за недели. Без неё инструменты тоже работают, но как одноразовые рабочие листы.",
   },
   {
+    q: "Какие техники КПТ включены?",
+    a: "10 доказательных модулей: оценка депрессии и тревоги, модель ABC, SMART-цели, изменение образа жизни, поведенческая активация, работа со страхами, контейнирование тревоги, решение проблем, оспаривание мыслей и план благополучия.",
+  },
+  {
     q: "Можно ли использовать без терапевта?",
     a: "Да, многие техники КПТ изначально создавались как self-help. Но если у вас выраженная депрессия, суицидальные мысли, тревога, мешающая жить, или ПТСР — самостоятельная работа не заменит терапию. Воркбук в этом случае — дополнение, а не альтернатива.",
   },
@@ -68,6 +72,76 @@ const faqs = [
     a: "Сейчас идёт закрытая бета. Оставьте email — пришлю инвайт, как только откроем регистрацию. Спама не будет: одно письмо при запуске и потом раз в пару месяцев — об апдейтах.",
   },
 ];
+
+const stats = [
+  { value: "10", label: "модулей КПТ" },
+  { value: "100%", label: "доказательная база" },
+  { value: "24/7", label: "доступ из браузера" },
+  { value: "2", label: "роли: клиент и терапевт" },
+];
+
+function MoodDemo() {
+  const days = [3, 5, 4, 6, 7, 6, 8];
+  const labels = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+  return (
+    <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+      <div className="flex items-center gap-2">
+        <TrendingUp className="w-4 h-4 text-primary" />
+        <span className="text-xs font-semibold text-foreground">Настроение за неделю</span>
+      </div>
+      <div className="flex items-end gap-1.5 h-20">
+        {days.map((v, i) => (
+          <div key={i} className="flex-1 flex flex-col items-center justify-end gap-1 h-full">
+            <motion.div
+              className="w-full rounded-t-md bg-primary"
+              style={{ opacity: 0.3 + (v / 10) * 0.7 }}
+              initial={{ height: 0 }}
+              whileInView={{ height: `${v * 8}px` }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6, ease: "easeOut" }}
+            />
+            <span className="text-[10px] text-muted-foreground">{labels[i]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProgressDemo() {
+  const items = [
+    { icon: Compass, name: "Оспаривание мыслей", progress: 85 },
+    { icon: Zap, name: "Поведенческая активация", progress: 60 },
+    { icon: Target, name: "SMART-цели", progress: 45 },
+  ];
+  return (
+    <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+      <div className="flex items-center gap-2">
+        <Activity className="w-4 h-4 text-primary" />
+        <span className="text-xs font-semibold text-foreground">Прогресс упражнений</span>
+      </div>
+      {items.map((t, i) => (
+        <div key={t.name} className="space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-foreground flex items-center gap-1.5">
+              <t.icon className="w-3 h-3 text-primary" /> {t.name}
+            </span>
+            <span className="text-[10px] font-mono text-primary">{t.progress}%</span>
+          </div>
+          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-primary"
+              initial={{ width: 0 }}
+              whileInView={{ width: `${t.progress}%` }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: "easeOut" }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -132,8 +206,8 @@ const CbtWorkbookPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="CBT Workbook — бесплатная цифровая тетрадь по КПТ онлайн"
-        description="Бесплатный CBT воркбук: 10 модулей когнитивно-поведенческой терапии, трекер настроения, упражнения при депрессии и тревоге. Доказательные техники онлайн."
+        title="CBT Workbook — бесплатная тетрадь КПТ онлайн между сессиями"
+        description="Бесплатная тетрадь КПТ онлайн: 10 интерактивных модулей, трекер настроения и упражнения при депрессии и тревоге. Закрепляйте навыки между сессиями."
         path="/cbtworkbook"
         schema={[softwareSchema, faqSchema]}
         breadcrumbs={[
@@ -158,24 +232,24 @@ const CbtWorkbookPage = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-6"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            Beta · Бесплатно · Без рекламы
+            Рабочая тетрадь КПТ — бета
           </motion.div>
 
           <motion.h1
             {...fade(0.05)}
             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08]"
           >
-            CBT Workbook —<br />
-            <span className="text-primary">тетрадь по КПТ</span> онлайн
+            Ваш мост к<br />
+            <span className="text-primary">лучшему психическому здоровью</span>
           </motion.h1>
 
           <motion.p
             {...fade(0.1)}
             className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
-            10 структурированных модулей когнитивно-поведенческой терапии,
-            трекер настроения и упражнения, основанные на протоколах Beck, Ellis и Lewinsohn.
-            Бесплатно, на русском, в браузере.
+            CBT Workbook — бесплатная рабочая тетрадь по КПТ онлайн: 10 интерактивных модулей,
+            трекер настроения и упражнения по протоколам Бека, Эллиса и Левинсона.
+            На русском, в браузере, для работы между сессиями и самостоятельно.
           </motion.p>
 
           <motion.div
@@ -188,59 +262,68 @@ const CbtWorkbookPage = () => {
               </a>
             </Button>
             <Button variant="outline" size="lg" className="text-base px-8" asChild>
-              <Link to="/contact">Записаться на консультацию</Link>
+              <Link to="/booking">Записаться на консультацию</Link>
             </Button>
           </motion.div>
 
           <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-            Закрытая бета · Инвайт придёт на email · Можно отписаться в любой момент
+            Закрытая бета · Бесплатно · Без рекламы
           </motion.p>
+
+          <motion.div
+            {...fade(0.25)}
+            className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto text-left"
+          >
+            <MoodDemo />
+            <ProgressDemo />
+          </motion.div>
         </section>
 
-        {/* WHAT IS IT */}
-        <section className="border-y border-border bg-card/40">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
-            <motion.div {...fade()}>
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">Что такое CBT Workbook</h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Когнитивно-поведенческая терапия (КПТ) — это самый изученный психотерапевтический подход
-                  в мире. За 60+ лет накопились сотни клинических исследований и стандартизированные
-                  протоколы для депрессии, тревоги, панических атак, ОКР, ПТСР, бессонницы, зависимостей.
-                  Эти протоколы давно перестали быть «секретом терапевтов» — большая их часть открыта,
-                  описана в книгах и активно используется как self-help.
-                </p>
-                <p>
-                  CBT Workbook собирает эти техники в одном месте и превращает их из бумажных рабочих
-                  листов в интерактивные упражнения с сохранением прогресса. Это не «приложение для
-                  настроения» с эмодзи — это рабочая тетрадь, которую вы заполняете последовательно,
-                  глава за главой, как при работе с терапевтом по протоколу.
-                </p>
-                <p>
-                  Воркбук подходит, если вы хотите разобраться в собственных мыслях и поведении,
-                  готовитесь к терапии, идёте параллельно с терапевтом или уже завершили курс и хотите
-                  поддерживать навыки. Он не заменяет лечение при тяжёлых состояниях, но даёт структуру
-                  и язык, на котором с собой можно разговаривать.
-                </p>
-              </div>
-            </motion.div>
+        {/* STATS */}
+        <section className="border-y border-border bg-card/50">
+          <div className="max-w-5xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((s, i) => (
+              <motion.div key={s.label} {...fade(i * 0.05)} className="text-center">
+                <p className="text-2xl md:text-3xl font-bold text-primary font-mono">{s.value}</p>
+                <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
+              </motion.div>
+            ))}
           </div>
+        </section>
+
+        {/* PROBLEM → SOLUTION */}
+        <section className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
+          <motion.p {...fade()} className="text-xs font-mono uppercase tracking-widest text-primary mb-4">
+            Разрыв между сессиями
+          </motion.p>
+          <motion.blockquote {...fade(0.05)} className="text-xl md:text-2xl font-medium leading-snug text-foreground">
+            «Я ухожу от терапевта с ощущением понимания — но к среде старые паттерны возвращаются.»
+          </motion.blockquote>
+          <motion.p {...fade(0.1)} className="mt-6 text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            Самая важная работа в КПТ происходит не в кабинете, а между встречами: когда вы замечаете
+            автоматическую мысль, проверяете её и пробуете действовать иначе. CBT Workbook превращает
+            бумажные рабочие листы в интерактивные упражнения с сохранением прогресса — чтобы навыки
+            закреплялись каждый день, а не раз в неделю.
+          </motion.p>
+          <motion.p {...fade(0.15)} className="mt-6 text-lg font-semibold text-primary">
+            CBT Workbook закрывает этот разрыв.
+          </motion.p>
         </section>
 
         {/* 3 STEPS */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <motion.div {...fade()} className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold">Как это устроено</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">Как это работает</h2>
             <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              Три цикла, которые повторяются каждую неделю.
+              Три шага к устойчивым изменениям — цикл, который повторяется каждую неделю.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { icon: TrendingUp, n: "01", title: "Отслеживайте настроение", desc: "Короткий ежедневный чек-ин: настроение, энергия, тревога. Через две недели появляется график, на котором видно паттерны: что подкручивает вниз, что вытягивает." },
-              { icon: Activity, n: "02", title: "Делайте упражнения", desc: "Каждый модуль — это последовательность шагов. Не «прочитайте теорию», а «заполните, подумайте, попробуйте». Прогресс сохраняется, к упражнениям можно возвращаться." },
-              { icon: Heart, n: "03", title: "Видите динамику", desc: "Через месяц на дашборде накапливается ваша история: какие техники сработали, какие убеждения поменялись, какие активности дают энергию. Это и есть терапевтическая работа." },
+              { icon: Activity, n: "02", title: "Выполняйте упражнения КПТ", desc: "10 интерактивных модулей — от оспаривания мыслей до поведенческой активации. Не «прочитайте теорию», а «заполните, подумайте, попробуйте». Прогресс сохраняется." },
+              { icon: Heart, n: "03", title: "Делитесь прогрессом с терапевтом", desc: "Если вы в терапии, специалист видит упражнения и динамику настроения — и каждая сессия становится продуктивнее. Если нет — вы сами видите, что работает." },
             ].map((s, i) => (
               <motion.div
                 key={s.n}
@@ -318,12 +401,6 @@ const CbtWorkbookPage = () => {
                 <li><strong className="text-foreground">Problem Solving Therapy Незу</strong> — структурированный подход к жизненным проблемам.</li>
                 <li><strong className="text-foreground">Когнитивная модель Падески</strong> — пятифакторная модель «мысль–эмоция–тело–поведение–среда».</li>
               </ul>
-              <p>
-                Метаанализы показывают, что для депрессии и тревоги эффективность структурированных
-                self-help программ КПТ — особенно с поддержкой даже минимального контакта — сравнима с
-                полноценной терапией при лёгких и умеренных формах. То есть это не «слабая замена», а
-                рабочий инструмент.
-              </p>
             </div>
           </motion.div>
         </section>
@@ -333,6 +410,7 @@ const CbtWorkbookPage = () => {
           <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
             <motion.div {...fade()} className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold">Чем отличается от других решений</h2>
+              <p className="text-muted-foreground mt-3 text-sm md:text-base">Сравнение по важным параметрам</p>
             </motion.div>
 
             <motion.div {...fade(0.05)} className="overflow-x-auto rounded-xl border border-border bg-background">
@@ -341,23 +419,23 @@ const CbtWorkbookPage = () => {
                   <tr className="border-b border-border bg-muted/40">
                     <th className="px-4 sm:px-6 py-4 text-left w-[28%] font-medium text-muted-foreground"></th>
                     <th className="px-3 sm:px-6 py-4 text-center font-bold text-primary">CBT Workbook</th>
-                    <th className="px-3 sm:px-6 py-4 text-center font-medium text-muted-foreground">Бумажный дневник</th>
-                    <th className="px-3 sm:px-6 py-4 text-center font-medium text-muted-foreground">Mood-приложения</th>
+                    <th className="px-3 sm:px-6 py-4 text-center font-medium text-muted-foreground">Только терапия</th>
+                    <th className="px-3 sm:px-6 py-4 text-center font-medium text-muted-foreground">Приложения самопомощи</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    ["Структурированные протоколы КПТ", true, false, false],
-                    ["Сохранение прогресса", true, false, true],
-                    ["Аналитика настроения", true, false, true],
+                    ["Инструменты КПТ между сессиями", "10 интерактивных", "Бумажные бланки", "Общие упражнения"],
+                    ["Отслеживание прогресса", "Графики и история", "Заметки на сессии", "Базовые логи"],
+                    ["Доказательная база", "Протоколы КПТ", "Зависит от специалиста", "Часто без проверки"],
                     ["Доступно в любой момент", true, false, true],
-                    ["Бесплатно без подписки", true, true, false],
                     ["На русском языке", true, true, "Часто нет"],
+                    ["Стоимость", "Бесплатно", "40–45 € за сессию", "5–15 € в месяц"],
                   ].map(([dim, ours, paper, app], i) => (
                     <tr key={i} className="border-b border-border last:border-0">
                       <td className="px-4 sm:px-6 py-3.5 font-medium text-foreground">{dim as string}</td>
                       <td className="px-3 sm:px-6 py-3.5 text-center">
-                        {ours === true ? <Check className="h-4 w-4 text-primary inline" /> : <X className="h-4 w-4 text-muted-foreground inline" />}
+                        {ours === true ? <Check className="h-4 w-4 text-primary inline" /> : <span className="font-medium text-primary">{ours as string}</span>}
                       </td>
                       <td className="px-3 sm:px-6 py-3.5 text-center text-muted-foreground">
                         {paper === true ? <Check className="h-4 w-4 inline" /> : paper === false ? <X className="h-4 w-4 inline" /> : (paper as string)}
@@ -426,7 +504,7 @@ const CbtWorkbookPage = () => {
             </motion.p>
             <motion.div {...fade(0.1)} className="mt-8">
               <Button size="lg" variant="outline" asChild className="bg-transparent border-background/30 text-background hover:bg-background hover:text-foreground">
-                <Link to="/contact" className="gap-2">
+                <Link to="/booking" className="gap-2">
                   Записаться на консультацию <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
@@ -486,17 +564,17 @@ const CbtWorkbookPage = () => {
         <section className="border-t border-border bg-primary/5">
           <div className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
             <motion.h2 {...fade()} className="text-2xl md:text-3xl font-bold">
-              Готовы начать?
+              Готовы закрыть разрыв?
             </motion.h2>
             <motion.p {...fade(0.05)} className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              Получите инвайт в бету или запишитесь на первую сессию — обсудим, что подойдёт именно вам.
+              Получите инвайт в бету или запишитесь на консультацию (45 €, 50 минут) — обсудим, что подойдёт именно вам.
             </motion.p>
             <motion.div {...fade(0.1)} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button size="lg" className="gap-2 px-8" asChild>
                 <a href="#waitlist">Получить ранний доступ <ArrowRight className="w-4 h-4" /></a>
               </Button>
               <Button size="lg" variant="outline" className="px-8" asChild>
-                <Link to="/contact">Записаться на консультацию</Link>
+                <Link to="/booking">Записаться на консультацию</Link>
               </Button>
             </motion.div>
           </div>
