@@ -411,7 +411,6 @@ const CbtWorkbookPage = () => {
             <motion.div {...fade()} className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold">Чем отличается от других решений</h2>
               <p className="text-muted-foreground mt-3 text-sm md:text-base">Сравнение по важным параметрам</p>
-              <h2 className="hidden"></h2>
             </motion.div>
 
             <motion.div {...fade(0.05)} className="overflow-x-auto rounded-xl border border-border bg-background">
