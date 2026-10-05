@@ -160,7 +160,7 @@ const App = () => (
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/informed-consent" element={<InformedConsent />} />
               <Route path="/thank-you" element={<ThankYou />} />
-              <Route path="/free-consultation" element={<FreeConsultationPage />} />
+              <Route path="/booking" element={<FreeConsultationPage />} />
               <Route path="/specialists" element={<SpecialistsPage />} />
               <Route path="/specialists/:id" element={<SpecialistPage />} />
               <Route path="/start" element={<StartQuizPage />} />

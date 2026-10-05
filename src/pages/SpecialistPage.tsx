@@ -19,7 +19,7 @@ const SpecialistPage = () => {
   const { id } = useParams<{ id: string }>();
   const s = getSpecialist(id ?? null);
 
-  if (!s) return <Navigate to="/free-consultation" replace />;
+  if (!s) return <Navigate to="/booking" replace />;
 
   const url = `https://cognitionx.cloud/specialists/${s.id}`;
   const others = specialists.filter((o) => o.id !== s.id);
@@ -46,7 +46,7 @@ const SpecialistPage = () => {
         "@type": "ListItem",
         position: 2,
         name: "Специалисты",
-        item: "https://cognitionx.cloud/free-consultation",
+        item: "https://cognitionx.cloud/booking",
       },
       { "@type": "ListItem", position: 3, name: s.fullName, item: url },
     ],
@@ -74,7 +74,7 @@ const SpecialistPage = () => {
             Главная
           </Link>
           <span>/</span>
-          <Link to="/free-consultation" className="hover:text-primary transition-colors">
+          <Link to="/booking" className="hover:text-primary transition-colors">
             Специалисты
           </Link>
           <span>/</span>
@@ -181,15 +181,15 @@ const SpecialistPage = () => {
             onClick={() => trackCta(`specialist_page_cta_${s.id}`)}
           >
             {!teamBookingEnabled && s.id !== "dmitrii" ? (
-              <Link to="/free-consultation">
+              <Link to="/booking">
                 Записаться к Дмитрию <ArrowRight className="w-4 h-4" />
               </Link>
             ) : s.acceptingNew === false ? (
-              <Link to="/free-consultation">
+              <Link to="/booking">
                 Выбрать другого специалиста <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (
-              <Link to={`/free-consultation?specialist=${s.id}`}>
+              <Link to={`/booking?specialist=${s.id}`}>
                 Оставить заявку {s.toName} <ArrowRight className="w-4 h-4" />
               </Link>
             )}

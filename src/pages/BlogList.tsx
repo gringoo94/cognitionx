@@ -678,7 +678,7 @@ const BlogList = () => {
               </li>
               <li>
                 →{" "}
-                <Link to="/free-consultation" className="text-primary underline">
+                <Link to="/booking" className="text-primary underline">
                   Записаться
                 </Link>
               </li>

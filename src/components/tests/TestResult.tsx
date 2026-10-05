@@ -273,7 +273,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-xl mx-auto">
               <Button asChild size="lg" className="gap-2">
                 <Link
-                  to="/free-consultation"
+                  to="/booking"
                   onClick={() => {
                     trackLead(`test_result_cta_${config.code}`, {
                       content_category: config.cluster,

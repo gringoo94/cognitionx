@@ -5,7 +5,7 @@ import { trackCta } from "@/lib/trackCta";
 import { trackContact } from "@/lib/metaPixel";
 
 // Routes where the FAB should NOT appear
-const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/free-consultation"];
+const HIDDEN_PREFIXES = ["/admin", "/thank-you", "/booking"];
 
 const STORAGE_KEY = "fab_telegram_dismissed_at";
 const DISMISS_HOURS = 24;

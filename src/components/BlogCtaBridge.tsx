@@ -29,7 +29,7 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
       <div className="mt-5 flex flex-col sm:flex-row gap-3">
         <Button asChild size="lg" className="rounded-lg gap-2">
           <Link
-            to="/free-consultation"
+            to="/booking"
             onClick={() => trackCta("blog_cta_free_consultation", { topic })}
           >
             <Gift className="w-4 h-4" /> Записаться на консультацию
