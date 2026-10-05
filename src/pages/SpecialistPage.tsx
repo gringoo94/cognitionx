@@ -219,7 +219,7 @@ const SpecialistPage = () => {
 
         <div className="mt-14">
           <Button variant="ghost" size="sm" asChild>
-            <Link to="/free-consultation" className="gap-2">
+            <Link to="/specialists" className="gap-2">
               <ArrowLeft className="w-4 h-4" /> Ко всем специалистам
             </Link>
           </Button>
