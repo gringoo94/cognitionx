@@ -210,3 +210,6 @@ export const PSYCHIATRIST_INTRO_LABEL =
 
 export const getSpecialist = (id: string | null) =>
   specialists.find((s) => s.id === id) ?? null;
+
+/** Пока false — на странице записи показывается только Дмитрий (платная консультация). */
+export const teamBookingEnabled = false;

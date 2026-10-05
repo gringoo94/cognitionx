@@ -18,6 +18,7 @@ import {
   specialists,
   getSpecialist,
   PSYCHIATRIST_INTRO_LABEL,
+  teamBookingEnabled,
   type Specialist,
 } from "@/data/specialists";
 
@@ -78,6 +79,15 @@ const serviceSchema = {
     availability: "https://schema.org/InStock",
     url: "https://cognitionx.cloud/free-consultation",
   },
+};
+
+const paidServiceSchema = {
+  ...serviceSchema,
+  name: "Консультация психолога Дмитрия Яцко",
+  description:
+    "Разовая платная онлайн-консультация КПТ-психолога Дмитрия Яцко (50 минут). Запись примерно за 2 недели.",
+  provider: { "@id": "https://cognitionx.cloud/#person" },
+  offers: { ...serviceSchema.offers, price: "35" },
 };
 
 type Selection = { kind: "specialist"; specialist: Specialist } | { kind: "match" } | null;
@@ -172,7 +182,11 @@ const SpecialistCard = ({
 );
 
 const FreeConsultationPage = () => {
-  const [selection, setSelection] = useState<Selection>(null);
+  const [selection, setSelection] = useState<Selection>(() => {
+    if (teamBookingEnabled) return null;
+    const d = getSpecialist("dmitrii");
+    return d ? { kind: "specialist", specialist: d } : null;
+  });
   const [submitted, setSubmitted] = useState<Selection>(null);
   const [form, setForm] = useState({
     name: "",
@@ -188,6 +202,7 @@ const FreeConsultationPage = () => {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    if (!teamBookingEnabled) return;
     const preselect = getSpecialist(searchParams.get("specialist"));
     if (preselect && preselect.acceptingNew !== false) {
       setSelection({ kind: "specialist", specialist: preselect });
@@ -312,10 +327,10 @@ const FreeConsultationPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Бесплатная 20-минутная консультация — выбрать специалиста"
-        description="Выберите специалиста команды CognitionX и запишитесь на бесплатную 20-минутную консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств."
+        title={teamBookingEnabled ? "Бесплатная 20-минутная консультация — выбрать специалиста" : "Запись на консультацию к психологу Дмитрию Яцко"}
+        description={teamBookingEnabled ? "Выберите специалиста команды CognitionX и запишитесь на бесплатную 20-минутную консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств." : "Разовая платная консультация КПТ-психолога Дмитрия Яцко онлайн — 35 €, запись примерно за 2 недели. Оставьте заявку, и мы согласуем время."}
         path="/free-consultation"
-        schema={[serviceSchema, breadcrumbSchema]}
+        schema={[teamBookingEnabled ? serviceSchema : paidServiceSchema, breadcrumbSchema]}
       />
       <Navbar />
 
@@ -323,9 +338,36 @@ const FreeConsultationPage = () => {
         <motion.nav {...fade()} className="flex items-center gap-1.5 text-xs text-muted-foreground mb-8">
           <Link to="/" className="hover:text-primary transition-colors">Главная</Link>
           <span>/</span>
-          <span className="text-foreground">Бесплатная консультация</span>
+          <span className="text-foreground">{teamBookingEnabled ? "Бесплатная консультация" : "Запись на консультацию"}</span>
         </motion.nav>
 
+        {!teamBookingEnabled ? (
+          <>
+            <motion.h1 {...fade(0.05)} className="text-3xl md:text-4xl font-bold tracking-tight max-w-2xl">
+              Запись на консультацию к Дмитрию Яцко
+            </motion.h1>
+            <motion.aside
+              {...fade(0.1)}
+              role="note"
+              className="relative mt-8 max-w-2xl overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-5 pl-6 shadow-sm"
+            >
+              <span aria-hidden className="absolute inset-y-0 left-0 w-1.5 bg-primary" />
+              <div className="flex gap-3">
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <div>
+                  <p className="text-sm font-semibold text-foreground">
+                    До ноября я не принимаю новых клиентов на регулярную терапию
+                  </p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    Доступна разовая платная консультация (35 €, 50 минут) с записью примерно за 2 недели.
+                    Оставьте заявку ниже — я или администратор свяжемся с вами, чтобы согласовать время.
+                  </p>
+                </div>
+              </div>
+            </motion.aside>
+          </>
+        ) : (
+          <>
         {/* Верхний блок */}
         <motion.h1 {...fade(0.05)} className="text-3xl md:text-4xl font-bold tracking-tight max-w-2xl">
           Бесплатная 20-минутная консультация
@@ -375,7 +417,11 @@ const FreeConsultationPage = () => {
           </div>
         </motion.aside>
 
+          </>
+        )}
+
         {/* Карточки */}
+        {teamBookingEnabled && (
         <div ref={listRef} className="scroll-mt-24 mt-14">
           <h2 className="text-xl md:text-2xl font-semibold">Выберите специалиста</h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
@@ -400,6 +446,7 @@ const FreeConsultationPage = () => {
             </Button>
           </div>
         </div>
+        )}
 
         {/* Форма / подтверждение */}
         <div ref={formRef} className="scroll-mt-24 mt-14">
@@ -510,6 +557,7 @@ const FreeConsultationPage = () => {
                   {!loading && <Send className="w-4 h-4" />}
                 </Button>
 
+                {teamBookingEnabled && (
                 <button
                   type="button"
                   onClick={() => {
@@ -520,6 +568,7 @@ const FreeConsultationPage = () => {
                 >
                   Выбрать другого специалиста
                 </button>
+                )}
               </form>
             </section>
           )}
