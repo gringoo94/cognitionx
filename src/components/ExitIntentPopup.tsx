@@ -113,7 +113,7 @@ const ExitIntentPopup = () => {
                 close();
               }}
             >
-              <Gift className="w-4 h-4" /> Записаться бесплатно
+              <Gift className="w-4 h-4" /> Записаться на консультацию
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full rounded-lg gap-2">

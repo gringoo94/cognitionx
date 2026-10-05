@@ -32,7 +32,7 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
             to="/free-consultation"
             onClick={() => trackCta("blog_cta_free_consultation", { topic })}
           >
-            <Gift className="w-4 h-4" /> Бесплатная встреча
+            <Gift className="w-4 h-4" /> Записаться на консультацию
           </Link>
         </Button>
         <Button asChild size="lg" variant="outline" className="rounded-lg gap-2">
