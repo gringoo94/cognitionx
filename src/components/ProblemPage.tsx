@@ -1152,7 +1152,7 @@ const ProblemPage = () => {
               </div>
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
-                  Регулярная сессия
+                  Регулярная терапия
                 </div>
                 <div className="text-2xl font-bold">
                   {PRICING.regular.price} {PRICING.regular.currency}
