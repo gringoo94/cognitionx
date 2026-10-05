@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { trackCta } from "@/lib/trackCta";
-import { getSpecialist, specialists, PSYCHIATRIST_INTRO_LABEL } from "@/data/specialists";
+import { getSpecialist, specialists, PSYCHIATRIST_INTRO_LABEL, teamBookingEnabled } from "@/data/specialists";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
