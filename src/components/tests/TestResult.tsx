@@ -280,7 +280,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                     });
                   }}
                 >
-                  Бесплатная встреча — 20 мин <ArrowRight className="h-4 w-4" />
+                  Записаться на консультацию <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="gap-2">

@@ -17,13 +17,13 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
   return (
     <div className="mt-10 rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/5 to-accent/5 p-7 md:p-9">
       <div className="flex items-center gap-2 text-xs font-medium text-accent">
-        <Gift className="w-4 h-4" /> Бесплатно · без обязательств
+        <Gift className="w-4 h-4" /> Консультация · 50 мин
       </div>
       <h3 className="mt-3 text-xl md:text-2xl font-bold tracking-tight">
         Узнали себя в статье?
       </h3>
       <p className="mt-2 text-sm md:text-base text-muted-foreground leading-relaxed">
-        Запишитесь на 20-минутную встречу-знакомство — обсудим ваш запрос и решим,
+        Запишитесь на консультацию — обсудим ваш запрос и решим,
         подходим ли мы друг другу. Или просто напишите мне в Telegram, отвечу в течение дня.
       </p>
       <div className="mt-5 flex flex-col sm:flex-row gap-3">

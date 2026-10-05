@@ -98,10 +98,10 @@ const ExitIntentPopup = () => {
           <Gift className="w-6 h-6 text-accent" />
         </div>
 
-        <h3 className="text-xl font-bold tracking-tight">Подождите — есть бесплатный вариант</h3>
+        <h3 className="text-xl font-bold tracking-tight">Подождите — запишитесь на консультацию</h3>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-          20-минутная встреча-знакомство без оплаты. Познакомимся, обсудим запрос и решим,
-          подходим ли мы друг другу. Без обязательств.
+          Консультация 50 минут — 45 €. Обсудим запрос, разберём ситуацию
+          и решим, подходим ли мы друг другу.
         </p>
 
         <div className="mt-5 flex flex-col gap-2">
