@@ -239,8 +239,8 @@ const CbtWorkbookPage = () => {
             {...fade(0.05)}
             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08]"
           >
-            Ваш мост к<br />
-            <span className="text-primary">лучшему психическому здоровью</span>
+            CBT Workbook —<br />
+            <span className="text-primary">тетрадь по КПТ онлайн</span>
           </motion.h1>
 
           <motion.p
