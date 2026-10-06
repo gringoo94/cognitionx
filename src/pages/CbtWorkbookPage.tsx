@@ -21,63 +21,55 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
+const problems = [
+  { icon: Leaf, title: "Депрессия и апатия", symptoms: "Нет сил, ничего не радует, трудно встать с кровати, мысли «я неудачник».", help: "Поведенческая активация: маленькими шагами возвращаете дела, которые дают энергию." },
+  { icon: AlertTriangle, title: "Тревога и стресс", symptoms: "Мысли по кругу, «а вдруг случится худшее», напряжение в теле, плохой сон.", help: "Проверка мыслей и решение проблем: отделяете реальные риски от катастрофических сценариев." },
+  { icon: Zap, title: "Панические атаки", symptoms: "Сердце колотится, не хватает воздуха, страх потерять контроль, избегание мест.", help: "Работа со страхами: шаг за шагом перестаёте избегать — и паника теряет силу." },
+];
+
 const modules = [
-  { icon: Brain, title: "Диагностика депрессии и тревоги", desc: "Оценка симптомов в четырёх плоскостях: мысли, эмоции, тело, поведение. Помогает увидеть, как они подпитывают друг друга." },
-  { icon: BookOpen, title: "ABC-модель Эллиса", desc: "Раскладываете ситуацию: активирующее событие → убеждение → последствия → диспут → новый взгляд. База когнитивной терапии." },
-  { icon: Target, title: "SMART-цели", desc: "Конкретные, измеримые, достижимые, релевантные и ограниченные по времени цели — для терапии и для жизни." },
-  { icon: Leaf, title: "Изменение образа жизни", desc: "Работа с базой: сон, питание, движение, социальные связи. То, что в КПТ называют biological CBT." },
-  { icon: Zap, title: "Поведенческая активация", desc: "Метод первой линии при депрессии: возвращаете в жизнь активности, дающие удовольствие и чувство мастерства." },
-  { icon: Shield, title: "Работа со страхами", desc: "Иерархия страхов и постепенная экспозиция — золотой стандарт работы с фобиями и тревожными расстройствами." },
-  { icon: AlertTriangle, title: "Контейнирование тревоги", desc: "«Время для тревоги», дерево решений, разделение продуктивного и непродуктивного беспокойства." },
-  { icon: Lightbulb, title: "Решение проблем", desc: "Структурированный problem solving: определение, варианты, оценка, план действий — техника с 50-летней доказательной базой." },
-  { icon: Compass, title: "Оспаривание мыслей", desc: "Поиск автоматических мыслей, распознавание когнитивных искажений и формулирование сбалансированных альтернатив." },
-  { icon: Heart, title: "План благополучия", desc: "Личный wellbeing blueprint: ресурсы, ранние сигналы ухудшения, стратегии поддержания, кризисный план." },
+  { icon: Brain, title: "Как устроен ваш замкнутый круг", desc: "Разбираете, как мысли, эмоции, тело и поведение подпитывают друг друга." },
+  { icon: Target, title: "Цели", desc: "Формулируете, что конкретно хотите изменить — и как поймёте, что получилось." },
+  { icon: Zap, title: "Возвращение активности", desc: "План небольших дел, которые поднимают настроение при депрессии." },
+  { icon: Shield, title: "Встреча со страхами", desc: "Лестница страхов: от лёгкого к сложному — при тревоге и панике." },
+  { icon: Compass, title: "Проверка мыслей", desc: "Ловите автоматические мысли и находите более реалистичный взгляд." },
+  { icon: Lightbulb, title: "Решение проблем", desc: "Пошаговый способ разобраться с реальной трудностью вместо бесконечного беспокойства." },
+  { icon: BookOpen, title: "Здоровый сон", desc: "Простые правила, которые помогают засыпать и высыпаться." },
+  { icon: Heart, title: "Личный план устойчивости", desc: "Что помогает именно вам и что делать, если станет хуже." },
 ];
 
 const faqs = [
   {
-    q: "Это правда бесплатно?",
-    a: "Да, доступ к воркбуку бесплатный. Это часть моей публичной практики: чем больше людей получают доказательные техники в открытом доступе, тем меньше страданий вокруг — и тем понятнее им потом, чего ждать от очной терапии.",
+    q: "Поможет ли тетрадь при депрессии, тревоге и панических атаках?",
+    a: "Да, упражнения подобраны именно для этих состояний. КПТ — метод первой линии при депрессии, тревожных расстройствах и панике по рекомендациям NICE и ВОЗ. При тяжёлом состоянии тетрадь лучше использовать вместе с терапией.",
   },
   {
-    q: "Чем это отличается от обычного дневника или mood-трекера в App Store?",
-    a: "Большинство популярных приложений собирают эмодзи настроения и ничего с ними не делают. CBT Workbook структурирован вокруг конкретных протоколов КПТ (Beck, Ellis, Lewinsohn, Padesky) — то есть каждое упражнение имеет цель, форму и опору на исследования.",
+    q: "На чём основана тетрадь?",
+    a: "На рабочей тетради навыков КПТ британской государственной службы здравоохранения NHS (программа IAPT), адаптированной на русский язык и в интерактивный формат.",
   },
   {
-    q: "Нужна ли регистрация?",
-    a: "Регистрация нужна, чтобы сохранять прогресс между сессиями и видеть динамику настроения за недели. Без неё инструменты тоже работают, но как одноразовые рабочие листы.",
+    q: "Это бесплатно?",
+    a: "Да, тетрадь бесплатная и без рекламы.",
   },
   {
-    q: "Какие техники КПТ включены?",
-    a: "10 доказательных модулей: оценка депрессии и тревоги, модель ABC, SMART-цели, изменение образа жизни, поведенческая активация, работа со страхами, контейнирование тревоги, решение проблем, оспаривание мыслей и план благополучия.",
+    q: "Можно заниматься без психолога?",
+    a: "Да, тетрадь создана для самостоятельной работы. Но если есть мысли о смерти или самоповреждении, или за 2–3 недели стало хуже — обратитесь к специалисту.",
   },
   {
-    q: "Можно ли использовать без терапевта?",
-    a: "Да, многие техники КПТ изначально создавались как self-help. Но если у вас выраженная депрессия, суицидальные мысли, тревога, мешающая жить, или ПТСР — самостоятельная работа не заменит терапию. Воркбук в этом случае — дополнение, а не альтернатива.",
-  },
-  {
-    q: "Это медицинский продукт?",
-    a: "Нет. CBT Workbook — образовательный инструмент. Он не ставит диагнозы и не заменяет консультацию врача или психолога. Если состояние ухудшается — обратитесь к специалисту.",
-  },
-  {
-    q: "Что с приватностью данных?",
-    a: "Данные хранятся в зашифрованной базе, доступ — только у вас. Ни email, ни записи не передаются третьим сторонам. Удалить аккаунт и все записи можно в один клик из настроек.",
-  },
-  {
-    q: "На каких устройствах работает?",
-    a: "Это веб-приложение — открывается в любом браузере на телефоне, планшете и компьютере. Отдельного нативного приложения пока нет, но интерфейс адаптирован под мобильные.",
+    q: "Это заменяет врача или психолога?",
+    a: "Нет. Тетрадь не ставит диагнозы и не заменяет лечение — это инструмент для отработки навыков.",
   },
   {
     q: "Когда будет доступ?",
-    a: "Сейчас идёт закрытая бета. Оставьте email — пришлю инвайт, как только откроем регистрацию. Спама не будет: одно письмо при запуске и потом раз в пару месяцев — об апдейтах.",
+    a: "Сейчас идёт закрытая бета. Оставьте email — пришлю приглашение, когда откроем регистрацию. Без спама.",
   },
 ];
 
 const stats = [
-  { value: "10", label: "модулей КПТ" },
-  { value: "100%", label: "доказательная база" },
-  { value: "24/7", label: "доступ из браузера" },
-  { value: "2", label: "роли: клиент и терапевт" },
+  { value: "8", label: "практических модулей" },
+  { value: "NHS", label: "британский протокол КПТ" },
+  { value: "0 €", label: "бесплатно, без рекламы" },
+  { value: "24/7", label: "в любом браузере" },
 ];
 
 function MoodDemo() {
@@ -110,9 +102,9 @@ function MoodDemo() {
 
 function ProgressDemo() {
   const items = [
-    { icon: Compass, name: "Оспаривание мыслей", progress: 85 },
-    { icon: Zap, name: "Поведенческая активация", progress: 60 },
-    { icon: Target, name: "SMART-цели", progress: 45 },
+    { icon: Compass, name: "Проверка мыслей", progress: 85 },
+    { icon: Zap, name: "Возвращение активности", progress: 60 },
+    { icon: Shield, name: "Встреча со страхами", progress: 45 },
   ];
   return (
     <div className="rounded-xl border border-border bg-card p-4 space-y-3">
@@ -177,7 +169,7 @@ const CbtWorkbookPage = () => {
     "@type": "SoftwareApplication",
     name: "CBT Workbook",
     description:
-      "Бесплатная цифровая рабочая тетрадь по когнитивно-поведенческой терапии: 10 модулей, трекер настроения, упражнения по протоколам Beck, Ellis, Lewinsohn.",
+      "Бесплатная рабочая тетрадь КПТ онлайн при депрессии, тревоге и панических атаках. Основана на рабочей тетради навыков КПТ NHS (IAPT).",
     applicationCategory: "HealthApplication",
     operatingSystem: "Web",
     inLanguage: "ru",
@@ -206,8 +198,8 @@ const CbtWorkbookPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="CBT Workbook — бесплатная тетрадь КПТ онлайн между сессиями"
-        description="Бесплатная тетрадь КПТ онлайн: 10 интерактивных модулей, трекер настроения и упражнения при депрессии и тревоге. Закрепляйте навыки между сессиями."
+        title="Тетрадь КПТ онлайн при депрессии, тревоге и панических атаках"
+        description="Бесплатная рабочая тетрадь КПТ на русском по протоколу NHS: упражнения при депрессии, тревоге и панических атаках. Пошагово, в браузере, без рекламы."
         path="/cbtworkbook"
         schema={[softwareSchema, faqSchema]}
         breadcrumbs={[
@@ -247,9 +239,8 @@ const CbtWorkbookPage = () => {
             {...fade(0.1)}
             className="mt-6 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
-            CBT Workbook — бесплатная рабочая тетрадь по КПТ онлайн: 10 интерактивных модулей,
-            трекер настроения и упражнения по протоколам Бека, Эллиса и Левинсона.
-            На русском, в браузере, для работы между сессиями и самостоятельно.
+            Простые упражнения, которые помогают справиться с депрессией, тревогой и
+            паническими атаками. Основано на рабочей тетради КПТ британской службы здравоохранения NHS.
           </motion.p>
 
           <motion.div
@@ -291,170 +282,90 @@ const CbtWorkbookPage = () => {
           </div>
         </section>
 
-        {/* PROBLEM → SOLUTION */}
-        <section className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
-          <motion.p {...fade()} className="text-xs font-mono uppercase tracking-widest text-primary mb-4">
-            Разрыв между сессиями
-          </motion.p>
-          <motion.blockquote {...fade(0.05)} className="text-xl md:text-2xl font-medium leading-snug text-foreground">
-            «Я ухожу от терапевта с ощущением понимания — но к среде старые паттерны возвращаются.»
-          </motion.blockquote>
-          <motion.p {...fade(0.1)} className="mt-6 text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Самая важная работа в КПТ происходит не в кабинете, а между встречами: когда вы замечаете
-            автоматическую мысль, проверяете её и пробуете действовать иначе. CBT Workbook превращает
-            бумажные рабочие листы в интерактивные упражнения с сохранением прогресса — чтобы навыки
-            закреплялись каждый день, а не раз в неделю.
-          </motion.p>
-          <motion.p {...fade(0.15)} className="mt-6 text-lg font-semibold text-primary">
-            CBT Workbook закрывает этот разрыв.
-          </motion.p>
-        </section>
-
-        {/* 3 STEPS */}
+        {/* PROBLEMS */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <motion.div {...fade()} className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold">Как это работает</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              Три шага к устойчивым изменениям — цикл, который повторяется каждую неделю.
-            </p>
+            <h2 className="text-2xl md:text-3xl font-bold">С чем помогает</h2>
+            <p className="text-muted-foreground mt-3 text-sm md:text-base">Узнаёте себя? Для каждого состояния — свои упражнения.</p>
           </motion.div>
-
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: TrendingUp, n: "01", title: "Отслеживайте настроение", desc: "Короткий ежедневный чек-ин: настроение, энергия, тревога. Через две недели появляется график, на котором видно паттерны: что подкручивает вниз, что вытягивает." },
-              { icon: Activity, n: "02", title: "Выполняйте упражнения КПТ", desc: "10 интерактивных модулей — от оспаривания мыслей до поведенческой активации. Не «прочитайте теорию», а «заполните, подумайте, попробуйте». Прогресс сохраняется." },
-              { icon: Heart, n: "03", title: "Делитесь прогрессом с терапевтом", desc: "Если вы в терапии, специалист видит упражнения и динамику настроения — и каждая сессия становится продуктивнее. Если нет — вы сами видите, что работает." },
-            ].map((s, i) => (
-              <motion.div
-                key={s.n}
-                {...fade(0.05 * i)}
-                className="rounded-2xl border border-border bg-card p-6"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <s.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <span className="text-3xl font-bold text-primary/15 font-mono">{s.n}</span>
+            {problems.map((p, i) => (
+              <motion.div key={p.title} {...fade(0.05 * i)} className="rounded-2xl border border-border bg-card p-6">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <p.icon className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                <h3 className="text-lg font-semibold mb-2">{p.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.symptoms}</p>
+                <p className="text-sm text-foreground leading-relaxed"><span className="text-primary font-medium">Что поможет: </span>{p.help}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* 10 MODULES */}
+        {/* 3 STEPS */}
         <section className="bg-card/40 border-y border-border">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+          <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
             <motion.div {...fade()} className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold">10 модулей</h2>
-              <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-2xl mx-auto">
-                Полный курс рассчитан на 8–12 недель работы по 1–2 модулю в неделю.
-                Можно проходить последовательно или брать только то, что актуально.
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold">Как это работает</h2>
             </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {modules.map((m, i) => (
-                <motion.div
-                  key={m.title}
-                  {...fade(0.04 * i)}
-                  className="rounded-xl border border-border bg-background p-5 hover:border-primary/30 transition-colors"
-                >
-                  <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                    <m.icon className="h-4 w-4 text-primary" />
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { icon: TrendingUp, n: "01", title: "Отмечайте настроение", desc: "Минута в день. Через пару недель видно, что тянет вниз, а что помогает." },
+                { icon: Activity, n: "02", title: "Делайте упражнения", desc: "Короткие практики: заполнили, подумали, попробовали. Прогресс сохраняется." },
+                { icon: Heart, n: "03", title: "Замечайте изменения", desc: "Навыки закрепляются, и с трудными состояниями становится легче справляться." },
+              ].map((s, i) => (
+                <motion.div key={s.n} {...fade(0.05 * i)} className="rounded-2xl border border-border bg-background p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <s.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <span className="text-3xl font-bold text-primary/15 font-mono">{s.n}</span>
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1.5">{m.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                  <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* EVIDENCE */}
-        <section className="max-w-3xl mx-auto px-6 py-16 md:py-24">
-          <motion.div {...fade()}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">На чём это основано</h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                Когнитивно-поведенческая терапия — терапия первой линии для большинства распространённых
-                расстройств по рекомендациям{" "}
-                <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  NICE (Великобритания)
-                </a>
-                ,{" "}
-                <a href="https://www.apa.org/depression-guideline" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  APA (США)
-                </a>
-                {" "}и ВОЗ. Это значит, что прежде чем назначать антидепрессанты при лёгкой и умеренной
-                депрессии, врачу рекомендовано предложить именно КПТ.
-              </p>
-              <p>
-                Каждый модуль воркбука основан на конкретных протоколах:
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5">
-                <li><strong className="text-foreground">Когнитивная терапия Аарона Бека</strong> — оспаривание автоматических мыслей, выявление искажений.</li>
-                <li><strong className="text-foreground">REBT Альберта Эллиса</strong> — модель ABC, работа с иррациональными убеждениями.</li>
-                <li><strong className="text-foreground">Поведенческая активация Левинсона/Якобсона</strong> — выход из спирали избегания при депрессии.</li>
-                <li><strong className="text-foreground">Экспозиционная терапия</strong> — работа со страхами через постепенное приближение.</li>
-                <li><strong className="text-foreground">Problem Solving Therapy Незу</strong> — структурированный подход к жизненным проблемам.</li>
-                <li><strong className="text-foreground">Когнитивная модель Падески</strong> — пятифакторная модель «мысль–эмоция–тело–поведение–среда».</li>
-              </ul>
-            </div>
+        {/* MODULES */}
+        <section className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+          <motion.div {...fade()} className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold">Что внутри</h2>
+            <p className="text-muted-foreground mt-3 text-sm md:text-base">Проходите по порядку или берите то, что нужно сейчас.</p>
           </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {modules.map((m, i) => (
+              <motion.div key={m.title} {...fade(0.04 * i)} className="rounded-xl border border-border bg-card p-5 hover:border-primary/30 transition-colors">
+                <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                  <m.icon className="h-4 w-4 text-primary" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-1.5">{m.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
-        {/* COMPARISON */}
+        {/* EVIDENCE */}
         <section className="bg-card/40 border-y border-border">
-          <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
-            <motion.div {...fade()} className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold">Чем отличается от других решений</h2>
-              <p className="text-muted-foreground mt-3 text-sm md:text-base">Сравнение по важным параметрам</p>
-            </motion.div>
-
-            <motion.div {...fade(0.05)} className="overflow-x-auto rounded-xl border border-border bg-background">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border bg-muted/40">
-                    <th className="px-4 sm:px-6 py-4 text-left w-[28%] font-medium text-muted-foreground"></th>
-                    <th className="px-3 sm:px-6 py-4 text-center font-bold text-primary">CBT Workbook</th>
-                    <th className="px-3 sm:px-6 py-4 text-center font-medium text-muted-foreground">Только терапия</th>
-                    <th className="px-3 sm:px-6 py-4 text-center font-medium text-muted-foreground">Приложения самопомощи</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ["Инструменты КПТ между сессиями", "10 интерактивных", "Бумажные бланки", "Общие упражнения"],
-                    ["Отслеживание прогресса", "Графики и история", "Заметки на сессии", "Базовые логи"],
-                    ["Доказательная база", "Протоколы КПТ", "Зависит от специалиста", "Часто без проверки"],
-                    ["Доступно в любой момент", true, false, true],
-                    ["На русском языке", true, true, "Часто нет"],
-                    ["Стоимость", "Бесплатно", "40–45 € за сессию", "5–15 € в месяц"],
-                  ].map(([dim, ours, paper, app], i) => (
-                    <tr key={i} className="border-b border-border last:border-0">
-                      <td className="px-4 sm:px-6 py-3.5 font-medium text-foreground">{dim as string}</td>
-                      <td className="px-3 sm:px-6 py-3.5 text-center">
-                        {ours === true ? <Check className="h-4 w-4 text-primary inline" /> : <span className="font-medium text-primary">{ours as string}</span>}
-                      </td>
-                      <td className="px-3 sm:px-6 py-3.5 text-center text-muted-foreground">
-                        {paper === true ? <Check className="h-4 w-4 inline" /> : paper === false ? <X className="h-4 w-4 inline" /> : (paper as string)}
-                      </td>
-                      <td className="px-3 sm:px-6 py-3.5 text-center text-muted-foreground">
-                        {app === true ? <Check className="h-4 w-4 inline" /> : app === false ? <X className="h-4 w-4 inline" /> : (app as string)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </motion.div>
+          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
+            <motion.h2 {...fade()} className="text-2xl md:text-3xl font-bold mb-5">Почему этому можно доверять</motion.h2>
+            <motion.p {...fade(0.05)} className="text-muted-foreground leading-relaxed">
+              Тетрадь основана на рабочей тетради навыков КПТ британской государственной службы
+              здравоохранения NHS (программа IAPT). КПТ — метод первой линии при депрессии и тревожных
+              расстройствах по рекомендациям{" "}
+              <a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">NICE</a>
+              {" "}и ВОЗ. Адаптация на русский — психолог Дмитрий Яцко.
+            </motion.p>
           </div>
         </section>
 
         {/* FOR WHOM */}
         <section className="max-w-4xl mx-auto px-6 py-16 md:py-24">
           <motion.div {...fade()} className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold">Кому подходит и кому — нет</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">Кому подходит</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-5">
@@ -464,12 +375,10 @@ const CbtWorkbookPage = () => {
                 <h3 className="font-semibold">Подойдёт</h3>
               </div>
               <ul className="space-y-2.5 text-sm text-muted-foreground">
-                <li>— У вас лёгкая или умеренная тревога, апатия, прокрастинация — и хочется системно с этим работать</li>
-                <li>— Вы готовитесь к терапии и хотите прийти со словарём и базой</li>
-                <li>— Идёте параллельно с терапевтом и хотите делать домашние задания удобнее</li>
-                <li>— Закончили курс терапии и поддерживаете навыки</li>
-                <li>— Любите структуру, чек-листы и письменные практики</li>
-                <li>— Живёте в стране, где русскоязычная терапия дорогая или недоступная</li>
+                <li>— Лёгкая или умеренная депрессия, тревога, панические атаки</li>
+                <li>— Хотите понять, что с вами происходит, и действовать</li>
+                <li>— Вы в терапии и хотите заниматься между сессиями</li>
+                <li>— Закончили терапию и хотите сохранить результат</li>
               </ul>
             </motion.div>
 
@@ -479,12 +388,10 @@ const CbtWorkbookPage = () => {
                 <h3 className="font-semibold">Лучше к специалисту</h3>
               </div>
               <ul className="space-y-2.5 text-sm text-muted-foreground">
-                <li>— Тяжёлая депрессия с мыслями о смерти или самоповреждении</li>
-                <li>— Активная зависимость, расстройства пищевого поведения</li>
-                <li>— ПТСР, тяжёлая травматизация</li>
-                <li>— Психотические симптомы</li>
-                <li>— Состояния, при которых сложно концентрироваться даже на короткой задаче</li>
-                <li>— Если за 2–3 недели self-help стало хуже — это не неудача, это сигнал, что нужен живой человек</li>
+                <li>— Мысли о смерти или самоповреждении</li>
+                <li>— Зависимость, расстройство пищевого поведения</li>
+                <li>— ПТСР, психотические симптомы</li>
+                <li>— За 2–3 недели стало хуже — это сигнал, что нужна поддержка специалиста</li>
               </ul>
             </motion.div>
           </div>
@@ -494,13 +401,11 @@ const CbtWorkbookPage = () => {
         <section className="bg-foreground text-background">
           <div className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
             <motion.h2 {...fade()} className="text-2xl md:text-3xl font-bold leading-tight">
-              Воркбук — не замена терапии
+              Тетрадь — не замена терапии
             </motion.h2>
             <motion.p {...fade(0.05)} className="mt-6 text-base md:text-lg leading-relaxed opacity-80 max-w-2xl mx-auto">
-              Никакая рабочая тетрадь не вмещает живой контакт, ту самую «третью точку зрения»,
-              которая есть только у внешнего человека. Воркбук помогает структурировать собственное
-              мышление и натренировать конкретные навыки. Терапия — помогает увидеть то, что вы сами
-              на себе не замечаете, и проработать то, что больно держать в одиночестве.
+              Тетрадь помогает отработать навыки. Терапия помогает увидеть то, что сложно заметить самому.
+              Если хотите разобраться вместе — первая консультация 50 минут, 45 €.
             </motion.p>
             <motion.div {...fade(0.1)} className="mt-8">
               <Button size="lg" variant="outline" asChild className="bg-transparent border-background/30 text-background hover:bg-background hover:text-foreground">
@@ -517,15 +422,14 @@ const CbtWorkbookPage = () => {
           <motion.div {...fade()} className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold">Получить доступ к бета-версии</h2>
             <p className="text-muted-foreground mt-3 text-sm md:text-base">
-              Оставьте email — пришлю инвайт, как только откроем регистрацию. Одно письмо при запуске,
-              потом раз в пару месяцев — об апдейтах. Без спама.
+              Оставьте email — пришлю приглашение, когда откроем регистрацию. Без спама.
             </p>
           </motion.div>
           <motion.div {...fade(0.05)}>
             <BlogSubscribeForm
               source="cbtworkbook"
               title="Ранний доступ к CBT Workbook"
-              description="Получите инвайт первым, когда откроем регистрацию в бету."
+              description="Получите приглашение первым."
             />
           </motion.div>
         </section>
@@ -564,10 +468,10 @@ const CbtWorkbookPage = () => {
         <section className="border-t border-border bg-primary/5">
           <div className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
             <motion.h2 {...fade()} className="text-2xl md:text-3xl font-bold">
-              Готовы закрыть разрыв?
+              Начните с первого шага
             </motion.h2>
             <motion.p {...fade(0.05)} className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              Получите инвайт в бету или запишитесь на консультацию (45 €, 50 минут) — обсудим, что подойдёт именно вам.
+              Получите бесплатный доступ к тетради или запишитесь на консультацию (45 €, 50 минут).
             </motion.p>
             <motion.div {...fade(0.1)} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button size="lg" className="gap-2 px-8" asChild>
