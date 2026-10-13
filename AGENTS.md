@@ -1,0 +1,1 @@
+- Prerender: `vite-plugin-seo.ts` SSR-builds `src/entry-server.tsx` during the normal `vite build` and injects page markup into each route's HTML; client stays on `createRoot` (no hydration). Why: Lovable publishes with plain `vite build`, crawlers need real text + one <h1> without JS. Code that runs during render must not touch `window`/`document`/`localStorage` (use effects).
