@@ -18,7 +18,8 @@ const LazySection = ({
   id?: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // On the server (build-time prerender) render everything so crawlers get the full text.
+  const [visible, setVisible] = useState(typeof window === "undefined");
   // Когда секцию открыли по якорю (#booking), нужно доскроллить после монтирования.
   const pendingScroll = useRef(false);
 

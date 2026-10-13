@@ -25,6 +25,8 @@ const installHook = () => {
 
 export const sanitizeHtml = (html: string): string => {
   if (!html) return "";
+  // Build-time prerender (no DOM): content is our own static data.
+  if (typeof window === "undefined") return html;
   installHook();
   return DOMPurify.sanitize(html, {
     ALLOWED_TAGS,

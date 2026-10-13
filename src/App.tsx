@@ -77,15 +77,10 @@ const AfterIdle = ({ children }: { children: ReactNode }) => {
   return ready ? <Suspense fallback={null}>{children}</Suspense> : null;
 };
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <AfterIdle>
-          <Toaster />
-          <Sonner />
-        </AfterIdle>
-        <BrowserRouter>
+/** Routes + per-page chrome, shared by the browser app and the build-time
+ *  prerender (src/entry-server.tsx), which wraps it in a StaticRouter. */
+export const AppShell = () => (
+  <>
           <ScrollToTop />
           <AfterIdle>
             <PageViewTracker />
@@ -186,10 +181,36 @@ const App = () => (
             <FloatingTelegramFab />
             <ExitIntentPopup />
           </AfterIdle>
-        </BrowserRouter>
+        </>
+);
+
+/** Providers shared by client and server render. */
+export const AppProviders = ({
+  children,
+  helmetContext,
+}: {
+  children: ReactNode;
+  helmetContext?: object;
+}) => (
+  <HelmetProvider context={helmetContext}>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <AfterIdle>
+          <Toaster />
+          <Sonner />
+        </AfterIdle>
+        {children}
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
+);
+
+const App = () => (
+  <AppProviders>
+    <BrowserRouter>
+      <AppShell />
+    </BrowserRouter>
+  </AppProviders>
 );
 
 export default App;
