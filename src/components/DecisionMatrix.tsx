@@ -381,9 +381,9 @@ const DecisionMatrix = () => {
     return (
       <div className="space-y-10">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             <span className="text-primary">Матрица выбора:</span> соберите карту сложного решения за 2–3 минуты
-          </h1>
+          </h2>
           <p className="text-muted-foreground leading-relaxed">
             Не нужно сразу формулировать идеальный ответ. Вы можете пройти матрицу в кликабельном
             формате: выбрать тему, факторы, страхи, ценности и возможный следующий шаг. А если
