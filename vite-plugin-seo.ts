@@ -297,7 +297,11 @@ export function seoPlugin(): Plugin {
         if (ssrRender && !isSoftRedirect && !route.noindex) {
           try {
             ssrHtml = cleanSsrHtml(await ssrRender(routePath));
-            if (!/<h1[\s>]/i.test(ssrHtml)) ssrFailures.push(`${routePath} (no <h1>)`);
+            if (!/<h1[\s>]/i.test(ssrHtml)) {
+              // Blog pages load the post client-side; use the inlined article instead.
+              if (/^\/blog\/[^/]+$/.test(routePath)) ssrHtml = null;
+              else ssrFailures.push(`${routePath} (no <h1>)`);
+            }
           } catch (err) {
             ssrFailures.push(`${routePath} (${(err as Error)?.message?.slice(0, 120)})`);
             ssrHtml = null;
