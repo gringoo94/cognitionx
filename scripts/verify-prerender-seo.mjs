@@ -312,6 +312,16 @@ for (const file of files) {
     }
   }
 
+  // Every indexable page must ship real content + exactly one <h1> without JS.
+  const isNoindex = /<meta[^>]+name=["']robots["'][^>]+noindex/i.test(head);
+  if (!isSoftRedirect && !isNoindex) {
+    const root = extractRoot(html);
+    const h1Count = (root.match(/<h1[\s>]/gi) || []).length;
+    if (h1Count !== 1) errs.push(`body: expected exactly 1 <h1> in #root, found ${h1Count}`);
+    const words = stripTags(root).split(/\s+/).filter(Boolean).length;
+    if (words < 100) errs.push(`body: only ${words} words in #root (empty prerender?)`);
+  }
+
   const isBlogPost = /^\/blog\/[^/]+\/?$/.test(rel) && !isRedirectPage;
   if (isBlogPost) {
     const ogType = attr("property=[\"']og:type[\"']", head)[0];
