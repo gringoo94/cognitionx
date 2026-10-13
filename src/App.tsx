@@ -185,8 +185,14 @@ export const AppShell = () => (
 );
 
 /** Providers shared by client and server render. */
-export const AppProviders = ({ children }: { children: ReactNode }) => (
-  <HelmetProvider>
+export const AppProviders = ({
+  children,
+  helmetContext,
+}: {
+  children: ReactNode;
+  helmetContext?: object;
+}) => (
+  <HelmetProvider context={helmetContext}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AfterIdle>
@@ -198,9 +204,6 @@ export const AppProviders = ({ children }: { children: ReactNode }) => (
     </QueryClientProvider>
   </HelmetProvider>
 );
-
-// Re-export for the server entry (prerender needs fresh query client per page).
-export { queryClient };
 
 const App = () => (
   <AppProviders>
