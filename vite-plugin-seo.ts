@@ -3,6 +3,7 @@ import { seoRoutes } from "./seo-routes";
 import { concreteRedirects } from "./src/lib/redirects";
 import * as fs from "fs";
 import * as path from "path";
+import { pathToFileURL } from "url";
 import { marked } from "marked";
 
 const SITE_URL = "https://cognitionx.cloud";
@@ -65,6 +66,69 @@ function alternateTags(routePath: string, canonicalUrl: string): string[] {
  *
  * This gives crawlers that don't execute JS all the SEO signals they need.
  */
+/**
+ * Builds src/entry-server.tsx with Vite in SSR mode (separate, plugin-free
+ * config so this plugin doesn't recurse) and returns its render(url).
+ * Returns null on failure — the build then falls back to meta-only HTML.
+ */
+async function loadSsrRenderer(_distDir: string): Promise<((url: string) => Promise<string>) | null> {
+  if (process.env.SEO_SSR_DISABLE === "1") return null;
+  const outDir = path.resolve(process.cwd(), "node_modules/.seo-ssr");
+  try {
+    const { build } = await import("vite");
+    const react = (await import("@vitejs/plugin-react-swc")).default;
+    await build({
+      configFile: false,
+      logLevel: "warn",
+      mode: "production",
+      plugins: [react()],
+      resolve: {
+        alias: { "@": path.resolve(process.cwd(), "src") },
+        dedupe: ["react", "react-dom"],
+      },
+      ssr: { noExternal: true },
+      build: {
+        ssr: path.resolve(process.cwd(), "src/entry-server.tsx"),
+        outDir,
+        emptyOutDir: true,
+        copyPublicDir: false,
+        minify: false,
+        rollupOptions: { output: { format: "esm", entryFileNames: "entry-server.mjs", inlineDynamicImports: true } },
+      },
+    });
+    const g = globalThis as any;
+    // Minimal browser-ish globals some modules touch at import time.
+    if (!g.localStorage) {
+      const mem = new Map<string, string>();
+      g.localStorage = g.sessionStorage = {
+        getItem: (k: string) => mem.get(k) ?? null,
+        setItem: (k: string, v: string) => void mem.set(k, String(v)),
+        removeItem: (k: string) => void mem.delete(k),
+        clear: () => mem.clear(),
+        key: () => null,
+        length: 0,
+      };
+    }
+    const mod = await import(pathToFileURL(path.join(outDir, "entry-server.mjs")).href + `?t=${Date.now()}`);
+    return mod.render as (url: string) => Promise<string>;
+  } catch (err) {
+    console.warn("[seo-plugin] SSR prerender unavailable, using meta-only HTML:", err);
+    return null;
+  }
+}
+
+/** Make prerendered markup visible without JS: framer-motion writes its
+ *  `initial` state (opacity:0, translate) inline, which would hide text. */
+function cleanSsrHtml(html: string): string {
+  return html.replace(/style="([^"]*)"/g, (_m, css: string) => {
+    const kept = css
+      .split(";")
+      .filter((d) => d.trim() && !/^\s*(opacity|transform|filter)\s*:/i.test(d))
+      .join(";");
+    return kept ? `style="${kept}"` : "";
+  });
+}
+
 export function seoPlugin(): Plugin {
   return {
     name: "vite-plugin-seo-prerender",
@@ -113,6 +177,9 @@ export function seoPlugin(): Plugin {
 
       let count = 0;
       let blogCount = 0;
+      const ssrRender = await loadSsrRenderer(distDir);
+      let ssrCount = 0;
+      const ssrFailures: string[] = [];
 
       let overrideCount = 0;
       for (const route of effectiveRoutes) {
@@ -226,8 +293,21 @@ export function seoPlugin(): Plugin {
 
         // For blog post routes, inline the article body into #root so crawlers
         // that don't execute JS see the full content (not just meta tags).
+        let ssrHtml: string | null = null;
+        if (ssrRender && !isSoftRedirect && !route.noindex) {
+          try {
+            ssrHtml = cleanSsrHtml(await ssrRender(routePath));
+            if (!/<h1[\s>]/i.test(ssrHtml)) ssrFailures.push(`${routePath} (no <h1>)`);
+          } catch (err) {
+            ssrFailures.push(`${routePath} (${(err as Error)?.message?.slice(0, 120)})`);
+            ssrHtml = null;
+          }
+        }
         const slugMatch = routePath.match(/^\/blog\/([^/]+)$/);
-        if (slugMatch) {
+        if (ssrHtml) {
+          html = html.replace(/<div id="root"><\/div>/, () => `<div id="root">${ssrHtml}</div>`);
+          ssrCount++;
+        } else if (slugMatch) {
           const post = blogPostsBySlug.get(slugMatch[1]);
           if (post) {
             const articleHtml = renderArticleHtml(post, url);
@@ -252,6 +332,11 @@ export function seoPlugin(): Plugin {
         count++;
       }
 
+      console.log(`[seo-plugin] SSR content rendered for ${ssrCount} routes`);
+      if (ssrFailures.length) {
+        console.warn(`[seo-plugin] SSR issues on ${ssrFailures.length} routes (kept meta-only HTML):\n  ` + ssrFailures.join("\n  "));
+      }
+      fs.rmSync(path.resolve(process.cwd(), "node_modules/.seo-ssr"), { recursive: true, force: true });
       console.log(`[seo-plugin] Generated ${count} pre-rendered HTML files (${blogCount} with inlined blog article body; ${overrideCount} blog metadata overridden from registry)`);
 
       // Emit soft-redirect/410 pages from the unified redirects registry.
