@@ -172,7 +172,7 @@ const Footer = () => (
             <Link to="/blog" className="hover:text-foreground transition-colors">Блог</Link>
             <Link to="/tools" className="hover:text-foreground transition-colors">Инструменты</Link>
             <Link to="/contact" className="hover:text-foreground transition-colors">Контакты</Link>
-            <a href="/#booking" className="hover:text-foreground transition-colors">Записаться</a>
+            <a href="/booking" className="hover:text-foreground transition-colors">Записаться</a>
           </div>
         </div>
       </div>

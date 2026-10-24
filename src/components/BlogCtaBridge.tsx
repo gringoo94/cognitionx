@@ -49,7 +49,7 @@ const BlogCtaBridge = ({ topic }: BlogCtaBridgeProps) => {
           </a>
         </Button>
         <Button asChild size="lg" variant="ghost" className="rounded-lg gap-2">
-          <a href="/#booking" onClick={() => trackCta("blog_cta_paid_booking", { topic })}>
+          <a href="/booking" onClick={() => trackCta("blog_cta_paid_booking", { topic })}>
             Платная консультация <ArrowRight className="w-4 h-4" />
           </a>
         </Button>

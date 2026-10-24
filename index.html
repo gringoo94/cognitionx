@@ -32,13 +32,13 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        script-src 'self' 'sha256-Kebj3bZMYIaoUSCKfa9Ua/ir5Exh6J1Xb8abBlCkhFo=' 'sha256-bckM80Q5ONLZ4Kt7I7ipwd304FD5mb5lIzqI+4NOIko=' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://connect.facebook.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        script-src 'self' 'sha256-tJNYlMjOFr3me7/8ZyQosVM8Tx4eixziGikzGD22v6U=' 'sha256-bckM80Q5ONLZ4Kt7I7ipwd304FD5mb5lIzqI+4NOIko=' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
         script-src-attr 'none';
         style-src 'self' 'unsafe-inline';
         font-src 'self' data:;
 
-        img-src 'self' data: blob: https:;
-        connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.google.com https://connect.facebook.net https://*.facebook.com https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru wss://mc.yandex.com;
+        img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com https://mc.yandex.ru https://mc.yandex.com https://*.lovable.app;
+        connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.google.com https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru wss://mc.yandex.com;
         worker-src 'self' blob:;
         child-src 'self' blob: https://mc.yandex.ru;
         frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://mc.yandex.ru;
@@ -97,7 +97,6 @@
     <!-- Preconnect for analytics (faster LCP) -->
     <link rel="preconnect" href="https://mc.yandex.ru" crossorigin />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
 
     <!-- Analytics: deferred until idle / first interaction to keep LCP & FCP fast -->
     <script>
@@ -113,18 +112,6 @@
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-NNPSJBP8');
 
-          // Meta Pixel
-          !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
-          'https://connect.facebook.net/en_US/fbevents.js');
-          window.fbq('init', '1596710061557007');
-          window.fbq('track', 'PageView');
-
           // Yandex Metrika
           (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -134,7 +121,7 @@
           window.ym(97350684, 'init', {webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
         }
 
-        // Позволяет приложению форсировать загрузку пикселя при конверсии
+        // Allows the app to request loading the remaining analytics providers
         window.loadAnalytics = loadAnalytics;
 
         // Load on first interaction OR after 4s idle (whichever comes first)
@@ -200,9 +187,6 @@
     <!-- Yandex.Metrika (noscript) -->
     <noscript><div><img src="https://mc.yandex.ru/watch/97350684" style="position:absolute; left:-9999px;" alt="Yandex Metrika" /></div></noscript>
     <!-- /Yandex.Metrika (noscript) -->
-    <!-- Meta Pixel (noscript) -->
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1596710061557007&ev=PageView&noscript=1" alt="Meta Pixel" /></noscript>
-    <!-- End Meta Pixel (noscript) -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

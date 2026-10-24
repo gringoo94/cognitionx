@@ -84,7 +84,7 @@ const Pricing = () => (
               variant={p.featured ? "default" : "outline"}
               asChild
             >
-              <a href="#booking">Записаться</a>
+              <a href="/booking">Записаться</a>
             </Button>
           </motion.div>
         ))}

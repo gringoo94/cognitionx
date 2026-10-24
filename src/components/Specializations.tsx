@@ -46,7 +46,7 @@ const Card = ({ item, accentLeft }: { item: typeof problems[0]; accentLeft?: boo
         </Link>
       </Button>
       <Button variant="outline" size="sm" className="gap-1.5" asChild>
-        <a href="#booking">
+        <a href="/booking">
           Записаться <ArrowRight className="w-3.5 h-3.5" />
         </a>
       </Button>

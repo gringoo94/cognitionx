@@ -337,7 +337,7 @@ const TestLayout = ({ config }: TestLayoutProps) => {
             Первая встреча — знакомство и оценка запроса.
           </p>
           <Button asChild>
-            <Link to="/contact">Записаться на консультацию</Link>
+            <Link to="/booking">Записаться на консультацию</Link>
           </Button>
         </section>
       </main>

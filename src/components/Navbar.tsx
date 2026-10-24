@@ -210,7 +210,7 @@ const Navbar = () => {
         {/* CTA + burger */}
         <div className="flex items-center gap-3">
           <Button size="sm" asChild className="hidden lg:inline-flex shadow-sm hover:shadow-md transition-shadow">
-            <a href="/#booking">Записаться</a>
+            <a href="/booking">Записаться</a>
           </Button>
           <button
             className="lg:hidden text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors"
@@ -320,7 +320,7 @@ const Navbar = () => {
 
               <div className="pt-2">
                 <Button size="sm" className="w-full" asChild>
-                  <a href="/#booking" onClick={() => setOpen(false)}>Записаться</a>
+                  <a href="/booking" onClick={() => setOpen(false)}>Записаться</a>
                 </Button>
               </div>
             </div>

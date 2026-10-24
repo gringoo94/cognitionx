@@ -643,10 +643,10 @@ const ProblemPage = () => {
             ))}
           </ul>
           <Button size="sm" className="w-full mt-6" asChild>
-            <a href="https://t.me/gringoo94" className="gap-1.5">
+            <Link to="/booking" className="gap-1.5">
               <MessageCircle className="w-3.5 h-3.5" />
               Записаться
-            </a>
+            </Link>
           </Button>
         </SheetContent>
       </Sheet>
@@ -713,13 +713,13 @@ const ProblemPage = () => {
 
               <div className="flex flex-wrap gap-3 mt-8">
                 <Button size="lg" asChild>
-                  <a href="https://t.me/gringoo94" className="gap-2">
+                  <Link to="/booking" className="gap-2">
                     <MessageCircle className="w-4 h-4" />
                     Записаться на консультацию
-                  </a>
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link to="/#booking" className="gap-2">
+                  <Link to="/booking" className="gap-2">
                     Заполнить форму
                     <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -1299,7 +1299,7 @@ const ProblemPage = () => {
                     <a href="https://t.me/gringoo94">Написать в Telegram</a>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link to="/#booking">Заполнить форму</Link>
+                    <Link to="/booking">Заполнить форму</Link>
                   </Button>
                 </div>
               </div>
@@ -1413,10 +1413,10 @@ const ProblemPage = () => {
             </ul>
             <div className="mt-5 pt-5 border-t border-border">
               <Button size="sm" className="w-full" asChild>
-                <a href="https://t.me/gringoo94" className="gap-1.5">
+                <Link to="/booking" className="gap-1.5">
                   <MessageCircle className="w-3.5 h-3.5" />
                   Записаться
-                </a>
+                </Link>
               </Button>
             </div>
           </nav>

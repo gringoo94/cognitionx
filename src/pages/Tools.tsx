@@ -707,7 +707,7 @@ const Tools = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild size="lg" className="px-8">
-                  <Link to="/contact">Записаться на консультацию</Link>
+                  <Link to="/booking">Записаться на консультацию</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="px-8">
                   <Link to="/about">Подробнее обо мне</Link>
