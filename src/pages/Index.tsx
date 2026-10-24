@@ -21,7 +21,7 @@ const Projects = lazy(() => import("@/components/Projects"));
 const SessionPrep = lazy(() => import("@/components/SessionPrep"));
 const Blog = lazy(() => import("@/components/Blog"));
 const HomeFAQ = lazy(() => import("@/components/HomeFAQ"));
-const BookingForm = lazy(() => import("@/components/BookingForm"));
+const HomeBookingOffer = lazy(() => import("@/components/HomeBookingOffer"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 
@@ -157,7 +157,7 @@ const Index = () => (
       <LazySection minHeight={480}><SessionPrep /></LazySection>
       <LazySection id="blog" minHeight={520}><Blog /></LazySection>
       <LazySection id="faq" minHeight={640}><HomeFAQ /></LazySection>
-      <LazySection id="booking" minHeight={720}><BookingForm /></LazySection>
+      <LazySection id="booking" minHeight={320}><HomeBookingOffer /></LazySection>
     </main>
     <LazySection minHeight={420}><Footer /></LazySection>
   </div>
