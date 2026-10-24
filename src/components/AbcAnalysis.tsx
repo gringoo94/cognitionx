@@ -314,7 +314,7 @@ const AbcAnalysis = () => {
               <a href="https://t.me/gringoo94">Написать в Telegram</a>
             </Button>
             <Button variant="outline" asChild>
-              <Link to="/#booking">Заполнить форму</Link>
+              <Link to="/booking">Заполнить форму</Link>
             </Button>
           </div>
         </div>

@@ -189,7 +189,7 @@ const seoSections = [
         Все шкалы на этой странице — скрининговые. Они помогают понять, насколько выражены симптомы,
         и принять решение, стоит ли обратиться. Диагноз ставится врачом-психиатром или
         психотерапевтом после клинического интервью. Если результат вас встревожил —{" "}
-        <Link to="/contact" className="text-primary hover:underline">запишитесь на консультацию</Link>.
+        <Link to="/booking" className="text-primary hover:underline">запишитесь на консультацию</Link>.
       </>
     ),
   },
@@ -414,7 +414,7 @@ const TestsHub = () => {
           <p className="mt-3">
             Если результат вас встревожил — это веский повод обратиться за консультацией. Я работаю с
             этими темами в формате КПТ и схема-терапии.{" "}
-            <Link to="/contact" className="text-primary hover:underline">
+            <Link to="/booking" className="text-primary hover:underline">
               Записаться
             </Link>
             .

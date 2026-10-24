@@ -46,7 +46,7 @@ const Hero = () => (
           className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
         >
           <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-            <a href="#booking">
+            <a href="/booking">
               Записаться <ArrowRight className="w-4 h-4" />
             </a>
           </Button>

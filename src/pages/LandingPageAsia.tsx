@@ -398,7 +398,7 @@ const LandingPageAsia = () => (
                   variant={p.featured ? "default" : "outline"}
                   asChild
                 >
-                  <a href="#booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
+                  <a href="/booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
                 </Button>
               </motion.div>
             ))}

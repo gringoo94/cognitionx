@@ -15,7 +15,7 @@ const PrivacyPolicy = () => (
       <h1 className="text-2xl sm:text-3xl font-bold mb-8">Политика конфиденциальности</h1>
 
       <div className="space-y-6 text-sm leading-relaxed text-muted-foreground">
-        <p>Дата последнего обновления: 13 апреля 2026 г.</p>
+        <p>Дата последнего обновления: 24 октября 2026 г.</p>
 
         <section>
           <h2 className="text-base font-semibold text-foreground mb-2">1. Общие положения</h2>
@@ -37,7 +37,7 @@ const PrivacyPolicy = () => (
             <li><strong>Контактные данные:</strong> имя, адрес электронной почты, мессенджер — при заполнении форм на Сайте.</li>
             <li><strong>Текст сообщений:</strong> содержание обращений через контактные формы.</li>
             <li><strong>Технические данные:</strong> IP-адрес, тип браузера, страницы посещений, источник перехода — собираются автоматически.</li>
-            <li><strong>Данные аналитики:</strong> информация о взаимодействии с Сайтом через Google Analytics, Яндекс.Метрику и Meta Pixel.</li>
+            <li><strong>Данные аналитики:</strong> информация о взаимодействии с Сайтом через Google Analytics и Яндекс.Метрику.</li>
           </ul>
         </section>
 
@@ -61,8 +61,11 @@ const PrivacyPolicy = () => (
           <ul className="list-disc pl-5 mt-1 space-y-1">
             <li>Google Analytics (Google LLC)</li>
             <li>Яндекс.Метрика (ООО «Яндекс»)</li>
-            <li>Meta Pixel (Meta Platforms, Inc.)</li>
           </ul>
+          <p className="mt-2">
+            Meta Pixel отключён на всём Сайте. Сайт не отправляет Meta события консультаций,
+            оценки самочувствия или результаты тестов и не загружает пиксель Meta.
+          </p>
         </section>
 
         <section>

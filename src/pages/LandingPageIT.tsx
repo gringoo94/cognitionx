@@ -295,7 +295,7 @@ const LandingPageIT = () => (
                     <a href={s.link}>Подробнее</a>
                   </Button>
                   <Button variant="outline" size="sm" className="text-xs" asChild>
-                    <a href="#booking">Записаться</a>
+                    <a href="/booking">Записаться</a>
                   </Button>
                 </div>
               </motion.div>
@@ -418,7 +418,7 @@ const LandingPageIT = () => (
                   variant={p.featured ? "default" : "outline"}
                   asChild
                 >
-                  <a href="#booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
+                  <a href="/booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
                 </Button>
               </motion.div>
             ))}

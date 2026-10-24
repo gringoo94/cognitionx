@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Unify booking buttons on /booking and replace homepage form with a consultation offer
+- [x] Disable Meta Pixel loading and sensitive event forwarding; verify navigation and network behavior
+
 - [x] /free-consultation → /booking (301), all links updated
 - [x] Contacts description, Projects volunteer wording
 - [x] Dehumanization + burnout test titles/descriptions

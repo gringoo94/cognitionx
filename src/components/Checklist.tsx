@@ -78,7 +78,7 @@ const Checklist = () => (
         </motion.div>
         <motion.div {...fade(0.1)} className="mt-10">
           <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 gap-2 text-base px-8" asChild>
-            <a href="#booking">
+            <a href="/booking">
               Записаться на консультацию <ArrowRight className="w-4 h-4" />
             </a>
           </Button>

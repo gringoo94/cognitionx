@@ -212,7 +212,7 @@ const CityLandingPage = () => {
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
-                  <a href="#booking">Записаться на диагностику</a>
+                  <a href="/booking">Записаться на диагностику</a>
                 </Button>
               </motion.div>
 
@@ -519,7 +519,7 @@ const CityLandingPage = () => {
                     variant={(p as any).featured ? "default" : "outline"}
                     asChild
                   >
-                    <a href="#booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
+                    <a href="/booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
                   </Button>
                 </motion.div>
               ))}
