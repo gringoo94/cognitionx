@@ -27,7 +27,7 @@
 
       If you change an inline script below, regenerate hashes for every real
       inline <script> block (comment text is stripped first so it isn't matched):
-        node -e "let h=require('fs').readFileSync('index.html','utf8').replace(/<!--[\s\S]*?-->/g,'');for(let m of h.matchAll(/<script>([\s\S]*?)<\/script>/g))console.log('sha256-'+require('crypto').createHash('sha256').update(m[1]).digest('base64'))"
+        node -e "let h=require('fs').readFileSync('index.html','utf8').replace(/<!-[-][\s\S]*?-[-]>/g,'');for(let m of h.matchAll(/<script>([\s\S]*?)<\/script>/g))console.log('sha256-'+require('crypto').createHash('sha256').update(m[1]).digest('base64'))"
     -->
     <meta
       http-equiv="Content-Security-Policy"
