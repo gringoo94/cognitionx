@@ -12,8 +12,8 @@
 
       Hardened (vs typical default):
         • No 'unsafe-eval'  — blocks eval() / new Function() / setTimeout("string").
-        • No 'unsafe-inline' on script-src — arbitrary <script>…</script> from XSS is rejected.
-          Our single legitimate inline loader (analytics deferral, see below) is whitelisted by
+        • No 'unsafe-inline' on script-src — arbitrary injected inline scripts from XSS is rejected.
+          Our legitimate inline loaders (analytics deferral, see below) is whitelisted by
           its sha256 hash. <script type="application/ld+json"> is data, not code, so it doesn't
           need a hash.
         • object-src 'none', base-uri 'self', form-action 'self', frame-ancestors restricted.
@@ -25,19 +25,20 @@
         nonces aren't possible. Hash-based CSP without strict-dynamic is the strongest option
         available here and already neutralises arbitrary <script> injection.
 
-      If you change the inline analytics loader below, regenerate its hash:
-        node -e "let s=require('fs').readFileSync('index.html','utf8').match(/<script>([\\s\\S]*?)<\\/script>/)[1];console.log('sha256-'+require('crypto').createHash('sha256').update(s).digest('base64'))"
+      If you change an inline script below, regenerate hashes for every real
+      inline script block, skipping commented text:
+        hash each inline script body (sha256, base64) and paste the results into script-src.
     -->
     <meta
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
-        script-src 'self' 'sha256-tJNYlMjOFr3me7/8ZyQosVM8Tx4eixziGikzGD22v6U=' 'sha256-bckM80Q5ONLZ4Kt7I7ipwd304FD5mb5lIzqI+4NOIko=' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
+        script-src 'self' 'sha256-6Sc6vih+aLHECgyOwQbMy8efY3VSPcZNsomnIIgaMJQ=' 'sha256-bckM80Q5ONLZ4Kt7I7ipwd304FD5mb5lIzqI+4NOIko=' https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://mc.yandex.ru https://mc.yandex.com https://cdn.gpteng.co;
         script-src-attr 'none';
         style-src 'self' 'unsafe-inline';
         font-src 'self' data:;
 
-        img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com https://mc.yandex.ru https://mc.yandex.com https://*.lovable.app;
+        img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://static.tildacdn.com https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com https://mc.yandex.ru https://mc.yandex.com https://*.lovable.app;
         connect-src 'self' blob: https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.google.com https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru wss://mc.yandex.com;
         worker-src 'self' blob:;
         child-src 'self' blob: https://mc.yandex.ru;
