@@ -16,7 +16,6 @@ const Specializations = lazy(() => import("@/components/Specializations"));
 const Expectations = lazy(() => import("@/components/Expectations"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
 const Pricing = lazy(() => import("@/components/Pricing"));
-const Ethics = lazy(() => import("@/components/Ethics"));
 const Projects = lazy(() => import("@/components/Projects"));
 const SessionPrep = lazy(() => import("@/components/SessionPrep"));
 const Blog = lazy(() => import("@/components/Blog"));
@@ -152,7 +151,6 @@ const Index = () => (
       <LazySection minHeight={560}><Expectations /></LazySection>
       <LazySection minHeight={520}><Testimonials /></LazySection>
       <LazySection id="pricing" minHeight={620}><Pricing /></LazySection>
-      <LazySection minHeight={480}><Ethics /></LazySection>
       <LazySection minHeight={480}><Projects /></LazySection>
       <LazySection minHeight={480}><SessionPrep /></LazySection>
       <LazySection id="blog" minHeight={520}><Blog /></LazySection>
