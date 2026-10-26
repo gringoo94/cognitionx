@@ -27,62 +27,64 @@ const methods = [
   { title: "Очная терапия", desc: "Индивидуальные консультации в кабинете в центре Кишинёва — живой контакт и безопасное пространство", icon: MapPin, slug: "in-person-therapy" },
 ];
 
-const Card = ({ item, accentLeft }: { item: typeof problems[0]; accentLeft?: boolean }) => (
-  <motion.div
-    {...fade(0)}
-    whileHover={{ scale: 1.02, y: -4 }}
-    transition={{ duration: 0.25 }}
-    className={`rounded-2xl border border-border bg-card p-6 flex flex-col gap-4 hover:border-primary/40 hover:shadow-lg transition-all cursor-pointer ${accentLeft ? "border-l-2 border-l-primary" : ""}`}
-  >
-    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-      <item.icon className="w-5 h-5 text-primary" />
-    </div>
-    <h3 className="text-base font-bold">{item.title}</h3>
-    <p className="text-sm text-muted-foreground leading-relaxed flex-1">{item.desc}</p>
-    <div className="flex gap-2 flex-wrap">
-      <Button variant="outline" size="sm" className="gap-1.5" asChild>
-        <Link to={`/${item.slug}`}>
-          <BookOpen className="w-3.5 h-3.5" /> Подробнее
-        </Link>
-      </Button>
-      <Button variant="outline" size="sm" className="gap-1.5" asChild>
-        <a href="/booking">
-          Записаться <ArrowRight className="w-3.5 h-3.5" />
-        </a>
-      </Button>
-    </div>
+const Card = ({ item }: { item: typeof problems[0] }) => (
+  <motion.div {...fade(0)} className="h-full">
+    <Link
+      to={`/${item.slug}`}
+      className="group h-full rounded-2xl border border-border bg-card p-5 flex flex-col gap-3 hover:border-primary/40 hover:shadow-md transition-all"
+    >
+      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+        <item.icon className="w-4 h-4 text-primary" />
+      </div>
+      <h3 className="text-base font-bold">{item.title}</h3>
+      <p className="text-sm text-muted-foreground leading-relaxed flex-1">{item.desc}</p>
+      <span className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+        Подробнее <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+      </span>
+    </Link>
   </motion.div>
 );
 
 const Specializations = () => (
-  <section id="specs" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-    {/* Problems */}
-    <motion.div {...fade()} className="text-center mb-14">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">На чём специализируюсь</h2>
+  <section id="specs" className="max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <motion.div {...fade()} className="text-center mb-8">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">С чем я работаю</h2>
       <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
         Выберите свою тему — я расскажу, как мы будем работать
       </p>
     </motion.div>
 
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {problems.map((s) => (
         <Card key={s.slug} item={s} />
       ))}
+      <motion.div {...fade(0)} className="h-full rounded-2xl bg-primary/5 border border-primary/30 p-5 flex flex-col gap-3">
+        <h3 className="text-base font-bold">Не нашли свою тему?</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+          На консультации разберём ваш запрос и решим, чем я могу помочь.
+        </p>
+        <Button size="sm" className="gap-1.5 self-start" asChild>
+          <Link to="/booking">
+            Записаться <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </Button>
+      </motion.div>
     </div>
 
-    {/* Methods */}
-    <motion.div {...fade()} className="text-center mt-20 mb-14">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Методы терапии</h2>
-      <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-        Как мы будем работать — подходы с доказанной эффективностью
-      </p>
-    </motion.div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <motion.div {...fade()} className="mt-10 flex flex-wrap items-center justify-center gap-2">
+      <span className="text-sm text-muted-foreground mr-1">Методы:</span>
       {methods.map((m) => (
-        <Card key={m.slug} item={m} accentLeft />
+        <Link
+          key={m.slug}
+          to={`/${m.slug}`}
+          title={m.desc}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
+        >
+          <m.icon className="w-3.5 h-3.5 text-primary" />
+          {m.title}
+        </Link>
       ))}
-    </div>
+    </motion.div>
   </section>
 );
 
