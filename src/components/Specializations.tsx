@@ -11,13 +11,18 @@ const fade = (delay = 0) => ({
 });
 
 const problems = [
-  { title: "Тревога и панические атаки", desc: "Постоянное беспокойство, навязчивые мысли, ощущение что вот-вот случится что-то плохое", icon: AlertCircle, slug: "anxiety" },
+  { title: "Тревожные расстройства", desc: "Постоянное беспокойство, панические атаки, ощущение что вот-вот случится что-то плохое", icon: AlertCircle, slug: "anxiety" },
   { title: "Депрессия", desc: "Нет сил, ничего не радует, утром не хочется вставать — и это длится неделями", icon: CloudRain, slug: "depression" },
-  { title: "Выгорание", desc: "Работа высасывает все силы, а на жизнь их уже не остаётся", icon: Flame, slug: "burnout" },
-  { title: "Отношения", desc: "Конфликты, обиды, ощущение что вас не слышат — или невозможность уйти", icon: Heart, slug: "co-dependency" },
-  { title: "Самооценка", desc: "Постоянная самокритика, ощущение что вы хуже других, синдром самозванца", icon: Shield, slug: "self-esteem" },
-  { title: "Стресс и адаптация", desc: "Переезд, увольнение, развод — когда всё навалилось и непонятно как справляться", icon: Sparkles, slug: "stress" },
   { title: "Зависимости", desc: "Алкоголь, вещества, поведенческие зависимости — когда хочется остановиться, но не получается", icon: Wine, slug: "addiction" },
+  { title: "ОКР", desc: "Навязчивые мысли и ритуалы, которые отнимают время и не дают покоя", icon: Brain, slug: "ocd" },
+];
+
+const otherTopics = [
+  { title: "Панические атаки", slug: "panic-attacks", icon: Sparkles },
+  { title: "Выгорание", slug: "burnout", icon: Flame },
+  { title: "Отношения и созависимость", slug: "co-dependency", icon: Heart },
+  { title: "Самооценка", slug: "self-esteem", icon: Shield },
+  { title: "Стресс и адаптация", slug: "stress", icon: Sparkles },
 ];
 
 const methods = [
