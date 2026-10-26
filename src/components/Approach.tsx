@@ -264,7 +264,7 @@ const Approach = () => {
             role="tabpanel"
             aria-labelledby={`approach-tab-${i}`}
             hidden={!on}
-            className="mt-5 rounded-2xl border border-border bg-card shadow-sm p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-10 items-center"
+            className={`mt-5 rounded-2xl border border-border bg-card shadow-sm p-6 md:p-8 md:grid-cols-2 gap-6 md:gap-10 items-center ${on ? "grid" : "hidden"}`}
           >
             <div>
               <h3 className="text-xl md:text-2xl font-bold">{s.title}</h3>
