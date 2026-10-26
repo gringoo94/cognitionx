@@ -86,7 +86,7 @@ const About = ({
           </div>
         </motion.div>
 
-        <div>
+        <div className="min-w-0">
           <motion.p {...fade(0.05)} className="text-sm font-semibold uppercase tracking-wide text-primary">
             Обо мне
           </motion.p>
