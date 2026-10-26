@@ -30,7 +30,7 @@ const Hero = () => (
         >
           Дмитрий <span className="text-primary">Яцко</span>
           <span className="block mt-3 text-xl sm:text-2xl md:text-2xl lg:text-3xl font-medium text-muted-foreground">
-            Психолог онлайн и в Кишинёве
+            Клинический психолог, когнитивно-поведенческий терапевт
           </span>
         </motion.h1>
 
