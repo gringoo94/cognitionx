@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageSquare, Brain, Target, TrendingUp, CheckCircle2 } from "lucide-react";
 
@@ -212,46 +213,58 @@ const STEPS = [
   },
 ];
 
-const Approach = () => (
-  <section id="approach" className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-    <motion.div {...fade()} className="text-center mb-6">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-        Как устроена терапия
-      </h2>
-      <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-        Структурированный процесс с понятными этапами и измеримыми результатами
-      </p>
-    </motion.div>
+const SHORT = ["Запрос и цели", "Карта проблемы", "Техники КПТ", "Самостоятельность"];
 
-    <div className="mt-16 space-y-20">
-      {STEPS.map((s, i) => (
-        <motion.div
-          key={s.step}
-          {...fade(0.05 * i)}
-          className={`flex flex-col ${
-            i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-          } items-center gap-10 md:gap-16`}
-        >
-          <div className="flex-1 text-center md:text-left">
-            <span className="text-4xl md:text-5xl font-bold text-primary/20">
-              {s.step}
-            </span>
-            <h3 className="text-xl md:text-2xl font-bold mt-2">{s.title}</h3>
-            <p className="text-sm md:text-base text-muted-foreground mt-3 leading-relaxed max-w-md">
-              {s.description}
-            </p>
-          </div>
-          <div className="flex-1 w-full">
-            <div className="rounded-2xl border border-border bg-card shadow-sm p-6 md:p-8 flex items-center justify-center">
-              <div className="w-full">
-                <s.Demo />
-              </div>
-            </div>
-          </div>
+const Approach = () => {
+  const [active, setActive] = useState(0);
+  const s = STEPS[active];
+  return (
+    <section id="approach" className="max-w-5xl mx-auto px-6 py-14 md:py-20">
+      <motion.div {...fade()} className="text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Как устроена терапия</h2>
+        <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+          Структурированный процесс с понятными этапами и измеримыми результатами
+        </p>
+      </motion.div>
+
+      <div role="tablist" aria-label="Этапы терапии" className="flex gap-3 overflow-x-auto snap-x pb-2 [scrollbar-width:none]">
+        {STEPS.map((st, i) => {
+          const on = i === active;
+          return (
+            <button
+              key={st.step}
+              type="button"
+              role="tab"
+              aria-selected={on}
+              aria-controls="approach-panel"
+              onClick={() => setActive(i)}
+              className={`snap-start shrink-0 w-[70%] sm:w-auto sm:flex-1 text-left rounded-xl border p-4 transition-colors ${
+                on ? "border-primary bg-primary/5" : "border-border bg-muted/30 hover:bg-muted/60"
+              }`}
+            >
+              <span className={`text-2xl font-bold ${on ? "text-primary" : "text-primary/30"}`}>{st.step}</span>
+              <span className="block text-sm font-semibold mt-1">{st.title}</span>
+              <span className="block text-xs text-muted-foreground mt-0.5">{SHORT[i]}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        id="approach-panel"
+        role="tabpanel"
+        className="mt-5 rounded-2xl border border-border bg-card shadow-sm p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-10 items-center"
+      >
+        <motion.div key={`t${active}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+          <h3 className="text-xl md:text-2xl font-bold">{s.title}</h3>
+          <p className="text-sm md:text-base text-muted-foreground mt-3 leading-relaxed">{s.description}</p>
         </motion.div>
-      ))}
-    </div>
-  </section>
-);
+        <div key={`d${active}`} className="w-full">
+          <s.Demo />
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default Approach;
