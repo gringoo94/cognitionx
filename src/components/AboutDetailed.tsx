@@ -113,7 +113,7 @@ const AboutDetailed = () => (
         </div>
 
         <motion.details {...fade(0.1)} className="group rounded-xl border border-border bg-muted/30 p-5">
-          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+          <summary className="cursor-pointer list-none text-sm font-semibold text-primary marker:content-none">
             Дипломы и сертификаты ▾
           </summary>
           <ul className="mt-4 space-y-3">
@@ -127,7 +127,7 @@ const AboutDetailed = () => (
         </motion.details>
 
         <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
-          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+          <summary className="cursor-pointer list-none text-sm font-semibold text-primary marker:content-none">
             Методы и подходы ▾
           </summary>
           <ul className="mt-4 flex flex-wrap gap-2">
