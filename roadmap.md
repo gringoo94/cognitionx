@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Show multiple About carousel cards with a visible preview of the next card
+- [x] Show multiple About carousel cards with a visible preview of the next card
 
 - [x] Unify booking buttons on /booking and replace homepage form with a consultation offer
 - [x] Disable Meta Pixel loading and sensitive event forwarding; verify navigation and network behavior
