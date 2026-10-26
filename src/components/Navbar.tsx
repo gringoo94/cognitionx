@@ -22,7 +22,7 @@ const specGroups = [
   {
     title: "Методы",
     links: [
-      { label: "КПТ-терапия", href: "/cbt-therapy", icon: Brain },
+      { label: "КПТ", href: "/cbt-therapy", icon: Brain },
       { label: "Схема-терапия", href: "/schema-therapy", icon: Brain },
     ],
   },
