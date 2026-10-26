@@ -68,125 +68,103 @@ const geoGroups: GeoGroup[] = [
   },
 ];
 
+const linkCls = "hover:text-foreground transition-colors";
+const headCls = "text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2";
+const rowCls = "flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted-foreground";
+
+const contacts = [
+  { href: "https://t.me/gringoo94", label: "Telegram", Icon: Send },
+  { href: "https://wa.me/447599880865", label: "WhatsApp", Icon: Phone },
+  { href: "https://www.instagram.com/gringo.journal", label: "Instagram", Icon: Instagram },
+  { href: "mailto:digitalgringoo@gmail.com", label: "Email", Icon: Mail },
+  { href: "https://www.linkedin.com/in/dmitrii-iatco/", label: "LinkedIn", Icon: Linkedin },
+];
+
 const Footer = () => (
   <footer className="border-t border-border">
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {/* Brand + contacts */}
-        <div>
-          <p className="text-lg font-bold tracking-tight mb-4">CognitionX</p>
-          <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-            <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Send className="w-4 h-4" aria-hidden="true" /> Telegram
+    <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <p className="text-lg font-bold tracking-tight">CognitionX</p>
+        <div className="flex items-center gap-1">
+          {contacts.map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              aria-label={label}
+              title={label}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            >
+              <Icon className="w-4 h-4" aria-hidden="true" />
             </a>
-            <a href="https://wa.me/447599880865" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Phone className="w-4 h-4" aria-hidden="true" /> WhatsApp
-            </a>
-            <a href="https://www.instagram.com/gringo.journal" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Instagram className="w-4 h-4" aria-hidden="true" /> Instagram
-            </a>
-            <a href="mailto:digitalgringoo@gmail.com" aria-label="Email" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Mail className="w-4 h-4" aria-hidden="true" /> Email
-            </a>
-            <a href="https://www.linkedin.com/in/dmitrii-iatco/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Linkedin className="w-4 h-4" aria-hidden="true" /> LinkedIn
-            </a>
-          </div>
+          ))}
         </div>
+      </div>
 
-        {/* Problems */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-5">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Проблемы</p>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+          <p className={headCls}>Проблемы</p>
+          <div className={rowCls}>
             {problemLinks.map((l) => (
-              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
-                {l.label}
-              </Link>
+              <Link key={l.href} to={l.href} className={linkCls}>{l.label}</Link>
             ))}
           </div>
         </div>
 
-        {/* Methods */}
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Методы</p>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+          <p className={headCls}>Методы</p>
+          <div className={rowCls}>
             {methodLinks.map((l) => (
-              <Link key={l.href} to={l.href} className="hover:text-foreground transition-colors">
-                {l.label}
-              </Link>
+              <Link key={l.href} to={l.href} className={linkCls}>{l.label}</Link>
             ))}
+            <Link to="/specialists" className={linkCls}>Специалисты</Link>
           </div>
-          <Link to="/specialists" className="mt-6 inline-block text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Специалисты
-          </Link>
         </div>
 
-        {/* Geography */}
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">География</p>
-          <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+          <p className={headCls}>Навигация</p>
+          <div className={rowCls}>
+            <Link to="/" className={linkCls}>Главная</Link>
+            <Link to="/about" className={linkCls}>Обо мне</Link>
+            <Link to="/blog" className={linkCls}>Блог</Link>
+            <Link to="/tools" className={linkCls}>Инструменты</Link>
+            <Link to="/contact" className={linkCls}>Контакты</Link>
+            <a href="/booking" className={linkCls}>Записаться</a>
+          </div>
+        </div>
+
+        <div>
+          <p className={headCls}>География</p>
+          <div className="flex flex-col text-sm text-muted-foreground">
             {geoGroups.map((g) =>
               g.cities && g.cities.length > 0 ? (
                 <details key={g.region} className="group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-1 font-medium text-foreground/80 hover:text-foreground transition-colors">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-0.5 hover:text-foreground transition-colors">
                     <span>{g.region}</span>
                     <ChevronDown className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-open:rotate-180" />
                   </summary>
-                  <div className="flex flex-col gap-1 pl-3 pt-1 pb-2 border-l border-border">
-                    {g.href && (
-                      <Link to={g.href} className="hover:text-foreground transition-colors text-xs">
-                        Все — {g.region}
-                      </Link>
-                    )}
+                  <div className="flex flex-wrap gap-x-2 gap-y-0.5 pl-3 py-1 border-l border-border text-xs">
+                    {g.href && <Link to={g.href} className={linkCls}>Все</Link>}
                     {g.cities.map((c) => (
-                      <Link key={c.href} to={c.href} className="hover:text-foreground transition-colors text-xs">
-                        {c.label}
-                      </Link>
+                      <Link key={c.href} to={c.href} className={linkCls}>{c.label}</Link>
                     ))}
                   </div>
                 </details>
               ) : g.href ? (
-                <Link
-                  key={g.region}
-                  to={g.href}
-                  className="py-1 font-medium text-foreground/80 hover:text-foreground transition-colors"
-                >
-                  {g.region}
-                </Link>
-              ) : (
-                <span key={g.region} className="py-1 font-medium text-foreground/80">
-                  {g.region}
-                </span>
-              )
+                <Link key={g.region} to={g.href} className={`py-0.5 ${linkCls}`}>{g.region}</Link>
+              ) : null
             )}
-          </div>
-
-        </div>
-
-        {/* Navigation */}
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Навигация</p>
-          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-            <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
-            <Link to="/about" className="hover:text-foreground transition-colors">Обо мне</Link>
-            <Link to="/blog" className="hover:text-foreground transition-colors">Блог</Link>
-            <Link to="/tools" className="hover:text-foreground transition-colors">Инструменты</Link>
-            <Link to="/contact" className="hover:text-foreground transition-colors">Контакты</Link>
-            <a href="/booking" className="hover:text-foreground transition-colors">Записаться</a>
           </div>
         </div>
       </div>
 
-      <div className="mt-10 pt-6 border-t border-border text-center">
+      <div className="mt-6 pt-4 border-t border-border text-center">
         <p className="text-xs text-muted-foreground">
-          © 2026 CognitionX. Все права защищены. ·{" "}
-          <Link to="/privacy" className="hover:text-foreground transition-colors underline">
-            Политика конфиденциальности
-          </Link>
+          © 2026 CognitionX ·{" "}
+          <Link to="/privacy" className={`${linkCls} underline`}>Конфиденциальность</Link>
           {" · "}
-          <Link to="/informed-consent" className="hover:text-foreground transition-colors underline">
-            Информированное согласие
-          </Link>
+          <Link to="/informed-consent" className={`${linkCls} underline`}>Информированное согласие</Link>
         </p>
       </div>
     </div>
