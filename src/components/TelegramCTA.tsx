@@ -32,11 +32,18 @@ const TelegramCTA = () => (
       </motion.div>
       <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between border-t border-border pt-6">
         <p className="text-sm text-muted-foreground">После встречи вы сами решите, хотите ли продолжать работу.</p>
-        <Button variant="outline" className="h-auto min-h-11 gap-2 whitespace-normal rounded-lg py-2.5" asChild>
-          <a href="/booking" onClick={() => trackCta("home_first_consultation_booking")}>
-            Записаться на консультацию <ArrowRight className="h-4 w-4 shrink-0" />
-          </a>
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="outline" className="h-auto min-h-11 gap-2 whitespace-normal rounded-lg py-2.5" asChild>
+            <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer" onClick={() => trackCta("home_first_consultation_telegram")}>
+              Написать в Telegram <ArrowRight className="h-4 w-4 shrink-0" />
+            </a>
+          </Button>
+          <Button variant="ghost" className="h-auto min-h-11 gap-2 whitespace-normal rounded-lg py-2.5" asChild>
+            <a href="/booking" onClick={() => trackCta("home_first_consultation_booking")}>
+              Записаться на консультацию
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   </section>
