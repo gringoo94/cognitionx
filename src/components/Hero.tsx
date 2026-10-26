@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Clock, Globe, MapPin } from "lucide-react";
+import { trackCta } from "@/lib/trackCta";
 const heroPhoto = "/hero-photo.webp";
 const heroPhotoAvif = "/hero-photo.avif";
 
@@ -12,25 +13,24 @@ const fade = (delay = 0) => ({
 });
 
 const Hero = () => (
-  <section className="max-w-7xl mx-auto px-6 pt-20 md:pt-32 pb-24">
-    <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+  <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 pb-12 md:pb-16">
+    <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
       {/* Text */}
-      <div className="text-center md:text-left order-2 md:order-1">
+      <div className="text-left">
         <motion.div
           {...fade(0)}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
+          className="text-sm font-medium text-primary mb-5"
         >
-          <Sparkles className="w-3.5 h-3.5" />
-          Психолог · КПТ · Схема-терапия
+          КПТ и схема-терапия
         </motion.div>
 
         <motion.h1
           {...fade(0.05)}
-          className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+          className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.12]"
         >
           Дмитрий <span className="text-primary">Яцко</span>
           <span className="block mt-3 text-xl sm:text-2xl md:text-2xl lg:text-3xl font-medium text-muted-foreground">
-            Психолог · КПТ и схема-терапия онлайн
+            Психолог онлайн и в Кишинёве
           </span>
         </motion.h1>
 
@@ -38,30 +38,34 @@ const Hero = () => (
           {...fade(0.1)}
           className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
         >
-          Помогаю справиться с тревогой, депрессией, выгоранием и сложностями в отношениях. Работаю онлайн и очно.
+          Тревога, подавленность, выгорание или сложности в отношениях? На консультации разберём, что с вами происходит и какой следующий шаг подойдёт вам.
         </motion.p>
 
         <motion.div
           {...fade(0.15)}
-          className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
+          className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground"
         >
-          <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-            <a href="/booking">
-              Записаться <ArrowRight className="w-4 h-4" />
+          <span className="font-semibold text-foreground">45 € за консультацию</span>
+          <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" />50 минут</span>
+          <span className="inline-flex items-center gap-1.5"><Globe className="h-4 w-4" />Онлайн</span>
+          <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4" />Кишинёв</span>
+        </motion.div>
+
+        <motion.div {...fade(0.2)} className="mt-7">
+          <Button size="lg" className="h-auto min-h-12 w-full sm:w-auto gap-2 whitespace-normal rounded-lg px-6 py-3 text-base" asChild>
+            <a href="/booking" onClick={() => trackCta("home_hero_booking")}>
+              Записаться на консультацию <ArrowRight className="w-4 h-4 shrink-0" />
             </a>
-          </Button>
-          <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
-            <a href="#approach">Как я работаю</a>
           </Button>
         </motion.div>
 
-        <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-          Консультация — 45 € · Онлайн и очно
+        <motion.p {...fade(0.22)} className="mt-3 text-xs leading-relaxed text-muted-foreground">
+          Ближайшая запись — примерно через две недели. Время согласуем в Telegram или WhatsApp.
         </motion.p>
 
         <motion.div
           {...fade(0.25)}
-          className="mt-8 flex items-center justify-center md:justify-start gap-6 text-sm text-muted-foreground"
+          className="mt-6 flex flex-wrap items-center gap-6 text-sm text-muted-foreground"
         >
           {[
             { value: "200+", label: "клиентов" },
@@ -77,10 +81,9 @@ const Hero = () => (
       </div>
 
       {/* Photo — статическая разметка для быстрого LCP, без framer-motion обёртки */}
-      <div className="flex justify-center order-1 md:order-2">
+      <div className="flex justify-center">
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl scale-110" />
-          <div className="relative w-72 h-80 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
+          <div className="relative w-64 h-72 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-lg overflow-hidden">
             <picture>
               <source srcSet={heroPhotoAvif} type="image/avif" />
               <source srcSet={heroPhoto} type="image/webp" />
