@@ -187,28 +187,32 @@ const STEPS = [
     step: "01",
     title: "Знакомство и диагностика",
     description:
-      "На первой встрече мы определяем запрос, разбираемся в истории и ставим цели терапии. Вы рассказываете — я слушаю и задаю вопросы.",
+      "На первой встрече мы определяем запрос, разбираемся в истории и ставим цели терапии. Вы рассказываете — я слушаю и задаю вопросы. При необходимости используем короткие опросники, чтобы оценить уровень тревоги, депрессии или стресса и потом отслеживать изменения. В конце встречи вы понимаете, подходит ли вам КПТ и как будет выглядеть работа.",
+    keywords: ["первая консультация психолога", "запрос и цели терапии", "психологическая диагностика", "опросники"],
     Demo: DiagnosticDemo,
   },
   {
     step: "02",
     title: "Формулировка случая",
     description:
-      "Вместе мы выстраиваем модель: какие мысли, эмоции и поведение поддерживают проблему. Это карта, по которой мы будем двигаться.",
+      "Вместе мы выстраиваем модель: какие мысли, эмоции, телесные реакции и поведение поддерживают проблему. Эта когнитивная концептуализация объясняет, почему трудности повторяются, и становится картой, по которой мы двигаемся. Модель можно уточнять по ходу терапии.",
+    keywords: ["концептуализация случая", "когнитивная модель", "мысли, эмоции, поведение", "план терапии"],
     Demo: FormulationDemo,
   },
   {
     step: "03",
     title: "Работа с мыслями и поведением",
     description:
-      "Используем техники КПТ: когнитивная реструктуризация, поведенческие эксперименты, экспозиция. Шаг за шагом меняем паттерны.",
+      "Используем техники КПТ: когнитивную реструктуризацию, поведенческие эксперименты, экспозицию, поведенческую активацию. Между сессиями — небольшие домашние задания и дневники мыслей, которые помогают переносить навыки в обычную жизнь. Шаг за шагом меняем привычные паттерны.",
+    keywords: ["когнитивная реструктуризация", "поведенческие эксперименты", "экспозиция", "домашние задания КПТ"],
     Demo: TechniqueDemo,
   },
   {
     step: "04",
     title: "Закрепление и профилактика",
     description:
-      "Формируем навыки самопомощи, составляем план профилактики рецидивов. Цель — чтобы вы могли справляться самостоятельно.",
+      "Формируем навыки самопомощи и составляем план профилактики рецидивов: какие ранние признаки замечать и что делать, если станет хуже. Встречи постепенно становятся реже. Цель — чтобы вы могли справляться самостоятельно и стали собственным терапевтом.",
+    keywords: ["профилактика рецидивов", "навыки самопомощи", "завершение терапии", "устойчивый результат"],
     Demo: SelfHelpDemo,
   },
 ];
@@ -217,7 +221,6 @@ const SHORT = ["Запрос и цели", "Карта проблемы", "Те�
 
 const Approach = () => {
   const [active, setActive] = useState(0);
-  const s = STEPS[active];
   return (
     <section id="approach" className="max-w-5xl mx-auto px-6 py-14 md:py-20">
       <motion.div {...fade()} className="text-center mb-8">
@@ -235,8 +238,9 @@ const Approach = () => {
               key={st.step}
               type="button"
               role="tab"
+              id={`approach-tab-${i}`}
               aria-selected={on}
-              aria-controls="approach-panel"
+              aria-controls={`approach-panel-${i}`}
               onClick={() => setActive(i)}
               className={`snap-start shrink-0 w-[70%] sm:w-auto sm:flex-1 text-left rounded-xl border p-4 transition-colors ${
                 on ? "border-primary bg-primary/5" : "border-border bg-muted/30 hover:bg-muted/60"
@@ -250,19 +254,33 @@ const Approach = () => {
         })}
       </div>
 
-      <div
-        id="approach-panel"
-        role="tabpanel"
-        className="mt-5 rounded-2xl border border-border bg-card shadow-sm p-6 md:p-8 grid md:grid-cols-2 gap-6 md:gap-10 items-center"
-      >
-        <motion.div key={`t${active}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-          <h3 className="text-xl md:text-2xl font-bold">{s.title}</h3>
-          <p className="text-sm md:text-base text-muted-foreground mt-3 leading-relaxed">{s.description}</p>
-        </motion.div>
-        <div key={`d${active}`} className="w-full">
-          <s.Demo />
-        </div>
-      </div>
+      {/* Все этапы в HTML (видны поисковикам), показывается активный */}
+      {STEPS.map((s, i) => {
+        const on = i === active;
+        return (
+          <div
+            key={s.step}
+            id={`approach-panel-${i}`}
+            role="tabpanel"
+            aria-labelledby={`approach-tab-${i}`}
+            hidden={!on}
+            className={`mt-5 rounded-2xl border border-border bg-card shadow-sm p-6 md:p-8 md:grid-cols-2 gap-6 md:gap-10 items-center ${on ? "grid" : "hidden"}`}
+          >
+            <div>
+              <h3 className="text-xl md:text-2xl font-bold">{s.title}</h3>
+              <p className="text-sm md:text-base text-muted-foreground mt-3 leading-relaxed">{s.description}</p>
+              <ul className="mt-4 flex flex-wrap gap-2" aria-label="Ключевые слова">
+                {s.keywords.map((k) => (
+                  <li key={k} className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                    {k}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="w-full">{on && <s.Demo />}</div>
+          </div>
+        );
+      })}
     </section>
   );
 };
