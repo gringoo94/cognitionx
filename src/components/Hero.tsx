@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, Globe, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { trackCta } from "@/lib/trackCta";
 const heroPhoto = "/hero-photo.webp";
 const heroPhotoAvif = "/hero-photo.avif";
