@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Globe2, Users } from "lucide-react";
+import { ChevronDown, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -59,157 +62,80 @@ const methods = [
   "Сексология",
 ];
 
-const trust = [
-  {
-    icon: ShieldCheck,
-    title: "Верифицирован на B17.ru",
-    text: "Все дипломы и сертификаты проверены платформой B17.ru.",
-    href: "https://www.b17.ru/dumitru_iatco/",
-  },
-  {
-    icon: Globe2,
-    title: "Стандарты EABCT",
-    text: "Практика по международным стандартам Европейской ассоциации КПТ.",
-  },
-  {
-    icon: Users,
-    title: "Супервизии и сообщество",
-    text: "Регулярные супервизии. Основатель Rolelit — тренажёра для психологов.",
-  },
-];
+const AboutDetailed = () => {
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const active = expanded === null ? undefined : timeline[expanded];
 
-const AboutDetailed = () => (
-  <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-    <motion.div {...fade()} className="text-center mb-10">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-        Образование и профессиональное развитие
-      </h2>
-      <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-        Прозрачность — часть моей профессиональной этики
-      </p>
-      <div className="mt-6 h-1 w-20 rounded-full bg-primary/20 mx-auto" />
-    </motion.div>
-
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-      {/* Таймлайн */}
-      <div className="lg:col-span-7 space-y-10">
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6">
-            Академический путь
-          </h3>
-          <div className="relative space-y-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-border">
-            {timeline.map((item, i) => (
-              <motion.div key={item.title} {...fade(0.05 * i)} className="relative pl-10">
-                <span
-                  className="absolute left-0 top-1 h-[23px] w-[23px] rounded-full border-4 border-background bg-primary shadow-sm"
-                  style={{ opacity: 1 - i * 0.2 }}
-                />
-                <span className="text-xs font-medium text-muted-foreground">{item.period}</span>
-                <h4 className="text-base md:text-lg font-semibold mt-0.5">{item.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{item.text}</p>
-              </motion.div>
-            ))}
+  return (
+    <section aria-labelledby="education-heading" className="max-w-5xl mx-auto px-6 py-10 md:py-12">
+      <motion.div {...fade()}>
+        <Carousel opts={{ align: "start" }} aria-label="Образование и профессиональное развитие">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <h2 id="education-heading" className="text-2xl md:text-3xl font-bold max-w-xl">
+              Образование и профессиональное развитие
+            </h2>
+            <div className="flex shrink-0 gap-2">
+              <CarouselPrevious className="static translate-x-0 translate-y-0 rounded-md" aria-label="Предыдущий этап" title="Предыдущий этап" />
+              <CarouselNext className="static translate-x-0 translate-y-0 rounded-md" aria-label="Следующий этап" title="Следующий этап" />
+            </div>
           </div>
+          <CarouselContent>
+            {timeline.map((item, index) => (
+              <CarouselItem key={item.title} className="basis-[86%] sm:basis-[44%]" aria-label={`${index + 1} из ${timeline.length}`}>
+                <div className="relative pt-4 before:absolute before:top-4 before:left-0 before:right-0 before:h-px before:bg-border">
+                  <span className="relative block h-3 w-3 rounded-full bg-primary ring-4 ring-background" />
+                  <Button
+                    variant="outline"
+                    aria-expanded={expanded === index}
+                    aria-controls="education-details"
+                    onClick={() => setExpanded(expanded === index ? null : index)}
+                    className={`mt-4 h-40 w-full flex flex-col items-start justify-between whitespace-normal rounded-lg p-5 text-left ${expanded === index ? "border-primary bg-accent text-accent-foreground" : "bg-background"}`}
+                  >
+                    <span className="flex w-full items-center justify-between gap-3 text-xs text-muted-foreground">
+                      {item.period}<span className="tabular-nums">{index + 1} / {timeline.length}</span>
+                    </span>
+                    <span className="text-base font-semibold leading-snug">{item.title}</span>
+                    <ChevronDown className={`h-4 w-4 self-end transition-transform motion-reduce:transition-none ${expanded === index ? "rotate-180" : ""}`} aria-hidden="true" />
+                  </Button>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+
+        <div id="education-details" hidden={!active} className="mt-6 border-l-2 border-primary pl-5">
+          {active && (
+            <>
+              <h3 className="text-lg font-semibold">{active.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{active.text}</p>
+              {expanded === 2 && (
+                <>
+                  <h4 className="mt-4 text-sm font-semibold">Курсы и сертификаты</h4>
+                  <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {certificates.map((c) => (
+                      <li key={c.title} className="text-sm leading-relaxed">
+                        {c.title}
+                        <span className="block text-xs text-muted-foreground">{c.year} · {c.org} · {c.hours}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <h4 className="mt-4 text-sm font-semibold">Методы и подходы</h4>
+                  <p className="mt-2 text-sm text-muted-foreground">{methods.join(" · ")}</p>
+                </>
+              )}
+            </>
+          )}
         </div>
 
-        <motion.details {...fade(0.1)} className="group rounded-xl border border-border bg-muted/30 p-5">
-          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
-            ДИПЛОМЫ И СЕРТИФИКАТЫ — ПОКАЗАТЬ
-          </summary>
-          <ul className="mt-4 space-y-3">
-            {certificates.map((c) => (
-              <li key={c.title} className="text-xs leading-relaxed text-foreground/80">
-                {c.title}
-                <span className="text-muted-foreground"> — {c.org}</span>
-              </li>
-            ))}
-          </ul>
-        </motion.details>
-
-        <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
-          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
-            МЕТОДЫ И ПОДХОДЫ — ПОКАЗАТЬ
-          </summary>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {methods.map((m) => (
-              <li
-                key={m}
-                className="rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-foreground/80"
-              >
-                {m}
-              </li>
-            ))}
-          </ul>
-        </motion.details>
-
-      </div>
-
-      {/* Доверие */}
-      <div className="lg:col-span-5 space-y-8">
-        <motion.div
-          {...fade(0.1)}
-          className="rounded-2xl border border-border bg-muted/40 p-7 shadow-sm"
-        >
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6">
-            Стандарты и верификация
-          </h3>
-          <ul className="space-y-6">
-            {trust.map((t) => (
-              <li key={t.title} className="flex items-start gap-4">
-                <div className="mt-0.5 rounded-lg bg-background p-2 shadow-sm">
-                  <t.icon className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold">
-                    {t.href ? (
-                      <a
-                        href={t.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
-                      >
-                        {t.title}
-                      </a>
-                    ) : (
-                      t.title
-                    )}
-                  </h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed mt-1">
-                    {t.text}
-                    {t.href && (
-                      <>
-                        {" "}
-                        <a
-                          href={t.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-medium text-primary underline underline-offset-2 hover:no-underline"
-                        >
-                          Смотреть профиль
-                        </a>
-                      </>
-                    )}
-                  </p>
-
-                </div>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-
-        <motion.div {...fade(0.15)} className="rounded-r-xl border-l-4 border-primary bg-primary/5 p-6">
-          <h4 className="text-sm font-semibold mb-2">Профессиональные интересы</h4>
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            Доказательная психотерапия и её популяризация, цифровые инструменты для психического
-            здоровья, психообразование и self-help на основе КПТ.
-          </p>
-          <p className="text-xs italic text-muted-foreground/80 mt-3">
-            «Обучение не заканчивается — оно продолжается с каждым новым человеком на сессии»
-          </p>
-        </motion.div>
-      </div>
-    </div>
-  </section>
-);
+        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-4 text-sm text-muted-foreground">
+          <a href="https://www.b17.ru/dumitru_iatco/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary underline underline-offset-4">
+            <ShieldCheck className="h-4 w-4" aria-hidden="true" /> Дипломы проверены B17.ru
+          </a>
+          <span>Регулярные супервизии</span>
+        </div>
+      </motion.div>
+    </section>
+  );
+};
 
 export default AboutDetailed;
