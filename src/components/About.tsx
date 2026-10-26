@@ -26,15 +26,7 @@ type AboutProps = {
   /** Текст и ссылка кнопки */
   ctaLabel?: string;
   ctaTo?: string;
-  /** Показать краткий блок об образовании и верификации */
-  showCredentials?: boolean;
 };
-
-const CREDENTIALS = [
-  "МолдГУ, психология · магистратура по клинической психологии",
-  "КПТ и схема-терапия: CBTLAB, APA PsycLearn, Белорусское общество КПТ",
-  "Практика: клиника MedHub (Кишинёв), работа с беженцами, групповая терапия",
-];
 
 const DEFAULT_TEXT =
   "Я клинический психолог, работаю в КПТ и схема-терапии. Ко мне приходят с тревогой, апатией и выгоранием — когда сил тянуть дальше уже нет. Мы разбираем, что именно вас держит, и шаг за шагом собираем опору. Без оценок и советов «просто соберись».";
@@ -49,7 +41,6 @@ const About = ({
   chips = ["КПТ", "Схема-терапия", "Регулярная супервизия", "Онлайн и очно"],
   ctaLabel = "Записаться на консультацию",
   ctaTo = "/booking",
-  showCredentials = false,
 }: AboutProps = {}) => (
   <section id="about" className="bg-foreground text-background">
     <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
@@ -109,24 +100,6 @@ const About = ({
               </li>
             ))}
           </motion.ul>
-          {showCredentials && (
-            <motion.div {...fade(0.22)} className="mt-8 border-t border-background/20 pt-6 text-left">
-              <h3 className="text-xs font-semibold uppercase tracking-wider opacity-60">Образование и практика</h3>
-              <ul className="mt-3 space-y-2 text-sm leading-relaxed opacity-80">
-                {CREDENTIALS.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
-              <a
-                href="https://www.b17.ru/dumitru_iatco/"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="mt-4 inline-block text-sm underline underline-offset-4 opacity-80 hover:opacity-100"
-              >
-                Дипломы проверены на B17.ru
-              </a>
-            </motion.div>
-          )}
           <motion.div {...fade(0.25)} className="mt-8">
             <Button asChild size="lg" variant="secondary">
               <Link
