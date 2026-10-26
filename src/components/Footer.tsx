@@ -13,7 +13,7 @@ const problemLinks = [
 ];
 
 const methodLinks = [
-  { label: "КПТ-терапия", href: "/cbt-therapy" },
+  { label: "КПТ", href: "/cbt-therapy" },
   { label: "Схема-терапия", href: "/schema-therapy" },
   { label: "Онлайн-терапия", href: "/online-therapy" },
   { label: "Очная терапия в Кишинёве", href: "/in-person-therapy" },

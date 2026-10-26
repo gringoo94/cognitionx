@@ -46,7 +46,7 @@ const certificates = [
   { year: "2024", title: "Disorders Due to Substance Use and Addictive Behaviors", org: "APA PsycLearn", hours: "20 ч" },
   { year: "2025", title: "Научно обоснованная практика: КПТ и вызовы современности", org: "Белорусское общество КПТ", hours: "30 ч" },
   { year: "2025", title: "Предотвращение сексуальной эксплуатации и надругательств", org: "UNICEF", hours: "30 ч" },
-  { year: "2026", title: "«В объятиях Тифона» — конференция по работе с опасным поведением", org: "В 4 Стенах", hours: "30 ч" },
+  { year: "2026", title: "Конференция по работе с кризисными состояниями и аутоагрессивным поведением", org: "В 4 Стенах", hours: "30 ч" },
 ];
 
 const methods = [
@@ -114,7 +114,7 @@ const AboutDetailed = () => (
 
         <motion.details {...fade(0.1)} className="group rounded-xl border border-border bg-muted/30 p-5">
           <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
-            ДИПЛОМЫ И СЕРТИФИКАТЫ — ПОКАЗАТЬ
+            Дипломы и сертификаты ▾
           </summary>
           <ul className="mt-4 space-y-3">
             {certificates.map((c) => (
@@ -128,7 +128,7 @@ const AboutDetailed = () => (
 
         <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
           <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
-            МЕТОДЫ И ПОДХОДЫ — ПОКАЗАТЬ
+            Методы и подходы ▾
           </summary>
           <ul className="mt-4 flex flex-wrap gap-2">
             {methods.map((m) => (
@@ -204,7 +204,7 @@ const AboutDetailed = () => (
             здоровья, психообразование и self-help на основе КПТ.
           </p>
           <p className="text-xs italic text-muted-foreground/80 mt-3">
-            «Обучение не заканчивается — оно продолжается с каждым новым человеком на сессии»
+            «Каждый человек уникален, поэтому терапия — совместное исследование, а не шаблонные решения»
           </p>
         </motion.div>
       </div>
