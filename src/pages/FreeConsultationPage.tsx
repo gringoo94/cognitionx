@@ -346,25 +346,6 @@ const FreeConsultationPage = () => {
             <motion.h1 {...fade(0.05)} className="text-3xl md:text-4xl font-bold tracking-tight max-w-2xl">
               Запись на консультацию к Дмитрию Яцко
             </motion.h1>
-            <motion.aside
-              {...fade(0.1)}
-              role="note"
-              className="relative mt-8 max-w-2xl overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-5 pl-6 shadow-sm"
-            >
-              <span aria-hidden className="absolute inset-y-0 left-0 w-1.5 bg-primary" />
-              <div className="flex gap-3">
-                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    До ноября я не принимаю новых клиентов на регулярную терапию
-                  </p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    Доступна разовая платная консультация (45 €, 50 минут) с записью примерно за 2 недели.
-                    Оставьте заявку ниже — я или администратор свяжемся с вами, чтобы согласовать время.
-                  </p>
-                </div>
-              </div>
-            </motion.aside>
           </>
         ) : (
           <>
