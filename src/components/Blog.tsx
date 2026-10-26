@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import BlogCover from "@/components/BlogCover";
 
@@ -34,12 +35,17 @@ const PILLAR_GUIDES: { slug: string; title: string; description: string; badge: 
 
 const Blog = () => {
   const { data: blogPosts = [], isLoading } = useBlogPosts();
-  const posts = blogPosts.slice(0, 6);
+  const posts = blogPosts.slice(0, 8);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const scroll = (dir: number) => {
+    const el = trackRef.current;
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
 
   return (
-    <section id="blog" className="py-24 px-6">
+    <section id="blog" className="py-14 md:py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...fade(0)} className="text-center mb-12">
+        <motion.div {...fade(0)} className="text-center mb-8">
           <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-4">
             Блог и гайды
           </span>
@@ -51,77 +57,51 @@ const Blog = () => {
           </p>
         </motion.div>
 
-        {/* Featured pillar guides — самые большие материалы, прокладывают внутренние ссылки */}
-        <motion.div {...fade(0.05)} className="mb-14 grid sm:grid-cols-3 gap-4">
-          {PILLAR_GUIDES.map((g) => (
-            <Link
-              key={g.slug}
-              to={`/blog/${g.slug}`}
-              className="group relative rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 p-5 hover:border-primary/40 hover:shadow-lg transition-all"
-            >
-              <span className="inline-block px-2 py-0.5 rounded-full bg-primary/10 text-[10px] font-semibold uppercase tracking-wider text-primary mb-3">
-                {g.badge}
-              </span>
-              <h3 className="font-semibold text-base leading-snug group-hover:text-primary transition-colors">
-                {g.title}
-              </h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                {g.description}
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                Открыть гайд <ArrowRight className="w-3 h-3" />
-              </span>
-            </Link>
-          ))}
-        </motion.div>
-
-
         {isLoading ? (
           <div className="flex justify-center py-12">
             <Loader2 className="w-6 h-6 animate-spin text-primary" />
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post, i) => (
-              <motion.div key={post.id} {...fade(0.05 * (i + 1))}>
+          <div className="relative">
+            <div className="hidden md:flex absolute -top-14 right-0 gap-2">
+              <button type="button" aria-label="Предыдущие статьи" onClick={() => scroll(-1)} className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center hover:border-primary/40 hover:text-primary transition-colors">
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button type="button" aria-label="Следующие статьи" onClick={() => scroll(1)} className="w-9 h-9 rounded-full border border-border bg-card flex items-center justify-center hover:border-primary/40 hover:text-primary transition-colors">
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+            <div ref={trackRef} className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3 -mx-6 px-6 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {posts.map((post) => (
                 <Link
+                  key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="group glass rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-lg block h-full"
+                  className="group snap-start shrink-0 w-[78%] sm:w-[45%] lg:w-[31%] glass rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-lg block"
                 >
                   <div className="aspect-[16/10] overflow-hidden">
-                    <BlogCover
-                      slug={post.slug}
-                      title={post.title}
-                      tag={post.tags?.[0]}
-                      className="group-hover:scale-105 transition-transform duration-500"
-                    />
+                    <BlogCover slug={post.slug} title={post.title} tag={post.tags?.[0]} className="group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <div className="p-5">
-                    <time className="text-xs text-muted-foreground">
-                      {new Date(post.date).toLocaleDateString("ru", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </time>
-                    <h3 className="mt-2 font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h3>
-                    <p className="mt-2 text-xs text-muted-foreground line-clamp-2">
-                      {post.description}
-                    </p>
-                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                      Читать <ArrowRight className="w-3 h-3" />
-                    </span>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>
+                    <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">{post.description}</p>
                   </div>
                 </Link>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
-        {blogPosts.length > 6 && (
-          <motion.div {...fade(0.3)} className="mt-10 text-center">
+        <motion.div {...fade(0.05)} className="mt-6 flex flex-wrap items-center justify-center gap-2">
+          <span className="text-sm text-muted-foreground mr-1">Гайды:</span>
+          {PILLAR_GUIDES.map((g) => (
+            <Link key={g.slug} to={`/blog/${g.slug}`} title={g.description} className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors">
+              {g.title}
+            </Link>
+          ))}
+        </motion.div>
+
+        {blogPosts.length > 0 && (
+          <motion.div {...fade(0.3)} className="mt-6 text-center">
             <Link
               to="/blog"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
