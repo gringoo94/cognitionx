@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, Globe, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { trackCta } from "@/lib/trackCta";
 const heroPhoto = "/hero-photo.webp";
 const heroPhotoAvif = "/hero-photo.avif";
@@ -41,15 +41,6 @@ const Hero = () => (
           Тревога, подавленность, выгорание или сложности в отношениях? На консультации разберём, что с вами происходит и какой следующий шаг подойдёт вам.
         </motion.p>
 
-        <motion.div
-          {...fade(0.15)}
-          className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground"
-        >
-          <span className="font-semibold text-foreground">45 € за консультацию</span>
-          <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" />50 минут</span>
-          <span className="inline-flex items-center gap-1.5"><Globe className="h-4 w-4" />Онлайн</span>
-          <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4" />Кишинёв</span>
-        </motion.div>
 
         <motion.div {...fade(0.2)} className="mt-7">
           <Button size="lg" className="h-auto min-h-12 w-full sm:w-auto gap-2 whitespace-normal rounded-lg px-6 py-3 text-base" asChild>
