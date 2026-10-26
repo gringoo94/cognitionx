@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Convert education into a carousel roadmap with expandable stage details and certificates
+
 - [x] Show multiple About carousel cards with a visible preview of the next card
 
 - [x] Unify booking buttons on /booking and replace homepage form with a consultation offer
