@@ -9,8 +9,6 @@ import { testimonialsSchema, homeFaqSchema } from "@/data/homeSchemas";
 // Below-the-fold sections are code-split and mounted only when they approach
 // the viewport → smaller initial bundle, less main-thread work, lower TBT.
 const About = lazy(() => import("@/components/About"));
-const AboutDetailed = lazy(() => import("@/components/AboutDetailed"));
-const AboutEvidence = lazy(() => import("@/components/AboutEvidence"));
 const Approach = lazy(() => import("@/components/Approach"));
 const Specializations = lazy(() => import("@/components/Specializations"));
 const Expectations = lazy(() => import("@/components/Expectations"));
@@ -144,9 +142,7 @@ const Index = () => (
     <main>
       <Hero />
       <TelegramCTA />
-      <LazySection id="about" minHeight={620}><About /></LazySection>
-      <LazySection minHeight={900}><AboutDetailed /></LazySection>
-      <LazySection minHeight={520}><AboutEvidence /></LazySection>
+      <LazySection id="about" minHeight={620}><About showCredentials /></LazySection>
       <LazySection id="approach" minHeight={620}><Approach /></LazySection>
       <LazySection id="specs" minHeight={620}><Specializations /></LazySection>
       <LazySection minHeight={560}><Expectations /></LazySection>
