@@ -29,10 +29,29 @@ type AboutProps = {
 };
 
 const DEFAULT_TEXT =
-  "Я клинический психолог, работаю в КПТ и схема-терапии. Ко мне приходят с тревогой, апатией и выгоранием — когда сил тянуть дальше уже нет. Мы разбираем, что именно вас держит, и шаг за шагом собираем опору. Без оценок и советов «просто соберись».";
+  "Я клинический психолог и когнитивно-поведенческий терапевт. Ко мне приходят с тревогой, апатией, выгоранием и трудностями в отношениях — часто тогда, когда сил справляться самому уже не осталось. В работе я соединяю тёплый, человеческий контакт с методами, эффективность которых подтверждена исследованиями.";
 
 const DEFAULT_QUOTE =
   "«Каждый человек способен измениться — нужно только безопасное пространство и подходящие инструменты».";
+
+const PRINCIPLES = [
+  {
+    title: "Научно обоснованные методы",
+    text: "Опираюсь на КПТ и схема-терапию — подходы с доказанной эффективностью при тревоге, депрессии и выгорании.",
+  },
+  {
+    title: "Понятная работа",
+    text: "Объясняю, что мы делаем и зачем. Вместе ставим цели и отслеживаем, что меняется.",
+  },
+  {
+    title: "Уважение без оценок",
+    text: "Никаких советов «просто соберись». Иду в вашем темпе и бережно отношусь к тому, что вы рассказываете.",
+  },
+  {
+    title: "Профессиональный контроль",
+    text: "Регулярно прохожу супервизию и продолжаю учиться, чтобы помощь оставалась качественной.",
+  },
+];
 
 const About = ({
   heading = "Меня зовут Дмитрий",
@@ -42,14 +61,12 @@ const About = ({
   ctaLabel = "Записаться на консультацию",
   ctaTo = "/booking",
 }: AboutProps = {}) => (
-  <section id="about" className="bg-foreground text-background">
-    <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
-      <div className="grid md:grid-cols-[minmax(0,18rem)_1fr] gap-10 md:gap-14 items-center">
-        {/* Фото */}
-        <motion.div {...fade()} className="flex justify-center md:justify-start">
-          <div className="relative">
-            <div className="absolute -inset-3 rounded-3xl bg-primary/20 blur-2xl" />
-            <div className="relative w-56 h-64 sm:w-64 sm:h-80 md:w-72 md:h-[22rem] rounded-3xl overflow-hidden shadow-2xl">
+  <section id="about" className="bg-background text-foreground">
+    <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
+      <div className="grid md:grid-cols-[minmax(0,20rem)_1fr] gap-10 md:gap-16 items-start">
+        <motion.div {...fade()} className="flex justify-center md:justify-start md:sticky md:top-24">
+          <div className="w-full max-w-xs">
+            <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
               <img
                 src={aboutPhoto}
                 alt="Психолог Дмитрий Яцко — КПТ и схема-терапия, консультации онлайн и очно"
@@ -59,59 +76,53 @@ const About = ({
                 width={675}
                 height={900}
               />
-
             </div>
+            {quote && (
+              <blockquote className="mt-5 border-l-2 border-primary pl-4 text-sm leading-relaxed text-muted-foreground italic">
+                {quote}
+              </blockquote>
+            )}
           </div>
         </motion.div>
 
-        {/* Текст */}
-        <div className="text-center md:text-left">
-          <motion.h2
-            {...fade(0.05)}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight"
-          >
+        <div>
+          <motion.p {...fade(0.05)} className="text-sm font-semibold uppercase tracking-wide text-primary">
+            Обо мне
+          </motion.p>
+          <motion.h2 {...fade(0.05)} className="mt-2 text-3xl md:text-4xl font-bold leading-tight">
             {heading}
           </motion.h2>
-          <motion.p
-            {...fade(0.1)}
-            className="mt-5 text-base sm:text-lg leading-relaxed opacity-80"
-          >
+          <motion.p {...fade(0.1)} className="mt-5 text-base sm:text-lg leading-relaxed text-muted-foreground">
             {text}
           </motion.p>
-          {quote && (
-            <motion.blockquote
-              {...fade(0.15)}
-              className="mt-6 text-sm sm:text-base leading-relaxed opacity-60 italic"
-            >
-              {quote}
-            </motion.blockquote>
-          )}
 
-          <motion.ul
-            {...fade(0.2)}
-            className="mt-6 flex flex-wrap justify-center md:justify-start gap-2"
-          >
+          <motion.h3 {...fade(0.15)} className="mt-10 text-lg font-semibold">
+            Как я работаю
+          </motion.h3>
+          <motion.ul {...fade(0.15)} className="mt-4 grid gap-4 sm:grid-cols-2">
+            {PRINCIPLES.map((p) => (
+              <li key={p.title} className="rounded-xl border border-border bg-muted/40 p-5">
+                <p className="font-semibold">{p.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+              </li>
+            ))}
+          </motion.ul>
+
+          <motion.ul {...fade(0.2)} className="mt-6 flex flex-wrap gap-2">
             {chips.map((chip) => (
-              <li
-                key={chip}
-                className="rounded-full border border-background/25 px-3 py-1 text-xs sm:text-sm opacity-80"
-              >
+              <li key={chip} className="rounded-full border border-border px-3 py-1 text-xs sm:text-sm text-muted-foreground">
                 {chip}
               </li>
             ))}
           </motion.ul>
           <motion.div {...fade(0.25)} className="mt-8">
-            <Button asChild size="lg" variant="secondary">
-              <Link
-                to={ctaTo}
-                onClick={() => trackContact("about_free_consultation")}
-              >
+            <Button asChild size="lg">
+              <Link to={ctaTo} onClick={() => trackContact("about_free_consultation")}>
                 {ctaLabel}
               </Link>
             </Button>
           </motion.div>
         </div>
-
       </div>
     </div>
   </section>
