@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { trackContact } from "@/lib/metaPixel";
 import aboutPhotoAsset from "@/assets/about-photo.jpg.asset.json";
 
@@ -85,7 +86,7 @@ const About = ({
           </div>
         </motion.div>
 
-        <div>
+        <div className="min-w-0">
           <motion.p {...fade(0.05)} className="text-sm font-semibold uppercase tracking-wide text-primary">
             Обо мне
           </motion.p>
@@ -96,17 +97,44 @@ const About = ({
             {text}
           </motion.p>
 
-          <motion.h3 {...fade(0.15)} className="mt-10 text-lg font-semibold">
-            Как я работаю
-          </motion.h3>
-          <motion.ul {...fade(0.15)} className="mt-4 grid gap-4 sm:grid-cols-2">
-            {PRINCIPLES.map((p) => (
-              <li key={p.title} className="rounded-xl border border-border bg-muted/40 p-5">
-                <p className="font-semibold">{p.title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
-              </li>
-            ))}
-          </motion.ul>
+          <motion.div {...fade(0.15)} className="mt-8">
+            <Carousel opts={{ align: "start" }} aria-label="Как я работаю">
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <h3 className="text-lg font-semibold">Как я работаю</h3>
+                <div className="flex shrink-0 gap-2">
+                  <CarouselPrevious
+                    className="static translate-x-0 translate-y-0 rounded-md"
+                    aria-label="Предыдущий пункт"
+                    title="Предыдущий пункт"
+                  />
+                  <CarouselNext
+                    className="static translate-x-0 translate-y-0 rounded-md"
+                    aria-label="Следующий пункт"
+                    title="Следующий пункт"
+                  />
+                </div>
+              </div>
+              <CarouselContent>
+                {PRINCIPLES.map((p, index) => (
+                  <CarouselItem
+                    key={p.title}
+                    className="basis-[88%] sm:basis-[46%]"
+                    aria-label={`${index + 1} из ${PRINCIPLES.length}`}
+                  >
+                    <div className="h-full min-h-56 rounded-lg border border-border bg-muted/40 p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <p className="font-semibold">{p.title}</p>
+                        <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+                          {index + 1} / {PRINCIPLES.length}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </motion.div>
 
           <motion.ul {...fade(0.2)} className="mt-6 flex flex-wrap gap-2">
             {chips.map((chip) => (
