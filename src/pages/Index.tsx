@@ -16,7 +16,6 @@ const Specializations = lazy(() => import("@/components/Specializations"));
 const Expectations = lazy(() => import("@/components/Expectations"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
 const Pricing = lazy(() => import("@/components/Pricing"));
-const Ethics = lazy(() => import("@/components/Ethics"));
 const Projects = lazy(() => import("@/components/Projects"));
 const SessionPrep = lazy(() => import("@/components/SessionPrep"));
 const Blog = lazy(() => import("@/components/Blog"));
