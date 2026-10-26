@@ -116,8 +116,12 @@ const About = ({
               </div>
               <CarouselContent>
                 {PRINCIPLES.map((p, index) => (
-                  <CarouselItem key={p.title} aria-label={`${index + 1} из ${PRINCIPLES.length}`}>
-                    <div className="h-full min-h-48 sm:min-h-36 rounded-lg border border-border bg-muted/40 p-5">
+                  <CarouselItem
+                    key={p.title}
+                    className="basis-[88%] sm:basis-[46%]"
+                    aria-label={`${index + 1} из ${PRINCIPLES.length}`}
+                  >
+                    <div className="h-full min-h-56 rounded-lg border border-border bg-muted/40 p-5">
                       <div className="flex items-start justify-between gap-4">
                         <p className="font-semibold">{p.title}</p>
                         <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
