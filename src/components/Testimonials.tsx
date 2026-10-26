@@ -20,8 +20,8 @@ const fade = (delay = 0) => ({
 });
 
 const Testimonials = () => (
-  <section className="max-w-6xl mx-auto px-6 py-24 md:py-32">
-    <motion.div {...fade()} className="text-center mb-14">
+  <section className="max-w-6xl mx-auto px-6 py-14 md:py-20">
+    <motion.div {...fade()} className="text-center mb-8">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
         Отзывы клиентов
       </h2>
@@ -36,7 +36,7 @@ const Testimonials = () => (
     >
       <CarouselContent className="-ml-4">
         {testimonials.map((t, i) => (
-          <CarouselItem key={i} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={i} className="pl-4 basis-[85%] md:basis-1/2 lg:basis-[38%]">
             <div className="relative rounded-2xl border border-border bg-card p-6 flex flex-col gap-4 h-full">
               <Quote className="w-5 h-5 text-primary/40" />
               <p className="text-sm leading-relaxed text-muted-foreground flex-1">
