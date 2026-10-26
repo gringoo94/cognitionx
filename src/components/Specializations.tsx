@@ -11,13 +11,18 @@ const fade = (delay = 0) => ({
 });
 
 const problems = [
-  { title: "Тревога и панические атаки", desc: "Постоянное беспокойство, навязчивые мысли, ощущение что вот-вот случится что-то плохое", icon: AlertCircle, slug: "anxiety" },
+  { title: "Тревожные расстройства", desc: "Постоянное беспокойство, панические атаки, ощущение что вот-вот случится что-то плохое", icon: AlertCircle, slug: "anxiety" },
   { title: "Депрессия", desc: "Нет сил, ничего не радует, утром не хочется вставать — и это длится неделями", icon: CloudRain, slug: "depression" },
-  { title: "Выгорание", desc: "Работа высасывает все силы, а на жизнь их уже не остаётся", icon: Flame, slug: "burnout" },
-  { title: "Отношения", desc: "Конфликты, обиды, ощущение что вас не слышат — или невозможность уйти", icon: Heart, slug: "co-dependency" },
-  { title: "Самооценка", desc: "Постоянная самокритика, ощущение что вы хуже других, синдром самозванца", icon: Shield, slug: "self-esteem" },
-  { title: "Стресс и адаптация", desc: "Переезд, увольнение, развод — когда всё навалилось и непонятно как справляться", icon: Sparkles, slug: "stress" },
   { title: "Зависимости", desc: "Алкоголь, вещества, поведенческие зависимости — когда хочется остановиться, но не получается", icon: Wine, slug: "addiction" },
+  { title: "ОКР", desc: "Навязчивые мысли и ритуалы, которые отнимают время и не дают покоя", icon: Brain, slug: "ocd" },
+];
+
+const otherTopics = [
+  { title: "Панические атаки", slug: "panic-attacks", icon: Sparkles },
+  { title: "Выгорание", slug: "burnout", icon: Flame },
+  { title: "Отношения и созависимость", slug: "co-dependency", icon: Heart },
+  { title: "Самооценка", slug: "self-esteem", icon: Shield },
+  { title: "Стресс и адаптация", slug: "stress", icon: Sparkles },
 ];
 
 const methods = [
@@ -58,18 +63,35 @@ const Specializations = () => (
       {problems.map((s) => (
         <Card key={s.slug} item={s} />
       ))}
-      <motion.div {...fade(0)} className="h-full rounded-2xl bg-primary/5 border border-primary/30 p-5 flex flex-col gap-3">
-        <h3 className="text-base font-bold">Не нашли свою тему?</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+    </div>
+
+    <motion.div {...fade()} className="mt-5 flex flex-wrap items-center justify-center gap-2">
+      <span className="text-sm text-muted-foreground mr-1">Также работаю с:</span>
+      {otherTopics.map((t) => (
+        <Link
+          key={t.slug}
+          to={`/${t.slug}`}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
+        >
+          <t.icon className="w-3.5 h-3.5 text-primary" />
+          {t.title}
+        </Link>
+      ))}
+    </motion.div>
+
+    <motion.div {...fade(0)} className="mt-6 rounded-2xl bg-primary/5 border border-primary/30 p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+      <div className="flex-1">
+        <h3 className="text-base md:text-lg font-bold">Не нашли свою тему?</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-1">
           На консультации разберём ваш запрос и решим, чем я могу помочь.
         </p>
-        <Button size="sm" className="gap-1.5 self-start" asChild>
-          <Link to="/booking">
-            Записаться <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </Button>
-      </motion.div>
-    </div>
+      </div>
+      <Button size="sm" className="gap-1.5 self-start sm:self-center" asChild>
+        <Link to="/booking">
+          Записаться <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </Button>
+    </motion.div>
 
     <motion.div {...fade()} className="mt-10 flex flex-wrap items-center justify-center gap-2">
       <span className="text-sm text-muted-foreground mr-1">Методы:</span>
