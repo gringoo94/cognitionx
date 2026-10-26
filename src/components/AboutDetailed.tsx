@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ShieldCheck, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { ShieldCheck, Globe2, Users } from "lucide-react";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -9,190 +8,208 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
-type Stage = {
-  period: string;
-  title: string;
-  text: string;
-  details: string[];
-};
-
-const stages: Stage[] = [
+const timeline = [
   {
     period: "2013 — 2016",
     title: "МолдГУ, лиценциат по психологии",
-    text: "Квалификация «психолог», академическая база.",
-    details: ["Лиценциат по психологии — МолдГУ"],
-  },
-  {
-    period: "2021 — 2024",
-    title: "КПТ и КПТ депрессии",
-    text: "Базовый курс и специалитет по депрессии.",
-    details: [
-      "Когнитивно-поведенческая терапия, базовый курс — CBTLAB, 36 ч",
-      "КПТ депрессии: 1 ступень — CBTLAB, 12 ч",
-      "КПТ депрессии: 2 ступень (специалитет) — CBTLAB, 16 ч",
-    ],
-  },
-  {
-    period: "2024",
-    title: "Клинические протоколы APA",
-    text: "Тревога, настроение, зависимости.",
-    details: [
-      "Anxiety and Related Disorders — APA PsycLearn, 20 ч",
-      "Depressive and Bipolar Disorders — APA PsycLearn, 20 ч",
-      "Psychology of Anxiety, Mood, Substance Use and Addictive Behaviors — APA, 50 ч",
-      "Disorders Due to Substance Use and Addictive Behaviors — APA PsycLearn, 20 ч",
-    ],
-  },
-  {
-    period: "2025 — 2026",
-    title: "Доказательная практика и безопасность",
-    text: "Белорусское общество КПТ, UNICEF, конференции.",
-    details: [
-      "Научно обоснованная практика: КПТ и вызовы современности — Белорусское общество КПТ, 30 ч",
-      "Предотвращение сексуальной эксплуатации и надругательств — UNICEF, 30 ч",
-      "«В объятиях Тифона» — работа с опасным поведением — В 4 Стенах, 30 ч",
-    ],
-  },
-  {
-    period: "Практика",
-    title: "MedHub, Without Prejudice и онлайн",
-    text: "Зависимости, беженцы войны, люди с ВИЧ, группы.",
-    details: [
-      "Клиника MedHub (Кишинёв): зависимости и созависимость",
-      "Initiativa Pozitiva: групповая терапия, люди с ВИЧ",
-      "Without Prejudice: работа с беженцами войны, кризисная помощь",
-    ],
+    text: "Квалификация «психолог». Фундаментальная академическая база.",
   },
   {
     period: "Сейчас",
     title: "Магистратура по клинической психологии",
-    text: "Углублённая клиническая подготовка и супервизии.",
-    details: ["Магистратура по клинической психологии", "Регулярные супервизии"],
+    text: "Углублённая клиническая подготовка.",
+  },
+  {
+    period: "2021 — 2026",
+    title: "КПТ, схема-терапия и клинические протоколы",
+    text: "CBTLAB, APA PsycLearn, Белорусское общество КПТ, UNICEF\u00a0",
+  },
+  {
+    period: "Практика",
+    title: "Клиника MedHub (Кишинёв) и онлайн",
+    text: "Зависимости и созависимость, беженцы войны, люди с ВИЧ, групповая терапия (Initiativa Pozitiva).",
+  },
+  {
+    period: "Практика",
+    title: "Without Prejudice",
+    text: "Волонтёрство и работа с беженцами войны, кризисная помощь.",
   },
 ];
 
-const methods = ["КПТ", "Схема-терапия", "ACT", "MI", "Smart Recovery", "Травматерапия", "Сексология"];
+const certificates = [
+  { year: "2023", title: "Когнитивно-поведенческая терапия, базовый курс", org: "CBTLAB", hours: "36 ч" },
+  { year: "2024", title: "КПТ депрессии: 1 ступень", org: "CBTLAB", hours: "12 ч" },
+  { year: "2024", title: "КПТ депрессии: 2 ступень (специалитет)", org: "CBTLAB", hours: "16 ч" },
+  { year: "2024", title: "Anxiety and Related Disorders", org: "APA PsycLearn", hours: "20 ч" },
+  { year: "2024", title: "Depressive and Bipolar Disorders", org: "APA PsycLearn", hours: "20 ч" },
+  { year: "2024", title: "Psychology of Anxiety, Mood, Substance Use and Addictive Behaviors", org: "APA", hours: "50 ч" },
+  { year: "2024", title: "Disorders Due to Substance Use and Addictive Behaviors", org: "APA PsycLearn", hours: "20 ч" },
+  { year: "2025", title: "Научно обоснованная практика: КПТ и вызовы современности", org: "Белорусское общество КПТ", hours: "30 ч" },
+  { year: "2025", title: "Предотвращение сексуальной эксплуатации и надругательств", org: "UNICEF", hours: "30 ч" },
+  { year: "2026", title: "«В объятиях Тифона» — конференция по работе с опасным поведением", org: "В 4 Стенах", hours: "30 ч" },
+];
 
-const AboutDetailed = () => {
-  const [open, setOpen] = useState<number | null>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+const methods = [
+  "КПТ",
+  "Схема-терапия",
+  "ACT",
+  "Мотивационное интервьюирование (MI)",
+  "Smart Recovery",
+  "Травматерапия",
+  "Сексология",
+];
 
-  const scroll = (dir: number) => {
-    const el = trackRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
-  };
+const trust = [
+  {
+    icon: ShieldCheck,
+    title: "Верифицирован на B17.ru",
+    text: "Все дипломы и сертификаты проверены платформой B17.ru.",
+    href: "https://www.b17.ru/dumitru_iatco/",
+  },
+  {
+    icon: Globe2,
+    title: "Стандарты EABCT",
+    text: "Практика по международным стандартам Европейской ассоциации КПТ.",
+  },
+  {
+    icon: Users,
+    title: "Супервизии и сообщество",
+    text: "Регулярные супервизии. Основатель Rolelit — тренажёра для психологов.",
+  },
+];
 
-  return (
-    <section className="max-w-5xl mx-auto px-6 py-12 md:py-16">
-      <motion.div {...fade()} className="flex items-end justify-between gap-4 mb-6">
+const AboutDetailed = () => (
+  <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
+    <motion.div {...fade()} className="text-center mb-10">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+        Образование и профессиональное развитие
+      </h2>
+      <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
+        Прозрачность — часть моей профессиональной этики
+      </p>
+      <div className="mt-6 h-1 w-20 rounded-full bg-primary/20 mx-auto" />
+    </motion.div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      {/* Таймлайн */}
+      <div className="lg:col-span-7 space-y-10">
         <div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-            Образование и профессиональное развитие
-          </h2>
-          <p className="text-muted-foreground mt-2 text-sm md:text-base">
-            Нажмите на этап, чтобы увидеть сертификаты
-          </p>
-        </div>
-        <div className="hidden sm:flex gap-2 shrink-0">
-          <button
-            type="button"
-            aria-label="Предыдущие этапы"
-            onClick={() => scroll(-1)}
-            className="rounded-full border border-border bg-background p-2 hover:bg-muted transition-colors"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label="Следующие этапы"
-            onClick={() => scroll(1)}
-            className="rounded-full border border-border bg-background p-2 hover:bg-muted transition-colors"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-      </motion.div>
-
-      <div className="relative">
-        <div className="absolute left-0 right-0 top-[11px] h-px bg-border" aria-hidden />
-        <div
-          ref={trackRef}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 scrollbar-none [scrollbar-width:none]"
-        >
-          {stages.map((s, i) => {
-            const active = open === i;
-            return (
-              <div key={s.title} className="snap-start shrink-0 w-[82%] sm:w-[44%] lg:w-[40%]">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6">
+            Академический путь
+          </h3>
+          <div className="relative space-y-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-border">
+            {timeline.map((item, i) => (
+              <motion.div key={item.title} {...fade(0.05 * i)} className="relative pl-10">
                 <span
-                  className={`relative block h-[23px] w-[23px] rounded-full border-4 border-background shadow-sm ${
-                    active ? "bg-primary" : "bg-primary/50"
-                  }`}
+                  className="absolute left-0 top-1 h-[23px] w-[23px] rounded-full border-4 border-background bg-primary shadow-sm"
+                  style={{ opacity: 1 - i * 0.2 }}
                 />
-                <button
-                  type="button"
-                  aria-expanded={active}
-                  aria-controls="roadmap-details"
-                  onClick={() => setOpen(active ? null : i)}
-                  className={`mt-3 w-full text-left rounded-xl border p-4 transition-colors ${
-                    active ? "border-primary bg-primary/5" : "border-border bg-muted/30 hover:bg-muted/60"
-                  }`}
-                >
-                  <span className="text-xs font-medium text-muted-foreground">{s.period}</span>
-                  <h3 className="text-base font-semibold mt-0.5">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{s.text}</p>
-                  <span className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                    {active ? "Свернуть" : "Подробнее"}
-                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${active ? "rotate-180" : ""}`} />
-                  </span>
-                </button>
-              </div>
-            );
-          })}
+                <span className="text-xs font-medium text-muted-foreground">{item.period}</span>
+                <h4 className="text-base md:text-lg font-semibold mt-0.5">{item.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
+
+        <motion.details {...fade(0.1)} className="group rounded-xl border border-border bg-muted/30 p-5">
+          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+            ДИПЛОМЫ И СЕРТИФИКАТЫ — ПОКАЗАТЬ
+          </summary>
+          <ul className="mt-4 space-y-3">
+            {certificates.map((c) => (
+              <li key={c.title} className="text-xs leading-relaxed text-foreground/80">
+                {c.title}
+                <span className="text-muted-foreground"> — {c.org}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.details>
+
+        <motion.details {...fade(0.15)} className="group rounded-xl border border-border bg-muted/30 p-5">
+          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-wider text-primary marker:content-none">
+            МЕТОДЫ И ПОДХОДЫ — ПОКАЗАТЬ
+          </summary>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {methods.map((m) => (
+              <li
+                key={m}
+                className="rounded-lg border border-border bg-muted px-4 py-2 text-sm font-medium text-foreground/80"
+              >
+                {m}
+              </li>
+            ))}
+          </ul>
+        </motion.details>
+
       </div>
 
-      <div id="roadmap-details" aria-live="polite">
-        <AnimatePresence initial={false}>
-          {open !== null && (
-            <motion.div
-              key={open}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden"
-            >
-              <ul className="mt-4 rounded-xl border border-border bg-muted/30 p-5 space-y-2">
-                {stages[open].details.map((d) => (
-                  <li key={d} className="text-sm text-foreground/80">
-                    {d}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <motion.div {...fade(0.1)} className="mt-6 flex flex-wrap items-center gap-2">
-        {methods.map((m) => (
-          <span key={m} className="rounded-lg border border-border bg-muted px-3 py-1.5 text-xs font-medium text-foreground/80">
-            {m}
-          </span>
-        ))}
-        <a
-          href="https://www.b17.ru/dumitru_iatco/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-auto inline-flex items-center gap-1.5 text-sm font-medium text-primary underline underline-offset-2 hover:no-underline"
+      {/* Доверие */}
+      <div className="lg:col-span-5 space-y-8">
+        <motion.div
+          {...fade(0.1)}
+          className="rounded-2xl border border-border bg-muted/40 p-7 shadow-sm"
         >
-          <ShieldCheck className="h-4 w-4" />
-          Дипломы проверены на B17.ru
-        </a>
-      </motion.div>
-    </section>
-  );
-};
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6">
+            Стандарты и верификация
+          </h3>
+          <ul className="space-y-6">
+            {trust.map((t) => (
+              <li key={t.title} className="flex items-start gap-4">
+                <div className="mt-0.5 rounded-lg bg-background p-2 shadow-sm">
+                  <t.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold">
+                    {t.href ? (
+                      <a
+                        href={t.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors"
+                      >
+                        {t.title}
+                      </a>
+                    ) : (
+                      t.title
+                    )}
+                  </h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+                    {t.text}
+                    {t.href && (
+                      <>
+                        {" "}
+                        <a
+                          href={t.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-primary underline underline-offset-2 hover:no-underline"
+                        >
+                          Смотреть профиль
+                        </a>
+                      </>
+                    )}
+                  </p>
+
+                </div>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div {...fade(0.15)} className="rounded-r-xl border-l-4 border-primary bg-primary/5 p-6">
+          <h4 className="text-sm font-semibold mb-2">Профессиональные интересы</h4>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Доказательная психотерапия и её популяризация, цифровые инструменты для психического
+            здоровья, психообразование и self-help на основе КПТ.
+          </p>
+          <p className="text-xs italic text-muted-foreground/80 mt-3">
+            «Обучение не заканчивается — оно продолжается с каждым новым человеком на сессии»
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  </section>
+);
 
 export default AboutDetailed;
