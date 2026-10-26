@@ -63,18 +63,35 @@ const Specializations = () => (
       {problems.map((s) => (
         <Card key={s.slug} item={s} />
       ))}
-      <motion.div {...fade(0)} className="h-full rounded-2xl bg-primary/5 border border-primary/30 p-5 flex flex-col gap-3">
-        <h3 className="text-base font-bold">Не нашли свою тему?</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+    </div>
+
+    <motion.div {...fade()} className="mt-5 flex flex-wrap items-center justify-center gap-2">
+      <span className="text-sm text-muted-foreground mr-1">Также работаю с:</span>
+      {otherTopics.map((t) => (
+        <Link
+          key={t.slug}
+          to={`/${t.slug}`}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium hover:border-primary/40 hover:text-primary transition-colors"
+        >
+          <t.icon className="w-3.5 h-3.5 text-primary" />
+          {t.title}
+        </Link>
+      ))}
+    </motion.div>
+
+    <motion.div {...fade(0)} className="mt-6 rounded-2xl bg-primary/5 border border-primary/30 p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+      <div className="flex-1">
+        <h3 className="text-base md:text-lg font-bold">Не нашли свою тему?</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-1">
           На консультации разберём ваш запрос и решим, чем я могу помочь.
         </p>
-        <Button size="sm" className="gap-1.5 self-start" asChild>
-          <Link to="/booking">
-            Записаться <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </Button>
-      </motion.div>
-    </div>
+      </div>
+      <Button size="sm" className="gap-1.5 self-start sm:self-center" asChild>
+        <Link to="/booking">
+          Записаться <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </Button>
+    </motion.div>
 
     <motion.div {...fade()} className="mt-10 flex flex-wrap items-center justify-center gap-2">
       <span className="text-sm text-muted-foreground mr-1">Методы:</span>
