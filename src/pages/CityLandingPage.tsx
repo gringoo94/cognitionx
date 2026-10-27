@@ -104,8 +104,11 @@ const CityLandingPage = () => {
   const businessSchema = buildGeoBusinessSchema(geoInput);
   const serviceSchema = buildGeoServiceSchema(geoInput);
 
+  // Only practical questions (time, payment, insurance, first session); max 4.
+  const outdatedFaq = /\/start|остр|кризис|параллельно|формата лучше|не уверен/i;
+  const visibleFaq = page.faq.filter((f) => !outdatedFaq.test(f.question + " " + f.answer)).slice(0, 4);
   // FAQPage разметка соответствует видимому FAQ-блоку ниже.
-  const faqSchema = buildFaqSchema(page.faq);
+  const faqSchema = buildFaqSchema(visibleFaq);
 
 
 
@@ -223,7 +226,7 @@ const CityLandingPage = () => {
                 {[
                   { value: "200+", label: "клиентов" },
                   { value: "5 лет", label: "опыта" },
-                  { value: page.timezone.split(" ")[0], label: "часовой пояс" },
+                  { value: "Онлайн", label: "на русском" },
                 ].map((s) => (
                   <div key={s.label} className="text-center">
                     <span className="block text-lg font-bold text-foreground">{s.value}</span>
@@ -260,31 +263,6 @@ const CityLandingPage = () => {
 
 
 
-        {/* ── Practical info bar ── */}
-        <section className="bg-foreground text-background">
-          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
-            <motion.div {...fade()} className="grid sm:grid-cols-3 gap-6 text-center sm:text-left">
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <Clock className="w-6 h-6 opacity-70" />
-                <p className="text-xs uppercase tracking-wider opacity-60">Часовой пояс</p>
-                <p className="text-sm font-semibold">{page.timezone}</p>
-                <p className="text-xs opacity-70">{page.utcOffset}</p>
-              </div>
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <Globe className="w-6 h-6 opacity-70" />
-                <p className="text-xs uppercase tracking-wider opacity-60">Формат</p>
-                <p className="text-sm font-semibold">Онлайн · Zoom</p>
-                <p className="text-xs opacity-70">На русском языке</p>
-              </div>
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <MessageCircle className="w-6 h-6 opacity-70" />
-                <p className="text-xs uppercase tracking-wider opacity-60">Оплата</p>
-                <p className="text-sm font-semibold">{page.currency}</p>
-                <p className="text-xs opacity-70">Wise, Revolut, перевод</p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
         <About />
 
@@ -321,53 +299,21 @@ const CityLandingPage = () => {
           </section>
         )}
 
-        {/* ── Help routes (local system + steps) ── */}
-        {page.helpRoutes && page.helpRoutes.length > 0 && (
+        {/* ── Local pain points ── */}
+        {page.painPoints.length > 0 && (
           <section className="bg-card border-y border-border">
-            <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
-              <motion.div {...fade()} className="text-center mb-12">
-                <Compass className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-                  Маршрут помощи в {page.country === "Германия" ? "Германии" : page.country === "Грузия" ? "Грузии" : page.country === "Молдова" ? "Молдове" : page.country === "Нидерланды" ? "Нидерландах" : page.country === "Португалия" ? "Португалии" : page.country}
-                </h2>
-                <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-                  Не каждому нужен именно я. Вот как выбрать формат под вашу ситуацию.
-                </p>
-              </motion.div>
-              <div className="space-y-3">
-                {page.helpRoutes.map((r, i) => (
-                  <motion.div
-                    key={i}
-                    {...fade(0.05 * i)}
-                    className={`rounded-xl border p-5 ${
-                      i === 0 ? "border-destructive/30 bg-destructive/5" : "border-border bg-background"
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      {i === 0 ? (
-                        <AlertTriangle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
-                      ) : (
-                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold shrink-0 mt-0.5">
-                          {i}
-                        </span>
-                      )}
-                      <div className="space-y-1.5">
-                        <h3 className="text-sm font-semibold">{r.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{r.text}</p>
-                      </div>
-                    </div>
+            <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
+              <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-10">
+                С чем часто приходят {page.cityFor.replace(/^для /, "из ")}
+              </motion.h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {page.painPoints.map((p, i) => (
+                  <motion.div key={i} {...fade(0.04 * i)} className="rounded-xl border border-border bg-background p-5">
+                    <h3 className="text-sm font-semibold mb-1.5">{p.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
                   </motion.div>
                 ))}
               </div>
-              {page.localSystem && (
-                <motion.div {...fade(0.3)} className="mt-8 rounded-xl border border-border bg-background p-5 text-xs text-muted-foreground leading-relaxed">
-                  <p className="font-semibold text-foreground mb-2">Контекст по страховке и системе</p>
-                  <p className="mb-1"><span className="font-medium text-foreground">Страховка:</span> {page.localSystem.insurance}</p>
-                  <p className="mb-1"><span className="font-medium text-foreground">Публичный путь:</span> {page.localSystem.publicRoute}</p>
-                  <p className="mb-1"><span className="font-medium text-foreground">Частный путь:</span> {page.localSystem.privateRoute}</p>
-                  <p className="mt-2 italic opacity-80">{page.localSystem.disclaimer}</p>
-                </motion.div>
-              )}
             </div>
           </section>
         )}
@@ -402,7 +348,7 @@ const CityLandingPage = () => {
           </motion.h2>
           <motion.div {...fade(0.1)} className="mt-10">
             <Accordion type="single" collapsible className="space-y-3">
-              {page.faq.map((faq, i) => (
+              {visibleFaq.map((faq, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
@@ -421,18 +367,6 @@ const CityLandingPage = () => {
         </section>
 
         <HomeBookingOffer />
-
-
-
-
-
-        {/* ── SEO footer ── */}
-        <section className="max-w-3xl mx-auto px-6 py-12 text-center border-t border-border">
-          <h2 className="text-base font-semibold text-muted-foreground mb-3">
-            Русскоязычный психолог {page.cityIn} онлайн
-          </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">{page.seoFooter}</p>
-        </section>
       </main>
       <Footer />
     </div>
