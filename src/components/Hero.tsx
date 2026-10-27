@@ -1,9 +1,52 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ZoomIn } from "lucide-react";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { trackCta } from "@/lib/trackCta";
 const heroPhoto = "/hero-photo.webp";
 const heroPhotoAvif = "/hero-photo.avif";
+
+const HeroPoster = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="flex justify-center">
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label="Открыть изображение в полном размере"
+        className="group relative w-64 sm:w-80 md:w-[22rem] lg:w-[26rem] aspect-[4/5] rounded-lg overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <picture>
+          <source srcSet={heroPhotoAvif} type="image/avif" />
+          <source srcSet={heroPhoto} type="image/webp" />
+          <img
+            src={heroPhoto}
+            alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
+            className="w-full h-full object-contain"
+            loading="eager"
+            {...({ fetchpriority: "high" } as any)}
+            width={1080}
+            height={1350}
+            decoding="async"
+          />
+        </picture>
+        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium text-foreground shadow-md">
+          <ZoomIn className="w-3.5 h-3.5" /> Увеличить
+        </span>
+      </button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-[min(95vw,calc(90vh*0.8))] p-0 overflow-hidden border-0 bg-transparent shadow-none">
+          <DialogTitle className="sr-only">Дмитрий Яцко — полный размер</DialogTitle>
+          <picture>
+            <source srcSet={heroPhotoAvif} type="image/avif" />
+            <img src={heroPhoto} alt="Дмитрий Яцко — полный размер" className="w-full h-auto max-h-[90vh] object-contain rounded-lg" width={1080} height={1350} />
+          </picture>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -71,27 +114,7 @@ const Hero = () => (
         </motion.div>
       </div>
 
-      {/* Photo — статическая разметка для быстрого LCP, без framer-motion обёртки */}
-      <div className="flex justify-center">
-        <div className="relative">
-          <div className="relative w-64 h-72 sm:w-80 sm:h-[22rem] md:w-[22rem] md:h-[28rem] lg:w-[26rem] lg:h-[32rem] rounded-lg overflow-hidden">
-            <picture>
-              <source srcSet={heroPhotoAvif} type="image/avif" />
-              <source srcSet={heroPhoto} type="image/webp" />
-              <img
-                src={heroPhoto}
-                alt="Фото психолога Дмитрия Яцко — КПТ-терапевт, консультации онлайн и очно"
-                className="w-full h-full object-cover object-top"
-                loading="eager"
-                {...({ fetchpriority: "high" } as any)}
-                width={1080}
-                height={1350}
-                decoding="async"
-              />
-            </picture>
-          </div>
-        </div>
-      </div>
+      <HeroPoster />
     </div>
   </section>
 );
