@@ -343,14 +343,13 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
   },
   "psiholog-moskva": {
     Icon: Brain,
-    badge: "Онлайн для Москвы и России",
+    badge: "Психотерапия онлайн",
     tagline:
-      "Работаю с русскоязычными клиентами из Москвы и всей России. Онлайн-формат: без пробок, очередей и привязки к району.",
+      "Когда дел много, своё состояние легко отложить. На встречах можно остановиться и разобраться, что сейчас требует внимания.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
       { label: "Длительность сессии", value: "50 минут", Icon: Clock },
       { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
-      { label: "Эффективность", value: "= очной", Icon: Award },
     ],
     trustChips: COMMON_TRUST,
     evidence: [
