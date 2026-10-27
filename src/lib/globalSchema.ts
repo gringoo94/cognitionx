@@ -8,7 +8,7 @@ const SAME_AS = [
   "https://t.me/gringoo94",
   "https://www.instagram.com/gringo.journal",
   "https://www.linkedin.com/in/dmitrii-iatco/",
-  "https://www.b17.ru/",
+  "https://www.b17.ru/dumitru_iatco/",
 ];
 
 export const personSchema = {
