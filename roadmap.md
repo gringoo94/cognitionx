@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Audit and soften problem, method and IT landing copy; preserve clinical safeguards and verify booking navigation
+- [x] Audit and soften problem, method and IT landing copy; preserve clinical safeguards and verify booking navigation
 
 - [x] Rewrite all city landing copy in short, warm paragraphs; verify mobile reading and booking links
 

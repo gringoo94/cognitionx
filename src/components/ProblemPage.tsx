@@ -475,7 +475,16 @@ const ProblemPage = () => {
   const scrollProgress = useScrollProgress();
 
   // Augment FAQ schema with common addons (price, online format)
-  const fullFaq = [...page.faq, ...COMMON_FAQ_ADDONS];
+  const fullFaq = [
+    ...page.faq,
+    ...COMMON_FAQ_ADDONS.filter((addon) =>
+      !page.faq.some((faq) =>
+        addon.question === "Работает ли терапия онлайн?"
+          ? /онлайн/i.test(faq.question)
+          : /сколько стоит|стоимость/i.test(faq.question),
+      ),
+    ),
+  ];
 
   const relatedPages = page.relatedPages
     .map((s) => problemPages.find((p) => p.slug === s))
