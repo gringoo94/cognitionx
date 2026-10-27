@@ -380,7 +380,7 @@ async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
       // Mirror only what the page shows: no time zones, local-system or expat blocks.
       const page = city || hub;
       lines.push(`## ${page.h1}`, "", `URL: ${SITE_URL}${r.path}`);
-      lines.push("", stripHtml(page.subtitle || ""), "", stripHtml(page.intro || ""));
+      lines.push("", stripHtml(page.subtitle || ""));
       if (hub?.cities?.length) {
         lines.push("", `Города: ${hub.cities.map((s: string) => `${SITE_URL}/${s}`).join(", ")}`);
       }
