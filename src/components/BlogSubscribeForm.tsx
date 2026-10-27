@@ -38,7 +38,7 @@ const BlogSubscribeForm = ({
     if (!parsed.success) {
       toast({
         title: "Проверьте email",
-        description: parsed.error.errors[0].message,
+        description: parsed.error.issues[0].message,
         variant: "destructive",
       });
       return;

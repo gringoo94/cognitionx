@@ -33,7 +33,7 @@ const schema = z.object({
   preferredTime: z.string().trim().max(200).optional().or(z.literal("")),
   topic: z.string().trim().max(2000).optional().or(z.literal("")),
   consent: z.literal(true, {
-    errorMap: () => ({ message: "Нужно согласие на обработку данных" }),
+    error: "Нужно согласие на обработку данных",
   }),
 });
 
@@ -235,7 +235,7 @@ const FreeConsultationPage = () => {
     if (!parsed.success) {
       toast({
         title: "Проверьте форму",
-        description: parsed.error.errors[0].message,
+        description: parsed.error.issues[0].message,
         variant: "destructive",
       });
       return;

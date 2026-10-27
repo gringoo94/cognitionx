@@ -22,21 +22,20 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "tag": {
-              "type": "string",
-              "description": "Optional tag filter (case-insensitive substring match)."
+              "description": "Optional tag filter (case-insensitive substring match).",
+              "type": "string"
             },
             "limit": {
+              "description": "Max number of posts to return (default 50).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 200,
-              "description": "Max number of posts to return (default 50)."
+              "maximum": 200
             }
-          },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          }
         },
         "outputSchema": null
       },
@@ -50,6 +49,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "slug": {
@@ -60,9 +60,7 @@
           },
           "required": [
             "slug"
-          ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          ]
         },
         "outputSchema": null
       },
@@ -76,15 +74,14 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "cluster": {
-              "type": "string",
-              "description": "Optional cluster filter: depression, anxiety, burnout, stress, self-esteem, it, cbt-tools, trauma, sleep, addiction, relationships, personality, eating."
+              "description": "Optional cluster filter: depression, anxiety, burnout, stress, self-esteem, it, cbt-tools, trauma, sleep, addiction, relationships, personality, eating.",
+              "type": "string"
             }
-          },
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          }
         },
         "outputSchema": null
       },
@@ -98,6 +95,7 @@
           "openWorldHint": false
         },
         "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "query": {
@@ -106,17 +104,15 @@
               "description": "Search query (Russian or English)."
             },
             "limit": {
+              "description": "Max results (default 10).",
               "type": "integer",
               "minimum": 1,
-              "maximum": 50,
-              "description": "Max results (default 10)."
+              "maximum": 50
             }
           },
           "required": [
             "query"
-          ],
-          "additionalProperties": false,
-          "$schema": "http://json-schema.org/draft-07/schema#"
+          ]
         },
         "outputSchema": null
       }
