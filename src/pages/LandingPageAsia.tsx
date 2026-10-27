@@ -10,14 +10,13 @@ import {
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
+import TelegramCTA from "@/components/TelegramCTA";
+import Pricing from "@/components/Pricing";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BookingForm from "@/components/BookingForm";
+import HomeBookingOffer from "@/components/HomeBookingOffer";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
 import { Badge } from "@/components/ui/badge";
-import Ethics from "@/components/Ethics";
-import Projects from "@/components/Projects";
-import SessionPrep from "@/components/SessionPrep";
 import Blog from "@/components/Blog";
 import Approach from "@/components/Approach";
 import AboutEvidence from "@/components/AboutEvidence";
@@ -123,7 +122,7 @@ const LandingPageAsia = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
       title="Психолог для экспатов в Азии онлайн — КПТ | Яцко"
-      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Первая встреча — бесплатно."
+      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Консультация 45 €, 50 минут."
       path="/psiholog-aziya"
       alternates={buildGeoAlternates("/psiholog-aziya", ["ID", "TH", "VN"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
@@ -167,18 +166,14 @@ const LandingPageAsia = () => (
               className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
             >
               <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-                <a href="/start">
-                  Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                <a href="/booking">
+                  Записаться на консультацию <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
               <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
                 <a href="#approach">Как я работаю</a>
               </Button>
             </motion.div>
-
-            <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground">
-              Короткий опросник на 3–5 минут. Я отправлю первичный разбор в Telegram. Без оплаты и обязательств.
-            </motion.p>
 
             <motion.div
               {...fade(0.25)}
@@ -217,24 +212,7 @@ const LandingPageAsia = () => (
         </div>
       </section>
 
-      {/* ── Telegram CTA ── */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="max-w-3xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium"
-          >
-            Запишитесь на консультацию — напишите в Telegram
-          </motion.p>
-          <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
-            <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">
-              <Send className="w-4 h-4" /> Написать в Telegram
-            </a>
-          </Button>
-        </div>
-      </section>
+      <TelegramCTA />
 
       {/* ── Pain Points ── */}
       <section className="bg-card border-y border-border">
@@ -321,96 +299,7 @@ const LandingPageAsia = () => (
 
       <Testimonials />
 
-      {/* ── Pricing ── */}
-      <section id="pricing" className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Стоимость</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              Прозрачные цены без скрытых платежей
-            </p>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {[
-              {
-                title: "Разовая консультация",
-                price: "45",
-                duration: "50 мин",
-                featured: true,
-                features: ["Работа в формате КПТ", "Домашние задания", "Поддержка между сессиями"],
-              },
-              {
-                title: "Регулярная терапия",
-                price: "40",
-                priceNote: "за сессию",
-                totalPrice: "При оплате от 4 сессий",
-                duration: "50 мин",
-                features: ["Дешевле разовой консультации", "Регулярная работа над запросом", "Приоритетная запись"],
-              },
-            ].map((p, i) => (
-              <motion.div
-                key={p.title}
-                {...fade(0.06 * i)}
-                className={`rounded-2xl p-6 md:p-8 flex flex-col border transition-colors ${
-                  p.featured
-                    ? "border-primary bg-primary text-primary-foreground shadow-lg"
-                    : (p as any).accent
-                    ? "border-accent bg-accent/5 hover:border-accent/60 shadow-md"
-                    : "border-border bg-background hover:border-primary/30"
-                }`}
-              >
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <p className={`text-xs uppercase tracking-widest font-medium ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                      {p.title}
-                    </p>
-                    {(p as any).badge && (
-                      <Badge variant="secondary" className="text-[10px] px-2 py-0">
-                        {(p as any).badge}
-                      </Badge>
-                    )}
-                  </div>
-                  <p className={`text-sm ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                    {p.duration}
-                  </p>
-                </div>
-                <div className="mt-6">
-                  <span className="text-4xl font-bold tracking-tight">{p.price}</span>
-                  <span className={`text-sm ml-1 ${p.featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                    €{(p as any).priceNote ? ` ${(p as any).priceNote}` : ""}
-                  </span>
-                  {(p as any).totalPrice && (
-                    <p className={`text-xs mt-1 ${p.featured ? "text-primary-foreground/60" : "text-muted-foreground/70"}`}>{(p as any).totalPrice}</p>
-                  )}
-                </div>
-                <ul className="mt-6 space-y-3 flex-1">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 text-accent`} />
-                      <span className={p.featured ? "text-primary-foreground/90" : "text-muted-foreground"}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  className={`mt-8 w-full ${
-                    p.featured ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90" : ""
-                  }`}
-                  variant={p.featured ? "default" : "outline"}
-                  asChild
-                >
-                  <a href="/booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
-                </Button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Ethics />
-
-      <Projects />
-
-      <SessionPrep />
+      <Pricing />
 
       <Blog />
 
@@ -448,7 +337,7 @@ const LandingPageAsia = () => (
         </motion.div>
       </section>
 
-      <BookingForm />
+      <HomeBookingOffer />
 
       {/* ── SEO footer block ── */}
       <section className="max-w-3xl mx-auto px-6 py-16 text-center">
