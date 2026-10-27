@@ -2,3 +2,4 @@
 - Meta event helpers are inert compatibility exports and the global Pixel install is removed; do not re-enable them without an eligibility review. Why: this healthcare site's page and conversion context can reveal sensitive information, including after client-side navigation.
 - The homepage uses HomeBookingOffer, not BookingForm; booking navigation targets /booking. Why: visitors should encounter a single consultation booking flow.
 - GEO landing FAQ uses a shared selector for visible answers and FAQ schema. Why: compact consultation information must stay consistent across cities, countries, and regional pages without duplicating the preparation guide.
+- City landing data contains only geography, search metadata, first-screen copy, practical FAQ and links; the Chisinau page reads this same source. Why: removed local marketing blocks must not survive as stale alternate copy.
