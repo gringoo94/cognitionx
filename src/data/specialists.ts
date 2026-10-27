@@ -63,7 +63,7 @@ export const specialists: Specialist[] = [
     languages: ["Русский"],
     formats: ["Онлайн"],
     price: TEAM_PRICE,
-    availability: "Ближайшие слоты — на этой неделе",
+    availability: "Время согласуем при записи",
     freeIntro: false,
   },
   {
@@ -94,7 +94,7 @@ export const specialists: Specialist[] = [
     languages: ["Русский", "Румынский"],
     formats: ["Онлайн", "Очно (Кишинёв)"],
     price: TEAM_PRICE,
-    availability: "Ближайшие слоты — на следующей неделе",
+    availability: "Время согласуем при записи",
     freeIntro: false,
   },
   {
@@ -129,7 +129,7 @@ export const specialists: Specialist[] = [
     languages: ["Русский", "Румынский"],
     formats: ["Онлайн", "Очно (Кишинёв)"],
     price: "Стоимость уточняется",
-    availability: "Ближайшие слоты — на следующей неделе",
+    availability: "Время согласуем при записи",
     freeIntro: false,
     isPsychiatrist: true,
     note:
@@ -200,7 +200,7 @@ export const specialists: Specialist[] = [
     freeIntro: false,
     acceptingNew: false,
     note:
-      "Настя временно не принимает новых клиентов. Возобновление записи планируется не раньше ноября 2026 года.",
+      "Запись к Насте через сайт сейчас закрыта — вы можете выбрать другого специалиста команды.",
   },
 ];
 
