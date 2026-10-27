@@ -3,3 +3,4 @@
 - The homepage uses HomeBookingOffer, not BookingForm; booking navigation targets /booking. Why: visitors should encounter a single consultation booking flow.
 - GEO landing FAQ uses a shared selector for visible answers and FAQ schema. Why: compact consultation information must stay consistent across cities, countries, and regional pages without duplicating the preparation guide.
 - City landing data contains only geography, search metadata, first-screen copy, practical FAQ and links; the Chisinau page reads this same source. Why: removed local marketing blocks must not survive as stale alternate copy.
+- Prerender injects each page's Helmet JSON-LD into the static HTML head, replacing the global index.html block (blog posts keep the plugin BlogPosting). Why: crawlers without JS must see page-specific schema.
