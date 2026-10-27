@@ -168,7 +168,7 @@ const SpecialistCard = ({
       </div>
     ) : (
       <Button className="mt-5 w-full rounded-lg mt-auto" onClick={onSelect}>
-        {s.freeIntro ? "Выбрать специалиста" : "Записаться на платную консультацию"}
+        {s.freeIntro ? "Выбрать специалиста" : "Записаться на консультацию"}
       </Button>
     )}
 
@@ -318,8 +318,8 @@ const FreeConsultationPage = () => {
   const confirmationText = () => {
     if (submitted?.kind === "specialist") {
       return submitted.specialist.freeIntro
-        ? `Заявка отправлена. ${submitted.specialist.name} или администратор свяжется с вами, чтобы согласовать время консультации.`
-        : `Заявка отправлена. ${submitted.specialist.name} или администратор свяжется с вами, чтобы согласовать время платной консультации.`;
+        ? `Заявка отправлена. ${submitted.specialist.name} свяжется с вами, чтобы согласовать время консультации.`
+        : `Заявка отправлена. ${submitted.specialist.name} свяжется с вами, чтобы согласовать время консультации.`;
     }
     return "Заявка отправлена. Администратор свяжется с вами, предложит подходящего специалиста и согласует время консультации.";
   };
@@ -392,7 +392,7 @@ const FreeConsultationPage = () => {
                   if (d) select({ kind: "specialist", specialist: d });
                 }}
               >
-                Записаться на платную консультацию
+                Записаться на консультацию
               </Button>
             </div>
           </div>

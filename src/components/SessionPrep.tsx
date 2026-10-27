@@ -70,8 +70,8 @@ const SessionPrep = () => (
               </span>
             </AccordionTrigger>
             <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
-              <p>• Оплата производится до сессии</p>
-              <p>• Отмена или перенос — минимум за 24 часа</p>
+              <p>• Способ оплаты и детали согласуем при записи</p>
+              <p>• Если планы изменятся, встречу можно перенести — просто предупредите заранее</p>
               <p>• Длительность первой встречи — 50 минут</p>
             </AccordionContent>
           </AccordionItem>

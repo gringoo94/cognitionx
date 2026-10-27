@@ -703,7 +703,7 @@ const Tools = () => {
               </h2>
               <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto leading-relaxed mb-7">
                 Если результат теста встревожил, или вы чувствуете, что в одиночку не справляетесь —
-                поговорим. Первая встреча — знакомство и оценка запроса, без обязательств.
+                поговорим. Первая консультация — разбор ситуации и план дальнейших шагов.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild size="lg" className="px-8">
