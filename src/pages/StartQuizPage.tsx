@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import { toContactEmailField } from "@/lib/contactFormat";
 import {
   ArrowLeft,
   ArrowRight,
