@@ -89,13 +89,13 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: CloudRain,
     badge: "Помощь при депрессии",
     tagline:
-      "Депрессия — это не лень и не слабость характера. Это лечится: КПТ показала эффективность, сопоставимую с медикаментами при умеренной депрессии.",
+      "Если сейчас мало сил, не нужно требовать от себя справляться в одиночку. Можно начать с обсуждения того, что вам особенно трудно.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "12–20 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "4–6 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + поведенческая активация", Icon: Brain },
-      { label: "Эффективность", value: "70–80%", Icon: Award },
+
     ],
     trustChips: COMMON_TRUST,
     evidence: [
@@ -124,13 +124,13 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: AlertCircle,
     badge: "Тревожные расстройства",
     tagline:
-      "Постоянное беспокойство, навязчивые мысли, ощущение, что вот-вот случится плохое — это поддаётся работе. КПТ — золотой стандарт при тревоге.",
+      "Если беспокойство стало мешать сну, общению или работе, можно вместе искать способы уменьшить его влияние на жизнь.",
     accent: "from-primary/25 via-primary/5 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "12–16 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "4–6 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + экспозиция", Icon: Brain },
-      { label: "Эффективность", value: "d = 0.79", Icon: Award },
+
     ],
     trustChips: COMMON_TRUST,
     evidence: [
@@ -155,20 +155,20 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: Zap,
     badge: "Панические атаки",
     tagline:
-      "Панические атаки страшные, но безопасные. Тело умеет переживать страх — этому можно научиться, и циклу страха перед страхом можно положить конец.",
+      "Работа с паникой включает понимание телесных реакций и постепенное возвращение к привычным делам.",
     accent: "from-destructive/15 via-primary/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "8–12 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "3–4 встречи", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + интероцептивная экспозиция", Icon: Brain },
-      { label: "Эффективность", value: "70–90%", Icon: Award },
+
     ],
     trustChips: COMMON_TRUST,
     evidence: [
       {
         source: "Barlow et al., Panic Control Treatment",
         finding:
-          "Протокол КПТ для панических атак показывает 70–90% избавления от панических приступов по результатам РКИ.",
+          "Исследования протокола показывают уменьшение панических симптомов. Индивидуальный результат и темп изменений различаются.",
       },
       {
         source: "NICE CG113",
@@ -186,11 +186,11 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: Flame,
     badge: "Выгорание",
     tagline:
-      "Выгорание — не «слабость воли». Это закономерный результат хронического дисбаланса между нагрузкой и восстановлением. Нужны системные изменения, а не «отпуск на неделю».",
+      "Восстановление — не ещё одна задача, которую нужно выполнить идеально. Будем учитывать ваши силы и реальные рабочие условия.",
     accent: "from-destructive/15 via-accent/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "10–16 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "3–5 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + работа со схемами", Icon: Brain },
       { label: "Подход", value: "Восстановление + границы", Icon: ShieldCheck },
     ],
@@ -217,11 +217,11 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: Heart,
     badge: "Отношения и созависимость",
     tagline:
-      "Конфликты, обиды, ощущение, что вас не слышат — или невозможность уйти. Часто корни — в ранних схемах, и это можно изменить.",
+      "На встречах можно говорить о сложных отношениях без необходимости сразу решать, оставаться в них или уходить.",
     accent: "from-accent/20 via-primary/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "16–24 сессии", Icon: Clock },
-      { label: "Первые улучшения", value: "6–8 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
       { label: "Фокус", value: "Границы и потребности", Icon: ShieldCheck },
     ],
@@ -248,11 +248,11 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: Shield,
     badge: "Самооценка",
     tagline:
-      "Низкая самооценка — это не объективная истина о вас, а набор глубинных убеждений, сформированных в детстве. Их можно осознать и изменить.",
+      "Будем разбирать самокритику и привычные требования к себе, не превращая терапию в ещё одну проверку на успешность.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "12–16 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "4–6 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
       { label: "Фокус", value: "Глубинные убеждения", Icon: Brain },
     ],
@@ -279,11 +279,11 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: Wind,
     badge: "Стресс и адаптация",
     tagline:
-      "Переезд, увольнение, развод — когда всё навалилось. КПТ помогает быстро восстановить ресурс и выстроить опору в период перемен.",
+      "В период перемен можно искать доступные опоры и разбирать трудности по одной, без требования быстро прийти в норму.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "6–12 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "2–4 встречи", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + копинг-стратегии", Icon: Brain },
       { label: "Фокус", value: "Адаптация и ресурс", Icon: ShieldCheck },
     ],
@@ -313,8 +313,8 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
       "Алкоголь, вещества, поведенческие зависимости — когда хочется остановиться, но не получается. КПТ работает с триггерами и циклом срыва.",
     accent: "from-destructive/15 via-primary/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "16–24+ сессии", Icon: Clock },
-      { label: "Первые улучшения", value: "4–8 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + профилактика рецидивов", Icon: Brain },
       { label: "Фокус", value: "Триггеры и навыки", Icon: ShieldCheck },
     ],
@@ -404,13 +404,13 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
     Icon: Repeat,
     badge: "ОКР — обсессивно-компульсивное расстройство",
     tagline:
-      "Навязчивые мысли и ритуалы — не «странности характера». ОКР хорошо поддаётся работе: протокол ERP (экспозиция и предотвращение реакции) считается золотым стандартом.",
+      "Здесь можно обсуждать навязчивости без стыда. Упражнения ERP выбираем с учётом вашей ситуации и готовности.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "12–20 сессий", Icon: Clock },
-      { label: "Первые улучшения", value: "4–6 встреч", Icon: Sparkles },
+
+
       { label: "Метод", value: "КПТ + ERP", Icon: Brain },
-      { label: "Эффективность", value: "60–85%", Icon: Award },
+
     ],
     trustChips: COMMON_TRUST,
     evidence: [
@@ -447,7 +447,7 @@ const buildToc = (
     { id: "evidence", label: "Доказательная база" },
     { id: "process", label: "Как я работаю" },
     hasCasebook ? { id: "casebook", label: "Пример работы" } : null,
-    { id: "outcomes", label: "Результаты" },
+    { id: "outcomes", label: "Цели работы" },
     { id: "pricing", label: "Стоимость" },
     { id: "faq", label: "FAQ" },
   ].filter(Boolean) as { id: string; label: string }[];
@@ -831,11 +831,8 @@ const ProblemPage = () => {
                 </h2>
               </div>
               <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
-                Ответьте «да» или «нет» на каждый пункт. Если согласились с{" "}
-                <strong className="text-foreground">
-                  {extras.selfCheckThreshold || 3} и более
-                </strong>{" "}
-                — стоит обсудить это с психологом.
+                Посмотрите, какие пункты вам знакомы. Важнее не количество
+                совпадений, а то, как эти трудности влияют на вашу жизнь.
               </p>
               <ol className="rounded-2xl border border-border bg-card divide-y divide-border overflow-hidden">
                 {extras.selfCheck.map((q, i) => (
@@ -1023,7 +1020,7 @@ const ProblemPage = () => {
             <div className="flex items-center gap-3 mb-6">
               <Award className="w-5 h-5 text-primary" />
               <h2 id="outcomes-h" className="text-2xl md:text-3xl font-bold">
-                Что вы получите
+                К чему будем стремиться
               </h2>
             </div>
             <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-accent/5 p-6 md:p-8 shadow-sm">
@@ -1098,7 +1095,8 @@ const ProblemPage = () => {
                 </h2>
               </div>
               <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
-                Деперсонализированный кейс — детали изменены, суть сохранена.
+                Пример не задаёт сроков или результата вашей терапии: план
+                и изменения зависят от индивидуальной ситуации.
               </p>
               <div className="rounded-2xl border border-border bg-card p-6 md:p-8 grid md:grid-cols-3 gap-6">
                 {[
@@ -1132,7 +1130,7 @@ const ProblemPage = () => {
             <div className="flex items-center gap-3 mb-6">
               <Wallet className="w-5 h-5 text-primary" />
               <h2 id="pricing-h" className="text-2xl md:text-3xl font-bold">
-                Сколько стоит и сколько займёт
+                Стоимость встреч
               </h2>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
@@ -1288,8 +1286,8 @@ const ProblemPage = () => {
                   Готовы начать?
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground mb-7 max-w-md mx-auto leading-relaxed">
-                  Первая сессия — знакомство и диагностика. Вы получите
-                  понимание проблемы и план работы.
+                  Первая консультация — 50 минут, 45 €. Обсудим вашу ситуацию
+                  и наметим следующие шаги.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button size="lg" asChild>

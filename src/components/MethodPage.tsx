@@ -63,20 +63,20 @@ const METHOD_META: Record<string, MethodMeta> = {
     Icon: Brain,
     badge: "Доказательный метод",
     tagline:
-      "Структурированный, краткосрочный, измеримый — рекомендован NICE и APA как метод первой линии.",
+      "Подход с совместными целями и практикой новых навыков в повседневной жизни.",
     accent: "from-primary/25 via-primary/5 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "12–20 сессий", Icon: Calendar },
-      { label: "Первые улучшения", value: "4–6 встреч", Icon: Clock },
-      { label: "Доказательная база", value: "1000+ RCT", Icon: GraduationCap },
+
+
+
       { label: "Формат", value: "Онлайн / очно", Icon: Globe },
     ],
     serviceType: "Когнитивно-поведенческая терапия (КПТ)",
     notFor: [
       "Острый психотический эпизод — нужна психиатрическая помощь в первую очередь",
-      "Активная зависимость без сопутствующего лечения — сначала детоксикация",
+      "При физической зависимости или риске отмены нужна медицинская оценка; психотерапию согласуем с лечением",
       "Если вы ищете формат свободной беседы без практических упражнений в повседневной жизни",
-      "Когда нужна длительная поддержка без структуры и целей",
+      "Если согласованный план сейчас неудобен — обсудим другой формат поддержки",
     ],
     evidence: [
       {
@@ -102,26 +102,26 @@ const METHOD_META: Record<string, MethodMeta> = {
     },
     trustChips: [
       { Icon: GraduationCap, text: "Доказательный метод" },
-      { Icon: Clock, text: "Краткосрочный курс" },
-      { Icon: Target, text: "Измеримый результат" },
+      { Icon: Clock, text: "Практические навыки" },
+      { Icon: Target, text: "Совместные цели" },
     ],
   },
   "schema-therapy": {
     Icon: Layers,
     badge: "Глубинная работа",
     tagline:
-      "Когда классическая КПТ помогла со симптомами, но повторяющиеся паттерны остались — пора идти глубже.",
+      "Работа с устойчивыми эмоциональными реакциями и привычными сценариями отношений.",
     accent: "from-accent/25 via-accent/5 to-transparent",
     stats: [
-      { label: "Длительность курса", value: "20–40+ сессий", Icon: Calendar },
-      { label: "Первые улучшения", value: "8–12 встреч", Icon: Clock },
+
+
       { label: "Подход", value: "Интегративный", Icon: Layers },
       { label: "Формат", value: "Онлайн / очно", Icon: Globe },
     ],
     serviceType: "Схема-терапия",
     notFor: [
-      "Острый кризис — сначала стабилизация классическими методами КПТ",
-      "Если нужна быстрая работа с симптомом за 6–10 сессий",
+      "В остром кризисе сначала нужна оценка безопасности и подходящая помощь",
+      "Если вам нужна работа только с конкретной текущей ситуацией — можно рассмотреть КПТ",
       "Если ваш запрос касается только текущей задачи и вы не хотите исследовать прошлый опыт",
       "Активные психотические или маниакальные состояния",
     ],
@@ -129,7 +129,7 @@ const METHOD_META: Record<string, MethodMeta> = {
       {
         source: "Bamelis et al. (2014), Am J Psychiatry",
         finding:
-          "Схема-терапия превосходит обычное лечение при расстройствах личности: 81% полного восстановления против 51%.",
+          "В исследовании схема-терапия помогала участникам с расстройствами личности. Эти результаты не предсказывают исход для отдельного человека.",
       },
       {
         source: "Giesen-Bloo et al. (2006)",
@@ -150,17 +150,17 @@ const METHOD_META: Record<string, MethodMeta> = {
     trustChips: [
       { Icon: Layers, text: "18 схем, 4 режима" },
       { Icon: Brain, text: "Работа с эмоциями" },
-      { Icon: Award, text: "Устойчивые изменения" },
+      { Icon: Award, text: "Внимание к потребностям" },
     ],
   },
   "online-therapy": {
     Icon: Globe,
     badge: "Из любой точки мира",
     tagline:
-      "Десятки мета-анализов: онлайн-КПТ сопоставима с очной по эффективности. Нужны только интернет и 50 минут.",
+      "Консультации по видеосвязи, если вам удобно говорить в приватном пространстве.",
     accent: "from-primary/20 via-accent/15 to-transparent",
     stats: [
-      { label: "Эффективность", value: "= очной", Icon: Award },
+
       { label: "Длительность сессии", value: "50 минут", Icon: Clock },
       { label: "География", value: "10+ стран", Icon: Globe },
       { label: "Платформы", value: "Zoom / Meet", Icon: Wifi },
@@ -209,7 +209,7 @@ const METHOD_META: Record<string, MethodMeta> = {
     stats: [
       { label: "Локация", value: "Центр Кишинёва", Icon: MapPin },
       { label: "Длительность сессии", value: "50 минут", Icon: Clock },
-      { label: "Расписание", value: "Пн–Пт, 9–19", Icon: Calendar },
+      { label: "Расписание", value: "По договорённости", Icon: Calendar },
       { label: "Гибкость", value: "Можно онлайн", Icon: Globe },
     ],
     serviceType: "Очная психотерапия",
@@ -238,7 +238,7 @@ const METHOD_META: Record<string, MethodMeta> = {
     comparePeer: {
       slug: "online-therapy",
       label: "Сравнить с онлайн-форматом",
-      note: "Если вы не в Кишинёве или цените гибкость расписания — онлайн даст ту же эффективность.",
+      note: "Если вы не в Кишинёве или вам неудобно приезжать, можно обсудить онлайн-формат.",
     },
     trustChips: [
       { Icon: MapPin, text: "Центр Кишинёва" },
@@ -256,8 +256,8 @@ const buildToc = (page: ReturnType<typeof getPageBySlug>) =>
     page?.schemaDomains ? { id: "schema-domains", label: "Схемы и режимы" } : null,
     { id: "evidence", label: "Доказательная база" },
     { id: "process", label: "Как проходит работа" },
-    { id: "outcomes", label: "Результаты" },
-    { id: "not-for", label: "Кому не подходит" },
+    { id: "outcomes", label: "Цели работы" },
+    { id: "not-for", label: "Выбор формата" },
     { id: "faq", label: "FAQ" },
   ].filter(Boolean) as { id: string; label: string }[];
 
@@ -648,7 +648,7 @@ const MethodPage = () => {
             <div className="flex items-center gap-3 mb-6">
               <Award className="w-5 h-5 text-primary" />
               <h2 id="outcomes-h" className="text-2xl md:text-3xl font-bold">
-                Что вы получите
+                К чему будем стремиться
               </h2>
             </div>
             <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-accent/5 p-6 md:p-8 shadow-sm">
@@ -677,12 +677,12 @@ const MethodPage = () => {
             <div className="flex items-center gap-3 mb-6">
               <XCircle className="w-5 h-5 text-destructive/70" />
               <h2 id="not-for-h" className="text-2xl md:text-3xl font-bold">
-                Когда метод не подходит
+                Когда стоит обсудить другой формат
               </h2>
             </div>
             <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-2xl">
-              Честность в начале — экономия времени и денег. Если что-то из
-              ниже описанного — про вас, обсудим альтернативу на первой встрече.
+              Подход подбираем под ваше состояние и предпочтения. При остром
+              кризисе нужна срочная местная помощь, а не ожидание консультации.
             </p>
             <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 md:p-7">
               <ul className="space-y-3">
@@ -767,8 +767,8 @@ const MethodPage = () => {
                   Готовы начать?
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground mb-7 max-w-md mx-auto leading-relaxed">
-                  Первая сессия — знакомство и диагностика. Вы получите
-                  понимание проблемы и план работы.
+                  Первая консультация — 50 минут, 45 €. Обсудим вашу ситуацию
+                  и наметим следующие шаги.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button size="lg" asChild>
