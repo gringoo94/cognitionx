@@ -148,7 +148,7 @@ const METHOD_META: Record<string, MethodMeta> = {
       note: "Если у вас конкретная проблема (паника, фобия, бессонница) — начните с классической КПТ, она больше сфокусирована на конкретных текущих симптомах.",
     },
     trustChips: [
-      { Icon: Layers, text: "18 схем, 4 режима" },
+      { Icon: Layers, text: "Схемы и режимы" },
       { Icon: Brain, text: "Работа с эмоциями" },
       { Icon: Award, text: "Внимание к потребностям" },
     ],
@@ -181,7 +181,7 @@ const METHOD_META: Record<string, MethodMeta> = {
       {
         source: "Carlbring et al. (2018)",
         finding:
-          "Онлайн-терапия не уступает очной по результатам и удержанию клиентов в большинстве расстройств.",
+          "Обзор исследований онлайн-КПТ показывает сопоставимые с очным форматом результаты в изученных группах.",
       },
       {
         source: "NICE Digital Health Guidelines",
@@ -227,7 +227,7 @@ const METHOD_META: Record<string, MethodMeta> = {
       {
         source: "Arntz et al. (2017), Schema Therapy",
         finding:
-          "Техники chair work и imagery rescripting показывают усиленный эффект при очном проведении.",
+          "Диалоги со сменой ролей и упражнения с воображением используются в схема-терапии. Формат и технику подбирают индивидуально.",
       },
       {
         source: "APA Guidelines",
