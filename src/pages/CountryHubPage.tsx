@@ -19,6 +19,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
+import Specializations from "@/components/Specializations";
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
 import About from "@/components/About";
@@ -54,13 +56,13 @@ const CountryHubPage = () => {
     description: page.metaDescription,
     country: page.country,
     languages: page.countryCode === "MD" ? ["Russian", "Romanian"] : ["Russian"],
-    timezone: page.timezone,
   };
 
   const businessSchema = buildGeoBusinessSchema(geoInput);
   const serviceSchema = buildGeoServiceSchema(geoInput);
 
-  const faqSchema = buildFaqSchema(page.faq);
+  const visibleFaq = buildLandingFaq(page.faq);
+  const faqSchema = buildFaqSchema(visibleFaq);
 
   const itemListSchema = cities.length > 0 ? {
     "@context": "https://schema.org",
@@ -111,7 +113,7 @@ const CountryHubPage = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Онлайн · {page.country} · {page.utcOffset}
+              Психотерапия онлайн
             </motion.div>
 
             <motion.h1
@@ -144,16 +146,6 @@ const CountryHubPage = () => {
               </Button>
             </motion.div>
           </div>
-        </section>
-
-        {/* ── Intro ── */}
-        <section className="max-w-4xl mx-auto px-6 pb-20">
-          <motion.p
-            {...fade()}
-            className="text-lg md:text-xl text-foreground/90 leading-relaxed"
-          >
-            {page.intro}
-          </motion.p>
         </section>
 
         {/* ── Cities list ── */}
@@ -208,85 +200,6 @@ const CountryHubPage = () => {
           </section>
         )}
 
-        {/* ── System overview ── */}
-        <section className="bg-muted/30 py-20">
-          <div className="max-w-5xl mx-auto px-6">
-            <motion.h2
-              {...fade()}
-              className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-            >
-              Как устроена психологическая помощь {page.countryIn}
-            </motion.h2>
-            <motion.p {...fade(0.05)} className="text-muted-foreground mb-10 max-w-2xl">
-              Коротко — три типичных пути. Я не лучше и не хуже государственной системы; я просто
-              другой формат, который многим подходит.
-            </motion.p>
-            <div className="grid md:grid-cols-3 gap-5">
-              {page.systemOverview.map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  {...fade(i * 0.05)}
-                  className="rounded-2xl border border-border bg-background p-6"
-                >
-                  <h3 className="text-base font-semibold mb-3">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.text}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Expat context ── */}
-        <section className="max-w-5xl mx-auto px-6 py-20">
-          <motion.h2
-            {...fade()}
-            className="text-3xl md:text-4xl font-bold tracking-tight mb-3 flex items-center gap-3"
-          >
-            <Globe className="w-7 h-7 text-primary" />
-            Контекст, который часто остаётся за кадром
-          </motion.h2>
-          <motion.p {...fade(0.05)} className="text-muted-foreground mb-10 max-w-2xl">
-            То, что местный терапевт может не считать важным — а для русскоязычного клиента это и
-            есть половина запроса.
-          </motion.p>
-          <div className="grid md:grid-cols-2 gap-4">
-            {page.expatContext.map((text, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.05)}
-                className="flex gap-3 rounded-xl border border-border bg-card p-5"
-              >
-                <AlertTriangle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <p className="text-sm text-foreground/90 leading-relaxed">{text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Why online RU ── */}
-        <section className="bg-muted/30 py-20">
-          <div className="max-w-4xl mx-auto px-6">
-            <motion.h2
-              {...fade()}
-              className="text-3xl md:text-4xl font-bold tracking-tight mb-10"
-            >
-              Почему онлайн на русском {page.countryIn} — нормально
-            </motion.h2>
-            <ul className="space-y-4">
-              {page.whyOnline.map((reason, i) => (
-                <motion.li
-                  key={i}
-                  {...fade(i * 0.05)}
-                  className="flex gap-3 items-start"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-base text-foreground/90 leading-relaxed">{reason}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         {/* ── About ── */}
         <About />
 
@@ -295,6 +208,7 @@ const CountryHubPage = () => {
         </div>
 
         <AboutEvidence />
+        <Specializations />
 
         {/* ── FAQ ── */}
         <section className="max-w-3xl mx-auto px-6 py-20">
@@ -305,7 +219,7 @@ const CountryHubPage = () => {
             Частые вопросы — {page.country}
           </motion.h2>
           <Accordion type="single" collapsible className="w-full">
-            {page.faq.map((f, i) => (
+            {visibleFaq.map((f, i) => (
               <AccordionItem key={i} value={`faq-${i}`}>
                 <AccordionTrigger className="text-left text-base">{f.question}</AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed">
@@ -374,12 +288,6 @@ const CountryHubPage = () => {
           </motion.div>
         </section>
 
-        {/* ── SEO footer ── */}
-        <section className="max-w-4xl mx-auto px-6 pb-20">
-          <p className="text-xs text-muted-foreground leading-relaxed text-center">
-            {page.seoFooter}
-          </p>
-        </section>
       </main>
       <Footer />
     </div>

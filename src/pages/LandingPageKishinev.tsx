@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
 import SEOHead from "@/components/SEOHead";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 import TelegramCTA from "@/components/TelegramCTA";
@@ -124,7 +125,8 @@ const localFaq = [
   },
 ];
 
-const localFaqSchema = buildFaqSchema(localFaq);
+const visibleFaq = buildLandingFaq(localFaq);
+const localFaqSchema = buildFaqSchema(visibleFaq);
 
 const kishinevGeoInput = {
   url: "https://cognitionx.cloud/psiholog-kishinev",
@@ -134,7 +136,6 @@ const kishinevGeoInput = {
   city: "Кишинёв",
   country: "Молдова",
   languages: ["Russian", "Romanian"],
-  timezone: "EET / EEST",
 };
 
 const businessSchema = buildGeoBusinessSchema(kishinevGeoInput);
@@ -169,7 +170,7 @@ const LandingPageKishinev = () => (
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
             >
               <MapPin className="w-3.5 h-3.5" />
-              Кишинёв · EET (UTC+2/+3) · Онлайн
+              Психотерапия онлайн
             </motion.div>
 
             <motion.h1
@@ -192,7 +193,7 @@ const LandingPageKishinev = () => (
               {...fade(0.1)}
               className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              КПТ и схема-терапия для жителей Кишинёва и Молдовы. Онлайн в Zoom — на русском, в одном с вами часовом поясе. Pentru clienții din Chișinău, Bălți și toată Moldova.
+              КПТ и схема-терапия для жителей Кишинёва и Молдовы. Встречи проходят в Zoom. Pentru clienții din Chișinău, Bălți și toată Moldova.
             </motion.p>
 
             <motion.div
@@ -248,43 +249,8 @@ const LandingPageKishinev = () => (
 
       <TelegramCTA />
 
-      {/* ── Pain Points ── */}
-      <section className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              С чем приходят клиенты в Кишинёве и Молдове
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.04)}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-border bg-background p-6 flex gap-4 items-start hover:border-primary/40 hover:shadow-lg transition-all"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <p.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{p.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── About ── */}
-      <About
-        text="Меня зовут Дмитрий. Я клинический психолог, работаю в КПТ и схема-терапии. Живу и работаю в Кишинёве (EET, UTC+2/+3). Принимаю клиентов из Молдовы и русскоязычных экспатов по всему миру."
-        quote="«Кишинёв — мой родной город. Я знаю контекст, в котором живут мои клиенты, — и это даёт терапии глубину, которая невозможна на расстоянии.»"
-        chips={["КПТ", "Схема-терапия", "Кишинёв", "Онлайн и очно"]}
-      />
+      <About />
 
       <div id="about-detailed" className="scroll-mt-20">
         <AboutDetailed />
@@ -353,7 +319,7 @@ const LandingPageKishinev = () => (
         </motion.p>
         <motion.div {...fade(0.1)} className="mt-10">
           <Accordion type="single" collapsible className="space-y-3">
-            {localFaq.map((faq, i) => (
+            {visibleFaq.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
@@ -372,17 +338,6 @@ const LandingPageKishinev = () => (
       </section>
 
       <HomeBookingOffer />
-
-      {/* ── SEO footer ── */}
-      <section className="max-w-3xl mx-auto px-6 py-12 text-center border-t border-border">
-        <h2 className="text-base font-semibold text-muted-foreground mb-3">
-          Русскоязычный психолог в Кишинёве и Молдове онлайн
-        </h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Работаю онлайн с русскоязычными клиентами в Молдове: Кишинёв, Бельцы, Тирасполь, Кагул, Орхей.
-          КПТ и схема-терапия на родном языке. Один часовой пояс, понятный контекст, оплата в EUR или MDL.
-        </p>
-      </section>
 
     </main>
     <Footer />

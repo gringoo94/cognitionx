@@ -348,7 +348,6 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
       "Работаю с русскоязычными клиентами из Москвы и всей России. Онлайн-формат: без пробок, очередей и привязки к району.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
-      { label: "Часовой пояс", value: "Удобно для МСК", Icon: Clock },
       { label: "Длительность сессии", value: "50 минут", Icon: Clock },
       { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
       { label: "Эффективность", value: "= очной", Icon: Award },
@@ -382,7 +381,6 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
       { label: "Язык", value: "Русский", Icon: BookOpen },
       { label: "Длительность сессии", value: "50 минут", Icon: Clock },
       { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
-      { label: "Часовые пояса", value: "EST / PST", Icon: Clock },
     ],
     trustChips: COMMON_TRUST,
     evidence: [
@@ -565,9 +563,9 @@ const ProblemPage = () => {
 
   // Geo landings rendered through this template (Москва, США/Канада) get the
   // same LocalBusiness-family + Service nodes as the other geo pages.
-  const geoArea: Record<string, { city?: string; country?: string; places?: string[]; timezone?: string }> = {
-    "psiholog-moskva": { city: "Москва", country: "Россия", timezone: "MSK (UTC+3)" },
-    "psiholog-usa": { country: "США", places: ["Канада"], timezone: "EST / PST" },
+  const geoArea: Record<string, { city?: string; country?: string; places?: string[] }> = {
+    "psiholog-moskva": { city: "Москва", country: "Россия" },
+    "psiholog-usa": { country: "США", places: ["Канада"] },
   };
   const geoConf = geoArea[page.slug];
   const geoSchemas = geoConf

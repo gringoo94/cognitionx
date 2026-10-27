@@ -32,8 +32,6 @@ export interface GeoSchemaInput extends GeoPlace {
   description: string;
   /** Languages sessions are held in. Defaults to Russian. */
   languages?: string[];
-  /** Local timezone label, e.g. "CET / CEST". */
-  timezone?: string;
 }
 
 function areaServed({ city, country, places }: GeoPlace) {
@@ -72,7 +70,6 @@ export function buildGeoBusinessSchema(input: GeoSchemaInput) {
     paymentAccepted: "Банковская карта, банковский перевод",
     priceRange: `€${SESSION_PRICE_REGULAR}–€${SESSION_PRICE_SINGLE}`,
     isAccessibleForFree: false,
-    ...(input.timezone ? { slogan: `Сессии по местному времени (${input.timezone})` } : {}),
   };
 }
 
