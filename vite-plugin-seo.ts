@@ -294,9 +294,12 @@ export function seoPlugin(): Plugin {
         // For blog post routes, inline the article body into #root so crawlers
         // that don't execute JS see the full content (not just meta tags).
         let ssrHtml: string | null = null;
+        let ssrSchema = "";
         if (ssrRender && !isSoftRedirect && !route.noindex) {
           try {
-            ssrHtml = cleanSsrHtml(await ssrRender(routePath));
+            const [markup, schemaScripts = ""] = (await ssrRender(routePath)).split("<!--seo-schema-->");
+            ssrHtml = cleanSsrHtml(markup);
+            ssrSchema = schemaScripts.replace(/\sdata-rh="true"/g, "").trim();
             if (!/<h1[\s>]/i.test(ssrHtml)) {
               // Blog pages load the post client-side; use the inlined article instead.
               if (/^\/blog\/[^/]+$/.test(routePath)) ssrHtml = null;
@@ -310,6 +313,14 @@ export function seoPlugin(): Plugin {
         const slugMatch = routePath.match(/^\/blog\/([^/]+)$/);
         if (ssrHtml) {
           html = html.replace(/<div id="root"><\/div>/, () => `<div id="root">${ssrHtml}</div>`);
+          // Page JSON-LD from SEOHead (already includes the global Person/Org/WebSite),
+          // replacing the static fallback block so crawlers see one consistent graph.
+          if (ssrSchema.includes("application/ld+json")) {
+            if (!routePath.startsWith("/blog/") || !ssrSchema.includes('"BlogPosting"')) {
+              html = html.replace(/<script type="application\/ld\+json">\s*[{[][\s\S]*?<\/script>\s*/, "");
+              html = html.replace("</head>", () => `    ${ssrSchema}\n  </head>`);
+            }
+          }
           ssrCount++;
         } else if (slugMatch) {
           const post = blogPostsBySlug.get(slugMatch[1]);
