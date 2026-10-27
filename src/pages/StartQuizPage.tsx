@@ -197,7 +197,7 @@ const StartQuizPage = () => {
       try {
         await supabase.from("contact_submissions").insert({
           name: parsed.data.name || "—",
-          email: parsed.data.contact.includes("@") ? parsed.data.contact : "",
+          email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parsed.data.contact) ? parsed.data.contact : `Telegram: ${parsed.data.contact}`,
           messenger: parsed.data.contact,
           message: messageText,
         });
@@ -208,7 +208,7 @@ const StartQuizPage = () => {
       await supabase.functions.invoke("notify-telegram", {
         body: {
           name: parsed.data.name || "—",
-          email: parsed.data.contact.includes("@") ? parsed.data.contact : "",
+          email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parsed.data.contact) ? parsed.data.contact : `Telegram: ${parsed.data.contact}`,
           messenger: parsed.data.contact,
           message: messageText,
           source: "🧭 /start quiz",
