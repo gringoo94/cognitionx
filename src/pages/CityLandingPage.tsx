@@ -77,7 +77,7 @@ const CityLandingPage = () => {
 
   const geoInput = {
     url,
-    name: `Русскоязычный психолог онлайн ${page.cityFor} — Дмитрий Яцко`,
+    name: `Психолог онлайн ${page.cityFor} — Дмитрий Яцко`,
     description: page.metaDescription,
     city: page.city,
     country: page.country,
@@ -267,7 +267,7 @@ const CityLandingPage = () => {
         {/* ── FAQ ── */}
         <section id="faq" className="max-w-3xl mx-auto px-6 py-20 md:py-28">
           <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center">
-            Частые <span className="text-primary">вопросы</span> {page.cityFor}
+            Вопросы <span className="text-primary">перед встречей</span>
           </motion.h2>
           <motion.div {...fade(0.1)} className="mt-10">
             <Accordion type="single" collapsible className="space-y-3">
