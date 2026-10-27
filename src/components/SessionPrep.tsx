@@ -72,7 +72,7 @@ const SessionPrep = () => (
             <AccordionContent className="text-sm text-muted-foreground leading-relaxed space-y-2">
               <p>• Способ оплаты и детали согласуем при записи</p>
               <p>• Если планы изменятся, встречу можно перенести — просто предупредите заранее</p>
-              <p>• Длительность первой встречи — 50 минут</p>
+              <p>• Длительность встречи — 50 минут (45 €)</p>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
