@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
@@ -59,16 +60,8 @@ const painPoints = [
 
 const usaFaq = [
   {
-    question: "Какая разница во времени? Когда проходят сессии?",
-    answer: "Я в Кишинёве (UTC+2/+3). Для EST это +7–8 часов, для PST +10–11. Ваше раннее утро (7:00–10:00 EST) — мой день, это самые удобные слоты. Сессии по выходным тоже возможны. Расписание фиксируем заранее и не сдвигаем.",
-  },
-  {
     question: "Почему не пойти к русскоязычному терапевту в США или Канаде?",
     answer: "Можно, но их мало, запись на недели вперёд, а цена — $150–250 за сессию. Онлайн-формат со мной доступнее (45 €), не привязан к городу и строится на доказательных методах — КПТ и схема-терапии.",
-  },
-  {
-    question: "Почему важно работать на родном языке?",
-    answer: "Эмоциональная память билингвов хранится на языке детства. На английском проще сказать «I felt sad» и не заплакать, чем «мне было больно» — и встретиться с этой болью. Поэтому терапия на английском у многих русскоязычных клиентов годами остаётся «на поверхности».",
   },
   {
     question: "Вы понимаете реалии жизни в Америке и Канаде?",
@@ -84,7 +77,7 @@ const usaFaq = [
   },
   {
     question: "Сколько сессий нужно для результата?",
-    answer: "Обычно 8–20 встреч, первые улучшения чаще заметны через 4–6. Точнее скажу после первичной консультации, когда увидим картину целиком.",
+    answer: "Длительность зависит от вашей ситуации. Обсудим ориентировочный план на первой встрече и будем пересматривать его по ходу работы.",
   },
   {
     question: "Как оплатить из США или Канады?",
@@ -92,7 +85,8 @@ const usaFaq = [
   },
 ];
 
-const usaFaqSchema = buildFaqSchema(usaFaq);
+const visibleFaq = buildLandingFaq(usaFaq);
+const usaFaqSchema = buildFaqSchema(visibleFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -106,9 +100,8 @@ const usaGeoInput = {
   url: "https://cognitionx.cloud/psiholog-usa",
   name: "Русскоязычный психолог онлайн для США и Канады — Дмитрий Яцко",
   description:
-    "Русскоязычный психолог онлайн для клиентов из США и Канады. КПТ и схема-терапия на родном языке, удобные слоты по EST/CST/PST.",
+    "Русскоязычный психолог онлайн для клиентов из США и Канады. КПТ и схема-терапия на родном языке.",
   places: ["США", "Канада", "Нью-Йорк", "Торонто", "Сан-Франциско"],
-  timezone: "EST / CST / PST",
 };
 
 const businessSchema = buildGeoBusinessSchema(usaGeoInput);
@@ -136,7 +129,7 @@ const LandingPageUSA = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
       title="Русскоязычный психолог онлайн США и Канада | КПТ"
-      description="Русскоязычный психолог онлайн для США и Канады: КПТ и схема-терапия на родном языке. Удобные слоты по EST/CST/PST. Консультация 45 €, 50 минут."
+      description="Русскоязычный психолог онлайн для США и Канады: КПТ и схема-терапия на родном языке. Консультация 45 €, 50 минут."
       path="/psiholog-usa"
       alternates={buildGeoAlternates("/psiholog-usa", ["US", "CA"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(usaFaqSchema ? [usaFaqSchema] : []), testimonialsSchema]}
@@ -156,7 +149,7 @@ const LandingPageUSA = () => (
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Онлайн · Zoom · На русском · Слоты по EST / CST / PST
+              Психотерапия онлайн
             </motion.div>
 
             <motion.h1
@@ -172,7 +165,7 @@ const LandingPageUSA = () => (
               {...fade(0.1)}
               className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              КПТ и схема-терапия онлайн для тех, кто живёт в Америке и Канаде. Сессии — в удобное для вас время по местному часовому поясу.
+              КПТ и схема-терапия онлайн для тех, кто живёт в Америке и Канаде. 
             </motion.p>
 
             <motion.div
@@ -228,43 +221,8 @@ const LandingPageUSA = () => (
 
       <TelegramCTA />
 
-      {/* ── Pain Points ── */}
-      <section className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              С чем чаще всего сталкиваются русскоязычные в США и Канаде
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.04)}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-border bg-background p-6 flex gap-4 items-start hover:border-primary/40 hover:shadow-lg transition-all"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <p.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{p.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── About ── */}
-      <About
-        text="Меня зовут Дмитрий. Я клинический психолог, работаю в КПТ и схема-терапии. Провожу онлайн-сессии с русскоязычными клиентами в США и Канаде из Кишинёва (UTC+2/+3) — с учётом вашей разницы во времени по EST, CST и PST."
-        quote="«Переезд решает вопрос географии. Всё остальное едет с нами — и с этим можно работать.»"
-        chips={["КПТ", "Схема-терапия", "На русском языке", "Слоты для EST / PST"]}
-      />
+      <About />
 
       <div id="about-detailed" className="scroll-mt-20">
         <AboutDetailed />
@@ -333,7 +291,7 @@ const LandingPageUSA = () => (
         </motion.p>
         <motion.div {...fade(0.1)} className="mt-10">
           <Accordion type="single" collapsible className="space-y-3">
-            {usaFaq.map((faq, i) => (
+            {visibleFaq.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
@@ -353,20 +311,6 @@ const LandingPageUSA = () => (
 
       <HomeBookingOffer />
 
-      {/* ── SEO footer block ── */}
-      <section className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h2 className="text-lg font-semibold text-muted-foreground mb-4">
-          Русскоязычный психолог онлайн для США и Канады
-        </h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Если вы живёте в Нью-Йорке, Чикаго, Майами, Сиэтле, Сан-Франциско, Торонто, Ванкувере или
-          Монреале и хотите работать с психологом на родном языке — эта страница для вас. Я работаю
-          онлайн с русскоязычными клиентами в США и Канаде в подходах когнитивно-поведенческой и
-          схема-терапии: тревога, панические атаки, выгорание, синдром самозванца, эмиграционный
-          стресс и отношения с семьёй на расстоянии. Удобные слоты по EST, CST и PST, консультация
-          45 € · 50 минут, оплата через Wise или Revolut.
-        </p>
-      </section>
     </main>
     <Footer />
   </div>

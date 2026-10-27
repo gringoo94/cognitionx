@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
@@ -76,15 +77,14 @@ const specializations = [
 const itFaq = [
   { question: "Вы работаете с выгоранием в IT конкретно, или с выгоранием вообще?", answer: "Работаю с профессиональным и эмоциональным выгоранием вне зависимости от профессии. При этом хорошо понимаю специфику IT: высокий темп, удалёнка, постоянное давление перформанса, культура «всегда онлайн». Этот контекст учитывается в работе." },
   { question: "Я не верю в «просто поговорить». КПТ — это действительно что-то конкретное?", answer: "Да. КПТ — это структурированная работа с конкретными когнитивными и поведенческими паттернами. Есть повестка каждой сессии, домашние задания, измеримые цели. Больше похоже на отладку системы, чем на разговор по душам." },
-  { question: "Как совместить сессии с плотным рабочим графиком?", answer: "Работаю в гибком расписании, включая вечернее время (EET). Сессии онлайн — Zoom или другой удобный инструмент. Не нужно никуда ехать." },
-  { question: "Я в Европе, вы в Кишинёве. Разница часовых поясов?", answer: "Кишинёв — EET (UTC+2 зимой, UTC+3 летом). Это та же зона или ±1 час от большинства стран Западной Европы. На практике разница несущественна." },
   { question: "Онлайн-терапия — это так же эффективно, как очная?", answer: "По данным исследований — да, для большинства запросов эффективность сопоставима. Для людей, привыкших к удалённой работе, онлайн-формат часто даже комфортнее." },
-  { question: "Сколько сессий обычно нужно?", answer: "Зависит от запроса. Конкретные тревожные паттерны — от 8 до 16 сессий. Более глубокая работа со схемами — дольше. На первой встрече обсудим ориентировочный план." },
+  { question: "Сколько сессий обычно нужно?", answer: "Длительность зависит от вашей ситуации. Обсудим ориентировочный план на первой встрече и будем пересматривать его по ходу работы." },
   { question: "Вы работаете с парами, где один или оба — из IT?", answer: "Пары — отдельный запрос, который я сейчас не веду. Работаю индивидуально." },
   { question: "Как оплатить из Европы?", answer: "Принимаю оплату через Stripe (карта), PayPal и банковский перевод. Детали обсудим на знакомстве." },
 ];
 
-const itFaqSchema = buildFaqSchema(itFaq);
+const visibleFaq = buildLandingFaq(itFaq);
+const itFaqSchema = buildFaqSchema(visibleFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -101,7 +101,6 @@ const itGeoInput = {
     "Психолог онлайн для IT-специалистов в Европе. КПТ и схема-терапия. Выгорание, синдром самозванца, тревога.",
   places: ["Европа"],
   languages: ["Russian", "English"],
-  timezone: "CET / CEST",
 };
 
 const businessSchema = buildGeoBusinessSchema(itGeoInput);
@@ -131,7 +130,7 @@ const LandingPageIT = () => (
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Онлайн · Zoom · На русском языке
+              Психотерапия онлайн
             </motion.div>
 
             <motion.h1
@@ -149,7 +148,7 @@ const LandingPageIT = () => (
               {...fade(0.1)}
               className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              Работаю с разработчиками, PM, аналитиками и дата-специалистами. КПТ и схема-терапия — структурированно, без воды, с измеримым результатом.
+              Работаю с разработчиками, PM, аналитиками и дата-специалистами. Использую КПТ и схема-терапию; цели и план работы обсуждаем вместе.
             </motion.p>
 
             <motion.div
@@ -205,43 +204,8 @@ const LandingPageIT = () => (
 
       <TelegramCTA />
 
-      {/* ── Pain Points ── */}
-      <section className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              С чем чаще всего приходят IT-специалисты
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.04)}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-border bg-background p-6 flex gap-4 items-start hover:border-primary/40 hover:shadow-lg transition-all"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <p.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{p.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── About ── */}
-      <About
-        text="Меня зовут Дмитрий. Я клинический психолог, работаю в КПТ и схема-терапии, онлайн с русскоязычными специалистами из IT по всей Европе. Помимо практики создаю AI-инструменты для психологов — Rolelit и CBT Workbook, поэтому понимаю, как думают люди в технологиях."
-        quote="«IT-специалисты мыслят системно. КПТ — это и есть система: конкретные инструменты, понятная структура, измеримый результат. Не просто разговоры.»"
-        chips={["КПТ", "Схема-терапия", "Опыт с IT-клиентами", "Онлайн"]}
-      />
+      <About />
 
       <div id="about-detailed" className="scroll-mt-20">
         <AboutDetailed />
@@ -346,7 +310,7 @@ const LandingPageIT = () => (
           </motion.p>
           <motion.div {...fade(0.1)} className="mt-10">
             <Accordion type="single" collapsible className="space-y-3">
-              {itFaq.map((faq, i) => (
+              {visibleFaq.map((faq, i) => (
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
@@ -366,15 +330,6 @@ const LandingPageIT = () => (
       </section>
 
       <HomeBookingOffer />
-
-      {/* ── SEO block ── */}
-      <section className="max-w-3xl mx-auto px-6 py-12">
-        <h2 className="text-sm font-semibold text-muted-foreground mb-2">Психолог для IT-специалистов онлайн на русском языке</h2>
-        <p className="text-xs text-muted-foreground/70 leading-relaxed">
-          Если вы разработчик, продакт-менеджер, дата-аналитик или тимлид — и переехали в Европу — эта страница для вас.
-          Работаю онлайн с русскоязычными IT-специалистами в Германии, Нидерландах, Чехии, Португалии, Израиле, Грузии, Сербии и других странах.
-        </p>
-      </section>
 
     </main>
     <Footer />

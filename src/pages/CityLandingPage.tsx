@@ -27,6 +27,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
 import TelegramCTA from "@/components/TelegramCTA";
@@ -46,23 +47,6 @@ import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug } from "@/data/cityPages";
 import NotFound from "@/pages/NotFound";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
-
-
-// Hour offset for "min" side of utcOffset string (e.g. "UTC+1/+2" -> 1).
-// Used for the "session times in your timezone" mini-table.
-function minOffsetHours(utcOffset: string): number {
-  const m = utcOffset.match(/UTC([+-]\d+)/);
-  return m ? parseInt(m[1], 10) : 0;
-}
-// Kishinev (host) min offset is +2 (winter). We compute diff = clientMin - hostMin.
-function shiftToKishinev(clientHour: number, clientUtcOffset: string): number {
-  const diff = minOffsetHours(clientUtcOffset) - 2;
-  let h = clientHour - diff;
-  if (h < 0) h += 24;
-  if (h >= 24) h -= 24;
-  return h;
-}
-const fmtH = (h: number) => `${String(h).padStart(2, "0")}:00`;
 
 
 const fade = (delay = 0) => ({
@@ -98,16 +82,12 @@ const CityLandingPage = () => {
     city: page.city,
     country: page.country,
     languages: page.countryCode === "MD" ? ["Russian", "Romanian"] : ["Russian"],
-    timezone: page.timezone,
   };
 
   const businessSchema = buildGeoBusinessSchema(geoInput);
   const serviceSchema = buildGeoServiceSchema(geoInput);
 
-  // Only practical questions (time, payment, insurance, first session); max 4.
-  const outdatedFaq = /\/start|остр|кризис|параллельно|формата лучше|не уверен/i;
-  const visibleFaq = page.faq.filter((f) => !outdatedFaq.test(f.question + " " + f.answer)).slice(0, 4);
-  // FAQPage разметка соответствует видимому FAQ-блоку ниже.
+  const visibleFaq = buildLandingFaq(page.faq);
   const faqSchema = buildFaqSchema(visibleFaq);
 
 
@@ -174,7 +154,7 @@ const CityLandingPage = () => {
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                Онлайн · {page.country} · {page.utcOffset}
+                Психотерапия онлайн
               </motion.div>
 
               <motion.h1
@@ -269,62 +249,6 @@ const CityLandingPage = () => {
         <div id="about-detailed" className="scroll-mt-20">
           <AboutDetailed />
         </div>
-
-        {/* ── Why Russian online ── */}
-        {page.whyRussianOnline && page.whyRussianOnline.length > 0 && (
-          <section className="bg-background">
-            <div className="max-w-4xl mx-auto px-6 py-20 md:py-24">
-              <motion.div {...fade()} className="text-center mb-12">
-                <Heart className="w-8 h-8 text-primary mx-auto mb-4 opacity-80" />
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-                  Почему русскоязычная терапия онлайн<br className="hidden sm:block" /> может быть удобнее {page.cityFor}
-                </h2>
-                <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-                  Не «лучше местной системы» — а другой формат, который подходит части людей.
-                </p>
-              </motion.div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {page.whyRussianOnline.map((point, i) => (
-                  <motion.div
-                    key={i}
-                    {...fade(0.05 * i)}
-                    className="flex items-start gap-3 rounded-xl border border-border bg-card p-5"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                    <p className="text-sm leading-relaxed text-muted-foreground">{point}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ── Local pain points ── */}
-        {page.painPoints.length > 0 && (
-          <section className="bg-card border-y border-border">
-            <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
-              <motion.h2 {...fade()} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-10">
-                С чем часто приходят {page.cityFor.replace(/^для /, "из ")}
-              </motion.h2>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {page.painPoints.map((p, i) => (
-                  <motion.div key={i} {...fade(0.04 * i)} className="rounded-xl border border-border bg-background p-5">
-                    <h3 className="text-sm font-semibold mb-1.5">{p.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{p.text}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-
-
-
-
-
-
-
 
         <AboutEvidence />
         <Approach />

@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
@@ -63,14 +64,6 @@ const painPoints = [
 
 const asiaFaq = [
   {
-    question: "Удобно ли работать со мной по времени из Бали или Таиланда?",
-    answer: "Да. Я нахожусь в Кишинёве (UTC+2/+3). Разница с Бали (UTC+8) — 5–6 часов, с Таиландом (UTC+7) — 4–5 часов. Для вас это утренние слоты (8:00–13:00 по местному времени) — это моё раннее утро / ранний день. Для многих клиентов утренняя сессия даже удобнее: день начинается с проработки, а не с задач.",
-  },
-  {
-    question: "Почему важно работать на родном языке?",
-    answer: "Эмоции, детские воспоминания и глубинные убеждения «живут» на том языке, на котором вы выросли. Терапия на английском (даже если он у вас отличный) часто остаётся поверхностной — как чинить часы в перчатках. Особенно это критично при работе с травмой, отношениями и схемами.",
-  },
-  {
     question: "Может ли в тропиках быть сезонная депрессия?",
     answer: "Да, и это частая жалоба у экспатов в Азии. Парадоксально — но «вечное лето» само по себе становится фактором риска: пропадает естественная смена ритма, телу не на что опираться. Плюс сезон дождей, влажность, изоляция — всё это даёт устойчивое снижение настроения. С этим хорошо работает поведенческая активация и структурирование дня.",
   },
@@ -88,7 +81,7 @@ const asiaFaq = [
   },
   {
     question: "Сколько сессий нужно для результата?",
-    answer: "Зависит от запроса. Обычно 8–20 сессий. Первые улучшения часто заметны через 4–6 встреч. Точнее скажу после первичной консультации, когда увидим картину.",
+    answer: "Длительность зависит от вашей ситуации. Обсудим ориентировочный план на первой встрече и будем пересматривать его по ходу работы.",
   },
   {
     question: "Как оплатить из Азии?",
@@ -96,7 +89,8 @@ const asiaFaq = [
   },
 ];
 
-const asiaFaqSchema = buildFaqSchema(asiaFaq);
+const visibleFaq = buildLandingFaq(asiaFaq);
+const asiaFaqSchema = buildFaqSchema(visibleFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -112,7 +106,6 @@ const asiaGeoInput = {
   description:
     "Русскоязычный психолог онлайн для экспатов на Бали, в Таиланде, Вьетнаме и других странах Юго-Восточной Азии. КПТ и схема-терапия на русском языке.",
   places: ["Индонезия", "Таиланд", "Вьетнам", "Малайзия", "Юго-Восточная Азия"],
-  timezone: "UTC+7 / UTC+8",
 };
 
 const businessSchema = buildGeoBusinessSchema(asiaGeoInput);
@@ -122,7 +115,7 @@ const LandingPageAsia = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
       title="Психолог для экспатов в Азии онлайн — КПТ | Яцко"
-      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Консультация 45 €, 50 минут."
+      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Консультация 45 €, 50 минут."
       path="/psiholog-aziya"
       alternates={buildGeoAlternates("/psiholog-aziya", ["ID", "TH", "VN"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
@@ -142,7 +135,7 @@ const LandingPageAsia = () => (
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-7"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Онлайн · Zoom · На русском · Удобно для UTC+7/+8
+              Психотерапия онлайн
             </motion.div>
 
             <motion.h1
@@ -158,7 +151,7 @@ const LandingPageAsia = () => (
               {...fade(0.1)}
               className="mt-6 text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              КПТ и схема-терапия онлайн для тех, кто живёт на Бали, в Таиланде, Вьетнаме и других странах Азии. Сессии — в ваше утро.
+              КПТ и схема-терапия онлайн для тех, кто живёт на Бали, в Таиланде, Вьетнаме и других странах Азии. 
             </motion.p>
 
             <motion.div
@@ -214,43 +207,8 @@ const LandingPageAsia = () => (
 
       <TelegramCTA />
 
-      {/* ── Pain Points ── */}
-      <section className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              С чем сталкиваются русскоязычные экспаты на Бали, в Таиланде и других странах Азии
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.04)}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-border bg-background p-6 flex gap-4 items-start hover:border-primary/40 hover:shadow-lg transition-all"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <p.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{p.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── About ── */}
-      <About
-        text="Меня зовут Дмитрий. Я клинический психолог, работаю в КПТ и схема-терапии. Работаю онлайн с русскоязычными экспатами в Азии из Кишинёва (UTC+2/+3). Для Бали (UTC+8) и Таиланда (UTC+7) — удобные утренние слоты по вашему времени."
-        quote="«Переезд в красивое место не лечит внутреннюю боль — но даёт шанс наконец её увидеть.»"
-        chips={["КПТ", "Схема-терапия", "На русском языке", "Удобные слоты для Азии"]}
-      />
+      <About />
 
       <div id="about-detailed" className="scroll-mt-20">
         <AboutDetailed />
@@ -319,7 +277,7 @@ const LandingPageAsia = () => (
         </motion.p>
         <motion.div {...fade(0.1)} className="mt-10">
           <Accordion type="single" collapsible className="space-y-3">
-            {asiaFaq.map((faq, i) => (
+            {visibleFaq.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
@@ -338,20 +296,6 @@ const LandingPageAsia = () => (
       </section>
 
       <HomeBookingOffer />
-
-      {/* ── SEO footer block ── */}
-      <section className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h2 className="text-lg font-semibold text-muted-foreground mb-4">
-          Русскоязычный психолог для экспатов в Азии онлайн
-        </h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Если вы переехали на Бали, в Таиланд, Вьетнам, Малайзию, Камбоджу, Индонезию или Шри-Ланку
-          и хотите работать с психологом на родном языке — эта страница для вас. Я работаю онлайн с
-          русскоязычными экспатами в Юго-Восточной Азии в подходах когнитивно-поведенческой и
-          схема-терапии. Удобные слоты по местному времени (UTC+7/+8), бесплатная первая встреча,
-          оплата в EUR через Wise или Revolut.
-        </p>
-      </section>
 
     </main>
     <Footer />

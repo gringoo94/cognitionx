@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buildLandingFaq } from "@/lib/geoFaq";
 import SEOHead from "@/components/SEOHead";
 import { buildFaqSchema, buildGeoBusinessSchema, buildGeoServiceSchema } from "@/lib/geoSchema";
 import TelegramCTA from "@/components/TelegramCTA";
@@ -68,10 +69,6 @@ const expatFaq = [
     answer: "Я нахожусь в Кишинёве, Молдова (часовой пояс EET, UTC+2/+3). Работаю онлайн с клиентами из Германии, Франции, Нидерландов, Великобритании, Испании, Италии и других стран.",
   },
   {
-    question: "Почему важно работать на родном языке?",
-    answer: "Эмоции, детские воспоминания и глубинные убеждения «живут» на том языке, на котором вы выросли. Терапия на неродном языке часто остаётся поверхностной — как чинить часы в перчатках.",
-  },
-  {
     question: "Я давно живу в Европе, но до сих пор не адаптировался — это нормально?",
     answer: "Да. Адаптация — не линейный процесс. Многие проходят через циклы: энтузиазм → разочарование → кризис → принятие. Застревание на одном этапе — повод обратиться за помощью.",
   },
@@ -85,7 +82,7 @@ const expatFaq = [
   },
   {
     question: "Сколько сессий нужно для результата?",
-    answer: "Зависит от проблемы. Обычно 8–20 сессий. Первые улучшения часто заметны через 4–6 сессий. Точнее скажу после первичной консультации.",
+    answer: "Длительность зависит от вашей ситуации. Обсудим ориентировочный план на первой встрече и будем пересматривать его по ходу работы.",
   },
   {
     question: "Вы работаете с парами экспатов?",
@@ -97,7 +94,8 @@ const expatFaq = [
   },
 ];
 
-const expatFaqSchema = buildFaqSchema(expatFaq);
+const visibleFaq = buildLandingFaq(expatFaq);
+const expatFaqSchema = buildFaqSchema(visibleFaq);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -113,7 +111,6 @@ const europaGeoInput = {
   description:
     "Русскоязычный психолог онлайн для экспатов в Европе. КПТ и схема-терапия на русском языке.",
   places: ["Европа", "Европейский союз"],
-  timezone: "CET / CEST",
 };
 
 const businessSchema = buildGeoBusinessSchema(europaGeoInput);
@@ -164,7 +161,7 @@ const LandingPageEuropa = () => (
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-5"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Онлайн · Zoom · На русском языке
+              Психотерапия онлайн
             </motion.div>
 
             <motion.h1
@@ -263,43 +260,8 @@ const LandingPageEuropa = () => (
 
       <TelegramCTA />
 
-      {/* ── Pain Points (expat-specific) — боль сразу ── */}
-      <section className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <motion.div {...fade()} className="text-center mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Узнаёте себя?</h2>
-            <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-              С чем сталкиваются русскоязычные экспаты в Европе
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {painPoints.map((p, i) => (
-              <motion.div
-                key={i}
-                {...fade(i * 0.04)}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ duration: 0.25 }}
-                className="rounded-2xl border border-border bg-background p-6 flex gap-4 items-start hover:border-primary/40 hover:shadow-lg transition-all"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <p.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{p.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── About ── */}
-      <About
-        text="Меня зовут Дмитрий. Я клинический психолог, работаю в КПТ и схема-терапии. Работаю онлайн с русскоязычными экспатами по всей Европе из Кишинёва (EET, UTC+2/+3)."
-        quote="«Эмоции формируются на родном языке — и работать с ними на чужом всё равно что чинить часы в перчатках.»"
-        chips={["КПТ", "Схема-терапия", "На русском языке", "Онлайн по всей Европе"]}
-      />
+      <About />
 
       <div id="about-detailed" className="scroll-mt-20">
         <AboutDetailed />
@@ -368,7 +330,7 @@ const LandingPageEuropa = () => (
         </motion.p>
         <motion.div {...fade(0.1)} className="mt-10">
           <Accordion type="single" collapsible className="space-y-3">
-            {expatFaq.map((faq, i) => (
+            {visibleFaq.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
