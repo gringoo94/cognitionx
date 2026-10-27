@@ -102,9 +102,9 @@ const personSchema = {
 
 const asiaGeoInput = {
   url: "https://cognitionx.cloud/psiholog-aziya",
-  name: "Русскоязычный психолог для экспатов в Азии — Дмитрий Яцко",
+  name: "Психолог онлайн в Азии — Дмитрий Яцко",
   description:
-    "Русскоязычный психолог онлайн для экспатов на Бали, в Таиланде, Вьетнаме и других странах Юго-Восточной Азии. КПТ и схема-терапия на русском языке.",
+    "Психолог онлайн в Азии: Бали, Таиланд, Вьетнам. КПТ и схема-терапия на русском при тревоге, депрессии и ОКР. Консультация — 45 €, 50 минут.",
   places: ["Индонезия", "Таиланд", "Вьетнам", "Малайзия", "Юго-Восточная Азия"],
 };
 
@@ -114,14 +114,14 @@ const serviceSchema = buildGeoServiceSchema(asiaGeoInput);
 const LandingPageAsia = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог для экспатов в Азии онлайн — КПТ | Яцко"
-      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Консультация 45 €, 50 минут."
+      title="Психолог онлайн в Азии — Бали, Таиланд, Вьетнам | Яцко"
+      description={asiaGeoInput.description}
       path="/psiholog-aziya"
       alternates={buildGeoAlternates("/psiholog-aziya", ["ID", "TH", "VN"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
-        { name: "Психолог для экспатов — Азия", url: "https://cognitionx.cloud/psiholog-aziya" },
+        { name: "Психолог онлайн в Азии", url: "https://cognitionx.cloud/psiholog-aziya" },
       ]}
     />
     <Navbar />
@@ -142,9 +142,9 @@ const LandingPageAsia = () => (
               {...fade(0.05)}
               className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
             >
-              Русскоязычный психолог
+              Психолог онлайн
               <br />
-              <span className="text-primary">для экспатов в Азии</span>
+              <span className="text-primary">в Азии</span>
             </motion.h1>
 
             <motion.p

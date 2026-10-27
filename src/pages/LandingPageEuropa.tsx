@@ -107,9 +107,9 @@ const personSchema = {
 
 const europaGeoInput = {
   url: "https://cognitionx.cloud/psiholog-europa",
-  name: "Русскоязычный психолог для экспатов в Европе — Дмитрий Яцко",
+  name: "Психолог онлайн в Европе — Дмитрий Яцко",
   description:
-    "Русскоязычный психолог онлайн для экспатов в Европе. КПТ и схема-терапия на русском языке.",
+    "Психолог онлайн в Европе: КПТ и схема-терапия на русском. Помощь при тревоге, депрессии и ОКР. Консультация — 45 €, 50 минут.",
   places: ["Европа", "Европейский союз"],
 };
 
@@ -119,8 +119,8 @@ const serviceSchema = buildGeoServiceSchema(europaGeoInput);
 const LandingPageEuropa = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Психолог на русском для Европы онлайн — КПТ | Яцко"
-      description="Русскоязычный психолог онлайн для экспатов в Европе: КПТ и схема-терапия. Адаптация, одиночество, тревога, выгорание. Консультация 45 €, 50 минут."
+      title="Психолог онлайн в Европе — на русском | Дмитрий Яцко"
+      description={europaGeoInput.description}
       path="/psiholog-europa"
       schema={[personSchema, businessSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
       alternates={[
@@ -132,7 +132,7 @@ const LandingPageEuropa = () => (
       ]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
-        { name: "Психолог для экспатов — Европа", url: "https://cognitionx.cloud/psiholog-europa" },
+        { name: "Психолог онлайн в Европе", url: "https://cognitionx.cloud/psiholog-europa" },
       ]}
     />
     <Navbar />
@@ -168,7 +168,7 @@ const LandingPageEuropa = () => (
               {...fade(0.05)}
               className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08]"
             >
-              Русскоязычный психолог
+              Психолог онлайн
               <br />
               <span className="text-primary">в Европе</span>
             </motion.h1>

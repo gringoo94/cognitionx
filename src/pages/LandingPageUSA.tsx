@@ -98,9 +98,9 @@ const personSchema = {
 
 const usaGeoInput = {
   url: "https://cognitionx.cloud/psiholog-usa",
-  name: "Русскоязычный психолог онлайн для США и Канады — Дмитрий Яцко",
+  name: "Психолог онлайн в США и Канаде — Дмитрий Яцко",
   description:
-    "Русскоязычный психолог онлайн для клиентов из США и Канады. КПТ и схема-терапия на родном языке.",
+    "Психолог онлайн в США и Канаде: КПТ и схема-терапия на русском. Помощь при тревоге, депрессии и ОКР. Консультация — 45 €, 50 минут.",
   places: ["США", "Канада", "Нью-Йорк", "Торонто", "Сан-Франциско"],
 };
 
@@ -128,14 +128,14 @@ const pricing = [
 const LandingPageUSA = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
-      title="Русскоязычный психолог онлайн США и Канада | КПТ"
-      description="Русскоязычный психолог онлайн для США и Канады: КПТ и схема-терапия на родном языке. Консультация 45 €, 50 минут."
+      title="Психолог онлайн в США и Канаде — на русском | Яцко"
+      description={usaGeoInput.description}
       path="/psiholog-usa"
       alternates={buildGeoAlternates("/psiholog-usa", ["US", "CA"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(usaFaqSchema ? [usaFaqSchema] : []), testimonialsSchema]}
       breadcrumbs={[
         { name: "Главная", url: "https://cognitionx.cloud/" },
-        { name: "Психолог онлайн — США и Канада", url: "https://cognitionx.cloud/psiholog-usa" },
+        { name: "Психолог онлайн в США и Канаде", url: "https://cognitionx.cloud/psiholog-usa" },
       ]}
     />
     <Navbar />
@@ -156,9 +156,9 @@ const LandingPageUSA = () => (
               {...fade(0.05)}
               className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
             >
-              Русскоязычный психолог
+              Психолог онлайн
               <br />
-              <span className="text-primary">для США и Канады</span>
+              <span className="text-primary">в США и Канаде</span>
             </motion.h1>
 
             <motion.p
