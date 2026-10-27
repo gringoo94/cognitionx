@@ -206,7 +206,6 @@ const CityLandingPage = () => {
                 {[
                   { value: "200+", label: "клиентов" },
                   { value: "5 лет", label: "опыта" },
-                  { value: "Онлайн", label: "на русском" },
                 ].map((s) => (
                   <div key={s.label} className="text-center">
                     <span className="block text-lg font-bold text-foreground">{s.value}</span>
