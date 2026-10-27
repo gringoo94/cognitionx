@@ -94,7 +94,7 @@ const Hero = () => (
         </motion.div>
 
         <motion.p {...fade(0.22)} className="mt-3 text-xs leading-relaxed text-muted-foreground">
-          Ближайшая запись — примерно через две недели. Время согласуем в Telegram или WhatsApp.
+          Время согласуем в Telegram или WhatsApp.
         </motion.p>
 
         <motion.div

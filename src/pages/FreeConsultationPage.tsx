@@ -85,7 +85,7 @@ const paidServiceSchema = {
   ...serviceSchema,
   name: "Консультация психолога Дмитрия Яцко",
   description:
-    "Разовая платная онлайн-консультация КПТ-психолога Дмитрия Яцко (50 минут). Запись примерно за 2 недели.",
+    "Разовая платная онлайн-консультация КПТ-психолога Дмитрия Яцко (50 минут).",
   provider: { "@id": "https://cognitionx.cloud/#person" },
   offers: { ...serviceSchema.offers, price: "45" },
 };
@@ -328,7 +328,7 @@ const FreeConsultationPage = () => {
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
         title={teamBookingEnabled ? "Запись на консультацию — выбрать специалиста" : "Запись на консультацию к психологу Дмитрию Яцко"}
-        description={teamBookingEnabled ? "Выберите специалиста команды CognitionX и запишитесь на консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств." : "Разовая платная консультация КПТ-психолога Дмитрия Яцко онлайн — 45 €, запись примерно за 2 недели. Оставьте заявку, и мы согласуем время."}
+        description={teamBookingEnabled ? "Выберите специалиста команды CognitionX и запишитесь на консультацию: КПТ-психологи и врач-психиатр. Онлайн и очно, без обязательств." : "Разовая платная консультация КПТ-психолога Дмитрия Яцко онлайн — 45 €. Оставьте заявку, и мы согласуем время."}
         path="/booking"
         schema={[teamBookingEnabled ? serviceSchema : paidServiceSchema, breadcrumbSchema]}
       />
@@ -374,15 +374,15 @@ const FreeConsultationPage = () => {
             <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
             <div>
               <p className="text-sm font-semibold text-foreground">
-                Я временно не принимаю новых клиентов
+                Регулярная терапия сейчас — через коллег
               </p>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                 Поэтому предлагаю выбрать одного из проверенных коллег. Формат и условия
                 дальнейшей работы вы согласуете непосредственно со специалистом.
               </p>
               <p className="mt-3 text-sm leading-relaxed text-foreground">
-                Если вы хотите попасть именно ко мне — доступна разовая платная консультация
-                с записью примерно за 2 недели.
+                Если вы хотите попасть именно ко мне — запишитесь на консультацию, и мы согласуем
+                удобное время.
               </p>
               <Button
                 size="sm"
