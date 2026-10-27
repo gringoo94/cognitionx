@@ -175,7 +175,7 @@ const StartQuizPage = () => {
     if (!parsed.success) {
       toast({
         title: "Проверьте форму",
-        description: parsed.error.errors[0].message,
+        description: parsed.error.issues[0].message,
         variant: "destructive",
       });
       return;
