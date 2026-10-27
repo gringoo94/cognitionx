@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
-    "@lovable.dev/mcp-js": "^3.3.0",
+    "@lovable.dev/mcp-js": "^0.20.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-aspect-ratio": "^1.1.7",
@@ -68,7 +68,7 @@
     "react-hook-form": "^7.61.1",
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^2.1.9",
-    "react-router-dom": "^6",
+    "react-router-dom": "6.30.3",
     "recharts": "^2.15.4",
     "rehype-raw": "^7.0.0",
     "remark-directive": "^4.0.0",

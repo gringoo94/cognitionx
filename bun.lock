@@ -6,7 +6,7 @@
       "name": "vite_react_shadcn_ts",
       "dependencies": {
         "@hookform/resolvers": "^3.10.0",
-        "@lovable.dev/mcp-js": "^3.3.0",
+        "@lovable.dev/mcp-js": "^0.20.0",
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-alert-dialog": "^1.1.14",
         "@radix-ui/react-aspect-ratio": "^1.1.7",
@@ -55,7 +55,7 @@
         "react-hook-form": "^7.61.1",
         "react-markdown": "^10.1.0",
         "react-resizable-panels": "^2.1.9",
-        "react-router-dom": "^6",
+        "react-router-dom": "6.30.3",
         "recharts": "^2.15.4",
         "rehype-raw": "^7.0.0",
         "remark-directive": "^4.0.0",
@@ -214,15 +214,9 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "http://npm-cache.lovable.net/@jridgewell/trace-mapping/-/trace-mapping-0.3.25.tgz", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@lovable.dev/mcp-js": ["@lovable.dev/mcp-js@3.3.0", "http://npm-cache.lovable.net/@lovable.dev/mcp-js/-/mcp-js-3.3.0.tgz", { "dependencies": { "@modelcontextprotocol/client": "2.3.0", "@modelcontextprotocol/core": "2.3.0", "@modelcontextprotocol/sdk": "1.28.0", "@modelcontextprotocol/server": "2.0.0", "esbuild": "^0.27.0", "jose": "^6.2.2", "js-yaml": "^4.3.2" }, "peerDependencies": { "vite": ">=5.0.0 <9.0.0", "zod": "^3.25 || ^4.0" }, "optionalPeers": ["vite"], "bin": { "lovable-mcp-check": "./dist/cli/check-server.cjs", "lovable-mcp-extract-manifest": "./dist/cli/extract-manifest.cjs" } }, "sha512-7KLhgeoRDR81XW4Vq57o9wFMxFN/7kL/qHa69ExthoRoT1oVx/fhIsGDnXdV9Ayf3oN1NUu7wDGlEImX2VjKWA=="],
-
-    "@modelcontextprotocol/client": ["@modelcontextprotocol/client@2.3.0", "http://npm-cache.lovable.net/@modelcontextprotocol/client/-/client-2.3.0.tgz", { "dependencies": { "@modelcontextprotocol/core": "2.3.0", "cross-spawn": "^7.0.5", "eventsource": "^3.0.2", "eventsource-parser": "^3.0.8", "jose": "^6.1.3", "pkce-challenge": "^5.0.0", "zod": "^4.2.0" } }, "sha512-pbHtGj6EeFCHngFE8gtNPaKrsj8Mb1IMw45BLcaPML/m2WTxI7pyYmeNQvaux88Lw8BSO5r7nyRbUyIkICmGrg=="],
-
-    "@modelcontextprotocol/core": ["@modelcontextprotocol/core@2.3.0", "http://npm-cache.lovable.net/@modelcontextprotocol/core/-/core-2.3.0.tgz", { "dependencies": { "zod": "^4.2.0" } }, "sha512-09BHFaNVBe5pB2AhzCfLj0cqmsKLERvZQ4FblzP90UMGLaXVqdZPByFjURwsUYCmxonUW2yAwgTTvle+8O2/8w=="],
+    "@lovable.dev/mcp-js": ["@lovable.dev/mcp-js@0.20.1", "", { "dependencies": { "@modelcontextprotocol/sdk": "1.28.0", "esbuild": "^0.27.0", "jose": "^6.2.2" }, "peerDependencies": { "vite": ">=5.0.0 <9.0.0", "zod": ">=3.23.0" }, "bin": { "lovable-mcp-extract-manifest": "./dist/cli/extract-manifest.cjs" } }, "sha512-om6CeutH0umP7WJLNqO7HnBYBnPje6iqQbSrE4PTFiWu0XhwC4BbEC6j0AmhiZWDV00Fu1TVidXCnAn45KVw2A=="],
 
     "@modelcontextprotocol/sdk": ["@modelcontextprotocol/sdk@1.28.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@modelcontextprotocol/sdk/-/sdk-1.28.0.tgz", { "dependencies": { "@hono/node-server": "^1.19.9", "ajv": "^8.17.1", "ajv-formats": "^3.0.1", "content-type": "^1.0.5", "cors": "^2.8.5", "cross-spawn": "^7.0.5", "eventsource": "^3.0.2", "eventsource-parser": "^3.0.0", "express": "^5.2.1", "express-rate-limit": "^8.2.1", "hono": "^4.11.4", "jose": "^6.1.3", "json-schema-typed": "^8.0.2", "pkce-challenge": "^5.0.0", "raw-body": "^3.0.0", "zod": "^3.25 || ^4.0", "zod-to-json-schema": "^3.25.1" }, "peerDependencies": { "@cfworker/json-schema": "^4.1.1" }, "optionalPeers": ["@cfworker/json-schema"] }, "sha512-gmloF+i+flI8ouQK7MWW4mOwuMh4RePBuPFAEPC6+pdqyWOUMDOixb6qZ69owLJpz6XmyllCouc4t8YWO+E2Nw=="],
-
-    "@modelcontextprotocol/server": ["@modelcontextprotocol/server@2.0.0", "http://npm-cache.lovable.net/@modelcontextprotocol/server/-/server-2.0.0.tgz", { "dependencies": { "@modelcontextprotocol/core": "2.0.0", "zod": "^4.2.0" } }, "sha512-YhHWdHfpFMQfd0prsEnxKeS3Qz3ytIGmsS0sth4KDjnacIT7hxk6hXHkJ9KysxlkvTM+WZAtQbbcUhdoP4Hvtw=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "http://npm-cache.lovable.net/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
@@ -344,7 +338,7 @@
 
     "@radix-ui/rect": ["@radix-ui/rect@1.1.1", "http://npm-cache.lovable.net/@radix-ui/rect/-/rect-1.1.1.tgz", {}, "sha512-HPwpGIzkl28mWyZqG52jiqDJ12waP11Pa1lGoiyUkIEuMLBP0oeK/C89esbXrxsky5we7dfd8U58nm0SgAWpVw=="],
 
-    "@remix-run/router": ["@remix-run/router@1.23.0", "http://npm-cache.lovable.net/@remix-run/router/-/router-1.23.0.tgz", {}, "sha512-O3rHJzAQKamUz1fvE0Qaw0xSFqsA/yafi2iqeE0pvdFtCO1viYx8QL6f3Ln/aCCTLxs68SLf0KPM9eSeM8yBnA=="],
+    "@remix-run/router": ["@remix-run/router@1.23.2", "", {}, "sha512-Ic6m2U/rMjTkhERIa/0ZtXJP17QUi2CbWE7cqx4J58M8aA3QTfW+2UlQ4psvTX9IO1RfNVhK3pcpdjej7L+t2w=="],
 
     "@rolldown/pluginutils": ["@rolldown/pluginutils@1.0.0-beta.27", "http://npm-cache.lovable.net/@rolldown/pluginutils/-/pluginutils-1.0.0-beta.27.tgz", {}, "sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA=="],
 
@@ -972,7 +966,7 @@
 
     "js-tokens": ["js-tokens@4.0.0", "http://npm-cache.lovable.net/js-tokens/-/js-tokens-4.0.0.tgz", {}, "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="],
 
-    "js-yaml": ["js-yaml@4.3.2", "http://npm-cache.lovable.net/js-yaml/-/js-yaml-4.3.2.tgz", { "dependencies": { "argparse": "^2.0.1" }, "bin": { "js-yaml": "bin/js-yaml.js" } }, "sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA=="],
+    "js-yaml": ["js-yaml@4.1.0", "http://npm-cache.lovable.net/js-yaml/-/js-yaml-4.1.0.tgz", { "dependencies": { "argparse": "^2.0.1" }, "bin": "bin/js-yaml.js" }, "sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA=="],
 
     "jsdom": ["jsdom@20.0.3", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/jsdom/-/jsdom-20.0.3.tgz", { "dependencies": { "abab": "^2.0.6", "acorn": "^8.8.1", "acorn-globals": "^7.0.0", "cssom": "^0.5.0", "cssstyle": "^2.3.0", "data-urls": "^3.0.2", "decimal.js": "^10.4.2", "domexception": "^4.0.0", "escodegen": "^2.0.0", "form-data": "^4.0.0", "html-encoding-sniffer": "^3.0.0", "http-proxy-agent": "^5.0.0", "https-proxy-agent": "^5.0.1", "is-potential-custom-element-name": "^1.0.1", "nwsapi": "^2.2.2", "parse5": "^7.1.1", "saxes": "^6.0.0", "symbol-tree": "^3.2.4", "tough-cookie": "^4.1.2", "w3c-xmlserializer": "^4.0.0", "webidl-conversions": "^7.0.0", "whatwg-encoding": "^2.0.0", "whatwg-mimetype": "^3.0.0", "whatwg-url": "^11.0.0", "ws": "^8.11.0", "xml-name-validator": "^4.0.0" }, "peerDependencies": { "canvas": "^2.5.0" }, "optionalPeers": ["canvas"] }, "sha512-SYhBvTh89tTfCD/CRdSOm13mOBa42iTaTyfyEWBdKcGdPxPtLFBXuHR8XHb33YNYaP+lLbmSvBTsnoesCNJEsQ=="],
 
@@ -998,7 +992,7 @@
 
     "locate-path": ["locate-path@6.0.0", "http://npm-cache.lovable.net/locate-path/-/locate-path-6.0.0.tgz", { "dependencies": { "p-locate": "^5.0.0" } }, "sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw=="],
 
-    "lodash": ["lodash@4.18.1", "", {}, "sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q=="],
+    "lodash": ["lodash@4.18.1", "http://npm-cache.lovable.net/lodash/-/lodash-4.18.1.tgz", {}, "sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q=="],
 
     "lodash.castarray": ["lodash.castarray@4.4.0", "http://npm-cache.lovable.net/lodash.castarray/-/lodash.castarray-4.4.0.tgz", {}, "sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q=="],
 
@@ -1280,9 +1274,9 @@
 
     "react-resizable-panels": ["react-resizable-panels@2.1.9", "http://npm-cache.lovable.net/react-resizable-panels/-/react-resizable-panels-2.1.9.tgz", { "peerDependencies": { "react": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc" } }, "sha512-z77+X08YDIrgAes4jl8xhnUu1LNIRp4+E7cv4xHmLOxxUPO/ML7PSrE813b90vj7xvQ1lcf7g2uA9GeMZonjhQ=="],
 
-    "react-router": ["react-router@6.30.1", "http://npm-cache.lovable.net/react-router/-/react-router-6.30.1.tgz", { "dependencies": { "@remix-run/router": "1.23.0" }, "peerDependencies": { "react": ">=16.8" } }, "sha512-X1m21aEmxGXqENEPG3T6u0Th7g0aS4ZmoNynhbs+Cn+q+QGTLt+d5IQ2bHAXKzKcxGJjxACpVbnYQSCRcfxHlQ=="],
+    "react-router": ["react-router@6.30.3", "", { "dependencies": { "@remix-run/router": "1.23.2" }, "peerDependencies": { "react": ">=16.8" } }, "sha512-XRnlbKMTmktBkjCLE8/XcZFlnHvr2Ltdr1eJX4idL55/9BbORzyZEaIkBFDhFGCEWBBItsVrDxwx3gnisMitdw=="],
 
-    "react-router-dom": ["react-router-dom@6.30.1", "http://npm-cache.lovable.net/react-router-dom/-/react-router-dom-6.30.1.tgz", { "dependencies": { "@remix-run/router": "1.23.0", "react-router": "6.30.1" }, "peerDependencies": { "react": ">=16.8", "react-dom": ">=16.8" } }, "sha512-llKsgOkZdbPU1Eg3zK8lCn+sjD9wMRZZPuzmdWWX5SUs8OFkN5HnFVC0u5KMeMaC9aoancFI/KoLuKPqN+hxHw=="],
+    "react-router-dom": ["react-router-dom@6.30.3", "", { "dependencies": { "@remix-run/router": "1.23.2", "react-router": "6.30.3" }, "peerDependencies": { "react": ">=16.8", "react-dom": ">=16.8" } }, "sha512-pxPcv1AczD4vso7G4Z3TKcvlxK7g7TNt3/FNGMhfqyntocvYKj+GCatfigGDjbLozC4baguJ0ReCigoDJXb0ag=="],
 
     "react-smooth": ["react-smooth@4.0.4", "http://npm-cache.lovable.net/react-smooth/-/react-smooth-4.0.4.tgz", { "dependencies": { "fast-equals": "^5.0.1", "prop-types": "^15.8.1", "react-transition-group": "^4.4.5" }, "peerDependencies": { "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-gnGKTpYwqL0Iii09gHobNolvX4Kiq4PKx6eWBCYYix+8cdw+cGo3do906l1NBPKkSWx1DghC1dlWG9L2uGd61Q=="],
 
@@ -1542,7 +1536,7 @@
 
     "wrappy": ["wrappy@1.0.2", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/wrappy/-/wrappy-1.0.2.tgz", {}, "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="],
 
-    "ws": ["ws@8.22.0", "", { "peerDependencies": { "bufferutil": "^4.0.1", "utf-8-validate": ">=5.0.2" }, "optionalPeers": ["bufferutil", "utf-8-validate"] }, "sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg=="],
+    "ws": ["ws@8.22.0", "http://npm-cache.lovable.net/ws/-/ws-8.22.0.tgz", { "peerDependencies": { "bufferutil": "^4.0.1", "utf-8-validate": ">=5.0.2" }, "optionalPeers": ["bufferutil", "utf-8-validate"] }, "sha512-Ydggc987+RO0AnWtZ/7Wq9FtNvcrL1b/RO0ud9mWjUPgDrsAAwQSF51sm2hm1XofbU/4jkpGEsLFsZZxU+1DOg=="],
 
     "xml-name-validator": ["xml-name-validator@4.0.0", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/xml-name-validator/-/xml-name-validator-4.0.0.tgz", {}, "sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw=="],
 
@@ -1562,8 +1556,6 @@
 
     "@eslint/eslintrc/globals": ["globals@14.0.0", "http://npm-cache.lovable.net/globals/-/globals-14.0.0.tgz", {}, "sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ=="],
 
-    "@eslint/eslintrc/js-yaml": ["js-yaml@4.1.0", "http://npm-cache.lovable.net/js-yaml/-/js-yaml-4.1.0.tgz", { "dependencies": { "argparse": "^2.0.1" }, "bin": "bin/js-yaml.js" }, "sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA=="],
-
     "@humanfs/node/@humanwhocodes/retry": ["@humanwhocodes/retry@0.3.1", "http://npm-cache.lovable.net/@humanwhocodes/retry/-/retry-0.3.1.tgz", {}, "sha512-JBxkERygn7Bv/GbN5Rv8Ul6LVknS+5Bp6RgDC/O8gEBU/yeH5Ui5C/OlWrTb6qct7LjjfT6Re2NxB0ln0yYybA=="],
 
     "@jridgewell/gen-mapping/@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.0", "http://npm-cache.lovable.net/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz", {}, "sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ=="],
@@ -1572,15 +1564,7 @@
 
     "@lovable.dev/mcp-js/esbuild": ["esbuild@0.27.7", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/esbuild/-/esbuild-0.27.7.tgz", { "optionalDependencies": { "@esbuild/aix-ppc64": "0.27.7", "@esbuild/android-arm": "0.27.7", "@esbuild/android-arm64": "0.27.7", "@esbuild/android-x64": "0.27.7", "@esbuild/darwin-arm64": "0.27.7", "@esbuild/darwin-x64": "0.27.7", "@esbuild/freebsd-arm64": "0.27.7", "@esbuild/freebsd-x64": "0.27.7", "@esbuild/linux-arm": "0.27.7", "@esbuild/linux-arm64": "0.27.7", "@esbuild/linux-ia32": "0.27.7", "@esbuild/linux-loong64": "0.27.7", "@esbuild/linux-mips64el": "0.27.7", "@esbuild/linux-ppc64": "0.27.7", "@esbuild/linux-riscv64": "0.27.7", "@esbuild/linux-s390x": "0.27.7", "@esbuild/linux-x64": "0.27.7", "@esbuild/netbsd-arm64": "0.27.7", "@esbuild/netbsd-x64": "0.27.7", "@esbuild/openbsd-arm64": "0.27.7", "@esbuild/openbsd-x64": "0.27.7", "@esbuild/openharmony-arm64": "0.27.7", "@esbuild/sunos-x64": "0.27.7", "@esbuild/win32-arm64": "0.27.7", "@esbuild/win32-ia32": "0.27.7", "@esbuild/win32-x64": "0.27.7" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-IxpibTjyVnmrIQo5aqNpCgoACA/dTKLTlhMHihVHhdkxKyPO1uBBthumT0rdHmcsk9uMonIWS0m4FljWzILh3w=="],
 
-    "@modelcontextprotocol/client/zod": ["zod@4.6.7", "http://npm-cache.lovable.net/zod/-/zod-4.6.7.tgz", {}, "sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg=="],
-
-    "@modelcontextprotocol/core/zod": ["zod@4.6.7", "http://npm-cache.lovable.net/zod/-/zod-4.6.7.tgz", {}, "sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg=="],
-
     "@modelcontextprotocol/sdk/ajv": ["ajv@8.20.0", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/ajv/-/ajv-8.20.0.tgz", { "dependencies": { "fast-deep-equal": "^3.1.3", "fast-uri": "^3.0.1", "json-schema-traverse": "^1.0.0", "require-from-string": "^2.0.2" } }, "sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA=="],
-
-    "@modelcontextprotocol/server/@modelcontextprotocol/core": ["@modelcontextprotocol/core@2.0.0", "http://npm-cache.lovable.net/@modelcontextprotocol/core/-/core-2.0.0.tgz", { "dependencies": { "zod": "^4.2.0" } }, "sha512-pJCEwGG7Lfr/+PQp9ZTwKXNeO5wzbfKL7H3MYpCorM4oFBoQrdjnBgEoqG+RjhsvS1FKrDbKux+M1HhlnGWqcA=="],
-
-    "@modelcontextprotocol/server/zod": ["zod@4.6.7", "http://npm-cache.lovable.net/zod/-/zod-4.6.7.tgz", {}, "sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg=="],
 
     "@supabase/auth-js/tslib": ["tslib@2.8.1", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/tslib/-/tslib-2.8.1.tgz", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
 
