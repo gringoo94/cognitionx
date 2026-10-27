@@ -248,7 +248,7 @@ const GEO_END = "<!-- GEO:AUTO-END -->";
 
 const GEO_FACTS = [
   "Язык консультаций: русский (единственный язык работы).",
-  "Формат: онлайн из любой страны и часового пояса; очно — только в Кишинёве (Молдова).",
+  "Формат: психотерапия онлайн; очно — только в Кишинёве (Молдова).",
   "Цены: разовая консультация 45 €, регулярная терапия 40 € за сессию при оплате от 4 сессий.",
     "Методы: когнитивно-поведенческая терапия (КПТ) и схема-терапия.",
   "Специалист: Дмитрий Яцко, психолог, практика CognitionX.",
@@ -271,6 +271,7 @@ function clip(s: string, max = 200): string {
 async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
   const { cityPages } = await import("./src/data/cityPages");
   const { countryHubs } = await import("./src/data/countryHubs");
+  const { buildLandingFaq } = await import("./src/lib/geoFaq");
 
   const cityBySlug = new Map<string, any>(cityPages.map((c: any) => [c.slug, c]));
   const hubBySlug = new Map<string, any>(countryHubs.map((h: any) => [h.slug, h]));
@@ -289,18 +290,16 @@ async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
     const city = cityBySlug.get(slug);
     const hub = hubBySlug.get(slug);
     if (city) {
-      const tz = city.utcOffset ? ` Часовой пояс: ${city.timezone} (${city.utcOffset}).` : "";
       cities.push({
         path: r.path,
         label: `Психолог ${city.cityIn}`,
-        desc: clip(`${city.metaDescription}${tz}`, 260),
+        desc: clip(`${city.metaDescription}`, 260),
       });
     } else if (hub) {
-      const tz = hub.utcOffset ? ` Часовой пояс: ${hub.timezone} (${hub.utcOffset}).` : "";
       countries.push({
         path: r.path,
         label: `Психолог ${hub.countryIn}`,
-        desc: clip(`${hub.metaDescription}${tz}`, 260),
+        desc: clip(`${hub.metaDescription}`, 260),
       });
     } else {
       const bucket = /dlya-/.test(slug)
@@ -330,7 +329,7 @@ async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
     "",
     ...GEO_FACTS.map((f) => `- ${f}`),
     "",
-    `Полные тексты гео-страниц (местный контекст, частые запросы, FAQ): ${SITE_URL}/llms-geo.txt`,
+    `Полные тексты гео-страниц (описание и FAQ): ${SITE_URL}/llms-geo.txt`,
     "",
     ...section("Страны и регионы", countries),
     ...section("Города", cities),
@@ -360,7 +359,7 @@ async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
   const parts: string[] = [
     "# CognitionX — гео-страницы (полный текст)",
     "",
-    `> Психолог Дмитрий Яцко (КПТ и схема-терапия). Локальный контекст по странам и городам: местная система психологической помощи, частые запросы, FAQ. Каталог сайта: ${SITE_URL}/llms.txt`,
+    `> Психолог Дмитрий Яцко (КПТ и схема-терапия). Тексты страниц по странам и городам: описание и частые вопросы. Каталог сайта: ${SITE_URL}/llms.txt`,
     "",
     `Обновлено: ${today}`,
     `Всего гео-страниц: ${geoRoutes.length}`,
@@ -377,55 +376,18 @@ async function generateGeo(seoRoutes: any[], today: string): Promise<number> {
     const hub = hubBySlug.get(slug);
     const lines: string[] = [];
 
-    if (city) {
-      lines.push(`## ${city.h1}`, "", `URL: ${SITE_URL}${r.path}`);
-      lines.push(`Город: ${city.city} (${city.country}, ${city.countryCode})`);
-      lines.push(`Часовой пояс: ${city.timezone} (${city.utcOffset})`);
-      lines.push("", stripHtml(city.subtitle || ""), "", stripHtml(city.intro || ""));
-      if (city.painPoints?.length) {
-        lines.push("", "### С чем обращаются");
-        for (const p of city.painPoints) lines.push(`- ${p.title}: ${stripHtml(p.text)}`);
+    if (city || hub) {
+      // Mirror only what the page shows: no time zones, local-system or expat blocks.
+      const page = city || hub;
+      lines.push(`## ${page.h1}`, "", `URL: ${SITE_URL}${r.path}`);
+      lines.push("", stripHtml(page.subtitle || ""), "", stripHtml(page.intro || ""));
+      if (hub?.cities?.length) {
+        lines.push("", `Города: ${hub.cities.map((s: string) => `${SITE_URL}/${s}`).join(", ")}`);
       }
-      if (city.localSystem) {
-        lines.push(
-          "",
-          "### Местная система помощи",
-          `- Страховка: ${stripHtml(city.localSystem.insurance)}`,
-          `- Государственный путь: ${stripHtml(city.localSystem.publicRoute)}`,
-          `- Частный путь: ${stripHtml(city.localSystem.privateRoute)}`,
-        );
-      }
-      if (city.faq?.length) {
+      const faq = buildLandingFaq(page.faq || []);
+      if (faq.length) {
         lines.push("", "### FAQ");
-        for (const f of city.faq) lines.push(`**${f.question}**`, stripHtml(f.answer), "");
-      }
-      if (city.localKeywords?.length) lines.push(`Ключевые запросы: ${city.localKeywords.join(", ")}`);
-    } else if (hub) {
-      lines.push(`## ${hub.h1}`, "", `URL: ${SITE_URL}${r.path}`);
-      lines.push(`Страна: ${hub.country} (${hub.countryCode}), местный язык: ${hub.language}`);
-      lines.push(`Часовой пояс: ${hub.timezone} (${hub.utcOffset})`);
-      lines.push("", stripHtml(hub.subtitle || ""), "", stripHtml(hub.intro || ""));
-      if (hub.systemOverview?.length) {
-        lines.push("", "### Система психологической помощи");
-        for (const s of hub.systemOverview) lines.push(`- ${s.title}: ${stripHtml(s.text)}`);
-      }
-      if (hub.expatContext?.length) {
-        lines.push("", "### Контекст эмиграции");
-        for (const t of hub.expatContext) lines.push(`- ${stripHtml(t)}`);
-      }
-      if (hub.whyOnline?.length) {
-        lines.push("", "### Почему онлайн на русском");
-        for (const t of hub.whyOnline) lines.push(`- ${stripHtml(t)}`);
-      }
-      if (hub.cities?.length) {
-        lines.push(
-          "",
-          `Города: ${hub.cities.map((s: string) => `${SITE_URL}/${s}`).join(", ")}`,
-        );
-      }
-      if (hub.faq?.length) {
-        lines.push("", "### FAQ");
-        for (const f of hub.faq) lines.push(`**${f.question}**`, stripHtml(f.answer), "");
+        for (const f of faq) lines.push(`**${f.question}**`, stripHtml(f.answer), "");
       }
     } else {
       lines.push(`## ${r.title.split("|")[0].trim()}`, "", `URL: ${SITE_URL}${r.path}`, "", clip(r.description, 400));
