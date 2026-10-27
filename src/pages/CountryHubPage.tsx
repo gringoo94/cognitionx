@@ -358,8 +358,7 @@ const CountryHubPage = () => {
             {...fade(0.05)}
             className="text-muted-foreground mb-8 max-w-xl mx-auto"
           >
-            Короткий опросник на 5 минут — я посмотрю ответы и пришлю первичный разбор в Telegram.
-            Без оплаты и без обязательств.
+            Консультация 45 € · 50 минут онлайн. Если остались вопросы — напишите в Telegram.
           </motion.p>
           <motion.div {...fade(0.1)} className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button size="lg" className="gap-2 px-8" asChild>

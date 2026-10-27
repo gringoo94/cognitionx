@@ -111,7 +111,7 @@ const LandingPageIT = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
       title="Психолог для IT-специалистов онлайн — КПТ | Яцко"
-      description="Психолог для разработчиков, PM и аналитиков в Европе: КПТ онлайн. Выгорание, синдром самозванца, тревога. Первая встреча — бесплатно."
+      description="Психолог для разработчиков, PM и аналитиков в Европе: КПТ онлайн. Выгорание, синдром самозванца, тревога. Консультация 45 €, 50 минут."
       path="/psiholog-dlya-it"
       alternates={buildGeoAlternates("/psiholog-dlya-it", ["DE", "NL", "PT", "GE"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(itFaqSchema ? [itFaqSchema] : []), testimonialsSchema]}
@@ -157,8 +157,8 @@ const LandingPageIT = () => (
               className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
             >
               <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-                <a href="/start">
-                  Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                <a href="/booking">
+                  Записаться на консультацию <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
               <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>

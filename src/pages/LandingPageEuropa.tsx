@@ -123,7 +123,7 @@ const LandingPageEuropa = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
       title="Психолог на русском для Европы онлайн — КПТ | Яцко"
-      description="Русскоязычный психолог онлайн для экспатов в Европе: КПТ и схема-терапия. Адаптация, одиночество, тревога, выгорание. Первая встреча — бесплатно."
+      description="Русскоязычный психолог онлайн для экспатов в Европе: КПТ и схема-терапия. Адаптация, одиночество, тревога, выгорание. Консультация 45 €, 50 минут."
       path="/psiholog-europa"
       schema={[personSchema, businessSchema, serviceSchema, ...(expatFaqSchema ? [expatFaqSchema] : []), testimonialsSchema]}
       alternates={[
@@ -201,8 +201,8 @@ const LandingPageEuropa = () => (
               className="mt-6 flex flex-col sm:flex-row items-center md:items-start gap-3"
             >
               <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all w-full sm:w-auto" asChild>
-                <a href="/start">
-                  Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                <a href="/booking">
+                  Записаться на консультацию <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
               <Button

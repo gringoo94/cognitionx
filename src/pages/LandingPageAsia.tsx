@@ -122,7 +122,7 @@ const LandingPageAsia = () => (
   <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
     <SEOHead
       title="Психолог для экспатов в Азии онлайн — КПТ | Яцко"
-      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Первая встреча — бесплатно."
+      description="Русскоязычный психолог онлайн для Бали, Таиланда и Вьетнама: КПТ и схема-терапия. Удобное время для UTC+7/+8. Консультация 45 €, 50 минут."
       path="/psiholog-aziya"
       alternates={buildGeoAlternates("/psiholog-aziya", ["ID", "TH", "VN"])}
       schema={[personSchema, businessSchema, serviceSchema, ...(asiaFaqSchema ? [asiaFaqSchema] : []), testimonialsSchema]}
@@ -166,8 +166,8 @@ const LandingPageAsia = () => (
               className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
             >
               <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-                <a href="/start">
-                  Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                <a href="/booking">
+                  Записаться на консультацию <ArrowRight className="w-4 h-4" />
                 </a>
               </Button>
               <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
