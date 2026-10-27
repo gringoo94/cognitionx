@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Audit and soften problem, method and IT landing copy; preserve clinical safeguards and verify booking navigation
+
 - [x] Rewrite all city landing copy in short, warm paragraphs; verify mobile reading and booking links
 
 - [x] Simplify all GEO copy: remove time zones and duplicate blocks, soften evidence wording, align first-meeting FAQ without duplicating preparation guide
