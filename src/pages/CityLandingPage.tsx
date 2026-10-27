@@ -29,9 +29,11 @@ import {
 } from "@/components/ui/accordion";
 import SEOHead from "@/components/SEOHead";
 import { buildGeoAlternates } from "@/lib/geoAlternates";
+import TelegramCTA from "@/components/TelegramCTA";
+import Pricing from "@/components/Pricing";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BookingForm from "@/components/BookingForm";
+import HomeBookingOffer from "@/components/HomeBookingOffer";
 import Approach from "@/components/Approach";
 import About from "@/components/About";
 import AboutDetailed from "@/components/AboutDetailed";
@@ -39,9 +41,6 @@ import AboutEvidence from "@/components/AboutEvidence";
 import Specializations from "@/components/Specializations";
 import Expectations from "@/components/Expectations";
 import Testimonials, { testimonialsSchema } from "@/components/Testimonials";
-import Ethics from "@/components/Ethics";
-import SessionPrep from "@/components/SessionPrep";
-import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import heroPhoto from "@/assets/hero-photo.webp";
 import { getCityBySlug } from "@/data/cityPages";
@@ -207,18 +206,14 @@ const CityLandingPage = () => {
                 className="mt-9 flex flex-col sm:flex-row items-center md:items-start gap-3"
               >
                 <Button size="lg" className="gap-2 text-base px-8 hover:scale-[1.02] hover:shadow-lg transition-all" asChild>
-                  <Link to="/start">
-                    Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                  <Link to="/booking">
+                    Записаться на консультацию <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-base px-8 hover:scale-[1.02] hover:shadow-md transition-all" asChild>
-                  <a href="/booking">Записаться на диагностику</a>
+                  <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
                 </Button>
               </motion.div>
-
-              <motion.p {...fade(0.2)} className="mt-4 text-xs text-muted-foreground max-w-md">
-                Короткий опросник на 3–5 минут. Вы опишете ситуацию, а я отправлю первичный разбор в Telegram. Без оплаты и обязательств.
-              </motion.p>
 
 
               <motion.div
@@ -258,19 +253,7 @@ const CityLandingPage = () => {
           </div>
         </section>
 
-        {/* ── Telegram CTA bar ── */}
-        <section className="bg-primary text-primary-foreground">
-          <div className="max-w-3xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
-            <p className="text-sm font-medium">
-              Запишитесь на консультацию — напишите в Telegram
-            </p>
-            <Button size="sm" variant="secondary" className="gap-2 rounded-full" asChild>
-              <a href="https://t.me/gringoo94" target="_blank" rel="noopener noreferrer">
-                <Send className="w-4 h-4" /> Написать в Telegram
-              </a>
-            </Button>
-          </div>
-        </section>
+      <TelegramCTA />
 
 
 
@@ -401,138 +384,13 @@ const CityLandingPage = () => {
         <Approach />
         <Specializations />
 
-        {/* ── Free meeting block ── */}
-        <section className="bg-primary text-primary-foreground">
-          <div className="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-            <motion.div {...fade()} className="inline-flex items-center gap-2 mb-6">
-              <Star className="w-5 h-5" />
-              <span className="text-sm font-semibold uppercase tracking-widest opacity-80">
-                Рекомендую начать с этого
-              </span>
-            </motion.div>
-            <motion.h2 {...fade(0.05)} className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
-              Первая консультация — 45 €
-            </motion.h2>
-            <motion.p {...fade(0.1)} className="mt-5 text-sm md:text-base leading-relaxed opacity-85 max-w-xl mx-auto">
-              50 минут: обсудим ваш запрос, разберём ситуацию и наметим план работы.
-            </motion.p>
-            <motion.div {...fade(0.15)} className="mt-8 grid sm:grid-cols-3 gap-4 max-w-lg mx-auto text-left">
-              {[
-                { icon: MessageCircle, text: "Обсудим ваш запрос" },
-                { icon: CheckCircle2, text: "Отвечу на вопросы" },
-                { icon: Users, text: "Решите, подходим ли мы" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm">
-                  <item.icon className="w-4 h-4 shrink-0 opacity-80" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
-            </motion.div>
-            <motion.div {...fade(0.2)} className="mt-8">
-              <Button size="lg" variant="secondary" className="gap-2 text-base px-8" asChild>
-                <Link to="/booking">Записаться на встречу <ArrowRight className="w-4 h-4" /></Link>
-              </Button>
-            </motion.div>
-          </div>
-        </section>
+
 
 
         <Expectations />
         <Testimonials />
 
-        {/* ── Pricing ── */}
-        <section id="pricing" className="bg-card border-y border-border">
-          <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
-            <motion.div {...fade()} className="text-center mb-14">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Стоимость</h2>
-              <p className="text-muted-foreground mt-3 text-sm md:text-base max-w-xl mx-auto">
-                Прозрачные цены без скрытых платежей · оплата в {page.currency}
-              </p>
-            </motion.div>
-            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-              {[
-                {
-                  title: "Разовая консультация",
-                  price: "45",
-                  duration: "50 мин",
-                  featured: true,
-                  features: ["Разбор запроса", "План работы", "Домашние задания"],
-                },
-                {
-                  title: "Регулярная терапия",
-                  price: "40",
-                  priceNote: "за сессию",
-                  totalPrice: "При оплате от 4 сессий",
-                  duration: "50 мин",
-                  features: ["Дешевле разовой консультации", "Регулярная работа над запросом", "Приоритетная запись"],
-                },
-              ].map((p, i) => (
-                <motion.div
-                  key={p.title}
-                  {...fade(0.06 * i)}
-                  className={`rounded-2xl p-6 md:p-8 flex flex-col border transition-colors ${
-                    (p as any).featured
-                      ? "border-primary bg-primary text-primary-foreground shadow-lg"
-                      : (p as any).accent
-                      ? "border-accent bg-accent/5 hover:border-accent/60 shadow-md"
-                      : "border-border bg-background hover:border-primary/30"
-                  }`}
-                >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <p className={`text-xs uppercase tracking-widest font-medium ${(p as any).featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                        {p.title}
-                      </p>
-                      {(p as any).badge && (
-                        <Badge variant="secondary" className="text-[10px] px-2 py-0">
-                          {(p as any).badge}
-                        </Badge>
-                      )}
-                    </div>
-                    <p className={`text-sm ${(p as any).featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                      {p.duration}
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <span className="text-4xl font-bold tracking-tight">{p.price}</span>
-                    <span className={`text-sm ml-1 ${(p as any).featured ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                      €{(p as any).priceNote ? ` ${(p as any).priceNote}` : ""}
-                    </span>
-                    {(p as any).totalPrice && (
-                      <p className={`text-xs mt-1 ${(p as any).featured ? "text-primary-foreground/60" : "text-muted-foreground/70"}`}>
-                        {(p as any).totalPrice}
-                      </p>
-                    )}
-                  </div>
-                  <ul className="mt-6 space-y-3 flex-1">
-                    {p.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent" />
-                        <span className={(p as any).featured ? "text-primary-foreground/90" : "text-muted-foreground"}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className={`mt-8 w-full ${
-                      (p as any).featured ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90" : ""
-                    }`}
-                    variant={(p as any).featured ? "default" : "outline"}
-                    asChild
-                  >
-                    <a href="/booking">{(p as any).accent ? "Записаться бесплатно" : "Записаться"}</a>
-                  </Button>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-
-
-
-        <Ethics />
-        <Projects />
-        <SessionPrep />
+      <Pricing />
 
         <Blog />
 
@@ -562,7 +420,7 @@ const CityLandingPage = () => {
           </motion.div>
         </section>
 
-        <BookingForm />
+        <HomeBookingOffer />
 
 
 

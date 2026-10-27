@@ -133,8 +133,8 @@ const CountryHubPage = () => {
               className="mt-9 flex flex-col sm:flex-row items-start gap-3"
             >
               <Button size="lg" className="gap-2 text-base px-8" asChild>
-                <Link to="/start">
-                  Понять, с чего начать <ArrowRight className="w-4 h-4" />
+                <Link to="/booking">
+                  Записаться на консультацию <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
               <Button variant="outline" size="lg" className="text-base px-8 gap-2" asChild>
@@ -363,8 +363,8 @@ const CountryHubPage = () => {
           </motion.p>
           <motion.div {...fade(0.1)} className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button size="lg" className="gap-2 px-8" asChild>
-              <Link to="/start">
-                Понять, с чего начать <ArrowRight className="w-4 h-4" />
+              <Link to="/booking">
+                Записаться на консультацию <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="gap-2 px-8" asChild>
