@@ -47,7 +47,7 @@ const BlogSubscribeForm = ({
     setLoading(true);
     const { error } = await supabase
       .from("blog_subscribers")
-      .insert({ email: parsed.data, source });
+      .insert({ email: parsed.data.toLowerCase(), source });
     setLoading(false);
 
     if (error) {

@@ -38,8 +38,8 @@ const PageViewTracker = () => {
       try {
         await supabase.from("page_views").insert({
           path: location.pathname,
-          referrer: document.referrer || null,
-          user_agent: navigator.userAgent,
+          referrer: document.referrer ? document.referrer.slice(0, 2048) : null,
+          user_agent: navigator.userAgent.slice(0, 1000),
         });
       } catch {
         // silent fail — analytics should never block UX

@@ -7,11 +7,11 @@ import { supabase } from "@/integrations/supabase/client";
 export const trackCta = (name: string, meta?: Record<string, unknown>) => {
   try {
     const path =
-      typeof window !== "undefined" ? window.location.pathname : null;
+      typeof window !== "undefined" ? window.location.pathname.slice(0, 500) : null;
     const referrer =
-      typeof document !== "undefined" ? document.referrer || null : null;
+      typeof document !== "undefined" ? (document.referrer || "").slice(0, 2048) || null : null;
     const userAgent =
-      typeof navigator !== "undefined" ? navigator.userAgent : null;
+      typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 1000) : null;
 
     void supabase
       .from("cta_clicks")
