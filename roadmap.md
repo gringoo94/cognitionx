@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Simplify all GEO copy: remove time zones and duplicate blocks, soften evidence wording, align first-meeting FAQ without duplicating preparation guide
+- [x] Simplify all GEO copy: remove time zones and duplicate blocks, soften evidence wording, align first-meeting FAQ without duplicating preparation guide
 
 - [x] Show multiple About carousel cards with a visible preview of the next card
 

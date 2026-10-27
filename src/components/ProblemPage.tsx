@@ -348,7 +348,6 @@ const PROBLEM_META: Record<string, ProblemMeta> = {
       "Работаю с русскоязычными клиентами из Москвы и всей России. Онлайн-формат: без пробок, очередей и привязки к району.",
     accent: "from-primary/20 via-accent/10 to-transparent",
     stats: [
-      { label: "Часовой пояс", value: "Удобно для МСК", Icon: Clock },
       { label: "Длительность сессии", value: "50 минут", Icon: Clock },
       { label: "Метод", value: "КПТ + схема-терапия", Icon: Brain },
       { label: "Эффективность", value: "= очной", Icon: Award },
