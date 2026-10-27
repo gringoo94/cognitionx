@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import { toContactEmailField } from "@/lib/contactFormat";
 import {
   ArrowLeft,
   ArrowRight,
@@ -193,28 +194,29 @@ const StartQuizPage = () => {
       .join("\n");
 
     try {
-      // Best-effort log to contact_submissions (RLS may reject anonymous insert — that's OK).
-      try {
-        await supabase.from("contact_submissions").insert({
-          name: parsed.data.name || "—",
-          email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parsed.data.contact) ? parsed.data.contact : `Telegram: ${parsed.data.contact}`,
-          messenger: parsed.data.contact,
-          message: messageText,
-        });
-      } catch {
-        /* ignore — Telegram is the source of truth */
-      }
-
-      await supabase.functions.invoke("notify-telegram", {
-        body: {
-          name: parsed.data.name || "—",
-          email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parsed.data.contact) ? parsed.data.contact : `Telegram: ${parsed.data.contact}`,
-          messenger: parsed.data.contact,
-          message: messageText,
-          source: "🧭 /start quiz",
-          page: typeof window !== "undefined" ? window.location.href : null,
-        },
+      const emailField = toContactEmailField(parsed.data.contact);
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: parsed.data.name || "—",
+        email: emailField,
+        messenger: parsed.data.contact,
+        message: messageText,
       });
+      if (error) throw error;
+
+      try {
+        await supabase.functions.invoke("notify-telegram", {
+          body: {
+            name: parsed.data.name || "—",
+            email: emailField,
+            messenger: parsed.data.contact,
+            message: messageText,
+            source: "🧭 /start quiz",
+            page: typeof window !== "undefined" ? window.location.href : null,
+          },
+        });
+      } catch (err) {
+        console.error("notify-telegram failed", err);
+      }
 
       trackLead("start_quiz_form", { content_category: "quiz" });
       navigate("/thank-you");

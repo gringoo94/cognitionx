@@ -64,6 +64,8 @@ Deno.serve(async (req) => {
       `<b>Мессенджер:</b> ${escape(messenger) || '—'}`,
       `<b>Запрос:</b> ${escape(message) || '—'}`,
     ].join('\n');
+    // Telegram rejects messages over 4096 chars; keep a safe margin.
+    const safeText = text.length > 4000 ? text.slice(0, 3990).replace(/&[a-z]*$/, '') + '\n…' : text;
 
     const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
       method: 'POST',
@@ -74,7 +76,7 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         chat_id: Number(TELEGRAM_CHAT_ID),
-        text,
+        text: safeText,
         parse_mode: 'HTML',
       }),
     });
