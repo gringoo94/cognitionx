@@ -7,11 +7,8 @@ User-agent: *
 Allow: /
 
 # --- Гео-лендинги (города, страны, регионы) ---
-# Открыты для индексации; у каждой страницы self-canonical
-# (см. sitemap.xml, приоритет 0.8): /psiholog-berlin, -myunhen, -gamburg,
-# -amsterdam, -rotterdam, -lissabon, -porto, -tbilisi, -kishinev,
-# -germaniya, -niderlandy, -portugaliya, -gruziya, -moldova,
-# -europa, -aziya, -usa, -moskva, -dlya-it
+# Открыты для индексации; у каждой страницы self-canonical,
+# полный список — в sitemap.xml и /llms-geo.txt.
 Allow: /psiholog-
 
 # --- Служебные / приватные страницы (не индексировать) ---
