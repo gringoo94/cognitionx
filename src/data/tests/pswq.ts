@@ -109,7 +109,7 @@ export const pswq: TestConfig = {
   whatNext: [
     { when: "Балл 16–39", action: "Норма. Можно проверить GAD-7 для общей картины." },
     { when: "Балл 40–59", action: "Самопомощь: «время беспокойства», mindfulness, дневник тревоги." },
-    { when: "Балл ≥ 60", action: "КПТ при ГТР или метакогнитивная терапия со специалистом." },
+    { when: "Балл ≥ 60", action: "С беспокойством хорошо работают в КПТ и метакогнитивной терапии — стоит обсудить со специалистом." },
   ],
   compareWith: [
     { code: "GAD-7", slug: "gad-7", note: "GAD-7 — симптомы за 2 недели; PSWQ — устойчивая склонность к worry как процессу мышления." },
@@ -117,6 +117,6 @@ export const pswq: TestConfig = {
   ],
   relatedArticles: [
     { title: "КПТ: полный гайд 2026", slug: "kpt-polnyj-gajd" },
-    { title: "Тревожность: симптомы, проверка, что делать", slug: "trevozhnost-simptomy" },
+    { title: "КПТ при тревоге", slug: "kpt-pri-trevoge" },
   ],
 };
