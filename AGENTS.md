@@ -5,3 +5,4 @@
 - City landing data contains only geography, search metadata, first-screen copy, practical FAQ and links; the Chisinau page reads this same source. Why: removed local marketing blocks must not survive as stale alternate copy.
 - Prerender injects each page's Helmet JSON-LD into the static HTML head, replacing the global index.html block (blog posts keep the plugin BlogPosting). Why: crawlers without JS must see page-specific schema.
 - Problem landing FAQ additions are filtered against existing topics before rendering and schema generation. Why: online-format and pricing answers should appear once and stay consistent for visitors and crawlers.
+- Accordion content renders as hidden plain markup during prerender (no `window`). Why: Radix drops closed content, so FAQ answers would be missing from crawler HTML and mismatch FAQPage schema.
