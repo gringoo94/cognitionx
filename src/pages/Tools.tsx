@@ -292,7 +292,7 @@ const Tools = () => {
           aria-hidden
           className="absolute inset-x-0 top-0 -z-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
         />
-        <div className="relative max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28 text-center">
+        <div className="relative max-w-6xl mx-auto px-6 pt-28 pb-14 md:pt-32 md:pb-20 text-center">
           <motion.span
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
