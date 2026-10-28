@@ -111,7 +111,7 @@ export const ders16: TestConfig = {
       tone: "danger",
     };
   },
-  related: ["atq-thoughts", "rrs-rumination", "phq-9"],
+  related: ["atq-automatic-thoughts", "rrs-rumination", "phq-9"],
   faq: [
     {
       q: "Что такое эмоциональная регуляция?",

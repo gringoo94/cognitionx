@@ -122,7 +122,7 @@ export const ecr: TestConfig = {
       tone,
     };
   },
-  related: ["rosenberg-self-esteem", "das-attitudes"],
+  related: ["rosenberg-self-esteem", "das-dysfunctional-attitudes"],
   faq: [
     {
       q: "Сколько вообще стилей привязанности?",
