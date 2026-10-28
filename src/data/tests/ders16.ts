@@ -140,6 +140,6 @@ export const ders16: TestConfig = {
   ],
   compareWith: [
     { code: "RRS", slug: "rrs-rumination", note: "Руминации — одна из дезадаптивных стратегий регуляции эмоций." },
-    { code: "ATQ", slug: "atq-thoughts", note: "Автоматические негативные мысли тесно связаны с трудностями регуляции." },
+    { code: "ATQ", slug: "atq-automatic-thoughts", note: "Автоматические негативные мысли тесно связаны с трудностями регуляции." },
   ],
 };
