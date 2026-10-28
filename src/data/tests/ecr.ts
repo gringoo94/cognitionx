@@ -122,7 +122,7 @@ export const ecr: TestConfig = {
       tone,
     };
   },
-  related: ["rosenberg-self-esteem", "das-attitudes"],
+  related: ["rosenberg-self-esteem", "das-dysfunctional-attitudes"],
   faq: [
     {
       q: "Сколько вообще стилей привязанности?",
@@ -151,7 +151,7 @@ export const ecr: TestConfig = {
   ],
   compareWith: [
     { code: "RSE", slug: "rosenberg-self-esteem", note: "Низкая самооценка часто соседствует с тревожной привязанностью." },
-    { code: "DAS", slug: "das-attitudes", note: "Дисфункциональные установки об отношениях усиливают тревожный паттерн." },
+    { code: "DAS", slug: "das-dysfunctional-attitudes", note: "Дисфункциональные установки об отношениях усиливают тревожный паттерн." },
   ],
   relatedArticles: [
     { title: "Стили привязанности: тревожный, избегающий, надёжный", slug: "stili-privyazannosti" },

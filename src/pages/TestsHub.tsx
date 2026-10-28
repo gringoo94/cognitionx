@@ -59,7 +59,7 @@ const seoSections = [
         стандарт скрининга генерализованной тревоги, 7 вопросов. Если ваша тревога сосредоточена в
         теле, попробуйте оценить уровень стресса (<Link to="/tools/tests/pss-10" className="text-primary hover:underline">PSS-10</Link>) и
         проверьте автоматические мысли (
-        <Link to="/tools/tests/atq-thoughts" className="text-primary hover:underline">ATQ</Link>).
+        <Link to="/tools/tests/atq-automatic-thoughts" className="text-primary hover:underline">ATQ</Link>).
         Если тревога после травматического события — пройдите{" "}
         <Link to="/tools/tests/pcl-5" className="text-primary hover:underline">PCL-5</Link>.
       </>
