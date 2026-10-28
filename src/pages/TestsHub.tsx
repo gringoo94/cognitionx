@@ -218,7 +218,7 @@ const hubFaq = [
   },
   {
     q: "Что делать с результатом?",
-    a: "Если балл низкий — поддерживайте текущие привычки. Если средний — попробуйте 2–3 недели сосредоточенной самопомощи (КПТ-инструменты на сайте). Если высокий — запишитесь на консультацию.",
+    a: "Если балл низкий — поддерживайте текущие привычки. Если средний — можно попробовать упражнения КПТ на сайте и понаблюдать за динамикой. Если высокий — стоит обсудить результат со специалистом.",
   },
   {
     q: "Можно ли скачать результат?",
@@ -264,7 +264,7 @@ const TestsHub = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Психологические тесты онлайн бесплатно — валидированные шкалы"
+        title="Психологические тесты онлайн бесплатно — 30+ шкал с расшифровкой"
         description="Бесплатные психологические тесты онлайн: PHQ-9, BDI-II, BAI, BHS (шкалы Бека), GAD-7, PCL-5, ISI, ECR-R, Большая пятёрка (BFI-10), WHO-5 и другие валидированные опросники."
         path="/tools/tests"
         schema={[itemListSchema]}
@@ -291,7 +291,7 @@ const TestsHub = () => {
           className="mb-10 max-w-2xl"
         >
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-            Психологические тесты онлайн — 30+ валидированных шкал
+            Психологические тесты онлайн бесплатно
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed mb-4">
             Скрининги, которыми пользуются психологи и врачи во всём мире: депрессия, тревога,
@@ -315,6 +315,14 @@ const TestsHub = () => {
           </div>
         </motion.div>
         <TestHistoryWidget />
+        <p className="mb-8 text-sm text-muted-foreground">
+          После теста можно перейти к практике:{" "}
+          <Link to="/tools/abc-analysis" className="text-primary hover:underline">ABC-анализ</Link>,{" "}
+          <Link to="/tools/thought-diary" className="text-primary hover:underline">дневник мыслей</Link>,{" "}
+          <Link to="/tools/behavioral-activation" className="text-primary hover:underline">поведенческая активация</Link>,{" "}
+          <Link to="/tools/breathing" className="text-primary hover:underline">дыхание</Link> или{" "}
+          <Link to="/tools" className="text-primary hover:underline">все упражнения КПТ онлайн</Link>.
+        </p>
 
         <div className="flex flex-wrap gap-2 mb-8">
 
