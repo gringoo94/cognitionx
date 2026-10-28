@@ -76,7 +76,7 @@ const DecisionMatrixPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Матрица выбора — инструмент для принятия решений"
+        title="Матрица принятия решений онлайн — как сделать сложный выбор | Яцко"
         description="Разложите сложный выбор по вариантам, страхам, ценностям и первым шагам. После заполнения можно продолжить разбор в GPT-помощнике."
         path="/tools/decision-matrix"
         schema={schemas}

@@ -8,12 +8,7 @@ import { buildFaqSchema } from "@/lib/geoSchema";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AbcAnalysis from "@/components/AbcAnalysis";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import ToolFaq from "@/components/ToolFaq";
 
 const description =
   "Бесплатный ABC-анализ мыслей онлайн по модели Альберта Эллиса: событие, мысль, эмоция, диспут и новый взгляд. Пошаговый бланк КПТ с разобранным примером.";
@@ -74,18 +69,8 @@ const AbcAnalysisPage = () => {
 
         <AbcAnalysis />
 
-        <section className="mt-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Частые вопросы</h2>
-          <Accordion type="single" collapsible className="w-full">
-            {faq.map((f, i) => (
-              <AccordionItem key={f.question} value={`faq-${i}`}>
-                <AccordionTrigger className="text-left">{f.question}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">
-                  {f.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <ToolFaq items={faq} />
+        <section className="mt-4">
 
           <h2 className="text-xl font-semibold mt-10 mb-3">Связанные материалы</h2>
           <ul className="text-muted-foreground space-y-1.5">

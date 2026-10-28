@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import { buildToolSchema } from "@/lib/toolSchema";
+import { buildFaqSchema } from "@/lib/geoSchema";
+import ToolFaq from "@/components/ToolFaq";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DayPlanner from "@/components/DayPlanner";
@@ -14,14 +16,23 @@ const toolSchema = buildToolSchema({
   path: "/tools/day-planner",
 });
 
+const faq = [
+  { question: "Чем этот планировщик отличается от обычного списка дел?", answer: "Он строится вокруг вашей энергии, а не продуктивности. Вы оцениваете силы на завтра и выбираете всего три опоры: одно необходимое дело, одно приятное и одно ради результата или смысла." },
+  { question: "Что такое минимальная версия действия?", answer: "Это самый маленький вариант дела, который реально сделать в плохой день: не «убрать квартиру», а «помыть одну чашку». Он помогает начать и не бросать план целиком." },
+  { question: "Где хранятся мои планы?", answer: "Только в вашем браузере на этом устройстве. На сервер они не отправляются, поэтому с другого устройства их не будет видно." },
+  { question: "Подходит ли планировщик при тяжёлой депрессии?", answer: "Он может быть поддержкой, но не заменяет лечение. Если сил нет почти ни на что несколько недель или появляются мысли о смерти, важно обратиться к специалисту." },
+];
+
+const faqSchema = buildFaqSchema(faq);
+
 const DayPlannerPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Планировщик дня при депрессии — поведенческая активация | Яцко"
+        title="Планировщик дня при депрессии онлайн — поведенческая активация | Яцко"
         description="Бесплатный инструмент планирования дня по методу поведенческой активации: оценка энергии, три опоры (необходимое, удовольствие, смысл), минимальные версии и история за 14 дней."
         path="/tools/day-planner"
-        schema={[toolSchema]}
+        schema={faqSchema ? [toolSchema, faqSchema] : [toolSchema]}
         breadcrumbs={[
           { name: "Главная", url: "https://cognitionx.cloud/" },
           { name: "Инструменты", url: "https://cognitionx.cloud/tools" },
@@ -59,6 +70,16 @@ const DayPlannerPage = () => {
             <li><strong className="text-foreground">Минимальная версия — не обман.</strong> Она снижает порог начала и сохраняет связь с направлением.</li>
             <li><strong className="text-foreground">Отметьте после действия.</strong> Полезное действие не обязано сразу улучшать настроение.</li>
           </ol>
+
+          <h2 className="text-xl font-semibold text-foreground mt-8">Пример плана на день с низкой энергией</h2>
+          <ul className="text-muted-foreground space-y-1.5 leading-relaxed">
+            <li><strong className="text-foreground">Энергия:</strong> 3 из 10.</li>
+            <li><strong className="text-foreground">Необходимое:</strong> оплатить счёт. Минимальная версия — открыть приложение банка.</li>
+            <li><strong className="text-foreground">Удовольствие:</strong> послушать любимый альбом. Минимальная версия — одну песню.</li>
+            <li><strong className="text-foreground">Смысл:</strong> написать другу. Минимальная версия — одно короткое сообщение.</li>
+          </ul>
+
+          <ToolFaq items={faq} />
 
           <h2 className="text-xl font-semibold text-foreground mt-8">Связанные материалы</h2>
           <ul className="text-muted-foreground space-y-1.5">
