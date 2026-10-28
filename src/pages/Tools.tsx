@@ -133,7 +133,7 @@ const externalTools = [
 
 const KNOWLEDGE_FORGE_URL = "https://knowledge-forge.lovable.app";
 // Top-3 most-searched tests (SEO): депрессия, тревога, выгорание
-const featuredTestSlugs = ["phq-9", "gad-7", "bat-burnout"];
+const featuredTestSlugs = ["phq-9", "gad-7", "bat-burnout", "rrs-rumination", "das-dysfunctional-attitudes", "pss-10"];
 
 const benefits = [
   {
@@ -149,7 +149,7 @@ const benefits = [
   {
     icon: GraduationCap,
     title: "С пояснениями психолога",
-    text: "Каждый тест и техника сопровождаются интерпретацией и рекомендациями, что делать дальше.",
+    text: "Каждый тест и упражнение сопровождаются пояснениями и подсказками, что делать дальше.",
   },
   {
     icon: Sparkles,
@@ -195,7 +195,7 @@ const faq = [
   },
   {
     q: "Что делать, если результат меня встревожил?",
-    a: "Это нормальная реакция. Не делайте поспешных выводов и не ставьте себе диагноз. Лучшее, что можно сделать — обсудить результат со специалистом. Запись на консультацию: /contact.",
+    a: "Это нормальная реакция. Не делайте поспешных выводов и не ставьте себе диагноз. Лучшее, что можно сделать — обсудить результат со специалистом. Записаться на консультацию можно на странице записи.",
   },
 ];
 
@@ -270,8 +270,8 @@ const Tools = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="КПТ-инструменты и психологические тесты | Дмитрий Яцко"
-        description="Бесплатные КПТ-инструменты и валидированные психологические тесты: PHQ-9, GAD-7, ABC-анализ, колесо эмоций, дневник."
+        title="Упражнения КПТ и психологические тесты онлайн бесплатно | Дмитрий Яцко"
+        description="Упражнения КПТ онлайн и 30+ психологических тестов бесплатно: ABC-анализ, дневник мыслей, колесо эмоций, PHQ-9, GAD-7. Без регистрации."
         path="/tools"
         ogImage={`${SITE_URL}/og-tools.webp`}
         schema={[itemListSchema, faqSchema]}
@@ -299,7 +299,7 @@ const Tools = () => {
             transition={{ duration: 0.4 }}
             className="inline-flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/10 border border-primary/20 px-3.5 py-1.5 rounded-full mb-6"
           >
-            <Sparkles className="h-3.5 w-3.5" /> 11 тестов · 4 техники КПТ · доказательная психология
+            <Sparkles className="h-3.5 w-3.5" /> {tests.length + 1} тестов · {interactiveTools.length} упражнений КПТ · бесплатно
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
@@ -307,8 +307,7 @@ const Tools = () => {
             transition={{ duration: 0.45, delay: 0.05 }}
             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground leading-[1.05] max-w-4xl mx-auto"
           >
-            Психологические тесты и&nbsp;<span className="text-primary">инструменты&nbsp;КПТ</span>
-            <br className="hidden md:block" /> которые работают
+            Упражнения КПТ и&nbsp;<span className="text-primary">психологические тесты</span> онлайн
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -316,8 +315,8 @@ const Tools = () => {
             transition={{ duration: 0.45, delay: 0.1 }}
             className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
           >
-            Валидированные шкалы, интерактивные техники и рабочие тетради — для самостоятельной
-            практики или работы с терапевтом. Без регистрации, анонимно, на основе доказательной психологии.
+            Онлайн-упражнения когнитивно-поведенческой терапии и проверенные психологические шкалы — для самостоятельной
+            практики или работы с психологом. Бесплатно, без регистрации, прямо в браузере.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -351,8 +350,8 @@ const Tools = () => {
         <div className="relative border-t border-border/60 bg-card/40 backdrop-blur">
           <div className="max-w-6xl mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { v: "11", l: "психологических тестов" },
-              { v: "4", l: "интерактивные техники" },
+              { v: `${tests.length + 1}`, l: "психологических тестов" },
+              { v: `${interactiveTools.length}`, l: "упражнений КПТ онлайн" },
               { v: "10", l: "модулей рабочей тетради" },
               { v: "0 €", l: "стоимость использования" },
             ].map((s) => (
@@ -369,12 +368,12 @@ const Tools = () => {
         {/* BLOCK 1 — Tests */}
         <section id="tests" className="max-w-6xl mx-auto px-6 py-20 md:py-24 scroll-mt-20">
           <SectionHeader
-            eyebrow="Блок 1 · Диагностика"
-            title="Психологические тесты"
-            description="10 валидированных шкал: депрессия (PHQ-9), тревога (GAD-7), выгорание (BAT-12), синдром самозванца, стресс, самооценка, перфекционизм, прокрастинация и дисфункциональные установки."
+            eyebrow="Самодиагностика"
+            title="Психологические тесты онлайн"
+            description={`${tests.length + 1} проверенных шкал с расшифровкой: депрессия, тревога, выгорание, руминации, стресс, сон, травма, самооценка, отношения и личность. Ниже — самые востребованные.`}
             meta={
               <Link to="/tools/tests" className="inline-flex items-center gap-1 text-primary hover:underline font-medium">
-                Все 10 тестов <ArrowRight className="h-3.5 w-3.5" />
+                Все тесты <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             }
           />
@@ -456,7 +455,7 @@ const Tools = () => {
           <div className="mt-8 text-center">
             <Button asChild variant="outline" size="lg">
               <Link to="/tools/tests">
-                Смотреть все 10 тестов <ArrowRight className="h-4 w-4 ml-1" />
+                Смотреть все {tests.length + 1} тестов <ArrowRight className="h-4 w-4 ml-1" />
               </Link>
             </Button>
           </div>
@@ -498,9 +497,9 @@ const Tools = () => {
         {/* BLOCK 2 — Interactive */}
         <section id="interactive" className="max-w-6xl mx-auto px-6 py-20 md:py-24 scroll-mt-20">
           <SectionHeader
-            eyebrow="Блок 2 · Практика"
-            title="Интерактивные инструменты"
-            description="Готовые техники прямо на сайте: разбор ранних схем, ABC-анализ, колесо эмоций и дневник поведенческой активации."
+            eyebrow="Практика"
+            title="Упражнения КПТ онлайн"
+            description="Техники когнитивно-поведенческой терапии, которые можно выполнить прямо на сайте: работа с мыслями, эмоциями, поведением и телом. Записи никуда не отправляются."
           />
           <div className="grid sm:grid-cols-2 gap-4">
             {interactiveTools.map((t, i) => (
@@ -577,8 +576,8 @@ const Tools = () => {
         {/* BLOCK 3 — Workbook */}
         <section id="workbook" className="max-w-6xl mx-auto px-6 py-20 md:py-24 scroll-mt-20">
           <SectionHeader
-            eyebrow="Блок 3 · Углублённая работа"
-            title="Расширенная рабочая тетрадь"
+            eyebrow="Углублённая работа"
+            title="Онлайн-тетрадь КПТ"
             description="Полноценный курс КПТ из 8 модулей с возможностью сохранять прогресс и работать вместе с терапевтом. Открывается во внешнем приложении — нужна регистрация."
             meta={
               <Link to="/cbtworkbook" className="inline-flex items-center gap-1 text-primary hover:underline font-medium">
