@@ -93,7 +93,7 @@ export const atq: TestConfig = {
     }
     return { score, maxScore: 150, level, levelLabel, interpretation, recommendation, tone };
   },
-  related: ["phq-9", "das-dysfunctional-attitudes", "rosenberg-self-esteem"],
+  related: ["phq-9", "rosenberg-self-esteem"],
   faq: [
     { q: "Что такое автоматическая мысль?", a: "Короткая мысль, проносящаяся в голове в ответ на ситуацию. «Я облажался», «он плохо обо мне думает», «у меня ничего не получится» — типичные примеры." },
     { q: "Я не замечаю у себя таких мыслей — это нормально?", a: "Да, поначалу — нормально. Они потому и «автоматические», что не осознаются. Тест помогает увидеть, как часто они на самом деле бывают." },
@@ -112,7 +112,7 @@ export const atq: TestConfig = {
     { when: "более 80 баллов", action: "Мысли появляются часто. Стоит пройти PHQ-9 и обсудить результат с психологом." },
   ],
   compareWith: [
-    { code: "DAS-17", slug: "das-dysfunctional-attitudes", note: "ATQ показывает частые мысли, DAS — глубокие установки, из которых они растут." },
+    { code: "DAS-17", slug: note: "ATQ показывает частые мысли, DAS — глубокие установки, из которых они растут." },
     { code: "PHQ-9", slug: "phq-9", note: "Если мысли сопровождаются упадком сил и настроения — проверьте симптомы депрессии." },
   ],
   relatedArticles: [

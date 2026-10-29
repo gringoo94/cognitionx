@@ -61,12 +61,6 @@ const TOOL_BAT: RelatedTool = {
   description: "Современная альтернатива опроснику Маслач, валидирована в Европе",
   Icon: ListChecks,
 };
-const TOOL_DAS: RelatedTool = {
-  href: "/tools/tests/das-dysfunctional-attitudes",
-  title: "Дисфункциональные установки (DAS)",
-  description: "Шкала Бека/Вайсман — иррациональные убеждения, уязвимость к депрессии",
-  Icon: BookHeart,
-};
 const TOOL_PSS: RelatedTool = {
   href: "/tools/tests/pss-10",
   title: "Шкала воспринимаемого стресса (PSS-10)",

@@ -55,7 +55,6 @@ CognitionX — сайт практикующего психолога Дмитр
 - [GAD-7 — генерализованная тревога](https://cognitionx.cloud/tools/tests/gad-7): скрининг тревожных расстройств
 - [PSS-10 — воспринимаемый стресс](https://cognitionx.cloud/tools/tests/pss-10): шкала Коэна
 - [Шкала самооценки Розенберга](https://cognitionx.cloud/tools/tests/rosenberg-self-esteem): глобальная самооценка
-- [DAS — дисфункциональные установки](https://cognitionx.cloud/tools/tests/das-dysfunctional-attitudes): шкала Вейссмана и Бека
 - [ATQ — автоматические мысли](https://cognitionx.cloud/tools/tests/atq-automatic-thoughts): опросник негативных автоматических мыслей
 - [FMPS — многомерный перфекционизм](https://cognitionx.cloud/tools/tests/fmps-perfectionism): шкала Фроста
 - [CIPS — синдром самозванца](https://cognitionx.cloud/tools/tests/cips-impostor): шкала Кланс

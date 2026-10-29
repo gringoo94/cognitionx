@@ -95,7 +95,6 @@ export const rosenberg: TestConfig = {
   ],
   compareWith: [
     { code: "CIPS", slug: "cips-impostor", note: "Если при внешних успехах кажется, что вы их не заслуживаете." },
-    { code: "DAS-17", slug: "das-dysfunctional-attitudes", note: "Показывает установки, от которых зависит ощущение собственной ценности." },
   ],
   relatedArticles: [
     { title: "Ловушка ярлыков", slug: "lovushka-yarlykov" },
