@@ -1,7 +1,7 @@
 // Дополнительные данные для страниц проблем: мифы, самопроверка, инструменты, кейсы.
 // Хранится отдельно от основного problemPages.ts чтобы не разрастать его.
 
-import { LucideIcon, Brain, ListChecks, Compass, Sparkles, BookHeart } from "lucide-react";
+import { LucideIcon, Brain, ListChecks, Compass, Sparkles } from "lucide-react";
 
 export interface Myth {
   myth: string;

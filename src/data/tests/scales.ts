@@ -56,15 +56,6 @@ export const FMPS_SCALE: LikertOption[] = [
   { value: 5, label: "Полностью согласен" },
 ];
 
-export const DAS_SCALE: LikertOption[] = [
-  { value: 1, label: "Полностью не согласен" },
-  { value: 2, label: "Не согласен" },
-  { value: 3, label: "Скорее не согласен" },
-  { value: 4, label: "Нейтрально" },
-  { value: 5, label: "Скорее согласен" },
-  { value: 6, label: "Согласен" },
-  { value: 7, label: "Полностью согласен" },
-];
 
 export const ATQ_SCALE: LikertOption[] = [
   { value: 1, label: "Совсем нет" },
