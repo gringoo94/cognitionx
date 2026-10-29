@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Verify PCL-5, Y-BOCS-SR, MDQ, AUDIT and ISI against primary instructions; correct scoring/descriptions and test results/PDF flow
+
 - [x] Audit and soften problem, method and IT landing copy; preserve clinical safeguards and verify booking navigation
 
 - [x] Rewrite all city landing copy in short, warm paragraphs; verify mobile reading and booking links
