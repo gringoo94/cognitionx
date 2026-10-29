@@ -363,5 +363,36 @@ export const generateTestReportPdf = async ({
   }
 
   const filename = `${config.code.replace(/[^A-Za-z0-9]/g, "")}-report-${fileDate(now)}.pdf`;
-  doc.save(filename);
+  await deliverPdf(doc.output("blob"), filename);
+};
+
+const isMobile = () =>
+  typeof navigator !== "undefined" &&
+  /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+/**
+ * Saves the PDF without leaving the results page. On phones (incl. in-app
+ * browsers of Telegram/Instagram, where plain downloads fail) the system share
+ * sheet is used, so the file can be saved to Files or sent to a messenger.
+ */
+const deliverPdf = async (blob: Blob, filename: string) => {
+  const file = new File([blob], filename, { type: "application/pdf" });
+  if (isMobile() && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: filename });
+      return;
+    } catch (e) {
+      if ((e as DOMException)?.name === "AbortError") return;
+    }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  // Keep the link alive long enough for slow mobile viewers to open the file.
+  setTimeout(() => URL.revokeObjectURL(url), 120_000);
 };
