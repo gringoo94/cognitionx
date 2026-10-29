@@ -2,7 +2,6 @@ import type { TestConfig, LikertOption } from "./types";
 
 // Beck Depression Inventory-II (Beck, Steer & Brown, 1996).
 // 21 items, item-specific 0–3 options, sum 0–63.
-// Russian adaptation widely used (Тарабрина Н.В., 2001).
 // Educational/screening use only — copyright belongs to Pearson Assessments.
 
 const opt = (...labels: string[]): LikertOption[] =>
@@ -22,7 +21,7 @@ const ITEM_SCALES: LikertOption[][] = [
   // 6 Чувство наказания
   opt("Я не чувствую, что меня наказывают", "Я чувствую, что меня могут наказать", "Я ожидаю наказания", "Я чувствую, что меня уже наказывают"),
   // 7 Самооценка
-  opt("Я отношусь к себе так же, как и раньше", "Я потерял уверенность в себе", "Я разочарован в себе", "Я ненавижу себя"),
+  opt("Я отношусь к себе так же, как и раньше", "Я потерял уверенность в себе", "Я разочарован в себе", "Я не люблю себя"),
   // 8 Самокритика
   opt("Я не критикую и не виню себя больше, чем обычно", "Я критикую себя больше, чем раньше", "Я критикую себя за все свои недостатки", "Я виню себя за всё плохое, что случается"),
   // 9 Суицидальные мысли
@@ -65,7 +64,7 @@ export const bdi2: TestConfig = {
     "Шкала депрессии Бека (BDI-II) — классический опросник из 21 пункта. Подробная оценка симптомов депрессии за 2 недели. Бесплатно онлайн, без регистрации.",
   cluster: "depression",
   clusterLabel: "Депрессия",
-  authorNote: "Beck, Steer & Brown, 1996 · русская адаптация Н.В. Тарабриной",
+  authorNote: "Beck, Steer & Brown, 1996",
   durationMin: 7,
   audience: "Подходит взрослым, кто хочет более подробно оценить симптомы депрессии, чем это даёт короткий PHQ-9.",
   intro: [
@@ -80,7 +79,6 @@ export const bdi2: TestConfig = {
   ],
   sources: [
     { label: "Beck AT, Steer RA, Brown GK. Manual for the Beck Depression Inventory-II. San Antonio: Psychological Corporation; 1996." },
-    { label: "Тарабрина Н.В. Практикум по психологии посттравматического стресса. СПб.: Питер, 2001." },
   ],
   scale: ITEM_SCALES[0],
   perQuestionScale: ITEM_SCALES,
