@@ -31,6 +31,7 @@ export const bat: TestConfig = {
   sources: [
     { label: "Schaufeli WB, Desart S, De Witte H. Burnout Assessment Tool (BAT)—Development, Validity, and Reliability. Int J Environ Res Public Health. 2020;17(24):9495." },
     { label: "Burnout Assessment Tool (официальный сайт)", url: "https://burnoutassessmenttool.be/" },
+    { label: "Schaufeli WB, De Witte H, Hakanen JJ, Kaltiainen J, Kok R. How to assess severe burnout? Cutoff points for the Burnout Assessment Tool (BAT) based on three European samples. Scand J Work Environ Health. 2023;49(4):293-302.", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10713992/" },
   ],
   // Official BAT scoring: 1 = never … 5 = always; result is the item mean.
   scale: [
