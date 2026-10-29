@@ -133,7 +133,7 @@ const externalTools = [
 
 const KNOWLEDGE_FORGE_URL = "https://knowledge-forge.lovable.app";
 // Top-3 most-searched tests (SEO): депрессия, тревога, выгорание
-const featuredTestSlugs = ["phq-9", "gad-7", "bat-burnout", "rrs-rumination", "das-dysfunctional-attitudes", "pss-10"];
+const featuredTestSlugs = ["phq-9", "gad-7", "bat-burnout", "rrs-rumination", "atq-automatic-thoughts", "pss-10"];
 
 const benefits = [
   {
@@ -271,7 +271,7 @@ const Tools = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Упражнения КПТ и психологические тесты онлайн бесплатно | Дмитрий Яцко"
-        description="Упражнения КПТ онлайн и 30+ психологических тестов бесплатно: ABC-анализ, дневник мыслей, колесо эмоций, PHQ-9, GAD-7. Без регистрации."
+        description="Упражнения КПТ онлайн и около 30 психологических тестов бесплатно: ABC-анализ, дневник мыслей, колесо эмоций, PHQ-9, GAD-7. Без регистрации."
         path="/tools"
         ogImage={`${SITE_URL}/og-tools.webp`}
         schema={[itemListSchema, faqSchema]}

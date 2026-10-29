@@ -1,7 +1,7 @@
 // Дополнительные данные для страниц проблем: мифы, самопроверка, инструменты, кейсы.
 // Хранится отдельно от основного problemPages.ts чтобы не разрастать его.
 
-import { LucideIcon, Brain, ListChecks, Compass, Sparkles, BookHeart } from "lucide-react";
+import { LucideIcon, Brain, ListChecks, Compass, Sparkles } from "lucide-react";
 
 export interface Myth {
   myth: string;
@@ -60,12 +60,6 @@ const TOOL_BAT: RelatedTool = {
   title: "Тест на выгорание (BAT-12)",
   description: "Современная альтернатива опроснику Маслач, валидирована в Европе",
   Icon: ListChecks,
-};
-const TOOL_DAS: RelatedTool = {
-  href: "/tools/tests/das-dysfunctional-attitudes",
-  title: "Дисфункциональные установки (DAS)",
-  description: "Шкала Бека/Вайсман — иррациональные убеждения, уязвимость к депрессии",
-  Icon: BookHeart,
 };
 const TOOL_PSS: RelatedTool = {
   href: "/tools/tests/pss-10",

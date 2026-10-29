@@ -7,7 +7,6 @@ import { cips } from "./cips";
 import { rosenberg } from "./rosenberg";
 import { lay } from "./lay";
 import { fmps } from "./fmps";
-import { das } from "./das";
 import { atq } from "./atq";
 import { rrs } from "./rrs";
 import { pcl5 } from "./pcl5";
@@ -40,7 +39,6 @@ export const tests: TestConfig[] = [
   rosenberg,
   lay,
   fmps,
-  das,
   atq,
   rrs,
   pcl5,

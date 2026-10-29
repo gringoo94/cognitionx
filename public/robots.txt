@@ -148,7 +148,7 @@ Disallow: /
 
 # --- Sitemap и LLM-индексы ---
 Sitemap: https://cognitionx.cloud/sitemap.xml
-# sitemap.xml: 194 URL
+# sitemap.xml: 193 URL
 
 # Каталоги для ИИ-агентов (llmstxt.org):
 #   /llms.txt — структура сайта и все страницы
