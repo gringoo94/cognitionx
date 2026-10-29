@@ -17,6 +17,8 @@ export interface ScoreRange {
  * target score using the minimum and maximum scale values.
  */
 export const deriveRanges = (config: TestConfig): ScoreRange[] => {
+  if (config.scoreRangesMode === "contextual") return [];
+
   const maxScore = config.scoring(
     new Array(config.questions.length).fill(
       config.scale[config.scale.length - 1].value,

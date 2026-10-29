@@ -57,6 +57,7 @@ export const isi: TestConfig = {
     "КПТ бессонницы (КПТ-И, CBT-I) — один из основных рекомендованных методов помощи при хронической бессоннице. Причины проблем со сном и подходящую помощь обсуждают со специалистом; сумма ISI не определяет необходимость лекарств.",
   ],
   sources: [
+    { label: "Morin CM. ISI: бланк за последний месяц и диапазоны интерпретации", url: "https://medfam.umontreal.ca/wp-content/uploads/sites/16/Insomnia-Severity-Index-anglais.pdf" },
     {
       label: "Bastien CH, Vallières A, Morin CM. Validation of the ISI. Sleep Med. 2001;2(4):297-307.",
     },

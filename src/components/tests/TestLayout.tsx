@@ -79,7 +79,7 @@ const TestLayout = ({ config }: TestLayoutProps) => {
       position: i + 1,
       name: q,
       eduQuestionType: "Multiple choice",
-      suggestedAnswer: config.scale.map((opt) => ({
+      suggestedAnswer: (config.perQuestionScale?.[i] ?? config.scale).map((opt) => ({
         "@type": "Answer",
         text: opt.label,
       })),

@@ -73,6 +73,8 @@ export interface TestConfig {
   layout: "one" | "paged";
   /** Compute result from raw answers (0-indexed array, length = questions.length) */
   scoring: (answers: number[]) => ScoringResult;
+  /** Context-dependent results cannot be represented by total-score bands. */
+  scoreRangesMode?: "contextual";
   /** Related test slugs */
   related: string[];
   /** FAQ */

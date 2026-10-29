@@ -58,6 +58,7 @@ export const mdq: TestConfig = {
     "Отрицательный результат не исключает биполярного расстройства, особенно II типа. Чувствительность зависит от группы и условий обследования. Сообщите врачу о периодах необычного подъёма энергии, раздражительности или сниженной потребности во сне независимо от результата. Русские формулировки здесь — адаптация, а не подтверждённая валидированная русская версия.",
   ],
   sources: [
+    { label: "MDQ: исходный бланк и алгоритм подсчёта", url: "https://www.healthcare.uiowa.edu/familymedicine/fpinfo/Docs/mdq.pdf" },
     { label: "Hirschfeld RM et al. Development and validation of a screening instrument for bipolar spectrum disorder: the Mood Disorder Questionnaire. Am J Psychiatry. 2000;157(11):1873-5." },
   ],
   scoreRangesMode: "contextual",

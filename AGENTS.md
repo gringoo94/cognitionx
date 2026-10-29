@@ -6,3 +6,5 @@
 - Prerender injects each page's Helmet JSON-LD into the static HTML head, replacing the global index.html block (blog posts keep the plugin BlogPosting). Why: crawlers without JS must see page-specific schema.
 - Problem landing FAQ additions are filtered against existing topics before rendering and schema generation. Why: online-format and pricing answers should appear once and stay consistent for visitors and crawlers.
 - Accordion content renders as hidden plain markup during prerender (no `window`). Why: Radix drops closed content, so FAQ answers would be missing from crawler HTML and mismatch FAQPage schema.
+- Questionnaire configs mark context-dependent results with `scoreRangesMode: "contextual"`; omit inferred total-score bands from both results and PDFs. Why: symptom totals alone cannot determine a multi-condition screen such as MDQ.
+- Questionnaire schema uses per-question response scales with the same fallback as the runner. Why: mixed response anchors must match the actual questionnaire.
