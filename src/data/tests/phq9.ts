@@ -82,6 +82,15 @@ export const phq9: TestConfig = {
       tone = "danger";
     }
 
+    // Official PHQ-9 guidance: any non-zero answer to item 9 needs a direct
+    // risk check regardless of the total score.
+    if ((answers[8] ?? 0) > 0) {
+      recommendation =
+        "Вы отметили мысли о смерти или о причинении себе вреда. По инструкции PHQ-9 это важно обсудить со специалистом независимо от общего балла. Если такие мысли сильные или есть план — позвоните в экстренную службу (112) или обратитесь в ближайшую больницу сейчас. " +
+        recommendation;
+      if (tone === "success" || tone === "info") tone = "warning";
+    }
+
     return { score, maxScore: 27, level, levelLabel, interpretation, recommendation, tone };
   },
   related: ["gad-7", "bat-burnout", "rosenberg-self-esteem"],
