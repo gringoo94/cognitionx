@@ -65,8 +65,9 @@ const findOptionLabel = (
   value: number | undefined,
 ): string => {
   if (value === undefined || value === null || Number.isNaN(value)) return "—";
-  const opt = scale.find((o) => o.value === value);
-  return opt ? opt.label : String(value);
+  // Several options may share a score (EAT-26: Иногда/Редко/Никогда = 0).
+  const labels = scale.filter((o) => o.value === value).map((o) => o.label);
+  return labels.length ? labels.join(" / ") : String(value);
 };
 
 export interface GenerateReportOptions {
