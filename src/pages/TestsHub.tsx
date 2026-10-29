@@ -264,7 +264,7 @@ const TestsHub = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEOHead
-        title="Психологические тесты онлайн бесплатно — 30+ шкал с расшифровкой"
+        title="Психологические тесты онлайн бесплатно — около 30 шкал с расшифровкой"
         description="Бесплатные психологические тесты онлайн: PHQ-9, BDI-II, BAI, BHS (шкалы Бека), GAD-7, PCL-5, ISI, ECR-R, Большая пятёрка (BFI-10), WHO-5 и другие валидированные опросники."
         path="/tools/tests"
         schema={[itemListSchema]}
