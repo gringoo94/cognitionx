@@ -15,13 +15,23 @@ const TestRunner = ({ config, onComplete }: TestRunnerProps) => {
     Array(config.questions.length).fill(null),
   );
   const [step, setStep] = useState(0);
+  // Some scales (e.g. EAT-26) give several options the same score, so the
+  // picked option is tracked by position to highlight only that one.
+  const [picked, setPicked] = useState<(number | null)[]>(
+    Array(config.questions.length).fill(null),
+  );
 
   const isPaged = config.layout === "paged";
   const total = config.questions.length;
   const answeredCount = answers.filter((a) => a !== null).length;
   const allAnswered = answeredCount === total;
 
-  const setAnswer = (qIndex: number, value: number) => {
+  const setAnswer = (qIndex: number, value: number, optIndex: number) => {
+    setPicked((p) => {
+      const n = [...p];
+      n[qIndex] = optIndex;
+      return n;
+    });
     const next = [...answers];
     next[qIndex] = value;
     setAnswers(next);
@@ -50,13 +60,16 @@ const TestRunner = ({ config, onComplete }: TestRunnerProps) => {
           <p className="text-base text-foreground leading-relaxed">{q}</p>
         </div>
         <div className="grid gap-2 ml-9">
-          {scale.map((opt) => {
-            const selected = value === opt.value;
+          {scale.map((opt, optIndex) => {
+            const selected =
+              picked[qIndex] !== null
+                ? picked[qIndex] === optIndex
+                : value === opt.value;
             return (
               <button
-                key={opt.value}
+                key={`${optIndex}-${opt.label}`}
                 type="button"
-                onClick={() => setAnswer(qIndex, opt.value)}
+                onClick={() => setAnswer(qIndex, opt.value, optIndex)}
                 className={cn(
                   "text-left text-sm rounded-xl border px-4 py-2.5 transition-all",
                   selected
