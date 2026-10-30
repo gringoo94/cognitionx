@@ -34,8 +34,8 @@ export const ROSENBERG_SCALE: LikertOption[] = [
 
 export const CIPS_SCALE: LikertOption[] = [
   { value: 1, label: "Совсем не верно" },
-  { value: 2, label: "Скорее не верно" },
-  { value: 3, label: "Иногда верно" },
+  { value: 2, label: "Редко" },
+  { value: 3, label: "Иногда" },
   { value: 4, label: "Часто верно" },
   { value: 5, label: "Очень верно" },
 ];
@@ -89,13 +89,13 @@ export const ISI_SCALE: LikertOption[] = [
 ];
 
 export const ECR_SCALE: LikertOption[] = [
-  { value: 1, label: "1 — совсем не про меня" },
-  { value: 2, label: "2" },
-  { value: 3, label: "3" },
-  { value: 4, label: "4 — нейтрально" },
-  { value: 5, label: "5" },
-  { value: 6, label: "6" },
-  { value: 7, label: "7 — полностью про меня" },
+  { value: 1, label: "Полностью не согласен" },
+  { value: 2, label: "Не согласен" },
+  { value: 3, label: "Скорее не согласен" },
+  { value: 4, label: "Ни согласен, ни не согласен" },
+  { value: 5, label: "Скорее согласен" },
+  { value: 6, label: "Согласен" },
+  { value: 7, label: "Полностью согласен" },
 ];
 
 export const BFI_SCALE: LikertOption[] = [

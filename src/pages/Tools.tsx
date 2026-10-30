@@ -139,7 +139,7 @@ const benefits = [
   {
     icon: ShieldCheck,
     title: "Доказательная база",
-    text: "Только валидированные шкалы и протоколы из современных клинических руководств.",
+    text: "Опросники и упражнения на основе научных методик; источники и ограничения указаны на страницах.",
   },
   {
     icon: Lock,
@@ -342,7 +342,7 @@ const Tools = () => {
             <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Бесплатно</span>
             <span className="inline-flex items-center gap-1.5"><Lock className="h-3.5 w-3.5 text-primary" /> Анонимно</span>
             <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5 text-primary" /> 2–10 минут</span>
-            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Валидированные методики</span>
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Научные источники</span>
           </motion.div>
         </div>
 
