@@ -75,6 +75,8 @@ export interface TestConfig {
   scoring: (answers: number[]) => ScoringResult;
   /** Contextual algorithms and continuous measures have no total-score bands. */
   scoreRangesMode?: "contextual" | "continuous";
+  /** Dimensional instruments report means instead of a combined total. */
+  scoreDisplay?: "subscale-means";
   /** Related test slugs */
   related: string[];
   /** FAQ */

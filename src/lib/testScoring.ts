@@ -60,3 +60,17 @@ export const subscaleMinScore = (
     const { min } = scaleBounds(scaleFor(config, q - 1));
     return sum + min;
   }, 0);
+
+/** Shared mean/bounds for dimensional results in the page and PDF. */
+export const subscaleMeanResult = (
+  config: TestConfig,
+  answers: number[],
+  items: number[],
+): { score: number; min: number; max: number } => {
+  if (items.length === 0) return { score: 0, min: 0, max: 0 };
+  return {
+    score: subscaleScore(config, answers, items) / items.length,
+    min: subscaleMinScore(config, items) / items.length,
+    max: subscaleMaxScore(config, items) / items.length,
+  };
+};

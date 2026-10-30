@@ -8,6 +8,7 @@ import {
   scoredValueForQuestion,
   subscaleScore,
   subscaleMaxScore,
+  subscaleMeanResult,
 } from "@/lib/testScoring";
 
 let fontsPromise: Promise<{ regular: string; bold: string }> | null = null;
@@ -123,6 +124,7 @@ export const generateTestReportPdf = async ({
 
   const now = new Date();
   const result = config.scoring(answers);
+  const showMeans = config.scoreDisplay === "subscale-means";
   const safeMax = result.maxScore > 0 ? result.maxScore : 1;
   const pct = Math.max(
     0,
@@ -196,7 +198,7 @@ export const generateTestReportPdf = async ({
   doc.setFontSize(11);
   doc.setTextColor(80, 80, 80);
   doc.text(
-    `${result.score} из ${result.maxScore} баллов · ${pct}%`,
+    showMeans ? "Два средних балла от 1 до 7; общий балл не интерпретируется." : `${result.score} из ${result.maxScore} баллов · ${pct}%`,
     margin + 14,
     labelY + 2,
   );
@@ -247,8 +249,12 @@ export const generateTestReportPdf = async ({
     ensureSpace(60);
     autoTable(doc, {
       startY: y,
-      head: [["Подшкала", "Балл", "Максимум"]],
+      head: [["Подшкала", showMeans ? "Средний балл" : "Балл", "Максимум"]],
       body: config.subscales.map((sub) => {
+        if (showMeans) {
+          const mean = subscaleMeanResult(config, answers, sub.items);
+          return [sub.name, mean.score.toFixed(2), String(mean.max)];
+        }
         const subScore = subscaleScore(config, answers, sub.items);
         const subMax = subscaleMaxScore(config, sub.items);
         return [sub.name, String(subScore), String(subMax)];

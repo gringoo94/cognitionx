@@ -14,6 +14,7 @@ import {
   subscaleScore,
   subscaleMaxScore,
   subscaleMinScore,
+  subscaleMeanResult,
 } from "@/lib/testScoring";
 import { saveTestHistory } from "@/lib/testHistory";
 import { trackContact, trackLead } from "@/lib/metaPixel";
@@ -40,6 +41,7 @@ const toneIcon = {
 
 const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
   const result = config.scoring(answers);
+  const showMeans = config.scoreDisplay === "subscale-means";
   const Icon = toneIcon[result.tone];
   const safeMax = result.maxScore > 0 ? result.maxScore : 1;
   const pct = Math.max(
@@ -91,7 +93,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
           <div className="flex-1">
             <p className="text-xs uppercase tracking-wide opacity-70 mb-1">Ваш результат</p>
             <h2 className="text-2xl md:text-3xl font-bold mb-2">{result.levelLabel}</h2>
-            <div className="flex items-baseline gap-2 mb-4">
+            {!showMeans && <><div className="flex items-baseline gap-2 mb-4">
               <span className="text-4xl font-bold">{result.score}</span>
               <span className="text-sm opacity-70">из {result.maxScore} баллов · {pct}%</span>
             </div>
@@ -100,7 +102,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                 className="h-full bg-current rounded-full transition-all"
                 style={{ width: `${pct}%` }}
               />
-            </div>
+            </div></>}
           </div>
         </div>
       </div>
@@ -144,9 +146,10 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
           <h3 className="text-sm font-semibold text-foreground mb-4">По подшкалам</h3>
           <div className="space-y-3">
             {config.subscales.map((sub) => {
-              const subScore = subscaleScore(config, answers, sub.items);
-              const subMax = subscaleMaxScore(config, sub.items);
-              const subMin = subscaleMinScore(config, sub.items);
+              const mean = showMeans ? subscaleMeanResult(config, answers, sub.items) : null;
+              const subScore = mean?.score ?? subscaleScore(config, answers, sub.items);
+              const subMax = mean?.max ?? subscaleMaxScore(config, sub.items);
+              const subMin = mean?.min ?? subscaleMinScore(config, sub.items);
               const range = subMax - subMin || 1;
               const subPct = Math.max(
                 0,
@@ -157,7 +160,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span className="text-foreground">{sub.name}</span>
                     <span className="text-muted-foreground">
-                      {subScore} из {subMax}
+                      {showMeans ? subScore.toFixed(2) : subScore} из {subMax}
                     </span>
                   </div>
                   <div className="h-1.5 bg-muted rounded-full overflow-hidden">
@@ -235,7 +238,7 @@ const TestResult = ({ config, answers, onRestart }: TestResultProps) => {
         const problem = clusterToProblem[config.cluster];
         const urgent = result.tone === "danger" || result.tone === "warning";
         const tgText = encodeURIComponent(
-          `Здравствуйте! Прошёл(а) тест ${config.code} — результат: ${result.levelLabel} (${result.score}/${result.maxScore}). Хочу обсудить.`,
+          `Здравствуйте! Прошёл(а) тест ${config.code} — результат: ${result.levelLabel}${showMeans ? "" : ` (${result.score}/${result.maxScore})`}. Хочу обсудить.`,
         );
         return (
           <div
