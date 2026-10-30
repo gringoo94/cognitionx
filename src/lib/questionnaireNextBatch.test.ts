@@ -5,7 +5,7 @@ import { cips } from "@/data/tests/cips";
 import { lay } from "@/data/tests/lay";
 import { ecr } from "@/data/tests/ecr";
 import { deriveRanges } from "./testRanges";
-import { subscaleScore } from "./testScoring";
+import { subscaleScore, subscaleMeanResult } from "./testScoring";
 
 describe("ATQ, FMPS, CIPS, procrastination and ECR source audit", () => {
   it("ATQ sums 30 frequency responses with endpoints 30 and 150", () => {
@@ -63,6 +63,18 @@ describe("ATQ, FMPS, CIPS, procrastination and ECR source audit", () => {
     expect(ecr.scoring(answers).score).toBe(12);
     expect(ecr.scoring(answers.map((v) => 8 - v)).score).toBe(84);
     expect(ecr.scoring(answers).maxScore).toBe(84);
+  });
+
+  it("ECR-S reports means from 1 to 7 independently for each dimension", () => {
+    expect(ecr.scoreDisplay).toBe("subscale-means");
+    const answers = [7, 7, 1, 7, 7, 7, 1, 1, 7, 7, 1, 7];
+    expect(subscaleMeanResult(ecr, answers, [1, 3, 5, 7, 9, 11])).toEqual({ score: 1, min: 1, max: 7 });
+    expect(subscaleMeanResult(ecr, answers, [2, 4, 6, 8, 10, 12])).toEqual({ score: 7, min: 1, max: 7 });
+    for (const item of [1, 5, 8, 9]) {
+      const baseline = Array(12).fill(4);
+      const changed = [...baseline]; changed[item - 1] = 7;
+      expect(ecr.scoring(changed).score).toBe(ecr.scoring(baseline).score - 3);
+    }
   });
 
   for (const config of [atq, fmps, lay, ecr]) {

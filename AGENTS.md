@@ -7,4 +7,5 @@
 - Problem landing FAQ additions are filtered against existing topics before rendering and schema generation. Why: online-format and pricing answers should appear once and stay consistent for visitors and crawlers.
 - Accordion content renders as hidden plain markup during prerender (no `window`). Why: Radix drops closed content, so FAQ answers would be missing from crawler HTML and mismatch FAQPage schema.
 - Questionnaire configs mark context-dependent results as `scoreRangesMode: "contextual"` and measures without validated total-score bands as `"continuous"`; omit inferred ranges in results and PDFs. Why: multidimensional or continuous scores must not acquire invented diagnostic cutoffs.
+- Dimensional questionnaires may set `scoreDisplay: "subscale-means"`; results and PDF use shared subscale means and omit the combined score. Why: independent dimensions must not be presented as a clinically meaningful total.
 - Questionnaire schema uses per-question response scales with the same fallback as the runner. Why: mixed response anchors must match the actual questionnaire.
