@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Verify ATQ, FMPS, CIPS, Lay procrastination and ECR against primary sources; correct confirmed discrepancies and verify results/PDF
+- [x] Verify ATQ, FMPS, CIPS, Lay procrastination and ECR against primary sources; correct confirmed discrepancies and verify results/PDF (Lay retained as an explicitly unvalidated self-observation exercise; Russian translation validation and reuse permissions not established)
 
 - [x] Verify PCL-5, Y-BOCS-SR, MDQ, AUDIT and ISI against primary instructions; correct scoring/descriptions and test results/PDF flow
 
