@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Publish all 29 updated questionnaire titles/descriptions on user's request; deployment completion and search-engine recrawl remain external until verified.
+- [x] Request publication of all 29 updated questionnaire titles/descriptions; fresh security check completed before request. Expected origin: https://cognitionx.cloud. Deployment completion and search-engine recrawl not yet verified.
 
 - [x] Optimize 27 remaining questionnaire titles/descriptions for distinct search intents; retain optimized GAD-7/PHQ-9. Questions/scoring/safety unchanged. 29 metadata tests and all 29 preview pages pass: unique titles/descriptions, one H1 each, no runtime errors; BAI/Y-BOCS screenshots verified, build OK. Changes not published.
 
