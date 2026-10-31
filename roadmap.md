@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Review current Google/AI visibility, repair confirmed on-site SEO issues, verify changes and recommend realistic query targets from Search Console and keyword evidence
+- [x] Review Google/AI visibility using current GSC snapshot, foundations checks and Semrush RU demand/SERP; synchronize crawler metadata for 29 questionnaires and tool hubs, remove unsupported test review dates, correct AI catalogue claims and duplicate runtime metadata; 39 tests and four browser checks pass. Changes await publication; AI citation visibility and the stale metadata scanner remain unverified.
 
 - [x] Publish latest questionnaire corrections and verify all five flows on cognitionx.cloud in desktop Chromium: ATQ 90/150, FMPS 29/145 (Organization 30/30 excluded), CIPS 60/100, procrastination 54/100, ECR means 1/7 and 7/7 without total; all PDF answers, raw/reverse-scored points, interpretations and notes match; downloads remain on results pages with no browser errors (physical phone not tested)
 
