@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Optimize all 29 questionnaire titles/descriptions for distinct search intents (retain already optimized GAD-7/PHQ-9 where appropriate); preserve questions/scoring/safety, verify metadata and preview pages. No publication requested in this task.
+
 - [x] Request publication of corrected questionnaire/search metadata; record GAD-7/PHQ-9 Google baseline (Oct 1–28: 1/0 clicks, 22/48 impressions) and native AI baseline (Oct 27–30: 0 recognized AI visits sitewide). Existing tracking continues; no scheduled reports configured. Baseline and comparison protocol: .lovable/gad7-phq9-search-baseline.md.
 - [ ] Confirm deployment completion: one post-request live fetch still served previous GAD-7/PHQ-9 metadata; wait for the requested deployment, do not republish just for timing.
 
