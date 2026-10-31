@@ -67,13 +67,12 @@ const SEOHead = ({
           { hreflang: "x-default", href: url },
         ];
 
-  // Remove any pre-rendered static canonical/hreflang tags so Helmet remains the
-  // single source of truth at runtime and we don't end up with duplicate tags
-  // in the DOM after hydration (prerender injects them for crawlers without JS).
+  // Keep prerender fallbacks for no-JS crawlers, but let Helmet own page metadata
+  // after mounting so client navigation cannot leave conflicting static tags.
   useEffect(() => {
     document
       .querySelectorAll(
-        'link[rel="canonical"]:not([data-rh]), link[rel="alternate"][hreflang]:not([data-rh])'
+        'link[rel="canonical"]:not([data-rh]), link[rel="alternate"][hreflang]:not([data-rh]), meta[name="description"]:not([data-rh]), meta[name="robots"]:not([data-rh]), meta[property^="og:"]:not([data-rh]), meta[property^="article:"]:not([data-rh]), meta[name^="twitter:"]:not([data-rh])'
       )
       .forEach((el) => el.parentNode?.removeChild(el));
   }, [url]);
