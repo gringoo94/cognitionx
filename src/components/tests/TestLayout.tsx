@@ -36,8 +36,8 @@ const TestLayout = ({ config }: TestLayoutProps) => {
 
   const testUrl = `${SITE_URL}${path}`;
 
-  // WebPage + MedicalWebPage: primary page-level schema for a psychological
-  // screening tool. lastReviewed signals clinical vetting to E-E-A-T crawlers.
+  // Page-level schema for a psychological questionnaire. Review/modification
+  // dates are omitted unless supported by documented, per-test editorial data.
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": ["WebPage", "MedicalWebPage"],
@@ -50,8 +50,6 @@ const TestLayout = ({ config }: TestLayoutProps) => {
     author: { "@id": `${SITE_URL}/#person` },
     reviewedBy: { "@id": `${SITE_URL}/#person` },
     publisher: { "@id": `${SITE_URL}/#organization` },
-    lastReviewed: "2026-07-11",
-    dateModified: "2026-07-11",
     about: { "@type": "Thing", name: config.clusterLabel },
     audience: {
       "@type": "PeopleAudience",
