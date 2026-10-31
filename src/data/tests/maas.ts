@@ -17,11 +17,11 @@ const sum = (a: number[]) => a.reduce((s, v) => s + (v ?? 0), 0);
 export const maas: TestConfig = {
   slug: "maas",
   code: "MAAS",
-  title: "MAAS — шкала осознанного внимания",
+  title: "Тест на осознанность онлайн — MAAS",
   tagline: "15 вопросов о том, насколько часто вы действуете на «автопилоте» и насколько присутствуете в моменте.",
-  seoTitle: "MAAS — тест на осознанность (mindfulness) онлайн, бесплатно",
+  seoTitle: "Тест на осознанность онлайн бесплатно — шкала MAAS",
   seoDescription:
-    "MAAS (Mindful Attention Awareness Scale) — научный тест уровня осознанности. 15 вопросов о повседневном внимании и присутствии. Бесплатно, анонимно.",
+    "Пройдите MAAS онлайн: 15 утверждений о внимании и действиях на автопилоте в повседневной жизни. Баллы, пояснения и PDF бесплатно. Не диагноз.",
   cluster: "cbt-tools",
   clusterLabel: "КПТ-инструменты",
   authorNote: "Brown KW, Ryan RM, J Pers Soc Psychol, 2003",
