@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Optimize existing GAD-7 and PHQ-9 pages for individual anxiety/depression online-test queries; preserve scoring and clinical safeguards; verify browser results and metadata
+- [x] Optimize existing GAD-7 and PHQ-9 titles, descriptions, opening copy and practical FAQ for individual online-test queries; add GAD-7 primary-source DOI, retain scoring/safety and existing related-test links; 29 metadata tests and both browser result flows pass. Changes await publication.
 
 - [x] Review Google/AI visibility using current GSC snapshot, foundations checks and Semrush RU demand/SERP; synchronize crawler metadata for 29 questionnaires and tool hubs, remove unsupported test review dates, correct AI catalogue claims and duplicate runtime metadata; 39 tests and four browser checks pass. Changes await publication; AI citation visibility and the stale metadata scanner remain unverified.
 
