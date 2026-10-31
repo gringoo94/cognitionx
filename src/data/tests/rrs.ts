@@ -9,12 +9,12 @@ import { RRS_SCALE } from "./scales";
 export const rrs: TestConfig = {
   slug: "rrs-rumination",
   code: "RRS",
-  title: "RRS — шкала руминации (Nolen-Hoeksema)",
+  title: "Тест на руминацию онлайн — RRS",
   tagline:
     "Опросник навязчивых мыслей о себе и своём состоянии. 22 вопроса, подшкалы мрачного застревания и рефлексии.",
-  seoTitle: "RRS: тест на руминацию онлайн — шкала Нолен-Хуксема",
+  seoTitle: "Тест на руминацию онлайн бесплатно — шкала RRS",
   seoDescription:
-    "Шкала руминативных реакций RRS-22 онлайн. Измеряет мрачное «застревание» (brooding) и рефлексию. Бесплатно, с интерпретацией и подшкалами.",
+    "Пройдите RRS онлайн: 22 вопроса о повторяющихся размышлениях о своём состоянии. Баллы, подшкалы и PDF бесплатно. Без диагностических порогов.",
   cluster: "depression",
   clusterLabel: "Депрессия",
   authorNote: "Nolen-Hoeksema & Morrow, 1991; Treynor, Gonzalez & Nolen-Hoeksema, 2003",
