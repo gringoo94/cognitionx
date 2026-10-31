@@ -54,7 +54,7 @@ async function loadBundled(relPath, exportName) {
   return mod[exportName];
 }
 
-const seoRoutes = await loadTs("seo-routes.ts", "seoRoutes");
+const seoRoutes = await loadBundled("seo-routes.ts", "seoRoutes");
 const redirects = (await loadTs("src/lib/redirects.ts", "redirects")) ?? [];
 const redirectFromPaths = new Set(
   redirects

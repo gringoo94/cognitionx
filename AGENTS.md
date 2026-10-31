@@ -9,3 +9,4 @@
 - Questionnaire configs mark context-dependent results as `scoreRangesMode: "contextual"` and measures without validated total-score bands as `"continuous"`; omit inferred ranges in results and PDFs. Why: multidimensional or continuous scores must not acquire invented diagnostic cutoffs.
 - Dimensional questionnaires may set `scoreDisplay: "subscale-means"`; results and PDF use shared subscale means and omit the combined score. Why: independent dimensions must not be presented as a clinically meaningful total.
 - Questionnaire schema uses per-question response scales with the same fallback as the runner. Why: mixed response anchors must match the actual questionnaire.
+- Questionnaire prerender metadata is derived from the same test configs as client metadata; schema review dates require documented per-test editorial timestamps. Why: source/scoring corrections must not leave stale crawler descriptions or unsupported review claims.

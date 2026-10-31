@@ -1,5 +1,6 @@
 // Build-time SEO meta data for static HTML generation
 // This file is used by the Vite plugin to inject meta tags into per-route HTML files
+import { tests } from "./src/data/tests";
 
 export interface SeoRoute {
   path: string;
@@ -18,7 +19,7 @@ export interface SeoRoute {
   canonicalPath?: string;
 }
 
-export const seoRoutes: SeoRoute[] = [
+const staticSeoRoutes: SeoRoute[] = [
   // Main pages
   {
     path: "/",
@@ -57,8 +58,8 @@ export const seoRoutes: SeoRoute[] = [
   },
   {
     path: "/tools",
-    title: "КПТ инструменты | Психолог Дмитрий Яцко",
-    description: "Бесплатные КПТ-инструменты и валидированные психологические тесты: PHQ-9, GAD-7, ABC-анализ, колесо эмоций, дневник.",
+    title: "Упражнения КПТ и психологические тесты онлайн бесплатно | Дмитрий Яцко",
+    description: "Упражнения КПТ онлайн и около 30 психологических тестов бесплатно: ABC-анализ, дневник мыслей, колесо эмоций, PHQ-9, GAD-7. Без регистрации.",
   },
   {
     path: "/tools/abc-analysis",
@@ -107,8 +108,8 @@ export const seoRoutes: SeoRoute[] = [
   },
   {
     path: "/tools/tests",
-    title: "Психологические тесты онлайн — PHQ-9, GAD-7, BAT и др.",
-    description: "Бесплатные психологические тесты онлайн: депрессия (PHQ-9), тревога (GAD-7), выгорание (BAT), синдром самозванца, стресс, самооценка. Валидированные шкалы.",
+    title: "Психологические тесты онлайн бесплатно — около 30 шкал с расшифровкой",
+    description: "Бесплатные психологические тесты онлайн: PHQ-9, BDI-II, BAI, BHS (шкалы Бека), GAD-7, PCL-5, ISI, ECR-S, Большая пятёрка (BFI-10), WHO-5 и другие опросники для самонаблюдения.",
   },
   {
     path: "/tools/tests/phq-9",
@@ -142,8 +143,8 @@ export const seoRoutes: SeoRoute[] = [
   },
   {
     path: "/tools/tests/lay-procrastination",
-    title: "Тест на прокрастинацию онлайн бесплатно — шкала Лей",
-    description: "Шкала прокрастинации Лей — научный тест на склонность откладывать дела. 20 вопросов, бесплатно онлайн.",
+    title: "Прокрастинация — опросник для самонаблюдения онлайн",
+    description: "Адаптированное упражнение из 20 утверждений об откладывании дел. Самонаблюдение без диагностических порогов, результат и PDF-отчёт.",
   },
   {
     path: "/tools/tests/fmps-perfectionism",
@@ -177,8 +178,8 @@ export const seoRoutes: SeoRoute[] = [
   },
   {
     path: "/tools/tests/ecr-r-12",
-    title: "Тест на стили привязанности ECR-R (12) — онлайн",
-    description: "Краткая версия ECR-R: измеряет тревожный и избегающий стили привязанности в близких отношениях. 12 вопросов, профиль и интерпретация.",
+    title: "ECR-S — тревога и избегание в отношениях | онлайн",
+    description: "Краткий опросник привязанности ECR-S: 12 вопросов, два независимых средних балла тревоги и избегания, без классификации стилей.",
   },
   {
     path: "/tools/tests/bfi-10",
@@ -769,4 +770,16 @@ export const seoRoutes: SeoRoute[] = [
   // Кластер: биполярное расстройство → /tools/tests/mdq
   { path: "/blog/bipolyarnoe-rasstroistvo-skrining", title: "Биполярное расстройство: признаки эпизодов и что показывает MDQ", description: "Как отличить манию и гипоманию от обычного хорошего настроения, почему БАР иногда принимают за депрессию и что означает результат теста MDQ.", ogType: "article" },
 ];
+
+// Questionnaire configs own both client and crawler metadata; never maintain
+// independent descriptions that can undo a scoring/source correction.
+const questionnaireMetadata = new Map(tests.map((test) => [
+  `/tools/tests/${test.slug}`,
+  { title: test.seoTitle, description: test.seoDescription },
+]));
+
+export const seoRoutes: SeoRoute[] = staticSeoRoutes.map((route) => ({
+  ...route,
+  ...questionnaireMetadata.get(route.path),
+}));
 
