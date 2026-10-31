@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Publish corrected questionnaire/search metadata; establish Google and AI referral baselines for GAD-7 and PHQ-9; confirm ongoing tracking/reporting scope.
+- [x] Request publication of corrected questionnaire/search metadata; record GAD-7/PHQ-9 Google baseline (Oct 1–28: 1/0 clicks, 22/48 impressions) and native AI baseline (Oct 27–30: 0 recognized AI visits sitewide). Existing tracking continues; no scheduled reports configured. Baseline and comparison protocol: .lovable/gad7-phq9-search-baseline.md.
+- [ ] Confirm deployment completion: one post-request live fetch still served previous GAD-7/PHQ-9 metadata; wait for the requested deployment, do not republish just for timing.
 
 - [x] Optimize existing GAD-7 and PHQ-9 titles, descriptions, opening copy and practical FAQ for individual online-test queries; add GAD-7 primary-source DOI, retain scoring/safety and existing related-test links; 29 metadata tests and both browser result flows pass. Changes await publication.
 
