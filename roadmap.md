@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Publish latest questionnaire corrections and verify all five flows on cognitionx.cloud in desktop Chromium: ATQ 90/150, FMPS 29/145 (Organization 30/30 excluded), CIPS 60/100, procrastination 54/100, ECR means 1/7 and 7/7 without total; all PDF answers, raw/reverse-scored points, interpretations and notes match; downloads remain on results pages with no browser errors (physical phone not tested)
+
 - [x] Repeat primary-source verification of ATQ, FMPS, CIPS, procrastination and ECR; correct CIPS item 20/category explanations and stale names, report ECR-S means without a combined total; 17 assertions and all five result/PDF flows verified (translation validation and reuse permissions remain unconfirmed)
 
 - [x] Verify ATQ, FMPS, CIPS, Lay procrastination and ECR against primary sources; correct confirmed discrepancies and verify results/PDF (Lay retained as an explicitly unvalidated self-observation exercise; Russian translation validation and reuse permissions not established)
